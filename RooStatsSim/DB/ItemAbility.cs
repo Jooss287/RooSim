@@ -18,9 +18,24 @@ namespace RooStatsSim.DB
         CLOCK,
         SHOSE,
         ACCESSAIES1,
-        ACCESSAIES2
+        ACCESSAIES2,
+        CARD
     }
-    
+    public enum STATUS_TYPE
+    {
+        STR,
+        AGI,
+        VIT,
+        INT,
+        DEX,
+        LUK
+    }
+
+    class StatVariable
+    {
+        Dictionary<STATUS_TYPE, int> ATK_per_Status;
+        
+    }
     class ItemAbility
     {
         
@@ -38,11 +53,16 @@ namespace RooStatsSim.DB
         public readonly int CardSlot;
 
 
-        //ATK
-        public ATK atk;
+        // ATK
+        public int ATK_weapon;
+        public int ATK_equipment;
+        public int ATK_mastery;
+        public int ATK_smelting;
+        public int ATK_percentage;
 
-        public int Pdamage_add;
-        //public int Pdamage_
+        // Physical Damage
+        public int PDamage_addition;
+        public int PDamage_percentage;
 
         
     }
