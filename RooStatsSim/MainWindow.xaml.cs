@@ -29,9 +29,6 @@ namespace RooStatsSim
 
         private void CalcSim_Click(object sender, RoutedEventArgs e)
         {
-            if (radio_attack_type.Tag == null)
-                return;
-            
             int attack_type = Convert.ToInt32(radio_attack_type.Tag);
 
             int atk_weapon = Convert.ToInt32(txt_atk_weapon.Text);
@@ -48,6 +45,13 @@ namespace RooStatsSim
             double elemet_increse = Convert.ToDouble(txt_element_increse.Text);
             double tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
 
+        }
+
+        private void attack_type_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton source = e.Source as RadioButton;
+
+            radio_attack_type.Tag = source.Tag;
         }
     }
 }

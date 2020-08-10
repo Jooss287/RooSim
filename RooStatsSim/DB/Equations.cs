@@ -9,6 +9,12 @@ namespace RooStatsSim.DB
 {
     class Equations
     {
+        public Equations(ItemAbility param_abilitys)
+        {
+            abilities = param_abilitys;
+        }
+
+        private readonly ItemAbility abilities;
         const double STR_WEIGHT = 0.05;
         const double RANDOM_ATK_WEIGHT = 0.05;
         const int BASE_ATK = 5;
