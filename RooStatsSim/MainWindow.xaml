@@ -9,13 +9,13 @@
     <Grid>
         <StackPanel Orientation="Vertical" Width="224" Margin="10,10,0,0" Height="300" VerticalAlignment="Top" HorizontalAlignment="Left">
             <GroupBox Header="attack type">
-                <Grid x:Name="radio_attack_type">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <RadioButton Content="근거리" Tag="0" Grid.Column="0" />
-                    <RadioButton Content="원거리" Tag="1" Grid.Column="1" />
+                    <RadioButton x:Name="radio_attack_type" Tag="0" IsChecked="True" Checked="attack_type_Click" Content="근거리" Grid.Column="0" GroupName="group_attack_type" />
+                    <RadioButton Tag="1" Checked="attack_type_Click" Content="원거리" Grid.Column="1" GroupName="group_attack_type" />
                 </Grid>
             </GroupBox>
             <Grid>

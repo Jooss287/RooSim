@@ -40,12 +40,12 @@ namespace RooStatsSim.DB
     {
         
 
-        public ItemAbility(EQU_TYPE equ_type, int card_slot, WEAPON_TYPE weapon_type = WEAPON_TYPE.HAND)
-        {
-            EQU_type = equ_type;
-            CardSlot = card_slot;
-            EQU_weapon_type = weapon_type;
-        }
+        //public ItemAbility(EQU_TYPE equ_type, int card_slot, WEAPON_TYPE weapon_type = WEAPON_TYPE.HAND)
+        //{
+        //    EQU_type = equ_type;
+        //    CardSlot = card_slot;
+        //    EQU_weapon_type = weapon_type;
+        //}
         
         //Equipment Type
         public readonly EQU_TYPE EQU_type;
