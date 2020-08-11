@@ -55,7 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DB\ATK.cs" />
     <Compile Include="DB\Equations.cs" />
     <Compile Include="DB\ItemAbility.cs" />
     <Compile Include="DB\AdvantageTable.cs" />

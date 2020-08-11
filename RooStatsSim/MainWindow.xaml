@@ -124,7 +124,8 @@
                         <TextBox x:Name ="txt_tribe_increse">20</TextBox>
                     </StackPanel>
                 </Grid>
-                <Button Name="CalcSim" Height="35" Click="CalcSim_Click">계산하기</Button>
+                <Button Name="CalcSim" Click="CalcSim_Click">계산하기</Button>
+                <TextBox Name="retCalc" IsEnabled="False" TextAlignment="Center">결과값</TextBox>
             </StackPanel>
         </GroupBox>
     </Grid>

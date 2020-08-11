@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RooStatsSim.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,20 +32,30 @@ namespace RooStatsSim
         {
             int attack_type = Convert.ToInt32(radio_attack_type.Tag);
 
-            int atk_weapon = Convert.ToInt32(txt_atk_weapon.Text);
-            int atk_equip = Convert.ToInt32(txt_atk_equip.Text);
-            int atk_smelting = Convert.ToInt32(txt_atk_smelting.Text);
-            int atk_mastery = Convert.ToInt32(txt_atk_mastery.Text);
+            ItemAbility abaility = new ItemAbility();
 
-            double pdamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
-            int pdamage_add = Convert.ToInt32(txt_pdamage_add.Text);
-            double pdamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
-            double atk_percent = Convert.ToDouble(txt_atk_percent.Text);
+            abaility.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
+            abaility.ATK_equipment = Convert.ToInt32(txt_atk_equip.Text);
+            abaility.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
+            abaility.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
 
-            double def_ignore = Convert.ToDouble(txt_def_ignore.Text);
-            double elemet_increse = Convert.ToDouble(txt_element_increse.Text);
-            double tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
+            abaility.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
+            abaility.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
+            abaility.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
+            abaility.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
 
+            abaility.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
+            abaility.element_increse = Convert.ToDouble(txt_element_increse.Text);
+            abaility.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
+
+            Status status = new Status();
+            status._base = Convert.ToInt32(txt_LvlBase.Text);
+            status._str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text);
+            status._dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text);
+            status._luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text);
+
+            Equations equ = new Equations(0, status, abaility);
+            retCalc.Text = Convert.ToString(equ.CalcATKdamage());
         }
 
         private void attack_type_Click(object sender, RoutedEventArgs e)

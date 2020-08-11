@@ -58,12 +58,17 @@ namespace RooStatsSim.DB
         public int ATK_equipment;
         public int ATK_mastery;
         public int ATK_smelting;
-        public int ATK_percentage;
+        public double ATK_percent;
 
         // Physical Damage
         public int PDamage_addition;
-        public int PDamage_percentage;
+        public double PDamage_percent;
+        public double PDamage_attack_type;
 
-        
+        public double def_ignore;
+        public double element_increse;
+        public double tribe_increse;
+        public double size_increse;
+        public double boss_increse;
     }
 }
