@@ -20,9 +20,9 @@ namespace RooStatsSim.DB
         private readonly ItemAbility abilities;
         private readonly Status status;
 
-        const double STR_WEIGHT = 0.05;
+        const double STR_WEIGHT = 0.005;
         const double RANDOM_ATK_WEIGHT = 0.05;
-        const int BASE_ATK = 5;
+        const int BASE_ATK = 0;
         const int BASE_MATK = 5;
 
         double GetStrATK()
@@ -49,10 +49,13 @@ namespace RooStatsSim.DB
             double tot_weapon_atk_inc = tot_weapon_atk /** SIZE_PANELTY*/;
 
             double tot_equip_atk = tot_weapon_atk_inc + abilities.ATK_equipment;
-            double tot_equip_atk_inc = tot_equip_atk * abilities.element_increse * abilities.tribe_increse * abilities.size_increse * abilities.boss_increse;
+            double tot_equip_atk_inc = tot_equip_atk * (1 + 0.01*abilities.element_increse) * (1 + 0.01*abilities.tribe_increse)
+                * (1 + 0.01*abilities.size_increse) * (1 + 0.01*abilities.boss_increse) * (1 + 0.01*abilities.ATK_percent);
 
+            double tot_atk = status_atk + abilities.ATK_mastery + tot_equip_atk_inc;
+            double tot_atk_inc = tot_atk * (1 + 0.01*abilities.PDamage_percent) + abilities.PDamage_addition;
 
-            return 1;
+            return Convert.ToInt32(Math.Floor(tot_atk_inc));
         }
     }
 }
