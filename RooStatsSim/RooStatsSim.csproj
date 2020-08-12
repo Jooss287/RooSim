@@ -58,6 +58,7 @@
     <Compile Include="DB\Equations.cs" />
     <Compile Include="DB\ItemAbility.cs" />
     <Compile Include="DB\AdvantageTable.cs" />
+    <Compile Include="DB\MonsterDB.cs" />
     <Compile Include="DB\Status.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>

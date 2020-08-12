@@ -65,7 +65,7 @@ namespace RooStatsSim
             ability.element_increse = Convert.ToDouble(txt_element_increse.Text);
             ability.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
             ability.size_increse = Convert.ToDouble(txt_size_increse.Text);
-            ability.boss_increse = Convert.ToDouble(txt_size_increse.Text);
+            ability.boss_increse = Convert.ToDouble(txt_boss_increse.Text);
 
             Status status = new Status();
             status._base = Convert.ToInt32(txt_LvlBase.Text);
@@ -73,17 +73,23 @@ namespace RooStatsSim
             status._dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text);
             status._luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text);
 
+            MonsterDB mobDB = new MonsterDB();
+            mobDB.defense = Convert.ToInt32(txt_monster_def.Text);
+
             ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;
             ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
             AdvantageTable advantage_table = new AdvantageTable();
             double element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
             
 
-            Equations equ = new Equations(attack_type, status, ability);
+            Equations equ = new Equations(attack_type, status, ability, mobDB);
             equ.element_inc = element_ratio;
             equ.size_panelty = Convert.ToInt32(txt_weapon_size_panelty.Text);
+
+            int calcATK_min = (int)(equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
+            int calcATK_max = (int)(equ.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
             string strRetCalc;
-            strRetCalc = Convert.ToString(equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE)) + " ~ " + Convert.ToString(equ.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE));
+            strRetCalc = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
             retCalc.Text = strRetCalc;
         }
 
