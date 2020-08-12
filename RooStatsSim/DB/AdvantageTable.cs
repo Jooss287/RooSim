@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,17 +39,16 @@ namespace RooStatsSim.DB
         EARTH,
         FIRE,
         WATER,
-        POISION,
+        POISON,
         HOLY,
         DARK,
         ASTRAL,
         UNDEAD,
         ELEMENT_CNT
     }
-    
     class AdvantageTable
     {
-        double[,] SizeRatio = new double[(int)WEAPON_TYPE.WEAPON_CNT, (int)MONSTER_SIZE.SIZE_CNT]
+        readonly double[,] SizeRatio = new double[(int)WEAPON_TYPE.WEAPON_CNT, (int)MONSTER_SIZE.SIZE_CNT]
         {
             {1.0, 1.0, 1.0},        //HAND
             {1.0, 0.75, 0.5 },      //DAGGER
@@ -66,7 +66,7 @@ namespace RooStatsSim.DB
         };
 
         //  [ATTACKER_ELEMENT, DEFENSER_ELEMENT]
-        double[,] ElementRatio = new double[(int)ELEMENT_TYPE.ELEMENT_CNT, (int)ELEMENT_TYPE.ELEMENT_CNT]
+        readonly double[,] ElementRatio = new double[(int)ELEMENT_TYPE.ELEMENT_CNT, (int)ELEMENT_TYPE.ELEMENT_CNT]
         {
             {0, 0, 0, 0, 0, 0, 0, 0, -0.3, 0 },                     //NORMAL
             {0, -0.75, -0.2, 0, 0.75, 0, 0, 0, 0, 0 },              //WIND
@@ -79,6 +79,16 @@ namespace RooStatsSim.DB
             {-0.3, 0, 0, 0, 0, 0, 0, -0.25, 0.5, 0.25 },            //ASTRAL
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },                        //UNDEAD
         };
+
+        public double GetSizePanelty(WEAPON_TYPE attacker, WEAPON_TYPE defender)
+        {
+            return SizeRatio[Convert.ToInt32(attacker),Convert.ToInt32(defender)];
+        }
+
+        public double GetElementRatio(ELEMENT_TYPE attacker, ELEMENT_TYPE defender)
+        {
+            return ElementRatio[Convert.ToInt32(attacker), Convert.ToInt32(defender)];
+        }
     }
     
 }

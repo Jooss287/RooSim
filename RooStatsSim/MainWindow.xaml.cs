@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace RooStatsSim
 {
@@ -21,32 +23,49 @@ namespace RooStatsSim
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
 
-            //radio_attack_type.Tag = 0;
+            Initialize_value();
         }
+
+        readonly Dictionary<ELEMENT_TYPE, string> element_dict = new Dictionary<ELEMENT_TYPE, string>()
+        {
+            {ELEMENT_TYPE.NORMAL, "무" },
+            {ELEMENT_TYPE.WIND, "풍" },
+            {ELEMENT_TYPE.EARTH, "지" },
+            {ELEMENT_TYPE.FIRE, "화" },
+            {ELEMENT_TYPE.WATER, "수" },
+            {ELEMENT_TYPE.POISON, "독" },
+            {ELEMENT_TYPE.HOLY, "성" },
+            {ELEMENT_TYPE.DARK, "암" },
+            {ELEMENT_TYPE.ASTRAL, "염" },
+            {ELEMENT_TYPE.UNDEAD, "불사" },
+        };
 
         private void CalcSim_Click(object sender, RoutedEventArgs e)
         {
             int attack_type = Convert.ToInt32(radio_attack_type.Tag);
 
-            ItemAbility abaility = new ItemAbility();
+            ItemAbility ability = new ItemAbility();
 
-            abaility.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
-            abaility.ATK_equipment = Convert.ToInt32(txt_atk_equip.Text);
-            abaility.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
-            abaility.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
+            ability.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
+            ability.ATK_equipment = Convert.ToInt32(txt_atk_equip.Text);
+            ability.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
+            ability.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
 
-            abaility.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
-            abaility.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
-            abaility.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
-            abaility.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
+            ability.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
+            ability.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
+            ability.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
+            ability.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
 
-            abaility.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
-            abaility.element_increse = Convert.ToDouble(txt_element_increse.Text);
-            abaility.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
+            ability.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
+            ability.element_increse = Convert.ToDouble(txt_element_increse.Text);
+            ability.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
+            ability.size_increse = Convert.ToDouble(txt_size_increse.Text);
+            ability.boss_increse = Convert.ToDouble(txt_size_increse.Text);
 
             Status status = new Status();
             status._base = Convert.ToInt32(txt_LvlBase.Text);
@@ -54,8 +73,18 @@ namespace RooStatsSim
             status._dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text);
             status._luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text);
 
-            Equations equ = new Equations(0, status, abaility);
-            retCalc.Text = Convert.ToString(equ.CalcATKdamage());
+            ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;
+            ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
+            AdvantageTable advantage_table = new AdvantageTable();
+            double element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
+            
+
+            Equations equ = new Equations(attack_type, status, ability);
+            equ.element_inc = element_ratio;
+            equ.size_panelty = Convert.ToInt32(txt_weapon_size_panelty.Text);
+            string strRetCalc;
+            strRetCalc = Convert.ToString(equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE)) + " ~ " + Convert.ToString(equ.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE));
+            retCalc.Text = strRetCalc;
         }
 
         private void attack_type_Click(object sender, RoutedEventArgs e)
@@ -63,6 +92,78 @@ namespace RooStatsSim
             RadioButton source = e.Source as RadioButton;
 
             radio_attack_type.Tag = source.Tag;
+        }
+
+        private void Initialize_Value_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult ret = MessageBox.Show("스텟, 아이템 옵션 수치를 초기화하시겠습니까?", "value clear", MessageBoxButton.YesNo);
+            if ( ret == MessageBoxResult.Yes)
+                Initialize_value();
+        }
+
+        private void Initialize_value()
+        {
+            radio_attack_type.Tag = 0;
+
+            txt_LvlBase.Text = "1";
+            txt_StrBase.Text = "1";
+            txt_StrAdd.Text = "0";
+            txt_DexBase.Text = "1";
+            txt_DexAdd.Text = "0";
+            txt_LukBase.Text = "1";
+            txt_LukAdd.Text = "0";
+
+            txt_atk_weapon.Text = "100";
+            txt_atk_equip.Text = "50";
+            txt_atk_smelting.Text = "0";
+            txt_atk_mastery.Text = "0";
+            txt_pdamage_add.Text = "0";
+            txt_def_ignore.Text = "0";
+            txt_monster_def.Text = "0";
+            txt_weapon_size_panelty.Text = "100";
+
+            cmb_monster_element.Items.Clear();
+            cmb_player_element.Items.Clear();
+            foreach(KeyValuePair<ELEMENT_TYPE, string> element_items in element_dict)
+            {
+                cmb_player_element.Items.Add(element_items.Value);
+                cmb_monster_element.Items.Add(element_items.Value);
+            }
+            cmb_player_element.SelectedIndex = 0;
+            cmb_monster_element.SelectedIndex = 0;
+
+            txt_pdamage_percent.Text = "0";
+            txt_pdamage_attacktype.Text = "0";
+            txt_atk_percent.Text = "0";
+            txt_element_increse.Text = "0";
+            txt_tribe_increse.Text = "0";
+            txt_size_increse.Text = "0";
+            txt_boss_increse.Text = "0";
+            txt_skill_percent.Text = "100";
+            txt_skill_add_percent.Text = "0";
+        }
+
+        public bool IsNumeric(string source)
+        {
+            Regex regex = new Regex("[^0-9.-]+");
+            return !regex.IsMatch(source);
+        }
+        private void NurmericCheckFunc(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsNumeric(e.Text);
+        }
+
+        private void TxtboxSelectAll(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.CurrentDispatcher.BeginInvoke(
+                DispatcherPriority.ContextIdle,
+                new Action(
+                    delegate
+                    {
+                        (sender as TextBox).SelectAll();
+                    }
+                )
+            );
         }
     }
 }
