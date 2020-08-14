@@ -85,6 +85,7 @@
             <Button Height="30" Click="Initialize_Value_Click" Content="초기화" Margin="0,20,0,0"/>
             <Button x:Name="CalcSim" Height="30" Click="CalcSim_Click" Content="계산하기"/>
             <TextBox Name="retCalc" Height="30" VerticalContentAlignment="Center" IsEnabled="False" TextAlignment="Center">결과값</TextBox>
+            <TextBox Name="retIngameATK" Height="30" VerticalContentAlignment="Center" IsEnabled="False" TextAlignment="Center">장비창 ATK</TextBox>
         </StackPanel>
 
         <GroupBox Header="장비 설정" Margin="239,10,603,59" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False">
