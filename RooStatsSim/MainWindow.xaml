@@ -25,6 +25,7 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="67"/>
@@ -38,6 +39,7 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0">STR</Label>
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0">DEX</Label>
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0">LUK</Label>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="5" Grid.Column="0">S.ATK</Label>
 
                 <TextBox Name="txt_LvlBase" TabIndex="1" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
@@ -61,6 +63,12 @@
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15"
                          Grid.Row="4" Grid.Column="1"
+                         GotFocus="TxtboxSelectAll"
+                         PreviewTextInput="NurmericCheckFunc" />
+                <TextBox Name="txt_sATK" TabIndex="1" 
+                         TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                         FontSize="15" 
+                         Grid.Row="5" Grid.Column="1"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
                 <TextBox Name="txt_StrAdd" TabIndex="2" 
