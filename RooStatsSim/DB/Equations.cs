@@ -135,5 +135,25 @@ namespace RooStatsSim.DB
 
             return Convert.ToInt32(Math.Floor(tot_atk));
         }
+
+        public int CalcReverseATK(int sATK)
+        {
+            double status_atk;
+            double tot_weapon_atk;
+            double randomATK = 0;
+
+            if (attack_type == 0)
+            {
+                status_atk = status._str + (status._dex + status._luk) * 0.2 + status._base * 0.25;
+            }
+            else
+            {
+                status_atk = status._dex + (status._str + status._luk) * 0.2 + status._base * 0.25;
+            }
+
+            double equipATK = (sATK - abilities.ATK_mastery - status_atk) / (1 + 0.01*abilities.ATK_percent) - abilities.ATK_weapon - abilities.ATK_smelting;
+
+            return Convert.ToInt32(Math.Floor(equipATK));
+        }
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1200">
     <Grid>
-        <StackPanel Orientation="Vertical" Width="224" Margin="10,10,0,0" Height="330" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <StackPanel Orientation="Vertical" Width="224" Margin="10,10,0,0" Height="370" VerticalAlignment="Top" HorizontalAlignment="Left">
             <GroupBox Header="attack type">
                 <Grid>
                     <Grid.ColumnDefinitions>

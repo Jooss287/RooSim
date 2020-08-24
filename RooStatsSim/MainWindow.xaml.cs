@@ -47,6 +47,10 @@ namespace RooStatsSim
             {ELEMENT_TYPE.UNDEAD, "불사" },
         };
 
+        private void InputUIData()
+        {
+
+        }
         private void CalcDamage()
         {
             int attack_type = Convert.ToInt32(radio_attack_type.Tag);
@@ -144,7 +148,7 @@ namespace RooStatsSim
         private void CalcSim_Click(object sender, RoutedEventArgs e)
         {
             CalcDamage();
-            CAlcIngameATK();
+            //CAlcIngameATK();
         }
 
         private void attack_type_Click(object sender, RoutedEventArgs e)
@@ -207,6 +211,7 @@ namespace RooStatsSim
         {
             radio_attack_type.Tag = 0;
 
+            txt_sATK.Text = "1392";
             txt_LvlBase.Text = "79";
             txt_StrBase.Text = "99";
             txt_StrAdd.Text = "59";
@@ -231,14 +236,14 @@ namespace RooStatsSim
                 cmb_player_element.Items.Add(element_items.Value);
                 cmb_monster_element.Items.Add(element_items.Value);
             }
-            cmb_player_element.SelectedIndex = (int)ELEMENT_TYPE.WIND;
-            cmb_monster_element.SelectedIndex = (int)ELEMENT_TYPE.WATER;
+            cmb_player_element.SelectedIndex = (int)ELEMENT_TYPE.NORMAL;
+            cmb_monster_element.SelectedIndex = (int)ELEMENT_TYPE.NORMAL;
 
             txt_pdamage_percent.Text = "13.75";
             txt_pdamage_attacktype.Text = "0";
             txt_atk_percent.Text = "18.62";
             txt_element_increse.Text = "20";
-            txt_tribe_increse.Text = "31";
+            txt_tribe_increse.Text = "26";
             txt_size_increse.Text = "0";
             txt_boss_increse.Text = "0";
             txt_skill_percent.Text = "100";
@@ -269,7 +274,46 @@ namespace RooStatsSim
 
         private void ATK_ReverseClick(object sender, RoutedEventArgs e)
         {
+            int attack_type = Convert.ToInt32(radio_attack_type.Tag);
 
+            ItemAbility ability = new ItemAbility();
+
+            ability.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
+            ability.ATK_equipment = Convert.ToInt32(txt_atk_equip.Text);
+            ability.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
+            ability.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
+
+            ability.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
+            ability.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
+            ability.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
+            ability.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
+
+            ability.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
+            ability.element_increse = Convert.ToDouble(txt_element_increse.Text);
+            ability.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
+            ability.size_increse = Convert.ToDouble(txt_size_increse.Text);
+            ability.boss_increse = Convert.ToDouble(txt_boss_increse.Text);
+
+            Status status = new Status();
+            status._base = Convert.ToInt32(txt_LvlBase.Text);
+            status._str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text);
+            status._dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text);
+            status._luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text);
+
+            MonsterDB mobDB = new MonsterDB();
+            mobDB.defense = Convert.ToInt32(txt_monster_def.Text);
+
+            ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;
+            ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
+            AdvantageTable advantage_table = new AdvantageTable();
+            double element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
+
+
+            Equations equ = new Equations(attack_type, status, ability, mobDB);
+            equ.element_inc = element_ratio;
+            equ.size_panelty = Convert.ToInt32(txt_weapon_size_panelty.Text);
+
+            txt_atk_equip.Text = Convert.ToString(equ.CalcReverseATK(Convert.ToInt32(txt_sATK.Text)));
         }
     }
 }
