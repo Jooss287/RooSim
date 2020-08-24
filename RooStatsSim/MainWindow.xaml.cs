@@ -207,18 +207,18 @@ namespace RooStatsSim
         {
             radio_attack_type.Tag = 0;
 
-            txt_LvlBase.Text = "75";
+            txt_LvlBase.Text = "79";
             txt_StrBase.Text = "99";
-            txt_StrAdd.Text = "55";
+            txt_StrAdd.Text = "59";
             txt_DexBase.Text = "11";
-            txt_DexAdd.Text = "32";
+            txt_DexAdd.Text = "25";
             txt_LukBase.Text = "1";
             txt_LukAdd.Text = "9";
 
             txt_atk_weapon.Text = "338";
-            txt_atk_equip.Text = "257";
-            txt_atk_smelting.Text = "253";
-            txt_atk_mastery.Text = "50";
+            txt_atk_equip.Text = "346";
+            txt_atk_smelting.Text = "249";
+            txt_atk_mastery.Text = "60";
             txt_pdamage_add.Text = "116";
             txt_def_ignore.Text = "0";
             txt_monster_def.Text = "52";
@@ -236,7 +236,7 @@ namespace RooStatsSim
 
             txt_pdamage_percent.Text = "13.75";
             txt_pdamage_attacktype.Text = "0";
-            txt_atk_percent.Text = "10.25";
+            txt_atk_percent.Text = "18.62";
             txt_element_increse.Text = "20";
             txt_tribe_increse.Text = "31";
             txt_size_increse.Text = "0";
@@ -265,6 +265,11 @@ namespace RooStatsSim
                     }
                 )
             );
+        }
+
+        private void ATK_ReverseClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
