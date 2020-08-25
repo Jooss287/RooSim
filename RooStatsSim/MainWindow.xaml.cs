@@ -1,4 +1,5 @@
 ﻿using RooStatsSim.DB;
+using RooStatsSim.Equation.Job;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -140,6 +141,7 @@ namespace RooStatsSim
         MonsterDB mobDB;
         AdvantageTable advantage_table;
         Equations equ;
+        LoadKnight load;
         int attack_type;
         double element_ratio;
         private void InputUIData()
@@ -152,16 +154,16 @@ namespace RooStatsSim
             ability.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
             ability.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
 
-            ability.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
+            ability.PDamage_percent = 1 + 0.01 * Convert.ToDouble(txt_pdamage_percent.Text);
             ability.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
-            ability.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
-            ability.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
+            ability.PDamage_attack_type = 1 + 0.01 * Convert.ToDouble(txt_pdamage_attacktype.Text);
+            ability.ATK_percent = 1 + 0.01 * Convert.ToDouble(txt_atk_percent.Text);
 
-            ability.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
-            ability.element_increse = Convert.ToDouble(txt_element_increse.Text);
-            ability.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
-            ability.size_increse = Convert.ToDouble(txt_size_increse.Text);
-            ability.boss_increse = Convert.ToDouble(txt_boss_increse.Text);
+            ability.def_ignore = 0.01 * Convert.ToDouble(txt_def_ignore.Text);
+            ability.element_increse = 1 + 0.01 * Convert.ToDouble(txt_element_increse.Text);
+            ability.tribe_increse = 1 + 0.01 * Convert.ToDouble(txt_tribe_increse.Text);
+            ability.size_increse = 1 + 0.01 * Convert.ToDouble(txt_size_increse.Text);
+            ability.boss_increse = 1 + 0.01 * Convert.ToDouble(txt_boss_increse.Text);
 
 
             status = new Status();
@@ -181,8 +183,12 @@ namespace RooStatsSim
             element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
 
             equ = new Equations(attack_type, status, ability, mobDB);
-            equ.element_inc = element_ratio;
-            equ.size_panelty = Convert.ToInt32(txt_weapon_size_panelty.Text);
+            equ.element_inc = 1+element_ratio;
+            equ.size_panelty = 0.01 * Convert.ToInt32(txt_weapon_size_panelty.Text);
+
+            load = new LoadKnight(attack_type, status, ability, mobDB);
+            load.element_inc = 1 + element_ratio;
+            load.size_panelty = 0.01 * Convert.ToInt32(txt_weapon_size_panelty.Text);
         }
 
         private void ATK_ReverseClick(object sender, RoutedEventArgs e)
@@ -194,6 +200,8 @@ namespace RooStatsSim
         private void CalcSim_Click(object sender, RoutedEventArgs e)
         {
             InputUIData();
+
+            load.CalcATKdamage();
 
             int calcATK_min = (int)(equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
             int calcATK_max = (int)(equ.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
