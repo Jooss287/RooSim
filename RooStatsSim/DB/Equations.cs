@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RooStatsSim.Equation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -9,9 +10,9 @@ namespace RooStatsSim.DB
 {
     enum CALC_STANDARD
     {
-        NONE,
-        MIN_DAMAGE,
-        MAX_DAMAGE
+        NONE = 0,
+        MIN_DAMAGE = -1,
+        MAX_DAMAGE = 1
     }
     class Equations
     {
@@ -21,58 +22,25 @@ namespace RooStatsSim.DB
             status = param_status;
             abilities = param_abilitys;
             mobDB = param_mobDB;
+
+            statusATK = new StatusATK(attack_type, ref abilities, ref status);
         }
 
         private readonly int attack_type;
         private readonly ItemAbility abilities;
         private readonly Status status;
         private readonly MonsterDB mobDB;
-
-        const double STR_WEIGHT = 0.005;
+        private readonly StatusATK statusATK;
+        public double element_inc;
+        public int size_panelty;
         const double RANDOM_ATK_WEIGHT = 0.1;
-        public double element_inc = 0;
-        public double size_panelty = 1;
 
-        double GetStrATK()              { return abilities.ATK_weapon * status._str * STR_WEIGHT; }
-        double GetDexATK()              { return abilities.ATK_weapon * status._dex * STR_WEIGHT; }
-        double GetRandomATK()           { return abilities.ATK_weapon * RANDOM_ATK_WEIGHT; }
-        double GetDefRatio()
-        {
-            double def_ignore = 1 - 0.01 * abilities.def_ignore;
-            double def_ratio = (4000 + (mobDB.defense * def_ignore)) / (4000 + (mobDB.defense * def_ignore * 10));
-            return def_ratio;
-        }
+        double GetRandomATK() { return abilities.ATK_weapon * RANDOM_ATK_WEIGHT; }
 
         public int CalcATKdamage(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
         {
-            double status_atk;
-            double tot_weapon_atk;
-            double randomATK = 0;
-
-            switch (calc_standard)
-            {
-                case CALC_STANDARD.NONE:
-                    randomATK = 0;
-                    break;
-                case CALC_STANDARD.MIN_DAMAGE:
-                    randomATK = -1 * GetRandomATK();
-                    break;
-                case CALC_STANDARD.MAX_DAMAGE:
-                    randomATK = 1 * GetRandomATK();
-                    break;
-            }
-
-            if (attack_type == 0)
-            {
-                status_atk = status._str + (status._dex + status._luk) * 0.2 + status._base * 0.25;
-                tot_weapon_atk = abilities.ATK_weapon + abilities.ATK_smelting + GetStrATK() + randomATK;
-            }
-            else
-            {
-                status_atk = status._dex + (status._str + status._luk) * 0.2 + status._base * 0.25;
-                tot_weapon_atk = abilities.ATK_weapon + abilities.ATK_smelting + GetDexATK() + randomATK;
-            }
-            status_atk *= 2;
+            double status_atk = statusATK.GetStatusATK() * 2;
+            double tot_weapon_atk = abilities.ATK_weapon + abilities.ATK_smelting + statusATK.GetStatusBonusATK() + GetRandomATK() * (int)calc_standard;
 
             double tot_weapon_atk_ratio = (0.01 * size_panelty);
             double tot_weapon_atk_inc = tot_weapon_atk * tot_weapon_atk_ratio;
@@ -80,7 +48,7 @@ namespace RooStatsSim.DB
             double tot_equip_atk = tot_weapon_atk_inc + abilities.ATK_equipment;
 
             double tot_equip_atk_ratio = (1 + element_inc) * (1 + 0.01*abilities.element_increse) * (1 + 0.01*abilities.tribe_increse)
-                * (1 + 0.01*abilities.size_increse) * (1 + 0.01*abilities.boss_increse) * (1 + 0.01*abilities.ATK_percent) * GetDefRatio();
+                * (1 + 0.01*abilities.size_increse) * (1 + 0.01*abilities.boss_increse) * (1 + 0.01*abilities.ATK_percent) * Defense.GetDefRatio(mobDB.defense, abilities.def_ignore);
             double tot_equip_atk_inc = tot_equip_atk * tot_equip_atk_ratio;
             
 
@@ -93,33 +61,8 @@ namespace RooStatsSim.DB
 
         public int CalcStatusWinATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
         {
-            double status_atk;
-            double tot_weapon_atk;
-            double randomATK = 0;
-
-            switch (calc_standard)
-            {
-                case CALC_STANDARD.NONE:
-                    randomATK = 0;
-                    break;
-                case CALC_STANDARD.MIN_DAMAGE:
-                    randomATK = -1 * GetRandomATK();
-                    break;
-                case CALC_STANDARD.MAX_DAMAGE:
-                    randomATK = 1 * GetRandomATK();
-                    break;
-            }
-
-            if (attack_type == 0)
-            {
-                status_atk = status._str + (status._dex + status._luk) * 0.2 + status._base * 0.25;
-                tot_weapon_atk = abilities.ATK_weapon + GetStrATK() + randomATK;
-            }
-            else
-            {
-                status_atk = status._dex + (status._str + status._luk) * 0.2 + status._base * 0.25;
-                tot_weapon_atk = abilities.ATK_weapon + GetDexATK() + randomATK;
-            }
+            double status_atk = statusATK.GetStatusATK();
+            double tot_weapon_atk = abilities.ATK_weapon + statusATK.GetStatusBonusATK() + GetRandomATK()*(int)calc_standard;
 
             double tot_weapon_atk_ratio = (0.01 * size_panelty);
             double tot_weapon_atk_inc = tot_weapon_atk * tot_weapon_atk_ratio;
@@ -138,20 +81,8 @@ namespace RooStatsSim.DB
 
         public int CalcReverseATK(int sATK)
         {
-            double status_atk;
-            double tot_weapon_atk;
-            double randomATK = 0;
-
-            if (attack_type == 0)
-            {
-                status_atk = status._str + (status._dex + status._luk) * 0.2 + status._base * 0.25;
-            }
-            else
-            {
-                status_atk = status._dex + (status._str + status._luk) * 0.2 + status._base * 0.25;
-            }
-
-            double equipATK = (sATK - abilities.ATK_mastery - status_atk) / (1 + 0.01*abilities.ATK_percent) - abilities.ATK_weapon - abilities.ATK_smelting;
+            double status_atk = statusATK.GetStatusATK();
+            double equipATK = (sATK - abilities.ATK_mastery - status_atk) / (1 + 0.01*abilities.ATK_percent) - abilities.ATK_weapon - statusATK.GetStatusBonusATK();
 
             return Convert.ToInt32(Math.Floor(equipATK));
         }
