@@ -70,7 +70,7 @@ namespace RooStatsSim.DB
         }
         protected virtual double TotalATK(double total_equip_atk_inc)
         {
-            return statusATK.GetStatusATK() * 2 + GetMasteryATK() + TotalEquipATKinc(total_equip_atk_inc);
+            return statusATK.GetStatusATK() * 2 + GetMasteryATK() + total_equip_atk_inc;
         }
         protected virtual double TotalATKinc(double total_atk)
         {
@@ -91,18 +91,22 @@ namespace RooStatsSim.DB
         #endregion
 
         #region StatusWindow ATK Equation
-        protected double WinTotalEquipATKinc(double total_equip_atk)
+        protected virtual double WinTotalEquipATKinc(double total_equip_atk)
         {
             return Math.Round(total_equip_atk * abilities.ATK_percent);
         }
-        protected double WinTotalATK(double total_equip_atk_inc)
+        protected virtual double WinTotalEquipATK(double total_weapon_atk)
+        {
+            return total_weapon_atk + abilities.ATK_equipment;
+        }
+        protected virtual double WinTotalATK(double total_equip_atk_inc)
         {
             return statusATK.GetStatusATK() + GetMasteryATK() + total_equip_atk_inc;
         }
         public int CalcStatusWinATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
         {
             double total_weapon_atk = GetWeaponATK();
-            double total_equip_atk = TotalEquipATK(total_weapon_atk);
+            double total_equip_atk = WinTotalEquipATK(total_weapon_atk);
             double total_equip_atk_inc = WinTotalEquipATKinc(total_equip_atk);
             double tot_atk = WinTotalATK(total_equip_atk_inc);
 
