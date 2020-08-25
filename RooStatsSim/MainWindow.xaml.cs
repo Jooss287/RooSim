@@ -2,19 +2,10 @@
 using RooStatsSim.Equation.Job;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace RooStatsSim
@@ -80,7 +71,7 @@ namespace RooStatsSim
         {
             radio_attack_type.Tag = 0;
 
-            txt_sATK.Text = "1392";
+            txt_sATK.Text = "1399";
             txt_LvlBase.Text = "79";
             txt_StrBase.Text = "99";
             txt_StrAdd.Text = "59";
@@ -134,6 +125,44 @@ namespace RooStatsSim
             {ELEMENT_TYPE.ASTRAL, "염" },
             {ELEMENT_TYPE.UNDEAD, "불사" },
         };
+        #endregion
+
+        #region UI Setting
+        public bool IsNumeric(string source)
+        {
+            Regex regex = new Regex("[^0-9.-]+");
+            return !regex.IsMatch(source);
+        }
+        private void NurmericCheckFunc(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsNumeric(e.Text);
+        }
+
+        private void TxtboxSelectAll(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.CurrentDispatcher.BeginInvoke(
+                DispatcherPriority.ContextIdle,
+                new Action(
+                    delegate
+                    {
+                        (sender as TextBox).SelectAll();
+                    }
+                )
+            );
+        }
+
+        private void attack_type_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton source = e.Source as RadioButton;
+            radio_attack_type.Tag = source.Tag;
+        }
+
+        private void Initialize_Value_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult ret = MessageBox.Show("스텟, 아이템 옵션 수치를 초기화하시겠습니까?", "value clear", MessageBoxButton.YesNo);
+            if (ret == MessageBoxResult.Yes)
+                Initialize_value();
+        }
         #endregion
 
         ItemAbility ability;
@@ -194,58 +223,24 @@ namespace RooStatsSim
         private void ATK_ReverseClick(object sender, RoutedEventArgs e)
         {
             InputUIData();
-
             txt_atk_equip.Text = Convert.ToString(equ.CalcReverseATK(Convert.ToInt32(txt_sATK.Text)));
         }
         private void CalcSim_Click(object sender, RoutedEventArgs e)
         {
             InputUIData();
 
-            load.CalcATKdamage();
+            //int minDamage = load.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE);
+            //int maxDamage = load.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE);
+            int minDamage = equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE);
+            int maxDamage = equ.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE);
 
-            int calcATK_min = (int)(equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
-            int calcATK_max = (int)(equ.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
+            int calcATK_min = (int)(minDamage * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
+            int calcATK_max = (int)(maxDamage * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
 
             retCalc.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
-            txt_sATK.Text = Convert.ToString(equ.CalcStatusWinATK(CALC_STANDARD.NONE));
+            txt_sATK.Text = Convert.ToString(load.CalcStatusWinATK(CALC_STANDARD.NONE));
         }
 
-        #region UI Setting
-        public bool IsNumeric(string source)
-        {
-            Regex regex = new Regex("[^0-9.-]+");
-            return !regex.IsMatch(source);
-        }
-        private void NurmericCheckFunc(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsNumeric(e.Text);
-        }
-
-        private void TxtboxSelectAll(object sender, RoutedEventArgs e)
-        {
-            Dispatcher.CurrentDispatcher.BeginInvoke(
-                DispatcherPriority.ContextIdle,
-                new Action(
-                    delegate
-                    {
-                        (sender as TextBox).SelectAll();
-                    }
-                )
-            );
-        }
-
-        private void attack_type_Click(object sender, RoutedEventArgs e)
-        {
-            RadioButton source = e.Source as RadioButton;
-            radio_attack_type.Tag = source.Tag;
-        }
-
-        private void Initialize_Value_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult ret = MessageBox.Show("스텟, 아이템 옵션 수치를 초기화하시겠습니까?", "value clear", MessageBoxButton.YesNo);
-            if (ret == MessageBoxResult.Yes)
-                Initialize_value();
-        }
-        #endregion
+        
     }
 }
