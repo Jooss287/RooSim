@@ -60,6 +60,7 @@
     <Compile Include="DB\AdvantageTable.cs" />
     <Compile Include="DB\MonsterDB.cs" />
     <Compile Include="DB\Status.cs" />
+    <Compile Include="Equation\Defense.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>

@@ -23,146 +23,14 @@ namespace RooStatsSim
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
+        #region Initialize
         public MainWindow()
         {
             InitializeComponent();
 
             Initialize_value();
             Initialize_value_test();
-            CalcDamage();
-        }
-
-        readonly Dictionary<ELEMENT_TYPE, string> element_dict = new Dictionary<ELEMENT_TYPE, string>()
-        {
-            {ELEMENT_TYPE.NORMAL, "무" },
-            {ELEMENT_TYPE.WIND, "풍" },
-            {ELEMENT_TYPE.EARTH, "지" },
-            {ELEMENT_TYPE.FIRE, "화" },
-            {ELEMENT_TYPE.WATER, "수" },
-            {ELEMENT_TYPE.POISON, "독" },
-            {ELEMENT_TYPE.HOLY, "성" },
-            {ELEMENT_TYPE.DARK, "암" },
-            {ELEMENT_TYPE.ASTRAL, "염" },
-            {ELEMENT_TYPE.UNDEAD, "불사" },
-        };
-
-        private void InputUIData()
-        {
-
-        }
-        private void CalcDamage()
-        {
-            int attack_type = Convert.ToInt32(radio_attack_type.Tag);
-
-            ItemAbility ability = new ItemAbility();
-
-            ability.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
-            ability.ATK_equipment = Convert.ToInt32(txt_atk_equip.Text);
-            ability.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
-            ability.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
-
-            ability.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
-            ability.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
-            ability.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
-            ability.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
-
-            ability.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
-            ability.element_increse = Convert.ToDouble(txt_element_increse.Text);
-            ability.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
-            ability.size_increse = Convert.ToDouble(txt_size_increse.Text);
-            ability.boss_increse = Convert.ToDouble(txt_boss_increse.Text);
-
-            Status status = new Status();
-            status._base = Convert.ToInt32(txt_LvlBase.Text);
-            status._str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text);
-            status._dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text);
-            status._luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text);
-
-            MonsterDB mobDB = new MonsterDB();
-            mobDB.defense = Convert.ToInt32(txt_monster_def.Text);
-
-            ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;
-            ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
-            AdvantageTable advantage_table = new AdvantageTable();
-            double element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
-
-
-            Equations equ = new Equations(attack_type, status, ability, mobDB);
-            equ.element_inc = element_ratio;
-            equ.size_panelty = Convert.ToInt32(txt_weapon_size_panelty.Text);
-
-            int calcATK_min = (int)(equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
-            int calcATK_max = (int)(equ.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
-            string strRetCalc;
-            strRetCalc = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
-            retCalc.Text = strRetCalc;
-        }
-
-        private void CAlcIngameATK()
-        {
-            int attack_type = Convert.ToInt32(radio_attack_type.Tag);
-
-            ItemAbility ability = new ItemAbility();
-
-            ability.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
-            ability.ATK_equipment = Convert.ToInt32(txt_atk_equip.Text);
-            ability.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
-            ability.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
-
-            ability.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
-            ability.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
-            ability.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
-            ability.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
-
-            ability.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
-            ability.element_increse = Convert.ToDouble(txt_element_increse.Text);
-            ability.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
-            ability.size_increse = Convert.ToDouble(txt_size_increse.Text);
-            ability.boss_increse = Convert.ToDouble(txt_boss_increse.Text);
-
-            Status status = new Status();
-            status._base = Convert.ToInt32(txt_LvlBase.Text);
-            status._str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text);
-            status._dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text);
-            status._luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text);
-
-            MonsterDB mobDB = new MonsterDB();
-            mobDB.defense = Convert.ToInt32(txt_monster_def.Text);
-
-            ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;
-            ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
-            AdvantageTable advantage_table = new AdvantageTable();
-            double element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
-
-
-            Equations equ = new Equations(attack_type, status, ability, mobDB);
-            equ.element_inc = element_ratio;
-            equ.size_panelty = Convert.ToInt32(txt_weapon_size_panelty.Text);
-
-            int calcStatusWinATK = (int)(equ.CalcStatusWinATK(CALC_STANDARD.NONE));
-            string strRetCalc;
-            strRetCalc = Convert.ToString(calcStatusWinATK);
-            retCalc.Text = strRetCalc;
-        }
-        private void CalcSim_Click(object sender, RoutedEventArgs e)
-        {
-            CalcDamage();
-            //CAlcIngameATK();
-        }
-
-        private void attack_type_Click(object sender, RoutedEventArgs e)
-        {
-            RadioButton source = e.Source as RadioButton;
-
-            radio_attack_type.Tag = source.Tag;
-        }
-
-        private void Initialize_Value_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult ret = MessageBox.Show("스텟, 아이템 옵션 수치를 초기화하시겠습니까?", "value clear", MessageBoxButton.YesNo);
-            if ( ret == MessageBoxResult.Yes)
-                Initialize_value();
         }
 
         private void Initialize_value()
@@ -188,7 +56,7 @@ namespace RooStatsSim
 
             cmb_monster_element.Items.Clear();
             cmb_player_element.Items.Clear();
-            foreach(KeyValuePair<ELEMENT_TYPE, string> element_items in element_dict)
+            foreach (KeyValuePair<ELEMENT_TYPE, string> element_items in element_dict)
             {
                 cmb_player_element.Items.Add(element_items.Value);
                 cmb_monster_element.Items.Add(element_items.Value);
@@ -243,12 +111,98 @@ namespace RooStatsSim
             txt_pdamage_attacktype.Text = "0";
             txt_atk_percent.Text = "18.62";
             txt_element_increse.Text = "20";
-            txt_tribe_increse.Text = "26";
+            txt_tribe_increse.Text = "0";
             txt_size_increse.Text = "0";
             txt_boss_increse.Text = "0";
             txt_skill_percent.Text = "100";
             txt_skill_add_percent.Text = "0";
         }
+        #endregion
+
+        #region UI Define
+        readonly Dictionary<ELEMENT_TYPE, string> element_dict = new Dictionary<ELEMENT_TYPE, string>()
+        {
+            {ELEMENT_TYPE.NORMAL, "무" },
+            {ELEMENT_TYPE.WIND, "풍" },
+            {ELEMENT_TYPE.EARTH, "지" },
+            {ELEMENT_TYPE.FIRE, "화" },
+            {ELEMENT_TYPE.WATER, "수" },
+            {ELEMENT_TYPE.POISON, "독" },
+            {ELEMENT_TYPE.HOLY, "성" },
+            {ELEMENT_TYPE.DARK, "암" },
+            {ELEMENT_TYPE.ASTRAL, "염" },
+            {ELEMENT_TYPE.UNDEAD, "불사" },
+        };
+        #endregion
+
+        ItemAbility ability;
+        Status status;
+        MonsterDB mobDB;
+        AdvantageTable advantage_table;
+        Equations equ;
+        int attack_type;
+        double element_ratio;
+        private void InputUIData()
+        {
+            attack_type = Convert.ToInt32(radio_attack_type.Tag);
+
+            ability = new ItemAbility();
+            ability.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
+            ability.ATK_equipment = Convert.ToInt32(txt_atk_equip.Text);
+            ability.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
+            ability.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
+
+            ability.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
+            ability.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
+            ability.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
+            ability.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
+
+            ability.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
+            ability.element_increse = Convert.ToDouble(txt_element_increse.Text);
+            ability.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
+            ability.size_increse = Convert.ToDouble(txt_size_increse.Text);
+            ability.boss_increse = Convert.ToDouble(txt_boss_increse.Text);
+
+
+            status = new Status();
+            status._base = Convert.ToInt32(txt_LvlBase.Text);
+            status._str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text);
+            status._dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text);
+            status._luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text);
+
+
+            mobDB = new MonsterDB();
+            mobDB.defense = Convert.ToInt32(txt_monster_def.Text);
+
+
+            advantage_table = new AdvantageTable();
+            ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;
+            ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
+            element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
+
+            equ = new Equations(attack_type, status, ability, mobDB);
+            equ.element_inc = element_ratio;
+            equ.size_panelty = Convert.ToInt32(txt_weapon_size_panelty.Text);
+        }
+
+        private void ATK_ReverseClick(object sender, RoutedEventArgs e)
+        {
+            InputUIData();
+
+            txt_atk_equip.Text = Convert.ToString(equ.CalcReverseATK(Convert.ToInt32(txt_sATK.Text)));
+        }
+        private void CalcSim_Click(object sender, RoutedEventArgs e)
+        {
+            InputUIData();
+
+            int calcATK_min = (int)(equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
+            int calcATK_max = (int)(equ.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE) * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
+
+            retCalc.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
+            txt_sATK.Text = Convert.ToString(equ.CalcStatusWinATK(CALC_STANDARD.NONE));
+        }
+
+        #region UI Setting
         public bool IsNumeric(string source)
         {
             Regex regex = new Regex("[^0-9.-]+");
@@ -272,48 +226,18 @@ namespace RooStatsSim
             );
         }
 
-        private void ATK_ReverseClick(object sender, RoutedEventArgs e)
+        private void attack_type_Click(object sender, RoutedEventArgs e)
         {
-            int attack_type = Convert.ToInt32(radio_attack_type.Tag);
-
-            ItemAbility ability = new ItemAbility();
-
-            ability.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
-            ability.ATK_equipment = Convert.ToInt32(txt_atk_equip.Text);
-            ability.ATK_smelting = Convert.ToInt32(txt_atk_smelting.Text);
-            ability.ATK_mastery = Convert.ToInt32(txt_atk_mastery.Text);
-
-            ability.PDamage_percent = Convert.ToDouble(txt_pdamage_percent.Text);
-            ability.PDamage_addition = Convert.ToInt32(txt_pdamage_add.Text);
-            ability.PDamage_attack_type = Convert.ToDouble(txt_pdamage_attacktype.Text);
-            ability.ATK_percent = Convert.ToDouble(txt_atk_percent.Text);
-
-            ability.def_ignore = Convert.ToDouble(txt_def_ignore.Text);
-            ability.element_increse = Convert.ToDouble(txt_element_increse.Text);
-            ability.tribe_increse = Convert.ToDouble(txt_tribe_increse.Text);
-            ability.size_increse = Convert.ToDouble(txt_size_increse.Text);
-            ability.boss_increse = Convert.ToDouble(txt_boss_increse.Text);
-
-            Status status = new Status();
-            status._base = Convert.ToInt32(txt_LvlBase.Text);
-            status._str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text);
-            status._dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text);
-            status._luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text);
-
-            MonsterDB mobDB = new MonsterDB();
-            mobDB.defense = Convert.ToInt32(txt_monster_def.Text);
-
-            ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;
-            ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
-            AdvantageTable advantage_table = new AdvantageTable();
-            double element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
-
-
-            Equations equ = new Equations(attack_type, status, ability, mobDB);
-            equ.element_inc = element_ratio;
-            equ.size_panelty = Convert.ToInt32(txt_weapon_size_panelty.Text);
-
-            txt_atk_equip.Text = Convert.ToString(equ.CalcReverseATK(Convert.ToInt32(txt_sATK.Text)));
+            RadioButton source = e.Source as RadioButton;
+            radio_attack_type.Tag = source.Tag;
         }
+
+        private void Initialize_Value_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult ret = MessageBox.Show("스텟, 아이템 옵션 수치를 초기화하시겠습니까?", "value clear", MessageBoxButton.YesNo);
+            if (ret == MessageBoxResult.Yes)
+                Initialize_value();
+        }
+        #endregion
     }
 }
