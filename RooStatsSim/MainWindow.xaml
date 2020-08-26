@@ -208,9 +208,10 @@
                 </GroupBox>
                 <GroupBox Header="버프스킬 List" Margin="10,0,0,0" Width="200">
                     <StackPanel Orientation="Vertical">
+                        <CheckBox x:Name="check_knight_magunumbrake" Content="매그넘브레이크" Margin="5,5,0,0"/>
                         <CheckBox x:Name="check_knight_concentrate" Content="컨센트레이션" Margin="5,5,0,0"/>
                         <CheckBox x:Name="check_knight_aurorblade" Content="오러블레이드" Margin="5,5,0,0"/>
-                        <CheckBox x:Name="check_knight_magunumbrake" Content="매그넘브레이크" Margin="5,5,0,0"/>
+                        
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
