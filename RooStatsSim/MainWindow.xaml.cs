@@ -27,7 +27,7 @@ namespace RooStatsSim
 
         private void Initialize_value()
         {
-            radio_attack_type.Tag = 0;
+            radio_job.Tag = 0;
 
             txt_LvlBase.Text = "1";
             txt_StrBase.Text = "1";
@@ -69,7 +69,7 @@ namespace RooStatsSim
 
         private void Initialize_value_test()
         {
-            radio_attack_type.Tag = 0;
+            radio_job.Tag = 0;
 
             txt_sATK.Text = "1399";
             txt_LvlBase.Text = "79";
@@ -125,6 +125,14 @@ namespace RooStatsSim
             {ELEMENT_TYPE.ASTRAL, "염" },
             {ELEMENT_TYPE.UNDEAD, "불사" },
         };
+        enum JOB_LIST{
+            LOAD_KNIGHT,
+            WHITE_SMITH,
+            GUILLOTINE_CROSS,
+            SNIPER,
+            HIGH_WIZARD,
+            HIGH_PRIST
+        }
         #endregion
 
         #region UI Setting
@@ -151,10 +159,10 @@ namespace RooStatsSim
             );
         }
 
-        private void attack_type_Click(object sender, RoutedEventArgs e)
+        private void job_sel_Click(object sender, RoutedEventArgs e)
         {
             RadioButton source = e.Source as RadioButton;
-            radio_attack_type.Tag = source.Tag;
+            radio_job.Tag = source.Tag;
         }
 
         private void Initialize_Value_Click(object sender, RoutedEventArgs e)
@@ -175,7 +183,7 @@ namespace RooStatsSim
         double element_ratio;
         private void InputUIData()
         {
-            attack_type = Convert.ToInt32(radio_attack_type.Tag);
+            attack_type = Convert.ToInt32(radio_job.Tag);
 
             ability = new ItemAbility();
             ability.ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text);
@@ -229,6 +237,8 @@ namespace RooStatsSim
         {
             InputUIData();
 
+            
+
             //int minDamage = load.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE);
             //int maxDamage = load.CalcATKdamage(CALC_STANDARD.MAX_DAMAGE);
             int minDamage = equ.CalcATKdamage(CALC_STANDARD.MIN_DAMAGE);
@@ -241,6 +251,20 @@ namespace RooStatsSim
             txt_sATK.Text = Convert.ToString(equ.CalcStatusWinATK(CALC_STANDARD.NONE));
         }
 
+        private Equations SelectJob(JOB_LIST jobnum)
+        {
+            Equations temp;
+            switch (jobnum)
+            {
+                default:
+                    temp = new Equations(1, status, ability, mobDB);
+                    break;
+                case JOB_LIST.LOAD_KNIGHT:
+                    temp = new LoadKnight(1, status, ability, mobDB);
+                    break;
+            }
+            return temp;
+        }
         
     }
 }
