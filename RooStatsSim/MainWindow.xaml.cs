@@ -238,7 +238,7 @@ namespace RooStatsSim
             int calcATK_max = (int)(maxDamage * (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01);
 
             retCalc.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
-            txt_sATK.Text = Convert.ToString(load.CalcStatusWinATK(CALC_STANDARD.NONE));
+            txt_sATK.Text = Convert.ToString(equ.CalcStatusWinATK(CALC_STANDARD.NONE));
         }
 
         
