@@ -1,10 +1,6 @@
 ﻿using RooStatsSim.Equation;
+using RooStatsSim.Equation.Job;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RooStatsSim.DB
 {
@@ -14,19 +10,25 @@ namespace RooStatsSim.DB
         MIN_DAMAGE = -1,
         MAX_DAMAGE = 1
     }
+
     class Equations
     {
-        public Equations(int param_attack_type, Status param_status, ItemAbility param_abilitys, MonsterDB param_mobDB)
+        
+
+        public Equations(ATTACK_TYPE atk_type, ref Status param_status, ref ItemAbility param_abilitys, ref MonsterDB param_mobDB,
+            ref double param_element, ref double param_size)
         {
-            attack_type = param_attack_type;
+            attack_type = atk_type;
             status = param_status;
             abilities = param_abilitys;
             mobDB = param_mobDB;
+            element_inc = param_element;
+            size_panelty = param_size;
 
             statusATK = new StatusATK(attack_type, ref abilities, ref status);
         }
 
-        protected readonly int attack_type;
+        protected readonly ATTACK_TYPE attack_type;
         protected readonly ItemAbility abilities;
         protected readonly Status status;
         protected readonly MonsterDB mobDB;
@@ -103,7 +105,7 @@ namespace RooStatsSim.DB
         {
             return statusATK.GetStatusATK() + GetMasteryATK() + total_equip_atk_inc;
         }
-        public int CalcStatusWinATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
+        public int CalcStatusWinATK()
         {
             double total_weapon_atk = GetWeaponATK();
             double total_equip_atk = WinTotalEquipATK(total_weapon_atk);
