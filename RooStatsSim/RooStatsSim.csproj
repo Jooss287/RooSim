@@ -61,6 +61,7 @@
     <Compile Include="DB\MonsterDB.cs" />
     <Compile Include="DB\Status.cs" />
     <Compile Include="Equation\Defense.cs" />
+    <Compile Include="Equation\Job\JobSelect.cs" />
     <Compile Include="Equation\Job\LoadKnight.cs" />
     <Compile Include="Equation\StatusATK.cs" />
     <Compile Include="Window1.xaml.cs">

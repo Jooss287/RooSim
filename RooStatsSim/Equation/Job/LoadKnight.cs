@@ -1,17 +1,22 @@
 ﻿using RooStatsSim.DB;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace RooStatsSim.Equation.Job
 {
     class LoadKnight : Equations
     {
-        public LoadKnight(int param_attack_type, Status param_status, ItemAbility param_abilitys, MonsterDB param_mobDB)
-        : base(param_attack_type, param_status, param_abilitys, param_mobDB)
+        
+        public LoadKnight(ref Status param_status, ref ItemAbility param_abilitys, ref MonsterDB param_mobDB, ref double param_element, ref double param_size)
+        : base(ATTACK_TYPE.MELEE_TYPE, ref param_status, ref param_abilitys, ref param_mobDB, ref param_element, ref param_size)
         {
+        }
+
+        enum BUFF_SKILL
+        {
+            MAGUNUM_BRAKE,
+            CONCENTRATION,
+            AUROR_BLADE,
         }
 
         private bool buff_concentrate_lvl = true;
