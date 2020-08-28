@@ -1,15 +1,29 @@
 ﻿using RooStatsSim.DB;
 using System;
-using System.Windows.Documents;
+using System.Collections.Generic;
+
+using RooStatsSim.Skills;
 
 namespace RooStatsSim.Equation.Job
 {
     class LoadKnight : Equations
     {
-        
+        List<SkillInfo> skillinfo;
+
+        private void SetSkillData()
+        {
+            List<double> dmg = new List<double>
+            {
+                0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.25
+            };
+            skillinfo.Add(new SkillInfo("컨센트레이션", 10, dmg));
+            skillinfo.Add(new SkillInfo("오러블레이드", 0, dmg));
+            skillinfo.Add(new SkillInfo("매그넘브레이크", 0, dmg));
+        }
         public LoadKnight(ref Status param_status, ref ItemAbility param_abilitys, ref MonsterDB param_mobDB, ref double param_element, ref double param_size)
         : base(ATTACK_TYPE.MELEE_TYPE, ref param_status, ref param_abilitys, ref param_mobDB, ref param_element, ref param_size)
         {
+            SetSkillData();
         }
 
         enum BUFF_SKILL

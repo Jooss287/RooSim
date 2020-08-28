@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RooStatsSim"
+        xmlns:skill="clr-namespace:RooStatsSim.Skills"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="870">
+    <Window.Resources>
+        <skill:SkillAdd x:Key="SkillList"/>
+    </Window.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" Margin="0,10,0,0" >
             <GroupBox Header="직업 선택" Width="600" HorizontalAlignment="Left" Margin="10,0,0,0">
@@ -20,7 +24,7 @@
                     </Grid.ColumnDefinitions>
                     <RadioButton x:Name="radio_job" Tag="0" IsChecked="True" Checked="job_sel_Click" Content="로드나이트" Grid.Column="0" GroupName="group_attack_type" />
                     <RadioButton Tag="1" Checked="job_sel_Click" Content="블랙스미스" Grid.Column="1" GroupName="group_attack_type" />
-                    <RadioButton Tag="2" Checked="job_sel_Click" Content="길로틴크로스" Grid.Column="2" GroupName="group_attack_type" />
+                    <RadioButton Tag="2" Checked="job_sel_Click" Content="어세신크로스" Grid.Column="2" GroupName="group_attack_type" />
                     <RadioButton Tag="3" Checked="job_sel_Click" Content="스나이퍼" Grid.Column="3" GroupName="group_attack_type" />
                     <RadioButton Tag="4" Checked="job_sel_Click" Content="하이위저드" Grid.Column="4" GroupName="group_attack_type" />
                     <RadioButton Tag="5" Checked="job_sel_Click" Content="하이프리스트" Grid.Column="5" GroupName="group_attack_type" />
@@ -207,12 +211,18 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="버프스킬 List" Margin="10,0,0,0" Width="200">
-                    <StackPanel Orientation="Vertical">
-                        <CheckBox x:Name="check_knight_magunumbrake" Content="매그넘브레이크" Margin="5,5,0,0"/>
-                        <CheckBox x:Name="check_knight_concentrate" Content="컨센트레이션" Margin="5,5,0,0"/>
-                        <CheckBox x:Name="check_knight_aurorblade" Content="오러블레이드" Margin="5,5,0,0"/>
-                        
-                    </StackPanel>
+                    <ListBox ItemsSource="{Binding Source={StaticResource SkillList}}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <CheckBox 
+                                            Content="{Binding Path=SkillName}" 
+                                              Click="CheckBox_Click"
+                                              Tag="{Binding Path=SkillListCnt}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </GroupBox>
             </StackPanel>
             

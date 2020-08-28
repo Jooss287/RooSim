@@ -64,9 +64,10 @@
     <Compile Include="Equation\Job\JobSelect.cs" />
     <Compile Include="Equation\Job\LoadKnight.cs" />
     <Compile Include="Equation\StatusATK.cs" />
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Extension\CheckBoxList.cs" />
+    <Compile Include="Skills\SkillCheckBox.cs" />
+    <Compile Include="Skills\SkillAdd.cs" />
+    <Compile Include="Skills\SkillInfo.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,10 +80,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
