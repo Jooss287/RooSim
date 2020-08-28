@@ -316,5 +316,12 @@ namespace RooStatsSim
             retCalc.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
             txt_sATK.Text = Convert.ToString(job_selection.GetWinATK());
         }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            MessageBox.Show(Convert.ToString((e.Source as CheckBox).Tag));
+        }
     }
 }
