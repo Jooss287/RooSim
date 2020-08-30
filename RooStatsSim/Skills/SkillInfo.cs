@@ -18,5 +18,14 @@ namespace RooStatsSim.Skills
             _level = level;
             _damage = damage;
         }
+        
+        public string Name
+        {
+            get { return _name; }
+        }
+        public int Level
+        {
+            get { return _level; }
+        }
     }
 }

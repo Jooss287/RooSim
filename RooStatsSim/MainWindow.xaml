@@ -25,7 +25,7 @@
                     <RadioButton x:Name="radio_job" Tag="0" IsChecked="True" Checked="job_sel_Click" Content="로드나이트" Grid.Column="0" GroupName="group_attack_type" />
                     <RadioButton Tag="1" Checked="job_sel_Click" Content="블랙스미스" Grid.Column="1" GroupName="group_attack_type" />
                     <RadioButton Tag="2" Checked="job_sel_Click" Content="어세신크로스" Grid.Column="2" GroupName="group_attack_type" />
-                    <RadioButton Tag="3" Checked="job_sel_Click" Content="스나이퍼" Grid.Column="3" GroupName="group_attack_type" />
+                    <RadioButton Tag="3" Checked="job_sel_Click" Content="스나이퍼" Grid.Column="3" GroupName="group_attack_type"/>
                     <RadioButton Tag="4" Checked="job_sel_Click" Content="하이위저드" Grid.Column="4" GroupName="group_attack_type" />
                     <RadioButton Tag="5" Checked="job_sel_Click" Content="하이프리스트" Grid.Column="5" GroupName="group_attack_type" />
                 </Grid>
@@ -162,11 +162,11 @@
                                 </StackPanel>
                             </Grid>
                         </StackPanel>
-                        <StackPanel Orientation="Vertical" Width="150" Margin="10,0,0,0">
+                        <StackPanel Orientation="Vertical" Width="155" Margin="10,0,0,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="40*" />
-                                    <ColumnDefinition Width="10*" />
+                                    <ColumnDefinition Width="15*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Vertical" Grid.Column="0">
                                     <Label>물리 데미지%</Label>
@@ -211,14 +211,16 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="버프스킬 List" Margin="10,0,0,0" Width="200">
-                    <ListBox ItemsSource="{Binding Source={StaticResource SkillList}}">
+                    <ListBox x:Name="SkillListBox" ItemsSource="{Binding Source={StaticResource SkillList},
+                                                    Path=SkillListSync}"
+                             IsSynchronizedWithCurrentItem="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
                                     <CheckBox 
                                             Content="{Binding Path=SkillName}" 
-                                              Click="CheckBox_Click"
-                                              Tag="{Binding Path=SkillListCnt}"/>
+                                            Click="CheckBox_Click"
+                                            Tag="{Binding Path=SkillListCnt}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

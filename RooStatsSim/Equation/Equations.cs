@@ -1,6 +1,7 @@
 ﻿using RooStatsSim.Equation;
 using RooStatsSim.Equation.Job;
 using System;
+using System.Collections.Generic;
 
 namespace RooStatsSim.DB
 {
@@ -13,31 +14,46 @@ namespace RooStatsSim.DB
 
     class Equations
     {
-        
-
-        public Equations(ATTACK_TYPE atk_type, ref Status param_status, ref ItemAbility param_abilitys, ref MonsterDB param_mobDB,
-            ref double param_element, ref double param_size)
+        public Equations(ATTACK_TYPE atk_type)
         {
             attack_type = atk_type;
-            status = param_status;
-            abilities = param_abilitys;
-            mobDB = param_mobDB;
-            element_inc = param_element;
-            size_panelty = param_size;
-
-            statusATK = new StatusATK(attack_type, ref abilities, ref status);
         }
 
         protected readonly ATTACK_TYPE attack_type;
-        protected readonly ItemAbility abilities;
-        protected readonly Status status;
-        protected readonly MonsterDB mobDB;
-        protected readonly StatusATK statusATK;
+        protected Status status = null;
+        protected ItemAbility abilities = null;
+        protected MonsterDB mobDB = null;
+        protected StatusATK statusATK = null;
         public double element_inc;
         public double size_panelty;
+        protected bool[] buff_list;
         const double RANDOM_ATK_WEIGHT = 0.1;
 
+        #region DB Set Functions
+        public void SetDB(ref Status param_status, ref ItemAbility param_abilities, ref MonsterDB param_mobDB,
+            ref double param_element, ref double param_size)
+        {
+            status = param_status;
+            abilities = param_abilities;
+            mobDB = param_mobDB;
+            element_inc = param_element;
+            size_panelty = param_size;
+            statusATK = new StatusATK(attack_type, ref abilities, ref status);
+        }
+
+        public void SetBuffList(ref bool[] param_buff_list)
+        {
+            buff_list = param_buff_list;
+        }
+        #endregion
+
         #region Common Call Functions
+        protected bool IsAlived()
+        {
+            if ((status == null) || (abilities == null) || (mobDB == null) || (statusATK == null))
+                return false;
+            return true;
+        }
         protected virtual double GetRandomATK() { return abilities.ATK_weapon * RANDOM_ATK_WEIGHT; }
         protected virtual double GetWeaponATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE) {
             return abilities.ATK_weapon + statusATK.GetStatusBonusATK() + GetRandomATK() * (int)calc_standard;
@@ -61,7 +77,6 @@ namespace RooStatsSim.DB
         protected virtual double TotalWeaponATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE) {
             return GetBaseTotalATK(calc_standard) * size_panelty;
         }
-
         protected virtual double TotalEquipATK(double total_weapon_atk)
         {
             return total_weapon_atk + abilities.ATK_equipment;
@@ -81,6 +96,9 @@ namespace RooStatsSim.DB
 
         public int CalcATKdamage(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
         {
+            if (!IsAlived())
+                return 0;
+
             double total_weapon_atk = TotalWeaponATK(calc_standard);
             double total_equip_atk = TotalEquipATK(total_weapon_atk);
             double total_equip_atk_inc = TotalEquipATKinc(total_equip_atk);
@@ -107,6 +125,9 @@ namespace RooStatsSim.DB
         }
         public int CalcStatusWinATK()
         {
+            if (IsAlived())
+                return 0;
+
             double total_weapon_atk = GetWeaponATK();
             double total_equip_atk = WinTotalEquipATK(total_weapon_atk);
             double total_equip_atk_inc = WinTotalEquipATKinc(total_equip_atk);
@@ -118,6 +139,9 @@ namespace RooStatsSim.DB
 
         public int CalcReverseATK(int sATK)
         {
+            if (IsAlived())
+                return 0;
+
             double status_atk = statusATK.GetStatusATK();
             double equipATK = (sATK - abilities.ATK_mastery - status_atk) / abilities.ATK_percent - abilities.ATK_weapon - statusATK.GetStatusBonusATK();
 

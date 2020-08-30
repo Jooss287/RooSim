@@ -1,4 +1,5 @@
-﻿using RooStatsSim.Skills;
+﻿using RooStatsSim.Equation.Job;
+using RooStatsSim.Skills;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,9 +14,35 @@ namespace RooStatsSim.Skills
     {
         public SkillAdd()
         {
-            Add(new SkillCheckBox("컨센트레이션", 1));
-            Add(new SkillCheckBox("오러블레이드", 2));
-            Add(new SkillCheckBox("매그넘브레이크", 3));
+            LoadKnight temp = new LoadKnight();
+            int cnt = 0;
+            //Clear();
+            foreach (SkillInfo skill in temp.skillinfo)
+            {
+                Add(new SkillCheckBox(skill.Name, cnt));
+                cnt++;
+            }
+        }
+
+        public SkillAdd(List<SkillInfo> param_skillinfo)
+        {
+            int cnt = 0;
+            //Clear();
+            foreach (SkillInfo skill in param_skillinfo)
+            {
+                Add(new SkillCheckBox(skill.Name, cnt));
+                cnt++;
+            }
+        }
+
+        public ObservableCollection<SkillCheckBox> SkillListSync
+        {
+            get { 
+                return this;
+            }
+            set
+            {
+            }
         }
     }
 }
