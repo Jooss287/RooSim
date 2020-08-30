@@ -61,8 +61,13 @@
     <Compile Include="DB\MonsterDB.cs" />
     <Compile Include="DB\Status.cs" />
     <Compile Include="Equation\Defense.cs" />
+    <Compile Include="Equation\Job\AssassinCross.cs" />
+    <Compile Include="Equation\Job\HighPrist.cs" />
+    <Compile Include="Equation\Job\HighWizard.cs" />
     <Compile Include="Equation\Job\JobSelect.cs" />
     <Compile Include="Equation\Job\LoadKnight.cs" />
+    <Compile Include="Equation\Job\Sniper.cs" />
+    <Compile Include="Equation\Job\WhiteSmith.cs" />
     <Compile Include="Equation\StatusATK.cs" />
     <Compile Include="Extension\CheckBoxList.cs" />
     <Compile Include="Skills\SkillCheckBox.cs" />

@@ -1,5 +1,6 @@
 ﻿using RooStatsSim.DB;
 using RooStatsSim.Equation.Job;
+using RooStatsSim.Skills;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -15,7 +16,6 @@ namespace RooStatsSim
     /// </summary>
     public partial class MainWindow : Window
     {
-
         #region Initialize
         public MainWindow()
         {
@@ -24,12 +24,12 @@ namespace RooStatsSim
             Initialize_value();
             Initialize_value_swordfish();
             Initialize_value_marduk();
+
+            job_UI_setting((int)(JOB_LIST.LOAD_KNIGHT));
         }
 
         private void Initialize_value()
         {
-            radio_job.Tag = 0;
-
             txt_LvlBase.Text = "1";
             txt_StrBase.Text = "1";
             txt_StrAdd.Text = "0";
@@ -70,8 +70,6 @@ namespace RooStatsSim
 
         private void Initialize_value_swordfish()
         {
-            radio_job.Tag = 0;
-
             txt_sATK.Text = "1399";
             txt_LvlBase.Text = "79";
             txt_StrBase.Text = "99";
@@ -150,8 +148,6 @@ namespace RooStatsSim
         }
         private void Initialize_value_marduk()
         {
-            radio_job.Tag = 0;
-
             txt_sATK.Text = "1387";
             txt_LvlBase.Text = "79";
             txt_StrBase.Text = "99";
@@ -192,7 +188,7 @@ namespace RooStatsSim
         }
         #endregion
 
-        #region UI Define
+        #region UI Variable Define
         readonly Dictionary<ELEMENT_TYPE, string> element_dict = new Dictionary<ELEMENT_TYPE, string>()
         {
             {ELEMENT_TYPE.NORMAL, "무" },
@@ -206,6 +202,17 @@ namespace RooStatsSim
             {ELEMENT_TYPE.ASTRAL, "염" },
             {ELEMENT_TYPE.UNDEAD, "불사" },
         };
+
+
+        ItemAbility ability;
+        Status status;
+        MonsterDB mobDB;
+        AdvantageTable advantage_table;
+        JobSelect job_selection = new JobSelect();
+        int job_select = (int)(JOB_LIST.LOAD_KNIGHT);
+        double element_ratio;
+        double size_panelty;
+        bool[] BuffList;
         #endregion
 
         #region UI Setting
@@ -231,11 +238,22 @@ namespace RooStatsSim
                 )
             );
         }
+        private void job_UI_setting(int param_job_select)
+        {
+            List<SkillInfo> skillNames = job_selection.GetSkillCnt(job_select);
+            BuffList = new bool[skillNames.Count];
+
+            if (SkillListBox != null)
+                SkillListBox.ItemsSource = new SkillAdd(skillNames);
+        }
 
         private void job_sel_Click(object sender, RoutedEventArgs e)
         {
             RadioButton source = e.Source as RadioButton;
-            radio_job.Tag = source.Tag;
+            job_select = Convert.ToInt32(source.Tag);
+            
+            job_selection.JobSelectNum = (JOB_LIST)job_select;
+            job_UI_setting(job_select);   
         }
 
         private void Initialize_Value_Click(object sender, RoutedEventArgs e)
@@ -246,17 +264,9 @@ namespace RooStatsSim
         }
         #endregion
 
-        ItemAbility ability;
-        Status status;
-        MonsterDB mobDB;
-        AdvantageTable advantage_table;
-        JobSelect job_selection;
-        int job_select;
-        double element_ratio;
+        
         private void InputUIData()
         {
-            job_select = Convert.ToInt32(radio_job.Tag);
-
             ability = new ItemAbility()
             {
                 ATK_weapon = Convert.ToInt32(txt_atk_weapon.Text),
@@ -293,10 +303,9 @@ namespace RooStatsSim
             ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
             advantage_table = new AdvantageTable();
             element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
+            size_panelty = 0.01 * Convert.ToInt32(txt_weapon_size_panelty.Text);
 
-            double size_panelty = 0.01 * Convert.ToInt32(txt_weapon_size_panelty.Text);
-
-            job_selection = new JobSelect(job_select, ref status, ref ability, ref mobDB, element_ratio, size_panelty);
+            job_selection.SetDB(ref status, ref ability, ref mobDB, ref element_ratio, ref size_panelty, ref BuffList);
         }
 
         private void ATK_ReverseClick(object sender, RoutedEventArgs e)
@@ -319,9 +328,9 @@ namespace RooStatsSim
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            
+            BuffList[Convert.ToInt32(((e.Source as CheckBox).Tag))] = (bool)((e.Source as CheckBox).IsChecked);
 
-            MessageBox.Show(Convert.ToString((e.Source as CheckBox).Tag));
+            MessageBox.Show(Convert.ToString((e.Source as CheckBox).IsChecked));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RooStatsSim.DB;
+using RooStatsSim.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,19 @@ namespace RooStatsSim.Equation.Job
     {
         LOAD_KNIGHT,
         WHITE_SMITH,
-        GUILLOTINE_CROSS,
+        ASSASSIN_CROSS,
         SNIPER,
         HIGH_WIZARD,
         HIGH_PRIST
+    }
+    enum JOB_LIST_KOR
+    {
+        로드나이트,
+        화이트스미스,
+        어세신크로스,
+        스나이퍼,
+        하이위저드,
+        하이프리스트
     }
     enum ATTACK_TYPE
     {
@@ -26,19 +36,43 @@ namespace RooStatsSim.Equation.Job
     
     class JobSelect
     {
-        List<dynamic> Job;
-        readonly JOB_LIST JobNum = new JOB_LIST();
+        List<dynamic> Job = new List<dynamic>()
+            {
+                new LoadKnight(),
+                new WhiteSmith(),
+                new AssassinCross(),
+                new Sniper(),
+                new HighWizard(),
+                new HighPrist()
+            };
+        private JOB_LIST JobNum = new JOB_LIST();
 
-        public JobSelect(int param_job, ref Status param_status, ref ItemAbility param_ability, ref MonsterDB param_mobDB,
-            double element_ratio, double size_panelty)
+
+        public JobSelect(int param_job = (int)JOB_LIST.LOAD_KNIGHT)
         {
             JobNum = (JOB_LIST)param_job;
-            Job = new List<dynamic>()
-            {
-                new LoadKnight(ref param_status, ref param_ability, ref param_mobDB, ref element_ratio, ref size_panelty),
-        };
+        }
+        public JOB_LIST JobSelectNum
+        {
+            get { return JobNum; }
+            set { JobNum = value; }
         }
 
+
+        public void SetDB(ref Status param_status, ref ItemAbility param_abilities, ref MonsterDB param_mobDB,
+            ref double param_element, ref double param_size, ref bool[] param_buff_list)
+        {
+            Job[Convert.ToInt32(JobNum)].SetDB(ref param_status, ref param_abilities, ref param_mobDB,
+                ref param_element, ref param_size);
+            Job[Convert.ToInt32(JobNum)].SetBuffList(ref param_buff_list);
+
+        }
+        public List<SkillInfo> GetSkillCnt(int param_job)
+        {
+            //if (param_job >= Job.Count)
+            //    return null;
+            return Job[param_job].skillinfo;
+        }
         public double GetReverseATK(int sATK)
         {
             return Job.ElementAt(0).CalcReverseATK(sATK);
