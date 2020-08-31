@@ -125,7 +125,7 @@ namespace RooStatsSim.DB
         }
         public int CalcStatusWinATK()
         {
-            if (IsAlived())
+            if (!IsAlived())
                 return 0;
 
             double total_weapon_atk = GetWeaponATK();
@@ -139,7 +139,7 @@ namespace RooStatsSim.DB
 
         public int CalcReverseATK(int sATK)
         {
-            if (IsAlived())
+            if (!IsAlived())
                 return 0;
 
             double status_atk = statusATK.GetStatusATK();

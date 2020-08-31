@@ -16,17 +16,18 @@ namespace RooStatsSim
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Initialize
         public MainWindow()
         {
             InitializeComponent();
 
             Initialize_value();
-            Initialize_value_swordfish();
-            Initialize_value_marduk();
+            Initialize_value_test();
+            //Initialize_value_marduk();
 
             job_UI_setting((int)(JOB_LIST.LOAD_KNIGHT));
         }
+
+        #region Initialize
 
         private void Initialize_value()
         {
@@ -68,14 +69,14 @@ namespace RooStatsSim
             txt_skill_add_percent.Text = "0";
         }
 
-        private void Initialize_value_swordfish()
+        private void Initialize_value_test()
         {
-            txt_sATK.Text = "1399";
-            txt_LvlBase.Text = "79";
+            txt_sATK.Text = "1407";
+            txt_LvlBase.Text = "80";
             txt_StrBase.Text = "99";
-            txt_StrAdd.Text = "59";
+            txt_StrAdd.Text = "55";
             txt_DexBase.Text = "11";
-            txt_DexAdd.Text = "25";
+            txt_DexAdd.Text = "29";
             txt_LukBase.Text = "1";
             txt_LukAdd.Text = "9";
 
@@ -85,8 +86,8 @@ namespace RooStatsSim
             txt_atk_mastery.Text = "60";
             txt_pdamage_add.Text = "116";
             txt_def_ignore.Text = "0";
-            txt_monster_def.Text = "52";
-            txt_weapon_size_panelty.Text = "100";
+            txt_monster_def.Text = "21";
+            txt_weapon_size_panelty.Text = "75";
 
             cmb_monster_element.Items.Clear();
             cmb_player_element.Items.Clear();
@@ -95,51 +96,13 @@ namespace RooStatsSim
                 cmb_player_element.Items.Add(element_items.Value);
                 cmb_monster_element.Items.Add(element_items.Value);
             }
-            cmb_player_element.SelectedIndex = (int)ELEMENT_TYPE.NORMAL;
-            cmb_monster_element.SelectedIndex = (int)ELEMENT_TYPE.NORMAL;
+            cmb_player_element.SelectedIndex = (int)ELEMENT_TYPE.WATER;
+            cmb_monster_element.SelectedIndex = (int)ELEMENT_TYPE.FIRE;
 
-            txt_pdamage_percent.Text = "13.75";
+            txt_pdamage_percent.Text = "14.00";
             txt_pdamage_attacktype.Text = "0";
             txt_atk_percent.Text = "18.62";
-            txt_element_increse.Text = "20";
-            txt_tribe_increse.Text = "0";
-            txt_size_increse.Text = "0";
-            txt_boss_increse.Text = "0";
-            txt_skill_percent.Text = "100";
-            txt_skill_add_percent.Text = "0";
-
-            txt_sATK.Text = "1399";
-            txt_LvlBase.Text = "79";
-            txt_StrBase.Text = "99";
-            txt_StrAdd.Text = "59";
-            txt_DexBase.Text = "11";
-            txt_DexAdd.Text = "25";
-            txt_LukBase.Text = "1";
-            txt_LukAdd.Text = "9";
-
-            txt_atk_weapon.Text = "338";
-            txt_atk_equip.Text = "346";
-            txt_atk_smelting.Text = "249";
-            txt_atk_mastery.Text = "60";
-            txt_pdamage_add.Text = "116";
-            txt_def_ignore.Text = "0";
-            txt_monster_def.Text = "52";
-            txt_weapon_size_panelty.Text = "100";
-
-            cmb_monster_element.Items.Clear();
-            cmb_player_element.Items.Clear();
-            foreach (KeyValuePair<ELEMENT_TYPE, string> element_items in element_dict)
-            {
-                cmb_player_element.Items.Add(element_items.Value);
-                cmb_monster_element.Items.Add(element_items.Value);
-            }
-            cmb_player_element.SelectedIndex = (int)ELEMENT_TYPE.NORMAL;
-            cmb_monster_element.SelectedIndex = (int)ELEMENT_TYPE.NORMAL;
-
-            txt_pdamage_percent.Text = "13.75";
-            txt_pdamage_attacktype.Text = "0";
-            txt_atk_percent.Text = "18.62";
-            txt_element_increse.Text = "20";
+            txt_element_increse.Text = "0";
             txt_tribe_increse.Text = "0";
             txt_size_increse.Text = "0";
             txt_boss_increse.Text = "0";
@@ -264,7 +227,7 @@ namespace RooStatsSim
         }
         #endregion
 
-        
+
         private void InputUIData()
         {
             ability = new ItemAbility()
@@ -302,7 +265,7 @@ namespace RooStatsSim
             ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;
             ELEMENT_TYPE monster_element = (ELEMENT_TYPE)cmb_monster_element.SelectedIndex;
             advantage_table = new AdvantageTable();
-            element_ratio = advantage_table.GetElementRatio(player_element, monster_element);
+            element_ratio = 1 + advantage_table.GetElementRatio(player_element, monster_element);
             size_panelty = 0.01 * Convert.ToInt32(txt_weapon_size_panelty.Text);
 
             job_selection.SetDB(ref status, ref ability, ref mobDB, ref element_ratio, ref size_panelty, ref BuffList);
