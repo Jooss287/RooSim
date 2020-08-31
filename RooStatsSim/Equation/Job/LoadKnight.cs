@@ -25,12 +25,12 @@ namespace RooStatsSim.Equation.Job
 
         enum BUFF_SKILL
         {
-            MAGUNUM_BRAKE,
             CONCENTRATION,
             AUROR_BLADE,
+            MAGUNUM_BRAKE,
         }
 
-        private bool buff_concentrate_lvl = true;
+        private bool buff_concentrate_lvl = false;
         private double buff_concentrate_ratio = 0.25;
 
         #region Skill
@@ -41,22 +41,21 @@ namespace RooStatsSim.Equation.Job
         #region override Skill
         protected override double GetBaseTotalATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
         {
-            double temp = base.GetBaseTotalATK();
-            double base_total_atk = abilities.ATK_weapon + abilities.ATK_smelting + statusATK.GetStatusBonusATK() + base.GetRandomATK() * (int)calc_standard;
-            double buff_concentrate = Convert.ToInt32(buff_concentrate_lvl) * (abilities.ATK_weapon + statusATK.GetStatusBonusATK() + abilities.ATK_smelting) * buff_concentrate_ratio;
-            return base_total_atk + Convert.ToInt32(buff_concentrate) + temp;
+            int Enabled_Concentrate = Convert.ToInt32(buff_list[(int)BUFF_SKILL.CONCENTRATION]);
+            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_weapon + statusATK.GetStatusBonusATK() + abilities.ATK_smelting) * buff_concentrate_ratio;
+            return base.GetBaseTotalATK(calc_standard) + Convert.ToInt32(buff_concentrate);
         }
         protected override double TotalEquipATK(double total_weapon_atk)
         {
-            double base_total_atk = total_weapon_atk + abilities.ATK_equipment;
-            double buff_concentrate = Convert.ToInt32(buff_concentrate_lvl) * (abilities.ATK_equipment) * buff_concentrate_ratio;
-            return base_total_atk + buff_concentrate;
+            int Enabled_Concentrate = Convert.ToInt32(buff_list[(int)BUFF_SKILL.CONCENTRATION]);
+            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_equipment) * buff_concentrate_ratio;
+            return base.TotalEquipATK(total_weapon_atk) + buff_concentrate;
         }
         protected override double WinTotalATK(double total_equip_atk_inc)
         {
-            double base_total_atk = statusATK.GetStatusATK() + GetMasteryATK() + total_equip_atk_inc;
-            double buff_concentrate = Convert.ToInt32(buff_concentrate_lvl) * (abilities.ATK_weapon + statusATK.GetStatusBonusATK() + abilities.ATK_equipment) * buff_concentrate_ratio;
-            return  base_total_atk + buff_concentrate;
+            int Enabled_Concentrate = Convert.ToInt32(buff_list[(int)BUFF_SKILL.CONCENTRATION]);
+            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_weapon + statusATK.GetStatusBonusATK() + abilities.ATK_equipment) * buff_concentrate_ratio;
+            return  base.WinTotalATK(total_equip_atk_inc) + buff_concentrate;
         }
         #endregion
     }
