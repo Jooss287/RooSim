@@ -4,227 +4,233 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RooStatsSim"
+        xmlns:skill="clr-namespace:RooStatsSim.Skills"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1200">
+        Title="MainWindow" Height="450" Width="870">
+    <Window.Resources>
+        <skill:SkillAdd x:Key="SkillList"/>
+    </Window.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical" Width="224" Margin="10,10,0,0" Height="370" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <GroupBox Header="attack type">
+        <StackPanel Orientation="Vertical" Margin="0,10,0,0" >
+            <GroupBox Header="직업 선택" Width="600" HorizontalAlignment="Left" Margin="10,0,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <RadioButton x:Name="radio_attack_type" Tag="0" IsChecked="True" Checked="attack_type_Click" Content="근거리" Grid.Column="0" GroupName="group_attack_type" />
-                    <RadioButton Tag="1" Checked="attack_type_Click" Content="원거리" Grid.Column="1" GroupName="group_attack_type" />
+                    <RadioButton x:Name="radio_job" Tag="0" IsChecked="True" Checked="job_sel_Click" Content="로드나이트" Grid.Column="0" GroupName="group_attack_type" />
+                    <RadioButton Tag="1" Checked="job_sel_Click" Content="블랙스미스" Grid.Column="1" GroupName="group_attack_type" />
+                    <RadioButton Tag="2" Checked="job_sel_Click" Content="어세신크로스" Grid.Column="2" GroupName="group_attack_type" />
+                    <RadioButton Tag="3" Checked="job_sel_Click" Content="스나이퍼" Grid.Column="3" GroupName="group_attack_type"/>
+                    <RadioButton Tag="4" Checked="job_sel_Click" Content="하이위저드" Grid.Column="4" GroupName="group_attack_type" />
+                    <RadioButton Tag="5" Checked="job_sel_Click" Content="하이프리스트" Grid.Column="5" GroupName="group_attack_type" />
                 </Grid>
             </GroupBox>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="67"/>
-                    <ColumnDefinition Width="79*"/>
-                    <ColumnDefinition Width="78*"/>
-                </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" 
+                            Margin="10, 0, 0, 0"
+                            Width="230" Height="350" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <GroupBox Header="스테이터스">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="67"/>
+                                <ColumnDefinition Width="79*"/>
+                                <ColumnDefinition Width="78*"/>
+                            </Grid.ColumnDefinitions>
 
-                <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="1">능력치</Label>
-                <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="2">가중치</Label>
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="1" Grid.Column="0">B.LEVEL</Label>
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0">STR</Label>
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0">DEX</Label>
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0">LUK</Label>
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="5" Grid.Column="0">S.ATK</Label>
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="1">능력치</Label>
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="2">가중치</Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="1" Grid.Column="0">B.LEVEL</Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0">STR</Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0">DEX</Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0">LUK</Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="5" Grid.Column="0">S.ATK</Label>
 
-                <TextBox Name="txt_LvlBase" TabIndex="1" 
+                            <TextBox Name="txt_LvlBase" TabIndex="1" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15" 
                          Grid.Row="1" Grid.Column="1"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
-                <TextBox Name="txt_StrBase" TabIndex="1" 
+                            <TextBox Name="txt_StrBase" TabIndex="1" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15"
                          Grid.Row="2" Grid.Column="1"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
-                <TextBox Name="txt_DexBase" TabIndex="3" 
+                            <TextBox Name="txt_DexBase" TabIndex="3" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15" 
                          Grid.Row="3" Grid.Column="1"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
-                <TextBox Name="txt_LukBase" TabIndex="5" 
+                            <TextBox Name="txt_LukBase" TabIndex="5" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15"
                          Grid.Row="4" Grid.Column="1"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
-                <TextBox Name="txt_sATK" TabIndex="1" 
+                            <TextBox Name="txt_sATK" TabIndex="1" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15" 
                          Grid.Row="5" Grid.Column="1"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
-                <TextBox Name="txt_StrAdd" TabIndex="2" 
+                            <TextBox Name="txt_StrAdd" TabIndex="2" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15" 
                          Grid.Row="2" Grid.Column="2"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
-                <TextBox Name="txt_DexAdd" TabIndex="4" 
+                            <TextBox Name="txt_DexAdd" TabIndex="4" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15" 
                          Grid.Row="3" Grid.Column="2"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
-                <TextBox Name="txt_LukAdd" TabIndex="6" 
+                            <TextBox Name="txt_LukAdd" TabIndex="6" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                          FontSize="15"
                          Grid.Row="4" Grid.Column="2"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
-            </Grid>
-            <Button Height="30" Click="ATK_ReverseClick" Content="상태창ATK역계산" Margin="0,20,0,0"/>
-            <Button Height="30" Click="Initialize_Value_Click" Content="초기화"/>
-            <Button x:Name="CalcSim" Height="30" Click="CalcSim_Click" Content="계산하기"/>
-            <TextBox Name="retCalc" Height="30" VerticalContentAlignment="Center" IsEnabled="False" TextAlignment="Center">결과값</TextBox>
-        </StackPanel>
-
-        <GroupBox Header="장비 설정" Margin="239,10,603,59" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False">
-            <Grid Margin="3,5,3,3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" FontWeight="Bold">머리상단</Button>
-                <Button Grid.Row="1" Grid.Column="0" FontWeight="Bold">머리하단</Button>
-                <Button Grid.Row="2" Grid.Column="0" FontWeight="Bold">무기</Button>
-                <Button Grid.Row="3" Grid.Column="0" FontWeight="Bold">걸칠것</Button>
-                <Button Grid.Row="4" Grid.Column="0" FontWeight="Bold">악세사리1</Button>
-                <Button Grid.Row="5" Grid.Column="0" FontWeight="Bold">의상</Button>
-                <Button Grid.Row="6" Grid.Column="0" FontWeight="Bold">기어</Button>
-
-                <Button Grid.Row="0" Grid.Column="1" FontWeight="Bold">머리중단</Button>
-                <Button Grid.Row="1" Grid.Column="1" FontWeight="Bold">갑옷</Button>
-                <Button Grid.Row="2" Grid.Column="1" FontWeight="Bold">보조무기</Button>
-                <Button Grid.Row="3" Grid.Column="1" FontWeight="Bold">신발</Button>
-                <Button Grid.Row="4" Grid.Column="1" FontWeight="Bold">악세사리2</Button>
-                <Button Grid.Row="5" Grid.Column="1" FontWeight="Bold">가방</Button>
-                <Button Grid.Row="6" Grid.Column="1" FontWeight="Bold">탈것</Button>
-            </Grid>
-        </GroupBox>
-
-        <GroupBox Header="데미지 결산" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="594,10,0,0" Width="330" Height="350">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical" Width="150">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40*" />
-                            <ColumnDefinition Width="18*" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <Label>무기 ATK</Label>
-                            <Label>장비 ATK</Label>
-                            <Label>제련 ATK</Label>
-                            <Label>마스터리 ATK</Label>
-                            <Label>추가 물리 데미지</Label>
-                            <Label>무기(공격) 속성</Label>
-                            <Label>DEF무시%</Label>
-                            <Label>몬스터 방어력</Label>
-                            <Label>몬스터 속성</Label>
-                            <Label>무기 패널티%</Label>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Grid.Column="1">
-                            <StackPanel.Resources>
-                                <Style TargetType="TextBox">
-                                    <Setter Property="Height" Value="26"/>
-                                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                                    <Setter Property="TextAlignment" Value="Center" />
-                                </Style>
-                            </StackPanel.Resources>
-                            <TextBox x:Name ="txt_atk_weapon" TabIndex="7" 
+                        </Grid>
+                    </GroupBox>
+                    <Button Height="30" Click="ATK_ReverseClick" Content="상태창ATK역계산" Margin="0,20,0,0"/>
+                    <Button Height="30" Click="Initialize_Value_Click" Content="초기화"/>
+                    <Button x:Name="CalcSim" Height="30" Click="CalcSim_Click" Content="계산하기"/>
+                    <TextBox Name="retCalc" Height="30" VerticalContentAlignment="Center" IsEnabled="False" TextAlignment="Center">결과값</TextBox>
+                </StackPanel>
+                <GroupBox Header="데미지 결산" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Width="330" Height="350">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Width="150">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40*" />
+                                    <ColumnDefinition Width="18*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical" Grid.Column="0">
+                                    <Label>무기 ATK</Label>
+                                    <Label>장비 ATK</Label>
+                                    <Label>제련 ATK</Label>
+                                    <Label>마스터리 ATK</Label>
+                                    <Label>추가 물리 데미지</Label>
+                                    <Label>무기(공격) 속성</Label>
+                                    <Label>DEF무시%</Label>
+                                    <Label>몬스터 방어력</Label>
+                                    <Label>몬스터 속성</Label>
+                                    <Label>무기 패널티%</Label>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Grid.Column="1">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="Height" Value="26"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                                            <Setter Property="TextAlignment" Value="Center" />
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <TextBox x:Name ="txt_atk_weapon" TabIndex="7" 
                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_atk_equip" TabIndex="8"
+                                    <TextBox x:Name ="txt_atk_equip" TabIndex="8"
                                      GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_atk_smelting" TabIndex="9" 
+                                    <TextBox x:Name ="txt_atk_smelting" TabIndex="9" 
                                      GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_atk_mastery" TabIndex="10" 
+                                    <TextBox x:Name ="txt_atk_mastery" TabIndex="10" 
                                      GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_pdamage_add" TabIndex="11" 
+                                    <TextBox x:Name ="txt_pdamage_add" TabIndex="11" 
                                      GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <ComboBox x:Name ="cmb_player_element" TabIndex="12" Height="26" />
-                            <TextBox x:Name ="txt_def_ignore" TabIndex="13" 
+                                    <ComboBox x:Name ="cmb_player_element" TabIndex="12" Height="26" />
+                                    <TextBox x:Name ="txt_def_ignore" TabIndex="13" 
                                      GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_monster_def" TabIndex="14" 
+                                    <TextBox x:Name ="txt_monster_def" TabIndex="14" 
                                      GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <ComboBox x:Name ="cmb_monster_element" TabIndex="15" Height="26" />
-                            <TextBox x:Name ="txt_weapon_size_panelty" TabIndex="16" 
+                                    <ComboBox x:Name ="cmb_monster_element" TabIndex="15" Height="26" />
+                                    <TextBox x:Name ="txt_weapon_size_panelty" TabIndex="16" 
                                      GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                </StackPanel>
+                            </Grid>
                         </StackPanel>
-                    </Grid>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Width="150" Margin="10,0,0,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40*" />
-                            <ColumnDefinition Width="10*" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <Label>물리 데미지%</Label>
-                            <Label>근/원거리 데미지%</Label>
-                            <Label>ATK%</Label>
-                            <Label>속성 증가 데미지%</Label>
-                            <Label>종족 증가 데미지%</Label>
-                            <Label>크기 증가 데미지%</Label>
-                            <Label>보스 증가 데미지%</Label>
-                            <Label>스킬 데미지%</Label>
-                            <Label>스킬 추가 데미지%</Label>
+                        <StackPanel Orientation="Vertical" Width="155" Margin="10,0,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40*" />
+                                    <ColumnDefinition Width="15*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical" Grid.Column="0">
+                                    <Label>물리 데미지%</Label>
+                                    <Label>근/원거리 데미지%</Label>
+                                    <Label>ATK%</Label>
+                                    <Label>속성 증가 데미지%</Label>
+                                    <Label>종족 증가 데미지%</Label>
+                                    <Label>크기 증가 데미지%</Label>
+                                    <Label>보스 증가 데미지%</Label>
+                                    <Label>스킬 데미지%</Label>
+                                    <Label>스킬 추가 데미지%</Label>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Grid.Column="1">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="Height" Value="26"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                                            <Setter Property="TextAlignment" Value="Center" />
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <TextBox x:Name ="txt_pdamage_percent" TabIndex="16" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                    <TextBox x:Name ="txt_pdamage_attacktype" TabIndex="17" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                    <TextBox x:Name ="txt_atk_percent" TabIndex="18" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                    <TextBox x:Name ="txt_element_increse" TabIndex="19" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                    <TextBox x:Name ="txt_tribe_increse" TabIndex="20" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                    <TextBox x:Name ="txt_size_increse" TabIndex="21" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                    <TextBox x:Name ="txt_boss_increse" TabIndex="22" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                    <TextBox x:Name ="txt_skill_percent" TabIndex="23" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                    <TextBox x:Name ="txt_skill_add_percent" TabIndex="24" 
+                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
+                                </StackPanel>
+                            </Grid>
                         </StackPanel>
-                        <StackPanel Orientation="Vertical" Grid.Column="1">
-                            <StackPanel.Resources>
-                                <Style TargetType="TextBox">
-                                    <Setter Property="Height" Value="26"/>
-                                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                                    <Setter Property="TextAlignment" Value="Center" />
-                                </Style>
-                            </StackPanel.Resources>
-                            <TextBox x:Name ="txt_pdamage_percent" TabIndex="16" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_pdamage_attacktype" TabIndex="17" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_atk_percent" TabIndex="18" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_element_increse" TabIndex="19" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_tribe_increse" TabIndex="20" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_size_increse" TabIndex="21" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_boss_increse" TabIndex="22" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_skill_percent" TabIndex="23" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox x:Name ="txt_skill_add_percent" TabIndex="24" 
-                                     GotFocus="TxtboxSelectAll" PreviewTextInput="NurmericCheckFunc" />
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="버프스킬 List" Margin="10,0,0,0" Width="200">
+                    <ListBox x:Name="SkillListBox" ItemsSource="{Binding Source={StaticResource SkillList},
+                                                    Path=SkillListSync}"
+                             IsSynchronizedWithCurrentItem="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <CheckBox 
+                                            Content="{Binding Path=SkillName}" 
+                                            Click="CheckBox_Click"
+                                            Tag="{Binding Path=SkillListCnt}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
             </StackPanel>
-        </GroupBox>
+            
+        </StackPanel>
+        
+
+        
     </Grid>
 </Window>

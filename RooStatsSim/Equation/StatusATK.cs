@@ -1,9 +1,5 @@
 ﻿using RooStatsSim.DB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RooStatsSim.Equation.Job;
 
 namespace RooStatsSim.Equation
 {
@@ -13,14 +9,14 @@ namespace RooStatsSim.Equation
         private readonly double statusATK;
         private readonly double statusBonusATK;
 
-        public StatusATK(int attack_type, ref ItemAbility ability, ref Status status)
+        public StatusATK(ATTACK_TYPE attack_type, ref ItemAbility ability, ref Status status)
         {
-            if (attack_type == 0)
+            if (attack_type == ATTACK_TYPE.MELEE_TYPE)
             {
                 statusATK = status._str + (status._dex + status._luk) * 0.2 + status._base * 0.25;
                 statusBonusATK = ability.ATK_weapon * status._str * STR_WEIGHT;
             }
-            else
+            else if (attack_type == ATTACK_TYPE.RANGE_TYPE)
             {
                 statusATK = status._dex + (status._str + status._luk) * 0.2 + status._base * 0.25;
                 statusBonusATK = ability.ATK_weapon * status._dex * STR_WEIGHT;
