@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RooStatsSim"
         xmlns:skill="clr-namespace:RooStatsSim.Skills"
+        xmlns:UI="clr-namespace:RooStatsSim.UI"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="870">
     <Window.Resources>
