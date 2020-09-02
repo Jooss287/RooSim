@@ -228,10 +228,6 @@
                     </ListBox>
                 </GroupBox>
             </StackPanel>
-            
         </StackPanel>
-        
-
-        
     </Grid>
 </Window>
