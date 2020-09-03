@@ -13,13 +13,13 @@ namespace RooStatsSim.Equation
         {
             if (attack_type == ATTACK_TYPE.MELEE_TYPE)
             {
-                statusATK = status._str + (status._dex + status._luk) * 0.2 + status._base * 0.25;
-                statusBonusATK = ability.ATK_weapon * status._str * STR_WEIGHT;
+                statusATK = status.Str+ (status.Dex+ status.Luk) * 0.2 + status.Base* 0.25;
+                statusBonusATK = ability.ATK_weapon * status.Str* STR_WEIGHT;
             }
             else if (attack_type == ATTACK_TYPE.RANGE_TYPE)
             {
-                statusATK = status._dex + (status._str + status._luk) * 0.2 + status._base * 0.25;
-                statusBonusATK = ability.ATK_weapon * status._dex * STR_WEIGHT;
+                statusATK = status.Dex+ (status.Str+ status.Luk) * 0.2 + status.Base* 0.25;
+                statusBonusATK = ability.ATK_weapon * status.Dex* STR_WEIGHT;
             }
         }
 
