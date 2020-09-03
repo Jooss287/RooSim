@@ -38,7 +38,7 @@ namespace RooStatsSim.Equation.Job
     {
         List<dynamic> Job = new List<dynamic>()
             {
-                new LoadKnight(),
+                new LordKnight(),
                 new WhiteSmith(),
                 new AssassinCross(),
                 new Sniper(),

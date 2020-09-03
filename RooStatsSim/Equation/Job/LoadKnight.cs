@@ -6,7 +6,7 @@ using RooStatsSim.Skills;
 
 namespace RooStatsSim.Equation.Job
 {
-    class LoadKnight : Equations
+    class LordKnight : Equations
     {
         static List<double> dmg = new List<double>
             {
@@ -19,7 +19,7 @@ namespace RooStatsSim.Equation.Job
             new SkillInfo("매그넘브레이크", 0, dmg)
         };
 
-        public LoadKnight() : base(ATTACK_TYPE.MELEE_TYPE)
+        public LordKnight() : base(ATTACK_TYPE.MELEE_TYPE)
         {
         }
 

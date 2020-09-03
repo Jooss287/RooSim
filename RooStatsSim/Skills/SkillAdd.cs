@@ -14,7 +14,7 @@ namespace RooStatsSim.Skills
     {
         public SkillAdd()
         {
-            LoadKnight temp = new LoadKnight();
+            LordKnight temp = new LordKnight();
             int cnt = 0;
             //Clear();
             foreach (SkillInfo skill in temp.skillinfo)
