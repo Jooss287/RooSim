@@ -1,0 +1,20 @@
+﻿<Window x:Class="DbManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DbManager"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <GroupBox Header="Manager Select">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="ManagerSelector" Content="ItemDB" GroupName="ManagerSel"
+                             Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
+                <RadioButton Content="MonsterDB" GroupName="ManagerSel" Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
+            </StackPanel>
+        </GroupBox>
+        <Frame x:Name="frame_contents"></Frame>
+    </StackPanel>
+</Window>
