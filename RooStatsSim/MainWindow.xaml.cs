@@ -1,6 +1,7 @@
 ﻿using RooStatsSim.DB;
 using RooStatsSim.Equation.Job;
 using RooStatsSim.Skills;
+using RooStatsSim.UI;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -25,6 +26,11 @@ namespace RooStatsSim
             //Initialize_value_marduk();
 
             job_UI_setting((int)(JOB_LIST.LOAD_KNIGHT));
+
+            //DB생성, Window open 등
+
+            var newWindow = new StatusWindow();
+            newWindow.Show();
         }
 
         #region Initialize
@@ -251,10 +257,10 @@ namespace RooStatsSim
 
             status = new Status()
             {
-                _base = Convert.ToInt32(txt_LvlBase.Text),
-                _str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text),
-                _dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text),
-                _luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text),
+                Base = Convert.ToInt32(txt_LvlBase.Text),
+                Str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text),
+                Dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text),
+                Luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text),
             };
 
             mobDB = new MonsterDB()

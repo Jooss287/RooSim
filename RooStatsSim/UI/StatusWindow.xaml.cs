@@ -1,4 +1,4 @@
-﻿
+﻿using RooStatsSim.DB;
 using System.Windows;
 
 namespace RooStatsSim.UI
@@ -8,9 +8,20 @@ namespace RooStatsSim.UI
     /// </summary>
     public partial class StatusWindow : Window
     {
+        StatusList BindingStatus;
+        Status statusDB;
+        Status statusAddDB;
+
         public StatusWindow()
         {
+            //DB가 레퍼로 들어왔다 치고.
+            statusDB = new Status();
+            statusAddDB = new Status();
+
             InitializeComponent();
+
+            BindingStatus = new StatusList(ref statusDB, ref statusAddDB);
+            StatusListBox.ItemsSource = BindingStatus;
         }
     }
 }

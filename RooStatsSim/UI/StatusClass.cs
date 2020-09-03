@@ -1,8 +1,23 @@
-﻿using System.Collections.ObjectModel;
+﻿using RooStatsSim.DB;
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace RooStatsSim.UI
 {
-    class StatusInfo
+    enum STATUS_INFO
+    {
+        BASE,
+        JOB,
+        STR,
+        AGI,
+        VIT,
+        INT,
+        DEX,
+        LUK
+    }
+
+    class StatusInfo : INotifyPropertyChanged
     {
         string _name;
         int _point;
@@ -22,30 +37,52 @@ namespace RooStatsSim.UI
         public int Point
         {
             get { return _point; }
+            set
+            {
+                _point = value;
+                OnPropertyChanged("Point");
+            }
         }
         public int AddPoint
         {
             get { return _add_point; }
+            set
+            {
+                _add_point = value;
+                OnPropertyChanged("AddPoint");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public override string ToString() => _name;
+
+        protected void OnPropertyChanged(string info)
+        {
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(info));
         }
     }
+
 
     class StatusList : ObservableCollection<StatusInfo>
     {
         public StatusList()
+        { }
+        public StatusList(ref Status param_status, ref Status param_status_add)
         {
-            Add(new StatusInfo("STR", 10, 1));
-            Add(new StatusInfo("AGI", 10, 1));
-            Add(new StatusInfo("VIT", 10, 1));
-            Add(new StatusInfo("DEX", 10, 1));
-            Add(new StatusInfo("INT", 10, 1));
-            Add(new StatusInfo("LUK", 10, 1));
+            Add(new StatusInfo("STR", param_status.Str, param_status_add.Str));
+            Add(new StatusInfo("AGI", param_status.Agi, param_status_add.Agi));
+            Add(new StatusInfo("VIT", param_status.Vit, param_status_add.Vit));
+            Add(new StatusInfo("INT", param_status.Int, param_status_add.Int));
+            Add(new StatusInfo("DEX", param_status.Dex, param_status_add.Dex));
+            Add(new StatusInfo("LUK", param_status.Luk, param_status_add.Luk));
         }
     }
 
-
     class BasicOptionInfo
     {
-        string _name;
+        readonly string _name;
         int _point;
         int _add_point;
 
@@ -62,10 +99,12 @@ namespace RooStatsSim.UI
         }
         public int Point
         {
+            set { _point = value; }
             get { return _point; }
         }
         public int AddPoint
         {
+            set { _add_point = value; }
             get { return _add_point; }
         }
     }
