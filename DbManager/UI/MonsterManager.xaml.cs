@@ -24,5 +24,15 @@ namespace DbManager.UI
         {
             InitializeComponent();
         }
+
+        private void New_DB_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Save_DB_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -34,5 +34,11 @@ namespace DbManager
         {
 
         }
+
+        private void DB_Type_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton a = sender as RadioButton;
+        }
+        
     }
 }
