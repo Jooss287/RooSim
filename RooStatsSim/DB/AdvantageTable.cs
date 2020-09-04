@@ -7,45 +7,6 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.DB
 {
-    public enum MONSTER_SIZE
-    {
-        SMALL,
-        MIDDLE,
-        LARGE,
-        SIZE_CNT
-    }
-    public enum WEAPON_TYPE
-    {
-        HAND,
-        DAGGER,
-        SWARD,
-        TWOHAND_SWARD,
-        BLUNT,
-        SPEAR,
-        TWOHAND_SPEAR,
-        AXE,
-        TWOHAND_AXE,
-        WAND,
-        TWOHAND_WAND,
-        BOW,
-        JAMADHAR,
-        WEAPON_CNT
-    }
-
-    public enum ELEMENT_TYPE
-    {
-        NORMAL,
-        WIND,
-        EARTH,
-        FIRE,
-        WATER,
-        POISON,
-        HOLY,
-        DARK,
-        ASTRAL,
-        UNDEAD,
-        ELEMENT_CNT
-    }
     class AdvantageTable
     {
         readonly double[,] SizeRatio = new double[(int)WEAPON_TYPE.WEAPON_CNT, (int)MONSTER_SIZE.SIZE_CNT]
