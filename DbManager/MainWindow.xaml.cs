@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using DbManager.DB;
+using DbManager.UI;
 
 namespace DbManager
 {
@@ -19,8 +21,14 @@ namespace DbManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DBlist _DB;
+        private MonsterManager mob_manager = null;
+        private ItemManager item_manager = null;
         public MainWindow()
         {
+            _DB = new DBlist();
+            DBSerizator.ReadDB(ref _DB);
+
             InitializeComponent();
         }
 
@@ -30,11 +38,25 @@ namespace DbManager
             string contents = source.Content.ToString();
 
             if (frame_contents != null)
+            {
                 if (string.Compare(contents, "ItemDB") == 0)
-                    frame_contents.Source = new Uri("/UI/ItemManager.xaml", UriKind.Relative);
+                {
+                    if (item_manager == null)
+                        item_manager = new ItemManager(ref _DB);
+                    frame_contents.Navigate(item_manager);
+                }
                 else
-                    frame_contents.Source = new Uri("/UI/MonsterManager.xaml", UriKind.Relative);
-                  
+                {
+                    if (mob_manager == null)
+                        mob_manager = new MonsterManager(ref _DB);
+                    frame_contents.Navigate(mob_manager);
+                }
+            }
+        }
+
+        private void DB_Save_Click(object sender, RoutedEventArgs e)
+        {
+            DBSerizator.SaveDataBase(ref _DB);
         }
     }
 }

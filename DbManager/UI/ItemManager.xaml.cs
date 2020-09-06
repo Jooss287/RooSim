@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DbManager.DB;
 
 namespace DbManager
 {
@@ -20,8 +21,10 @@ namespace DbManager
     /// </summary>
     public partial class ItemManager : Page
     {
-        public ItemManager()
+        DBlist _DB;
+        public ItemManager(ref DBlist DB)
         {
+            _DB = DB;
             InitializeComponent();
         }
 
@@ -29,10 +32,9 @@ namespace DbManager
         {
 
         }
-
-        private void Save_DB_Click(object sender, RoutedEventArgs e)
+        private void Add_DB_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void DB_Type_Click(object sender, RoutedEventArgs e)

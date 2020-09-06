@@ -8,13 +8,17 @@
         Title="MainWindow" Height="450" Width="800">
 
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
-        <GroupBox Header="Manager Select">
-            <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="ManagerSelector" Content="ItemDB" GroupName="ManagerSel"
-                             Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
-                <RadioButton Content="MonsterDB" GroupName="ManagerSel" Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
-            </StackPanel>
-        </GroupBox>
-        <Frame x:Name="frame_contents"></Frame>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Manager Select">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="ManagerSelector" Content="ItemDB" GroupName="ManagerSel"
+                                 Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
+                    <RadioButton Content="MonsterDB" GroupName="ManagerSel" Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
+                
+                </StackPanel>
+            </GroupBox>
+            <Button Content="DB 저장" Width="100" Click="DB_Save_Click" Margin="5,10,5,0"/>
+        </StackPanel>
+        <Frame x:Name="frame_contents" NavigationUIVisibility="Hidden"></Frame>
     </StackPanel>
 </Window>

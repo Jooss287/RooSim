@@ -10,8 +10,8 @@
 
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
-            <Button Width="100" Height="30" Margin="5,5,5,5" Click="New_DB_Click">New DB</Button>
-            <Button Width="100" Height="30" Margin="5,5,5,5" Click="Save_DB_Click">Save DB</Button>
+            <Button Width="100" Height="30" Margin="5,5,5,5" Click="New_DB_Click" VerticalAlignment="Top" HorizontalAlignment="Left">New DB</Button>
+            <Button Width="100" Height="30" Margin="5,5,5,5" Click="Add_DB_Click" VerticalAlignment="Top" HorizontalAlignment="Left">Add DB</Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <ListBox x:Name="DB_ListBox" Width="200" Height="400"></ListBox>

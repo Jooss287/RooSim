@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\enumDB.cs" />
     <Compile Include="Equation\Equations.cs" />
     <Compile Include="DB\ItemAbility.cs" />
     <Compile Include="DB\AdvantageTable.cs" />
