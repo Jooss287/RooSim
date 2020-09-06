@@ -7,47 +7,60 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MonsterManager">
+    <Page.Resources>
+        <local:MonsterListBox x:Key="MobList"/>
+    </Page.Resources>
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
-            <Button Width="100" Height="30" Margin="5,5,5,5" Click="New_DB_Click">New DB</Button>
-            <Button Width="100" Height="30" Margin="5,5,5,5" Click="Save_DB_Click">Save DB</Button>
+            <Button Width="100" Height="30" Margin="5,5,5,5" Click="New_DB_Click" VerticalAlignment="Top" HorizontalAlignment="Left">New DB</Button>
+            <Button Width="100" Height="30" Margin="5,5,5,5" Click="Add_DB_Click" VerticalAlignment="Top" HorizontalAlignment="Left">Add DB</Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <ListBox x:Name="DB_ListBox" Width="200" Height="400"></ListBox>
+            <ListBox x:Name="DB_ListBox" Width="200" Height="400"
+                     ItemsSource="{Binding Source={StaticResource MobList}}"
+                     SelectionChanged="DB_ListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <GroupBox Header="DB Info">
                 <StackPanel Orientation="Vertical" Background="BlueViolet">
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="Boss/Mini" Margin="5,5,5,5"/>
+                        <CheckBox Content="Boss/Mini" x:Name="checkBoss" Margin="5,5,5,5"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                             <TextBlock Text="번호" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobNumber" Text="" Width="70" IsEnabled="False"/>
+                            <TextBox x:Name="MobNumber" Text="{Binding Path=MobId}" Width="70" Height="22" IsEnabled="False"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="이름" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobName" Text="" Width="70"/>
+                            <TextBox x:Name="MobName" Text="{Binding Path=Name}" Width="70" TabIndex="0"/>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                             <TextBlock Text="종족" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobTribe" Text="" Width="70"/>
+                            <TextBox x:Name="MobTribe" Text="" Width="70" TabIndex="1"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="속성" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobElement" Text="" Width="70"/>
+                            <TextBox x:Name="MobElement" Text="" Width="70" TabIndex="2"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="크기" Width="40" TextAlignment="Center"/>
-                            <ComboBox Name="MobSize" Width="70">
-                                <ItemsControl>
-                                    <ComboBoxItem Content="소형"/>
-                                    <ComboBoxItem Content="중형"/>
-                                    <ComboBoxItem Content="대형"/>
-                                </ItemsControl>
+                            <ComboBox Name="MobSize" Width="70" TabIndex="3">
+                                <ComboBoxItem Content="소형"/>
+                                <ComboBoxItem Content="중형"/>
+                                <ComboBoxItem Content="대형"/>
                             </ComboBox>
                         </StackPanel>
                     </StackPanel>
@@ -55,37 +68,51 @@
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                             <TextBlock Text="ATK" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobAtk" Text="" Width="70"/>
+                            <TextBox x:Name="MobAtk" Text="" Width="70" Height="22"  TabIndex="4"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="MATK" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobMatk" Text="" Width="70"/>
+                            <TextBox x:Name="MobMatk" Text="" Width="70" Height="22" TabIndex="5"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                             <TextBlock Text="MaxHP" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobHp" Text="" Width="70"/>
+                            <TextBox x:Name="MobHp" Text="" Width="70" Height="22" TabIndex="6"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="DEF" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobDef" Text="" Width="70"/>
+                            <TextBox x:Name="MobDef" Text="" Width="70" Height="22" TabIndex="7"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="MDEF" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobMdef" Text="" Width="70"/>
+                            <TextBox x:Name="MobMdef" Text="" Width="70" Height="22" TabIndex="8"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                             <TextBlock Text="HIT" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobHit" Text="" Width="70"/>
+                            <TextBox x:Name="MobHit" Text="" Width="70" Height="22" TabIndex="9"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="FLEE" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobFlee" Text="" Width="70"/>
+                            <TextBox x:Name="MobFlee" Text="" Width="70" Height="22" TabIndex="10"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

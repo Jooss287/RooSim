@@ -55,9 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\DBlist.cs" />
+    <Compile Include="DB\MonsterDB.cs" />
     <Compile Include="UI\MonsterManager.xaml.cs">
       <DependentUpon>MonsterManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\MobListBox.cs" />
     <Page Include="UI\ItemManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
