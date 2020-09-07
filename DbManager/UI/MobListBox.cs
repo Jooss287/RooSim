@@ -8,10 +8,11 @@ namespace DbManager.UI
     class MonsterDB_Binding : MonsterDB, INotifyPropertyChanged
     {
         public MonsterDB_Binding() { }
-        public MonsterDB_Binding(int mob_id, string name, bool isBoss, int size,
+        public MonsterDB_Binding(int mob_id, string name, int level, bool isBoss, int size, int tribe, int element,
             int atk, int matk, int hp, int def, int mdef, int hit, int flee)
-            : base(mob_id, name, isBoss, size, atk, matk, hp, def, mdef, hit, flee)
+            : base(mob_id, name, level, isBoss, tribe, element, size, atk, matk, hp, def, mdef, hit, flee)
         { }
+
         public new int MobId
         {
             get { return _mob_id; }
@@ -21,6 +22,11 @@ namespace DbManager.UI
         {
             get { return _name; }
             set { _name = value; OnPropertyChanged("Name"); }
+        }
+        public new int Level
+        {
+            get { return _level; }
+            set { _level = value; OnPropertyChanged("Level"); }
         }
         public new bool IsBoss
         {
@@ -77,6 +83,24 @@ namespace DbManager.UI
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(info));
         }
+
+        public void ChangeValue(MonsterDB_Binding param)
+        {
+            MobId = param.MobId;
+            Name = param.Name;
+            Level = param.Level;
+            IsBoss = param.IsBoss;
+            Tribe = param.Tribe;
+            Element = param.Element;
+            Size = param.Size;
+            Atk = param.Atk;
+            Matk = param.Matk;
+            Hp = param.Hp;
+            Def = param.Def;
+            Mdef = param.Mdef;
+            Hit = param.Hit;
+            Flee = param.Flee;
+        }
     }
 
 
@@ -89,15 +113,20 @@ namespace DbManager.UI
             foreach (KeyValuePair<int, MonsterDB> items in DB._mob_db )
             {
                 MonsterDB db = items.Value;
-                Add(new MonsterDB_Binding(db.MobId, db.Name, db.IsBoss, db.Size,
+                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Size, db.Tribe, db.Element,
                     db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
             }
         }
         
         public void AddList(MonsterDB db)
         {
-            Add(new MonsterDB_Binding(db.MobId, db.Name, db.IsBoss, db.Size,
+            if (Count == db.MobId)
+                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Size, db.Tribe, db.Element,
                     db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
+            else
+                SetItem(db.MobId, new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Size, db.Tribe, db.Element,
+                    db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
+            
         }
     }
 }
