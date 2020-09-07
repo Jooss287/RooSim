@@ -265,7 +265,7 @@ namespace RooStatsSim
 
             mobDB = new MonsterDB()
             {
-                defense = Convert.ToInt32(txt_monster_def.Text),
+                Def = Convert.ToInt32(txt_monster_def.Text),
             };
 
             ELEMENT_TYPE player_element = (ELEMENT_TYPE)cmb_player_element.SelectedIndex;

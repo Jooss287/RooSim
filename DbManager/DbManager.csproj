@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2C9FF397-AD63-4A43-9E35-77235F63E07A}</ProjectGuid>
+    <ProjectGuid>{A215184C-7C28-440B-A84E-D42C2AAEF446}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>RooStatsSim</RootNamespace>
-    <AssemblyName>RooStatsSim</AssemblyName>
+    <RootNamespace>DbManager</RootNamespace>
+    <AssemblyName>DbManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,29 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DB\enumDB.cs" />
-    <Compile Include="Equation\Equations.cs" />
-    <Compile Include="DB\ItemAbility.cs" />
-    <Compile Include="DB\AdvantageTable.cs" />
+    <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\MonsterDB.cs" />
-    <Compile Include="DB\Status.cs" />
-    <Compile Include="Equation\Defense.cs" />
-    <Compile Include="Equation\Job\AssassinCross.cs" />
-    <Compile Include="Equation\Job\HighPrist.cs" />
-    <Compile Include="Equation\Job\HighWizard.cs" />
-    <Compile Include="Equation\Job\JobSelect.cs" />
-    <Compile Include="Equation\Job\LoadKnight.cs" />
-    <Compile Include="Equation\Job\Sniper.cs" />
-    <Compile Include="Equation\Job\WhiteSmith.cs" />
-    <Compile Include="Equation\StatusATK.cs" />
-    <Compile Include="Extension\CheckBoxList.cs" />
-    <Compile Include="Skills\SkillCheckBox.cs" />
-    <Compile Include="Skills\SkillAdd.cs" />
-    <Compile Include="Skills\SkillInfo.cs" />
-    <Compile Include="UI\StatusClass.cs" />
-    <Compile Include="UI\StatusWindow.xaml.cs">
-      <DependentUpon>StatusWindow.xaml</DependentUpon>
+    <Compile Include="UI\MonsterManager.xaml.cs">
+      <DependentUpon>MonsterManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\MobListBox.cs" />
+    <Page Include="UI\ItemManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,11 +73,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UI\ItemManager.xaml.cs">
+      <DependentUpon>ItemManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\StatusWindow.xaml">
+    <Page Include="UI\MonsterManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

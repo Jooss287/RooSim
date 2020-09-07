@@ -4,36 +4,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RooStatsSim.DB
+namespace DbManager.DB
 {
-    class MonsterDB
+    [Serializable]
+    public class MonsterDB
     {
-        int _mob_id;
-        string _name;
-        bool _isBoss;
-        int _tribe;
-        int _element;
-        int _size;
-        int _atk;
-        int _matk;
-        int _hp;
-        int _def;
-        int _mdef;
-        int _hit;
-        int _flee;
+        public MonsterDB() { }
+        public MonsterDB(int mob_id, string name, int level, bool isBoss, int size, int tribe, int element,
+            int atk, int matk, int hp, int def, int mdef, int hit, int flee)
+        {
+            _mob_id = mob_id;
+            _name = name;
+            _level = level;
+            _isBoss = isBoss;
+            _tribe = tribe;
+            _element = element;
+            _size = size;
+            _atk = atk;
+            _matk = matk;
+            _hp = hp;
+            _def = def;
+            _mdef = mdef;
+            _hit = hit;
+            _flee = flee;
+        }
+        protected int _mob_id;
+        protected string _name;
+        protected bool _isBoss;
+        protected int _level;
+        protected int _tribe;
+        protected int _element;
+        protected int _size;
+        protected int _atk;
+        protected int _matk;
+        protected int _hp;
+        protected int _def;
+        protected int _mdef;
+        protected int _hit;
+        protected int _flee;
 
         public int MobId
         {
             get { return _mob_id; }
+            set { _mob_id = value; }
         }
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
+        public int Level
+        {
+            get { return _level; }
+            set { _level = value; }
+        }
         public bool IsBoss
         {
-            get { return _isBoss; }
+            get { return _isBoss;  }
             set { _isBoss = value; }
         }
         public int Tribe

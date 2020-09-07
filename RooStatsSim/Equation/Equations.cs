@@ -63,7 +63,7 @@ namespace RooStatsSim.DB
         }
         protected virtual double GetTotalEquipATKRatio() {
             return element_inc * abilities.element_increse * abilities.tribe_increse * abilities.size_increse * abilities.boss_increse * abilities.ATK_percent
-                * Defense.GetDefRatio(mobDB.defense, abilities.def_ignore);
+                * Defense.GetDefRatio(mobDB.Def, abilities.def_ignore);
         }
         protected virtual double GetTotalATKRatio() {
             return abilities.PDamage_percent * abilities.PDamage_attack_type;
