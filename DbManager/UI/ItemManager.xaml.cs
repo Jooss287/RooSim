@@ -22,10 +22,19 @@ namespace DbManager
     public partial class ItemManager : Page
     {
         DBlist _DB;
+        
         public ItemManager(ref DBlist DB)
         {
             _DB = DB;
             InitializeComponent();
+        }
+
+
+        private bool _isNew = false;
+        public bool IsNew
+        {
+            get { return _isNew; }
+            set { _isNew = value; }
         }
 
         private void New_DB_Click(object sender, RoutedEventArgs e)
@@ -34,7 +43,7 @@ namespace DbManager
         }
         private void Add_DB_Click(object sender, RoutedEventArgs e)
         {
-            
+            _isNew = true;
         }
 
         private void DB_Type_Click(object sender, RoutedEventArgs e)

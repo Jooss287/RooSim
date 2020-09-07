@@ -11,6 +11,8 @@ namespace RooStatsSim.DB
         int _mob_id;
         string _name;
         bool _isBoss;
+        int _tribe;
+        int _element;
         int _size;
         int _atk;
         int _matk;
@@ -31,8 +33,18 @@ namespace RooStatsSim.DB
         }
         public bool IsBoss
         {
-            get { return _isBoss;  }
+            get { return _isBoss; }
             set { _isBoss = value; }
+        }
+        public int Tribe
+        {
+            get { return _tribe; }
+            set { _tribe = value; }
+        }
+        public int Element
+        {
+            get { return _element; }
+            set { _element = value; }
         }
         public int Size
         {

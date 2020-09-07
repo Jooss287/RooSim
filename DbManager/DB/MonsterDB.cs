@@ -10,12 +10,15 @@ namespace DbManager.DB
     public class MonsterDB
     {
         public MonsterDB() { }
-        public MonsterDB(int mob_id, string name, bool isBoss, int size,
+        public MonsterDB(int mob_id, string name, int level, bool isBoss, int size, int tribe, int element,
             int atk, int matk, int hp, int def, int mdef, int hit, int flee)
         {
             _mob_id = mob_id;
             _name = name;
+            _level = level;
             _isBoss = isBoss;
+            _tribe = tribe;
+            _element = element;
             _size = size;
             _atk = atk;
             _matk = matk;
@@ -28,6 +31,9 @@ namespace DbManager.DB
         protected int _mob_id;
         protected string _name;
         protected bool _isBoss;
+        protected int _level;
+        protected int _tribe;
+        protected int _element;
         protected int _size;
         protected int _atk;
         protected int _matk;
@@ -47,10 +53,25 @@ namespace DbManager.DB
             get { return _name; }
             set { _name = value; }
         }
+        public int Level
+        {
+            get { return _level; }
+            set { _level = value; }
+        }
         public bool IsBoss
         {
             get { return _isBoss;  }
             set { _isBoss = value; }
+        }
+        public int Tribe
+        {
+            get { return _tribe; }
+            set { _tribe = value; }
+        }
+        public int Element
+        {
+            get { return _element; }
+            set { _element = value; }
         }
         public int Size
         {
