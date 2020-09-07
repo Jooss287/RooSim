@@ -9,8 +9,25 @@ namespace DbManager.DB
     [Serializable]
     public class MonsterDB
     {
+        public MonsterDB(MonsterDB monsterDB)
+        {
+            _mob_id = monsterDB.MobId;
+            _name = monsterDB.Name;
+            _level = monsterDB.Level;
+            _isBoss = monsterDB.IsBoss;
+            _tribe = monsterDB.Tribe;
+            _element = monsterDB.Element;
+            _size = monsterDB.Size;
+            _atk = monsterDB.Atk;
+            _matk = monsterDB.Matk;
+            _hp = monsterDB.Hp;
+            _def = monsterDB.Def;
+            _mdef = monsterDB.Mdef;
+            _hit = monsterDB.Hit;
+            _flee = monsterDB.Flee;
+        }
         public MonsterDB() { }
-        public MonsterDB(int mob_id, string name, int level, bool isBoss, int size, int tribe, int element,
+        public MonsterDB(int mob_id, string name, int level, bool isBoss, int tribe, int element, int size,
             int atk, int matk, int hp, int def, int mdef, int hit, int flee)
         {
             _mob_id = mob_id;

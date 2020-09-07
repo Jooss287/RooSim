@@ -34,7 +34,7 @@
             <GroupBox Header="DB Info" >
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="Boss/Mini" x:Name="checkBoss" Margin="5,5,5,5"/>
+                        <CheckBox Content="Boss/Mini" IsChecked="{Binding Path=IsBoss}" x:Name="checkBoss" Margin="5,5,5,5"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
@@ -47,8 +47,7 @@
                             <TextBlock Text="이름" Width="40" TextAlignment="Center"/>
                             <TextBox x:Name="MobName" Text="{Binding Path=Name}" TextAlignment="Center"
                                      Width="70" TabIndex="0"
-                                     GotFocus="TxtboxSelectAll"
-                                     PreviewTextInput="NurmericCheckFunc"/>
+                                     GotFocus="TxtboxSelectAll"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="레벨" Width="40" TextAlignment="Center"/>

@@ -85,12 +85,8 @@ namespace DbManager.UI
             if (string.Compare(MobName.Text, "") == 0)
                 return;
 
-            MonsterDB temp = new MonsterDB(Convert.ToInt32(MobNumber.Text), Convert.ToString(MobName.Text), Convert.ToInt32(MobLevel.Text), Convert.ToBoolean(checkBoss.IsChecked),
-                Convert.ToInt32(MobTribe.SelectedIndex), Convert.ToInt32(MobElement.SelectedIndex), Convert.ToInt32(MobSize.SelectedIndex), 
-                Convert.ToInt32(MobAtk.Text), Convert.ToInt32(MobMatk.Text), Convert.ToInt32(MobHp.Text),
-                Convert.ToInt32(MobDef.Text), Convert.ToInt32(MobMdef.Text), Convert.ToInt32(MobHit.Text), Convert.ToInt32(MobFlee.Text));
-            _DB.Add(temp);
-            BindingMobList.AddList(temp);
+            _DB.Add(new MonsterDB(now_mob));
+            BindingMobList.AddList(new MonsterDB(now_mob));
 
             InitalizeContents();
             MobName.Focus();
