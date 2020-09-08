@@ -23,5 +23,25 @@ namespace RooStatsSim.UI
             BindingStatus = new StatusList(ref statusDB, ref statusAddDB);
             StatusListBox.ItemsSource = BindingStatus;
         }
+
+        private void StatusUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void StatusDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void LevelUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void LevelDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

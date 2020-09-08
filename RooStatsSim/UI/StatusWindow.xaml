@@ -15,8 +15,22 @@
                 HorizontalAlignment="Left" VerticalAlignment="Top">
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Base" FontSize="15" FontWeight="Bold" Margin="15,0,0,0" />
-                <TextBlock Text="00" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Margin="30,0,0,0" />
+                <TextBlock Text="Base" 
+                           FontSize="15" FontWeight="Bold" 
+                           Margin="15,0,0,0" />
+                <TextBlock Text="00" FontSize="15" FontWeight="Bold" 
+                           HorizontalAlignment="Center" 
+                           Margin="15,0,0,0" 
+                           MouseLeftButtonDown="LevelUp_Click"
+                           MouseRightButtonDown="LevelDown_Click"/>
+                <TextBlock Text="남은 포인트" 
+                           FontSize="9" FontWeight="Bold" 
+                           TextAlignment="Right" VerticalAlignment="Bottom" 
+                           Margin="15,0,0,0" />
+                <TextBlock Text="00" 
+                           FontSize="9" FontWeight="Bold" 
+                           VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                           Margin="5,0,0,0" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <ListBox x:Name="StatusListBox"
@@ -29,10 +43,20 @@
                         <DataTemplate>
                             <Border Background="#FF8BCAFF" Height="30" CornerRadius="5">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Path=Name}" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-                                    <TextBlock Text="{Binding Path=Point}" Width="20" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="+" Width="20" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Path=AddPoint}"  Width="20" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=Name}" 
+                                               Width="50" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=Point}" 
+                                               Width="20" 
+                                               TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
+                                               MouseRightButtonDown="StatusDown_Click"/>
+                                    <TextBlock Text="+" 
+                                               Width="20" 
+                                               TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=AddPoint}" 
+                                               Width="20" 
+                                               TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     <Border Background="Blue" CornerRadius="2" Width="15" Height="15" Margin="10,0,20,0">
                                         <Path Stretch="Fill"
                                   Fill="white"
