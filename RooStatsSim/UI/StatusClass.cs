@@ -17,6 +17,18 @@ namespace RooStatsSim.UI
         LUK
     }
 
+    class NewStatus
+    {
+        public StatusInfo _STR = new StatusInfo("STR", 0, 0);
+        public StatusInfo _AGI = new StatusInfo("AGI", 0, 0);
+        public StatusInfo _VIT = new StatusInfo("VIT", 0, 0);
+        public StatusInfo _INT = new StatusInfo("INT", 0, 0);
+        public StatusInfo _DEX = new StatusInfo("DEX", 0, 0);
+        public StatusInfo _LUK = new StatusInfo("LUK", 0, 0);
+        public StatusInfo _BASE = new StatusInfo("BASE", 0, 0);
+
+    }
+
     class StatusInfo : INotifyPropertyChanged
     {
         string _name;
@@ -64,19 +76,18 @@ namespace RooStatsSim.UI
         }
     }
 
-
     class StatusList : ObservableCollection<StatusInfo>
     {
         public StatusList()
         { }
-        public StatusList(ref Status param_status, ref Status param_status_add)
+        public StatusList(ref NewStatus param_status)
         {
-            Add(new StatusInfo("STR", param_status.Str, param_status_add.Str));
-            Add(new StatusInfo("AGI", param_status.Agi, param_status_add.Agi));
-            Add(new StatusInfo("VIT", param_status.Vit, param_status_add.Vit));
-            Add(new StatusInfo("INT", param_status.Int, param_status_add.Int));
-            Add(new StatusInfo("DEX", param_status.Dex, param_status_add.Dex));
-            Add(new StatusInfo("LUK", param_status.Luk, param_status_add.Luk));
+            Add(param_status._STR);
+            Add(param_status._AGI);
+            Add(param_status._VIT);
+            Add(param_status._INT);
+            Add(param_status._DEX);
+            Add(param_status._LUK);
         }
     }
 

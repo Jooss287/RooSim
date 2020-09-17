@@ -1,5 +1,7 @@
 ﻿using RooStatsSim.DB;
+using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RooStatsSim.UI
 {
@@ -9,29 +11,35 @@ namespace RooStatsSim.UI
     public partial class StatusWindow : Window
     {
         StatusList BindingStatus;
-        Status statusDB;
+        NewStatus statusDB;
         Status statusAddDB;
 
         public StatusWindow()
         {
             //DB가 레퍼로 들어왔다 치고.
-            statusDB = new Status();
-            statusAddDB = new Status();
+            statusDB = new NewStatus();
+            //statusAddDB = new Status();
 
             InitializeComponent();
-
-            BindingStatus = new StatusList(ref statusDB, ref statusAddDB);
+            
+            DataContext = this;
+            BaseLvlUI.DataContext = statusDB._BASE.Point;
+            BindingStatus = new StatusList(ref statusDB);
             StatusListBox.ItemsSource = BindingStatus;
         }
 
         private void StatusUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            
+            var tb = sender as StackPanel;
+            StatusInfo dataCxtx = tb.DataContext as StatusInfo;
+            dataCxtx.Point++;
         }
 
         private void StatusDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
+            var tb = sender as StackPanel;
+            StatusInfo dataCxtx = tb.DataContext as StatusInfo;
+            dataCxtx.Point--;
         }
 
         private void LevelUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
