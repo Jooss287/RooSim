@@ -14,32 +14,36 @@
                 Background="#FF729FFF" CornerRadius="3"
                 HorizontalAlignment="Left" VerticalAlignment="Top">
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" Margin="0,5"
+            <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="BaseLvlUI" Orientation="Horizontal" Margin="0,5"
                         MouseLeftButtonDown="LevelUp_Click"
                         MouseRightButtonDown="LevelDown_Click">
-                <TextBlock Text="Base" 
+                    <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" 
                            FontSize="15" FontWeight="Bold" 
                            Margin="15,0,0,0" />
-                <TextBlock x:Name="BaseLvlUI"
-                    Text="{Binding BaseLvl, UpdateSourceTrigger=PropertyChanged}" FontSize="15" FontWeight="Bold" 
+                    <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
+                           FontSize="15" FontWeight="Bold" 
                            HorizontalAlignment="Center" 
                            Margin="15,0,0,0" />
-                <Border Background="Blue" CornerRadius="2" Width="15" Height="15" Margin="5,0,0,0">
-                    <Path Stretch="Fill"
+                    <Border Background="Blue" CornerRadius="2" Width="15" Height="15" Margin="5,0,0,0">
+                        <Path Stretch="Fill"
                                   Fill="white"
                                   Stroke="{x:Null}"
                                   StrokeThickness="0.5"
                                   Data="M3.875,0 L5.125,0 5.125,3.875 9,3.875 9,5.125 5.125,5.125 5.125,9 3.875,9 3.875,5.125 0,5.125 0,3.875 3.875,3.875 3.875,0 z"
                                   Margin="3,3,3,3"/>
-                </Border>
-                <TextBlock Text="남은 포인트" 
+                    </Border>
+                </StackPanel>
+                <StackPanel x:Name="BaseLvlUIpoint" Orientation="Horizontal">
+                    <TextBlock Text="남은 포인트" 
                            FontSize="9" FontWeight="Bold" 
                            TextAlignment="Right" VerticalAlignment="Bottom" 
                            Margin="5,0,0,0" />
-                <TextBlock Text="00" 
+                    <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="9" FontWeight="Bold" 
                            VerticalAlignment="Bottom" HorizontalAlignment="Center" 
                            Margin="5,0,0,0" />
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <ListBox x:Name="StatusListBox"

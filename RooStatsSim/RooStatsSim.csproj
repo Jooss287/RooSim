@@ -55,7 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AbstractClass\AbilityInfo.cs" />
     <Compile Include="DB\enumDB.cs" />
+    <Compile Include="DB\StatsPointTable.cs" />
     <Compile Include="Equation\Equations.cs" />
     <Compile Include="DB\ItemAbility.cs" />
     <Compile Include="DB\AdvantageTable.cs" />
@@ -74,10 +76,11 @@
     <Compile Include="Skills\SkillCheckBox.cs" />
     <Compile Include="Skills\SkillAdd.cs" />
     <Compile Include="Skills\SkillInfo.cs" />
-    <Compile Include="UI\StatusClass.cs" />
+    <Compile Include="UI\StatusWindowBinding.cs" />
     <Compile Include="UI\StatusWindow.xaml.cs">
       <DependentUpon>StatusWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User\UserData.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
