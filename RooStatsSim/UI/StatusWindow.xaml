@@ -17,7 +17,8 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel x:Name="BaseLvlUI" Orientation="Horizontal" Margin="0,5"
                         MouseLeftButtonDown="LevelUp_Click"
-                        MouseRightButtonDown="LevelDown_Click">
+                        MouseRightButtonDown="LevelDown_Click"
+                        MouseWheel="Level_MouseWheel">
                     <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" 
                            FontSize="15" FontWeight="Bold" 
                            Margin="15,0,0,0" />
@@ -57,7 +58,8 @@
                             <Border Background="#FF8BCAFF" Height="30" CornerRadius="5">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
                                             MouseLeftButtonDown="StatusUp_Click"
-                                            MouseRightButtonDown="StatusDown_Click">
+                                            MouseRightButtonDown="StatusDown_Click"
+                                            MouseWheel="Status_MouseWheel">
                                     <TextBlock Text="{Binding Path=Name}" 
                                                Width="50" 
                                                VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>

@@ -34,33 +34,30 @@ namespace RooStatsSim.UI
             BaseLvlUIpoint.DataContext = BindingLevelPoint;
         }
 
-        private void StatusUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        void StatusPointUp(AbilityBinding dataCxtx)
         {
-            var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
-
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
             ABILITTY status = statusDB.Status[(int)statusName];
+            ABILITTY LevelStatsPoint = statusDB.Level[(int)LEVEL_ENUM.BASE_POINT];
+            LevelStatsPoint.Point -= StatsPointTable.StatusNeedPoint[status.Point];
             status.Point++;
             dataCxtx.UpdateAbility(status);
+            BindingLevelPoint.UpdateAbility(LevelStatsPoint);
         }
 
-        private void StatusDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        void StatusPointDown(AbilityBinding dataCxtx)
         {
-            var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
-
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
             ABILITTY status = statusDB.Status[(int)statusName];
+            ABILITTY LevelStatsPoint = statusDB.Level[(int)LEVEL_ENUM.BASE_POINT];
             status.Point--;
+            LevelStatsPoint.Point += StatsPointTable.StatusNeedPoint[status.Point];
             dataCxtx.UpdateAbility(status);
+            BindingLevelPoint.UpdateAbility(LevelStatsPoint);
         }
 
-        private void LevelUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        void LevelUp(AbilityBinding dataCxtx)
         {
-            var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
-
             LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.Name);
             ABILITTY Level = statusDB.Level[(int)LevelName];
             ABILITTY LevelStatsPoint = statusDB.Level[(int)LEVEL_ENUM.BASE_POINT];
@@ -70,11 +67,8 @@ namespace RooStatsSim.UI
             BindingLevelPoint.UpdateAbility(LevelStatsPoint);
         }
 
-        private void LevelDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        void LevelDown(AbilityBinding dataCxtx)
         {
-            var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
-
             LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.Name);
             ABILITTY Level = statusDB.Level[(int)LevelName];
             ABILITTY LevelStatsPoint = statusDB.Level[(int)LEVEL_ENUM.BASE_POINT];
@@ -83,5 +77,65 @@ namespace RooStatsSim.UI
             dataCxtx.UpdateAbility(Level);
             BindingLevelPoint.UpdateAbility(LevelStatsPoint);
         }
+
+        #region Mouse reaction func
+        private void StatusUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+
+            StatusPointUp(dataCxtx);
+        }
+
+        private void StatusDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+
+            StatusPointDown(dataCxtx);
+        }
+
+        private void LevelUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+
+            LevelUp(dataCxtx);
+        }
+
+        private void LevelDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+
+            LevelDown(dataCxtx);
+        }
+
+        private void Level_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+
+            if (e.Delta < 0)
+                LevelDown(dataCxtx);
+            else
+                LevelUp(dataCxtx);
+                
+        }
+
+        private void Status_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+
+            if (e.Delta < 0)
+                StatusPointDown(dataCxtx);
+            else
+                StatusPointUp(dataCxtx);
+        }
+
+        #endregion
+
+
     }
 }
