@@ -25,14 +25,21 @@ namespace RooStatsSim.User
         LUK
     }
 
-    class ABILITTY
+    // User data singleton design pattern
+    public sealed class UserData
     {
-        public int Point;
-        public int AddPoint;
-        public ABILITTY() { Point = 1; AddPoint = 0; }
-    }
-    class UserData
-    {
+        private UserData() { }
+        private static UserData _instance = null;
+        public static UserData GetInstance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new UserData();
+                return _instance;
+            }
+        }
+
         public List<ABILITTY> Level = new List<ABILITTY>()
         {
            new ABILITTY(),  //BASE
@@ -50,5 +57,12 @@ namespace RooStatsSim.User
            new ABILITTY(),
            new ABILITTY(),  //LUK
         };
+    }
+
+    public class ABILITTY
+    {
+        public int Point;
+        public int AddPoint;
+        public ABILITTY() { Point = 1; AddPoint = 0; }
     }
 }
