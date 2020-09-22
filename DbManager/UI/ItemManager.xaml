@@ -20,6 +20,16 @@
                     Margin="5,5,5,5"
                     Click="Add_DB_Click"
                     VerticalAlignment="Top" HorizontalAlignment="Left" />
+            <ComboBox Name="cmb_equip_type" Width="100" Height="30"
+                      Margin="5,5,5,5"
+                      VerticalAlignment="Top" HorizontalAlignment="Left"
+                      SelectionChanged="cmb_equip_type_SelectionChanged">
+                <ComboBoxItem Content="몬스터도감"/>
+                <ComboBoxItem Content="스티커"/>
+                <ComboBoxItem Content="의상스타일"/>
+                <ComboBoxItem Content="장비" IsSelected="True"/>
+                <ComboBoxItem Content="카드"/>
+            </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <ListBox x:Name="DB_ListBox" Width="200" Height="200"

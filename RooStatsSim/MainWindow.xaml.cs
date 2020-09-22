@@ -40,14 +40,6 @@ namespace RooStatsSim
 
         private void Initialize_value()
         {
-            txt_LvlBase.Text = "1";
-            txt_StrBase.Text = "1";
-            txt_StrAdd.Text = "0";
-            txt_DexBase.Text = "1";
-            txt_DexAdd.Text = "0";
-            txt_LukBase.Text = "1";
-            txt_LukAdd.Text = "0";
-
             txt_atk_weapon.Text = "100";
             txt_atk_equip.Text = "50";
             txt_atk_smelting.Text = "0";
@@ -80,15 +72,6 @@ namespace RooStatsSim
 
         private void Initialize_value_test()
         {
-            txt_sATK.Text = "1407";
-            txt_LvlBase.Text = "80";
-            txt_StrBase.Text = "99";
-            txt_StrAdd.Text = "55";
-            txt_DexBase.Text = "11";
-            txt_DexAdd.Text = "29";
-            txt_LukBase.Text = "1";
-            txt_LukAdd.Text = "9";
-
             txt_atk_weapon.Text = "338";
             txt_atk_equip.Text = "346";
             txt_atk_smelting.Text = "249";
@@ -121,13 +104,6 @@ namespace RooStatsSim
         private void Initialize_value_marduk()
         {
             txt_sATK.Text = "1387";
-            txt_LvlBase.Text = "79";
-            txt_StrBase.Text = "99";
-            txt_StrAdd.Text = "55";
-            txt_DexBase.Text = "11";
-            txt_DexAdd.Text = "25";
-            txt_LukBase.Text = "1";
-            txt_LukAdd.Text = "9";
 
             txt_atk_weapon.Text = "338";
             txt_atk_equip.Text = "346";

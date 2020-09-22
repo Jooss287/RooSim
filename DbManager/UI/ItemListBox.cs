@@ -9,80 +9,19 @@ namespace DbManager.UI
     class ItemDB_Binding : ItemDB, INotifyPropertyChanged
     {
         public ItemDB_Binding() { }
-        public ItemDB_Binding(int mob_id, string name, int level, bool isBoss, int tribe, int element, int size,
-            int atk, int matk, int hp, int def, int mdef, int hit, int flee)
-            : base(mob_id, name, level, isBoss, tribe, element, size, atk, matk, hp, def, mdef, hit, flee)
+        public ItemDB_Binding(ItemDB db)
+            : base(db)
         { }
 
-        public new int MobId
+        public new int Id
         {
-            get { return _mob_id; }
-            set { _mob_id = value; OnPropertyChanged("MobId"); }
+            get { return _id; }
+            set { _id = value; OnPropertyChanged("ItemId"); }
         }
         public new string Name
         {
             get { return _name; }
             set { _name = value; OnPropertyChanged("Name"); }
-        }
-        public new int Level
-        {
-            get { return _level; }
-            set { _level = value; OnPropertyChanged("Level"); }
-        }
-        public new bool IsBoss
-        {
-            get { return _isBoss; }
-            set { _isBoss = value; OnPropertyChanged("IsBoss"); }
-        }
-        public new int Tribe
-        {
-            get { return _tribe; }
-            set { _tribe = value; OnPropertyChanged("Tribe"); }
-        }
-        public new int Element
-        {
-            get { return _element; }
-            set { _element = value; OnPropertyChanged("Element"); }
-        }
-        public new int Size
-        {
-            get { return _size; }
-            set { _size = value; OnPropertyChanged("Size"); }
-        }
-        public new int Atk
-        {
-            get { return _atk; }
-            set { _atk = value; OnPropertyChanged("Atk"); }
-        }
-        public new int Matk
-        {
-            get { return _matk; }
-            set { _matk = value; OnPropertyChanged("Matk"); }
-        }
-        public new int Hp
-        {
-            get { return _hp; }
-            set { _hp = value; OnPropertyChanged("Hp"); }
-        }
-        public new int Def
-        {
-            get { return _def; }
-            set { _def = value; OnPropertyChanged("Def"); }
-        }
-        public new int Mdef
-        {
-            get { return _mdef; }
-            set { _mdef = value; OnPropertyChanged("Mdef"); }
-        }
-        public new int Hit
-        {
-            get { return _hit; }
-            set { _hit = value; OnPropertyChanged("Hit"); }
-        }
-        public new int Flee
-        {
-            get { return _flee; }
-            set { _flee = value; OnPropertyChanged("Flee"); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -95,22 +34,10 @@ namespace DbManager.UI
             handler?.Invoke(this, new PropertyChangedEventArgs(info));
         }
 
-        public void ChangeValue(MonsterDB_Binding param)
+        public void ChangeValue(ItemDB_Binding param)
         {
-            MobId = param.MobId;
+            Id = param.Id;
             Name = param.Name;
-            Level = param.Level;
-            IsBoss = param.IsBoss;
-            Tribe = param.Tribe;
-            Element = param.Element;
-            Size = param.Size;
-            Atk = param.Atk;
-            Matk = param.Matk;
-            Hp = param.Hp;
-            Def = param.Def;
-            Mdef = param.Mdef;
-            Hit = param.Hit;
-            Flee = param.Flee;
         }
     }
 
@@ -119,24 +46,21 @@ namespace DbManager.UI
     {
         public ItemListBox()
         { }
-        public ItemListBox(ref DBlist DB)
+        public ItemListBox(ref Dictionary<int, ItemDB> DB)
         {
-            foreach (KeyValuePair<int, ItemDB> items in DB._item_db)
+            foreach (KeyValuePair<int, ItemDB> items in DB)
             {
                 ItemDB db = items.Value;
-                Add(new ItemDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Tribe, db.Element, db.Size,
-                    db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
+                Add(new ItemDB_Binding(db));
             }
         }
         
         public void AddList(ItemDB db)
         {
-            if (Count == db.MobId)
-                Add(new ItemDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Tribe, db.Element, db.Size,
-                    db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
+            if (Count == db.Id)
+                Add(new ItemDB_Binding(db));
             else
-                SetItem(db.MobId, new ItemDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Tribe, db.Element, db.Size,
-                    db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
+                SetItem(db.Id, new ItemDB_Binding(db));
             
         }
     }

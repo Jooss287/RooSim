@@ -31,11 +31,6 @@ namespace RooStatsSim.DB
         LUK
     }
 
-    class StatVariable
-    {
-        Dictionary<STATUS_TYPE, int> ATK_per_Status;
-        
-    }
     class ItemAbility
     {
         

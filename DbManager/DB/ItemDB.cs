@@ -8,8 +8,9 @@ namespace DbManager.DB
 {
     public enum ITEM_TYPE_ENUM
     {
+        NONE,
         MONSTER_RESEARCH,
-        STIKER,
+        STICKER,
         DRESS_STYLE,
         EQUIPMENT,
         CARD,
@@ -18,6 +19,7 @@ namespace DbManager.DB
 
     public enum EQUIP_TYPE_ENUM
     {
+        NONE,
         HEAD_TOP,
         HEAD_MID,
         HEAD_BOT,
@@ -31,129 +33,95 @@ namespace DbManager.DB
         BACK_DECORATION,
     }
 
+    public enum ITYPE
+    {
+        ATK = 1000,
+        MATK = 2000,
+        DEF = 3000,
+        MDEF = 4000,
+        ELEMENT = 8000,
+    }
+    public enum DTYPE
+    {
+        ATK_P,
+
+    }
+    public enum IFTYPE
+    {
+        ATK_PER_STR = 1000,
+        ATK_PER_AGI = 2000,
+        HP_PER_VIT = 3000,
+        MATK_PER_INT = 4000,
+    }
     [Serializable]
     public class ItemDB
     {
-        public ItemDB(MonsterDB monsterDB)
+        public ItemDB(ItemDB item_db)
         {
-            _mob_id = monsterDB.MobId;
-            _name = monsterDB.Name;
-            _level = monsterDB.Level;
-            _isBoss = monsterDB.IsBoss;
-            _tribe = monsterDB.Tribe;
-            _element = monsterDB.Element;
-            _size = monsterDB.Size;
-            _atk = monsterDB.Atk;
-            _matk = monsterDB.Matk;
-            _hp = monsterDB.Hp;
-            _def = monsterDB.Def;
-            _mdef = monsterDB.Mdef;
-            _hit = monsterDB.Hit;
-            _flee = monsterDB.Flee;
+            _id = item_db.Id;
+            _name = item_db.Name;
+            _item_type = item_db._item_type;
+            _equip_type = item_db._equip_type;
+            i_option = item_db.i_option;
+            d_option = item_db.d_option;
+            if_option = item_db.if_option;
         }
         public ItemDB() { }
-        public ItemDB(int mob_id, string name, int level, bool isBoss, int tribe, int element, int size,
-            int atk, int matk, int hp, int def, int mdef, int hit, int flee)
-        {
-            _mob_id = mob_id;
-            _name = name;
-            _level = level;
-            _isBoss = isBoss;
-            _tribe = tribe;
-            _element = element;
-            _size = size;
-            _atk = atk;
-            _matk = matk;
-            _hp = hp;
-            _def = def;
-            _mdef = mdef;
-            _hit = hit;
-            _flee = flee;
-        }
-        protected int _mob_id;
+        
+        
+        
+        ITEM_TYPE_ENUM _item_type = ITEM_TYPE_ENUM.NONE;
+        EQUIP_TYPE_ENUM _equip_type = EQUIP_TYPE_ENUM.NONE;
+        protected int _id;
         protected string _name;
-        protected bool _isBoss;
-        protected int _level;
-        protected int _tribe;
-        protected int _element;
-        protected int _size;
-        protected int _atk;
-        protected int _matk;
-        protected int _hp;
-        protected int _def;
-        protected int _mdef;
-        protected int _hit;
-        protected int _flee;
+        public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
+        public Dictionary<DTYPE, int> d_option = new Dictionary<DTYPE, int>();
+        public Dictionary<IFTYPE, AbilityPerStatus> if_option = new Dictionary<IFTYPE, AbilityPerStatus>();
 
-        public int MobId
+        public int Id
         {
-            get { return _mob_id; }
-            set { _mob_id = value; }
+            get { return _id; }
+            set { _id = value; }
         }
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
-        public int Level
+        public ITEM_TYPE_ENUM Item_type
         {
-            get { return _level; }
-            set { _level = value; }
+            get { return _item_type; }
+            set { _item_type = value; }
         }
-        public bool IsBoss
+        public EQUIP_TYPE_ENUM Equip_type
         {
-            get { return _isBoss;  }
-            set { _isBoss = value; }
+            get { return _equip_type; }
+            set { _equip_type = value; }
         }
-        public int Tribe
+    }
+
+    public class AbilityPerStatus
+    {
+        public delegate int CalcFunc(int value);
+        public int AddValue;
+        public int PerValue;
+        CalcFunc Calc;
+
+        public AbilityPerStatus(IFTYPE iftype, int add_value, int per_value)
         {
-            get { return _tribe; }
-            set { _tribe = value; }
+            AddValue = add_value;
+            PerValue = per_value;
+            switch (iftype)
+            {
+                case IFTYPE.ATK_PER_STR:
+                    Calc = ATK_PER_STR;
+                    break;
+            }
         }
-        public int Element
+
+        public int ATK_PER_STR(int value)
         {
-            get { return _element; }
-            set { _element = value; }
-        }
-        public int Size
-        {
-            get { return _size; }
-            set { _size = value; }
-        }
-        public int Atk
-        {
-            get { return _atk; }
-            set { _atk = value; }
-        }
-        public int Matk
-        {
-            get { return _matk; }
-            set { _matk = value; }
-        }
-        public int Hp
-        {
-            get { return _hp; }
-            set { _hp = value; }
-        }
-        public int Def
-        {
-            get { return _def; }
-            set { _def= value; }
-        }
-        public int Mdef
-        {
-            get { return _mdef; }
-            set { _mdef = value; }
-        }
-        public int Hit
-        {
-            get { return _hit; }
-            set { _hit = value; }
-        }
-        public int Flee
-        {
-            get { return _flee; }
-            set { _flee = value; }
+            return ((int)(value / PerValue) * AddValue);
         }
     }
 }

@@ -8,16 +8,16 @@ namespace DbManager.DB
     [Serializable]
     public class DBlist
     {
-        public Dictionary<int, MonsterDB> _mob_db;
-        public Dictionary<int, ItemDB> _item_db;
+        public Dictionary<int, MonsterDB> _mob_db = new Dictionary<int, MonsterDB>();
+        public Dictionary<int, ItemDB> _equip_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _card_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _monster_research_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _dress_style_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _stiker_db = new Dictionary<int, ItemDB>();
         //List<ItemDB> ItemDB;
-        public DBlist()
-        {
-            _mob_db = new Dictionary<int, MonsterDB>();
-            _item_db = new Dictionary<int, ItemDB>();
-        }
+        public DBlist() { }
         
-        public void Add(MonsterDB monsterDB)
+        public void AddMonsterDB(MonsterDB monsterDB)
         {
             _mob_db[monsterDB.MobId] = monsterDB;
         }

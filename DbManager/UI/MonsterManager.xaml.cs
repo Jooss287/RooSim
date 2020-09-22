@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -85,7 +84,7 @@ namespace DbManager.UI
             if (string.Compare(MobName.Text, "") == 0)
                 return;
 
-            _DB.Add(new MonsterDB(now_mob));
+            _DB.AddMonsterDB(new MonsterDB(now_mob));
             BindingMobList.AddList(new MonsterDB(now_mob));
 
             InitalizeContents();

@@ -57,7 +57,6 @@
     </ApplicationDefinition>
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\ItemDB.cs" />
-    <Compile Include="DB\ItemInfo.cs" />
     <Compile Include="DB\MonsterDB.cs" />
     <Compile Include="UI\ItemListBox.cs" />
     <Compile Include="UI\MonsterManager.xaml.cs">

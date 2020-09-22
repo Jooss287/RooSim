@@ -3,7 +3,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using RooStatsSim.User;
-using RooStatsSim.DB;
 
 namespace RooStatsSim.UI
 {
