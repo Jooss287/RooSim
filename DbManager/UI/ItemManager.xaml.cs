@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DbManager.DB;
+using DbManager.UI;
 
 namespace DbManager
 {
@@ -22,7 +23,9 @@ namespace DbManager
     public partial class ItemManager : Page
     {
         DBlist _DB;
-        
+        ItemDB_Binding now_item = new ItemDB_Binding();
+        ItemListBox BindingItemList;
+
         public ItemManager(ref DBlist DB)
         {
             _DB = DB;
@@ -50,6 +53,10 @@ namespace DbManager
         {
             RadioButton a = sender as RadioButton;
         }
-        
+
+        private void DB_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

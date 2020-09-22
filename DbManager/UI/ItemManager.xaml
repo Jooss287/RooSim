@@ -3,38 +3,38 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:DbManager"
+      xmlns:local="clr-namespace:DbManager.UI"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="300" d:DesignWidth="600"
       Title="ItemManager">
-
+    <Page.Resources>
+        <local:ItemListBox x:Key="ItemList"/>
+    </Page.Resources>
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
-            <Button Width="100" Height="30" Margin="5,5,5,5" Click="New_DB_Click" VerticalAlignment="Top" HorizontalAlignment="Left">New DB</Button>
-            <Button Width="100" Height="30" Margin="5,5,5,5" Click="Add_DB_Click" VerticalAlignment="Top" HorizontalAlignment="Left">Add DB</Button>
+            <Button Content="New DB" Width="100" Height="30" TabIndex="9"
+                    Margin="5,5,5,5"
+                    Click="New_DB_Click"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Button Content="Add DB" Width="100" Height="30" TabIndex="8"
+                    Margin="5,5,5,5"
+                    Click="Add_DB_Click"
+                    VerticalAlignment="Top" HorizontalAlignment="Left" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <ListBox x:Name="DB_ListBox" Width="200" Height="400"></ListBox>
-            <GroupBox Header="DB Info">
+            <ListBox x:Name="DB_ListBox" Width="200" Height="200"
+                     ItemsSource="{Binding Source={StaticResource ItemList}}"
+                     SelectionChanged="DB_ListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <GroupBox Header="DB Info" >
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <RadioButton Content="장비" Tag="0" Click="DB_Type_Click"/>
-                        <RadioButton Content="카드" Tag="1"  Click="DB_Type_Click"/>
-                        <RadioButton Content="인챈트" Tag="2"  Click="DB_Type_Click"/>
-                    </StackPanel>
-                    <Grid>
-                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                            <TextBlock Text="번호" Width="40"/>
-                            <TextBox x:Name="ItemNumber" Text="d" Width="100" IsEnabled="False"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="이름" Width="40"/>
-                            <TextBox x:Name="ItemName" Text="d" Width="100" IsEnabled="False"/>
-                        </StackPanel>
-                    </Grid>
                     
                 </StackPanel>
-                
             </GroupBox>
         </StackPanel>
     </StackPanel>

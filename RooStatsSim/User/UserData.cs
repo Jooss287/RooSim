@@ -40,23 +40,32 @@ namespace RooStatsSim.User
             }
         }
 
-        public List<ABILITTY> Level = new List<ABILITTY>()
-        {
-           new ABILITTY(),  //BASE
-           new ABILITTY(),
-           new ABILITTY(),  //JOB
-           new ABILITTY(),
-        };
+        public Level Level = new Level();
+        public Status Status = new Status();
+    }
 
-        public List<ABILITTY> Status = new List<ABILITTY>()
+    public class Level : List<ABILITTY>
+    {
+        public Level()
         {
-           new ABILITTY(),  //STR
-           new ABILITTY(),
-           new ABILITTY(),  
-           new ABILITTY(),
-           new ABILITTY(),
-           new ABILITTY(),  //LUK
-        };
+            Add(new ABILITTY());  //BASE
+            Add(new ABILITTY());
+            Add(new ABILITTY());  //JOB
+            Add(new ABILITTY());
+        }
+    }
+
+    public class Status : List<ABILITTY>
+    {
+        public Status()
+        {
+            Add(new ABILITTY());  //STR
+            Add(new ABILITTY());
+            Add(new ABILITTY());
+            Add(new ABILITTY());
+            Add(new ABILITTY());
+            Add(new ABILITTY());  //LUK
+        }
     }
 
     public class ABILITTY

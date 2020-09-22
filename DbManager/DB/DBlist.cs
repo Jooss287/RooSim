@@ -9,11 +9,14 @@ namespace DbManager.DB
     public class DBlist
     {
         public Dictionary<int, MonsterDB> _mob_db;
+        public Dictionary<int, ItemDB> _item_db;
         //List<ItemDB> ItemDB;
         public DBlist()
         {
             _mob_db = new Dictionary<int, MonsterDB>();
+            _item_db = new Dictionary<int, ItemDB>();
         }
+        
         public void Add(MonsterDB monsterDB)
         {
             _mob_db[monsterDB.MobId] = monsterDB;
