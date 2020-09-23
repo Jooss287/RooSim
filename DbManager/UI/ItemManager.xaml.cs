@@ -12,6 +12,7 @@ namespace DbManager
     public partial class ItemManager : Page
     {
         DBlist _DB;
+        Dictionary<int, ItemDB> now_DB;
         ItemDB_Binding now_item = new ItemDB_Binding();
         ItemListBox BindingItemList;
         
@@ -21,9 +22,37 @@ namespace DbManager
             _DB = DB;
             InitializeComponent();
 
-            
+            DataContext = now_item;
+
+            now_DB = SelectedItemType();
+            InitializeContents(ref now_DB);
+
+            BindingItemList = new ItemListBox(ref now_DB);
+            DB_ListBox.ItemsSource = BindingItemList;
         }
 
+        void InitializeContents(Dictionary<int, ItemDB> db)
+        {
+            if (db == null)
+                db.
+                now_mob.MobId = 0;
+            else
+                now_mob.MobId = _DB._mob_db.Count();
+
+            now_mob.Name = "";
+            now_mob.Level = 0;
+            now_mob.IsBoss = false;
+            now_mob.Tribe = 0;
+            now_mob.Element = 0;
+            now_mob.Size = 0;
+            now_mob.Atk = 0;
+            now_mob.Matk = 0;
+            now_mob.Hp = 0;
+            now_mob.Def = 0;
+            now_mob.Mdef = 0;
+            now_mob.Hit = 0;
+            now_mob.Flee = 0;
+        }
 
         #region To pass mainwindow
         private bool _isNew = false;

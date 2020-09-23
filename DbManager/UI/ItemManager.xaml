@@ -42,9 +42,62 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <GroupBox Header="DB Info" >
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="번호" Width="40" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBox x:Name="Item_id" Text="{Binding Path=Id}" TextAlignment="Center"
+                                     Width="70" Height="22" IsEnabled="False"/>
+                            <TextBlock Text="이름" Width="40" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBox x:Name="Item_name" Text="{Binding Path=Name}" TextAlignment="Center"
+                                     Width="70" Height="22"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical" Width="120" Margin="5,5,5,5">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox ></ComboBox>
+                                    <TextBlock Text="0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="^^" Margin="5,5,5,5"></Button>
+                                    <Button Content="VV" Margin="5,5,5,5"></Button>
+                                </StackPanel>
+                                <ListBox>
+
+                                </ListBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Width="120" Margin="5,5,5,5">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox ></ComboBox>
+                                    <TextBlock Text="0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="^^"></Button>
+                                    <Button Content="VV"></Button>
+                                </StackPanel>
+                                <ListBox>
+
+                                </ListBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Width="120" Margin="5,5,5,5">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox ></ComboBox>
+                                    <TextBlock Text="0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="^^"></Button>
+                                    <Button Content="VV"></Button>
+                                </StackPanel>
+                                <ListBox>
+
+                                </ListBox>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                    </StackPanel>
                     
                 </StackPanel>
+                
             </GroupBox>
         </StackPanel>
     </StackPanel>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RooStatsSim.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,16 @@ namespace DbManager.DB
         HP_PER_VIT = 3000,
         MATK_PER_INT = 4000,
     }
+    public enum STATUS_EFFECT_TYPE
+    {
+        STERN,
+        FEAR,
+        SILENCE,
+        FROZEN,
+        CURSE,
+        PETRIFICATION,
+    }
+
     [Serializable]
     public class ItemDB
     {
@@ -75,8 +86,19 @@ namespace DbManager.DB
         protected int _id;
         protected string _name;
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
-        public Dictionary<DTYPE, int> d_option = new Dictionary<DTYPE, int>();
+        public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
+        public Dictionary<STATUS_EFFECT_TYPE, double> se_option = new Dictionary<STATUS_EFFECT_TYPE, double>();
         public Dictionary<IFTYPE, AbilityPerStatus> if_option = new Dictionary<IFTYPE, AbilityPerStatus>();
+
+        public Dictionary<ELEMENT_TYPE, double> element_inc_option = new Dictionary<ELEMENT_TYPE, double>();
+        public Dictionary<MONSTER_SIZE, double> size_inc_option = new Dictionary<MONSTER_SIZE, double>();
+        public Dictionary<TRIBE_TYPE, double> tribe_inc_option = new Dictionary<TRIBE_TYPE, double>();
+        public Dictionary<MONSTER_TYPE, double> mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>();
+
+        public Dictionary<ELEMENT_TYPE, double> element_dec_option = new Dictionary<ELEMENT_TYPE, double>();
+        public Dictionary<MONSTER_SIZE, double> size_dec_option = new Dictionary<MONSTER_SIZE, double>();
+        public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
+        public Dictionary<MONSTER_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>();
 
         public int Id
         {

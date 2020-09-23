@@ -21,6 +21,11 @@ namespace DbManager.DB
         {
             _mob_db[monsterDB.MobId] = monsterDB;
         }
+
+        public void AddItemDB(ref Dictionary<int, ItemDB> now_DB, ItemDB DB)
+        {
+            now_DB[DB.Id] = DB;
+        }
     }
     
     class DBSerizator

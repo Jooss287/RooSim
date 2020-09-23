@@ -33,14 +33,14 @@ namespace DbManager.UI
                 now_mob.MobId = _DB._mob_db.Count();
             
             DataContext = now_mob;
-            InitalizeContents();
+            InitializeContents();
 
             BindingMobList = new MonsterListBox(ref _DB);
             DB_ListBox.ItemsSource = BindingMobList;
 
             MobName.Focus();
         }
-        void InitalizeContents()
+        void InitializeContents()
         {
             if (_DB._mob_db == null)
                 now_mob.MobId = 0;
