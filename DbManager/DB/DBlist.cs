@@ -16,6 +16,15 @@ namespace DbManager.DB
         public Dictionary<int, ItemDB> _stiker_db = new Dictionary<int, ItemDB>();
         //List<ItemDB> ItemDB;
         public DBlist() { }
+        public DBlist(DBlist db)
+        {
+            if (db._mob_db != null) _mob_db = db._mob_db;
+            if (db._equip_db != null) _equip_db = db._equip_db;
+            if (db._card_db != null) _card_db = db._card_db;
+            if (db._monster_research_db != null) _monster_research_db = db._monster_research_db;
+            if (db._dress_style_db != null) _dress_style_db = db._dress_style_db;
+            if (db._stiker_db != null) _stiker_db = db._stiker_db;
+        }
         
         public void AddMonsterDB(MonsterDB monsterDB)
         {
@@ -68,7 +77,7 @@ namespace DbManager.DB
             using (FileStream stream = new FileStream(file_name, FileMode.Open, FileAccess.Read))
             {
                 // 클래스를 역직렬화 하고 Node클래스의 Print함수 실행.
-                DB = (DBlist)(formatter.Deserialize(stream));
+                DB = new DBlist((DBlist)formatter.Deserialize(stream));
             }
         }
 

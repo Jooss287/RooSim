@@ -13,6 +13,7 @@ namespace DbManager.UI
             : base(db)
         { }
 
+        string binding_str;
         public new int Id
         {
             get { return _id; }

@@ -75,7 +75,7 @@ namespace DbManager.UI
         #region UI Binding, Contents settings
         private void New_DB_Click(object sender, RoutedEventArgs e)
         {
-            InitalizeContents();
+            InitializeContents();
             MobName.Focus();
         }
         
@@ -87,7 +87,7 @@ namespace DbManager.UI
             _DB.AddMonsterDB(new MonsterDB(now_mob));
             BindingMobList.AddList(new MonsterDB(now_mob));
 
-            InitalizeContents();
+            InitializeContents();
             MobName.Focus();
             _isNew = true;
         }

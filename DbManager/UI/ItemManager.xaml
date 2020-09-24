@@ -53,9 +53,9 @@
                                      Width="70" Height="22"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical" Width="120" Margin="5,5,5,5">
+                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
                                 <StackPanel Orientation="Horizontal">
-                                    <ComboBox ></ComboBox>
+                                    <ComboBox Name="cmb_Ioption" SelectedIndex="0"></ComboBox>
                                     <TextBlock Text="0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -66,27 +66,41 @@
 
                                 </ListBox>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="120" Margin="5,5,5,5">
+                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
                                 <StackPanel Orientation="Horizontal">
-                                    <ComboBox ></ComboBox>
+                                    <ComboBox Name="cmb_Doption" SelectedIndex="0" ></ComboBox>
                                     <TextBlock Text="0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="^^"></Button>
-                                    <Button Content="VV"></Button>
+                                    <Button Content="^^" Margin="5,5,5,5"></Button>
+                                    <Button Content="VV" Margin="5,5,5,5"></Button>
                                 </StackPanel>
                                 <ListBox>
 
                                 </ListBox>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="120" Margin="5,5,5,5">
+                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
                                 <StackPanel Orientation="Horizontal">
-                                    <ComboBox ></ComboBox>
+                                    <ComboBox Name="cmb_SEoption" SelectedIndex="0"></ComboBox>
                                     <TextBlock Text="0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="^^"></Button>
-                                    <Button Content="VV"></Button>
+                                    <Button Content="^^" Margin="5,5,5,5"></Button>
+                                    <Button Content="VV" Margin="5,5,5,5"></Button>
+                                </StackPanel>
+                                <ListBox>
+
+                                </ListBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox Name="cmb_IFoption" SelectedIndex="0"></ComboBox>
+                                    <TextBlock Text="0" Width="20"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="^^" Margin="5,5,5,5"></Button>
+                                    <Button Content="VV" Margin="5,5,5,5"></Button>
                                 </StackPanel>
                                 <ListBox>
 

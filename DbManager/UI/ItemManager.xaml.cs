@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using DbManager.DB;
 using DbManager.UI;
@@ -29,29 +30,55 @@ namespace DbManager
 
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
+
+            SetComboBox();
         }
 
-        void InitializeContents(Dictionary<int, ItemDB> db)
+        void SetComboBox()
         {
-            if (db == null)
-                db.
-                now_mob.MobId = 0;
-            else
-                now_mob.MobId = _DB._mob_db.Count();
+            foreach (ITYPE option in Enum.GetValues(typeof(ITYPE)))
+            {
+                string statusName = Enum.GetName(typeof(ITYPE), option);
+                cmb_Ioption.Items.Add(statusName);
+            }
+            foreach (DTYPE option in Enum.GetValues(typeof(DTYPE)))
+            {
+                string statusName = Enum.GetName(typeof(DTYPE), option);
+                cmb_Doption.Items.Add(statusName);
+            }
+            foreach (STATUS_EFFECT_TYPE option in Enum.GetValues(typeof(STATUS_EFFECT_TYPE)))
+            {
+                string statusName = Enum.GetName(typeof(STATUS_EFFECT_TYPE), option);
+                cmb_SEoption.Items.Add(statusName);
+            }
+            foreach (IFTYPE option in Enum.GetValues(typeof(IFTYPE)))
+            {
+                string statusName = Enum.GetName(typeof(IFTYPE), option);
+                cmb_IFoption.Items.Add(statusName);
+            }
+        }
 
-            now_mob.Name = "";
-            now_mob.Level = 0;
-            now_mob.IsBoss = false;
-            now_mob.Tribe = 0;
-            now_mob.Element = 0;
-            now_mob.Size = 0;
-            now_mob.Atk = 0;
-            now_mob.Matk = 0;
-            now_mob.Hp = 0;
-            now_mob.Def = 0;
-            now_mob.Mdef = 0;
-            now_mob.Hit = 0;
-            now_mob.Flee = 0;
+        void InitializeContents(ref Dictionary<int, ItemDB> db)
+        {
+            //if (db == null)
+                
+            //    now_mob.MobId = 0;
+            //else
+            //    now_mob.MobId = _DB._mob_db.Count();
+
+            //now_mob.Name = "";
+            //now_mob.Level = 0;
+            //now_mob.IsBoss = false;
+            //now_mob.Tribe = 0;
+            //now_mob.Element = 0;
+            //now_mob.Size = 0;
+            //now_mob.Atk = 0;
+            //now_mob.Matk = 0;
+            //now_mob.Hp = 0;
+            //now_mob.Def = 0;
+            //now_mob.Mdef = 0;
+            //now_mob.Hit = 0;
+            //now_mob.Flee = 0;
         }
 
         #region To pass mainwindow

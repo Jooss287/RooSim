@@ -29,8 +29,9 @@ namespace DbManager
         {
             _DB = new DBlist();
             DBSerizator.ReadDB(ref _DB);
-            item_manager = new ItemManager(ref _DB);
+            
             mob_manager = new MonsterManager(ref _DB);
+            item_manager = new ItemManager(ref _DB);
 
             InitializeComponent();
         }

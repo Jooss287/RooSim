@@ -45,6 +45,8 @@ namespace DbManager.DB
     public enum DTYPE
     {
         ATK_P,
+        MATK_P,
+
 
     }
     public enum IFTYPE
