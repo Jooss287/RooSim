@@ -34,6 +34,8 @@ namespace DbManager
             item_manager = new ItemManager(ref _DB);
 
             InitializeComponent();
+
+            frame_contents.Navigate(item_manager);
         }
 
         #region UI Binding, contents settings

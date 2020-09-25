@@ -16,20 +16,35 @@ namespace DbManager
         Dictionary<int, ItemDB> now_DB;
         ItemDB_Binding now_item = new ItemDB_Binding();
         ItemListBox BindingItemList;
-        
+        ItemOption_Binding now_option = new ItemOption_Binding();
+        testBox BindingItemOptionList;
 
         public ItemManager(ref DBlist DB)
         {
             _DB = DB;
             InitializeComponent();
 
+            ItemDB test = new ItemDB();
+            test.i_option.Add(ITYPE.ATK, 50);
+            test.i_option.Add(ITYPE.MATK, 30);
+            test.Name = "test1";
+            ItemDB test2 = new ItemDB();
+            test2.i_option.Add(ITYPE.ATK, 5);
+            test2.i_option.Add(ITYPE.MATK, 3);
+            test2.Name = "test2";
+            test2.Id = 1;
+            _DB._equip_db.Add(0, test);
+            _DB._equip_db.Add(1, test2);
+            
             DataContext = now_item;
 
             now_DB = SelectedItemType();
-            InitializeContents(ref now_DB);
+            InitializeContents();
 
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
+            BindingItemOptionList = new testBox(ref now_item.i_option);
+            testOption.ItemsSource = BindingItemOptionList;
 
             SetComboBox();
         }
@@ -58,27 +73,27 @@ namespace DbManager
             }
         }
 
-        void InitializeContents(ref Dictionary<int, ItemDB> db)
+        void InitializeContents()
         {
-            //if (db == null)
-                
-            //    now_mob.MobId = 0;
-            //else
-            //    now_mob.MobId = _DB._mob_db.Count();
+            if (now_DB == null)
+                now_item.Id = 0;
+            else
+                now_item.Id = now_DB.Count;
 
-            //now_mob.Name = "";
-            //now_mob.Level = 0;
-            //now_mob.IsBoss = false;
-            //now_mob.Tribe = 0;
-            //now_mob.Element = 0;
-            //now_mob.Size = 0;
-            //now_mob.Atk = 0;
-            //now_mob.Matk = 0;
-            //now_mob.Hp = 0;
-            //now_mob.Def = 0;
-            //now_mob.Mdef = 0;
-            //now_mob.Hit = 0;
-            //now_mob.Flee = 0;
+            now_item.Name = "";
+            now_item.i_option.Clear();
+            now_item.d_option.Clear();
+            now_item.if_option.Clear();
+            now_item.se_option.Clear();
+
+            now_item.mobtype_inc_option.Clear();
+            now_item.size_inc_option.Clear();
+            now_item.tribe_inc_option.Clear();
+            now_item.element_inc_option.Clear();
+            now_item.mobtype_dec_option.Clear();
+            now_item.size_dec_option.Clear();
+            now_item.tribe_dec_option.Clear();
+            now_item.element_dec_option.Clear();
         }
 
         #region To pass mainwindow
@@ -112,10 +127,19 @@ namespace DbManager
         }
         private void New_DB_Click(object sender, RoutedEventArgs e)
         {
-
+            InitializeContents();
+            Item_name.Focus();
         }
         private void Add_DB_Click(object sender, RoutedEventArgs e)
         {
+            if (string.Compare(Item_name.Text, "") == 0)
+                return;
+
+            now_DB[now_item.Id] = new ItemDB(now_item);
+            BindingItemList.AddList(new ItemDB(now_item));
+
+            InitializeContents();
+            Item_name.Focus();
             _isNew = true;
         }
 
@@ -126,7 +150,14 @@ namespace DbManager
 
         private void DB_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ItemDB_Binding temp = (ItemDB_Binding)DB_ListBox.SelectedItem;
+            if (temp != null)
+            {
+                now_item.ChangeValue(temp);
+                BindingItemOptionList = new testBox(ref now_item.i_option);
+                testOption.ItemsSource = BindingItemOptionList;
+            }
+                
         }
 
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)

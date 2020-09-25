@@ -13,7 +13,7 @@
             <GroupBox Header="Manager Select">
                 <StackPanel Orientation="Horizontal">
                     <RadioButton x:Name="ManagerSelector" Content="ItemDB" GroupName="ManagerSel"
-                                 Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
+                                 Checked="ManagerSelector_Checked" IsChecked="True" Margin="5,5,5,5"/>
                     <RadioButton Content="MonsterDB" GroupName="ManagerSel" Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
                 
                 </StackPanel>
