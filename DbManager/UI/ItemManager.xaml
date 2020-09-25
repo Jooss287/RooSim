@@ -9,6 +9,7 @@
       Title="ItemManager">
     <Page.Resources>
         <local:ItemListBox x:Key="ItemList"/>
+        <local:testBox x:Key="testList"/>
     </Page.Resources>
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
@@ -44,7 +45,7 @@
             <GroupBox Header="DB Info" >
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" >
                             <TextBlock Text="번호" Width="40" TextAlignment="Center" VerticalAlignment="Center"/>
                             <TextBox x:Name="Item_id" Text="{Binding Path=Id}" TextAlignment="Center"
                                      Width="70" Height="22" IsEnabled="False"/>
@@ -54,22 +55,34 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_Ioption" SelectedIndex="0"></ComboBox>
-                                    <TextBlock Text="0"/>
+                                    <TextBox Text="0" Width="30" Height="22"
+                                             TextAlignment="Center" VerticalAlignment="Center"
+                                             Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Content="^^" Margin="5,5,5,5"></Button>
                                     <Button Content="VV" Margin="5,5,5,5"></Button>
                                 </StackPanel>
-                                <ListBox>
-
+                                <ListBox x:Name="testOption" ItemsSource="{Binding Source={StaticResource testList}}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Type_name}"/>
+                                                <TextBlock Text=" : "/>
+                                                <TextBlock Text="{Binding Path=Type_value}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
                                 </ListBox>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
                                 <StackPanel Orientation="Horizontal">
                                     <ComboBox Name="cmb_Doption" SelectedIndex="0" ></ComboBox>
-                                    <TextBlock Text="0"/>
+                                    <TextBox Text="0" Width="30" Height="22"
+                                             TextAlignment="Center" VerticalAlignment="Center"
+                                             Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="^^" Margin="5,5,5,5"></Button>
@@ -82,7 +95,9 @@
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
                                 <StackPanel Orientation="Horizontal">
                                     <ComboBox Name="cmb_SEoption" SelectedIndex="0"></ComboBox>
-                                    <TextBlock Text="0"/>
+                                    <TextBox Text="0" Width="30" Height="22"
+                                             TextAlignment="Center" VerticalAlignment="Center"
+                                             Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="^^" Margin="5,5,5,5"></Button>
@@ -96,7 +111,9 @@
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
                                 <StackPanel Orientation="Horizontal">
                                     <ComboBox Name="cmb_IFoption" SelectedIndex="0"></ComboBox>
-                                    <TextBlock Text="0" Width="20"/>
+                                    <TextBox Text="0" Width="30" Height="22"
+                                             TextAlignment="Center" VerticalAlignment="Center"
+                                             Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="^^" Margin="5,5,5,5"></Button>
