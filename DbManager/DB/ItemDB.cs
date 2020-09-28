@@ -77,6 +77,7 @@ namespace DbManager.DB
             _equip_type = item_db._equip_type;
             i_option = item_db.i_option;
             d_option = item_db.d_option;
+            se_option = item_db.se_option;
             if_option = item_db.if_option;
         }
         public ItemDB() { }

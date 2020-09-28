@@ -16,8 +16,6 @@ namespace DbManager
         Dictionary<int, ItemDB> now_DB;
         ItemDB_Binding now_item = new ItemDB_Binding();
         ItemListBox BindingItemList;
-        ItemOption_Binding now_option = new ItemOption_Binding();
-        testBox BindingItemOptionList;
 
         public ItemManager(ref DBlist DB)
         {
@@ -27,10 +25,16 @@ namespace DbManager
             ItemDB test = new ItemDB();
             test.i_option.Add(ITYPE.ATK, 50);
             test.i_option.Add(ITYPE.MATK, 30);
+            test.d_option.Add(DTYPE.ATK_P, 5);
+            test.se_option.Add(STATUS_EFFECT_TYPE.CURSE, 30);
+            test.if_option.Add(IFTYPE.ATK_PER_AGI, new AbilityPerStatus(IFTYPE.ATK_PER_AGI, 3, 10));
             test.Name = "test1";
             ItemDB test2 = new ItemDB();
             test2.i_option.Add(ITYPE.ATK, 5);
             test2.i_option.Add(ITYPE.MATK, 3);
+            test2.d_option.Add(DTYPE.MATK_P, 1);
+            test2.se_option.Add(STATUS_EFFECT_TYPE.FEAR, 10);
+            test2.if_option.Add(IFTYPE.ATK_PER_STR, new AbilityPerStatus(IFTYPE.ATK_PER_STR, 4, 10));
             test2.Name = "test2";
             test2.Id = 1;
             _DB._equip_db.Add(0, test);
@@ -43,8 +47,7 @@ namespace DbManager
 
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
-            BindingItemOptionList = new testBox(ref now_item.i_option);
-            testOption.ItemsSource = BindingItemOptionList;
+            SetNowItemOption();
 
             SetComboBox();
         }
@@ -71,6 +74,14 @@ namespace DbManager
                 string statusName = Enum.GetName(typeof(IFTYPE), option);
                 cmb_IFoption.Items.Add(statusName);
             }
+        }
+
+        void SetNowItemOption()
+        {
+            list_iOption.ItemsSource = new ItemOptionListBox<ITYPE, int>(ref now_item.i_option);
+            list_dOption.ItemsSource = new ItemOptionListBox<DTYPE, double>(ref now_item.d_option);
+            list_seOption.ItemsSource = new ItemOptionListBox<STATUS_EFFECT_TYPE, double>(ref now_item.se_option);
+            list_ifOption.ItemsSource = new ItemOptionListBox(ref now_item.if_option);
         }
 
         void InitializeContents()
@@ -154,8 +165,7 @@ namespace DbManager
             if (temp != null)
             {
                 now_item.ChangeValue(temp);
-                BindingItemOptionList = new testBox(ref now_item.i_option);
-                testOption.ItemsSource = BindingItemOptionList;
+                SetNowItemOption();
             }
                 
         }

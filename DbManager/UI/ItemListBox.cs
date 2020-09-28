@@ -14,7 +14,6 @@ namespace DbManager.UI
             : base(db)
         { }
 
-        string binding_str;
         public new int Id
         {
             get { return _id; }
@@ -51,6 +50,9 @@ namespace DbManager.UI
             Id = param.Id;
             Name = param.Name;
             i_option = param.i_option;
+            d_option = param.d_option;
+            se_option = param.se_option;
+            if_option = param.if_option;
         }
     }
 
@@ -77,24 +79,24 @@ namespace DbManager.UI
         }
     }
 
-    class ItemOption_Binding : INotifyPropertyChanged
+    class ItemOption_Binding<TYPE, D_TYPE> : INotifyPropertyChanged
     {
         public ItemOption_Binding() { }
-        public ItemOption_Binding(KeyValuePair<ITYPE, int> db)
+        public ItemOption_Binding(KeyValuePair<TYPE, D_TYPE> db)
         {
-            _type_name = Enum.GetName(typeof(ITYPE), db.Key);
+            _type_name = Enum.GetName(typeof(TYPE), db.Key);
             _type_value = db.Value;
         }
 
         string _type_name;
-        int _type_value;
+        D_TYPE _type_value;
         public string Type_name
         { 
             get { return _type_name; } 
             set { _type_name = value; OnPropertyChanged("Type_name"); } 
         }
         
-        public int Type_value
+        public D_TYPE Type_value
         {
             get { return _type_value; }
             set { _type_value = value; OnPropertyChanged("Type_value"); }
@@ -111,27 +113,76 @@ namespace DbManager.UI
         }
     }
 
-    class testBox : ObservableCollection<ItemOption_Binding>
+    class ItemOption_Binding : INotifyPropertyChanged
     {
-        public testBox()
-        { }
-        public testBox(ref Dictionary<ITYPE, int> DB)
+        public ItemOption_Binding() { }
+        public ItemOption_Binding(KeyValuePair<IFTYPE, AbilityPerStatus> db)
         {
-            foreach (KeyValuePair<ITYPE, int> items in DB)
-            {
-                Add(new ItemOption_Binding(items)) ;
-            }
+            _type_name = Enum.GetName(typeof(IFTYPE), db.Key);
+            _type_value = db.Value;
         }
 
-        //public void AddList(KeyValuePair<ITYPE, int> item)
-        //{
-        //    Add
-        //    if (Count == db.Id)
-        //        Add(new ItemDB_Binding(db));
-        //    else
-        //        SetItem(db.Id, new ItemDB_Binding(db));
+        string _type_name;
+        AbilityPerStatus _type_value;
+        public string Type_name
+        {
+            get { return _type_name; }
+            set { _type_name = value; OnPropertyChanged("Type_name"); }
+        }
 
-        //}
+        public string Type_value
+        {
+            get {
+                string temp = Convert.ToString(Type_per_value) + "당 +" + Convert.ToString(Type_add_value);
+                return temp;
+            }
+        }
+        public int Type_add_value
+        {
+            get { return _type_value.AddValue; }
+            set { _type_value.AddValue = value; OnPropertyChanged("Type_value"); }
+        }
+        public int Type_per_value
+        {
+            get { return _type_value.PerValue; }
+            set { _type_value.PerValue = value; OnPropertyChanged("Type_value"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public override string ToString() => _type_name;
+
+        protected void OnPropertyChanged(string info)
+        {
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(info));
+        }
+    }
+
+
+    class ItemOptionListBox<TYPE,D_TYPE> : ObservableCollection<ItemOption_Binding<TYPE,D_TYPE>>
+    {
+        public ItemOptionListBox()
+        { }
+        public ItemOptionListBox(ref Dictionary<TYPE, D_TYPE> DB)
+        {
+            foreach (KeyValuePair<TYPE, D_TYPE> items in DB)
+            {
+                Add(new ItemOption_Binding<TYPE,D_TYPE>(items)) ;
+            }
+        }
+    }
+    class ItemOptionListBox : ObservableCollection<ItemOption_Binding>
+    {
+        public ItemOptionListBox()
+        { }
+        public ItemOptionListBox(ref Dictionary<IFTYPE, AbilityPerStatus> DB)
+        {
+            foreach (KeyValuePair<IFTYPE, AbilityPerStatus> items in DB)
+            {
+                Add(new ItemOption_Binding(items));
+            }
+        }
     }
 
 }

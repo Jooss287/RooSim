@@ -5,13 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DbManager.UI"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="600"
+      d:DesignHeight="300" d:DesignWidth="900"
       Title="ItemManager">
     <Page.Resources>
         <local:ItemListBox x:Key="ItemList"/>
-        <local:testBox x:Key="testList"/>
     </Page.Resources>
-    <StackPanel Orientation="Vertical">
+    <StackPanel Orientation="Vertical" Margin="0,0,0,0">
         <StackPanel Orientation="Horizontal">
             <Button Content="New DB" Width="100" Height="30" TabIndex="9"
                     Margin="5,5,5,5"
@@ -65,7 +64,7 @@
                                     <Button Content="^^" Margin="5,5,5,5"></Button>
                                     <Button Content="VV" Margin="5,5,5,5"></Button>
                                 </StackPanel>
-                                <ListBox x:Name="testOption" ItemsSource="{Binding Source={StaticResource testList}}">
+                                <ListBox x:Name="list_iOption" >
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -78,57 +77,78 @@
                                 </ListBox>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_Doption" SelectedIndex="0" ></ComboBox>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Content="^^" Margin="5,5,5,5"></Button>
                                     <Button Content="VV" Margin="5,5,5,5"></Button>
                                 </StackPanel>
-                                <ListBox>
-
+                                <ListBox x:Name="list_dOption" >
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Type_name}"/>
+                                                <TextBlock Text=" : "/>
+                                                <TextBlock Text="{Binding Path=Type_value}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
                                 </ListBox>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_SEoption" SelectedIndex="0"></ComboBox>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Content="^^" Margin="5,5,5,5"></Button>
                                     <Button Content="VV" Margin="5,5,5,5"></Button>
                                 </StackPanel>
-                                <ListBox>
-
+                                <ListBox x:Name="list_seOption" >
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Type_name}"/>
+                                                <TextBlock Text=" : "/>
+                                                <TextBlock Text="{Binding Path=Type_value}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
                                 </ListBox>
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_IFoption" SelectedIndex="0"></ComboBox>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Content="^^" Margin="5,5,5,5"></Button>
                                     <Button Content="VV" Margin="5,5,5,5"></Button>
                                 </StackPanel>
-                                <ListBox>
-
+                                <ListBox x:Name="list_ifOption" >
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Type_name}"/>
+                                                <TextBlock Text=" : "/>
+                                                <TextBlock Text="{Binding Path=Type_value}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
                                 </ListBox>
                             </StackPanel>
                         </StackPanel>
-                        
                     </StackPanel>
-                    
                 </StackPanel>
-                
             </GroupBox>
         </StackPanel>
     </StackPanel>
