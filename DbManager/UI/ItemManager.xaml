@@ -55,14 +55,16 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_Ioption" SelectedIndex="0"></ComboBox>
+                                    <ComboBox Name="cmb_Ioption" SelectedIndex="0" Tag="ITYPE"/>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"></Button>
-                                    <Button Content="VV" Margin="5,5,5,5"></Button>
+                                    <Button Content="^^" Margin="5,5,5,5"
+                                            Click="Del_Option_Click" />
+                                    <Button Content="VV" Margin="5,5,5,5"
+                                            Click="Add_Option_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_iOption" >
                                     <ListBox.ItemTemplate>

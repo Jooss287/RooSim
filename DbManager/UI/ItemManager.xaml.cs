@@ -23,11 +23,11 @@ namespace DbManager
             InitializeComponent();
 
             ItemDB test = new ItemDB();
-            test.i_option.Add(ITYPE.ATK, 50);
-            test.i_option.Add(ITYPE.MATK, 30);
-            test.d_option.Add(DTYPE.ATK_P, 5);
-            test.se_option.Add(STATUS_EFFECT_TYPE.CURSE, 30);
-            test.if_option.Add(IFTYPE.ATK_PER_AGI, new AbilityPerStatus(IFTYPE.ATK_PER_AGI, 3, 10));
+            test.i_option[ITYPE.ATK] = 50;
+            test.i_option[ITYPE.MATK] = 30;
+            test.d_option[DTYPE.ATK_P] = 5;
+            test.se_option[STATUS_EFFECT_TYPE.CURSE] = 30;
+            test.if_option[IFTYPE.ATK_PER_AGI] = new AbilityPerStatus(IFTYPE.ATK_PER_AGI, 3, 10);
             test.Name = "test1";
             ItemDB test2 = new ItemDB();
             test2.i_option.Add(ITYPE.ATK, 5);
@@ -84,6 +84,8 @@ namespace DbManager
             list_ifOption.ItemsSource = new ItemOptionListBox(ref now_item.if_option);
         }
 
+        
+
         void InitializeContents()
         {
             if (now_DB == null)
@@ -136,6 +138,7 @@ namespace DbManager
 
             return null;
         }
+
         private void New_DB_Click(object sender, RoutedEventArgs e)
         {
             InitializeContents();
@@ -173,6 +176,55 @@ namespace DbManager
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedItemType();
+        }
+
+        private void Add_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            StackPanel OptionStack = parentStackpanel.Children[0] as StackPanel;
+
+            ComboBox AddType = OptionStack.Children[0] as ComboBox;
+            TextBox AddValue = OptionStack.Children[1] as TextBox;
+
+
+            string typeName = Convert.ToString(AddType.SelectedItem);
+            switch (Convert.ToString(AddType.Tag))
+            {
+                case "ITYPE":
+                    {
+                        ITYPE type = (ITYPE)Enum.Parse(typeof(ITYPE), typeName);
+                        now_item.i_option[type] = Convert.ToInt32(AddValue.Text);
+                        break;
+                    }
+                case "DTYPE":
+                    { 
+                        DTYPE type = (DTYPE)Enum.Parse(typeof(DTYPE), typeName);
+                        now_item.d_option[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "SETYPE":
+                    {
+                        STATUS_EFFECT_TYPE type = (STATUS_EFFECT_TYPE)Enum.Parse(typeof(STATUS_EFFECT_TYPE), typeName);
+                        now_item.se_option[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "IFTYPE":
+                    {
+                        TextBox PerValue = OptionStack.Children[2] as TextBox;
+                        IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
+                        now_item.if_option[type] = new AbilityPerStatus(type, Convert.ToInt32(AddValue.Text), Convert.ToInt32(PerValue.Text));
+                        break;
+                    }
+            }
+
+            
+            
+            
+        }
+
+        private void Del_Option_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
