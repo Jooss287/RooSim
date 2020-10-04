@@ -186,9 +186,13 @@ namespace DbManager
             ComboBox AddType = OptionStack.Children[0] as ComboBox;
             TextBox AddValue = OptionStack.Children[1] as TextBox;
 
+            if (DB_ListBox.SelectedItem == null)
+                return;
+            if (Convert.ToInt32(AddValue.Text) == 0)
+                return;
 
             string typeName = Convert.ToString(AddType.SelectedItem);
-            switch (Convert.ToString(AddType.Tag))
+            switch (Convert.ToString(parentStackpanel.Tag))
             {
                 case "ITYPE":
                     {
@@ -216,14 +220,53 @@ namespace DbManager
                         break;
                     }
             }
-
-            
-            
-            
+            SetNowItemOption();
+            AddType.SelectedIndex = 0;
+            AddValue.Text = "0";
         }
 
         private void Del_Option_Click(object sender, RoutedEventArgs e)
         {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            ListBox OptionList = parentStackpanel.Children[2] as ListBox;
+
+            if (OptionList.SelectedItem == null)
+                return;
+            if (DB_ListBox.SelectedItem == null)
+                return;
+
+            switch (Convert.ToString(parentStackpanel.Tag))
+            {
+                case "ITYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ITYPE, int>).Type_name;
+                        ITYPE type = (ITYPE)Enum.Parse(typeof(ITYPE), typeName);
+                        now_item.i_option.Remove(type);
+                        break;
+                    }
+                case "DTYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<DTYPE, double>).Type_name;
+                        DTYPE type = (DTYPE)Enum.Parse(typeof(DTYPE), typeName);
+                        now_item.d_option.Remove(type);
+                        break;
+                    }
+                case "SETYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<STATUS_EFFECT_TYPE, double>).Type_name;
+                        STATUS_EFFECT_TYPE type = (STATUS_EFFECT_TYPE)Enum.Parse(typeof(STATUS_EFFECT_TYPE), typeName);
+                        now_item.se_option.Remove(type);
+                        break;
+                    }
+                case "IFTYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
+                        IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
+                        now_item.if_option.Remove(type);
+                        break;
+                    }
+            }
+            SetNowItemOption();
 
         }
     }

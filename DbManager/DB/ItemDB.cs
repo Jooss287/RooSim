@@ -75,10 +75,10 @@ namespace DbManager.DB
             _name = item_db.Name;
             _item_type = item_db._item_type;
             _equip_type = item_db._equip_type;
-            i_option = item_db.i_option;
-            d_option = item_db.d_option;
-            se_option = item_db.se_option;
-            if_option = item_db.if_option;
+            i_option = new Dictionary<ITYPE, int>(item_db.i_option);
+            d_option = new Dictionary<DTYPE, double>(item_db.d_option);
+            se_option = new Dictionary<STATUS_EFFECT_TYPE, double>(item_db.se_option);
+            if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
         }
         public ItemDB() { }
         

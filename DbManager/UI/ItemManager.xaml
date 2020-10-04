@@ -53,9 +53,10 @@
                                      Width="70" Height="22"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
+                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
+                                        Tag ="ITYPE">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_Ioption" SelectedIndex="0" Tag="ITYPE"/>
+                                    <ComboBox Name="cmb_Ioption" SelectedIndex="0"/>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
@@ -78,7 +79,8 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
+                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
+                                        Tag="DTYPE">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_Doption" SelectedIndex="0" ></ComboBox>
                                     <TextBox Text="0" Width="30" Height="22"
@@ -86,8 +88,9 @@
                                              Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"></Button>
-                                    <Button Content="VV" Margin="5,5,5,5"></Button>
+                                    <Button Content="^^" Margin="5,5,5,5"/>
+                                    <Button Content="VV" Margin="5,5,5,5"
+                                            Click="Add_Option_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_dOption" >
                                     <ListBox.ItemTemplate>
@@ -101,7 +104,8 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
+                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
+                                        Tag="SETYPE">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_SEoption" SelectedIndex="0"></ComboBox>
                                     <TextBox Text="0" Width="30" Height="22"
@@ -109,8 +113,9 @@
                                              Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"></Button>
-                                    <Button Content="VV" Margin="5,5,5,5"></Button>
+                                    <Button Content="^^" Margin="5,5,5,5"/>
+                                    <Button Content="VV" Margin="5,5,5,5"
+                                            Click="Add_Option_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_seOption" >
                                     <ListBox.ItemTemplate>
@@ -125,7 +130,8 @@
                                 </ListBox>
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5">
+                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
+                                        Tag="IFTYPE">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_IFoption" SelectedIndex="0"></ComboBox>
                                     <TextBox Text="0" Width="30" Height="22"
@@ -133,8 +139,9 @@
                                              Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"></Button>
-                                    <Button Content="VV" Margin="5,5,5,5"></Button>
+                                    <Button Content="^^" Margin="5,5,5,5"/>
+                                    <Button Content="VV" Margin="5,5,5,5"
+                                            Click="Add_Option_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_ifOption" >
                                     <ListBox.ItemTemplate>
