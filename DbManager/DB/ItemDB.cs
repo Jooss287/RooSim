@@ -46,6 +46,8 @@ namespace DbManager.DB
         MATK,
         DEF = 2000,     //방어력 관련 스텟
         MDEF,
+        HP = 3000,      //HP,SP 관련 스텟
+        SP,
         FLEE = 4000,    //회피명중 관련 스텟
         HIT,
         CRI = 5000,     //크리율 관련 스텟

@@ -21,24 +21,6 @@ namespace DbManager
         {
             _DB = DB;
             InitializeComponent();
-
-            //ItemDB test = new ItemDB();
-            //test.i_option[ITYPE.ATK] = 50;
-            //test.i_option[ITYPE.MATK] = 30;
-            //test.d_option[DTYPE.ATK_P] = 5;
-            //test.se_option[STATUS_EFFECT_TYPE.CURSE] = 30;
-            //test.if_option[IFTYPE.ATK_PER_AGI] = new AbilityPerStatus(IFTYPE.ATK_PER_AGI, 3, 10);
-            //test.Name = "test1";
-            //ItemDB test2 = new ItemDB();
-            //test2.i_option.Add(ITYPE.ATK, 5);
-            //test2.i_option.Add(ITYPE.MATK, 3);
-            //test2.d_option.Add(DTYPE.MATK_P, 1);
-            //test2.se_option.Add(STATUS_EFFECT_TYPE.FEAR, 10);
-            //test2.if_option.Add(IFTYPE.ATK_PER_STR, new AbilityPerStatus(IFTYPE.ATK_PER_STR, 4, 10));
-            //test2.Name = "test2";
-            //test2.Id = 1;
-            //_DB._equip_db.Add(0, test);
-            //_DB._equip_db.Add(1, test2);
             
             DataContext = now_item;
 
@@ -47,7 +29,7 @@ namespace DbManager
             InitializeContents();
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
-            SetNowItemOption();
+            //SetNowItemOption();
             SetComboBox();
         }
 
@@ -83,7 +65,6 @@ namespace DbManager
             list_ifOption.ItemsSource = new ItemOptionListBox(ref now_item.if_option);
         }
 
-        
 
         void InitializeContents()
         {
@@ -106,6 +87,7 @@ namespace DbManager
             now_item.size_dec_option.Clear();
             now_item.tribe_dec_option.Clear();
             now_item.element_dec_option.Clear();
+            SetNowItemOption();
         }
 
         #region To pass mainwindow
@@ -138,10 +120,12 @@ namespace DbManager
             return null;
         }
 
+        #region CLICK FUNCTION
         private void New_DB_Click(object sender, RoutedEventArgs e)
         {
             InitializeContents();
             Item_name.Focus();
+            DB_ListBox.SelectedIndex = -1;
         }
         private void Add_DB_Click(object sender, RoutedEventArgs e)
         {
@@ -153,6 +137,7 @@ namespace DbManager
 
             InitializeContents();
             Item_name.Focus();
+            DB_ListBox.SelectedIndex = -1;
             _isNew = true;
         }
 
@@ -179,7 +164,6 @@ namespace DbManager
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
             SetNowItemOption();
-            SetComboBox();
         }
 
         private void Add_Option_Click(object sender, RoutedEventArgs e)
@@ -271,7 +255,17 @@ namespace DbManager
                     }
             }
             SetNowItemOption();
-
         }
+        private void cmb_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StackPanel parentStackpanel = (sender as ComboBox).Parent as StackPanel;
+            TextBox AddValue = parentStackpanel.Children[1] as TextBox;
+
+            AddValue.Text = "";
+            AddValue.Focus();
+        }
+        #endregion
+
+
     }
 }

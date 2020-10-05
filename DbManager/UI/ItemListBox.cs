@@ -28,6 +28,10 @@ namespace DbManager.UI
         {
            get { return Enum.GetName(typeof(ITYPE), i_option.Keys); }
         }
+        public int Count
+        {
+            get { return i_option.Count + d_option.Count + if_option.Count + se_option.Count; }
+        }
 
         public Dictionary<ITYPE, int> ITYPE_OPTION { get; set; }
         public string Itype_value

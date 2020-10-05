@@ -56,7 +56,8 @@
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
                                         Tag ="ITYPE">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_Ioption" SelectedIndex="0"/>
+                                    <ComboBox Name="cmb_Ioption" SelectedIndex="0"
+                                              SelectionChanged="cmb_option_SelectionChanged"/>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
@@ -82,7 +83,8 @@
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
                                         Tag="DTYPE">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_Doption" SelectedIndex="0" ></ComboBox>
+                                    <ComboBox Name="cmb_Doption" SelectedIndex="0"
+                                              SelectionChanged="cmb_option_SelectionChanged"/>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
@@ -107,7 +109,8 @@
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
                                         Tag="SETYPE">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_SEoption" SelectedIndex="0"></ComboBox>
+                                    <ComboBox Name="cmb_SEoption" SelectedIndex="0"
+                                              SelectionChanged="cmb_option_SelectionChanged"/>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
@@ -133,7 +136,8 @@
                             <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
                                         Tag="IFTYPE">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_IFoption" SelectedIndex="0"></ComboBox>
+                                    <ComboBox Name="cmb_IFoption" SelectedIndex="0"
+                                              SelectionChanged="cmb_option_SelectionChanged"/>
                                     <TextBox Text="0" Width="30" Height="22"
                                              TextAlignment="Center" VerticalAlignment="Center"
                                              Margin="5,0,0,0"/>
