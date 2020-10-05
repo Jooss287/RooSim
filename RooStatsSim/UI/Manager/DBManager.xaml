@@ -1,0 +1,24 @@
+﻿<Window x:Class="RooStatsSim.UI.Manager.DBManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="900"
+        Closing="Window_Closing">
+
+    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Manager Select">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="ManagerSelector" Content="ItemDB" GroupName="ManagerSel"
+                                 Checked="ManagerSelector_Checked" IsChecked="True" Margin="5,5,5,5"/>
+                    <RadioButton Content="MonsterDB" GroupName="ManagerSel" Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
+                
+                </StackPanel>
+            </GroupBox>
+            <Button Content="DB 저장" Width="100" Click="DB_Save_Click" Margin="5,10,5,0"/>
+        </StackPanel>
+        <Frame x:Name="frame_contents" NavigationUIVisibility="Hidden"></Frame>
+    </StackPanel>
+</Window>
