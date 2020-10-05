@@ -67,6 +67,14 @@ namespace DbManager.UI
                 ItemDB db = items.Value;
                 Add(new ItemDB_Binding(db));
             }
+
+            //if ( Count == 0)
+            //{
+            //    ItemDB db = new ItemDB();
+            //    db.Id = 0;
+            //    db.Name = "Null";
+            //    Add(new ItemDB_Binding(db));
+            //}
         }
         
         public void AddList(ItemDB db)

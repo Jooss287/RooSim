@@ -27,7 +27,7 @@
                 <ComboBoxItem Content="몬스터도감"/>
                 <ComboBoxItem Content="스티커"/>
                 <ComboBoxItem Content="의상스타일"/>
-                <ComboBoxItem Content="장비" IsSelected="True"/>
+                <ComboBoxItem Content="장비"/>
                 <ComboBoxItem Content="카드"/>
             </ComboBox>
         </StackPanel>

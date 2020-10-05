@@ -36,17 +36,33 @@ namespace DbManager.DB
 
     public enum ITYPE
     {
-        ATK = 1000,
-        MATK = 2000,
-        DEF = 3000,
-        MDEF = 4000,
-        ELEMENT = 8000,
+        STR = 0000,     //스테이터스 관련 스텟
+        AGI,
+        VIT,
+        INT,
+        DEX,
+        LUK,
+        ATK = 1000,     //공격력 관련 스텟
+        MATK,
+        DEF = 2000,     //방어력 관련 스텟
+        MDEF,
+        FLEE = 4000,    //회피명중 관련 스텟
+        HIT,
+        CRI = 5000,     //크리율 관련 스텟
+        CDEF,
+        ELEMENT = 6000, //속성 관련 스텟
+        
     }
     public enum DTYPE
     {
-        ATK_P,
+        ATK_P = 1000,
         MATK_P,
-
+        DEF_P = 2000,
+        MDEF_P,
+        PHYSICAL_DAMAGE,
+        MAGICAL_DAMAGE,
+        MAX_HP_P,
+        MAX_SP_P,
 
     }
     public enum IFTYPE

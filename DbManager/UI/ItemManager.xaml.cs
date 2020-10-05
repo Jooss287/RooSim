@@ -22,33 +22,32 @@ namespace DbManager
             _DB = DB;
             InitializeComponent();
 
-            ItemDB test = new ItemDB();
-            test.i_option[ITYPE.ATK] = 50;
-            test.i_option[ITYPE.MATK] = 30;
-            test.d_option[DTYPE.ATK_P] = 5;
-            test.se_option[STATUS_EFFECT_TYPE.CURSE] = 30;
-            test.if_option[IFTYPE.ATK_PER_AGI] = new AbilityPerStatus(IFTYPE.ATK_PER_AGI, 3, 10);
-            test.Name = "test1";
-            ItemDB test2 = new ItemDB();
-            test2.i_option.Add(ITYPE.ATK, 5);
-            test2.i_option.Add(ITYPE.MATK, 3);
-            test2.d_option.Add(DTYPE.MATK_P, 1);
-            test2.se_option.Add(STATUS_EFFECT_TYPE.FEAR, 10);
-            test2.if_option.Add(IFTYPE.ATK_PER_STR, new AbilityPerStatus(IFTYPE.ATK_PER_STR, 4, 10));
-            test2.Name = "test2";
-            test2.Id = 1;
-            _DB._equip_db.Add(0, test);
-            _DB._equip_db.Add(1, test2);
+            //ItemDB test = new ItemDB();
+            //test.i_option[ITYPE.ATK] = 50;
+            //test.i_option[ITYPE.MATK] = 30;
+            //test.d_option[DTYPE.ATK_P] = 5;
+            //test.se_option[STATUS_EFFECT_TYPE.CURSE] = 30;
+            //test.if_option[IFTYPE.ATK_PER_AGI] = new AbilityPerStatus(IFTYPE.ATK_PER_AGI, 3, 10);
+            //test.Name = "test1";
+            //ItemDB test2 = new ItemDB();
+            //test2.i_option.Add(ITYPE.ATK, 5);
+            //test2.i_option.Add(ITYPE.MATK, 3);
+            //test2.d_option.Add(DTYPE.MATK_P, 1);
+            //test2.se_option.Add(STATUS_EFFECT_TYPE.FEAR, 10);
+            //test2.if_option.Add(IFTYPE.ATK_PER_STR, new AbilityPerStatus(IFTYPE.ATK_PER_STR, 4, 10));
+            //test2.Name = "test2";
+            //test2.Id = 1;
+            //_DB._equip_db.Add(0, test);
+            //_DB._equip_db.Add(1, test2);
             
             DataContext = now_item;
 
+            cmb_equip_type.SelectedIndex = 3;
             now_DB = SelectedItemType();
             InitializeContents();
-
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
             SetNowItemOption();
-
             SetComboBox();
         }
 
@@ -175,7 +174,12 @@ namespace DbManager
 
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedItemType();
+            now_DB = SelectedItemType();
+            InitializeContents();
+            BindingItemList = new ItemListBox(ref now_DB);
+            DB_ListBox.ItemsSource = BindingItemList;
+            SetNowItemOption();
+            SetComboBox();
         }
 
         private void Add_Option_Click(object sender, RoutedEventArgs e)
@@ -186,8 +190,8 @@ namespace DbManager
             ComboBox AddType = OptionStack.Children[0] as ComboBox;
             TextBox AddValue = OptionStack.Children[1] as TextBox;
 
-            if (DB_ListBox.SelectedItem == null)
-                return;
+            //if (DB_ListBox.SelectedItem == null)
+            //    return;
             if (Convert.ToInt32(AddValue.Text) == 0)
                 return;
 
