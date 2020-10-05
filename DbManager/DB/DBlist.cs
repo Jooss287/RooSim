@@ -8,15 +8,32 @@ namespace DbManager.DB
     [Serializable]
     public class DBlist
     {
-        public Dictionary<int, MonsterDB> _mob_db;
+        public Dictionary<int, MonsterDB> _mob_db = new Dictionary<int, MonsterDB>();
+        public Dictionary<int, ItemDB> _equip_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _card_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _monster_research_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _dress_style_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _stiker_db = new Dictionary<int, ItemDB>();
         //List<ItemDB> ItemDB;
-        public DBlist()
+        public DBlist() { }
+        public DBlist(DBlist db)
         {
-            _mob_db = new Dictionary<int, MonsterDB>();
+            if (db._mob_db != null) _mob_db = db._mob_db;
+            if (db._equip_db != null) _equip_db = db._equip_db;
+            if (db._card_db != null) _card_db = db._card_db;
+            if (db._monster_research_db != null) _monster_research_db = db._monster_research_db;
+            if (db._dress_style_db != null) _dress_style_db = db._dress_style_db;
+            if (db._stiker_db != null) _stiker_db = db._stiker_db;
         }
-        public void Add(MonsterDB monsterDB)
+        
+        public void AddMonsterDB(MonsterDB monsterDB)
         {
             _mob_db[monsterDB.MobId] = monsterDB;
+        }
+
+        public void AddItemDB(ref Dictionary<int, ItemDB> now_DB, ItemDB DB)
+        {
+            now_DB[DB.Id] = DB;
         }
     }
     
@@ -60,7 +77,7 @@ namespace DbManager.DB
             using (FileStream stream = new FileStream(file_name, FileMode.Open, FileAccess.Read))
             {
                 // 클래스를 역직렬화 하고 Node클래스의 Print함수 실행.
-                DB = (DBlist)(formatter.Deserialize(stream));
+                DB = new DBlist((DBlist)formatter.Deserialize(stream));
             }
         }
 

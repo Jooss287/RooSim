@@ -3,7 +3,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using RooStatsSim.User;
-using RooStatsSim.DB;
 
 namespace RooStatsSim.UI
 {
@@ -20,7 +19,7 @@ namespace RooStatsSim.UI
         public StatusWindow()
         {
             //DB가 레퍼로 들어왔다 치고.
-            statusDB = new UserData();
+            statusDB = UserData.GetInstance;
 
             InitializeComponent();
 

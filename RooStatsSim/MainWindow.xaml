@@ -50,61 +50,11 @@
                                 <ColumnDefinition Width="79*"/>
                                 <ColumnDefinition Width="78*"/>
                             </Grid.ColumnDefinitions>
-
-                            <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="1">능력치</Label>
-                            <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="2">가중치</Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="1" Grid.Column="0">B.LEVEL</Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0">STR</Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0">DEX</Label>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0">LUK</Label>
                             <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Grid.Row="5" Grid.Column="0">S.ATK</Label>
-
-                            <TextBox Name="txt_LvlBase" TabIndex="1" 
-                         TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         FontSize="15" 
-                         Grid.Row="1" Grid.Column="1"
-                         GotFocus="TxtboxSelectAll"
-                         PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox Name="txt_StrBase" TabIndex="1" 
-                         TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         FontSize="15"
-                         Grid.Row="2" Grid.Column="1"
-                         GotFocus="TxtboxSelectAll"
-                         PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox Name="txt_DexBase" TabIndex="3" 
-                         TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         FontSize="15" 
-                         Grid.Row="3" Grid.Column="1"
-                         GotFocus="TxtboxSelectAll"
-                         PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox Name="txt_LukBase" TabIndex="5" 
-                         TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         FontSize="15"
-                         Grid.Row="4" Grid.Column="1"
-                         GotFocus="TxtboxSelectAll"
-                         PreviewTextInput="NurmericCheckFunc" />
                             <TextBox Name="txt_sATK" TabIndex="1" 
                          TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                          FontSize="15" 
                          Grid.Row="5" Grid.Column="1"
-                         GotFocus="TxtboxSelectAll"
-                         PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox Name="txt_StrAdd" TabIndex="2" 
-                         TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         FontSize="15" 
-                         Grid.Row="2" Grid.Column="2"
-                         GotFocus="TxtboxSelectAll"
-                         PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox Name="txt_DexAdd" TabIndex="4" 
-                         TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                         FontSize="15" 
-                         Grid.Row="3" Grid.Column="2"
-                         GotFocus="TxtboxSelectAll"
-                         PreviewTextInput="NurmericCheckFunc" />
-                            <TextBox Name="txt_LukAdd" TabIndex="6" 
-                         TextAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                         FontSize="15"
-                         Grid.Row="4" Grid.Column="2"
                          GotFocus="TxtboxSelectAll"
                          PreviewTextInput="NurmericCheckFunc" />
                         </Grid>

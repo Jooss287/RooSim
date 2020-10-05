@@ -1,5 +1,6 @@
 ﻿using RooStatsSim.Equation;
 using RooStatsSim.Equation.Job;
+using RooStatsSim.User;
 using System;
 using System.Collections.Generic;
 
@@ -20,7 +21,8 @@ namespace RooStatsSim.DB
         }
 
         protected readonly ATTACK_TYPE attack_type;
-        protected Status status = null;
+        //protected Status status = null;
+        UserData _user_data;
         protected ItemAbility abilities = null;
         protected MonsterDB mobDB = null;
         protected StatusATK statusATK = null;
@@ -30,15 +32,15 @@ namespace RooStatsSim.DB
         const double RANDOM_ATK_WEIGHT = 0.1;
 
         #region DB Set Functions
-        public void SetDB(ref Status param_status, ref ItemAbility param_abilities, ref MonsterDB param_mobDB,
+        public void SetDB(ref ItemAbility param_abilities, ref MonsterDB param_mobDB,
             ref double param_element, ref double param_size)
         {
-            status = param_status;
+            _user_data = UserData.GetInstance;
             abilities = param_abilities;
             mobDB = param_mobDB;
             element_inc = param_element;
             size_panelty = param_size;
-            statusATK = new StatusATK(attack_type, ref abilities, ref status);
+            statusATK = new StatusATK(attack_type, ref abilities, _user_data);
         }
 
         public void SetBuffList(ref bool[] param_buff_list)
@@ -50,7 +52,7 @@ namespace RooStatsSim.DB
         #region Common Call Functions
         protected bool IsAlived()
         {
-            if ((status == null) || (abilities == null) || (mobDB == null) || (statusATK == null))
+            if ((_user_data == null) || (abilities == null) || (mobDB == null) || (statusATK == null))
                 return false;
             return true;
         }

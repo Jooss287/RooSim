@@ -59,10 +59,10 @@ namespace RooStatsSim.Equation.Job
         }
 
 
-        public void SetDB(ref Status param_status, ref ItemAbility param_abilities, ref MonsterDB param_mobDB,
+        public void SetDB(ref ItemAbility param_abilities, ref MonsterDB param_mobDB,
             ref double param_element, ref double param_size, ref bool[] param_buff_list)
         {
-            Job[Convert.ToInt32(JobNum)].SetDB(ref param_status, ref param_abilities, ref param_mobDB,
+            Job[Convert.ToInt32(JobNum)].SetDB(ref param_abilities, ref param_mobDB,
                 ref param_element, ref param_size);
             Job[Convert.ToInt32(JobNum)].SetBuffList(ref param_buff_list);
 

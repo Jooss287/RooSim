@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DbManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="450" Width="900"
         Closing="Window_Closing">
 
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
@@ -13,7 +13,7 @@
             <GroupBox Header="Manager Select">
                 <StackPanel Orientation="Horizontal">
                     <RadioButton x:Name="ManagerSelector" Content="ItemDB" GroupName="ManagerSel"
-                                 Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
+                                 Checked="ManagerSelector_Checked" IsChecked="True" Margin="5,5,5,5"/>
                     <RadioButton Content="MonsterDB" GroupName="ManagerSel" Checked="ManagerSelector_Checked" Margin="5,5,5,5"/>
                 
                 </StackPanel>

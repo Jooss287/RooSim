@@ -1,5 +1,6 @@
 ﻿using RooStatsSim.DB;
 using RooStatsSim.Equation.Job;
+using RooStatsSim.User;
 
 namespace RooStatsSim.Equation
 {
@@ -9,17 +10,22 @@ namespace RooStatsSim.Equation
         private readonly double statusATK;
         private readonly double statusBonusATK;
 
-        public StatusATK(ATTACK_TYPE attack_type, ref ItemAbility ability, ref Status status)
+        public StatusATK(ATTACK_TYPE attack_type, ref ItemAbility ability, UserData user)
         {
+            int BASE = user.Level[(int)LEVEL_ENUM.BASE].Point;
+            int STR = user.Status[(int)STATUS_ENUM.STR].Point + user.Status[(int)STATUS_ENUM.STR].AddPoint;
+            int DEX = user.Status[(int)STATUS_ENUM.DEX].Point + user.Status[(int)STATUS_ENUM.DEX].AddPoint;
+            int LUK = user.Status[(int)STATUS_ENUM.LUK].Point + user.Status[(int)STATUS_ENUM.LUK].AddPoint;
+
             if (attack_type == ATTACK_TYPE.MELEE_TYPE)
             {
-                statusATK = status.Str+ (status.Dex+ status.Luk) * 0.2 + status.Base* 0.25;
-                statusBonusATK = ability.ATK_weapon * status.Str* STR_WEIGHT;
+                statusATK =  STR + (DEX + LUK) * 0.2 + BASE * 0.25;
+                statusBonusATK = ability.ATK_weapon * STR* STR_WEIGHT;
             }
             else if (attack_type == ATTACK_TYPE.RANGE_TYPE)
             {
-                statusATK = status.Dex+ (status.Str+ status.Luk) * 0.2 + status.Base* 0.25;
-                statusBonusATK = ability.ATK_weapon * status.Dex* STR_WEIGHT;
+                statusATK = DEX + (STR + LUK) * 0.2 + BASE * 0.25;
+                statusBonusATK = ability.ATK_weapon * DEX * STR_WEIGHT;
             }
         }
 

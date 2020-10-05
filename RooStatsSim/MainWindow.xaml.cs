@@ -2,6 +2,7 @@
 using RooStatsSim.Equation.Job;
 using RooStatsSim.Skills;
 using RooStatsSim.UI;
+using RooStatsSim.User;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -21,6 +22,8 @@ namespace RooStatsSim
         {
             InitializeComponent();
 
+            _user_data = UserData.GetInstance;
+
             Initialize_value();
             Initialize_value_test();
             //Initialize_value_marduk();
@@ -37,14 +40,6 @@ namespace RooStatsSim
 
         private void Initialize_value()
         {
-            txt_LvlBase.Text = "1";
-            txt_StrBase.Text = "1";
-            txt_StrAdd.Text = "0";
-            txt_DexBase.Text = "1";
-            txt_DexAdd.Text = "0";
-            txt_LukBase.Text = "1";
-            txt_LukAdd.Text = "0";
-
             txt_atk_weapon.Text = "100";
             txt_atk_equip.Text = "50";
             txt_atk_smelting.Text = "0";
@@ -77,15 +72,6 @@ namespace RooStatsSim
 
         private void Initialize_value_test()
         {
-            txt_sATK.Text = "1407";
-            txt_LvlBase.Text = "80";
-            txt_StrBase.Text = "99";
-            txt_StrAdd.Text = "55";
-            txt_DexBase.Text = "11";
-            txt_DexAdd.Text = "29";
-            txt_LukBase.Text = "1";
-            txt_LukAdd.Text = "9";
-
             txt_atk_weapon.Text = "338";
             txt_atk_equip.Text = "346";
             txt_atk_smelting.Text = "249";
@@ -118,13 +104,6 @@ namespace RooStatsSim
         private void Initialize_value_marduk()
         {
             txt_sATK.Text = "1387";
-            txt_LvlBase.Text = "79";
-            txt_StrBase.Text = "99";
-            txt_StrAdd.Text = "55";
-            txt_DexBase.Text = "11";
-            txt_DexAdd.Text = "25";
-            txt_LukBase.Text = "1";
-            txt_LukAdd.Text = "9";
 
             txt_atk_weapon.Text = "338";
             txt_atk_equip.Text = "346";
@@ -174,7 +153,8 @@ namespace RooStatsSim
 
 
         ItemAbility ability;
-        Status status;
+        //Status status;
+        UserData _user_data;
         MonsterDB mobDB;
         AdvantageTable advantage_table;
         JobSelect job_selection = new JobSelect();
@@ -255,14 +235,6 @@ namespace RooStatsSim
                 boss_increse = 1 + 0.01 * Convert.ToDouble(txt_boss_increse.Text),
             };
 
-            status = new Status()
-            {
-                Base = Convert.ToInt32(txt_LvlBase.Text),
-                Str = Convert.ToInt32(txt_StrBase.Text) + Convert.ToInt32(txt_StrAdd.Text),
-                Dex = Convert.ToInt32(txt_DexBase.Text) + Convert.ToInt32(txt_DexAdd.Text),
-                Luk = Convert.ToInt32(txt_LukBase.Text) + Convert.ToInt32(txt_LukAdd.Text),
-            };
-
             mobDB = new MonsterDB()
             {
                 Def = Convert.ToInt32(txt_monster_def.Text),
@@ -274,7 +246,7 @@ namespace RooStatsSim
             element_ratio = 1 + advantage_table.GetElementRatio(player_element, monster_element);
             size_panelty = 0.01 * Convert.ToInt32(txt_weapon_size_panelty.Text);
 
-            job_selection.SetDB(ref status, ref ability, ref mobDB, ref element_ratio, ref size_panelty, ref BuffList);
+            job_selection.SetDB(ref ability, ref mobDB, ref element_ratio, ref size_panelty, ref BuffList);
         }
 
         private void ATK_ReverseClick(object sender, RoutedEventArgs e)

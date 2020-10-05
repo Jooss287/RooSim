@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -34,14 +33,14 @@ namespace DbManager.UI
                 now_mob.MobId = _DB._mob_db.Count();
             
             DataContext = now_mob;
-            InitalizeContents();
+            InitializeContents();
 
             BindingMobList = new MonsterListBox(ref _DB);
             DB_ListBox.ItemsSource = BindingMobList;
 
             MobName.Focus();
         }
-        void InitalizeContents()
+        void InitializeContents()
         {
             if (_DB._mob_db == null)
                 now_mob.MobId = 0;
@@ -76,7 +75,7 @@ namespace DbManager.UI
         #region UI Binding, Contents settings
         private void New_DB_Click(object sender, RoutedEventArgs e)
         {
-            InitalizeContents();
+            InitializeContents();
             MobName.Focus();
         }
         
@@ -85,10 +84,10 @@ namespace DbManager.UI
             if (string.Compare(MobName.Text, "") == 0)
                 return;
 
-            _DB.Add(new MonsterDB(now_mob));
+            _DB.AddMonsterDB(new MonsterDB(now_mob));
             BindingMobList.AddList(new MonsterDB(now_mob));
 
-            InitalizeContents();
+            InitializeContents();
             MobName.Focus();
             _isNew = true;
         }

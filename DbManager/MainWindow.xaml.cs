@@ -29,10 +29,13 @@ namespace DbManager
         {
             _DB = new DBlist();
             DBSerizator.ReadDB(ref _DB);
-            item_manager = new ItemManager(ref _DB);
+            
             mob_manager = new MonsterManager(ref _DB);
+            item_manager = new ItemManager(ref _DB);
 
             InitializeComponent();
+
+            frame_contents.Navigate(item_manager);
         }
 
         #region UI Binding, contents settings
@@ -56,9 +59,14 @@ namespace DbManager
 
         private void DB_Save_Click(object sender, RoutedEventArgs e)
         {
-            DBSerizator.SaveDataBase(ref _DB);
-            mob_manager.IsNew = false;
-            item_manager.IsNew = false;
+            MessageBoxResult res = MessageBox.Show(" 저장하시겠습니까?", "Save", MessageBoxButton.YesNo);
+            if (res == MessageBoxResult.Yes)
+            {
+                DBSerizator.SaveDataBase(ref _DB);
+                mob_manager.IsNew = false;
+                item_manager.IsNew = false;
+            }
+            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
