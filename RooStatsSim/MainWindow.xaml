@@ -7,7 +7,8 @@
         xmlns:skill="clr-namespace:RooStatsSim.Skills"
         xmlns:UI="clr-namespace:RooStatsSim.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="870">
+        Title="RooSim" Height="450" Width="870"
+        Closing="Window_Closing">
     <Window.Resources>
         <skill:SkillAdd x:Key="SkillList"/>
     </Window.Resources>

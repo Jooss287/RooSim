@@ -307,5 +307,12 @@ namespace RooStatsSim
             else
                 _info.Show();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _status.Close();
+            _info.Close();
+            _db_manager.Close();
+        }
     }
 }
