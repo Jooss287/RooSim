@@ -102,11 +102,4 @@ namespace DbManager
             DBlist _Test = JsonSerializer.Deserialize<DBlist>(jsonString, serializeOptions);
         }
     }
-
-    public class Product
-    {
-        public MonsterDB mobDB { get; set; }
-        public Dictionary<int, MonsterDB> Dic { get; set; }
-        public Dictionary<ITYPE, int> Dic_Itype { get; set; }
-    }
 }

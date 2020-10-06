@@ -2,7 +2,6 @@
 using RooStatsSim.Equation.Job;
 using RooStatsSim.Skills;
 using RooStatsSim.UI;
-using RooStatsSim.User;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -11,6 +10,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
+using RooStatsSim.UI.Manager;
+using RooStatsSim.User;
+using RooStatsSim.UI.ACK;
+
 namespace RooStatsSim
 {
     /// <summary>
@@ -18,8 +21,14 @@ namespace RooStatsSim
     /// </summary>
     public partial class MainWindow : Window
     {
+        DBManager _db_manager = new DBManager();
+        StatusWindow _status = new StatusWindow();
+        ProgramInfo _info = new ProgramInfo();
+
         public MainWindow()
         {
+            //Version Check
+
             InitializeComponent();
 
             _user_data = UserData.GetInstance;
@@ -32,8 +41,9 @@ namespace RooStatsSim
 
             //DB생성, Window open 등
 
-            var newWindow = new StatusWindow();
-            newWindow.Show();
+            _db_manager.Show();
+            _status.Show();
+            
         }
 
         #region Initialize
@@ -272,6 +282,30 @@ namespace RooStatsSim
             BuffList[Convert.ToInt32(((e.Source as CheckBox).Tag))] = (bool)((e.Source as CheckBox).IsChecked);
 
             MessageBox.Show(Convert.ToString((e.Source as CheckBox).IsChecked));
+        }
+
+        private void Status_window_Click(object sender, RoutedEventArgs e)
+        {
+            if (_status.IsVisible)
+                _status.Hide();
+            else
+                _status.Show();
+        }
+
+        private void DBManager_window_Click(object sender, RoutedEventArgs e)
+        {
+            if (_db_manager.IsVisible)
+                _db_manager.Hide();
+            else
+                _db_manager.Show();
+        }
+
+        private void Info_window_Click(object sender, RoutedEventArgs e)
+        {
+            if (_info.IsVisible)
+                _info.Hide();
+            else
+                _info.Show();
         }
     }
 }

@@ -141,6 +141,70 @@ namespace DbManager.DB
             get { return _equip_type; }
             set { _equip_type = value; }
         }
+
+        public Dictionary<ITYPE, int> I_OPTION
+        {
+            get { return i_option; }
+            set { i_option = value; }
+        }
+        public Dictionary<DTYPE, double> D_OPTION
+        {
+            get { return d_option; }
+            set { d_option = value; }
+        }
+        public Dictionary<STATUS_EFFECT_TYPE, double> SE_OPTION
+        {
+            get { return se_option; }
+            set { se_option = value; }
+        }
+        public Dictionary<IFTYPE, AbilityPerStatus> IF_OPTION
+        {
+            get { return if_option; }
+            set { if_option = value; }
+        }
+
+        public Dictionary<ELEMENT_TYPE, double> ELEMENT_INC_OPTION
+        {
+            get { return element_inc_option; }
+            set { element_inc_option = value; }
+        }
+        public Dictionary<MONSTER_SIZE, double> SIZE_INC_OPTION
+        {
+            get { return size_inc_option; }
+            set { size_inc_option = value; }
+        }
+        public Dictionary<TRIBE_TYPE, double> TRIBE_INC_OPTION
+        {
+            get { return tribe_inc_option; }
+            set { tribe_inc_option = value; }
+        }
+        
+        public Dictionary<MONSTER_TYPE, double> MOBTYPE_INC_OPTION
+        {
+            get { return mobtype_inc_option; }
+            set { mobtype_inc_option = value; }
+        }
+
+        public Dictionary<ELEMENT_TYPE, double> ELEMENT_DEC_OPTION
+        {
+            get { return element_dec_option; }
+            set { element_dec_option = value; }
+        }
+        public Dictionary<MONSTER_SIZE, double> SIZE_DEC_OPTION
+        {
+            get { return size_dec_option; }
+            set { size_dec_option = value; }
+        }
+        public Dictionary<TRIBE_TYPE, double> TRIBE_DEC_OPTION
+        {
+            get { return tribe_dec_option; }
+            set { tribe_dec_option = value; }
+        }
+        public Dictionary<MONSTER_TYPE, double> MOBTYPE_DEC_OPTION
+        {
+            get { return mobtype_dec_option; }
+            set { mobtype_dec_option = value; }
+        }
     }
 
     public class AbilityPerStatus

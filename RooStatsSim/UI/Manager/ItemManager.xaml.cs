@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using RooStatsSim.DB;
-using RooStatsSim.UI.Manager;
 using System.Collections.Generic;
 
 namespace RooStatsSim.UI.Manager

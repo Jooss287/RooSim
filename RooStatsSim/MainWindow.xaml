@@ -13,6 +13,35 @@
     </Window.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" Margin="0,10,0,0" >
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Save1" Margin="5,5,5,5"/>
+                    <Button Content="Save2" Margin="5,5,5,5"/>
+                    <Button Content="Save3" Margin="5,5,5,5"/>
+                    <Button Content="Save4" Margin="5,5,5,5"/>
+                </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Status" Grid.Row="0" Grid.Column="0"
+                            Click="Status_window_Click"/>
+                    <Button Content="Skill" Grid.Row="0" Grid.Column="1"/>
+                    <Button Content="Equip" Grid.Row="0" Grid.Column="2"/>
+                    <Button Content="Buff" Grid.Row="1" Grid.Column="0"/>
+                    <Button Content="DBManager" Grid.Row="2" Grid.Column="1"
+                            Click="DBManager_window_Click"/>
+                    <Button Content="Info" Grid.Row="2" Grid.Column="2"
+                            Click="Info_window_Click"/>
+                </Grid>
+            </StackPanel>
             <GroupBox Header="직업 선택" Width="600" HorizontalAlignment="Left" Margin="10,0,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
