@@ -15,6 +15,40 @@ namespace DbManager.DB
         public Dictionary<int, ItemDB> _dress_style_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _stiker_db = new Dictionary<int, ItemDB>();
         //List<ItemDB> ItemDB;
+
+        public Dictionary<int, MonsterDB> Mob_db
+        {
+            get { return _mob_db; }
+            set { _mob_db = value; }
+        }
+        public Dictionary<int, ItemDB> Equip_db
+        {
+            get { return _equip_db; }
+            set { _equip_db = value; }
+        }
+        public Dictionary<int, ItemDB> Card_db
+        {
+            get { return _card_db; }
+            set { _card_db = value; }
+        }
+        public Dictionary<int, ItemDB> Mob_research_db
+        {
+            get { return _monster_research_db; }
+            set { _monster_research_db = value; }
+        }
+        public Dictionary<int, ItemDB> Dress_style_db
+        {
+            get { return _dress_style_db; }
+            set { _dress_style_db = value; }
+        }
+        public Dictionary<int, ItemDB> Stiker_db
+        {
+            get { return _stiker_db; }
+            set { _stiker_db = value; }
+        }
+
+
+
         public DBlist() { }
         public DBlist(DBlist db)
         {
@@ -53,13 +87,6 @@ namespace DbManager.DB
                 //스트림을 byte[] 데이터로 변환한다.
                 data = stream.GetBuffer();
             }
-            //using (MemoryStream stream = new MemoryStream())
-            //{
-            //    // byte를 읽어드린다.
-            //    stream.Write(data, 0, data.Length);
-            //    // Stream seek을 맨 처음으로 돌린다.
-            //    stream.Seek(0, SeekOrigin.Begin);
-            //}
 
             // 직렬화 데이터를 파일로 저장한다.
             using (FileStream stream = new FileStream(file_name, FileMode.Create, FileAccess.Write))

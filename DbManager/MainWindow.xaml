@@ -19,6 +19,8 @@
                 </StackPanel>
             </GroupBox>
             <Button Content="DB 저장" Width="100" Click="DB_Save_Click" Margin="5,10,5,0"/>
+            <Button Content="DB 저장Test" Width="100" Click="Button_Click"  Margin="5,10,5,0"/>
+            <Button Content="DB 불러오기Test" Width="100" Click="Button_Click_1"  Margin="5,10,5,0"/>
         </StackPanel>
         <Frame x:Name="frame_contents" NavigationUIVisibility="Hidden"></Frame>
     </StackPanel>

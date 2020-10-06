@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
+using System.IO;
 using DbManager.DB;
 using DbManager.UI;
+
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using DbManager.Extension;
 
 namespace DbManager
 {
@@ -79,5 +78,35 @@ namespace DbManager
             }    
         }
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var serializeOptions = new JsonSerializerOptions();
+            serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
+            serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            serializeOptions.WriteIndented = true;
+
+            string jsonString;
+            jsonString = JsonSerializer.Serialize(_DB, serializeOptions);
+            File.WriteAllText("roo_json.roo", jsonString);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var serializeOptions = new JsonSerializerOptions();
+            serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
+            serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            serializeOptions.WriteIndented = true;
+
+            string jsonString = File.ReadAllText("roo_json.roo");
+            DBlist _Test = JsonSerializer.Deserialize<DBlist>(jsonString, serializeOptions);
+        }
+    }
+
+    public class Product
+    {
+        public MonsterDB mobDB { get; set; }
+        public Dictionary<int, MonsterDB> Dic { get; set; }
+        public Dictionary<ITYPE, int> Dic_Itype { get; set; }
     }
 }
