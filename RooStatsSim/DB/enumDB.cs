@@ -2,7 +2,7 @@
 
 namespace RooStatsSim.DB
 {
-    enum TRIBE_TYPE
+    public enum TRIBE_TYPE
     {
         ANIMAL,
         PLANT,
@@ -15,6 +15,13 @@ namespace RooStatsSim.DB
         ANGEL,
         UNDEAD,
         TRIBE_CNT
+    }
+
+    public enum MONSTER_TYPE
+    {
+        NORMAL,
+        MINI,
+        MVP
     }
 
     public enum MONSTER_SIZE

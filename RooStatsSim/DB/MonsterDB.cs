@@ -6,30 +6,74 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.DB
 {
-    class MonsterDB
+    [Serializable]
+    public class MonsterDB
     {
-        int _mob_id;
-        string _name;
-        bool _isBoss;
-        int _tribe;
-        int _element;
-        int _size;
-        int _atk;
-        int _matk;
-        int _hp;
-        int _def;
-        int _mdef;
-        int _hit;
-        int _flee;
+        public MonsterDB(MonsterDB monsterDB)
+        {
+            _mob_id = monsterDB.MobId;
+            _name = monsterDB.Name;
+            _level = monsterDB.Level;
+            _isBoss = monsterDB.IsBoss;
+            _tribe = monsterDB.Tribe;
+            _element = monsterDB.Element;
+            _size = monsterDB.Size;
+            _atk = monsterDB.Atk;
+            _matk = monsterDB.Matk;
+            _hp = monsterDB.Hp;
+            _def = monsterDB.Def;
+            _mdef = monsterDB.Mdef;
+            _hit = monsterDB.Hit;
+            _flee = monsterDB.Flee;
+        }
+        public MonsterDB() { }
+        public MonsterDB(int mob_id, string name, int level, bool isBoss, int tribe, int element, int size,
+            int atk, int matk, int hp, int def, int mdef, int hit, int flee)
+        {
+            _mob_id = mob_id;
+            _name = name;
+            _level = level;
+            _isBoss = isBoss;
+            _tribe = tribe;
+            _element = element;
+            _size = size;
+            _atk = atk;
+            _matk = matk;
+            _hp = hp;
+            _def = def;
+            _mdef = mdef;
+            _hit = hit;
+            _flee = flee;
+        }
+        protected int _mob_id;
+        protected string _name;
+        protected bool _isBoss;
+        protected int _level;
+        protected int _tribe;
+        protected int _element;
+        protected int _size;
+        protected int _atk;
+        protected int _matk;
+        protected int _hp;
+        protected int _def;
+        protected int _mdef;
+        protected int _hit;
+        protected int _flee;
 
         public int MobId
         {
             get { return _mob_id; }
+            set { _mob_id = value; }
         }
         public string Name
         {
             get { return _name; }
             set { _name = value; }
+        }
+        public int Level
+        {
+            get { return _level; }
+            set { _level = value; }
         }
         public bool IsBoss
         {
@@ -69,7 +113,7 @@ namespace RooStatsSim.DB
         public int Def
         {
             get { return _def; }
-            set { _def= value; }
+            set { _def = value; }
         }
         public int Mdef
         {

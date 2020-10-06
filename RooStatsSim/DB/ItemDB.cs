@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DbManager.DB
+namespace RooStatsSim.DB
 {
     public enum ITEM_TYPE_ENUM
     {
@@ -53,7 +53,7 @@ namespace DbManager.DB
         CRI = 5000,     //크리율 관련 스텟
         CDEF,
         ELEMENT = 6000, //속성 관련 스텟
-        
+
     }
     public enum DTYPE
     {
@@ -99,9 +99,9 @@ namespace DbManager.DB
             if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
         }
         public ItemDB() { }
-        
-        
-        
+
+
+
         ITEM_TYPE_ENUM _item_type = ITEM_TYPE_ENUM.NONE;
         EQUIP_TYPE_ENUM _equip_type = EQUIP_TYPE_ENUM.NONE;
         protected int _id;
@@ -141,7 +141,6 @@ namespace DbManager.DB
             get { return _equip_type; }
             set { _equip_type = value; }
         }
-
         public Dictionary<ITYPE, int> I_OPTION
         {
             get { return i_option; }
@@ -162,7 +161,6 @@ namespace DbManager.DB
             get { return if_option; }
             set { if_option = value; }
         }
-
         public Dictionary<ELEMENT_TYPE, double> ELEMENT_INC_OPTION
         {
             get { return element_inc_option; }
@@ -178,13 +176,11 @@ namespace DbManager.DB
             get { return tribe_inc_option; }
             set { tribe_inc_option = value; }
         }
-        
         public Dictionary<MONSTER_TYPE, double> MOBTYPE_INC_OPTION
         {
             get { return mobtype_inc_option; }
             set { mobtype_inc_option = value; }
         }
-
         public Dictionary<ELEMENT_TYPE, double> ELEMENT_DEC_OPTION
         {
             get { return element_dec_option; }

@@ -1,12 +1,11 @@
-﻿<Window x:Class="DbManager.MainWindow"
+﻿<Window x:Class="RooStatsSim.UI.Manager.DBManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DbManager"
+        xmlns:local="clr-namespace:RooStatsSim.UI.Manager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="900"
-        Closing="Window_Closing">
+        Title="DBmanager" Height="450" Width="900">
 
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
         <StackPanel Orientation="Horizontal">
@@ -19,8 +18,6 @@
                 </StackPanel>
             </GroupBox>
             <Button Content="DB 저장" Width="100" Click="DB_Save_Click" Margin="5,10,5,0"/>
-            <Button Content="DB 저장Test" Width="100" Click="Button_Click"  Margin="5,10,5,0"/>
-            <Button Content="DB 불러오기Test" Width="100" Click="Button_Click_1"  Margin="5,10,5,0"/>
         </StackPanel>
         <Frame x:Name="frame_contents" NavigationUIVisibility="Hidden"></Frame>
     </StackPanel>

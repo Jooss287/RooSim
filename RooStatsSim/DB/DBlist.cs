@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
+using RooStatsSim.Extension;
 
-namespace DbManager.DB
+namespace RooStatsSim.DB
 {
     [Serializable]
     public class DBlist
@@ -14,7 +15,6 @@ namespace DbManager.DB
         public Dictionary<int, ItemDB> _monster_research_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _dress_style_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _stiker_db = new Dictionary<int, ItemDB>();
-        //List<ItemDB> ItemDB;
 
         public Dictionary<int, MonsterDB> Mob_db
         {
@@ -48,7 +48,6 @@ namespace DbManager.DB
         }
 
 
-
         public DBlist() { }
         public DBlist(DBlist db)
         {
@@ -76,23 +75,14 @@ namespace DbManager.DB
         const string file_name = "DB.roo";
         public static void SaveDataBase(ref DBlist DB)
         {
-            // 직렬화 클래스
-            var formatter = new BinaryFormatter();
-            // 클래스를 직렬화하여 보관할 데이터
-            byte[] data;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                formatter.Serialize(stream, DB);
-                data = new byte[stream.Length];
-                //스트림을 byte[] 데이터로 변환한다.
-                data = stream.GetBuffer();
-            }
+            var serializeOptions = new JsonSerializerOptions();
+            serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
+            serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            serializeOptions.WriteIndented = true;
 
-            // 직렬화 데이터를 파일로 저장한다.
-            using (FileStream stream = new FileStream(file_name, FileMode.Create, FileAccess.Write))
-            {
-                formatter.Serialize(stream, DB);
-            }
+            string jsonString;
+            jsonString = JsonSerializer.Serialize(DB, serializeOptions);
+            File.WriteAllText(file_name, jsonString);
         }
 
         public static void ReadDB(ref DBlist DB)
@@ -100,19 +90,18 @@ namespace DbManager.DB
             if (!IsFileAvailable())
                 return;
 
-            var formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(file_name, FileMode.Open, FileAccess.Read))
-            {
-                // 클래스를 역직렬화 하고 Node클래스의 Print함수 실행.
-                DB = new DBlist((DBlist)formatter.Deserialize(stream));
-            }
+            var serializeOptions = new JsonSerializerOptions();
+            serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
+            serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            serializeOptions.WriteIndented = true;
+
+            string jsonString = File.ReadAllText(file_name);
+            DB = JsonSerializer.Deserialize<DBlist>(jsonString, serializeOptions);
         }
 
         public static bool IsFileAvailable()
         {
-            //FileInfo생성
             FileInfo fi = new FileInfo(file_name);
-            //FileInfo.Exists로 파일 존재유무 확인
             if (fi.Exists)
                 return true;
             else
