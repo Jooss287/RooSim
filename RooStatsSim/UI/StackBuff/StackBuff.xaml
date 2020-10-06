@@ -1,0 +1,68 @@
+﻿<Window x:Class="RooStatsSim.UI.StackBuff.StackBuff"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RooStatsSim.UI.StackBuff"
+        mc:Ignorable="d"
+        Title="StackBuff" Height="450" Width="800">
+    <StackPanel Orientation="Vertical">
+        <GroupBox Header="탈것-능력">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="ATK/MATK"/>
+                    <TextBox Text="1"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="MAX HP"/>
+                    <TextBox Text="1"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="ATK%/MATK%"/>
+                    <TextBox Text="1"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="탈것-성격">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="ATK/MATK"/>
+                    <TextBox Text="1"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="MAX HP"/>
+                    <TextBox Text="1"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="ATK%/MATK%"/>
+                    <TextBox Text="1"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="몬스터 연구"/>
+                <TextBlock Text="0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="옷장 레벨"/>
+                <TextBlock Text="0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="스티커"/>
+                <TextBlock Text="0"/>
+            </StackPanel>
+        </StackPanel>
+        <GroupBox Header="훈장">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="용맹훈장"/>
+                <TextBox Text="수호훈장"/>
+                <TextBox Text="지혜훈장"/>
+                <TextBox Text="매력훈장"/>
+                <TextBox Text="질풍훈장"/>
+            </StackPanel>
+        </GroupBox>
+                  
+    </StackPanel>
+</Window>

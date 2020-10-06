@@ -83,14 +83,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AbstractClass\AbilityInfo.cs" />
     <Compile Include="DB\DBlist.cs" />
-    <Compile Include="DB\enumDB.cs" />
+    <Compile Include="DB\Definition.cs" />
     <Compile Include="DB\ItemDB.cs" />
-    <Compile Include="DB\StatsPointTable.cs" />
+    <Compile Include="DB\Table\RidingTable.cs" />
+    <Compile Include="DB\Table\SmeltingTable.cs" />
+    <Compile Include="DB\Table\StatsPointTable.cs" />
     <Compile Include="Equation\Equations.cs" />
     <Compile Include="DB\ItemAbility.cs" />
-    <Compile Include="DB\AdvantageTable.cs" />
+    <Compile Include="DB\Table\AdvantageTable.cs" />
     <Compile Include="DB\MonsterDB.cs" />
     <Compile Include="DB\Status.cs" />
     <Compile Include="Equation\Defense.cs" />
@@ -122,8 +123,11 @@
     <Compile Include="UI\Manager\MonsterManager.xaml.cs">
       <DependentUpon>MonsterManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\StatusWindowBinding.cs" />
-    <Compile Include="UI\StatusWindow.xaml.cs">
+    <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
+      <DependentUpon>StackBuff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Status\StatusWindowBinding.cs" />
+    <Compile Include="UI\Status\StatusWindow.xaml.cs">
       <DependentUpon>StatusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="User\UserData.cs" />
@@ -155,7 +159,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\StatusWindow.xaml">
+    <Page Include="UI\StackBuff\StackBuff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Status\StatusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

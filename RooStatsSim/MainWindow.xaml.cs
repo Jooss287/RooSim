@@ -1,8 +1,4 @@
-﻿using RooStatsSim.DB;
-using RooStatsSim.Equation.Job;
-using RooStatsSim.Skills;
-using RooStatsSim.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -10,9 +6,15 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
+using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
+using RooStatsSim.Equation.Job;
+using RooStatsSim.Skills;
+using RooStatsSim.UI.Status;
 using RooStatsSim.UI.Manager;
-using RooStatsSim.User;
 using RooStatsSim.UI.ACK;
+using RooStatsSim.User;
+
 
 namespace RooStatsSim
 {
@@ -41,7 +43,6 @@ namespace RooStatsSim
 
             //DB생성, Window open 등
 
-            _db_manager.Show();
             _status.Show();
             
         }
@@ -313,6 +314,21 @@ namespace RooStatsSim
             _status.Close();
             _info.Close();
             _db_manager.Close();
+        }
+
+        private void StackBuff_window_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Skill_window_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Equip_window_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

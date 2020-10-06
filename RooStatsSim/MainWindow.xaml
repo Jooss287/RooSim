@@ -34,9 +34,12 @@
                     </Grid.ColumnDefinitions>
                     <Button Content="Status" Grid.Row="0" Grid.Column="0"
                             Click="Status_window_Click"/>
-                    <Button Content="Skill" Grid.Row="0" Grid.Column="1"/>
-                    <Button Content="Equip" Grid.Row="0" Grid.Column="2"/>
-                    <Button Content="Buff" Grid.Row="1" Grid.Column="0"/>
+                    <Button Content="Skill" Grid.Row="0" Grid.Column="1"
+                            Click="Skill_window_Click"/>
+                    <Button Content="Equip" Grid.Row="0" Grid.Column="2"
+                            Click="Equip_window_Click"/>
+                    <Button Content="StackBuff" Grid.Row="1" Grid.Column="0"
+                            Click="StackBuff_window_Click"/>
                     <Button Content="DBManager" Grid.Row="2" Grid.Column="1"
                             Click="DBManager_window_Click"/>
                     <Button Content="Info" Grid.Row="2" Grid.Column="2"

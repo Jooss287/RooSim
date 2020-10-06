@@ -1,12 +1,9 @@
-﻿using RooStatsSim.DB;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using RooStatsSim.AbstractClass;
 using RooStatsSim.User;
-using System.Collections.Generic;
 
-namespace RooStatsSim.UI
+namespace RooStatsSim.UI.Status
 {
     class AbilityBinding: INotifyPropertyChanged
     {
