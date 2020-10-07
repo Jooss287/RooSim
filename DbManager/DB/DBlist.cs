@@ -13,7 +13,7 @@ namespace DbManager.DB
         public Dictionary<int, ItemDB> _card_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _monster_research_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _dress_style_db = new Dictionary<int, ItemDB>();
-        public Dictionary<int, ItemDB> _stiker_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _sticker_db = new Dictionary<int, ItemDB>();
         //List<ItemDB> ItemDB;
 
         public Dictionary<int, MonsterDB> Mob_db
@@ -41,10 +41,10 @@ namespace DbManager.DB
             get { return _dress_style_db; }
             set { _dress_style_db = value; }
         }
-        public Dictionary<int, ItemDB> Stiker_db
+        public Dictionary<int, ItemDB> Sticker_db
         {
-            get { return _stiker_db; }
-            set { _stiker_db = value; }
+            get { return _sticker_db; }
+            set { _sticker_db = value; }
         }
 
 
@@ -57,7 +57,7 @@ namespace DbManager.DB
             if (db._card_db != null) _card_db = db._card_db;
             if (db._monster_research_db != null) _monster_research_db = db._monster_research_db;
             if (db._dress_style_db != null) _dress_style_db = db._dress_style_db;
-            if (db._stiker_db != null) _stiker_db = db._stiker_db;
+            if (db._sticker_db != null) _sticker_db = db._sticker_db;
         }
         
         public void AddMonsterDB(MonsterDB monsterDB)

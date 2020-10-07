@@ -17,12 +17,18 @@ namespace RooStatsSim.User
             get
             {
                 if (_instance == null)
+                { 
                     _instance = new UserData();
+                }
                 return _instance;
             }
         }
 
         public Level Level = new Level();
         public Status Status = new Status();
+        public List<int> Madel = new List<int>();
+        public int Monster_Research { get; set; }
+        public int Dress_Style { get; set; }
+        public int Sticker { get; set; }
     }
 }

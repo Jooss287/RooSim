@@ -126,6 +126,7 @@
     <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
       <DependentUpon>StackBuff.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\StackBuff\StackBuffWindowBinding.cs" />
     <Compile Include="UI\Status\StatusWindowBinding.cs" />
     <Compile Include="UI\Status\StatusWindow.xaml.cs">
       <DependentUpon>StatusWindow.xaml</DependentUpon>

@@ -43,15 +43,15 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBox Text="몬스터 연구"/>
-                <TextBlock Text="0"/>
+                <TextBlock x:Name="txt_monster_research"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBox Text="옷장 레벨"/>
-                <TextBlock Text="0"/>
+                <TextBlock x:Name="txt_dress_style"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBox Text="스티커"/>
-                <TextBlock Text="0"/>
+                <TextBlock x:Name="txt_sticker"/>
             </StackPanel>
         </StackPanel>
         <GroupBox Header="훈장">
