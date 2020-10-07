@@ -21,7 +21,8 @@ namespace RooStatsSim.UI.ACK
         const string _PROGRAM_VER = "v0.0";
         const string _LATEST_VER_API_URL = "https://api.github.com/repos/Jooss287/RooSim/releases/latest";
         // Github 주소
-        const string _CONTACT_URL = "https://api.github.com/repos/Jooss287/RooSim/Issue";
+        const string _CONTACT_URL = "https://api.github.com/repos/Jooss287/RooSim/Issue \n" + 
+                                    _EMAIL;
         const string _EMAIL = "Jooss287@gmail.com";
         // Library사용목록
         // 도와주신 분들
@@ -32,6 +33,12 @@ namespace RooStatsSim.UI.ACK
         public ProgramInfo()
         {
             InitializeComponent();
+
+            txt_license.Text = _LICENSE;
+            txt_game_url.Text = _ROO_URL;
+            txt_version.Text = _PROGRAM_VER;
+            txt_contact.Text = _CONTACT_URL;
+            txt_helpers.Text = _THANKS;
         }
 
 

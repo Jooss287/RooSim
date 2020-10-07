@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RooStatsSim.UI.ACK"
         mc:Ignorable="d"
-        Title="Thanks" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Info" MinHeight="200" MinWidth="400"
+        SizeToContent="WidthAndHeight">
+    
+    <StackPanel Orientation="Vertical" Margin="10,10,10,10">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="라이센스: " 
+                       Width="100" TextAlignment="Right"/>
+            <TextBlock x:Name="txt_license" TextWrapping="Wrap" Width="500"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="게임주소: "
+                       Width="100" TextAlignment="Right"/>
+            <TextBlock x:Name="txt_game_url" TextWrapping="Wrap" Width="500"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="프로그램 버전: "
+                       Width="100" TextAlignment="Right"/>
+            <TextBlock x:Name="txt_version" TextWrapping="Wrap" Width="500"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Contact Us: " 
+                       Width="100" TextAlignment="Right"/>
+            <TextBlock x:Name="txt_contact" TextWrapping="Wrap" Width="500"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="도와주신 분들: " 
+                       Width="100" TextAlignment="Right"/>
+            <TextBlock x:Name="txt_helpers" TextWrapping="Wrap" Width="500"/>
+        </StackPanel>
+    </StackPanel>
 </Window>
