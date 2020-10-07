@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RooStatsSim"
         xmlns:skill="clr-namespace:RooStatsSim.Skills"
-        xmlns:UI="clr-namespace:RooStatsSim.UI"
         mc:Ignorable="d"
-        Title="RooSim" Height="450" Width="870"
+        Title="RooSim" Height="573" Width="870"
         Closing="Window_Closing">
     <Window.Resources>
         <skill:SkillAdd x:Key="SkillList"/>
@@ -16,10 +15,10 @@
         <StackPanel Orientation="Vertical" Margin="0,10,0,0" >
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Save1" Margin="5,5,5,5"/>
-                    <Button Content="Save2" Margin="5,5,5,5"/>
-                    <Button Content="Save3" Margin="5,5,5,5"/>
-                    <Button Content="Save4" Margin="5,5,5,5"/>
+                    <Button Content="Save1" Margin="5,5,5,5" Style="{DynamicResource Custom_Btn}"/>
+                    <Button Content="Save2" Margin="5,5,5,5" Style="{DynamicResource Custom_Btn}"/>
+                    <Button Content="Save3" Margin="5,5,5,5" Style="{DynamicResource Custom_Btn}"/>
+                    <Button Content="Save4" Margin="5,5,5,5" Style="{DynamicResource Custom_Btn}"/>
                 </StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
