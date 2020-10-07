@@ -131,6 +131,8 @@
       <DependentUpon>StatusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="User\UserData.cs" />
+    <Compile Include="User\UserData_Lists.cs" />
+    <Compile Include="User\User_Enum.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
