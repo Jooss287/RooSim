@@ -5,67 +5,18 @@ using RooStatsSim.User;
 
 namespace RooStatsSim.UI.StackBuff
 {
-    class StackBuffBinding : INotifyPropertyChanged
+    class MedalList : ObservableCollection<AbilityBinding>
     {
-        string _name;
-        int _point;
-        int _add_point;
-
-        public StackBuffBinding()
+        public MedalList()
+        { }
+        public MedalList(ref UserData param_status)
         {
-            _name = "Test";
-            _point = 1;
-            _add_point = 0;
-        }
-        public StackBuffBinding(string name, int point, int add_point)
-        {
-            _name = name;
-            _point = point;
-            _add_point = add_point;
-        }
-        public StackBuffBinding(string name, ABILITTY ability)
-        {
-            _name = name;
-            _point = ability.Point;
-            _add_point = ability.AddPoint;
-        }
-
-        public void UpdateAbility(ABILITTY param_ability) {
-            Point = param_ability.Point;
-            AddPoint = param_ability.AddPoint;
-        }
-
-        public string Name {
-            get { return _name; }
-            set { 
-                _name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-        public int Point {
-            get { return _point; } 
-            set {
-                _point = value;
-                OnPropertyChanged("Point");
-            }
-        }
-        public int AddPoint {
-            get { return _add_point; } 
-            set { 
-                _add_point = value;
-                OnPropertyChanged("AddPoint");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public override string ToString() => _name;
-
-        protected void OnPropertyChanged(string info)
-        {
-            var handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(info));
+            MEDAL temp = param_status.Medal;
+            Add(new AbilityBinding("용맹훈장", temp[(int)MEDAL_ENUM.VALOR], 0));
+            Add(new AbilityBinding("수호훈장", temp[(int)MEDAL_ENUM.GUARDIAN], 0));
+            Add(new AbilityBinding("지혜훈장", temp[(int)MEDAL_ENUM.WISDOM], 0));
+            Add(new AbilityBinding("매력훈장", temp[(int)MEDAL_ENUM.CHARM], 0));
+            Add(new AbilityBinding("질풍훈장", temp[(int)MEDAL_ENUM.GALE], 0));
         }
     }
-
 }

@@ -14,7 +14,7 @@ using RooStatsSim.UI.Status;
 using RooStatsSim.UI.Manager;
 using RooStatsSim.UI.ACK;
 using RooStatsSim.User;
-
+using RooStatsSim.UI.StackBuff;
 
 namespace RooStatsSim
 {
@@ -26,6 +26,7 @@ namespace RooStatsSim
         DBManager _db_manager = new DBManager();
         StatusWindow _status = new StatusWindow();
         ProgramInfo _info = new ProgramInfo();
+        StackBuff _stacK_buff = new StackBuff();
 
         public MainWindow()
         {
@@ -318,7 +319,10 @@ namespace RooStatsSim
 
         private void StackBuff_window_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_stacK_buff.IsVisible)
+                _stacK_buff.Hide();
+            else
+                _stacK_buff.Show();
         }
 
         private void Skill_window_Click(object sender, RoutedEventArgs e)

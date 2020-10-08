@@ -41,28 +41,47 @@
             </StackPanel>
         </GroupBox>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        MouseLeftButtonDown="Monster_Research_Up_Click"
+                        MouseRightButtonDown="Monster_Research_Down_Click"
+                        MouseWheel="Monster_Research_MouseWheel">
                 <TextBox Text="몬스터 연구"/>
-                <TextBlock x:Name="txt_monster_research"/>
+                <TextBlock Text="{Binding Monster_Research}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        MouseLeftButtonDown="Dress_Up_Click"
+                        MouseRightButtonDown="Dress_Down_Click"
+                        MouseWheel="Dress_MouseWheel">
                 <TextBox Text="옷장 레벨"/>
-                <TextBlock x:Name="txt_dress_style"/>
+                <TextBlock Text="{Binding Dress_Style}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        MouseLeftButtonDown="Sticker_Up_Click"
+                        MouseRightButtonDown="Sticker_Down_Click"
+                        MouseWheel="Sticker_MouseWheel">
                 <TextBox Text="스티커"/>
-                <TextBlock x:Name="txt_sticker"/>
+                <TextBlock Text="{Binding Sticker}"/>
             </StackPanel>
         </StackPanel>
         <GroupBox Header="훈장">
-            <StackPanel Orientation="Horizontal">
-                <TextBox Text="용맹훈장"/>
-                <TextBox Text="수호훈장"/>
-                <TextBox Text="지혜훈장"/>
-                <TextBox Text="매력훈장"/>
-                <TextBox Text="질풍훈장"/>
-            </StackPanel>
+            <ItemsControl x:Name="MedalPoint" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical"
+                                    MouseLeftButtonDown="Medal_Up_Click"
+                                    MouseRightButtonDown="Medal_Down_Click"
+                                    MouseWheel="Medal_MouseWheel">
+                            <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </GroupBox>
-                  
     </StackPanel>
 </Window>

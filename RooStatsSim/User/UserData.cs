@@ -24,11 +24,12 @@ namespace RooStatsSim.User
             }
         }
 
-        public Level Level = new Level();
-        public Status Status = new Status();
-        public List<int> Madel = new List<int>();
-        public int Monster_Research { get; set; }
-        public int Dress_Style { get; set; }
-        public int Sticker { get; set; }
+        public LEVEL Level = new LEVEL();
+        public STATUS Status = new STATUS();
+        public MEDAL Medal = new MEDAL();
+        public MONSTER_RESEARCH Monster_Research = new MONSTER_RESEARCH();
+        public DRESS_STYLE Dress_Style = new DRESS_STYLE();
+        public STICKER Sticker = new STICKER();
+
     }
 }

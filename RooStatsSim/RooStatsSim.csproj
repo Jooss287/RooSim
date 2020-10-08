@@ -109,6 +109,7 @@
     <Compile Include="Skills\SkillCheckBox.cs" />
     <Compile Include="Skills\SkillAdd.cs" />
     <Compile Include="Skills\SkillInfo.cs" />
+    <Compile Include="UI\AbilityBinding.cs" />
     <Compile Include="UI\ACK\ProgramInfo.xaml.cs">
       <DependentUpon>ProgramInfo.xaml</DependentUpon>
     </Compile>

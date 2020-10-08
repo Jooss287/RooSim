@@ -58,7 +58,7 @@ namespace RooStatsSim.DB
             if (db._dress_style_db != null) _dress_style_db = db._dress_style_db;
             if (db._sticker_db != null) _sticker_db = db._sticker_db;
         }
-        
+
         public void AddMonsterDB(MonsterDB monsterDB)
         {
             _mob_db[monsterDB.MobId] = monsterDB;
