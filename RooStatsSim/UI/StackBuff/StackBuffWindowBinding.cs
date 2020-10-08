@@ -19,4 +19,16 @@ namespace RooStatsSim.UI.StackBuff
             Add(new AbilityBinding("질풍훈장", temp[(int)MEDAL_ENUM.GALE], 0));
         }
     }
+
+    class RidingList : ObservableCollection<AbilityBinding>
+    {
+        public RidingList()
+        { }
+        public RidingList(ref RIDING param_riding)
+        {
+            Add(new AbilityBinding("ATK / MATK", Enum.GetName(typeof(RIDING_ENUM), RIDING_ENUM.ATK_MATK), param_riding[(int)RIDING_ENUM.ATK_MATK], 0));
+            Add(new AbilityBinding("MAX HP", Enum.GetName(typeof(RIDING_ENUM), RIDING_ENUM.MAX_HP), param_riding[(int)RIDING_ENUM.MAX_HP], 0));
+            Add(new AbilityBinding("ATK% / MATK%", Enum.GetName(typeof(RIDING_ENUM), RIDING_ENUM.ATK_MATK_PERCENT), param_riding[(int)RIDING_ENUM.ATK_MATK_PERCENT], 0));
+        }
+    }
 }

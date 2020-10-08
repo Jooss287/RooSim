@@ -16,6 +16,8 @@ namespace RooStatsSim.UI.StackBuff
     public partial class StackBuff : Window, INotifyPropertyChanged
     {
         UserData _user_data;
+        RidingList BindingRidingAbility;
+        RidingList BindingRidingPersonality;
         MedalList BindingMedalPoint;
         public StackBuff()
         {
@@ -24,6 +26,10 @@ namespace RooStatsSim.UI.StackBuff
             InitializeComponent();
             DataContext = this;
 
+            BindingRidingAbility = new RidingList(ref _user_data.Riding_ability);
+            RidingAbility.ItemsSource = BindingRidingAbility;
+            BindingRidingPersonality = new RidingList(ref _user_data.Riding_personality);
+            RidingPersonality.ItemsSource = BindingRidingPersonality;
             BindingMedalPoint = new MedalList(ref _user_data);
             MedalPoint.ItemsSource = BindingMedalPoint;
         }
@@ -136,6 +142,51 @@ namespace RooStatsSim.UI.StackBuff
             else
                 MedalPointChange(dataCxtx, +1);
         }
+        private void Riding_Abaility_Up_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, 1);
+        }
+        private void Riding_Abaility_Down_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, -1);
+        }
+        private void Riding_Abaility_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+
+            if (e.Delta < 0)
+                RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, -1);
+            else
+                RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, 1);
+        }
+
+        private void Riding_Personality_Up_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, 1);
+        }
+        private void Riding_Personality_Down_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, -1);
+        }
+        private void Riding_Personality_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+
+            if (e.Delta < 0)
+                RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, -1);
+            else
+                RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, 1);
+        }
         #endregion
 
         void MedalPointChange(AbilityBinding dataCxtx, int changingPoint)
@@ -144,6 +195,14 @@ namespace RooStatsSim.UI.StackBuff
             
             _user_data.Medal[(int)medalName] += changingPoint;
             BindingMedalPoint[(int)medalName].Point = _user_data.Medal[(int)medalName];
+        }
+
+        void RidingPointChange(ref RIDING riding, ref RidingList bindingList, AbilityBinding dataCxtx, int changingPoint)
+        {
+            RIDING_ENUM ridingName = (RIDING_ENUM)Enum.Parse(typeof(RIDING_ENUM), dataCxtx.EnumName);
+            
+            riding[(int)ridingName] += changingPoint;
+            bindingList[(int)ridingName].Point = riding[(int)ridingName];
         }
 
     }

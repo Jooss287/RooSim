@@ -7,6 +7,7 @@ namespace RooStatsSim.UI
     class AbilityBinding : INotifyPropertyChanged
     {
         string _name;
+        string _enum_name;
         int _point;
         int _add_point;
 
@@ -19,6 +20,14 @@ namespace RooStatsSim.UI
         public AbilityBinding(string name, int point, int add_point)
         {
             _name = name;
+            _enum_name = name;
+            _point = point;
+            _add_point = add_point;
+        }
+        public AbilityBinding(string name, string enum_name, int point, int add_point)
+        {
+            _name = name;
+            _enum_name = enum_name;
             _point = point;
             _add_point = add_point;
         }
@@ -43,6 +52,11 @@ namespace RooStatsSim.UI
                 _name = value;
                 OnPropertyChanged("Name");
             }
+        }
+        public string EnumName
+        {
+            get { return _enum_name; }
+            set { _enum_name = value; }
         }
         public int Point
         {

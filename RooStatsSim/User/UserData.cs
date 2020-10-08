@@ -30,6 +30,7 @@ namespace RooStatsSim.User
         public MONSTER_RESEARCH Monster_Research = new MONSTER_RESEARCH();
         public DRESS_STYLE Dress_Style = new DRESS_STYLE();
         public STICKER Sticker = new STICKER();
-
+        public RIDING Riding_ability = new RIDING();
+        public RIDING Riding_personality = new RIDING();
     }
 }

@@ -63,4 +63,14 @@ namespace RooStatsSim.User
         public int Level { get; set; }
         public STICKER() { Level = 0; }
     }
+    public class RIDING : List<int>
+    {
+        public RIDING()
+        {
+            foreach (string riding_name in Enum.GetNames(typeof(RIDING_ENUM)))
+            {
+                Add(0);
+            }
+        }
+    }
 }

@@ -7,39 +7,50 @@
         mc:Ignorable="d"
         Title="StackBuff" Height="450" Width="800">
     <StackPanel Orientation="Vertical">
-        <GroupBox Header="탈것-능력">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Text="ATK/MATK"/>
-                    <TextBox Text="1"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Text="MAX HP"/>
-                    <TextBox Text="1"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Text="ATK%/MATK%"/>
-                    <TextBox Text="1"/>
-                </StackPanel>
-            </StackPanel>
-        </GroupBox>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="탈것-능력">
+                <ItemsControl x:Name="RidingAbility" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                    MouseLeftButtonDown="Riding_Abaility_Up_Click"
+                                    MouseRightButtonDown="Riding_Abaility_Down_Click"
+                                    MouseWheel="Riding_Abaility_MouseWheel">
+                                <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </GroupBox>
 
-        <GroupBox Header="탈것-성격">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Text="ATK/MATK"/>
-                    <TextBox Text="1"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Text="MAX HP"/>
-                    <TextBox Text="1"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Text="ATK%/MATK%"/>
-                    <TextBox Text="1"/>
-                </StackPanel>
-            </StackPanel>
-        </GroupBox>
+            <GroupBox Header="탈것-성격">
+                <ItemsControl x:Name="RidingPersonality" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                    MouseLeftButtonDown="Riding_Personality_Up_Click"
+                                    MouseRightButtonDown="Riding_Personality_Down_Click"
+                                    MouseWheel="Riding_Personality_MouseWheel">
+                                <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </GroupBox>
+        </StackPanel>
+        
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal"
                         MouseLeftButtonDown="Monster_Research_Up_Click"

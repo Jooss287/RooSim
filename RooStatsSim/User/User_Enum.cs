@@ -38,4 +38,10 @@ namespace RooStatsSim.User
         매력훈장,
         질풍훈장
     }
+    enum RIDING_ENUM : int
+    {
+        ATK_MATK,
+        MAX_HP,
+        ATK_MATK_PERCENT,
+    }
 }
