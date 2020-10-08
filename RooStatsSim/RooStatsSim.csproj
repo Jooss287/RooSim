@@ -109,6 +109,7 @@
     <Compile Include="Skills\SkillCheckBox.cs" />
     <Compile Include="Skills\SkillAdd.cs" />
     <Compile Include="Skills\SkillInfo.cs" />
+    <Compile Include="UI\AbilityBinding.cs" />
     <Compile Include="UI\ACK\ProgramInfo.xaml.cs">
       <DependentUpon>ProgramInfo.xaml</DependentUpon>
     </Compile>
@@ -126,11 +127,14 @@
     <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
       <DependentUpon>StackBuff.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\StackBuff\StackBuffWindowBinding.cs" />
     <Compile Include="UI\Status\StatusWindowBinding.cs" />
     <Compile Include="UI\Status\StatusWindow.xaml.cs">
       <DependentUpon>StatusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="User\UserData.cs" />
+    <Compile Include="User\UserData_Lists.cs" />
+    <Compile Include="User\User_Enum.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

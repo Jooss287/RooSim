@@ -108,7 +108,7 @@ namespace DbManager
                 case (int)ITEM_TYPE_ENUM.MONSTER_RESEARCH:
                     return _DB._monster_research_db;
                 case (int)ITEM_TYPE_ENUM.STICKER:
-                    return _DB._stiker_db;
+                    return _DB._sticker_db;
                 case (int)ITEM_TYPE_ENUM.DRESS_STYLE:
                     return _DB._dress_style_db;
                 case (int)ITEM_TYPE_ENUM.EQUIPMENT:
