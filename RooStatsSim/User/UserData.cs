@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using RooStatsSim.DB;
 
 namespace RooStatsSim.User
 {
@@ -32,5 +33,19 @@ namespace RooStatsSim.User
         public STICKER Sticker = new STICKER();
         public RIDING Riding_ability = new RIDING();
         public RIDING Riding_personality = new RIDING();
+
+        public UserItem User_Item = new UserItem();
+
+
+        public void CalcUserData()
+        {
+            UserItem CalcUserItem = new UserItem();
+
+            CalcUserItem += Monster_Research.GetOption();
+            CalcUserItem += Dress_Style.GetOption();
+            CalcUserItem += Sticker.GetOption();
+
+            User_Item = CalcUserItem;
+        }
     }
 }

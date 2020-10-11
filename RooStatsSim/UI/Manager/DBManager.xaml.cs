@@ -13,15 +13,12 @@ namespace RooStatsSim.UI.Manager
     /// </summary>
     public partial class DBManager : Window
     {
-        private DBlist _DB;
+        private DBlist _DB = MainWindow._roo_db;
         private MonsterManager mob_manager = null;
         private ItemManager item_manager = null;
 
         public DBManager()
         {
-            _DB = new DBlist();
-            DBSerizator.ReadDB(ref _DB);
-            
             mob_manager = new MonsterManager(ref _DB);
             item_manager = new ItemManager(ref _DB);
 

@@ -39,6 +39,7 @@ namespace RooStatsSim.UI.StackBuff
             get { return _user_data.Monster_Research.Level; }
             set {
                 _user_data.Monster_Research.Level = value;
+                _user_data.CalcUserData();
                 OnPropertyChanged("Monster_Research");
             }
         }
@@ -48,6 +49,7 @@ namespace RooStatsSim.UI.StackBuff
             set
             {
                 _user_data.Dress_Style.Level = value;
+                _user_data.CalcUserData();
                 OnPropertyChanged("Dress_Style");
             }
         }
@@ -57,6 +59,7 @@ namespace RooStatsSim.UI.StackBuff
             set
             {
                 _user_data.Sticker.Level = value;
+                _user_data.CalcUserData();
                 OnPropertyChanged("Sticker");
             }
         }
@@ -123,19 +126,19 @@ namespace RooStatsSim.UI.StackBuff
         private void Medal_Up_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
             MedalPointChange(dataCxtx, 1);
         }
         private void Medal_Down_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
             MedalPointChange(dataCxtx, -1);
         }
         private void Medal_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
             
             if (e.Delta < 0)
                 MedalPointChange(dataCxtx, -1);
@@ -145,19 +148,19 @@ namespace RooStatsSim.UI.StackBuff
         private void Riding_Abaility_Up_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
             RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, 1);
         }
         private void Riding_Abaility_Down_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
             RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, -1);
         }
         private void Riding_Abaility_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
 
             if (e.Delta < 0)
                 RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, -1);
@@ -168,19 +171,19 @@ namespace RooStatsSim.UI.StackBuff
         private void Riding_Personality_Up_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
             RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, 1);
         }
         private void Riding_Personality_Down_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
             RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, -1);
         }
         private void Riding_Personality_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding dataCxtx = tb.DataContext as AbilityBinding;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
 
             if (e.Delta < 0)
                 RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, -1);
@@ -189,7 +192,7 @@ namespace RooStatsSim.UI.StackBuff
         }
         #endregion
 
-        void MedalPointChange(AbilityBinding dataCxtx, int changingPoint)
+        void MedalPointChange(AbilityBinding<int> dataCxtx, int changingPoint)
         {
             MEDAL_ENUM_KOR medalName = (MEDAL_ENUM_KOR)Enum.Parse(typeof(MEDAL_ENUM_KOR), dataCxtx.Name);
             
@@ -197,7 +200,7 @@ namespace RooStatsSim.UI.StackBuff
             BindingMedalPoint[(int)medalName].Point = _user_data.Medal[(int)medalName];
         }
 
-        void RidingPointChange(ref RIDING riding, ref RidingList bindingList, AbilityBinding dataCxtx, int changingPoint)
+        void RidingPointChange(ref RIDING riding, ref RidingList bindingList, AbilityBinding<int> dataCxtx, int changingPoint)
         {
             RIDING_ENUM ridingName = (RIDING_ENUM)Enum.Parse(typeof(RIDING_ENUM), dataCxtx.EnumName);
             

@@ -44,15 +44,22 @@ namespace RooStatsSim.DB
         LUK,
         ATK = 1000,     //공격력 관련 스텟
         MATK,
+        SMELTING_ATK,
+        SMELTING_MATK,
         DEF = 2000,     //방어력 관련 스텟
         MDEF,
+        SMELTING_DEF,
+        SMELTING_MDEF,
         HP = 3000,      //HP,SP 관련 스텟
         SP,
+        HP_RECOVERY,
+        SP_RECOVERY,
         FLEE = 4000,    //회피명중 관련 스텟
         HIT,
         CRI = 5000,     //크리율 관련 스텟
         CDEF,
-        ELEMENT = 6000, //속성 관련 스텟
+        ASPD = 6000,
+        ELEMENT = 7000, //속성 관련 스텟
 
     }
     public enum DTYPE
@@ -61,10 +68,11 @@ namespace RooStatsSim.DB
         MATK_P,
         DEF_P = 2000,
         MDEF_P,
-        PHYSICAL_DAMAGE,
-        MAGICAL_DAMAGE,
-        MAX_HP_P,
+        MAX_HP_P = 3000,
         MAX_SP_P,
+        PHYSICAL_DAMAGE,    
+        MAGICAL_DAMAGE,
+        
 
     }
     public enum IFTYPE
@@ -99,6 +107,44 @@ namespace RooStatsSim.DB
             if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
         }
         public ItemDB() { }
+
+        public static ItemDB operator +(ItemDB a, ItemDB b)
+        {
+            AddOption<ITYPE>(ref a.i_option, b.i_option);
+            AddOption<DTYPE>(ref a.d_option, b.d_option);
+            AddOption<STATUS_EFFECT_TYPE>(ref a.se_option, b.se_option);
+
+            return a;
+        }
+        
+        protected static void AddOption<T1>(ref Dictionary<T1, int> a, Dictionary<T1, int> b)
+        {
+            foreach (KeyValuePair<T1, int> opt in b)
+            {
+                if (a.ContainsKey(opt.Key) == true)
+                {
+                    a[opt.Key] = a[opt.Key] + opt.Value;
+                }
+                else
+                {
+                    a[opt.Key] = opt.Value;
+                }
+            }
+        }
+        protected static void AddOption<T1>(ref Dictionary<T1, double> a, Dictionary<T1, double> b)
+        {
+            foreach (KeyValuePair<T1, double> opt in b)
+            {
+                if (a.ContainsKey(opt.Key) == true)
+                {
+                    a[opt.Key] = a[opt.Key] + opt.Value;
+                }
+                else
+                {
+                    a[opt.Key] = opt.Value;
+                }
+            }
+        }
 
 
 
