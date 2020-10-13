@@ -34,7 +34,8 @@ namespace RooStatsSim.User
             i_option[ITYPE.CRI] = 0;
             i_option[ITYPE.CDEF] = 0;
 
-            i_option[ITYPE.ASPD] = 0;
+            d_option[DTYPE.ASPD] = 0;
+            d_option[DTYPE.MOVING_SPEED] = 0;
         }
         public static UserItem operator +(UserItem a, ItemDB b)
         {

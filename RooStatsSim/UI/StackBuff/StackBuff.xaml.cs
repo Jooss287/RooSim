@@ -196,8 +196,8 @@ namespace RooStatsSim.UI.StackBuff
         {
             MEDAL_ENUM_KOR medalName = (MEDAL_ENUM_KOR)Enum.Parse(typeof(MEDAL_ENUM_KOR), dataCxtx.Name);
             
-            _user_data.Medal[(int)medalName] += changingPoint;
-            BindingMedalPoint[(int)medalName].Point = _user_data.Medal[(int)medalName];
+            _user_data.Medal.List[(int)medalName] += changingPoint;
+            BindingMedalPoint[(int)medalName].Point = _user_data.Medal.List[(int)medalName];
         }
 
         void RidingPointChange(ref RIDING riding, ref RidingList bindingList, AbilityBinding<int> dataCxtx, int changingPoint)

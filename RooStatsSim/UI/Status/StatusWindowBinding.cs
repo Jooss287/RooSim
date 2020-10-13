@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Collections.Generic;
 using RooStatsSim.User;
-using RooStatsSim.UI;
 using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.UI.Status
 {
@@ -48,20 +48,14 @@ namespace RooStatsSim.UI.Status
     {
         public AdvancedPropertyList(ref UserData user_data)
         {
-            Add(new AbilityBinding<double>("ASPD", user_data.User_Item.i_option[ITYPE.ASPD], 0, Enum.GetName(typeof(ITYPE), ITYPE.ASPD)));
-            //Add(new AbilityBinding<double>("SP", Enum.GetName(typeof(ITYPE), ITYPE.SP), user_data.User_Item.i_option[ITYPE.SP], 0));
-            //Add(new AbilityBinding<double>("ATK", Enum.GetName(typeof(ITYPE), ITYPE.ATK), user_data.User_Item.i_option[ITYPE.ATK], 0));
-            //Add(new AbilityBinding("DEF", Enum.GetName(typeof(ITYPE), ITYPE.DEF), user_data.User_Item.i_option[ITYPE.DEF], 0));
-            //Add(new AbilityBinding("MATK", Enum.GetName(typeof(ITYPE), ITYPE.MATK), user_data.User_Item.i_option[ITYPE.MATK], 0));
-            //Add(new AbilityBinding("MDEF", Enum.GetName(typeof(ITYPE), ITYPE.MDEF), user_data.User_Item.i_option[ITYPE.MDEF], 0));
-            //Add(new AbilityBinding("제련 ATK", Enum.GetName(typeof(ITYPE), ITYPE.SMELTING_ATK), user_data.User_Item.i_option[ITYPE.SMELTING_ATK], 0));
-            //Add(new AbilityBinding("제련 DEF", Enum.GetName(typeof(ITYPE), ITYPE.SMELTING_DEF), user_data.User_Item.i_option[ITYPE.SMELTING_DEF], 0));
-            //Add(new AbilityBinding("제련 MATK", Enum.GetName(typeof(ITYPE), ITYPE.SMELTING_MATK), user_data.User_Item.i_option[ITYPE.SMELTING_MATK], 0));
-            //Add(new AbilityBinding("제련 MDEF", Enum.GetName(typeof(ITYPE), ITYPE.SMELTING_MDEF), user_data.User_Item.i_option[ITYPE.SMELTING_MDEF], 0));
-            //Add(new AbilityBinding("HP 자연 회복", Enum.GetName(typeof(ITYPE), ITYPE.HP_RECOVERY), user_data.User_Item.i_option[ITYPE.HP_RECOVERY], 0));
-            //Add(new AbilityBinding("SP 자연 회복", Enum.GetName(typeof(ITYPE), ITYPE.SP_RECOVERY), user_data.User_Item.i_option[ITYPE.SP_RECOVERY], 0));
-            //Add(new AbilityBinding("HIT", Enum.GetName(typeof(ITYPE), ITYPE.HIT), user_data.User_Item.i_option[ITYPE.HIT], 0));
-            //Add(new AbilityBinding("FLEE", Enum.GetName(typeof(ITYPE), ITYPE.FLEE), user_data.User_Item.i_option[ITYPE.FLEE], 0));
+            Add(new AbilityBinding<double>("ASPD", user_data.User_Item.d_option[DTYPE.ASPD], 0, Enum.GetName(typeof(DTYPE), DTYPE.ASPD)));
+            Add(new AbilityBinding<double>("이동속도", user_data.User_Item.d_option[DTYPE.MOVING_SPEED], 0, Enum.GetName(typeof(DTYPE), DTYPE.MOVING_SPEED)));
+            foreach(KeyValuePair<DTYPE, double> item in user_data.User_Item.d_option)
+            {
+                if ((item.Key == DTYPE.ASPD) || (item.Key == DTYPE.MOVING_SPEED))
+                    continue;
+                Add(new AbilityBinding<double>(EnumProperty_Kor.DTYPE_KOR[item.Key], user_data.User_Item.d_option[item.Key], 0, Enum.GetName(typeof(DTYPE), item.Key)));
+            }
         }
     }
 }

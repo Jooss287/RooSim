@@ -11,12 +11,12 @@ namespace RooStatsSim.UI.StackBuff
         { }
         public MedalList(ref UserData param_status)
         {
-            MEDAL temp = param_status.Medal;
-            Add(new AbilityBinding<int>("용맹훈장", temp[(int)MEDAL_ENUM.VALOR], 0));
-            Add(new AbilityBinding<int>("수호훈장", temp[(int)MEDAL_ENUM.GUARDIAN], 0));
-            Add(new AbilityBinding<int>("지혜훈장", temp[(int)MEDAL_ENUM.WISDOM], 0));
-            Add(new AbilityBinding<int>("매력훈장", temp[(int)MEDAL_ENUM.CHARM], 0));
-            Add(new AbilityBinding<int>("질풍훈장", temp[(int)MEDAL_ENUM.GALE], 0));
+            MEDAL medal = param_status.Medal;
+            Add(new AbilityBinding<int>("용맹훈장", medal.List[(int)MEDAL_ENUM.VALOR], 0));
+            Add(new AbilityBinding<int>("수호훈장", medal.List[(int)MEDAL_ENUM.GUARDIAN], 0));
+            Add(new AbilityBinding<int>("지혜훈장", medal.List[(int)MEDAL_ENUM.WISDOM], 0));
+            Add(new AbilityBinding<int>("매력훈장", medal.List[(int)MEDAL_ENUM.CHARM], 0));
+            Add(new AbilityBinding<int>("질풍훈장", medal.List[(int)MEDAL_ENUM.GALE], 0));
         }
     }
 

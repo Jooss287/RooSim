@@ -58,22 +58,21 @@ namespace RooStatsSim.DB
         HIT,
         CRI = 5000,     //크리율 관련 스텟
         CDEF,
-        ASPD = 6000,
         ELEMENT = 7000, //속성 관련 스텟
-
     }
+
     public enum DTYPE
     {
         ATK_P = 1000,
         MATK_P,
+        PHYSICAL_DAMAGE,
+        MAGICAL_DAMAGE,
         DEF_P = 2000,
         MDEF_P,
         MAX_HP_P = 3000,
         MAX_SP_P,
-        PHYSICAL_DAMAGE,    
-        MAGICAL_DAMAGE,
-        
-
+        ASPD = 6000,    //기타 관련 스텟
+        MOVING_SPEED,
     }
     public enum IFTYPE
     {

@@ -1,10 +1,8 @@
 ﻿using RooStatsSim.DB;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace RooStatsSim.User
 {
@@ -39,17 +37,57 @@ namespace RooStatsSim.User
         }
     }
 
-    public class MEDAL : List<int>
+    public class MEDAL
     {
+        public ObservableCollection<int> List { get; }
+        
         public MEDAL()
         {
+            List = new ObservableCollection<int>();
+            List.CollectionChanged += OnListChanged;
+
             foreach(string medal_name in Enum.GetNames(typeof(MEDAL_ENUM)))
             {
-                Add(0);
+                List.Add(0);
             }
         }
 
+        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            if ( Convert.ToInt32(args.NewItems[0]) < 0)
+            {
+                List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
+            }
+        }
+        public ItemDB GetATKMATK()
+        {
+            ItemDB option = new ItemDB();
+            option.i_option[ITYPE.ATK] = 4 * List[0];   //20까지 4 그이후 6
+            
+            return option;
+        }
+    }
 
+    public class RIDING
+    {
+        public ObservableCollection<int> List { get; }
+        public RIDING()
+        {
+            List = new ObservableCollection<int>();
+            List.CollectionChanged += OnListChanged;
+
+            foreach (string riding_name in Enum.GetNames(typeof(RIDING_ENUM)))
+            {
+                List.Add(0);
+            }
+        }
+        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            if (Convert.ToInt32(args.NewItems[0]) < 0)
+            {
+                List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
+            }
+        }
     }
 
     public class MONSTER_RESEARCH
@@ -65,7 +103,7 @@ namespace RooStatsSim.User
                     _level = 0;
                     return;
                 }
-                if ( (value <= MainWindow._roo_db._monster_research_db.Count) &&
+                if ( (value < MainWindow._roo_db._monster_research_db.Count) &&
                     (value >= 0) )
                     _level = value;
             }
@@ -93,7 +131,7 @@ namespace RooStatsSim.User
                     _level = 0;
                     return;
                 }
-                if ((value <= MainWindow._roo_db._dress_style_db.Count) &&
+                if ((value < MainWindow._roo_db._dress_style_db.Count) &&
                     (value >= 0))
                     _level = value;
             }
@@ -121,7 +159,7 @@ namespace RooStatsSim.User
                     _level = 0;
                     return;
                 }
-                if ((value <= MainWindow._roo_db._sticker_db.Count) &&
+                if ((value < MainWindow._roo_db._sticker_db.Count) &&
                     (value >= 0))
                     _level = value;
             }
@@ -137,14 +175,5 @@ namespace RooStatsSim.User
             return option;
         }
     }
-    public class RIDING : List<int>
-    {
-        public RIDING()
-        {
-            foreach (string riding_name in Enum.GetNames(typeof(RIDING_ENUM)))
-            {
-                Add(0);
-            }
-        }
-    }
+    
 }

@@ -24,6 +24,7 @@ namespace RooStatsSim.UI.Status
         {
             //DB가 레퍼로 들어왔다 치고.
             user_data = UserData.GetInstance;
+            user_data.dataChanged += new UserData.UserDataChangedEventHandler(CalcStatusProperty);
 
             InitializeComponent();
 
@@ -31,15 +32,20 @@ namespace RooStatsSim.UI.Status
             bindingStatusList = new StatusList(ref user_data);
             StatusListBox.ItemsSource = bindingStatusList;
 
-            normalPropertyList = new NormalPropertyList(ref user_data);
-            NormalProperty.ItemsSource = normalPropertyList;
-            advancedPropertyList = new AdvancedPropertyList(ref user_data);
-            AdvancedProperty.ItemsSource = advancedPropertyList;
+            CalcStatusProperty();
 
             bindingLevel = new AbilityBinding<int>(Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE), user_data.Level[(int)LEVEL_ENUM.BASE]);
             BaseLvlUI.DataContext = bindingLevel;
             bindingLevelPoint = new AbilityBinding<int>(Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE_POINT), user_data.Level[(int)LEVEL_ENUM.BASE_POINT]);
             BaseLvlUIpoint.DataContext = bindingLevelPoint;
+        }
+
+        void CalcStatusProperty()
+        {
+            normalPropertyList = new NormalPropertyList(ref user_data);
+            NormalProperty.ItemsSource = normalPropertyList;
+            advancedPropertyList = new AdvancedPropertyList(ref user_data);
+            AdvancedProperty.ItemsSource = advancedPropertyList;
         }
 
         void StatusPointUp(AbilityBinding<int> dataCxtx)
