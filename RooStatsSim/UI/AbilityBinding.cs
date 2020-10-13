@@ -4,41 +4,30 @@ using RooStatsSim.UI;
 
 namespace RooStatsSim.UI
 {
-    class AbilityBinding : INotifyPropertyChanged
+    class AbilityBinding<T> : INotifyPropertyChanged
+        where T : struct
     {
-        string _name;
+        string _name = "Unknown";
         string _enum_name;
-        int _point;
-        int _add_point;
+        T _point;
+        T _add_point;
 
-        public AbilityBinding()
-        {
-            _name = "Test";
-            _point = 1;
-            _add_point = 0;
-        }
-        public AbilityBinding(string name, int point, int add_point)
-        {
-            _name = name;
-            _enum_name = name;
-            _point = point;
-            _add_point = add_point;
-        }
-        public AbilityBinding(string name, string enum_name, int point, int add_point)
+        public AbilityBinding(string name, T point, T add_point = default(T), string enum_name = "Unknown")
         {
             _name = name;
             _enum_name = enum_name;
             _point = point;
             _add_point = add_point;
         }
-        public AbilityBinding(string name, ABILITTY ability)
+        public AbilityBinding(string name, ABILITTY<T> ability, string enum_name = "Unknown")
         {
             _name = name;
+            _enum_name = enum_name;
             _point = ability.Point;
             _add_point = ability.AddPoint;
         }
 
-        public void UpdateAbility(ABILITTY param_ability)
+        public void UpdateAbility(ABILITTY<T> param_ability)
         {
             Point = param_ability.Point;
             AddPoint = param_ability.AddPoint;
@@ -58,7 +47,7 @@ namespace RooStatsSim.UI
             get { return _enum_name; }
             set { _enum_name = value; }
         }
-        public int Point
+        public T Point
         {
             get { return _point; }
             set
@@ -67,7 +56,7 @@ namespace RooStatsSim.UI
                 OnPropertyChanged("Point");
             }
         }
-        public int AddPoint
+        public T AddPoint
         {
             get { return _add_point; }
             set
@@ -87,4 +76,5 @@ namespace RooStatsSim.UI
             handler?.Invoke(this, new PropertyChangedEventArgs(info));
         }
     }
+
 }

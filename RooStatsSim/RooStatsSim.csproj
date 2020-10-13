@@ -94,6 +94,8 @@
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\Definition.cs" />
     <Compile Include="DB\ItemDB.cs" />
+    <Compile Include="DB\Table\EnumProperty_Kor.cs" />
+    <Compile Include="DB\Table\MedalTable.cs" />
     <Compile Include="DB\Table\RidingTable.cs" />
     <Compile Include="DB\Table\SmeltingTable.cs" />
     <Compile Include="DB\Table\StatsPointTable.cs" />
@@ -142,6 +144,7 @@
     </Compile>
     <Compile Include="User\UserData.cs" />
     <Compile Include="User\UserData_Lists.cs" />
+    <Compile Include="User\UserItem.cs" />
     <Compile Include="User\User_Enum.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
