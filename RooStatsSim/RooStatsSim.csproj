@@ -95,6 +95,7 @@
     <Compile Include="DB\Definition.cs" />
     <Compile Include="DB\ItemDB.cs" />
     <Compile Include="DB\Table\EnumProperty_Kor.cs" />
+    <Compile Include="DB\Table\MedalTable.cs" />
     <Compile Include="DB\Table\RidingTable.cs" />
     <Compile Include="DB\Table\SmeltingTable.cs" />
     <Compile Include="DB\Table\StatsPointTable.cs" />

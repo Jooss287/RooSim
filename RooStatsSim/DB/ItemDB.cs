@@ -69,6 +69,8 @@ namespace RooStatsSim.DB
         MAGICAL_DAMAGE,
         DEF_P = 2000,
         MDEF_P,
+        PHYSICAL_DEC_DAMAGE,
+        MAGICAL_DEC_DAMAGE,
         MAX_HP_P = 3000,
         MAX_SP_P,
         ASPD = 6000,    //기타 관련 스텟

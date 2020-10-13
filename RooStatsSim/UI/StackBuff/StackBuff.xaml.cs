@@ -4,9 +4,8 @@ using RooStatsSim.User;
 using System.Windows.Data;
 using System.ComponentModel;
 using System;
-using System.Linq;
-using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.UI.StackBuff
 {
@@ -148,19 +147,19 @@ namespace RooStatsSim.UI.StackBuff
         private void Riding_Abaility_Up_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            AbilityBinding<double> dataCxtx = tb.DataContext as AbilityBinding<double>;
             RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, 1);
         }
         private void Riding_Abaility_Down_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            AbilityBinding<double> dataCxtx = tb.DataContext as AbilityBinding<double>;
             RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, -1);
         }
         private void Riding_Abaility_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            AbilityBinding<double> dataCxtx = tb.DataContext as AbilityBinding<double>;
 
             if (e.Delta < 0)
                 RidingPointChange(ref _user_data.Riding_ability, ref BindingRidingAbility, dataCxtx, -1);
@@ -171,19 +170,19 @@ namespace RooStatsSim.UI.StackBuff
         private void Riding_Personality_Up_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            AbilityBinding<double> dataCxtx = tb.DataContext as AbilityBinding<double>;
             RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, 1);
         }
         private void Riding_Personality_Down_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            AbilityBinding<double> dataCxtx = tb.DataContext as AbilityBinding<double>;
             RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, -1);
         }
         private void Riding_Personality_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            AbilityBinding<double> dataCxtx = tb.DataContext as AbilityBinding<double>;
 
             if (e.Delta < 0)
                 RidingPointChange(ref _user_data.Riding_personality, ref BindingRidingPersonality, dataCxtx, -1);
@@ -194,18 +193,22 @@ namespace RooStatsSim.UI.StackBuff
 
         void MedalPointChange(AbilityBinding<int> dataCxtx, int changingPoint)
         {
-            MEDAL_ENUM_KOR medalName = (MEDAL_ENUM_KOR)Enum.Parse(typeof(MEDAL_ENUM_KOR), dataCxtx.Name);
+            MEDAL_ENUM medalName = (MEDAL_ENUM)Enum.Parse(typeof(MEDAL_ENUM), dataCxtx.EnumName);
             
             _user_data.Medal.List[(int)medalName] += changingPoint;
             BindingMedalPoint[(int)medalName].Point = _user_data.Medal.List[(int)medalName];
+            _user_data.CalcUserData();
         }
 
-        void RidingPointChange(ref RIDING riding, ref RidingList bindingList, AbilityBinding<int> dataCxtx, int changingPoint)
+        void RidingPointChange(ref RIDING riding, ref RidingList bindingList, AbilityBinding<double> dataCxtx, double changingPoint)
         {
             RIDING_ENUM ridingName = (RIDING_ENUM)Enum.Parse(typeof(RIDING_ENUM), dataCxtx.EnumName);
-            
-            riding[(int)ridingName] += changingPoint;
-            bindingList[(int)ridingName].Point = riding[(int)ridingName];
+
+            if (ridingName == RIDING_ENUM.ATK_MATK_PERCENT)
+                changingPoint /= 100;
+            riding.List[(int)ridingName] += changingPoint;
+            bindingList[(int)ridingName].Point = riding.List[(int)ridingName];
+            _user_data.CalcUserData();
         }
 
     }

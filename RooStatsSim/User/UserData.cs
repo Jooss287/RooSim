@@ -49,6 +49,9 @@ namespace RooStatsSim.User
             CalcUserItem += Monster_Research.GetOption();
             CalcUserItem += Dress_Style.GetOption();
             CalcUserItem += Sticker.GetOption();
+            CalcUserItem += Medal.GetOption();
+            CalcUserItem += Riding_ability.GetOption();
+            CalcUserItem += Riding_personality.GetOption();
 
             User_Item = CalcUserItem;
 

@@ -1,8 +1,10 @@
-﻿using RooStatsSim.DB;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+
+using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.User
 {
@@ -59,21 +61,56 @@ namespace RooStatsSim.User
                 List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
             }
         }
-        public ItemDB GetATKMATK()
+        public ItemDB GetOption()
         {
             ItemDB option = new ItemDB();
-            option.i_option[ITYPE.ATK] = 4 * List[0];   //20까지 4 그이후 6
-            
+            int atk = 0;
+            double hp = 0.0;
+            double damage = 0.0;
+
+            for (int i = 0; i < List[(int)MEDAL_ENUM.VALOR]; i++)
+                atk += MedalTable.Get_ATK_MATK(i);
+            option.i_option[ITYPE.ATK] = atk;
+            option.i_option[ITYPE.MATK] = atk;
+
+            for (int i = 0; i <= List[(int)MEDAL_ENUM.GUARDIAN]; i++)
+            {
+                hp += MedalTable.Get_MaxHP(i);
+                damage += MedalTable.Get_P_M_Damage(i);
+            }
+            option.i_option[ITYPE.HP] = (int)hp;
+            option.d_option[DTYPE.PHYSICAL_DAMAGE] = damage;
+
+            hp = 0;
+            damage = 0.0;
+            for (int i = 0; i <= List[(int)MEDAL_ENUM.WISDOM]; i++)
+            {
+                hp += MedalTable.Get_MaxHP(i);
+                damage += MedalTable.Get_P_M_Damage(i);
+            }
+            option.i_option[ITYPE.HP] += (int)hp;
+            option.d_option[DTYPE.MAGICAL_DAMAGE] = damage;
+
+            damage = 0.0;
+            for (int i = 0; i <= List[(int)MEDAL_ENUM.CHARM]; i++)
+                damage += MedalTable.Get_Dec_Damage(i);
+            option.d_option[DTYPE.PHYSICAL_DEC_DAMAGE] = damage;
+
+            damage = 0.0;
+            for (int i = 0; i <= List[(int)MEDAL_ENUM.GALE]; i++)
+                damage += MedalTable.Get_Dec_Damage(i);
+            option.d_option[DTYPE.MAGICAL_DEC_DAMAGE] = damage;
+
             return option;
         }
     }
 
     public class RIDING
     {
-        public ObservableCollection<int> List { get; }
+        public ObservableCollection<double> List { get; }
         public RIDING()
         {
-            List = new ObservableCollection<int>();
+            List = new ObservableCollection<double>();
             List.CollectionChanged += OnListChanged;
 
             foreach (string riding_name in Enum.GetNames(typeof(RIDING_ENUM)))
@@ -87,6 +124,21 @@ namespace RooStatsSim.User
             {
                 List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
             }
+        }
+
+        public ItemDB GetOption()
+        {
+            ItemDB option = new ItemDB();
+
+            option.i_option[ITYPE.ATK] = (int)List[(int)RIDING_ENUM.ATK_MATK];
+            option.i_option[ITYPE.MATK] = (int)List[(int)RIDING_ENUM.ATK_MATK];
+
+            option.i_option[ITYPE.HP] = (int)List[(int)RIDING_ENUM.MAX_HP];
+            
+            option.d_option[DTYPE.ATK_P] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
+            option.d_option[DTYPE.MATK_P] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
+
+            return option;
         }
     }
 

@@ -119,7 +119,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
                                                Width="80" Margin="0,0,0,5"/>
-                                    <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
+                                    <TextBlock Text="{Binding Path=Point, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"
                                                TextAlignment="Right" Margin="0,0,30,0"/>
                                 </StackPanel>
                             </DataTemplate>

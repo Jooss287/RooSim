@@ -22,7 +22,7 @@
                                     MouseRightButtonDown="Riding_Abaility_Down_Click"
                                     MouseWheel="Riding_Abaility_MouseWheel">
                                 <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="{Binding Path=Point, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -43,7 +43,7 @@
                                     MouseRightButtonDown="Riding_Personality_Down_Click"
                                     MouseWheel="Riding_Personality_MouseWheel">
                                 <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="{Binding Path=Point, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

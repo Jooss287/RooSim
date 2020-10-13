@@ -30,14 +30,6 @@ namespace RooStatsSim.User
         CHARM,
         GALE,
     }
-    enum MEDAL_ENUM_KOR : int
-    {
-        용맹훈장,
-        수호훈장,
-        지혜훈장,
-        매력훈장,
-        질풍훈장
-    }
     enum RIDING_ENUM : int
     {
         ATK_MATK,
