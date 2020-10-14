@@ -16,7 +16,7 @@ namespace RooStatsSim.UI.Status
             foreach (STATUS_ENUM status in Enum.GetValues(typeof(STATUS_ENUM)))
             {
                 string statusName = Enum.GetName(typeof(STATUS_ENUM), status);
-                Add(new AbilityBinding<int>(statusName, param_status.Status[(int)status].Point, param_status.User_Item.i_option[(ITYPE)status]));
+                Add(new AbilityBinding<int>(statusName, param_status.Status.List[(int)status].Point, param_status.User_Item.i_option[(ITYPE)status], statusName));
             }
         }
     }

@@ -56,5 +56,11 @@ namespace RooStatsSim.DB.Table
             10,10,10,10,10,10,10,10,10,10,
             11,11,11,11,11,11,11,11,11,11,
         };
+        public static int StatNecessaryPoint(int nowStatPoint)
+        {
+            if (nowStatPoint < 1)
+                return 0;
+            return (int)(nowStatPoint / 10) + (nowStatPoint % 10 >= 9 ? 1 : 0) + 2;
+        }
     }
 }

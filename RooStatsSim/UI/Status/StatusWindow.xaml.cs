@@ -51,10 +51,13 @@ namespace RooStatsSim.UI.Status
         void StatusPointUp(AbilityBinding<int> dataCxtx)
         {
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
-            ABILITTY<int> status = user_data.Status[(int)statusName];
-            status.Point++;
-            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint -= StatsPointTable.StatusNeedPoint[status.Point];
-            dataCxtx.UpdateAbility(status);
+            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint -= user_data.Status.List[(int)statusName].NecessaryPoint;
+            user_data.Status.List[(int)statusName].Point++;
+            dataCxtx.UpdateAbility(new ABILITTY<int>()
+            {
+                Point = user_data.Status.List[(int)statusName].Point,
+                AddPoint = user_data.Status.List[(int)statusName].AddPoint
+            });
             bindingLevel.UpdateAbility(new ABILITTY<int>()
             {
                 Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
@@ -65,10 +68,13 @@ namespace RooStatsSim.UI.Status
         void StatusPointDown(AbilityBinding<int> dataCxtx)
         {
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
-            ABILITTY<int> status = user_data.Status[(int)statusName];
-            status.Point--;
-            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint += StatsPointTable.StatusNeedPoint[status.Point];
-            dataCxtx.UpdateAbility(status);
+            user_data.Status.List[(int)statusName].Point--;
+            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint += user_data.Status.List[(int)statusName].NecessaryPoint;
+            dataCxtx.UpdateAbility(new ABILITTY<int>()
+            {
+                Point = user_data.Status.List[(int)statusName].Point,
+                AddPoint = user_data.Status.List[(int)statusName].AddPoint
+            });
             bindingLevel.UpdateAbility(new ABILITTY<int>()
             {
                 Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,

@@ -176,7 +176,8 @@ namespace RooStatsSim
         {
             _status.Close();
             _info.Close();
-            _db_manager.Close();
+            if ( _db_manager != null)
+                _db_manager.Close();
         }
 
         private void StackBuff_window_Click(object sender, RoutedEventArgs e)

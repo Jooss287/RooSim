@@ -80,17 +80,60 @@ namespace RooStatsSim.User
         }
     }
 
-    public class STATUS : List<ABILITTY<int>>
+    public class STATUS
     {
-        public ObservableCollection<int> List { get; }
+        public class StatPoint
+        {
+            int _point = 1;
+            int _add_point = 0;
+            int _necessary_point = 2;
+            public int Point
+            {
+                get { return _point; }
+                set
+                {
+                    if (value > 0)
+                    {
+                        _point = value;
+                        _necessary_point = StatsPointTable.StatNecessaryPoint(_point);
+                    }
+                }
+            }
+            public int AddPoint
+            {
+                get { return _add_point; }
+                set
+                {
+                    if (value > 0)
+                        _add_point = value;
+                }
+            }
+            public int NecessaryPoint
+            {
+                get { return _necessary_point; }
+                set
+                {
+                    _necessary_point = value;
+                }
+            }
+        }
+        public ObservableCollection<StatPoint> List { get; }
         public STATUS()
         {
-            Add(new ABILITTY<int>());  //STR
-            Add(new ABILITTY<int>());
-            Add(new ABILITTY<int>());
-            Add(new ABILITTY<int>());
-            Add(new ABILITTY<int>());
-            Add(new ABILITTY<int>());  //LUK
+            List = new ObservableCollection<StatPoint>();
+            List.CollectionChanged += OnListChanged;
+
+            foreach (string medal_name in Enum.GetNames(typeof(STATUS_ENUM)))
+            {
+                List.Add(new StatPoint());
+            }
+        }
+        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            //if (Convert.ToInt32(args.NewItems[0]) < 0)
+            //{
+            //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
+            //}
         }
     }
 
