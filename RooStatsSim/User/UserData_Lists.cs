@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-
+using System.Runtime.InteropServices.WindowsRuntime;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 
@@ -10,8 +10,27 @@ namespace RooStatsSim.User
 {
     public class ABILITTY<T> where T : struct
     {
-        public T Point;
-        public T AddPoint;
+        public T _point;
+        public T _add_point;
+
+        public T Point
+        {
+            get { return _point; }
+            set
+            {
+                if (Convert.ToInt32(value) >= 0)
+                    _point = value;
+            }
+        }
+        public T AddPoint
+        {
+            get { return _add_point; }
+            set
+            {
+                if (Convert.ToInt32(value) >= 0)
+                    _add_point = value;
+            }
+        }
         public ABILITTY() { Point = default(T); AddPoint = default(T); }
     }
 
