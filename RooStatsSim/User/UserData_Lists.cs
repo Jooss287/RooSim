@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
@@ -27,26 +28,61 @@ namespace RooStatsSim.User
             get { return _add_point; }
             set
             {
-                if (Convert.ToInt32(value) >= 0)
+                //if (Convert.ToInt32(value) >= 0)
                     _add_point = value;
             }
         }
         public ABILITTY() { Point = default(T); AddPoint = default(T); }
     }
 
-    public class LEVEL : List<ABILITTY<int>>
+    public class LEVEL
     {
+        public class LvlPoint
+        {
+            int _point = 1;
+            int _remain_point = 0;
+            public int Point
+            {
+                get { return _point; }
+                set
+                {
+                    if (value > 0) 
+                        _point = value;
+                }
+            }
+            public int RemainPoint
+            {
+                get { return _remain_point; }
+                set {
+                    _remain_point = value;
+                }
+            }
+        }
+        public ObservableCollection<LvlPoint> List { get; }
+
         public LEVEL()
         {
-            Add(new ABILITTY<int>());  //BASE
-            Add(new ABILITTY<int>());
-            Add(new ABILITTY<int>());  //JOB
-            Add(new ABILITTY<int>());
+            List = new ObservableCollection<LvlPoint>();
+            List.CollectionChanged += OnListChanged;
+
+            foreach (string level_name in Enum.GetNames(typeof(LEVEL_ENUM)))
+            {
+                List.Add(new LvlPoint());
+            }
+        }
+
+        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            //if (Convert.ToInt32(args.NewItems[0]) < 0)
+            //{
+            //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
+            //}
         }
     }
 
     public class STATUS : List<ABILITTY<int>>
     {
+        public ObservableCollection<int> List { get; }
         public STATUS()
         {
             Add(new ABILITTY<int>());  //STR

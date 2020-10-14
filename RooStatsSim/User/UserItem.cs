@@ -17,6 +17,13 @@ namespace RooStatsSim.User
         
         public void MakeNormalProperty()
         {
+            i_option[ITYPE.STR] = 0;
+            i_option[ITYPE.AGI] = 0;
+            i_option[ITYPE.VIT] = 0;
+            i_option[ITYPE.INT] = 0;
+            i_option[ITYPE.DEX] = 0;
+            i_option[ITYPE.LUK] = 0;
+
             i_option[ITYPE.HP] = 0;
             i_option[ITYPE.SP] = 0;
             i_option[ITYPE.ATK] = 0;

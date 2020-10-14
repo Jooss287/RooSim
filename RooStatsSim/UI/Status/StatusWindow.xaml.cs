@@ -15,7 +15,6 @@ namespace RooStatsSim.UI.Status
         UserData user_data;
 
         AbilityBinding<int> bindingLevel;
-        AbilityBinding<int> bindingLevelPoint;
         StatusList bindingStatusList;
 
         NormalPropertyList normalPropertyList;
@@ -34,10 +33,11 @@ namespace RooStatsSim.UI.Status
 
             CalcStatusProperty();
 
-            bindingLevel = new AbilityBinding<int>(Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE), user_data.Level[(int)LEVEL_ENUM.BASE]);
+            bindingLevel = new AbilityBinding<int>("Level", user_data.Level.List[(int)LEVEL_ENUM.BASE].Point, 
+                                                            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint, 
+                                                            Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE));
             BaseLvlUI.DataContext = bindingLevel;
-            bindingLevelPoint = new AbilityBinding<int>(Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE_POINT), user_data.Level[(int)LEVEL_ENUM.BASE_POINT]);
-            BaseLvlUIpoint.DataContext = bindingLevelPoint;
+            BaseLvlUIpoint.DataContext = bindingLevel;
         }
 
         void CalcStatusProperty()
@@ -52,44 +52,52 @@ namespace RooStatsSim.UI.Status
         {
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
             ABILITTY<int> status = user_data.Status[(int)statusName];
-            ABILITTY<int> LevelStatsPoint = user_data.Level[(int)LEVEL_ENUM.BASE_POINT];
-            LevelStatsPoint.Point -= StatsPointTable.StatusNeedPoint[status.Point];
             status.Point++;
+            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint -= StatsPointTable.StatusNeedPoint[status.Point];
             dataCxtx.UpdateAbility(status);
-            bindingLevelPoint.UpdateAbility(LevelStatsPoint);
+            bindingLevel.UpdateAbility(new ABILITTY<int>()
+            {
+                Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
+                AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
+            });
         }
 
         void StatusPointDown(AbilityBinding<int> dataCxtx)
         {
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
             ABILITTY<int> status = user_data.Status[(int)statusName];
-            ABILITTY<int> LevelStatsPoint = user_data.Level[(int)LEVEL_ENUM.BASE_POINT];
             status.Point--;
-            LevelStatsPoint.Point += StatsPointTable.StatusNeedPoint[status.Point];
+            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint += StatsPointTable.StatusNeedPoint[status.Point];
             dataCxtx.UpdateAbility(status);
-            bindingLevelPoint.UpdateAbility(LevelStatsPoint);
+            bindingLevel.UpdateAbility(new ABILITTY<int>()
+            {
+                Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
+                AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
+            });
         }
 
         void LevelUp(AbilityBinding<int> dataCxtx)
         {
-            LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.Name);
-            ABILITTY<int> Level = user_data.Level[(int)LevelName];
-            ABILITTY<int> LevelStatsPoint = user_data.Level[(int)LEVEL_ENUM.BASE_POINT];
-            Level.Point++;
-            LevelStatsPoint.Point += StatsPointTable.LevelUpStatusPoint[Level.Point];
-            dataCxtx.UpdateAbility(Level);
-            bindingLevelPoint.UpdateAbility(LevelStatsPoint);
+            LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
+            int nextLevel = ++user_data.Level.List[(int)LevelName].Point;
+            user_data.Level.List[(int)LevelName].RemainPoint += StatsPointTable.LevelUpStatusPoint(nextLevel);
+            dataCxtx.UpdateAbility(new ABILITTY<int>()
+            {
+                Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
+                AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
+            });
         }
 
         void LevelDown(AbilityBinding<int> dataCxtx)
         {
-            LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.Name);
-            ABILITTY<int> Level = user_data.Level[(int)LevelName];
-            ABILITTY<int> LevelStatsPoint = user_data.Level[(int)LEVEL_ENUM.BASE_POINT];
-            Level.Point--;
-            LevelStatsPoint.Point -= StatsPointTable.LevelUpStatusPoint[Level.Point];
-            dataCxtx.UpdateAbility(Level);
-            bindingLevelPoint.UpdateAbility(LevelStatsPoint);
+            LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
+            int nextLevel = user_data.Level.List[(int)LevelName].Point--;
+            user_data.Level.List[(int)LevelName].RemainPoint -= StatsPointTable.LevelUpStatusPoint(nextLevel);
+            dataCxtx.UpdateAbility(new ABILITTY<int>()
+            {
+                Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
+                AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
+            });
         }
 
         #region Mouse reaction func

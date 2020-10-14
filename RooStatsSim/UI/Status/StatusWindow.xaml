@@ -40,7 +40,7 @@
                            FontSize="9" FontWeight="Bold" 
                            TextAlignment="Right" VerticalAlignment="Bottom" 
                            Margin="5,0,0,0" />
-                    <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding Path=AddPoint, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="9" FontWeight="Bold" 
                            VerticalAlignment="Bottom" HorizontalAlignment="Center" 
                            Margin="5,0,0,0" />

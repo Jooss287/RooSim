@@ -12,7 +12,7 @@ namespace RooStatsSim.Equation
 
         public StatusATK(ATTACK_TYPE attack_type, ref ItemAbility ability, UserData user)
         {
-            int BASE = user.Level[(int)LEVEL_ENUM.BASE].Point;
+            int BASE = user.Level.List[(int)LEVEL_ENUM.BASE].Point;
             int STR = user.Status[(int)STATUS_ENUM.STR].Point + user.Status[(int)STATUS_ENUM.STR].AddPoint;
             int DEX = user.Status[(int)STATUS_ENUM.DEX].Point + user.Status[(int)STATUS_ENUM.DEX].AddPoint;
             int LUK = user.Status[(int)STATUS_ENUM.LUK].Point + user.Status[(int)STATUS_ENUM.LUK].AddPoint;
