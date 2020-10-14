@@ -40,7 +40,8 @@ namespace RooStatsSim.User
 
         #region Userdata event
         public delegate void UserDataChangedEventHandler();
-        public event UserDataChangedEventHandler dataChanged;
+        public event UserDataChangedEventHandler itemDataChanged;
+        //public event UserDataChangedEventHandler StatusDataChanged;
 
         public void CalcUserData()
         {
@@ -55,8 +56,8 @@ namespace RooStatsSim.User
 
             User_Item = CalcUserItem;
 
-            if (dataChanged != null)
-                dataChanged();
+            if (itemDataChanged != null)
+                itemDataChanged();
         }
         #endregion
     }

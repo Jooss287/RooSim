@@ -27,6 +27,8 @@ namespace RooStatsSim.User
             i_option[ITYPE.SMELTING_DEF] = 0;
             i_option[ITYPE.SMELTING_MATK] = 0;
             i_option[ITYPE.SMELTING_MDEF] = 0;
+            i_option[ITYPE.WEAPON_ATK] = 0;
+            i_option[ITYPE.WEAPON_MATK] = 0;
             i_option[ITYPE.HP_RECOVERY] = 0;
             i_option[ITYPE.SP_RECOVERY] = 0;
             i_option[ITYPE.HIT] = 0;

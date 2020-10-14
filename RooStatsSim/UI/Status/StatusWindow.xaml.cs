@@ -24,7 +24,7 @@ namespace RooStatsSim.UI.Status
         {
             //DB가 레퍼로 들어왔다 치고.
             user_data = UserData.GetInstance;
-            user_data.dataChanged += new UserData.UserDataChangedEventHandler(CalcStatusProperty);
+            user_data.itemDataChanged += new UserData.UserDataChangedEventHandler(CalcStatusProperty);
 
             InitializeComponent();
 

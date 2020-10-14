@@ -46,6 +46,8 @@ namespace RooStatsSim.DB
         MATK,
         SMELTING_ATK,
         SMELTING_MATK,
+        WEAPON_ATK,
+        WEAPON_MATK,
         DEF = 2000,     //방어력 관련 스텟
         MDEF,
         SMELTING_DEF,
