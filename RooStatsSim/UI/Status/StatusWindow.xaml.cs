@@ -14,9 +14,8 @@ namespace RooStatsSim.UI.Status
     {
         UserData user_data;
 
-        AbilityBinding<int> bindingLevel;
+        LevelList bindingLevel;
         StatusList bindingStatusList;
-
         NormalPropertyList normalPropertyList;
         AdvancedPropertyList advancedPropertyList;
         public StatusWindow()
@@ -34,12 +33,9 @@ namespace RooStatsSim.UI.Status
 
         void CalcStatusProperty()
         {
-            bindingLevel = new AbilityBinding<int>("Level", user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
-                                                            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint,
-                                                            Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE));
-            BaseLvlUI.DataContext = bindingLevel;
+            bindingLevel = new LevelList(ref user_data);
+            LvlUI.ItemsSource = bindingLevel;
             BaseLvlUIpoint.DataContext = bindingLevel;
-
             bindingStatusList = new StatusList(ref user_data);
             StatusListBox.ItemsSource = bindingStatusList;
             normalPropertyList = new NormalPropertyList(ref user_data);
@@ -53,18 +49,8 @@ namespace RooStatsSim.UI.Status
             if (dataCxtx == null)
                 return;
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
-            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint -= user_data.Status.List[(int)statusName].NecessaryPoint;
+            user_data.Base_Level.RemainPoint -= user_data.Status.List[(int)statusName].NecessaryPoint;
             user_data.Status.List[(int)statusName].Point++;
-            dataCxtx.UpdateAbility(new ABILITTY<int>()
-            {
-                Point = user_data.Status.List[(int)statusName].Point,
-                AddPoint = user_data.Status.List[(int)statusName].AddPoint
-            });
-            bindingLevel.UpdateAbility(new ABILITTY<int>()
-            {
-                Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
-                AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
-            });
             user_data.CalcUserData();
         }
 
@@ -76,17 +62,7 @@ namespace RooStatsSim.UI.Status
             int nextPoint = user_data.Status.List[(int)statusName].Point - 1;
             user_data.Status.List[(int)statusName].Point = nextPoint;
             if (nextPoint != 0)
-                user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint += user_data.Status.List[(int)statusName].NecessaryPoint;
-            dataCxtx.UpdateAbility(new ABILITTY<int>()
-            {
-                Point = user_data.Status.List[(int)statusName].Point,
-                AddPoint = user_data.Status.List[(int)statusName].AddPoint
-            });
-            bindingLevel.UpdateAbility(new ABILITTY<int>()
-            {
-                Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
-                AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
-            });
+                user_data.Base_Level.RemainPoint += user_data.Status.List[(int)statusName].NecessaryPoint;
             user_data.CalcUserData();
         }
 
@@ -95,13 +71,14 @@ namespace RooStatsSim.UI.Status
             if (dataCxtx == null)
                 return;
             LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
-            int nextLevel = ++user_data.Level.List[(int)LevelName].Point;
-            user_data.Level.List[(int)LevelName].RemainPoint += StatsPointTable.LevelUpStatusPoint(nextLevel);
-            dataCxtx.UpdateAbility(new ABILITTY<int>()
+            if ( LevelName == LEVEL_ENUM.BASE)
             {
-                Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
-                AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
-            });
+                int nextLevel = ++user_data.Base_Level.Point;
+                user_data.Base_Level.RemainPoint += StatsPointTable.LevelUpStatusPoint(nextLevel);
+            }
+            else
+                user_data.Job_Level.Point++;
+
             user_data.CalcUserData();
         }
 
@@ -110,13 +87,14 @@ namespace RooStatsSim.UI.Status
             if (dataCxtx == null)
                 return;
             LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
-            int nextLevel = user_data.Level.List[(int)LevelName].Point--;
-            user_data.Level.List[(int)LevelName].RemainPoint -= StatsPointTable.LevelUpStatusPoint(nextLevel);
-            dataCxtx.UpdateAbility(new ABILITTY<int>()
+            if (LevelName == LEVEL_ENUM.BASE)
             {
-                Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
-                AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
-            });
+                int nextLevel = user_data.Base_Level.Point--;
+                user_data.Base_Level.RemainPoint -= StatsPointTable.LevelUpStatusPoint(nextLevel);
+            }
+            else
+                user_data.Job_Level.Point--;
+            
             user_data.CalcUserData();
         }
 
@@ -125,7 +103,6 @@ namespace RooStatsSim.UI.Status
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-
             StatusPointUp(dataCxtx);
         }
 
@@ -133,7 +110,6 @@ namespace RooStatsSim.UI.Status
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-
             StatusPointDown(dataCxtx);
         }
 
@@ -141,7 +117,6 @@ namespace RooStatsSim.UI.Status
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-
             LevelUp(dataCxtx);
         }
 
@@ -149,7 +124,6 @@ namespace RooStatsSim.UI.Status
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-
             LevelDown(dataCxtx);
         }
 
@@ -157,7 +131,6 @@ namespace RooStatsSim.UI.Status
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-
             if (e.Delta < 0)
                 LevelDown(dataCxtx);
             else
@@ -169,7 +142,6 @@ namespace RooStatsSim.UI.Status
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-
             if (e.Delta < 0)
                 StatusPointDown(dataCxtx);
             else

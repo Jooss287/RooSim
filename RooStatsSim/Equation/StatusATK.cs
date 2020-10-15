@@ -10,7 +10,7 @@ namespace RooStatsSim.Equation
         
         public static int GetStatusATK(ATTACK_TYPE atk_type, UserData user)
         {
-            int BASE = user.Level.List[(int)LEVEL_ENUM.BASE].Point;
+            int BASE = user.Base_Level.Point;
             int STR = user.Status.List[(int)STATUS_ENUM.STR].Point + user.Status.List[(int)STATUS_ENUM.STR].AddPoint;
             int DEX = user.Status.List[(int)STATUS_ENUM.DEX].Point + user.Status.List[(int)STATUS_ENUM.DEX].AddPoint;
             int LUK = user.Status.List[(int)STATUS_ENUM.LUK].Point + user.Status.List[(int)STATUS_ENUM.LUK].AddPoint;
@@ -27,10 +27,9 @@ namespace RooStatsSim.Equation
         }
         public static int GetStatusBonusATK(ATTACK_TYPE atk_type, UserData user)
         {
-            int BASE = user.Level.List[(int)LEVEL_ENUM.BASE].Point;
+            int BASE = user.Base_Level.Point;
             int STR = user.Status.List[(int)STATUS_ENUM.STR].Point + user.Status.List[(int)STATUS_ENUM.STR].AddPoint;
             int DEX = user.Status.List[(int)STATUS_ENUM.DEX].Point + user.Status.List[(int)STATUS_ENUM.DEX].AddPoint;
-            int LUK = user.Status.List[(int)STATUS_ENUM.LUK].Point + user.Status.List[(int)STATUS_ENUM.LUK].AddPoint;
             int statusBonusATK = 0;
             if (atk_type == ATTACK_TYPE.MELEE_TYPE)
             {

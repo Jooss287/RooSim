@@ -35,48 +35,48 @@ namespace RooStatsSim.User
         public ABILITTY() { Point = default(T); AddPoint = default(T); }
     }
 
-    public class LEVEL
+    public class BASE_LEVEL
     {
-        public class LvlPoint
+        int _point = 1;
+        int _remain_point = 0;
+        public int Point
         {
-            int _point = 1;
-            int _remain_point = 0;
-            public int Point
+            get { return _point; }
+            set
             {
-                get { return _point; }
-                set
-                {
-                    if (value > 0) 
-                        _point = value;
-                }
-            }
-            public int RemainPoint
-            {
-                get { return _remain_point; }
-                set {
-                    _remain_point = value;
-                }
+                if (value > 0) 
+                    _point = value;
             }
         }
-        public ObservableCollection<LvlPoint> List { get; }
-
-        public LEVEL()
+        public int RemainPoint
         {
-            List = new ObservableCollection<LvlPoint>();
-            List.CollectionChanged += OnListChanged;
-
-            foreach (string level_name in Enum.GetNames(typeof(LEVEL_ENUM)))
-            {
-                List.Add(new LvlPoint());
+            get { return _remain_point; }
+            set {
+                _remain_point = value;
             }
         }
+    }
 
-        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
+    public class JOB_LEVEL
+    {
+        int _point = 1;
+        int _remain_point = 0;
+        public int Point
         {
-            //if (Convert.ToInt32(args.NewItems[0]) < 0)
-            //{
-            //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
-            //}
+            get { return _point; }
+            set
+            {
+                if (value > 0)
+                    _point = value;
+            }
+        }
+        public int RemainPoint
+        {
+            get { return _remain_point; }
+            set
+            {
+                _remain_point = value;
+            }
         }
     }
 

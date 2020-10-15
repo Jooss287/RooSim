@@ -28,7 +28,8 @@ namespace RooStatsSim.User
         }
         #endregion
 
-        public LEVEL Level = new LEVEL();
+        public BASE_LEVEL Base_Level = new BASE_LEVEL();
+        public JOB_LEVEL Job_Level = new JOB_LEVEL();
         public STATUS Status = new STATUS();
         public MEDAL Medal = new MEDAL();
         public MONSTER_RESEARCH Monster_Research = new MONSTER_RESEARCH();

@@ -7,6 +7,21 @@ using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.UI.Status
 {
+    class LevelList : ObservableCollection<AbilityBinding<int>>
+    {
+        public LevelList()
+        { }
+        public LevelList(ref UserData param_status)
+        {
+            Add(new AbilityBinding<int>("Level", param_status.Base_Level.Point,
+                                                        param_status.Base_Level.RemainPoint,
+                                                        Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE)));
+            Add(new AbilityBinding<int>("Job", param_status.Job_Level.Point,
+                                                        param_status.Job_Level.RemainPoint,
+                                                        Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.JOB)));
+        }
+    }
+
     class StatusList : ObservableCollection<AbilityBinding<int>>
     {
         public StatusList()
