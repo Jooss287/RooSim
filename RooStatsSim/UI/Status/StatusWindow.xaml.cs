@@ -28,20 +28,20 @@ namespace RooStatsSim.UI.Status
             InitializeComponent();
 
             DataContext = this;
-            bindingStatusList = new StatusList(ref user_data);
-            StatusListBox.ItemsSource = bindingStatusList;
-
+            
             CalcStatusProperty();
-
-            bindingLevel = new AbilityBinding<int>("Level", user_data.Level.List[(int)LEVEL_ENUM.BASE].Point, 
-                                                            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint, 
-                                                            Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE));
-            BaseLvlUI.DataContext = bindingLevel;
-            BaseLvlUIpoint.DataContext = bindingLevel;
         }
 
         void CalcStatusProperty()
         {
+            bindingLevel = new AbilityBinding<int>("Level", user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
+                                                            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint,
+                                                            Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE));
+            BaseLvlUI.DataContext = bindingLevel;
+            BaseLvlUIpoint.DataContext = bindingLevel;
+
+            bindingStatusList = new StatusList(ref user_data);
+            StatusListBox.ItemsSource = bindingStatusList;
             normalPropertyList = new NormalPropertyList(ref user_data);
             NormalProperty.ItemsSource = normalPropertyList;
             advancedPropertyList = new AdvancedPropertyList(ref user_data);
@@ -50,6 +50,8 @@ namespace RooStatsSim.UI.Status
 
         void StatusPointUp(AbilityBinding<int> dataCxtx)
         {
+            if (dataCxtx == null)
+                return;
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
             user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint -= user_data.Status.List[(int)statusName].NecessaryPoint;
             user_data.Status.List[(int)statusName].Point++;
@@ -63,10 +65,13 @@ namespace RooStatsSim.UI.Status
                 Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
                 AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
             });
+            user_data.CalcUserData();
         }
 
         void StatusPointDown(AbilityBinding<int> dataCxtx)
         {
+            if (dataCxtx == null)
+                return;
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
             int nextPoint = user_data.Status.List[(int)statusName].Point - 1;
             user_data.Status.List[(int)statusName].Point = nextPoint;
@@ -82,10 +87,13 @@ namespace RooStatsSim.UI.Status
                 Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
                 AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
             });
+            user_data.CalcUserData();
         }
 
         void LevelUp(AbilityBinding<int> dataCxtx)
         {
+            if (dataCxtx == null)
+                return;
             LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
             int nextLevel = ++user_data.Level.List[(int)LevelName].Point;
             user_data.Level.List[(int)LevelName].RemainPoint += StatsPointTable.LevelUpStatusPoint(nextLevel);
@@ -94,10 +102,13 @@ namespace RooStatsSim.UI.Status
                 Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
                 AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
             });
+            user_data.CalcUserData();
         }
 
         void LevelDown(AbilityBinding<int> dataCxtx)
         {
+            if (dataCxtx == null)
+                return;
             LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
             int nextLevel = user_data.Level.List[(int)LevelName].Point--;
             user_data.Level.List[(int)LevelName].RemainPoint -= StatsPointTable.LevelUpStatusPoint(nextLevel);
@@ -106,6 +117,7 @@ namespace RooStatsSim.UI.Status
                 Point = user_data.Level.List[(int)LEVEL_ENUM.BASE].Point,
                 AddPoint = user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint
             });
+            user_data.CalcUserData();
         }
 
         #region Mouse reaction func

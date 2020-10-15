@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using RooStatsSim.DB;
+using RooStatsSim.Equation;
 
 namespace RooStatsSim.User
 {
@@ -46,6 +47,8 @@ namespace RooStatsSim.User
         public void CalcUserData()
         {
             UserItem CalcUserItem = new UserItem();
+
+            CalcUserItem.i_option[ITYPE.STATUS_ATK] = StatusATK.GetStatusATK(Equation.Job.ATTACK_TYPE.MELEE_TYPE, this);
 
             CalcUserItem += Monster_Research.GetOption();
             CalcUserItem += Dress_Style.GetOption();
