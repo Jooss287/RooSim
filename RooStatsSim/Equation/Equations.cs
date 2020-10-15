@@ -15,7 +15,7 @@ namespace RooStatsSim.DB
 
     class Equations
     {
-        public Equations(ATTACK_TYPE atk_type)
+        public Equations(ATTACK_TYPE atk_type=ATTACK_TYPE.MELEE_TYPE)
         {
             attack_type = atk_type;
         }

@@ -44,8 +44,14 @@ namespace RooStatsSim.User
             get { return _point; }
             set
             {
-                if (value > 0) 
-                    _point = value;
+                if (value <= 0)
+                    return;
+                
+                if ( _point < value)
+                    RemainPoint += StatsPointTable.LevelChangeStatusPoint(_point, value);
+                else
+                    RemainPoint -= StatsPointTable.LevelChangeStatusPoint(value, _point);
+                _point = value;
             }
         }
         public int RemainPoint

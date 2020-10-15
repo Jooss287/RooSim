@@ -66,35 +66,16 @@ namespace RooStatsSim.UI.Status
             user_data.CalcUserData();
         }
 
-        void LevelUp(AbilityBinding<int> dataCxtx)
-        {
-            if (dataCxtx == null)
-                return;
-            LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
-            if ( LevelName == LEVEL_ENUM.BASE)
-            {
-                int nextLevel = ++user_data.Base_Level.Point;
-                user_data.Base_Level.RemainPoint += StatsPointTable.LevelUpStatusPoint(nextLevel);
-            }
-            else
-                user_data.Job_Level.Point++;
-
-            user_data.CalcUserData();
-        }
-
-        void LevelDown(AbilityBinding<int> dataCxtx)
+        void LevelChange(AbilityBinding<int> dataCxtx, int changeValue)
         {
             if (dataCxtx == null)
                 return;
             LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
             if (LevelName == LEVEL_ENUM.BASE)
-            {
-                int nextLevel = user_data.Base_Level.Point--;
-                user_data.Base_Level.RemainPoint -= StatsPointTable.LevelUpStatusPoint(nextLevel);
-            }
+                user_data.Base_Level.Point += changeValue;
             else
-                user_data.Job_Level.Point--;
-            
+                user_data.Job_Level.Point += changeValue;
+
             user_data.CalcUserData();
         }
 
@@ -117,14 +98,14 @@ namespace RooStatsSim.UI.Status
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            LevelUp(dataCxtx);
+            LevelChange(dataCxtx, 1);
         }
 
         private void LevelDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            LevelDown(dataCxtx);
+            LevelChange(dataCxtx, -1);
         }
 
         private void Level_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
@@ -132,9 +113,9 @@ namespace RooStatsSim.UI.Status
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
             if (e.Delta < 0)
-                LevelDown(dataCxtx);
+                LevelChange(dataCxtx, -1);
             else
-                LevelUp(dataCxtx);
+                LevelChange(dataCxtx, +1);
                 
         }
 
