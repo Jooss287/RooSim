@@ -68,8 +68,10 @@ namespace RooStatsSim.UI.Status
         void StatusPointDown(AbilityBinding<int> dataCxtx)
         {
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
-            user_data.Status.List[(int)statusName].Point--;
-            user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint += user_data.Status.List[(int)statusName].NecessaryPoint;
+            int nextPoint = user_data.Status.List[(int)statusName].Point - 1;
+            user_data.Status.List[(int)statusName].Point = nextPoint;
+            if (nextPoint != 0)
+                user_data.Level.List[(int)LEVEL_ENUM.BASE].RemainPoint += user_data.Status.List[(int)statusName].NecessaryPoint;
             dataCxtx.UpdateAbility(new ABILITTY<int>()
             {
                 Point = user_data.Status.List[(int)statusName].Point,
