@@ -15,6 +15,7 @@ using RooStatsSim.UI.Manager;
 using RooStatsSim.UI.ACK;
 using RooStatsSim.User;
 using RooStatsSim.UI.StackBuff;
+using RooStatsSim.UI.Equipment;
 
 namespace RooStatsSim
 {
@@ -27,6 +28,7 @@ namespace RooStatsSim
         StatusWindow _status = new StatusWindow();
         ProgramInfo _info = new ProgramInfo();
         StackBuff _stacK_buff = new StackBuff();
+        EquipWindow _equip = new EquipWindow();
 
         public MainWindow()
         {
@@ -45,6 +47,8 @@ namespace RooStatsSim
             //DB생성, Window open 등
 
             _status.Show();
+            _stacK_buff.Show();
+            _equip.Show();
             
         }
 
@@ -332,7 +336,10 @@ namespace RooStatsSim
 
         private void Equip_window_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_equip.IsVisible)
+                _equip.Hide();
+            else
+                _equip.Show();
         }
     }
 }
