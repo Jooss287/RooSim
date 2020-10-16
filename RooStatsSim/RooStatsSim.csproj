@@ -139,6 +139,9 @@
     <Compile Include="UI\Manager\MonsterManager.xaml.cs">
       <DependentUpon>MonsterManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Menu\MenuBox.xaml.cs">
+      <DependentUpon>MenuBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
       <DependentUpon>StackBuff.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,10 @@
     <Page Include="UI\Manager\MonsterManager.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Menu\MenuBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\StackBuff\StackBuff.xaml">
       <SubType>Designer</SubType>
