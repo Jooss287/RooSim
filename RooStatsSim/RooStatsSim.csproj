@@ -123,6 +123,10 @@
     <Compile Include="UI\ACK\ProgramInfo.xaml.cs">
       <DependentUpon>ProgramInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Equipment\Equip.xaml.cs">
+      <DependentUpon>Equip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Equipment\EquipList.cs" />
     <Compile Include="UI\Manager\ItemListBox.cs" />
     <Compile Include="UI\Manager\ItemManager.xaml.cs">
       <DependentUpon>ItemManager.xaml</DependentUpon>
@@ -159,6 +163,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\ACK\ProgramInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Equipment\Equip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
