@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace RooStatsSim.UI.Equipment
 {
     /// <summary>
-    /// EquipWindow.xaml에 대한 상호 작용 논리
+    /// Equip.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class EquipWindow : Window
+    public partial class Equip : Page
     {
-        public EquipWindow()
+        public Equip()
         {
             InitializeComponent();
         }

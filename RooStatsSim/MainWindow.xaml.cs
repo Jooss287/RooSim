@@ -28,7 +28,7 @@ namespace RooStatsSim
         StatusWindow _status = new StatusWindow();
         ProgramInfo _info = new ProgramInfo();
         StackBuff _stacK_buff = new StackBuff();
-        EquipWindow _equip = new EquipWindow();
+        Equip _equip = new Equip();
 
         public MainWindow()
         {
@@ -48,7 +48,7 @@ namespace RooStatsSim
 
             _status.Show();
             _stacK_buff.Show();
-            _equip.Show();
+            //_equip.Show();
             
         }
 
@@ -337,9 +337,9 @@ namespace RooStatsSim
         private void Equip_window_Click(object sender, RoutedEventArgs e)
         {
             if (_equip.IsVisible)
-                _equip.Hide();
+                _equip.Visibility = Visibility.Hidden;
             else
-                _equip.Show();
+                _equip.Visibility = Visibility.Visible;
         }
     }
 }
