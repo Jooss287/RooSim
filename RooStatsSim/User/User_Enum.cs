@@ -9,9 +9,7 @@ namespace RooStatsSim.User
     enum LEVEL_ENUM : int
     {
         BASE = 0,
-        BASE_POINT,
         JOB,
-        JOB_POINT,
     }
     enum STATUS_ENUM : int
     {

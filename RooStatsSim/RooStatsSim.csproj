@@ -109,6 +109,7 @@
     <Compile Include="Equation\Job\HighPrist.cs" />
     <Compile Include="Equation\Job\HighWizard.cs" />
     <Compile Include="Equation\Job\JobSelect.cs" />
+    <Compile Include="Equation\Job\Novice.cs" />
     <Compile Include="Equation\Job\LoadKnight.cs" />
     <Compile Include="Equation\Job\Sniper.cs" />
     <Compile Include="Equation\Job\WhiteSmith.cs" />

@@ -7,6 +7,21 @@ using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.UI.Status
 {
+    class LevelList : ObservableCollection<AbilityBinding<int>>
+    {
+        public LevelList()
+        { }
+        public LevelList(ref UserData param_status)
+        {
+            Add(new AbilityBinding<int>("Level", param_status.Base_Level.Point,
+                                                        param_status.Base_Level.RemainPoint,
+                                                        Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE)));
+            Add(new AbilityBinding<int>("Job", param_status.Job_Level.Point,
+                                                        param_status.Job_Level.RemainPoint,
+                                                        Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.JOB)));
+        }
+    }
+
     class StatusList : ObservableCollection<AbilityBinding<int>>
     {
         public StatusList()
@@ -16,7 +31,7 @@ namespace RooStatsSim.UI.Status
             foreach (STATUS_ENUM status in Enum.GetValues(typeof(STATUS_ENUM)))
             {
                 string statusName = Enum.GetName(typeof(STATUS_ENUM), status);
-                Add(new AbilityBinding<int>(statusName, param_status.Status[(int)status].Point, param_status.Status[(int)status].AddPoint));
+                Add(new AbilityBinding<int>(statusName, param_status.Status.List[(int)status].Point, param_status.User_Item.i_option[(ITYPE)status], statusName));
             }
         }
     }
@@ -35,6 +50,10 @@ namespace RooStatsSim.UI.Status
             Add(new AbilityBinding<int>("제련 DEF", user_data.User_Item.i_option[ITYPE.SMELTING_DEF], 0, Enum.GetName(typeof(ITYPE), ITYPE.SMELTING_DEF)));
             Add(new AbilityBinding<int>("제련 MATK", user_data.User_Item.i_option[ITYPE.SMELTING_MATK], 0, Enum.GetName(typeof(ITYPE), ITYPE.SMELTING_MATK)));
             Add(new AbilityBinding<int>("제련 MDEF", user_data.User_Item.i_option[ITYPE.SMELTING_MDEF], 0, Enum.GetName(typeof(ITYPE), ITYPE.SMELTING_MDEF)));
+            Add(new AbilityBinding<int>("무기 ATK", user_data.User_Item.i_option[ITYPE.WEAPON_ATK], 0, Enum.GetName(typeof(ITYPE), ITYPE.WEAPON_ATK)));
+            Add(new AbilityBinding<int>("무기 MATK", user_data.User_Item.i_option[ITYPE.WEAPON_MATK], 0, Enum.GetName(typeof(ITYPE), ITYPE.WEAPON_MATK)));
+            Add(new AbilityBinding<int>("스텟 ATK", user_data.User_Item.i_option[ITYPE.STATUS_ATK], 0, Enum.GetName(typeof(ITYPE), ITYPE.STATUS_ATK)));
+            Add(new AbilityBinding<int>("스텟 MATK", user_data.User_Item.i_option[ITYPE.STATUS_MATK], 0, Enum.GetName(typeof(ITYPE), ITYPE.STATUS_MATK)));
             Add(new AbilityBinding<int>("HP 자연 회복", user_data.User_Item.i_option[ITYPE.HP_RECOVERY], 0, Enum.GetName(typeof(ITYPE), ITYPE.HP_RECOVERY)));
             Add(new AbilityBinding<int>("SP 자연 회복", user_data.User_Item.i_option[ITYPE.SP_RECOVERY], 0, Enum.GetName(typeof(ITYPE), ITYPE.SP_RECOVERY)));
             Add(new AbilityBinding<int>("HIT", user_data.User_Item.i_option[ITYPE.HIT], 0, Enum.GetName(typeof(ITYPE), ITYPE.HIT)));

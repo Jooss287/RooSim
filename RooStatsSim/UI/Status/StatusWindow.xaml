@@ -15,32 +15,43 @@
                 HorizontalAlignment="Left" VerticalAlignment="Top">
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <StackPanel x:Name="BaseLvlUI" Orientation="Horizontal" Margin="0,5"
-                        MouseLeftButtonDown="LevelUp_Click"
-                        MouseRightButtonDown="LevelDown_Click"
-                        MouseWheel="Level_MouseWheel">
-                    <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" 
-                           FontSize="15" FontWeight="Bold" 
-                           Margin="15,0,0,0" />
-                    <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
-                           FontSize="15" FontWeight="Bold" 
-                           HorizontalAlignment="Center" 
-                           Margin="15,0,0,0" />
-                    <Border Background="Blue" CornerRadius="2" Width="15" Height="15" Margin="5,0,0,0">
-                        <Path Stretch="Fill"
-                                  Fill="white"
-                                  Stroke="{x:Null}"
-                                  StrokeThickness="0.5"
-                                  Data="M3.875,0 L5.125,0 5.125,3.875 9,3.875 9,5.125 5.125,5.125 5.125,9 3.875,9 3.875,5.125 0,5.125 0,3.875 3.875,3.875 3.875,0 z"
-                                  Margin="3,3,3,3"/>
-                    </Border>
-                </StackPanel>
+                <ItemsControl x:Name="LvlUI" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="0,5"
+                                        MouseLeftButtonDown="LevelUp_Click"
+                                        MouseRightButtonDown="LevelDown_Click"
+                                        MouseWheel="Level_MouseWheel">
+                                <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" 
+                                           FontSize="15" FontWeight="Bold" 
+                                           Margin="15,0,0,0" /> 
+                                <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
+                                           FontSize="15" FontWeight="Bold" 
+                                           HorizontalAlignment="Center" 
+                                           Margin="15,0,0,0" />
+                                <Border Background="Blue" CornerRadius="2" Width="15" Height="15" Margin="5,0,0,0">
+                                    <Path Stretch="Fill"
+                                          Fill="white"
+                                          Stroke="{x:Null}"
+                                          StrokeThickness="0.5"
+                                          Data="M3.875,0 L5.125,0 5.125,3.875 9,3.875 9,5.125 5.125,5.125 5.125,9 3.875,9 3.875,5.125 0,5.125 0,3.875 3.875,3.875 3.875,0 z"
+                                          Margin="3,3,3,3"/>
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
                 <StackPanel x:Name="BaseLvlUIpoint" Orientation="Horizontal">
                     <TextBlock Text="남은 포인트" 
                            FontSize="9" FontWeight="Bold" 
                            TextAlignment="Right" VerticalAlignment="Bottom" 
                            Margin="5,0,0,0" />
-                    <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding Path=AddPoint, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="9" FontWeight="Bold" 
                            VerticalAlignment="Bottom" HorizontalAlignment="Center" 
                            Margin="5,0,0,0" />

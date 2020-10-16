@@ -15,17 +15,16 @@ namespace RooStatsSim.DB
 
     class Equations
     {
-        public Equations(ATTACK_TYPE atk_type)
+        public Equations(ATTACK_TYPE atk_type=ATTACK_TYPE.MELEE_TYPE)
         {
             attack_type = atk_type;
         }
 
         protected readonly ATTACK_TYPE attack_type;
         //protected Status status = null;
-        UserData _user_data;
+        protected UserData _user_data;
         protected ItemAbility abilities = null;
         protected MonsterDB mobDB = null;
-        protected StatusATK statusATK = null;
         public double element_inc;
         public double size_panelty;
         protected bool[] buff_list;
@@ -40,7 +39,6 @@ namespace RooStatsSim.DB
             mobDB = param_mobDB;
             element_inc = param_element;
             size_panelty = param_size;
-            statusATK = new StatusATK(attack_type, ref abilities, _user_data);
         }
 
         public void SetBuffList(ref bool[] param_buff_list)
@@ -52,16 +50,16 @@ namespace RooStatsSim.DB
         #region Common Call Functions
         protected bool IsAlived()
         {
-            if ((_user_data == null) || (abilities == null) || (mobDB == null) || (statusATK == null))
+            if ((_user_data == null) || (abilities == null) || (mobDB == null))
                 return false;
             return true;
         }
         protected virtual double GetRandomATK() { return abilities.ATK_weapon * RANDOM_ATK_WEIGHT; }
         protected virtual double GetWeaponATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE) {
-            return abilities.ATK_weapon + statusATK.GetStatusBonusATK() + GetRandomATK() * (int)calc_standard;
+            return abilities.ATK_weapon + StatusATK.GetStatusBonusATK(attack_type, _user_data) + GetRandomATK() * (int)calc_standard;
         }
         protected virtual double GetBaseTotalATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE) {
-            return abilities.ATK_weapon + abilities.ATK_smelting + statusATK.GetStatusBonusATK() + GetRandomATK() * (int)calc_standard;
+            return abilities.ATK_weapon + abilities.ATK_smelting + StatusATK.GetStatusBonusATK(attack_type, _user_data) + GetRandomATK() * (int)calc_standard;
         }
         protected virtual double GetTotalEquipATKRatio() {
             return element_inc * abilities.element_increse * abilities.tribe_increse * abilities.size_increse * abilities.boss_increse * abilities.ATK_percent
@@ -89,7 +87,7 @@ namespace RooStatsSim.DB
         }
         protected virtual double TotalATK(double total_equip_atk_inc)
         {
-            return statusATK.GetStatusATK() * 2 + GetMasteryATK() + total_equip_atk_inc;
+            return StatusATK.GetStatusATK(attack_type, _user_data) * 2 + GetMasteryATK() + total_equip_atk_inc;
         }
         protected virtual double TotalATKinc(double total_atk)
         {
@@ -123,7 +121,7 @@ namespace RooStatsSim.DB
         }
         protected virtual double WinTotalATK(double total_equip_atk_inc)
         {
-            return statusATK.GetStatusATK() + GetMasteryATK() + total_equip_atk_inc;
+            return StatusATK.GetStatusATK(attack_type, _user_data) + GetMasteryATK() + total_equip_atk_inc;
         }
         public int CalcStatusWinATK()
         {
@@ -144,8 +142,8 @@ namespace RooStatsSim.DB
             if (!IsAlived())
                 return 0;
 
-            double status_atk = statusATK.GetStatusATK();
-            double equipATK = (sATK - abilities.ATK_mastery - status_atk) / abilities.ATK_percent - abilities.ATK_weapon - statusATK.GetStatusBonusATK();
+            double status_atk = StatusATK.GetStatusATK(attack_type, _user_data);
+            double equipATK = (sATK - abilities.ATK_mastery - status_atk) / abilities.ATK_percent - abilities.ATK_weapon - StatusATK.GetStatusBonusATK(attack_type, _user_data);
 
             return Convert.ToInt32(Math.Floor(equipATK));
         }

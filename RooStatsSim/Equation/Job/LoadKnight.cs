@@ -42,7 +42,7 @@ namespace RooStatsSim.Equation.Job
         protected override double GetBaseTotalATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
         {
             int Enabled_Concentrate = Convert.ToInt32(buff_list[(int)BUFF_SKILL.CONCENTRATION]);
-            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_weapon + statusATK.GetStatusBonusATK() + abilities.ATK_smelting) * buff_concentrate_ratio;
+            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_weapon + StatusATK.GetStatusBonusATK(attack_type, _user_data) + abilities.ATK_smelting) * buff_concentrate_ratio;
             return base.GetBaseTotalATK(calc_standard) + Convert.ToInt32(buff_concentrate);
         }
         protected override double TotalEquipATK(double total_weapon_atk)
@@ -54,7 +54,7 @@ namespace RooStatsSim.Equation.Job
         protected override double WinTotalATK(double total_equip_atk_inc)
         {
             int Enabled_Concentrate = Convert.ToInt32(buff_list[(int)BUFF_SKILL.CONCENTRATION]);
-            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_weapon + statusATK.GetStatusBonusATK() + abilities.ATK_equipment) * buff_concentrate_ratio;
+            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_weapon + StatusATK.GetStatusBonusATK(attack_type, _user_data) + abilities.ATK_equipment) * buff_concentrate_ratio;
             return  base.WinTotalATK(total_equip_atk_inc) + buff_concentrate;
         }
         #endregion

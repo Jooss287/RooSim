@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using RooStatsSim.DB;
+using RooStatsSim.Equation;
 
 namespace RooStatsSim.User
 {
@@ -27,7 +28,8 @@ namespace RooStatsSim.User
         }
         #endregion
 
-        public LEVEL Level = new LEVEL();
+        public BASE_LEVEL Base_Level = new BASE_LEVEL();
+        public JOB_LEVEL Job_Level = new JOB_LEVEL();
         public STATUS Status = new STATUS();
         public MEDAL Medal = new MEDAL();
         public MONSTER_RESEARCH Monster_Research = new MONSTER_RESEARCH();
@@ -40,11 +42,14 @@ namespace RooStatsSim.User
 
         #region Userdata event
         public delegate void UserDataChangedEventHandler();
-        public event UserDataChangedEventHandler dataChanged;
+        public event UserDataChangedEventHandler itemDataChanged;
+        //public event UserDataChangedEventHandler StatusDataChanged;
 
         public void CalcUserData()
         {
             UserItem CalcUserItem = new UserItem();
+
+            CalcUserItem.i_option[ITYPE.STATUS_ATK] = StatusATK.GetStatusATK(Equation.Job.ATTACK_TYPE.MELEE_TYPE, this);
 
             CalcUserItem += Monster_Research.GetOption();
             CalcUserItem += Dress_Style.GetOption();
@@ -55,8 +60,8 @@ namespace RooStatsSim.User
 
             User_Item = CalcUserItem;
 
-            if (dataChanged != null)
-                dataChanged();
+            if (itemDataChanged != null)
+                itemDataChanged();
         }
         #endregion
     }
