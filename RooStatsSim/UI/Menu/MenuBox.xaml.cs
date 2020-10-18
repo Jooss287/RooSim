@@ -68,9 +68,9 @@ namespace RooStatsSim.UI.Menu
         private void Status_window_Click(object sender, RoutedEventArgs e)
         {
             if (_parents._status.IsVisible)
-                _parents._status.Hide();
+                _parents._status.Visibility = Visibility.Hidden;
             else
-                _parents._status.Show();
+                _parents._status.Visibility = Visibility.Visible;
         }
 
         private void DBManager_window_Click(object sender, RoutedEventArgs e)

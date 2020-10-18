@@ -46,6 +46,7 @@ namespace RooStatsSim
             menu_titlebar.PreviewMouseMove += this.ObjMouseMove;
 
             _status = new StatusWindow();
+            status_contents.Navigate(_status);
             _info = new ProgramInfo();
             _stacK_buff = new StackBuffWindow();
             _equip = new Equip();
