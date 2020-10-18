@@ -12,13 +12,30 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
          
         mc:Ignorable="d"
-        Title="RooSim"
+        Title="RooSim" WindowStyle="None" ResizeMode="NoResize" Background="Transparent"
         Left="50" Top="50">
     <Window.Resources>
     </Window.Resources>
-    
+    <Grid>
+        <Canvas Name="DesigningCanvas">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition MaxWidth="30" Width="30" />
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="menu_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Rectangle Name="menu_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+                <Button Content="X" Grid.Column="1" Name="closeButton"
+                        Click="closeButton_Click"/>
+            </Grid>
+        </Canvas>
+    </Grid>
 </Window>

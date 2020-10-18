@@ -32,15 +32,11 @@ namespace RooStatsSim.UI.Menu
     public partial class MenuBox : Page
     {
         public static DBlist _roo_db;
-        DBManager _db_manager;
-        StatusWindow _status = new StatusWindow();
-        ProgramInfo _info = new ProgramInfo();
-        StackBuffWindow _stacK_buff = new StackBuffWindow();
-        Equip _equip = new Equip();
         UserData _user_data;
-
-        public MenuBox()
+        MainWindow _parents;
+        public MenuBox(MainWindow parents)
         {
+            _parents = parents;
             InitializeComponent();
 
             job_UI_setting((int)(JOB_LIST.LOAD_KNIGHT));
@@ -48,13 +44,6 @@ namespace RooStatsSim.UI.Menu
             _roo_db = new DBlist();
             DBSerizator.ReadDB(ref _roo_db);
             _user_data = UserData.GetInstance;
-
-
-            //DB생성, Window open 등
-
-            _status.Show();
-            _stacK_buff.Show();
-            //_equip.Show();
         }
 
 
@@ -78,42 +67,34 @@ namespace RooStatsSim.UI.Menu
 
         private void Status_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_status.IsVisible)
-                _status.Hide();
+            if (_parents._status.IsVisible)
+                _parents._status.Hide();
             else
-                _status.Show();
+                _parents._status.Show();
         }
 
         private void DBManager_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_db_manager == null)
-                _db_manager = new DBManager();
+            if (_parents._db_manager == null)
+                _parents._db_manager = new DBManager();
             else
-                _db_manager.Show();
+                _parents._db_manager.Show();
         }
 
         private void Info_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_info.IsVisible)
-                _info.Hide();
+            if (_parents._info.IsVisible)
+                _parents._info.Hide();
             else
-                _info.Show();
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            _status.Close();
-            _info.Close();
-            if (_db_manager != null)
-                _db_manager.Close();
+                _parents._info.Show();
         }
 
         private void StackBuff_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_stacK_buff.IsVisible)
-                _stacK_buff.Hide();
+            if (_parents._stacK_buff.IsVisible)
+                _parents._stacK_buff.Hide();
             else
-                _stacK_buff.Show();
+                _parents._stacK_buff.Show();
         }
 
         private void Skill_window_Click(object sender, RoutedEventArgs e)
@@ -123,10 +104,10 @@ namespace RooStatsSim.UI.Menu
 
         private void Equip_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_equip.IsVisible)
-                _equip.Visibility = Visibility.Hidden;
+            if (_parents._equip.IsVisible)
+                _parents._equip.Visibility = Visibility.Hidden;
             else
-                _equip.Visibility = Visibility.Visible;
+                _parents._equip.Visibility = Visibility.Visible;
         }
     }
 }

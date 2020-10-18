@@ -17,6 +17,7 @@ using RooStatsSim.User;
 using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
+using System.Windows.Shapes;
 
 namespace RooStatsSim
 {
@@ -27,12 +28,27 @@ namespace RooStatsSim
 
     public partial class MainWindow : Window
     {
-        MenuBox _menu = new MenuBox();
+        double objXPos, objYPos, canvasXPos, canvasYPos;
+        object MovingObject;
+        MenuBox _menu;
+        public StatusWindow _status;
+        public ProgramInfo _info;
+        public StackBuffWindow _stacK_buff;
+        public Equip _equip;
+        public DBManager _db_manager;
         public MainWindow()
         {
             InitializeComponent();
+            _menu = new MenuBox(this);
+            menu_contents.Navigate(_menu);
+            menu_titlebar.PreviewMouseLeftButtonDown += this.ObjMouseLeftButtonDown;
+            menu_titlebar.PreviewMouseLeftButtonUp += this.ObjPreviewMouseLeftButtonUp;
+            menu_titlebar.PreviewMouseMove += this.ObjMouseMove;
 
-            Content = _menu;
+            _status = new StatusWindow();
+            _info = new ProgramInfo();
+            _stacK_buff = new StackBuffWindow();
+            _equip = new Equip();
         }
 
         #region UI Setting
@@ -68,6 +84,7 @@ namespace RooStatsSim
 
             //txt_atk_equip.Text = Convert.ToString(job_selection.GetReverseATK(Convert.ToInt32(txt_sATK.Text)));
         }
+
         private void CalcSim_Click(object sender, RoutedEventArgs e)
         {
             //InputUIData();
@@ -87,6 +104,41 @@ namespace RooStatsSim
             //MessageBox.Show(Convert.ToString((e.Source as CheckBox).IsChecked));
         }
 
-        
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void status_closeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ObjMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Grid moveTarget = (sender as Rectangle).Parent as Grid;
+            objXPos = e.GetPosition(moveTarget).X;
+            objYPos = e.GetPosition(moveTarget).Y;
+            canvasXPos = e.GetPosition(moveTarget.Parent as Canvas).X - objXPos;
+            canvasYPos = e.GetPosition(moveTarget.Parent as Canvas).Y - objYPos;
+            MovingObject = (object)moveTarget;
+        }
+        private void ObjMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                (MovingObject as FrameworkElement).SetValue(Canvas.LeftProperty,
+                    e.GetPosition((MovingObject as FrameworkElement).Parent as FrameworkElement).X - objXPos);
+
+                (MovingObject as FrameworkElement).SetValue(Canvas.TopProperty,
+                    e.GetPosition((MovingObject as FrameworkElement).Parent as FrameworkElement).Y - objYPos);
+            }
+        }
+
+        private void ObjPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+                MovingObject = null;
+        }
+
     }
 }
