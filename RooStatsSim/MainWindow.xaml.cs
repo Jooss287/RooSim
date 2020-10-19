@@ -28,7 +28,7 @@ namespace RooStatsSim
 
     public partial class MainWindow : Window
     {
-        double objXPos, objYPos, canvasXPos, canvasYPos;
+        double objXPos, objYPos;
         object MovingObject;
         MenuBox _menu;
         public StatusWindow _status;
@@ -50,6 +50,8 @@ namespace RooStatsSim
             _info = new ProgramInfo();
             _stacK_buff = new StackBuffWindow();
             _equip = new Equip();
+
+            System.Windows.Media.Brush brush = DesigningCanvas.Background;
         }
 
         #region UI Setting
@@ -120,8 +122,6 @@ namespace RooStatsSim
             Grid moveTarget = (sender as Rectangle).Parent as Grid;
             objXPos = e.GetPosition(moveTarget).X;
             objYPos = e.GetPosition(moveTarget).Y;
-            canvasXPos = e.GetPosition(moveTarget.Parent as Canvas).X - objXPos;
-            canvasYPos = e.GetPosition(moveTarget.Parent as Canvas).Y - objYPos;
             MovingObject = (object)moveTarget;
         }
         private void ObjMouseMove(object sender, MouseEventArgs e)

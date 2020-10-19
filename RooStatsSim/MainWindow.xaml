@@ -15,12 +15,12 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
          
         mc:Ignorable="d"
-        Title="RooSim" WindowStyle="None" ResizeMode="NoResize" Background="Transparent"
+        Title="RooSim" WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize" Background="{x:Null}" AllowsTransparency="True"
         Left="50" Top="50">
     <Window.Resources>
     </Window.Resources>
     <Grid>
-        <Canvas Name="DesigningCanvas" Background="{Binding}">
+        <Canvas Name="DesigningCanvas" Background="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition MaxHeight="24" Height="24" />
