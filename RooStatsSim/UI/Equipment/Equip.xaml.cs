@@ -29,7 +29,7 @@ namespace RooStatsSim.UI.Equipment
 
             InitializeComponent();
 
-            equipList = new EquipList(MainWindow._roo_db.Dress_style_db[0]);
+            //equipList = new EquipList(MainWindow._roo_db.Dress_style_db[0]);
             
         }
     }

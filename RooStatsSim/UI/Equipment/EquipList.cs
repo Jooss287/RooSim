@@ -1,24 +1,27 @@
-﻿using RooStatsSim.DB;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RooStatsSim.UI.Equipment
 {
-    public class EquipList
+    class EquipList : ObservableCollection<EquipItem>
     {
-        public EquipList(ItemDB item)
+        
+        
+        
+        public EquipList()
         {
-            Id = item.Id;
-            Name = item.Name;
-
-            SubList = new List<EquipList>();
+            EquipItem Equipment;
+            EquipItem Card;
+            EquipItem Enchent;
+            Add(Equipment = new EquipItem("장비_이름"));
+            Equipment.SubList.Add(Card = new EquipItem("보운드"));
+            Equipment.SubList.Add(Enchent = new EquipItem("투지"));
         }
-        public string Name { get; set; }
-        public int Id { get; set; }
-        public List<EquipList> SubList { get; set; }
-
     }
+    //public EquipItem this[string name] => this.FirstOrDefault(l => l.Name == name);
 }

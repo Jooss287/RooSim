@@ -50,8 +50,8 @@ namespace RooStatsSim
 
             //DB생성, Window open 등
 
-            _status.Show();
-            _stacK_buff.Show();
+            //_status.Show();
+            //_stacK_buff.Show();
             //_equip.Show();
 
              _equip = new Equip();

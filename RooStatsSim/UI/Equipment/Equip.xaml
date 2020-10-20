@@ -7,37 +7,46 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Equip">
+    <DockPanel>
+        <DockPanel.Resources>
+            <local:EquipList x:Key="MyList"/>
+            <HierarchicalDataTemplate DataType    = "{x:Type local:EquipItem}"
+                                ItemsSource = "{Binding Path=EquipItem}">
+                <TextBlock Text="{Binding Path=Name}"/>
+            </HierarchicalDataTemplate>
+        </DockPanel.Resources>
 
-    <StackPanel Orientation="Horizontal">
-        <TreeView Grid.Row="0" Grid.Column="0">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate  x:Name="treeItem"
-                        DataType = "{x:Type local:EquipList}"
-                        ItemsSource = "{Binding Path=SubList}">
-                    <TextBlock Text="{Binding Path=Name}"/>
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
-        
-        <Grid Width="400">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TreeView Grid.Row="0" Grid.Column="0">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType    = "{x:Type local:EquipItem}"
+                                ItemsSource = "{Binding Path=EquipItem}">
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+                <TreeViewItem ItemsSource="{Binding Source={StaticResource MyList}}" x:Name="treeItem" Header="Equip_test"/>
+            </TreeView>
 
-            
-            
-            <Button Content="111" Grid.Row="0" Grid.Column="1"/>
-            <Button Content="111" Grid.Row="0" Grid.Column="2"/>
-        </Grid>
-    </StackPanel>
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+
+
+                <Button Content="111" Grid.Row="0" Grid.Column="1"/>
+                <Button Content="111" Grid.Row="0" Grid.Column="2"/>
+            </Grid>
+        </StackPanel>
+    </DockPanel>
 </Window>

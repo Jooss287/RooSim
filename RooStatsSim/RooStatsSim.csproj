@@ -127,6 +127,7 @@
     <Compile Include="UI\Equipment\Equip.xaml.cs">
       <DependentUpon>Equip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Equipment\EquipItem.cs" />
     <Compile Include="UI\Equipment\EquipList.cs" />
     <Compile Include="UI\Manager\ItemListBox.cs" />
     <Compile Include="UI\Manager\ItemManager.xaml.cs">
