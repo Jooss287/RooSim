@@ -1,4 +1,4 @@
-﻿<Page x:Class="RooStatsSim.UI.Equipment.Equip"
+﻿<Window x:Class="RooStatsSim.UI.Equipment.Equip"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,6 +9,16 @@
       Title="Equip">
 
     <StackPanel Orientation="Horizontal">
+        <TreeView Grid.Row="0" Grid.Column="0">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate  x:Name="treeItem"
+                        DataType = "{x:Type local:EquipList}"
+                        ItemsSource = "{Binding Path=SubList}">
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        
         <Grid Width="400">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -24,17 +34,10 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <TreeView>
-                <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType = "{x:Type local:EquipList}"
-                        ItemsSource = "{Binding Path=SubList}">
-                        <TextBlock Text="{Binding Path=Name}"/>
-                    </HierarchicalDataTemplate>
-                </TreeView.Resources>
-            </TreeView>
+            
             
             <Button Content="111" Grid.Row="0" Grid.Column="1"/>
             <Button Content="111" Grid.Row="0" Grid.Column="2"/>
         </Grid>
     </StackPanel>
-</Page>
+</Window>

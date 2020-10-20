@@ -32,7 +32,7 @@ namespace RooStatsSim
         StatusWindow _status = new StatusWindow();
         ProgramInfo _info = new ProgramInfo();
         StackBuff _stacK_buff = new StackBuff();
-        Equip _equip = new Equip();
+        Equip _equip;
 
         public MainWindow()
         {
@@ -53,7 +53,9 @@ namespace RooStatsSim
             _status.Show();
             _stacK_buff.Show();
             //_equip.Show();
-            
+
+             _equip = new Equip();
+            _equip.Show();
         }
 
         #region UI Variable Define

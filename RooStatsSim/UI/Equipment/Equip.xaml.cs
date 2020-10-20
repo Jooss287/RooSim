@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RooStatsSim.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,18 @@ namespace RooStatsSim.UI.Equipment
     /// <summary>
     /// Equip.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class Equip : Page
+    public partial class Equip : Window
     {
+        UserData _user_data;
+        EquipList equipList;
         public Equip()
         {
+            _user_data = UserData.GetInstance;
+
             InitializeComponent();
+
+            equipList = new EquipList(MainWindow._roo_db.Dress_style_db[0]);
+            
         }
     }
 }
