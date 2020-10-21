@@ -9,18 +9,14 @@
       Title="Equip">
     <DockPanel>
         <DockPanel.Resources>
-            <local:EquipList x:Key="MyList"/>
-            <HierarchicalDataTemplate DataType    = "{x:Type local:EquipItem}"
-                                ItemsSource = "{Binding Path=EquipItem}">
-                <TextBlock Text="{Binding Path=Name}"/>
-            </HierarchicalDataTemplate>
         </DockPanel.Resources>
 
         <StackPanel Orientation="Horizontal">
             <TreeView Grid.Row="0" Grid.Column="0">
                 <TreeView.Resources>
+                    <local:EquipList x:Key="MyList"/>
                     <HierarchicalDataTemplate DataType    = "{x:Type local:EquipItem}"
-                                ItemsSource = "{Binding Path=EquipItem}">
+                                ItemsSource = "{Binding Path=SubList}">
                         <TextBlock Text="{Binding Path=Name}"/>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
