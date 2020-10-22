@@ -23,14 +23,17 @@ namespace RooStatsSim.UI.Equipment
     {
         UserData _user_data;
         EquipList equipList;
+        ItemListFilter normalPropertyList;
         public Equip()
         {
             _user_data = UserData.GetInstance;
 
             InitializeComponent();
 
+            normalPropertyList = new ItemListFilter(ref _user_data);
+            ItemSelector.ItemsSource = normalPropertyList;
             //equipList = new EquipList(MainWindow._roo_db.Dress_style_db[0]);
-            
+
         }
     }
 }

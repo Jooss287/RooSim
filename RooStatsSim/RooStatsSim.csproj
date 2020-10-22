@@ -128,7 +128,7 @@
       <DependentUpon>Equip.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Equipment\EquipItem.cs" />
-    <Compile Include="UI\Equipment\EquipList.cs" />
+    <Compile Include="UI\Equipment\EquipListBinding.cs" />
     <Compile Include="UI\Manager\ItemListBox.cs" />
     <Compile Include="UI\Manager\ItemManager.xaml.cs">
       <DependentUpon>ItemManager.xaml</DependentUpon>
@@ -169,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Equipment\Equip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Equipment\EquipContext.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

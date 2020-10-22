@@ -76,5 +76,4 @@ namespace RooStatsSim.UI
             handler?.Invoke(this, new PropertyChangedEventArgs(info));
         }
     }
-
 }

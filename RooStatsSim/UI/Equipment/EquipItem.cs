@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.UI.Equipment
 {
-    public class EquipItem
+    public class EquipItem : EquipId
     {
         public EquipItem(string name)
         {
@@ -21,9 +21,13 @@ namespace RooStatsSim.UI.Equipment
 
             SubList = new List<EquipItem>();
         }
-        public string Name { get; set; }
-        public int Id { get; set; }
         public List<EquipItem> SubList { get; set; }
 
+    }
+
+    public class EquipId
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
     }
 }
