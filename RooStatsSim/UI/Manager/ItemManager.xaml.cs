@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using RooStatsSim.DB;
 using System.Collections.Generic;
+using System.CodeDom;
 
 namespace RooStatsSim.UI.Manager
 {
@@ -30,7 +31,18 @@ namespace RooStatsSim.UI.Manager
             DB_ListBox.ItemsSource = BindingItemList;
             //SetNowItemOption();
             SetComboBox();
-        }
+
+
+        //    public Dictionary<ELEMENT_TYPE, double> element_inc_option = new Dictionary<ELEMENT_TYPE, double>();
+        //public Dictionary<MONSTER_SIZE, double> size_inc_option = new Dictionary<MONSTER_SIZE, double>();
+        //public Dictionary<TRIBE_TYPE, double> tribe_inc_option = new Dictionary<TRIBE_TYPE, double>();
+        //public Dictionary<MONSTER_TYPE, double> mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>();
+
+        //public Dictionary<ELEMENT_TYPE, double> element_dec_option = new Dictionary<ELEMENT_TYPE, double>();
+        //public Dictionary<MONSTER_SIZE, double> size_dec_option = new Dictionary<MONSTER_SIZE, double>();
+        //public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
+        //public Dictionary<MONSTER_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>();
+    }
 
         void SetComboBox()
         {
@@ -53,6 +65,30 @@ namespace RooStatsSim.UI.Manager
             {
                 string statusName = Enum.GetName(typeof(IFTYPE), option);
                 cmb_IFoption.Items.Add(statusName);
+            }
+            foreach (ELEMENT_TYPE option in Enum.GetValues(typeof(ELEMENT_TYPE)))
+            {
+                string statusName = Enum.GetName(typeof(ELEMENT_TYPE), option);
+                cmb_element_inc_option.Items.Add(statusName);
+                cmb_element_dec_option.Items.Add(statusName);
+            }
+            foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
+            {
+                string statusName = Enum.GetName(typeof(MONSTER_SIZE), option);
+                cmb_size_inc_option.Items.Add(statusName);
+                cmb_size_dec_option.Items.Add(statusName);
+            }
+            foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
+            {
+                string statusName = Enum.GetName(typeof(ELEMENT_TYPE), option);
+                cmb_tribe_inc_option.Items.Add(statusName);
+                cmb_tribe_dec_option.Items.Add(statusName);
+            }
+            foreach (MONSTER_TYPE option in Enum.GetValues(typeof(MONSTER_TYPE)))
+            {
+                string statusName = Enum.GetName(typeof(MONSTER_TYPE), option);
+                cmb_mobtype_inc_option.Items.Add(statusName);
+                cmb_mobtype_dec_option.Items.Add(statusName);
             }
         }
 
