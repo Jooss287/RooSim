@@ -45,12 +45,11 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="번호" Width="40" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBox x:Name="Item_name" Text="{Binding Path=Name}"
+                                     Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
+                                     materialDesign:HintAssist.Hint="아이템 이름" Width="150"/>
                             <TextBox x:Name="Item_id" Text="{Binding Path=Id}" TextAlignment="Center"
-                                     Width="70" Height="22" IsEnabled="False"/>
-                            <TextBlock Text="이름" Width="40" TextAlignment="Center" VerticalAlignment="Center"/>
-                            <TextBox x:Name="Item_name" Text="{Binding Path=Name}" TextAlignment="Center"
-                                     Width="70" Height="22"/>
+                                     Width="40" Height="22" IsEnabled="False" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Tag ="ITYPE"
@@ -59,7 +58,7 @@
                                     <ComboBox Name="cmb_Ioption" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="증감값"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" MinWidth="100">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -78,7 +77,7 @@
                                     <ComboBox Name="cmb_Doption" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="%값"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -97,7 +96,7 @@
                                     <ComboBox Name="cmb_SEoption" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="%값"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -142,7 +141,7 @@
                                     <ComboBox Name="cmb_element_inc_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="속성증가데미지(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -161,7 +160,7 @@
                                     <ComboBox Name="cmb_size_inc_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="크기증가데미지(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -180,7 +179,7 @@
                                     <ComboBox Name="cmb_tribe_inc_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="종족증가데미지(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -200,7 +199,7 @@
                                     <ComboBox Name="cmb_mobtype_inc_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="스타일증가데미지(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -222,7 +221,7 @@
                                     <ComboBox Name="cmb_element_dec_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="속성감소데미지(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -241,7 +240,7 @@
                                     <ComboBox Name="cmb_size_dec_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="크기감소데미지(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -260,7 +259,7 @@
                                     <ComboBox Name="cmb_tribe_dec_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="종족감소데미지(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -280,7 +279,7 @@
                                     <ComboBox Name="cmb_mobtype_dec_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="값 입력"/>
+                                        materialDesign:HintAssist.Hint="스타일감소데미지(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"

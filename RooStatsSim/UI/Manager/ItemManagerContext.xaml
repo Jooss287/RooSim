@@ -16,8 +16,8 @@
 
     <Style TargetType="{x:Type StackPanel}" x:Key="ItemManagerListStackPanel">
         <Setter Property="Orientation" Value="Vertical"/>
-        <Setter Property="MaxWidth" Value="200"/>
-        <Setter Property="Margin" Value="5,5,5,5"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="0,5,0,5"/>
     </Style>
     
     <Style TargetType="{x:Type TextBox}" x:Key="ItemManagerValueBox"

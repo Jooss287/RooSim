@@ -69,7 +69,7 @@ namespace RooStatsSim.UI.Manager
             }
             foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
             {
-                string statusName = Enum.GetName(typeof(ELEMENT_TYPE), option);
+                string statusName = Enum.GetName(typeof(TRIBE_TYPE), option);
                 cmb_tribe_inc_option.Items.Add(statusName);
                 cmb_tribe_dec_option.Items.Add(statusName);
             }
@@ -198,8 +198,6 @@ namespace RooStatsSim.UI.Manager
             ComboBox AddType = OptionStack.Children[0] as ComboBox;
             TextBox AddValue = OptionStack.Children[1] as TextBox;
 
-            //if (DB_ListBox.SelectedItem == null)
-            //    return;
             if (AddValue.Text == "")
                 return;
             if (Convert.ToInt32(AddValue.Text) == 0)
@@ -237,7 +235,7 @@ namespace RooStatsSim.UI.Manager
             }
             SetNowItemOption();
             AddType.SelectedIndex = 0;
-            AddValue.Text = "0";
+            AddValue.Text = null;
         }
 
         private void Del_Option_Click(object sender, RoutedEventArgs e)
@@ -246,8 +244,6 @@ namespace RooStatsSim.UI.Manager
             ListBox OptionList = parentStackpanel.Children[2] as ListBox;
 
             if (OptionList.SelectedItem == null)
-                return;
-            if (DB_ListBox.SelectedItem == null)
                 return;
 
             switch (Convert.ToString(parentStackpanel.Tag))
