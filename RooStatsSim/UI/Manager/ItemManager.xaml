@@ -4,8 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RooStatsSim.UI.Manager"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignWidth="900"
       Title="ItemManager">
     <Page.Resources>
         <local:ItemListBox x:Key="ItemList"/>
@@ -53,329 +53,245 @@
                                      Width="70" Height="22"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag ="ITYPE">
+                            <StackPanel Tag ="ITYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_Ioption" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"
-                                            Click="Del_Option_Click" />
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" MinWidth="100">
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_iOption" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_iOption"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="DTYPE">
+                            <StackPanel Tag="DTYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_Doption" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_dOption" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_dOption"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="SETYPE">
+                            <StackPanel Tag="SETYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_SEoption" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_seOption" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_seOption"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="IFTYPE">
+                            <StackPanel Tag="IFTYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_IFoption" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="Ex)힘10"/>
+                                    <TextBlock Text="당" VerticalAlignment="Bottom" Margin="5,0,0,3" HorizontalAlignment="Center"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="증가량"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_ifOption" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_ifOption"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag ="ITYPE">
+                            <StackPanel Tag ="ITYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_element_inc_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"
-                                            Click="Del_Option_Click" />
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_element_inc_option" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_element_inc_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="DTYPE">
+                            <StackPanel Tag="DTYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_size_inc_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_size_inc_option" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_size_inc_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="SETYPE">
+                            <StackPanel Tag="SETYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_tribe_inc_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_tribe_inc_option" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_tribe_inc_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="IFTYPE">
+                            <StackPanel Tag="IFTYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_mobtype_inc_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_mobtype_inc_option" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_mobtype_inc_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag ="ITYPE">
+                            <StackPanel Tag ="ITYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_element_dec_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"
-                                            Click="Del_Option_Click" />
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_element_dec_option" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_element_dec_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="DTYPE">
+                            <StackPanel Tag="DTYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_size_dec_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_size_dec_option" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_size_dec_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="SETYPE">
+                            <StackPanel Tag="SETYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_tribe_dec_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_tribe_dec_option" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_tribe_dec_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
 
-                            <StackPanel Orientation="Vertical" Width="150" Margin="5,5,5,5"
-                                        Tag="IFTYPE">
+                            <StackPanel Tag="IFTYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_mobtype_dec_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged"/>
-                                    <TextBox Text="0" Width="30" Height="22"
-                                             TextAlignment="Center" VerticalAlignment="Center"
-                                             Margin="5,0,0,0"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="값 입력"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="^^" Margin="5,5,5,5"/>
-                                    <Button Content="VV" Margin="5,5,5,5"
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
-                                <ListBox x:Name="list_mobtype_dec_option" >
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=Type_name}"/>
-                                                <TextBlock Text=" : "/>
-                                                <TextBlock Text="{Binding Path=Type_value}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <ListBox x:Name="list_mobtype_dec_option" 
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

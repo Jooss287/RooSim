@@ -31,17 +31,6 @@ namespace RooStatsSim.UI.Manager
             DB_ListBox.ItemsSource = BindingItemList;
             //SetNowItemOption();
             SetComboBox();
-
-
-        //    public Dictionary<ELEMENT_TYPE, double> element_inc_option = new Dictionary<ELEMENT_TYPE, double>();
-        //public Dictionary<MONSTER_SIZE, double> size_inc_option = new Dictionary<MONSTER_SIZE, double>();
-        //public Dictionary<TRIBE_TYPE, double> tribe_inc_option = new Dictionary<TRIBE_TYPE, double>();
-        //public Dictionary<MONSTER_TYPE, double> mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>();
-
-        //public Dictionary<ELEMENT_TYPE, double> element_dec_option = new Dictionary<ELEMENT_TYPE, double>();
-        //public Dictionary<MONSTER_SIZE, double> size_dec_option = new Dictionary<MONSTER_SIZE, double>();
-        //public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
-        //public Dictionary<MONSTER_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>();
     }
 
         void SetComboBox()
@@ -211,6 +200,8 @@ namespace RooStatsSim.UI.Manager
 
             //if (DB_ListBox.SelectedItem == null)
             //    return;
+            if (AddValue.Text == "")
+                return;
             if (Convert.ToInt32(AddValue.Text) == 0)
                 return;
 
@@ -237,7 +228,8 @@ namespace RooStatsSim.UI.Manager
                     }
                 case "IFTYPE":
                     {
-                        TextBox PerValue = OptionStack.Children[2] as TextBox;
+                        AddValue = OptionStack.Children[3] as TextBox;
+                        TextBox PerValue = OptionStack.Children[1] as TextBox;
                         IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
                         now_item.if_option[type] = new AbilityPerStatus(type, Convert.ToInt32(AddValue.Text), Convert.ToInt32(PerValue.Text));
                         break;

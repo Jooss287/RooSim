@@ -10,6 +10,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="UI\UIextension\Button.xaml"/>
                 <ResourceDictionary Source="UI\Equipment\Equipcontext.xaml"/>
+                <ResourceDictionary Source="UI\Manager\ItemManagerContext.xaml"/>
 
                 <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
