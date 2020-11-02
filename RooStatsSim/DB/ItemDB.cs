@@ -9,13 +9,13 @@ namespace RooStatsSim.DB
 {
     public enum ITEM_TYPE_ENUM
     {
-        NONE,
         MONSTER_RESEARCH,
         STICKER,
         DRESS_STYLE,
         EQUIPMENT,
         CARD,
         ENCHANT,
+        GEAR,
     }
 
     public enum EQUIP_TYPE_ENUM
@@ -32,6 +32,30 @@ namespace RooStatsSim.DB
         ACCESSORIES2,
         COSTUME,
         BACK_DECORATION,
+    }
+    public enum JOB_SELECT_LIST
+    {
+        NOVICE = 0,
+        SWORDMAN = 100,
+        KNIGHT,
+        CRUSADER,
+        MARCHANT = 200,
+        BLACKSMITH,
+        ALCHEMIST,
+        THIEF = 300,
+        ASSASSIN,
+        LOGUE,
+        ARCHER = 400,
+        HUNTER,
+        BARD,
+        DANCER,
+        MAGICIAN = 500,
+        WIZARD,
+        SAGE,
+        ACOLYTE = 600,
+        PRIST,
+        MONK
+        
     }
 
     public enum ITYPE
@@ -108,7 +132,7 @@ namespace RooStatsSim.DB
             i_option = new Dictionary<ITYPE, int>(item_db.i_option);
             d_option = new Dictionary<DTYPE, double>(item_db.d_option);
             se_option = new Dictionary<STATUS_EFFECT_TYPE, double>(item_db.se_option);
-            IF_OPTION = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.IF_OPTION);
+            if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
         }
         public ItemDB() { }
 
@@ -152,10 +176,11 @@ namespace RooStatsSim.DB
 
 
 
-        ITEM_TYPE_ENUM _item_type = ITEM_TYPE_ENUM.NONE;
+        ITEM_TYPE_ENUM _item_type;
         EQUIP_TYPE_ENUM _equip_type = EQUIP_TYPE_ENUM.NONE;
         protected int _id;
         protected string _name;
+        public List<bool> _wear_limit = new List<bool>() { false, false, false, false, false, false, false };
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
         public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
         public Dictionary<STATUS_EFFECT_TYPE, double> se_option = new Dictionary<STATUS_EFFECT_TYPE, double>();
@@ -171,6 +196,7 @@ namespace RooStatsSim.DB
         public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
         public Dictionary<MONSTER_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>();
 
+        #region property
         public int Id
         {
             get { return _id; }
@@ -251,6 +277,7 @@ namespace RooStatsSim.DB
             get { return mobtype_dec_option; }
             set { mobtype_dec_option = value; }
         }
+        #endregion
     }
 
     public class AbilityPerStatus

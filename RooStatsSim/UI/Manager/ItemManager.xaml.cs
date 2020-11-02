@@ -26,15 +26,25 @@ namespace RooStatsSim.UI.Manager
             
             DataContext = now_item;
 
+            InitUIsetting();
             cmb_equip_type.SelectedIndex = 3;
             now_DB = SelectedItemType();
             InitializeContents();
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
-            //SetNowItemOption();
-            SetComboBox();
-    }
 
+            SetComboBox();
+        }
+
+        void InitUIsetting()
+        {
+            foreach (ITEM_TYPE_ENUM option in Enum.GetValues(typeof(ITEM_TYPE_ENUM)))
+            {
+                string statusName = Enum.GetName(typeof(ITEM_TYPE_ENUM), option);
+                cmb_equip_type.Items.Add(statusName);
+            }
+            cmb_equip_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
+        }
         void SetComboBox()
         {
             foreach (ITYPE option in Enum.GetValues(typeof(ITYPE)))
@@ -107,6 +117,7 @@ namespace RooStatsSim.UI.Manager
             else
                 now_item.Id = now_DB.Count;
 
+            now_item.Item_type = (ITEM_TYPE_ENUM)cmb_equip_type.SelectedIndex;
             now_item.Name = "";
             now_item.i_option.Clear();
             now_item.d_option.Clear();
@@ -135,7 +146,7 @@ namespace RooStatsSim.UI.Manager
 
         private Dictionary<int, ItemDB> SelectedItemType()
         {
-            int selected = cmb_equip_type.SelectedIndex + 1;
+            int selected = cmb_equip_type.SelectedIndex;
 
             switch (selected)
             {
@@ -149,6 +160,10 @@ namespace RooStatsSim.UI.Manager
                     return _DB._equip_db;
                 case (int)ITEM_TYPE_ENUM.CARD:
                     return _DB._card_db;
+                case (int)ITEM_TYPE_ENUM.ENCHANT:
+                    return _DB._enchant_db;
+                case (int)ITEM_TYPE_ENUM.GEAR:
+                    return _DB._gear_db;
             }
 
             return null;
@@ -194,6 +209,11 @@ namespace RooStatsSim.UI.Manager
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             now_DB = SelectedItemType();
+            if (now_DB == null)
+                return;
+            else
+                cmb_AddInfo.Visibility = Visibility.Visible;
+
             InitializeContents();
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;

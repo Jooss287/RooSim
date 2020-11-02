@@ -24,11 +24,6 @@
                       Margin="5,5,5,5"
                       VerticalAlignment="Top" HorizontalAlignment="Left"
                       SelectionChanged="cmb_equip_type_SelectionChanged">
-                <ComboBoxItem Content="몬스터도감"/>
-                <ComboBoxItem Content="스티커"/>
-                <ComboBoxItem Content="의상스타일"/>
-                <ComboBoxItem Content="장비"/>
-                <ComboBoxItem Content="카드"/>
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
@@ -45,11 +40,12 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" >
+                            <TextBox x:Name="Item_id" Text="{Binding Path=Id}" TextAlignment="Center"
+                                     Width="40" Height="22" IsEnabled="False" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
                             <TextBox x:Name="Item_name" Text="{Binding Path=Name}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="아이템 이름" Width="150"/>
-                            <TextBox x:Name="Item_id" Text="{Binding Path=Id}" TextAlignment="Center"
-                                     Width="40" Height="22" IsEnabled="False" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                            <ComboBox x:Name="cmb_AddInfo" Visibility="Hidden"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Tag ="ITYPE"
