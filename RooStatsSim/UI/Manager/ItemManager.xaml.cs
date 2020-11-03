@@ -45,9 +45,6 @@ namespace RooStatsSim.UI.Manager
             }
             cmb_equip_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
 
-            {
-                list_Job_limit.ItemsSource = new Job_Limite_List();
-            }
             
         }
         void SetComboBox()
@@ -100,6 +97,7 @@ namespace RooStatsSim.UI.Manager
 
         void SetNowItemOption()
         {
+            list_Job_limit.ItemsSource = new Job_Limite_List(ref now_item._wear_job_limit);
             list_iOption.ItemsSource = new ItemOptionListBox<ITYPE, int>(ref now_item.i_option);
             list_dOption.ItemsSource = new ItemOptionListBox<DTYPE, double>(ref now_item.d_option);
             list_seOption.ItemsSource = new ItemOptionListBox<STATUS_EFFECT_TYPE, double>(ref now_item.se_option);
@@ -123,6 +121,7 @@ namespace RooStatsSim.UI.Manager
                 now_item.Id = now_DB.Count;
 
             now_item.Item_type = (ITEM_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+            now_item._wear_job_limit.Clear();
             now_item.Name = "";
             now_item.i_option.Clear();
             now_item.d_option.Clear();
@@ -195,7 +194,7 @@ namespace RooStatsSim.UI.Manager
             if (string.Compare(Item_name.Text, "") == 0)
                 return;
 
-            now_item._wear_job_limit = (list_Job_limit.ItemsSource as Job_Limite_List).GetLimitedJobList();
+            //now_item._wear_job_limit = (list_Job_limit.ItemsSource as Job_Limite_List).GetLimitedJobList();
             now_DB[now_item.Id] = new ItemDB(now_item);
             BindingItemList.AddList(new ItemDB(now_item));
 
@@ -228,7 +227,8 @@ namespace RooStatsSim.UI.Manager
             {
                 temp_list.SelectClass((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), temp.EnumName), temp.Point);
             }
-            list_Job_limit.ItemsSource = temp_list;
+            now_item.Wear_job_limit = temp_list.GetLimitedJobList();
+            SetNowItemOption();
         }
 
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -124,14 +124,24 @@ namespace RooStatsSim.DB
     {
         public ItemDB(ItemDB item_db)
         {
-            _id = item_db.Id;
-            _name = item_db.Name;
-            _item_type = item_db._item_type;
-            _equip_type = item_db._equip_type;
+            Id = item_db.Id;
+            Name = item_db.Name;
+            Item_type = item_db._item_type;
+            Equip_type = item_db._equip_type;
+            Wear_job_limit = item_db.Wear_job_limit;
             i_option = new Dictionary<ITYPE, int>(item_db.i_option);
             d_option = new Dictionary<DTYPE, double>(item_db.d_option);
             se_option = new Dictionary<STATUS_EFFECT_TYPE, double>(item_db.se_option);
             if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
+
+            element_inc_option = item_db.element_inc_option;
+            element_dec_option = item_db.element_dec_option;
+            size_inc_option = item_db.size_inc_option;
+            size_dec_option = item_db.size_dec_option;
+            tribe_inc_option = item_db.tribe_inc_option;
+            tribe_dec_option = item_db.tribe_dec_option;
+            mobtype_inc_option = item_db.mobtype_inc_option;
+            mobtype_dec_option = item_db.mobtype_dec_option;
         }
         public ItemDB() { }
 

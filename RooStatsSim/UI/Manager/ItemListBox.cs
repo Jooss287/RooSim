@@ -208,11 +208,14 @@ namespace RooStatsSim.UI.Manager
 
     class Job_Limite_List : ObservableCollection<AbilityBinding<bool>>
     {
-        public Job_Limite_List()
+        public Job_Limite_List(ref List<JOB_SELECT_LIST> joblist)
         {
             foreach(JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
             {
-                Add(new AbilityBinding<bool>(EnumProperty_Kor.JOB_SELECT_LIST_KOR_3WORD[job], false, false, Enum.GetName(typeof(JOB_SELECT_LIST), job)));
+                bool value = false;
+                if (joblist.Contains(job))
+                    value = true;
+                Add(new AbilityBinding<bool>(EnumProperty_Kor.JOB_SELECT_LIST_KOR_3WORD[job], value, false, Enum.GetName(typeof(JOB_SELECT_LIST), job)));
             }
         }
 
