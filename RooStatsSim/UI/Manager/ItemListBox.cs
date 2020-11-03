@@ -61,6 +61,7 @@ namespace RooStatsSim.UI.Manager
             d_option = param.d_option;
             se_option = param.se_option;
             if_option = param.if_option;
+            
         }
     }
 
@@ -228,6 +229,20 @@ namespace RooStatsSim.UI.Manager
                 }
                 inx++;
             }
+        }
+
+        public List<JOB_SELECT_LIST> GetLimitedJobList()
+        {
+            List <JOB_SELECT_LIST> retValue = new List<JOB_SELECT_LIST>();
+            
+            foreach(AbilityBinding<bool> ability in this)
+            {
+                if (ability.Point)
+                {
+                    retValue.Add((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), ability.EnumName));
+                }
+            }
+            return retValue;
         }
     }
 }

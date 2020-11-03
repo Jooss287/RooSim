@@ -179,7 +179,7 @@ namespace RooStatsSim.DB
         EQUIP_TYPE_ENUM _equip_type = EQUIP_TYPE_ENUM.NONE;
         protected int _id;
         protected string _name;
-        public List<JOB_SELECT_LIST> _wear_limit = new List<JOB_SELECT_LIST>();
+        public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
         public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
         public Dictionary<STATUS_EFFECT_TYPE, double> se_option = new Dictionary<STATUS_EFFECT_TYPE, double>();
