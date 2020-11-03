@@ -27,7 +27,7 @@
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <ListBox x:Name="DB_ListBox" Width="200" Height="200"
+            <ListBox x:Name="DB_ListBox" Width="200"
                      ItemsSource="{Binding Source={StaticResource ItemList}}"
                      SelectionChanged="DB_ListBox_SelectionChanged">
                 <ListBox.ItemTemplate>
@@ -45,7 +45,24 @@
                             <TextBox x:Name="Item_name" Text="{Binding Path=Name}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="아이템 이름" Width="150"/>
-                            <ComboBox x:Name="cmb_AddInfo" Visibility="Hidden"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <ListBox x:Name="list_Job_limit" Visibility="Visible">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Rows="2" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"
+                                                  Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
+                                                  IsChecked="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
+                                                  Click="CheckBox_Click"
+                                                  HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Tag ="ITYPE"

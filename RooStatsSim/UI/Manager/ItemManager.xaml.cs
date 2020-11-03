@@ -44,6 +44,11 @@ namespace RooStatsSim.UI.Manager
                 cmb_equip_type.Items.Add(statusName);
             }
             cmb_equip_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
+
+            {
+                list_Job_limit.ItemsSource = new Job_Limite_List();
+            }
+            
         }
         void SetComboBox()
         {
@@ -146,27 +151,36 @@ namespace RooStatsSim.UI.Manager
 
         private Dictionary<int, ItemDB> SelectedItemType()
         {
-            int selected = cmb_equip_type.SelectedIndex;
+            ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_equip_type.SelectedIndex;
 
             switch (selected)
             {
-                case (int)ITEM_TYPE_ENUM.MONSTER_RESEARCH:
+                case ITEM_TYPE_ENUM.MONSTER_RESEARCH:
                     return _DB._monster_research_db;
-                case (int)ITEM_TYPE_ENUM.STICKER:
+                case ITEM_TYPE_ENUM.STICKER:
                     return _DB._sticker_db;
-                case (int)ITEM_TYPE_ENUM.DRESS_STYLE:
+                case ITEM_TYPE_ENUM.DRESS_STYLE:
                     return _DB._dress_style_db;
-                case (int)ITEM_TYPE_ENUM.EQUIPMENT:
+                case ITEM_TYPE_ENUM.EQUIPMENT:
                     return _DB._equip_db;
-                case (int)ITEM_TYPE_ENUM.CARD:
+                case ITEM_TYPE_ENUM.CARD:
                     return _DB._card_db;
-                case (int)ITEM_TYPE_ENUM.ENCHANT:
+                case ITEM_TYPE_ENUM.ENCHANT:
                     return _DB._enchant_db;
-                case (int)ITEM_TYPE_ENUM.GEAR:
+                case ITEM_TYPE_ENUM.GEAR:
                     return _DB._gear_db;
             }
 
             return null;
+        }
+        private void SetSelectedItemTypeUI()
+        {
+            ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+            if ((selected == ITEM_TYPE_ENUM.EQUIPMENT) ||
+                (selected == ITEM_TYPE_ENUM.GEAR))
+                list_Job_limit.IsEnabled = true;
+            else
+                list_Job_limit.IsEnabled = false;
         }
 
         #region CLICK FUNCTION
@@ -203,7 +217,17 @@ namespace RooStatsSim.UI.Manager
                 now_item.ChangeValue(temp);
                 SetNowItemOption();
             }
-                
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            Job_Limite_List temp_list = (Job_Limite_List)list_Job_limit.ItemsSource;
+            AbilityBinding<bool> temp = (AbilityBinding<bool>)(sender as CheckBox).DataContext;
+            if (temp != null)
+            {
+                temp_list.SelectClass((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), temp.EnumName), temp.Point);
+            }
+            list_Job_limit.ItemsSource = temp_list;
         }
 
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -212,7 +236,7 @@ namespace RooStatsSim.UI.Manager
             if (now_DB == null)
                 return;
             else
-                cmb_AddInfo.Visibility = Visibility.Visible;
+                SetSelectedItemTypeUI();
 
             InitializeContents();
             BindingItemList = new ItemListBox(ref now_DB);
@@ -421,8 +445,9 @@ namespace RooStatsSim.UI.Manager
             AddValue.Text = "";
             AddValue.Focus();
         }
+
         #endregion
 
-
+        
     }
 }

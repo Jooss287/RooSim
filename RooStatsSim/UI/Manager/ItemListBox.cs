@@ -4,6 +4,10 @@ using System.ComponentModel;
 using RooStatsSim.DB;
 using System.Collections.Generic;
 
+using RooStatsSim.DB.Table;
+using System.Windows.Controls;
+using System.ComponentModel.Design;
+
 namespace RooStatsSim.UI.Manager
 {
     
@@ -197,5 +201,34 @@ namespace RooStatsSim.UI.Manager
         }
     }
 
+    class Job_Limite_List : ObservableCollection<AbilityBinding<bool>>
+    {
+        public Job_Limite_List()
+        {
+            foreach(JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
+            {
+                Add(new AbilityBinding<bool>(EnumProperty_Kor.JOB_SELECT_LIST_KOR_3WORD[job], false, false, Enum.GetName(typeof(JOB_SELECT_LIST), job)));
+            }
+        }
+
+        public void SelectClass(JOB_SELECT_LIST select_job, bool value)
+        {
+            int inx = 0;
+            int ClassRoot = 0;
+            if ( (int)select_job % 100 == 0)
+                ClassRoot = 100;
+            else if ((int)select_job % 10 == 0)
+                ClassRoot = 10;
+            
+            foreach(JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
+            {
+                if ( ( (int)job >= (int)select_job) && ((int)job < (int)select_job+ ClassRoot))
+                {
+                    this[inx].Point = value;
+                }
+                inx++;
+            }
+        }
+    }
 }
 

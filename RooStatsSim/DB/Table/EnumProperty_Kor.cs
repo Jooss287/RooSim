@@ -142,6 +142,28 @@ namespace RooStatsSim.DB.Table
             {JOB_SELECT_LIST.PRIST, "프리스트" },
             {JOB_SELECT_LIST.MONK, "몽크" },
         };
-
+        public static Dictionary<JOB_SELECT_LIST, string> JOB_SELECT_LIST_KOR_3WORD = new Dictionary<JOB_SELECT_LIST, string>()
+        {
+            {JOB_SELECT_LIST.NOVICE, "노비스"},
+            {JOB_SELECT_LIST.SWORDMAN, "검사" },
+            {JOB_SELECT_LIST.KNIGHT, "기사" },
+            {JOB_SELECT_LIST.CRUSADER, "크루" },
+            {JOB_SELECT_LIST.MARCHANT, "상인" },
+            {JOB_SELECT_LIST.BLACKSMITH, "블스" },
+            {JOB_SELECT_LIST.ALCHEMIST, "알케" },
+            {JOB_SELECT_LIST.THIEF, "도둑" },
+            {JOB_SELECT_LIST.ASSASSIN, "어세신" },
+            {JOB_SELECT_LIST.LOGUE, "로그" },
+            {JOB_SELECT_LIST.ARCHER, "궁수" },
+            {JOB_SELECT_LIST.HUNTER, "헌터" },
+            {JOB_SELECT_LIST.BARD, "바드" },
+            {JOB_SELECT_LIST.DANCER, "댄서" },
+            {JOB_SELECT_LIST.MAGICIAN, "마법사" },
+            {JOB_SELECT_LIST.WIZARD, "위저드" },
+            {JOB_SELECT_LIST.SAGE, "세이지" },
+            {JOB_SELECT_LIST.ACOLYTE, "복사" },
+            {JOB_SELECT_LIST.PRIST, "프리" },
+            {JOB_SELECT_LIST.MONK, "몽크" },
+        };
     }
 }

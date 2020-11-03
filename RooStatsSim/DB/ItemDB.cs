@@ -37,25 +37,24 @@ namespace RooStatsSim.DB
     {
         NOVICE = 0,
         SWORDMAN = 100,
-        KNIGHT,
-        CRUSADER,
+        KNIGHT = 110,
+        CRUSADER = 120,
         MARCHANT = 200,
-        BLACKSMITH,
-        ALCHEMIST,
+        BLACKSMITH = 210,
+        ALCHEMIST = 220,
         THIEF = 300,
-        ASSASSIN,
-        LOGUE,
+        ASSASSIN = 310,
+        LOGUE = 320,
         ARCHER = 400,
-        HUNTER,
-        BARD,
-        DANCER,
+        HUNTER = 410,
+        BARD = 420,
+        DANCER = 430,
         MAGICIAN = 500,
-        WIZARD,
-        SAGE,
+        WIZARD = 510,
+        SAGE = 520,
         ACOLYTE = 600,
-        PRIST,
-        MONK
-        
+        PRIST = 610,
+        MONK = 620,
     }
 
     public enum ITYPE
@@ -180,7 +179,7 @@ namespace RooStatsSim.DB
         EQUIP_TYPE_ENUM _equip_type = EQUIP_TYPE_ENUM.NONE;
         protected int _id;
         protected string _name;
-        public List<bool> _wear_limit = new List<bool>() { false, false, false, false, false, false, false };
+        public List<JOB_SELECT_LIST> _wear_limit = new List<JOB_SELECT_LIST>();
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
         public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
         public Dictionary<STATUS_EFFECT_TYPE, double> se_option = new Dictionary<STATUS_EFFECT_TYPE, double>();
