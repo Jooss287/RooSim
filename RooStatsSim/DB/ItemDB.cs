@@ -216,6 +216,11 @@ namespace RooStatsSim.DB
             get { return _equip_type; }
             set { _equip_type = value; }
         }
+        public List<JOB_SELECT_LIST> Wear_job_limit
+        {
+            get { return _wear_job_limit; }
+            set { _wear_job_limit = value; }
+        }
         public Dictionary<ITYPE, int> I_OPTION
         {
             get { return i_option; }

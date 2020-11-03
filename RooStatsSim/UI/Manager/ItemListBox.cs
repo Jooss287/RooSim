@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using RooStatsSim.DB.Table;
 using System.Windows.Controls;
 using System.ComponentModel.Design;
+using System.Reflection;
 
 namespace RooStatsSim.UI.Manager
 {
@@ -57,11 +58,22 @@ namespace RooStatsSim.UI.Manager
         {
             Id = param.Id;
             Name = param.Name;
-            i_option = param.i_option;
+            Item_type = param.Item_type;
+            Equip_type = param.Equip_type;
+            Wear_job_limit = param.Wear_job_limit;
+            I_OPTION = param.I_OPTION;
             d_option = param.d_option;
             se_option = param.se_option;
             if_option = param.if_option;
-            
+
+            element_inc_option = param.element_inc_option;
+            element_dec_option = param.element_dec_option;
+            size_inc_option = param.size_inc_option;
+            size_dec_option = param.size_dec_option;
+            tribe_inc_option = param.tribe_inc_option;
+            tribe_dec_option = param.tribe_dec_option;
+            mobtype_inc_option = param.mobtype_inc_option;
+            mobtype_dec_option = param.mobtype_dec_option;
         }
     }
 
@@ -76,14 +88,6 @@ namespace RooStatsSim.UI.Manager
                 ItemDB db = items.Value;
                 Add(new ItemDB_Binding(db));
             }
-
-            //if ( Count == 0)
-            //{
-            //    ItemDB db = new ItemDB();
-            //    db.Id = 0;
-            //    db.Name = "Null";
-            //    Add(new ItemDB_Binding(db));
-            //}
         }
         
         public void AddList(ItemDB db)
