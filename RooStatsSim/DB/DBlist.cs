@@ -12,6 +12,8 @@ namespace RooStatsSim.DB
         public Dictionary<int, MonsterDB> _mob_db = new Dictionary<int, MonsterDB>();
         public Dictionary<int, ItemDB> _equip_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _card_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _enchant_db = new Dictionary<int, ItemDB>();
+        public Dictionary<int, ItemDB> _gear_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _monster_research_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _dress_style_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _sticker_db = new Dictionary<int, ItemDB>();
@@ -30,6 +32,16 @@ namespace RooStatsSim.DB
         {
             get { return _card_db; }
             set { _card_db = value; }
+        }
+        public Dictionary<int, ItemDB> Enchant_db
+        {
+            get { return _enchant_db; }
+            set { _enchant_db = value; }
+        }
+        public Dictionary<int, ItemDB> Gear_db
+        {
+            get { return _gear_db; }
+            set { _gear_db = value; }
         }
         public Dictionary<int, ItemDB> Mob_research_db
         {

@@ -9,13 +9,13 @@ namespace RooStatsSim.DB
 {
     public enum ITEM_TYPE_ENUM
     {
-        NONE,
         MONSTER_RESEARCH,
         STICKER,
         DRESS_STYLE,
         EQUIPMENT,
         CARD,
         ENCHANT,
+        GEAR,
     }
 
     public enum EQUIP_TYPE_ENUM
@@ -32,6 +32,29 @@ namespace RooStatsSim.DB
         ACCESSORIES2,
         COSTUME,
         BACK_DECORATION,
+    }
+    public enum JOB_SELECT_LIST
+    {
+        NOVICE = 0,
+        SWORDMAN = 100,
+        KNIGHT = 110,
+        CRUSADER = 120,
+        MARCHANT = 200,
+        BLACKSMITH = 210,
+        ALCHEMIST = 220,
+        THIEF = 300,
+        ASSASSIN = 310,
+        LOGUE = 320,
+        ARCHER = 400,
+        HUNTER = 410,
+        BARD = 420,
+        DANCER = 430,
+        MAGICIAN = 500,
+        WIZARD = 510,
+        SAGE = 520,
+        ACOLYTE = 600,
+        PRIST = 610,
+        MONK = 620,
     }
 
     public enum ITYPE
@@ -62,7 +85,6 @@ namespace RooStatsSim.DB
         HIT,
         CRI = 5000,     //크리율 관련 스텟
         CDEF,
-        ELEMENT = 7000, //속성 관련 스텟
     }
 
     public enum DTYPE
@@ -102,14 +124,24 @@ namespace RooStatsSim.DB
     {
         public ItemDB(ItemDB item_db)
         {
-            _id = item_db.Id;
-            _name = item_db.Name;
-            _item_type = item_db._item_type;
-            _equip_type = item_db._equip_type;
+            Id = item_db.Id;
+            Name = item_db.Name;
+            Item_type = item_db._item_type;
+            Equip_type = item_db._equip_type;
+            Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
             i_option = new Dictionary<ITYPE, int>(item_db.i_option);
             d_option = new Dictionary<DTYPE, double>(item_db.d_option);
             se_option = new Dictionary<STATUS_EFFECT_TYPE, double>(item_db.se_option);
             if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
+
+            element_inc_option = new Dictionary<ELEMENT_TYPE, double>(item_db.element_inc_option);
+            element_dec_option = new Dictionary<ELEMENT_TYPE, double>(item_db.element_dec_option);
+            size_inc_option = new Dictionary<MONSTER_SIZE, double>(item_db.size_inc_option);
+            size_dec_option = new Dictionary<MONSTER_SIZE, double>(item_db.size_dec_option);
+            tribe_inc_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_inc_option);
+            tribe_dec_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_dec_option);
+            mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>(item_db.mobtype_inc_option);
+            mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>(item_db.mobtype_dec_option);
         }
         public ItemDB() { }
 
@@ -153,10 +185,11 @@ namespace RooStatsSim.DB
 
 
 
-        ITEM_TYPE_ENUM _item_type = ITEM_TYPE_ENUM.NONE;
+        ITEM_TYPE_ENUM _item_type;
         EQUIP_TYPE_ENUM _equip_type = EQUIP_TYPE_ENUM.NONE;
         protected int _id;
         protected string _name;
+        public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
         public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
         public Dictionary<STATUS_EFFECT_TYPE, double> se_option = new Dictionary<STATUS_EFFECT_TYPE, double>();
@@ -172,6 +205,7 @@ namespace RooStatsSim.DB
         public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
         public Dictionary<MONSTER_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>();
 
+        #region property
         public int Id
         {
             get { return _id; }
@@ -191,6 +225,11 @@ namespace RooStatsSim.DB
         {
             get { return _equip_type; }
             set { _equip_type = value; }
+        }
+        public List<JOB_SELECT_LIST> Wear_job_limit
+        {
+            get { return _wear_job_limit; }
+            set { _wear_job_limit = value; }
         }
         public Dictionary<ITYPE, int> I_OPTION
         {
@@ -252,6 +291,7 @@ namespace RooStatsSim.DB
             get { return mobtype_dec_option; }
             set { mobtype_dec_option = value; }
         }
+        #endregion
     }
 
     public class AbilityPerStatus

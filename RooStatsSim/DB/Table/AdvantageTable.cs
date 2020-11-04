@@ -9,7 +9,7 @@ namespace RooStatsSim.DB.Table
 {
     class AdvantageTable
     {
-        readonly double[,] SizeRatio = new double[(int)WEAPON_TYPE.WEAPON_CNT, (int)MONSTER_SIZE.SIZE_CNT]
+        readonly double[,] SizeRatio = new double[(int)WEAPON_TYPE.JAMADHAR+1, (int)MONSTER_SIZE.LARGE+1]
         {
             {1.0, 1.0, 1.0},        //HAND
             {1.0, 0.75, 0.5 },      //DAGGER
@@ -27,7 +27,7 @@ namespace RooStatsSim.DB.Table
         };
 
         //  [ATTACKER_ELEMENT, DEFENSER_ELEMENT]
-        readonly double[,] ElementRatio = new double[(int)ELEMENT_TYPE.ELEMENT_CNT, (int)ELEMENT_TYPE.ELEMENT_CNT]
+        readonly double[,] ElementRatio = new double[(int)ELEMENT_TYPE.UNDEAD+1, (int)ELEMENT_TYPE.UNDEAD+1]
         {
             {0,    0,     0,     0,     0,     0,     0, 0,     -0.3, 0 },                     //NORMAL
             {0,    -0.75, -0.2,  0,     0.75,  0,     0, 0,     0,    0 },              //WIND
