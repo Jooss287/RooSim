@@ -170,8 +170,8 @@ namespace RooStatsSim.DB.Table
         public static Dictionary<EQUIP_TYPE_ENUM, string> EQUIP_TYPE_ENUM_KOR = new Dictionary<EQUIP_TYPE_ENUM, string>()
         {
             {EQUIP_TYPE_ENUM.HEAD_TOP, "머리상단"},
-            {EQUIP_TYPE_ENUM.HEAD_MID, "머리상단"},
-            {EQUIP_TYPE_ENUM.HEAD_BOT, "머리상단"},
+            {EQUIP_TYPE_ENUM.HEAD_MID, "머리중단"},
+            {EQUIP_TYPE_ENUM.HEAD_BOT, "머리하단"},
             {EQUIP_TYPE_ENUM.WEAPON, "주무기"},
             {EQUIP_TYPE_ENUM.SUB_WEAPON, "보조무기"},
             {EQUIP_TYPE_ENUM.CLOAK, "걸칠것"},
