@@ -194,7 +194,6 @@ namespace RooStatsSim.UI.Manager
             if (string.Compare(Item_name.Text, "") == 0)
                 return;
 
-            //now_item._wear_job_limit = (list_Job_limit.ItemsSource as Job_Limite_List).GetLimitedJobList();
             now_DB[now_item.Id] = new ItemDB(now_item);
             BindingItemList.AddList(new ItemDB(now_item));
 
