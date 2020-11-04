@@ -20,7 +20,6 @@ namespace RooStatsSim.DB
 
     public enum EQUIP_TYPE_ENUM
     {
-        NONE,
         HEAD_TOP,
         HEAD_MID,
         HEAD_BOT,
@@ -93,6 +92,8 @@ namespace RooStatsSim.DB
         MATK_P,
         PHYSICAL_DAMAGE,
         MAGICAL_DAMAGE,
+        IGNORE_PHYSICAL_DEFENSE,
+        IGNORE_MAGICAL_DEFENSE,
         DEF_P = 2000,
         MDEF_P,
         PHYSICAL_DEC_DAMAGE,
@@ -126,8 +127,9 @@ namespace RooStatsSim.DB
         {
             Id = item_db.Id;
             Name = item_db.Name;
-            Item_type = item_db._item_type;
-            Equip_type = item_db._equip_type;
+            Item_type = item_db.Item_type;
+            Equip_type = item_db.Equip_type;
+            Smelt = item_db.Smelt;
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
             i_option = new Dictionary<ITYPE, int>(item_db.i_option);
             d_option = new Dictionary<DTYPE, double>(item_db.d_option);
@@ -186,9 +188,10 @@ namespace RooStatsSim.DB
 
 
         ITEM_TYPE_ENUM _item_type;
-        EQUIP_TYPE_ENUM _equip_type = EQUIP_TYPE_ENUM.NONE;
+        EQUIP_TYPE_ENUM _equip_type;
         protected int _id;
         protected string _name;
+        protected int _smelt;
         public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
         public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
@@ -215,6 +218,11 @@ namespace RooStatsSim.DB
         {
             get { return _name; }
             set { _name = value; }
+        }
+        public int Smelt
+        {
+            get { return _smelt; }
+            set { _smelt = value; }
         }
         public ITEM_TYPE_ENUM Item_type
         {

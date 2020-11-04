@@ -36,7 +36,7 @@ namespace RooStatsSim.DB.Table
             {ITYPE.SP_RECOVERY,"SP 자연 회복" },
             {ITYPE.FLEE,"FLEE" },
             {ITYPE.HIT,"HIT" },
-            {ITYPE.CRI,"CIR" },
+            {ITYPE.CRI,"CRI" },
             {ITYPE.CDEF,"CDEF" },
         };
         public static Dictionary<DTYPE, string> DTYPE_KOR = new Dictionary<DTYPE, string>()
@@ -45,6 +45,8 @@ namespace RooStatsSim.DB.Table
             {DTYPE.MATK_P, "MATK %" },
             {DTYPE.PHYSICAL_DAMAGE, "물리 데미지(%)" },
             {DTYPE.MAGICAL_DAMAGE, "마법 데미지(%)" },
+            {DTYPE.IGNORE_PHYSICAL_DEFENSE, "물리 방어 무시(%)" },
+            {DTYPE.IGNORE_MAGICAL_DEFENSE, "마법 방어 무시(%)" },
             {DTYPE.PHYSICAL_DEC_DAMAGE, "물리 데미지 감소(%)" },
             {DTYPE.MAGICAL_DEC_DAMAGE, "마법 데미지 감소(%)" },
             {DTYPE.DEF_P, "DEF %" },
@@ -164,6 +166,21 @@ namespace RooStatsSim.DB.Table
             {JOB_SELECT_LIST.ACOLYTE, "복사" },
             {JOB_SELECT_LIST.PRIST, "프리" },
             {JOB_SELECT_LIST.MONK, "몽크" },
+        };
+        public static Dictionary<EQUIP_TYPE_ENUM, string> EQUIP_TYPE_ENUM_KOR = new Dictionary<EQUIP_TYPE_ENUM, string>()
+        {
+            {EQUIP_TYPE_ENUM.HEAD_TOP, "머리상단"},
+            {EQUIP_TYPE_ENUM.HEAD_MID, "머리상단"},
+            {EQUIP_TYPE_ENUM.HEAD_BOT, "머리상단"},
+            {EQUIP_TYPE_ENUM.WEAPON, "주무기"},
+            {EQUIP_TYPE_ENUM.SUB_WEAPON, "보조무기"},
+            {EQUIP_TYPE_ENUM.CLOAK, "걸칠것"},
+            {EQUIP_TYPE_ENUM.BOOTS, "신발"},
+            {EQUIP_TYPE_ENUM.ACCESSORIES1, "악세사리1"},
+            {EQUIP_TYPE_ENUM.ACCESSORIES2, "악세사리2"},
+            {EQUIP_TYPE_ENUM.COSTUME, "코스튬"},
+            {EQUIP_TYPE_ENUM.BACK_DECORATION, "등장식"},
+            
         };
     }
 }

@@ -20,10 +20,10 @@
                     Margin="5,5,5,5"
                     Click="Add_DB_Click"
                     VerticalAlignment="Top" HorizontalAlignment="Left" />
-            <ComboBox Name="cmb_equip_type" Width="100" Height="30"
+            <ComboBox Name="cmb_item_type" Width="100" Height="30"
                       Margin="5,5,5,5"
                       VerticalAlignment="Top" HorizontalAlignment="Left"
-                      SelectionChanged="cmb_equip_type_SelectionChanged">
+                      SelectionChanged="cmb_item_type_SelectionChanged">
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
@@ -45,6 +45,8 @@
                             <TextBox x:Name="Item_name" Text="{Binding Path=Name}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="아이템 이름" Width="150"/>
+                            <ComboBox Name="cmb_equip_type"
+                                      VerticalAlignment="Bottom"/>
                         </StackPanel>
                         <StackPanel>
                             <ListBox x:Name="list_Job_limit" Visibility="Visible">

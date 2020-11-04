@@ -27,7 +27,6 @@ namespace RooStatsSim.UI.Manager
             DataContext = now_item;
 
             InitUIsetting();
-            cmb_equip_type.SelectedIndex = 3;
             now_DB = SelectedItemType();
             InitializeContents();
             BindingItemList = new ItemListBox(ref now_DB);
@@ -41,11 +40,16 @@ namespace RooStatsSim.UI.Manager
             foreach (ITEM_TYPE_ENUM option in Enum.GetValues(typeof(ITEM_TYPE_ENUM)))
             {
                 string statusName = Enum.GetName(typeof(ITEM_TYPE_ENUM), option);
+                cmb_item_type.Items.Add(statusName);
+            }
+            cmb_item_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
+
+            foreach (EQUIP_TYPE_ENUM equip in Enum.GetValues(typeof(EQUIP_TYPE_ENUM)))
+            {
+                string statusName = EnumProperty_Kor.EQUIP_TYPE_ENUM_KOR[equip];
                 cmb_equip_type.Items.Add(statusName);
             }
-            cmb_equip_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
-
-            
+            cmb_equip_type.SelectedIndex = (int)EQUIP_TYPE_ENUM.HEAD_TOP;
         }
         void SetComboBox()
         {
@@ -120,7 +124,7 @@ namespace RooStatsSim.UI.Manager
             else
                 now_item.Id = now_DB.Count;
 
-            now_item.Item_type = (ITEM_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+            now_item.Item_type = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
             now_item._wear_job_limit.Clear();
             now_item.Name = "";
             now_item.i_option.Clear();
@@ -150,7 +154,7 @@ namespace RooStatsSim.UI.Manager
 
         private Dictionary<int, ItemDB> SelectedItemType()
         {
-            ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+            ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
 
             switch (selected)
             {
@@ -174,12 +178,18 @@ namespace RooStatsSim.UI.Manager
         }
         private void SetSelectedItemTypeUI()
         {
-            ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_equip_type.SelectedIndex;
-            if ((selected == ITEM_TYPE_ENUM.EQUIPMENT) ||
-                (selected == ITEM_TYPE_ENUM.GEAR))
+            ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
+
+            cmb_equip_type.IsEnabled = false;
+            list_Job_limit.IsEnabled = false;
+
+            if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
+            {
+                cmb_equip_type.IsEnabled = true;
                 list_Job_limit.IsEnabled = true;
-            else
-                list_Job_limit.IsEnabled = false;
+            }
+            else if (selected == ITEM_TYPE_ENUM.GEAR)
+                list_Job_limit.IsEnabled = true;
         }
 
         #region CLICK FUNCTION
@@ -230,7 +240,7 @@ namespace RooStatsSim.UI.Manager
             SetNowItemOption();
         }
 
-        private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cmb_item_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             now_DB = SelectedItemType();
             if (now_DB == null)
@@ -446,8 +456,7 @@ namespace RooStatsSim.UI.Manager
             AddValue.Focus();
         }
 
-        #endregion
 
-        
+        #endregion
     }
 }
