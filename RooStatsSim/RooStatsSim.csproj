@@ -149,7 +149,9 @@
       <DependentUpon>StatusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="User\UserData.cs" />
-    <Compile Include="User\UserData_Lists.cs" />
+    <Compile Include="User\UserData_Equipment_List.cs" />
+    <Compile Include="User\UserData_Status_List.cs" />
+    <Compile Include="User\UserData_Stackbuff_List.cs" />
     <Compile Include="User\UserItem.cs" />
     <Compile Include="User\User_Enum.cs" />
     <Page Include="MainWindow.xaml">

@@ -33,13 +33,15 @@
                     </StackPanel>
                 </Border>
                 <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <StackPanel Orientation="Vertical">
-                        <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                        <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                            <TreeViewItem x:Name="main_weapon_tree" Header="무기"
+                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="WEAPON">
+                        <StackPanel Orientation="Vertical" Background="GhostWhite">
+                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                <TreeViewItem x:Name="main_weapon_tree" Header="{Binding Path=Name}"
                                 ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                        </TreeView>
-                    </StackPanel>
+                            </TreeView>
+                        </StackPanel>
+                    </ContentControl>
                 </Border>
                 <Border Style="{Binding Source={StaticResource Tree_Border}}">
                     <StackPanel Orientation="Vertical">
@@ -142,11 +144,13 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical" Margin="8">
-                                    <Button Content="Img" Width="30" Height="30"/>
-                                    <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
-                                               Margin="0,-10,0,0"/>
-                                </StackPanel>
+                                <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick">
+                                    <StackPanel Orientation="Vertical" Margin="8">
+                                        <Button Content="Img" Width="30" Height="30" Background="AntiqueWhite"/>
+                                        <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
+                                                   Margin="0,-10,0,0" TextAlignment="Center"/>
+                                    </StackPanel>
+                                </ContentControl>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -154,6 +158,12 @@
                 <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <TabItem.Header>
                         <TextBlock Text="카드"/>
+                    </TabItem.Header>
+
+                </TabItem>
+                <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <TabItem.Header>
+                        <TextBlock Text="인챈트"/>
                     </TabItem.Header>
 
                 </TabItem>
