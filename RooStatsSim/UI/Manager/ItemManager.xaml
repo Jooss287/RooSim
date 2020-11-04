@@ -45,7 +45,7 @@
                             <TextBox x:Name="Item_name" Text="{Binding Path=Name}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="아이템 이름" Width="150"/>
-                            <ComboBox Name="cmb_equip_type"
+                            <ComboBox Name="cmb_equip_type" SelectionChanged="cmb_equip_type_SelectionChanged"
                                       VerticalAlignment="Bottom"/>
                         </StackPanel>
                         <StackPanel>

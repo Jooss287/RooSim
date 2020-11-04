@@ -101,6 +101,7 @@ namespace RooStatsSim.UI.Manager
 
         void SetNowItemOption()
         {
+            cmb_equip_type.SelectedIndex = (int)now_item.Equip_type;
             list_Job_limit.ItemsSource = new Job_Limite_List(ref now_item._wear_job_limit);
             list_iOption.ItemsSource = new ItemOptionListBox<ITYPE, int>(ref now_item.i_option);
             list_dOption.ItemsSource = new ItemOptionListBox<DTYPE, double>(ref now_item.d_option);
@@ -125,6 +126,7 @@ namespace RooStatsSim.UI.Manager
                 now_item.Id = now_DB.Count;
 
             now_item.Item_type = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
+            now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
             now_item._wear_job_limit.Clear();
             now_item.Name = "";
             now_item.i_option.Clear();
@@ -204,6 +206,7 @@ namespace RooStatsSim.UI.Manager
             if (string.Compare(Item_name.Text, "") == 0)
                 return;
 
+            
             now_DB[now_item.Id] = new ItemDB(now_item);
             BindingItemList.AddList(new ItemDB(now_item));
 
@@ -458,5 +461,10 @@ namespace RooStatsSim.UI.Manager
 
 
         #endregion
+
+        private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+        }
     }
 }
