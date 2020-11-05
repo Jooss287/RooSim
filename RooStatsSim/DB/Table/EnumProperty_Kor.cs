@@ -175,7 +175,7 @@ namespace RooStatsSim.DB.Table
             {EQUIP_TYPE_ENUM.WEAPON, "주무기"},
             {EQUIP_TYPE_ENUM.SUB_WEAPON, "보조무기"},
             {EQUIP_TYPE_ENUM.CLOAK, "걸칠것"},
-            {EQUIP_TYPE_ENUM.BOOTS, "신발"},
+            {EQUIP_TYPE_ENUM.SHOES, "신발"},
             {EQUIP_TYPE_ENUM.ACCESSORIES1, "악세사리1"},
             {EQUIP_TYPE_ENUM.ACCESSORIES2, "악세사리2"},
             {EQUIP_TYPE_ENUM.COSTUME, "코스튬"},
