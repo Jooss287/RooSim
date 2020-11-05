@@ -23,7 +23,6 @@ namespace RooStatsSim.UI.Equipment
     public partial class Equip : Window
     {
         UserData _user_data;
-        EquipList equipList;
         ItemListFilter EquipItemList;
         ItemListFilter CardItemList;
         ItemListFilter EnchantList;
@@ -36,6 +35,35 @@ namespace RooStatsSim.UI.Equipment
             InitializeComponent();
         }
 
+
+        private TreeViewItem GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
+        {
+            switch (equip_type)
+            {
+                case EQUIP_TYPE_ENUM.HEAD_TOP:
+                    return head_top_tree;
+                case EQUIP_TYPE_ENUM.HEAD_MID:
+                    return head_mid_tree;
+                case EQUIP_TYPE_ENUM.HEAD_BOT:
+                    return head_bot_tree;
+                case EQUIP_TYPE_ENUM.WEAPON:
+                    return main_weapon_tree;
+                case EQUIP_TYPE_ENUM.SUB_WEAPON:
+                    return sub_weapon_tree;
+                case EQUIP_TYPE_ENUM.ARMOR:
+                    return armor_tree;
+                case EQUIP_TYPE_ENUM.CLOAK:
+                    return cloak_tree;
+                case EQUIP_TYPE_ENUM.SHOES:
+                    return shoes_tree;
+                case EQUIP_TYPE_ENUM.ACCESSORIES1:
+                    return acc1_tree;
+                case EQUIP_TYPE_ENUM.ACCESSORIES2:
+                    return acc2_tree;
+            }
+            return null;
+        }
+        
         private void SelectEquipment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             now_selected_equip_type = (EQUIP_TYPE_ENUM)Enum.Parse(typeof(EQUIP_TYPE_ENUM), (string)((sender as ContentControl).Tag));
@@ -49,8 +77,8 @@ namespace RooStatsSim.UI.Equipment
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
             _user_data.Equip.List[(int)now_selected_equip_type].Equip = MainWindow._roo_db.Equip_db[item.Id];
-            main_weapon_tree.Header = item.Name;
-            main_weapon_tree.ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
+            GetEquipTypeItem(now_selected_equip_type).Header = item.Name;
+            GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
 
             CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, now_selected_equip_type);
             CardSelector.ItemsSource = CardItemList;
@@ -64,7 +92,7 @@ namespace RooStatsSim.UI.Equipment
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
             _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MainWindow._roo_db.Card_db[item.Id]);
-            main_weapon_tree.ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
+            GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
         }
     }
 }
