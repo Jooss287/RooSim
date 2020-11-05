@@ -173,6 +173,7 @@ namespace RooStatsSim.DB.Table
             {EQUIP_TYPE_ENUM.HEAD_MID, "머리중단"},
             {EQUIP_TYPE_ENUM.HEAD_BOT, "머리하단"},
             {EQUIP_TYPE_ENUM.WEAPON, "주무기"},
+            {EQUIP_TYPE_ENUM.ARMOR, "갑옷"},
             {EQUIP_TYPE_ENUM.SUB_WEAPON, "보조무기"},
             {EQUIP_TYPE_ENUM.CLOAK, "걸칠것"},
             {EQUIP_TYPE_ENUM.SHOES, "신발"},
