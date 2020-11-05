@@ -71,7 +71,7 @@ namespace RooStatsSim.DB.Table
             {ELEMENT_TYPE.NORMAL, "무속성" },
             {ELEMENT_TYPE.WIND, "풍속성" },
             {ELEMENT_TYPE.EARTH, "지속성" },
-            {ELEMENT_TYPE.FIRE, "지속성" },
+            {ELEMENT_TYPE.FIRE, "화속성" },
             {ELEMENT_TYPE.WATER, "수속성" },
             {ELEMENT_TYPE.POISON, "독속성" },
             {ELEMENT_TYPE.HOLY, "성속성" },
