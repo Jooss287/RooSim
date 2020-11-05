@@ -130,6 +130,8 @@ namespace RooStatsSim.DB
             Item_type = item_db.Item_type;
             Equip_type = item_db.Equip_type;
             Smelt = item_db.Smelt;
+            CardSlot = item_db.CardSlot;
+            EnchantSlot = item_db.EnchantSlot;
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
             i_option = new Dictionary<ITYPE, int>(item_db.i_option);
             d_option = new Dictionary<DTYPE, double>(item_db.d_option);
@@ -192,6 +194,8 @@ namespace RooStatsSim.DB
         protected int _id;
         protected string _name;
         protected int _smelt;
+        protected int _card_slot;
+        protected int _enchant_slot;
         public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
         public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
@@ -223,6 +227,16 @@ namespace RooStatsSim.DB
         {
             get { return _smelt; }
             set { _smelt = value; }
+        }
+        public int CardSlot
+        {
+            get { return _card_slot; }
+            set { _card_slot = value; }
+        }
+        public int EnchantSlot
+        {
+            get { return _enchant_slot; }
+            set { _enchant_slot = value; }
         }
         public ITEM_TYPE_ENUM Item_type
         {
