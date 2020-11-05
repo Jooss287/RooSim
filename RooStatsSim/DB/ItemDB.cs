@@ -127,6 +127,7 @@ namespace RooStatsSim.DB
         {
             Id = item_db.Id;
             Name = item_db.Name;
+            LevelLimit = item_db.LevelLimit;
             Item_type = item_db.Item_type;
             Equip_type = item_db.Equip_type;
             Smelt = item_db.Smelt;
@@ -193,6 +194,7 @@ namespace RooStatsSim.DB
         EQUIP_TYPE_ENUM _equip_type;
         protected int _id;
         protected string _name;
+        protected int _level_limit;
         protected int _smelt;
         protected int _card_slot;
         protected int _enchant_slot;
@@ -222,6 +224,11 @@ namespace RooStatsSim.DB
         {
             get { return _name; }
             set { _name = value; }
+        }
+        public int LevelLimit
+        {
+            get { return _level_limit; }
+            set { _level_limit = value; }
         }
         public int Smelt
         {

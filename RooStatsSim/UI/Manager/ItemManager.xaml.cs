@@ -125,10 +125,13 @@ namespace RooStatsSim.UI.Manager
             else
                 now_item.Id = now_DB.Count;
 
+            now_item.Name = "";
+            now_item.LevelLimit = 0;
+            now_item.CardSlot = 0;
+            now_item.EnchantSlot = 0;
             now_item.Item_type = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
             now_item._wear_job_limit.Clear();
-            now_item.Name = "";
             now_item.i_option.Clear();
             now_item.d_option.Clear();
             now_item.IF_OPTION.Clear();
@@ -184,14 +187,22 @@ namespace RooStatsSim.UI.Manager
 
             cmb_equip_type.IsEnabled = false;
             list_Job_limit.IsEnabled = false;
+            Item_EnchantSlot.IsEnabled = false;
+            Item_CardSlot.IsEnabled = false;
+            Item_Level.IsEnabled = false;
 
             if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
             {
                 cmb_equip_type.IsEnabled = true;
                 list_Job_limit.IsEnabled = true;
+                Item_EnchantSlot.IsEnabled = true;
+                Item_CardSlot.IsEnabled = true;
+                Item_Level.IsEnabled = true;
             }
             else if (selected == ITEM_TYPE_ENUM.GEAR)
                 list_Job_limit.IsEnabled = true;
+            else if (selected == ITEM_TYPE_ENUM.CARD)
+                cmb_equip_type.IsEnabled = true;
         }
 
         #region CLICK FUNCTION

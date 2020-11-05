@@ -29,6 +29,21 @@ namespace RooStatsSim.UI.Manager
             get { return _name; }
             set { _name = value; OnPropertyChanged("Name"); }
         }
+        public new int LevelLimit
+        {
+            get { return _level_limit; }
+            set { _level_limit = value; OnPropertyChanged("LevelLimit"); }
+        }
+        public new int CardSlot
+        {
+            get { return _card_slot; }
+            set { _card_slot = value; OnPropertyChanged("CardSlot"); }
+        }
+        public new int EnchantSlot
+        {
+            get { return _enchant_slot; }
+            set { _enchant_slot = value; OnPropertyChanged("EnchantSlot"); }
+        }
         public string Itype_name
         {
            get { return Enum.GetName(typeof(ITYPE), i_option.Keys); }
@@ -58,6 +73,9 @@ namespace RooStatsSim.UI.Manager
         {
             Id = param.Id;
             Name = param.Name;
+            LevelLimit = param.LevelLimit;
+            CardSlot = param.CardSlot;
+            EnchantSlot = param.EnchantSlot;
             Item_type = param.Item_type;
             Equip_type = param.Equip_type;
             Wear_job_limit = param.Wear_job_limit;

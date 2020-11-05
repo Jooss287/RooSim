@@ -44,9 +44,18 @@
                                      Width="40" Height="22" IsEnabled="False" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
                             <TextBox x:Name="Item_name" Text="{Binding Path=Name}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
-                                     materialDesign:HintAssist.Hint="아이템 이름" Width="150"/>
+                                     materialDesign:HintAssist.Hint="아이템 이름" Width="150" Margin="10,0,0,0" />
                             <ComboBox Name="cmb_equip_type" SelectionChanged="cmb_equip_type_SelectionChanged"
-                                      VerticalAlignment="Bottom"/>
+                                      VerticalAlignment="Bottom" Margin="10,0,0,0" />
+                            <TextBox x:Name="Item_Level" Text="{Binding Path=LevelLimit}"
+                                     Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
+                                     materialDesign:HintAssist.Hint="레벨 제한" Width="60" Margin="10,0,0,0" />
+                            <TextBox x:Name="Item_CardSlot" Text="{Binding Path=CardSlot}"
+                                     Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
+                                     materialDesign:HintAssist.Hint="카드 슬롯" Width="60" Margin="10,0,0,0" />
+                            <TextBox x:Name="Item_EnchantSlot" Text="{Binding Path=EnchantSlot}"
+                                     Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
+                                     materialDesign:HintAssist.Hint="인챈트 개수" Width="70" Margin="10,0,0,0"/>
                         </StackPanel>
                         <StackPanel>
                             <ListBox x:Name="list_Job_limit" Visibility="Visible">
