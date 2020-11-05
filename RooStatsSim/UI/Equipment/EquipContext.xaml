@@ -10,7 +10,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Style.Resources>
-            <HierarchicalDataTemplate DataType="{x:Type local:EquipItem}"
+            <HierarchicalDataTemplate DataType="{x:Type local:EquipTreeViewBinding}"
                                       ItemsSource="{Binding Path=SubList}">
                 <TextBlock Text="{Binding Path=Name}"/>
             </HierarchicalDataTemplate>

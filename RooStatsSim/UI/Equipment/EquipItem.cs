@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.UI.Equipment
 {
-    public class EquipItem : EquipId
+    public class EquipTreeViewBinding : EquipId
     {
-        public EquipItem(string name)
+        public EquipTreeViewBinding(string name)
         {
             Name = name;
-            SubList = new List<EquipItem>();
+            SubList = new List<EquipTreeViewBinding>();
         }
-        public EquipItem(ItemDB item)
+        public EquipTreeViewBinding(ItemDB item)
         {
             Id = item.Id;
             Name = item.Name;
 
-            SubList = new List<EquipItem>();
+            SubList = new List<EquipTreeViewBinding>();
         }
-        public List<EquipItem> SubList { get; set; }
+        public List<EquipTreeViewBinding> SubList { get; set; }
 
     }
 

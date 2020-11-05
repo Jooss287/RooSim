@@ -12,29 +12,40 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.UI.Equipment
 {
-    class EquipList : ObservableCollection<EquipItem>
+    class EquipList : ObservableCollection<EquipTreeViewBinding>
     {
         public string Name { get; set; }
-        public EquipItem Card { get; set; }
-        public EquipItem Enchant { get; set; }
 
         public EquipList()
         {
             Name = "TestName";
-            Add(Card = new EquipItem("카드"));
-            Card.SubList.Add(new EquipItem("스켈 워커"));
-            Card.SubList.Add(new EquipItem("마이너 우로스"));
-            Add(Enchant = new EquipItem("인챈트"));
-            Enchant.SubList.Add(new EquipItem("투지 2"));
-            Enchant.SubList.Add(new EquipItem("첨예 3"));
+
+            EquipTreeViewBinding CardTree;
+            Add(CardTree = new EquipTreeViewBinding("카드"));
+            CardTree.SubList.Add(new EquipTreeViewBinding("스켈 워커"));
+            CardTree.SubList.Add(new EquipTreeViewBinding("마이너 우로스"));
+
+            EquipTreeViewBinding EnchantTree;
+            Add(EnchantTree = new EquipTreeViewBinding("인챈트"));
+            EnchantTree.SubList.Add(new EquipTreeViewBinding("투지 2"));
+            EnchantTree.SubList.Add(new EquipTreeViewBinding("첨예 3"));
         }
-        public EquipList(ItemDB item)
+        public EquipList(EQUIP.EquipItem equip_item)
         {
-            Name = item.Name;
-            Add(Card = new EquipItem("카드"));
-            Add(Enchant = new EquipItem("인챈트"));
+            Name = equip_item.Equip.Name;
+            EquipTreeViewBinding CardTree = new EquipTreeViewBinding("카드");
+            Add(CardTree);
+            foreach (ItemDB card in equip_item.Card)
+            {
+                CardTree.SubList.Add(new EquipTreeViewBinding(card));
+            }
+            EquipTreeViewBinding EnchantTree = new EquipTreeViewBinding("인챈트");
+            Add(EnchantTree);
+            foreach (ItemDB Enchant in equip_item.Enchant)
+            {
+                EnchantTree.SubList.Add(new EquipTreeViewBinding(Enchant));
+            }
         }
-        
     }
 }
 
@@ -45,7 +56,8 @@ class ItemListFilter : ObservableCollection<EquipId>
     {
         foreach(KeyValuePair<int, ItemDB> itemPair in GetItemList(itemtype))
         {
-            if (!(itemPair.Value)._wear_job_limit.Contains(user.Job))
+            if ( ( (itemPair.Value)._wear_job_limit.Count != 0 ) &&
+                (!(itemPair.Value)._wear_job_limit.Contains(user.Job)) )
                 continue;
             if ((itemPair.Value).Equip_type != equiptype)
                 continue;
