@@ -18,17 +18,10 @@ namespace RooStatsSim.UI.Equipment
 
         public EquipList()
         {
-            Name = "TestName";
-
             EquipTreeViewBinding CardTree;
             Add(CardTree = new EquipTreeViewBinding("카드"));
-            CardTree.SubList.Add(new EquipTreeViewBinding("스켈 워커"));
-            CardTree.SubList.Add(new EquipTreeViewBinding("마이너 우로스"));
-
             EquipTreeViewBinding EnchantTree;
             Add(EnchantTree = new EquipTreeViewBinding("인챈트"));
-            EnchantTree.SubList.Add(new EquipTreeViewBinding("투지 2"));
-            EnchantTree.SubList.Add(new EquipTreeViewBinding("첨예 3"));
         }
         public EquipList(EQUIP.EquipItem equip_item)
         {

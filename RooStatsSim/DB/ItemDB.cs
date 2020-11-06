@@ -156,7 +156,15 @@ namespace RooStatsSim.DB
             AddOption<ITYPE>(ref a.i_option, b.i_option);
             AddOption<DTYPE>(ref a.d_option, b.d_option);
             AddOption<STATUS_EFFECT_TYPE>(ref a.se_option, b.se_option);
-
+            AddOption(ref a.if_option, b.if_option);
+            AddOption<ELEMENT_TYPE>(ref a.element_inc_option, b.element_inc_option);
+            AddOption<ELEMENT_TYPE>(ref a.element_dec_option, b.element_dec_option);
+            AddOption<MONSTER_SIZE>(ref a.size_inc_option, b.size_inc_option);
+            AddOption<MONSTER_SIZE>(ref a.size_dec_option, b.size_dec_option);
+            AddOption<TRIBE_TYPE>(ref a.tribe_inc_option, b.tribe_inc_option);
+            AddOption<TRIBE_TYPE>(ref a.tribe_dec_option, b.tribe_dec_option);
+            AddOption<MONSTER_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
+            AddOption<MONSTER_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
             return a;
         }
         
@@ -181,6 +189,22 @@ namespace RooStatsSim.DB
                 if (a.ContainsKey(opt.Key) == true)
                 {
                     a[opt.Key] = a[opt.Key] + opt.Value;
+                }
+                else
+                {
+                    a[opt.Key] = opt.Value;
+                }
+            }
+        }
+        protected static void AddOption(ref Dictionary<IFTYPE, AbilityPerStatus> a, Dictionary<IFTYPE, AbilityPerStatus> b)
+        {
+            foreach (KeyValuePair<IFTYPE, AbilityPerStatus> opt in b)
+            {
+                if (a.ContainsKey(opt.Key) == true)
+                {
+                    a[opt.Key].AddValue += opt.Value.AddValue;
+                    a[opt.Key].PerValue += opt.Value.PerValue;
+                    a[opt.Key].IfType = opt.Value.IfType;
                 }
                 else
                 {
@@ -329,12 +353,14 @@ namespace RooStatsSim.DB
         public delegate int CalcFunc(int value);
         public int AddValue;
         public int PerValue;
+        public IFTYPE IfType;
         CalcFunc Calc;
 
         public AbilityPerStatus(IFTYPE iftype, int add_value, int per_value)
         {
             AddValue = add_value;
             PerValue = per_value;
+            IfType = iftype;
             switch (iftype)
             {
                 case IFTYPE.ATK_PER_STR:

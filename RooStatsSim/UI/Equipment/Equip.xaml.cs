@@ -85,6 +85,7 @@ namespace RooStatsSim.UI.Equipment
             //EnchantList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.ENCHANT, now_selected_equip_type);
 
             ItemSlectorTab.SelectedIndex = 1;
+            _user_data.CalcUserData();
         }
 
         private void SelectCard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -93,6 +94,7 @@ namespace RooStatsSim.UI.Equipment
 
             _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MainWindow._roo_db.Card_db[item.Id]);
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
+            _user_data.CalcUserData();
         }
     }
 }

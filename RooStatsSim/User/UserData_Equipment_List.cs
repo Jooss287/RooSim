@@ -6,6 +6,7 @@ using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
+using RooStatsSim.UI.Equipment;
 
 namespace RooStatsSim.User
 {
@@ -73,6 +74,24 @@ namespace RooStatsSim.User
             //{
             //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
             //}
+        }
+
+        public ItemDB GetOption()
+        {
+            ItemDB option = new ItemDB();
+
+            foreach ( EquipItem equipment in List)
+            {
+                if (equipment.Equip == null)
+                    continue;
+                option += equipment.Equip;
+                foreach (ItemDB card in equipment.Card)
+                    option += card;
+                foreach (ItemDB enchant in equipment.Enchant)
+                    option += enchant;
+            }
+            
+            return option;
         }
     }
 

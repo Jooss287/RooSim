@@ -59,6 +59,8 @@ namespace RooStatsSim.User
             CalcUserItem += Riding_ability.GetOption();
             CalcUserItem += Riding_personality.GetOption();
 
+            CalcUserItem += Equip.GetOption();
+
             User_Item = CalcUserItem;
 
             if (itemDataChanged != null)
