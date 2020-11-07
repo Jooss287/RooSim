@@ -71,7 +71,10 @@ namespace RooStatsSim.UI.Equipment
             ItemSelector.ItemsSource = EquipItemList;
             ItemSlectorTab.SelectedIndex = 0;
         }
+        private void SelectGear_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
 
+        }
         private void SelectItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
@@ -96,5 +99,7 @@ namespace RooStatsSim.UI.Equipment
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
             _user_data.CalcUserData();
         }
+
+        
     }
 }
