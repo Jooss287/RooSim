@@ -5,6 +5,7 @@ using RooStatsSim.DB;
 
 using System.Text.Json;
 using RooStatsSim.Extension;
+using RooStatsSim.UI.Menu;
 
 namespace RooStatsSim.UI.Manager
 {
@@ -13,7 +14,7 @@ namespace RooStatsSim.UI.Manager
     /// </summary>
     public partial class DBManager : Window
     {
-        private DBlist _DB = MainWindow._roo_db;
+        private DBlist _DB = MenuBox._roo_db;
         private MonsterManager mob_manager = null;
         private ItemManager item_manager = null;
 

@@ -1,0 +1,67 @@
+﻿<Page x:Class="RooStatsSim.UI.Menu.MenuBox"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RooStatsSim.UI"
+      mc:Ignorable="d" 
+      Background="#E6E6E6" Width="613" Height="100"
+      Title="MenuBox">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="직업 선택" HorizontalAlignment="Left" Margin="0,0,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <RadioButton x:Name="radio_job" Tag="0" IsChecked="True" Checked="job_sel_Click" Content="노&#10;비&#10;스" Grid.Column="0" GroupName="group_attack_type" />
+                    <RadioButton Tag="1" Checked="job_sel_Click" Content="로&#10;나" Grid.Column="1" GroupName="group_attack_type" />
+                    <RadioButton Tag="2" Checked="job_sel_Click" Content="블&#10;스" Grid.Column="2" GroupName="group_attack_type" />
+                    <RadioButton Tag="3" Checked="job_sel_Click" Content="어&#10;크" Grid.Column="3" GroupName="group_attack_type" />
+                    <RadioButton Tag="4" Checked="job_sel_Click" Content="스&#10;나" Grid.Column="4" GroupName="group_attack_type"/>
+                    <RadioButton Tag="5" Checked="job_sel_Click" Content="하&#10;위" Grid.Column="5" GroupName="group_attack_type" />
+                    <RadioButton Tag="6" Checked="job_sel_Click" Content="하&#10;프" Grid.Column="6" GroupName="group_attack_type" />
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Save Point">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton IsChecked="True"/>
+                    <RadioButton />
+                    <RadioButton />
+                    <RadioButton />
+                </StackPanel>
+            </GroupBox>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Status" Grid.Row="0" Grid.Column="0"
+                        Click="Status_window_Click"/>
+                <Button Content="Skill" Grid.Row="0" Grid.Column="1"
+                        Click="Skill_window_Click"/>
+                <Button Content="Equip" Grid.Row="0" Grid.Column="2"
+                        Click="Equip_window_Click"/>
+                <Button Content="StackBuff" Grid.Row="1" Grid.Column="0"
+                        Click="StackBuff_window_Click"/>
+                <Button Content="DBManager" Grid.Row="2" Grid.Column="1"
+                        Click="DBManager_window_Click"/>
+                <Button Content="Info" Grid.Row="2" Grid.Column="2"
+                        Click="Info_window_Click"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>

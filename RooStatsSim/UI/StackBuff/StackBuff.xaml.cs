@@ -12,13 +12,13 @@ namespace RooStatsSim.UI.StackBuff
     /// <summary>
     /// StackBuff.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class StackBuff : Window, INotifyPropertyChanged
+    public partial class StackBuffWindow : Window, INotifyPropertyChanged
     {
         UserData _user_data;
         RidingList BindingRidingAbility;
         RidingList BindingRidingPersonality;
         MedalList BindingMedalPoint;
-        public StackBuff()
+        public StackBuffWindow()
         {
             _user_data = UserData.GetInstance;
 

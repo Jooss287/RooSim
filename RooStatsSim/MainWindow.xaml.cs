@@ -16,6 +16,8 @@ using RooStatsSim.UI.ACK;
 using RooStatsSim.User;
 using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
+using RooStatsSim.UI.Menu;
+using System.Windows.Shapes;
 
 namespace RooStatsSim
 {
@@ -26,6 +28,7 @@ namespace RooStatsSim
 
     public partial class MainWindow : Window
     {
+<<<<<<< HEAD
 
         public static DBlist _roo_db;
         DBManager _db_manager;
@@ -34,20 +37,32 @@ namespace RooStatsSim
         StackBuff _stacK_buff = new StackBuff();
         Equip _equip;
 
+=======
+        double objXPos, objYPos;
+        object MovingObject;
+        MenuBox _menu;
+        public StatusWindow _status;
+        public ProgramInfo _info;
+        public StackBuffWindow _stacK_buff;
+        public Equip _equip;
+        public DBManager _db_manager;
+>>>>>>> Feat/DesignRebuilding
         public MainWindow()
         {
-            //Version Check
-
             InitializeComponent();
+            _menu = new MenuBox(this);
+            menu_contents.Navigate(_menu);
+            menu_titlebar.PreviewMouseLeftButtonDown += this.ObjMouseLeftButtonDown;
+            menu_titlebar.PreviewMouseLeftButtonUp += this.ObjPreviewMouseLeftButtonUp;
+            menu_titlebar.PreviewMouseMove += this.ObjMouseMove;
 
-            _roo_db = new DBlist();
-            DBSerizator.ReadDB(ref _roo_db);
-            _user_data = UserData.GetInstance;
+            _status = new StatusWindow();
+            status_contents.Navigate(_status);
+            _info = new ProgramInfo();
+            _stacK_buff = new StackBuffWindow();
+            _equip = new Equip();
 
-
-
-            job_UI_setting((int)(JOB_LIST.LOAD_KNIGHT));
-
+<<<<<<< HEAD
             //DB생성, Window open 등
 
             //_status.Show();
@@ -56,35 +71,10 @@ namespace RooStatsSim
 
              _equip = new Equip();
             _equip.Show();
+=======
+            System.Windows.Media.Brush brush = DesigningCanvas.Background;
+>>>>>>> Feat/DesignRebuilding
         }
-
-        #region UI Variable Define
-        readonly Dictionary<ELEMENT_TYPE, string> element_dict = new Dictionary<ELEMENT_TYPE, string>()
-        {
-            {ELEMENT_TYPE.NORMAL, "무" },
-            {ELEMENT_TYPE.WIND, "풍" },
-            {ELEMENT_TYPE.EARTH, "지" },
-            {ELEMENT_TYPE.FIRE, "화" },
-            {ELEMENT_TYPE.WATER, "수" },
-            {ELEMENT_TYPE.POISON, "독" },
-            {ELEMENT_TYPE.HOLY, "성" },
-            {ELEMENT_TYPE.DARK, "암" },
-            {ELEMENT_TYPE.ASTRAL, "염" },
-            {ELEMENT_TYPE.UNDEAD, "불사" },
-        };
-
-
-        ItemAbility ability;
-        //Status status;
-        UserData _user_data;
-        MonsterDB mobDB;
-        AdvantageTable advantage_table;
-        JobSelect job_selection = new JobSelect();
-        int job_select = (int)(JOB_LIST.LOAD_KNIGHT);
-        double element_ratio;
-        double size_panelty;
-        bool[] BuffList;
-        #endregion
 
         #region UI Setting
         public bool IsNumeric(string source)
@@ -109,23 +99,7 @@ namespace RooStatsSim
                 )
             );
         }
-        private void job_UI_setting(int param_job_select)
-        {
-            List<SkillInfo> skillNames = job_selection.GetSkillCnt(job_select);
-            BuffList = new bool[skillNames.Count];
-
-            if (SkillListBox != null)
-                SkillListBox.ItemsSource = new SkillAdd(skillNames);
-        }
-
-        private void job_sel_Click(object sender, RoutedEventArgs e)
-        {
-            RadioButton source = e.Source as RadioButton;
-            job_select = Convert.ToInt32(source.Tag);
-            
-            job_selection.JobSelectNum = (JOB_LIST)job_select;
-            job_UI_setting(job_select);   
-        }
+        
         #endregion
 
 
@@ -135,6 +109,7 @@ namespace RooStatsSim
 
             //txt_atk_equip.Text = Convert.ToString(job_selection.GetReverseATK(Convert.ToInt32(txt_sATK.Text)));
         }
+
         private void CalcSim_Click(object sender, RoutedEventArgs e)
         {
             //InputUIData();
@@ -149,62 +124,44 @@ namespace RooStatsSim
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            BuffList[Convert.ToInt32(((e.Source as CheckBox).Tag))] = (bool)((e.Source as CheckBox).IsChecked);
+            //BuffList[Convert.ToInt32(((e.Source as CheckBox).Tag))] = (bool)((e.Source as CheckBox).IsChecked);
 
-            MessageBox.Show(Convert.ToString((e.Source as CheckBox).IsChecked));
+            //MessageBox.Show(Convert.ToString((e.Source as CheckBox).IsChecked));
         }
 
-        private void Status_window_Click(object sender, RoutedEventArgs e)
+        private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_status.IsVisible)
-                _status.Hide();
-            else
-                _status.Show();
+            Application.Current.Shutdown();
         }
 
-        private void DBManager_window_Click(object sender, RoutedEventArgs e)
-        {
-            if (_db_manager == null)
-                _db_manager = new DBManager();
-            else
-                _db_manager.Show();
-        }
-
-        private void Info_window_Click(object sender, RoutedEventArgs e)
-        {
-            if (_info.IsVisible)
-                _info.Hide();
-            else
-                _info.Show();
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            _status.Close();
-            _info.Close();
-            if ( _db_manager != null)
-                _db_manager.Close();
-        }
-
-        private void StackBuff_window_Click(object sender, RoutedEventArgs e)
-        {
-            if (_stacK_buff.IsVisible)
-                _stacK_buff.Hide();
-            else
-                _stacK_buff.Show();
-        }
-
-        private void Skill_window_Click(object sender, RoutedEventArgs e)
+        private void status_closeButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Equip_window_Click(object sender, RoutedEventArgs e)
+        private void ObjMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (_equip.IsVisible)
-                _equip.Visibility = Visibility.Hidden;
-            else
-                _equip.Visibility = Visibility.Visible;
+            Grid moveTarget = (sender as Rectangle).Parent as Grid;
+            objXPos = e.GetPosition(moveTarget).X;
+            objYPos = e.GetPosition(moveTarget).Y;
+            MovingObject = (object)moveTarget;
         }
+        private void ObjMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                (MovingObject as FrameworkElement).SetValue(Canvas.LeftProperty,
+                    e.GetPosition((MovingObject as FrameworkElement).Parent as FrameworkElement).X - objXPos);
+
+                (MovingObject as FrameworkElement).SetValue(Canvas.TopProperty,
+                    e.GetPosition((MovingObject as FrameworkElement).Parent as FrameworkElement).Y - objYPos);
+            }
+        }
+
+        private void ObjPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+                MovingObject = null;
+        }
+
     }
 }
