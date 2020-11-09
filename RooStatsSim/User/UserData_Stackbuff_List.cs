@@ -123,13 +123,8 @@ namespace RooStatsSim.User
                     _level = 0;
                     return;
                 }
-<<<<<<< HEAD:RooStatsSim/User/UserData_Stackbuff_List.cs
-                if ((value < MainWindow._roo_db._monster_research_db.Count) &&
-                    (value >= 0))
-=======
                 if ( (value < MenuBox._roo_db._monster_research_db.Count) &&
                     (value >= 0) )
->>>>>>> Feat/DesignRebuilding:RooStatsSim/User/UserData_Lists.cs
                     _level = value;
             }
         }

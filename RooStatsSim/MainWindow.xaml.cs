@@ -28,16 +28,6 @@ namespace RooStatsSim
 
     public partial class MainWindow : Window
     {
-<<<<<<< HEAD
-
-        public static DBlist _roo_db;
-        DBManager _db_manager;
-        StatusWindow _status = new StatusWindow();
-        ProgramInfo _info = new ProgramInfo();
-        StackBuff _stacK_buff = new StackBuff();
-        Equip _equip;
-
-=======
         double objXPos, objYPos;
         object MovingObject;
         MenuBox _menu;
@@ -46,7 +36,7 @@ namespace RooStatsSim
         public StackBuffWindow _stacK_buff;
         public Equip _equip;
         public DBManager _db_manager;
->>>>>>> Feat/DesignRebuilding
+
         public MainWindow()
         {
             InitializeComponent();
@@ -62,18 +52,7 @@ namespace RooStatsSim
             _stacK_buff = new StackBuffWindow();
             _equip = new Equip();
 
-<<<<<<< HEAD
-            //DB생성, Window open 등
-
-            //_status.Show();
-            //_stacK_buff.Show();
-            //_equip.Show();
-
-             _equip = new Equip();
-            _equip.Show();
-=======
             System.Windows.Media.Brush brush = DesigningCanvas.Background;
->>>>>>> Feat/DesignRebuilding
         }
 
         #region UI Setting

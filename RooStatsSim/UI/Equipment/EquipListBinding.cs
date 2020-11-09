@@ -1,6 +1,7 @@
 ﻿using RooStatsSim;
 using RooStatsSim.DB;
 using RooStatsSim.UI.Equipment;
+using RooStatsSim.UI.Menu;
 using RooStatsSim.User;
 using System;
 using System.Collections.Generic;
@@ -67,13 +68,13 @@ class ItemListFilter : ObservableCollection<EquipId>
         switch(itemtype)
         {
             case ITEM_TYPE_ENUM.EQUIPMENT:
-                return MainWindow._roo_db.Equip_db;
+                return MenuBox._roo_db.Equip_db;
             case ITEM_TYPE_ENUM.CARD:
-                return MainWindow._roo_db.Card_db;
+                return MenuBox._roo_db.Card_db;
             case ITEM_TYPE_ENUM.ENCHANT:
-                return MainWindow._roo_db.Enchant_db;
+                return MenuBox._roo_db.Enchant_db;
             case ITEM_TYPE_ENUM.GEAR:
-                return MainWindow._roo_db.Gear_db;
+                return MenuBox._roo_db.Gear_db;
         }
         return null;
     }

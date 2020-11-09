@@ -1,4 +1,5 @@
 ﻿using RooStatsSim.DB;
+using RooStatsSim.UI.Menu;
 using RooStatsSim.User;
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,7 @@ namespace RooStatsSim.UI.Equipment
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.List[(int)now_selected_equip_type].Equip = MainWindow._roo_db.Equip_db[item.Id];
+            _user_data.Equip.List[(int)now_selected_equip_type].Equip = MenuBox._roo_db.Equip_db[item.Id];
             GetEquipTypeItem(now_selected_equip_type).Header = item.Name;
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
 
@@ -95,7 +96,7 @@ namespace RooStatsSim.UI.Equipment
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MainWindow._roo_db.Card_db[item.Id]);
+            _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MenuBox._roo_db.Card_db[item.Id]);
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
             _user_data.CalcUserData();
         }
