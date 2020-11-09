@@ -18,6 +18,7 @@ namespace RooStatsSim.UI.Status
         StatusList bindingStatusList;
         NormalPropertyList normalPropertyList;
         AdvancedPropertyList advancedPropertyList;
+        SpecialPropertyList specialPropertyList;
         public StatusWindow()
         {
             //DB가 레퍼로 들어왔다 치고.
@@ -42,6 +43,8 @@ namespace RooStatsSim.UI.Status
             NormalProperty.ItemsSource = normalPropertyList;
             advancedPropertyList = new AdvancedPropertyList(ref user_data);
             AdvancedProperty.ItemsSource = advancedPropertyList;
+            specialPropertyList = new SpecialPropertyList(ref user_data);
+            SpecialProperty.ItemsSource = specialPropertyList;
         }
 
         void StatusPointUp(AbilityBinding<int> dataCxtx)
