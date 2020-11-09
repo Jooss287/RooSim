@@ -50,7 +50,7 @@ namespace RooStatsSim.DB
         protected string _name;
         protected bool _isBoss;
         protected int _level;
-        protected Status _status;
+        protected Status _status = new Status();
         protected int _tribe;
         protected int _element;
         protected int _size;

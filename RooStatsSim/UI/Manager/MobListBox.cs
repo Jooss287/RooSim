@@ -42,7 +42,7 @@ namespace RooStatsSim.UI.Manager
         public new int Tribe
         {
             get { return _tribe; }
-            set { _tribe = value; OnPropertyChanged("Tribe"); }
+            set { _tribe = value; OnPropertyChanged("Tribe"); OnPropertyChanged("Tribe_Kor"); }
         }
         public string Tribe_Kor
         {
@@ -51,7 +51,7 @@ namespace RooStatsSim.UI.Manager
         public new int Element
         {
             get { return _element; }
-            set { _element = value; OnPropertyChanged("Element"); }
+            set { _element = value; OnPropertyChanged("Element"); OnPropertyChanged("Element_Kor"); }
         }
         public string Element_Kor
         {
@@ -60,7 +60,7 @@ namespace RooStatsSim.UI.Manager
         public new int Size
         {
             get { return _size; }
-            set { _size = value; OnPropertyChanged("Size"); }
+            set { _size = value; OnPropertyChanged("Size"); OnPropertyChanged("Size_Kor"); }
         }
         public string Size_Kor
         {
@@ -100,6 +100,36 @@ namespace RooStatsSim.UI.Manager
         {
             get { return _flee; }
             set { _flee = value; OnPropertyChanged("Flee"); }
+        }
+        public int Str
+        {
+            get { return _status.Str; }
+            set { _status.Str = value; OnPropertyChanged("Str"); }
+        }
+        public int Agi
+        {
+            get { return _status.Agi; }
+            set { _status.Agi = value; OnPropertyChanged("Agi"); }
+        }
+        public int Vit
+        {
+            get { return _status.Vit; }
+            set { _status.Vit = value; OnPropertyChanged("Vit"); }
+        }
+        public int Dex
+        {
+            get { return _status.Dex; }
+            set { _status.Dex = value; OnPropertyChanged("Dex"); }
+        }
+        public int Int
+        {
+            get { return _status.Int; }
+            set { _status.Int = value; OnPropertyChanged("Int"); }
+        }
+        public int Luk
+        {
+            get { return _status.Luk; }
+            set { _status.Luk = value; OnPropertyChanged("Luk"); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -18,6 +18,7 @@ using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
 using System.Windows.Shapes;
+using RooStatsSim.UI.MonsterDamage;
 
 namespace RooStatsSim
 {
@@ -36,6 +37,7 @@ namespace RooStatsSim
         public StackBuffWindow _stacK_buff;
         public Equip _equip;
         public DBManager _db_manager;
+        public MonsterDamageCheck _damage_check;
 
         public MainWindow()
         {
@@ -51,6 +53,9 @@ namespace RooStatsSim
             _info = new ProgramInfo();
             _stacK_buff = new StackBuffWindow();
             _equip = new Equip();
+            _damage_check = new MonsterDamageCheck();
+            _damage_check.Show();
+            
 
             System.Windows.Media.Brush brush = DesigningCanvas.Background;
         }
