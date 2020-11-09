@@ -5,7 +5,7 @@ using RooStatsSim.User;
 using RooStatsSim.DB.Table;
 using System.Windows.Navigation;
 
-namespace RooStatsSim.UI.Status
+namespace RooStatsSim.UI.StatusWindow
 {
     /// <summary>
     /// StatusWindow.xaml에 대한 상호 작용 논리

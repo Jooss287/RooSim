@@ -143,12 +143,15 @@
     <Compile Include="UI\Menu\MenuBox.xaml.cs">
       <DependentUpon>MenuBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\MonsterDamage\MonsterDamageCheck.xaml.cs">
+      <DependentUpon>MonsterDamageCheck.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
       <DependentUpon>StackBuff.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\StackBuff\StackBuffWindowBinding.cs" />
-    <Compile Include="UI\Status\StatusWindowBinding.cs" />
-    <Compile Include="UI\Status\StatusWindow.xaml.cs">
+    <Compile Include="UI\StatusWindow\StatusWindowBinding.cs" />
+    <Compile Include="UI\StatusWindow\StatusWindow.xaml.cs">
       <DependentUpon>StatusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="User\UserData.cs" />
@@ -201,11 +204,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\MonsterDamage\MonsterDamageCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\StackBuff\StackBuff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Status\StatusWindow.xaml">
+    <Page Include="UI\StatusWindow\StatusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

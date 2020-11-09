@@ -5,7 +5,7 @@ using RooStatsSim.User;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 
-namespace RooStatsSim.UI.Status
+namespace RooStatsSim.UI.StatusWindow
 {
     class LevelList : ObservableCollection<AbilityBinding<int>>
     {

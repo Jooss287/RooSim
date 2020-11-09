@@ -32,7 +32,7 @@ namespace RooStatsSim.UI.Manager
             DataContext = now_mob;
             InitializeContents();
 
-            BindingMobList = new MonsterListBox(ref _DB);
+            BindingMobList = new MonsterListBox(_DB.Mob_db);
             DB_ListBox.ItemsSource = BindingMobList;
 
             MobName.Focus();

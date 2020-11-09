@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.DB
 {
-    class Status
+    public class Status
     {
         int _base;
         int _job;
