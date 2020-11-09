@@ -9,29 +9,52 @@ namespace RooStatsSim.DB
 {
     public enum ITEM_TYPE_ENUM
     {
-        NONE,
         MONSTER_RESEARCH,
         STICKER,
         DRESS_STYLE,
         EQUIPMENT,
         CARD,
         ENCHANT,
+        GEAR,
     }
 
     public enum EQUIP_TYPE_ENUM
     {
-        NONE,
         HEAD_TOP,
         HEAD_MID,
         HEAD_BOT,
         WEAPON,
+        ARMOR,
         SUB_WEAPON,
         CLOAK,
-        BOOTS,
+        SHOES,
         ACCESSORIES1,
         ACCESSORIES2,
         COSTUME,
         BACK_DECORATION,
+    }
+    public enum JOB_SELECT_LIST
+    {
+        NOVICE = 0,
+        SWORDMAN = 100,
+        KNIGHT = 110,
+        CRUSADER = 120,
+        MARCHANT = 200,
+        BLACKSMITH = 210,
+        ALCHEMIST = 220,
+        THIEF = 300,
+        ASSASSIN = 310,
+        LOGUE = 320,
+        ARCHER = 400,
+        HUNTER = 410,
+        BARD = 420,
+        DANCER = 430,
+        MAGICIAN = 500,
+        WIZARD = 510,
+        SAGE = 520,
+        ACOLYTE = 600,
+        PRIST = 610,
+        MONK = 620,
     }
 
     public enum ITYPE
@@ -62,7 +85,6 @@ namespace RooStatsSim.DB
         HIT,
         CRI = 5000,     //크리율 관련 스텟
         CDEF,
-        ELEMENT = 7000, //속성 관련 스텟
     }
 
     public enum DTYPE
@@ -71,6 +93,8 @@ namespace RooStatsSim.DB
         MATK_P,
         PHYSICAL_DAMAGE,
         MAGICAL_DAMAGE,
+        IGNORE_PHYSICAL_DEFENSE,
+        IGNORE_MAGICAL_DEFENSE,
         DEF_P = 2000,
         MDEF_P,
         PHYSICAL_DEC_DAMAGE,
@@ -102,14 +126,28 @@ namespace RooStatsSim.DB
     {
         public ItemDB(ItemDB item_db)
         {
-            _id = item_db.Id;
-            _name = item_db.Name;
-            _item_type = item_db._item_type;
-            _equip_type = item_db._equip_type;
+            Id = item_db.Id;
+            Name = item_db.Name;
+            LevelLimit = item_db.LevelLimit;
+            Item_type = item_db.Item_type;
+            Equip_type = item_db.Equip_type;
+            Smelt = item_db.Smelt;
+            CardSlot = item_db.CardSlot;
+            EnchantSlot = item_db.EnchantSlot;
+            Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
             i_option = new Dictionary<ITYPE, int>(item_db.i_option);
             d_option = new Dictionary<DTYPE, double>(item_db.d_option);
             se_option = new Dictionary<STATUS_EFFECT_TYPE, double>(item_db.se_option);
             if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
+
+            element_inc_option = new Dictionary<ELEMENT_TYPE, double>(item_db.element_inc_option);
+            element_dec_option = new Dictionary<ELEMENT_TYPE, double>(item_db.element_dec_option);
+            size_inc_option = new Dictionary<MONSTER_SIZE, double>(item_db.size_inc_option);
+            size_dec_option = new Dictionary<MONSTER_SIZE, double>(item_db.size_dec_option);
+            tribe_inc_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_inc_option);
+            tribe_dec_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_dec_option);
+            mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>(item_db.mobtype_inc_option);
+            mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>(item_db.mobtype_dec_option);
         }
         public ItemDB() { }
 
@@ -118,7 +156,15 @@ namespace RooStatsSim.DB
             AddOption<ITYPE>(ref a.i_option, b.i_option);
             AddOption<DTYPE>(ref a.d_option, b.d_option);
             AddOption<STATUS_EFFECT_TYPE>(ref a.se_option, b.se_option);
-
+            AddOption(ref a.if_option, b.if_option);
+            AddOption<ELEMENT_TYPE>(ref a.element_inc_option, b.element_inc_option);
+            AddOption<ELEMENT_TYPE>(ref a.element_dec_option, b.element_dec_option);
+            AddOption<MONSTER_SIZE>(ref a.size_inc_option, b.size_inc_option);
+            AddOption<MONSTER_SIZE>(ref a.size_dec_option, b.size_dec_option);
+            AddOption<TRIBE_TYPE>(ref a.tribe_inc_option, b.tribe_inc_option);
+            AddOption<TRIBE_TYPE>(ref a.tribe_dec_option, b.tribe_dec_option);
+            AddOption<MONSTER_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
+            AddOption<MONSTER_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
             return a;
         }
         
@@ -150,13 +196,34 @@ namespace RooStatsSim.DB
                 }
             }
         }
+        protected static void AddOption(ref Dictionary<IFTYPE, AbilityPerStatus> a, Dictionary<IFTYPE, AbilityPerStatus> b)
+        {
+            foreach (KeyValuePair<IFTYPE, AbilityPerStatus> opt in b)
+            {
+                if (a.ContainsKey(opt.Key) == true)
+                {
+                    a[opt.Key].AddValue += opt.Value.AddValue;
+                    a[opt.Key].PerValue += opt.Value.PerValue;
+                    a[opt.Key].IfType = opt.Value.IfType;
+                }
+                else
+                {
+                    a[opt.Key] = opt.Value;
+                }
+            }
+        }
 
 
 
-        ITEM_TYPE_ENUM _item_type = ITEM_TYPE_ENUM.NONE;
-        EQUIP_TYPE_ENUM _equip_type = EQUIP_TYPE_ENUM.NONE;
+        ITEM_TYPE_ENUM _item_type;
+        EQUIP_TYPE_ENUM _equip_type;
         protected int _id;
         protected string _name;
+        protected int _level_limit;
+        protected int _smelt;
+        protected int _card_slot;
+        protected int _enchant_slot;
+        public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
         public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
         public Dictionary<STATUS_EFFECT_TYPE, double> se_option = new Dictionary<STATUS_EFFECT_TYPE, double>();
@@ -172,6 +239,7 @@ namespace RooStatsSim.DB
         public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
         public Dictionary<MONSTER_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>();
 
+        #region property
         public int Id
         {
             get { return _id; }
@@ -182,6 +250,26 @@ namespace RooStatsSim.DB
             get { return _name; }
             set { _name = value; }
         }
+        public int LevelLimit
+        {
+            get { return _level_limit; }
+            set { _level_limit = value; }
+        }
+        public int Smelt
+        {
+            get { return _smelt; }
+            set { _smelt = value; }
+        }
+        public int CardSlot
+        {
+            get { return _card_slot; }
+            set { _card_slot = value; }
+        }
+        public int EnchantSlot
+        {
+            get { return _enchant_slot; }
+            set { _enchant_slot = value; }
+        }
         public ITEM_TYPE_ENUM Item_type
         {
             get { return _item_type; }
@@ -191,6 +279,11 @@ namespace RooStatsSim.DB
         {
             get { return _equip_type; }
             set { _equip_type = value; }
+        }
+        public List<JOB_SELECT_LIST> Wear_job_limit
+        {
+            get { return _wear_job_limit; }
+            set { _wear_job_limit = value; }
         }
         public Dictionary<ITYPE, int> I_OPTION
         {
@@ -252,6 +345,7 @@ namespace RooStatsSim.DB
             get { return mobtype_dec_option; }
             set { mobtype_dec_option = value; }
         }
+        #endregion
     }
 
     public class AbilityPerStatus
@@ -259,12 +353,14 @@ namespace RooStatsSim.DB
         public delegate int CalcFunc(int value);
         public int AddValue;
         public int PerValue;
+        public IFTYPE IfType;
         CalcFunc Calc;
 
         public AbilityPerStatus(IFTYPE iftype, int add_value, int per_value)
         {
             AddValue = add_value;
             PerValue = per_value;
+            IfType = iftype;
             switch (iftype)
             {
                 case IFTYPE.ATK_PER_STR:

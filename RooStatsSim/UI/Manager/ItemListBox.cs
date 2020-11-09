@@ -4,6 +4,11 @@ using System.ComponentModel;
 using RooStatsSim.DB;
 using System.Collections.Generic;
 
+using RooStatsSim.DB.Table;
+using System.Windows.Controls;
+using System.ComponentModel.Design;
+using System.Reflection;
+
 namespace RooStatsSim.UI.Manager
 {
     
@@ -23,6 +28,21 @@ namespace RooStatsSim.UI.Manager
         {
             get { return _name; }
             set { _name = value; OnPropertyChanged("Name"); }
+        }
+        public new int LevelLimit
+        {
+            get { return _level_limit; }
+            set { _level_limit = value; OnPropertyChanged("LevelLimit"); }
+        }
+        public new int CardSlot
+        {
+            get { return _card_slot; }
+            set { _card_slot = value; OnPropertyChanged("CardSlot"); }
+        }
+        public new int EnchantSlot
+        {
+            get { return _enchant_slot; }
+            set { _enchant_slot = value; OnPropertyChanged("EnchantSlot"); }
         }
         public string Itype_name
         {
@@ -53,10 +73,25 @@ namespace RooStatsSim.UI.Manager
         {
             Id = param.Id;
             Name = param.Name;
-            i_option = param.i_option;
+            LevelLimit = param.LevelLimit;
+            CardSlot = param.CardSlot;
+            EnchantSlot = param.EnchantSlot;
+            Item_type = param.Item_type;
+            Equip_type = param.Equip_type;
+            Wear_job_limit = param.Wear_job_limit;
+            I_OPTION = param.I_OPTION;
             d_option = param.d_option;
             se_option = param.se_option;
             if_option = param.if_option;
+
+            element_inc_option = param.element_inc_option;
+            element_dec_option = param.element_dec_option;
+            size_inc_option = param.size_inc_option;
+            size_dec_option = param.size_dec_option;
+            tribe_inc_option = param.tribe_inc_option;
+            tribe_dec_option = param.tribe_dec_option;
+            mobtype_inc_option = param.mobtype_inc_option;
+            mobtype_dec_option = param.mobtype_dec_option;
         }
     }
 
@@ -71,14 +106,6 @@ namespace RooStatsSim.UI.Manager
                 ItemDB db = items.Value;
                 Add(new ItemDB_Binding(db));
             }
-
-            //if ( Count == 0)
-            //{
-            //    ItemDB db = new ItemDB();
-            //    db.Id = 0;
-            //    db.Name = "Null";
-            //    Add(new ItemDB_Binding(db));
-            //}
         }
         
         public void AddList(ItemDB db)
@@ -197,5 +224,51 @@ namespace RooStatsSim.UI.Manager
         }
     }
 
+    class Job_Limite_List : ObservableCollection<AbilityBinding<bool>>
+    {
+        public Job_Limite_List(ref List<JOB_SELECT_LIST> joblist)
+        {
+            foreach(JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
+            {
+                bool value = false;
+                if (joblist.Contains(job))
+                    value = true;
+                Add(new AbilityBinding<bool>(EnumProperty_Kor.JOB_SELECT_LIST_KOR_3WORD[job], value, false, Enum.GetName(typeof(JOB_SELECT_LIST), job)));
+            }
+        }
+
+        public void SelectClass(JOB_SELECT_LIST select_job, bool value)
+        {
+            int inx = 0;
+            int ClassRoot = 0;
+            if ( (int)select_job % 100 == 0)
+                ClassRoot = 100;
+            else if ((int)select_job % 10 == 0)
+                ClassRoot = 10;
+            
+            foreach(JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
+            {
+                if ( ( (int)job >= (int)select_job) && ((int)job < (int)select_job+ ClassRoot))
+                {
+                    this[inx].Point = value;
+                }
+                inx++;
+            }
+        }
+
+        public List<JOB_SELECT_LIST> GetLimitedJobList()
+        {
+            List <JOB_SELECT_LIST> retValue = new List<JOB_SELECT_LIST>();
+            
+            foreach(AbilityBinding<bool> ability in this)
+            {
+                if (ability.Point)
+                {
+                    retValue.Add((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), ability.EnumName));
+                }
+            }
+            return retValue;
+        }
+    }
 }
 

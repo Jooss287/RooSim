@@ -13,8 +13,7 @@ namespace RooStatsSim.DB
         DRAGON,
         NONE,
         ANGEL,
-        UNDEAD,
-        TRIBE_CNT
+        UNDEAD
     }
 
     public enum MONSTER_TYPE
@@ -28,8 +27,7 @@ namespace RooStatsSim.DB
     {
         SMALL,
         MIDDLE,
-        LARGE,
-        SIZE_CNT
+        LARGE
     }
     public enum WEAPON_TYPE
     {
@@ -45,8 +43,7 @@ namespace RooStatsSim.DB
         WAND,
         TWOHAND_WAND,
         BOW,
-        JAMADHAR,
-        WEAPON_CNT
+        JAMADHAR
     }
 
     public enum ELEMENT_TYPE
@@ -60,7 +57,6 @@ namespace RooStatsSim.DB
         HOLY,
         DARK,
         ASTRAL,
-        UNDEAD,
-        ELEMENT_CNT
+        UNDEAD
     }
 }

@@ -4,6 +4,9 @@ using System.Windows.Controls;
 using RooStatsSim.DB;
 using System.Collections.Generic;
 
+using RooStatsSim.DB.Table;
+using System.Linq;
+
 namespace RooStatsSim.UI.Manager
 {
     /// <summary>
@@ -23,30 +26,46 @@ namespace RooStatsSim.UI.Manager
             
             DataContext = now_item;
 
-            cmb_equip_type.SelectedIndex = 3;
+            InitUIsetting();
             now_DB = SelectedItemType();
             InitializeContents();
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
-            //SetNowItemOption();
+
             SetComboBox();
         }
 
+        void InitUIsetting()
+        {
+            foreach (ITEM_TYPE_ENUM option in Enum.GetValues(typeof(ITEM_TYPE_ENUM)))
+            {
+                string statusName = Enum.GetName(typeof(ITEM_TYPE_ENUM), option);
+                cmb_item_type.Items.Add(statusName);
+            }
+            cmb_item_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
+
+            foreach (EQUIP_TYPE_ENUM equip in Enum.GetValues(typeof(EQUIP_TYPE_ENUM)))
+            {
+                string statusName = EnumProperty_Kor.EQUIP_TYPE_ENUM_KOR[equip];
+                cmb_equip_type.Items.Add(statusName);
+            }
+            cmb_equip_type.SelectedIndex = (int)EQUIP_TYPE_ENUM.HEAD_TOP;
+        }
         void SetComboBox()
         {
             foreach (ITYPE option in Enum.GetValues(typeof(ITYPE)))
             {
-                string statusName = Enum.GetName(typeof(ITYPE), option);
+                string statusName = EnumProperty_Kor.ITYPE_KOR[option];
                 cmb_Ioption.Items.Add(statusName);
             }
             foreach (DTYPE option in Enum.GetValues(typeof(DTYPE)))
             {
-                string statusName = Enum.GetName(typeof(DTYPE), option);
+                string statusName = EnumProperty_Kor.DTYPE_KOR[option];
                 cmb_Doption.Items.Add(statusName);
             }
             foreach (STATUS_EFFECT_TYPE option in Enum.GetValues(typeof(STATUS_EFFECT_TYPE)))
             {
-                string statusName = Enum.GetName(typeof(STATUS_EFFECT_TYPE), option);
+                string statusName = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR[option];
                 cmb_SEoption.Items.Add(statusName);
             }
             foreach (IFTYPE option in Enum.GetValues(typeof(IFTYPE)))
@@ -54,14 +73,48 @@ namespace RooStatsSim.UI.Manager
                 string statusName = Enum.GetName(typeof(IFTYPE), option);
                 cmb_IFoption.Items.Add(statusName);
             }
+            foreach (ELEMENT_TYPE option in Enum.GetValues(typeof(ELEMENT_TYPE)))
+            {
+                string statusName = EnumProperty_Kor.ELEMENT_TYPE_KOR[option];
+                cmb_element_inc_option.Items.Add(statusName);
+                cmb_element_dec_option.Items.Add(statusName);
+            }
+            foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
+            {
+                string statusName = EnumProperty_Kor.MONSTER_SIZE_KOR[option];
+                cmb_size_inc_option.Items.Add(statusName);
+                cmb_size_dec_option.Items.Add(statusName);
+            }
+            foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
+            {
+                string statusName = EnumProperty_Kor.TRIBE_TYPE_KOR[option];
+                cmb_tribe_inc_option.Items.Add(statusName);
+                cmb_tribe_dec_option.Items.Add(statusName);
+            }
+            foreach (MONSTER_TYPE option in Enum.GetValues(typeof(MONSTER_TYPE)))
+            {
+                string statusName = EnumProperty_Kor.MONSTER_TYPE_KOR[option];
+                cmb_mobtype_inc_option.Items.Add(statusName);
+                cmb_mobtype_dec_option.Items.Add(statusName);
+            }
         }
 
         void SetNowItemOption()
         {
+            cmb_equip_type.SelectedIndex = (int)now_item.Equip_type;
+            list_Job_limit.ItemsSource = new Job_Limite_List(ref now_item._wear_job_limit);
             list_iOption.ItemsSource = new ItemOptionListBox<ITYPE, int>(ref now_item.i_option);
             list_dOption.ItemsSource = new ItemOptionListBox<DTYPE, double>(ref now_item.d_option);
             list_seOption.ItemsSource = new ItemOptionListBox<STATUS_EFFECT_TYPE, double>(ref now_item.se_option);
             list_ifOption.ItemsSource = new ItemOptionListBox(ref now_item.if_option);
+            list_element_inc_option.ItemsSource = new ItemOptionListBox<ELEMENT_TYPE, double>(ref now_item.element_inc_option);
+            list_element_dec_option.ItemsSource = new ItemOptionListBox<ELEMENT_TYPE, double>(ref now_item.element_dec_option);
+            list_tribe_inc_option.ItemsSource = new ItemOptionListBox<TRIBE_TYPE, double>(ref now_item.tribe_inc_option);
+            list_tribe_dec_option.ItemsSource = new ItemOptionListBox<TRIBE_TYPE, double>(ref now_item.tribe_dec_option);
+            list_size_inc_option.ItemsSource = new ItemOptionListBox<MONSTER_SIZE, double>(ref now_item.size_inc_option);
+            list_size_dec_option.ItemsSource = new ItemOptionListBox<MONSTER_SIZE, double>(ref now_item.size_dec_option);
+            list_mobtype_inc_option.ItemsSource = new ItemOptionListBox<MONSTER_TYPE, double>(ref now_item.mobtype_inc_option);
+            list_mobtype_dec_option.ItemsSource = new ItemOptionListBox<MONSTER_TYPE, double>(ref now_item.mobtype_dec_option);
         }
 
 
@@ -73,9 +126,15 @@ namespace RooStatsSim.UI.Manager
                 now_item.Id = now_DB.Count;
 
             now_item.Name = "";
+            now_item.LevelLimit = 0;
+            now_item.CardSlot = 0;
+            now_item.EnchantSlot = 0;
+            now_item.Item_type = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
+            now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+            now_item._wear_job_limit.Clear();
             now_item.i_option.Clear();
             now_item.d_option.Clear();
-            now_item.if_option.Clear();
+            now_item.IF_OPTION.Clear();
             now_item.se_option.Clear();
 
             now_item.mobtype_inc_option.Clear();
@@ -100,23 +159,50 @@ namespace RooStatsSim.UI.Manager
 
         private Dictionary<int, ItemDB> SelectedItemType()
         {
-            int selected = cmb_equip_type.SelectedIndex + 1;
+            ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
 
             switch (selected)
             {
-                case (int)ITEM_TYPE_ENUM.MONSTER_RESEARCH:
+                case ITEM_TYPE_ENUM.MONSTER_RESEARCH:
                     return _DB._monster_research_db;
-                case (int)ITEM_TYPE_ENUM.STICKER:
+                case ITEM_TYPE_ENUM.STICKER:
                     return _DB._sticker_db;
-                case (int)ITEM_TYPE_ENUM.DRESS_STYLE:
+                case ITEM_TYPE_ENUM.DRESS_STYLE:
                     return _DB._dress_style_db;
-                case (int)ITEM_TYPE_ENUM.EQUIPMENT:
+                case ITEM_TYPE_ENUM.EQUIPMENT:
                     return _DB._equip_db;
-                case (int)ITEM_TYPE_ENUM.CARD:
+                case ITEM_TYPE_ENUM.CARD:
                     return _DB._card_db;
+                case ITEM_TYPE_ENUM.ENCHANT:
+                    return _DB._enchant_db;
+                case ITEM_TYPE_ENUM.GEAR:
+                    return _DB._gear_db;
             }
 
             return null;
+        }
+        private void SetSelectedItemTypeUI()
+        {
+            ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
+
+            cmb_equip_type.IsEnabled = false;
+            list_Job_limit.IsEnabled = false;
+            Item_EnchantSlot.IsEnabled = false;
+            Item_CardSlot.IsEnabled = false;
+            Item_Level.IsEnabled = false;
+
+            if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
+            {
+                cmb_equip_type.IsEnabled = true;
+                list_Job_limit.IsEnabled = true;
+                Item_EnchantSlot.IsEnabled = true;
+                Item_CardSlot.IsEnabled = true;
+                Item_Level.IsEnabled = true;
+            }
+            else if (selected == ITEM_TYPE_ENUM.GEAR)
+                list_Job_limit.IsEnabled = true;
+            else if (selected == ITEM_TYPE_ENUM.CARD)
+                cmb_equip_type.IsEnabled = true;
         }
 
         #region CLICK FUNCTION
@@ -131,6 +217,7 @@ namespace RooStatsSim.UI.Manager
             if (string.Compare(Item_name.Text, "") == 0)
                 return;
 
+            
             now_DB[now_item.Id] = new ItemDB(now_item);
             BindingItemList.AddList(new ItemDB(now_item));
 
@@ -153,12 +240,28 @@ namespace RooStatsSim.UI.Manager
                 now_item.ChangeValue(temp);
                 SetNowItemOption();
             }
-                
         }
 
-        private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            Job_Limite_List temp_list = (Job_Limite_List)list_Job_limit.ItemsSource;
+            AbilityBinding<bool> temp = (AbilityBinding<bool>)(sender as CheckBox).DataContext;
+            if (temp != null)
+            {
+                temp_list.SelectClass((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), temp.EnumName), temp.Point);
+            }
+            now_item.Wear_job_limit = temp_list.GetLimitedJobList();
+            SetNowItemOption();
+        }
+
+        private void cmb_item_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             now_DB = SelectedItemType();
+            if (now_DB == null)
+                return;
+            else
+                SetSelectedItemTypeUI();
+
             InitializeContents();
             BindingItemList = new ItemListBox(ref now_DB);
             DB_ListBox.ItemsSource = BindingItemList;
@@ -173,43 +276,92 @@ namespace RooStatsSim.UI.Manager
             ComboBox AddType = OptionStack.Children[0] as ComboBox;
             TextBox AddValue = OptionStack.Children[1] as TextBox;
 
-            //if (DB_ListBox.SelectedItem == null)
-            //    return;
+            if (AddValue.Text == "")
+                return;
             if (Convert.ToInt32(AddValue.Text) == 0)
                 return;
 
             string typeName = Convert.ToString(AddType.SelectedItem);
-            switch (Convert.ToString(parentStackpanel.Tag))
+            switch (Convert.ToString(parentStackpanel.Tag)) 
             {
                 case "ITYPE":
                     {
-                        ITYPE type = (ITYPE)Enum.Parse(typeof(ITYPE), typeName);
+                        ITYPE type = EnumProperty_Kor.ITYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.i_option[type] = Convert.ToInt32(AddValue.Text);
                         break;
                     }
                 case "DTYPE":
-                    { 
-                        DTYPE type = (DTYPE)Enum.Parse(typeof(DTYPE), typeName);
+                    {
+                        DTYPE type = EnumProperty_Kor.DTYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.d_option[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "SETYPE":
                     {
-                        STATUS_EFFECT_TYPE type = (STATUS_EFFECT_TYPE)Enum.Parse(typeof(STATUS_EFFECT_TYPE), typeName);
+                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.se_option[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "IFTYPE":
                     {
-                        TextBox PerValue = OptionStack.Children[2] as TextBox;
+                        AddValue = OptionStack.Children[3] as TextBox;
+                        TextBox PerValue = OptionStack.Children[1] as TextBox;
                         IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
-                        now_item.if_option[type] = new AbilityPerStatus(type, Convert.ToInt32(AddValue.Text), Convert.ToInt32(PerValue.Text));
+                        now_item.IF_OPTION[type] = new AbilityPerStatus(type, Convert.ToInt32(AddValue.Text), Convert.ToInt32(PerValue.Text));
+                        break;
+                    }
+                case "ELEMENT_INC_TYPE":
+                    {
+                        ELEMENT_TYPE type = EnumProperty_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.ELEMENT_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "ELEMENT_DEC_TYPE":
+                    {
+                        ELEMENT_TYPE type = EnumProperty_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.ELEMENT_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "SIZE_INC_TYPE":
+                    {
+                        MONSTER_SIZE type = EnumProperty_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.SIZE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "SIZE_DEC_TYPE":
+                    {
+                        MONSTER_SIZE type = EnumProperty_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.SIZE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "TRIBE_INC_TYPE":
+                    {
+                        TRIBE_TYPE type = EnumProperty_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.TRIBE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "TRIBE_DEC_TYPE":
+                    {
+                        TRIBE_TYPE type = EnumProperty_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.TRIBE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "MOBTYPE_INC_TYPE":
+                    {
+                        MONSTER_TYPE type = EnumProperty_Kor.MONSTER_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.MOBTYPE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "MOBTYPE_DEC_TYPE":
+                    {
+                        MONSTER_TYPE type = EnumProperty_Kor.MONSTER_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.MOBTYPE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
             }
             SetNowItemOption();
             AddType.SelectedIndex = 0;
-            AddValue.Text = "0";
+            AddValue.Text = null;
         }
 
         private void Del_Option_Click(object sender, RoutedEventArgs e)
@@ -218,8 +370,6 @@ namespace RooStatsSim.UI.Manager
             ListBox OptionList = parentStackpanel.Children[2] as ListBox;
 
             if (OptionList.SelectedItem == null)
-                return;
-            if (DB_ListBox.SelectedItem == null)
                 return;
 
             switch (Convert.ToString(parentStackpanel.Tag))
@@ -249,7 +399,63 @@ namespace RooStatsSim.UI.Manager
                     {
                         string typeName = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
                         IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
-                        now_item.if_option.Remove(type);
+                        now_item.IF_OPTION.Remove(type);
+                        break;
+                    }
+                case "ELEMENT_INC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ELEMENT_TYPE, double>).Type_name;
+                        ELEMENT_TYPE type = (ELEMENT_TYPE)Enum.Parse(typeof(ELEMENT_TYPE), typeName);
+                        now_item.ELEMENT_INC_OPTION.Remove(type);
+                        break;
+                    }
+                case "ELEMENT_DEC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ELEMENT_TYPE, double>).Type_name;
+                        ELEMENT_TYPE type = (ELEMENT_TYPE)Enum.Parse(typeof(ELEMENT_TYPE), typeName);
+                        now_item.ELEMENT_DEC_OPTION.Remove(type);
+                        break;
+                    }
+                case "SIZE_INC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_SIZE, double>).Type_name;
+                        MONSTER_SIZE type = (MONSTER_SIZE)Enum.Parse(typeof(MONSTER_SIZE), typeName);
+                        now_item.SIZE_INC_OPTION.Remove(type);
+                        break;
+                    }
+                case "SIZE_DEC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_SIZE, double>).Type_name;
+                        MONSTER_SIZE type = (MONSTER_SIZE)Enum.Parse(typeof(MONSTER_SIZE), typeName);
+                        now_item.SIZE_DEC_OPTION.Remove(type);
+                        break;
+                    }
+                case "TRIBE_INC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<TRIBE_TYPE, double>).Type_name;
+                        TRIBE_TYPE type = (TRIBE_TYPE)Enum.Parse(typeof(TRIBE_TYPE), typeName);
+                        now_item.TRIBE_INC_OPTION.Remove(type);
+                        break;
+                    }
+                case "TRIBE_DEC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<TRIBE_TYPE, double>).Type_name;
+                        TRIBE_TYPE type = (TRIBE_TYPE)Enum.Parse(typeof(TRIBE_TYPE), typeName);
+                        now_item.TRIBE_DEC_OPTION.Remove(type);
+                        break;
+                    }
+                case "MOBTYPE_INC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_TYPE, double>).Type_name;
+                        MONSTER_TYPE type = (MONSTER_TYPE)Enum.Parse(typeof(MONSTER_TYPE), typeName);
+                        now_item.MOBTYPE_INC_OPTION.Remove(type);
+                        break;
+                    }
+                case "MOBTYPE_DEC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_TYPE, double>).Type_name;
+                        MONSTER_TYPE type = (MONSTER_TYPE)Enum.Parse(typeof(MONSTER_TYPE), typeName);
+                        now_item.MOBTYPE_DEC_OPTION.Remove(type);
                         break;
                     }
             }
@@ -263,8 +469,13 @@ namespace RooStatsSim.UI.Manager
             AddValue.Text = "";
             AddValue.Focus();
         }
+
+
         #endregion
 
-
+        private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+        }
     }
 }

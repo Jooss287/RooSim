@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using RooStatsSim.DB;
+﻿using RooStatsSim.DB;
 using RooStatsSim.Equation;
+using System.Diagnostics;
 
 namespace RooStatsSim.User
 {
@@ -31,12 +26,18 @@ namespace RooStatsSim.User
         public BASE_LEVEL Base_Level = new BASE_LEVEL();
         public JOB_LEVEL Job_Level = new JOB_LEVEL();
         public STATUS Status = new STATUS();
+        public JOB_SELECT_LIST Job = JOB_SELECT_LIST.KNIGHT;
+
+        public EQUIP Equip = new EQUIP();
+        public GEAR Gear = new GEAR();
+
         public MEDAL Medal = new MEDAL();
         public MONSTER_RESEARCH Monster_Research = new MONSTER_RESEARCH();
         public DRESS_STYLE Dress_Style = new DRESS_STYLE();
         public STICKER Sticker = new STICKER();
         public RIDING Riding_ability = new RIDING();
         public RIDING Riding_personality = new RIDING();
+        
 
         public UserItem User_Item = new UserItem();
 
@@ -57,6 +58,8 @@ namespace RooStatsSim.User
             CalcUserItem += Medal.GetOption();
             CalcUserItem += Riding_ability.GetOption();
             CalcUserItem += Riding_personality.GetOption();
+
+            CalcUserItem += Equip.GetOption();
 
             User_Item = CalcUserItem;
 
