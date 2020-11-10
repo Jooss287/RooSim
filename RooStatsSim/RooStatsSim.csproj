@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\AllSkillList.cs" />
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\Definition.cs" />
     <Compile Include="DB\ItemDB.cs" />
