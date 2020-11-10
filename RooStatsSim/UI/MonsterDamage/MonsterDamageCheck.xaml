@@ -131,6 +131,16 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
+            <GroupBox Header="데미지 계산">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="데미지 공식은 보완중입니다. 참고로만 사용하세요"
+                               Foreground="Red" FontSize="8" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <TextBlock Text="평타" />
+                    <TextBlock Text="크리티컬" />
+                    <TextBlock Text="배쉬" />
+                    <TextBlock Text="스파이럴" />
+                </StackPanel>
+            </GroupBox>
         </StackPanel>
     </StackPanel>
 </Window>
