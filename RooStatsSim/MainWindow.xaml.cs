@@ -10,7 +10,7 @@ using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 using RooStatsSim.Equation.Job;
 using RooStatsSim.Skills;
-using RooStatsSim.UI.Status;
+using RooStatsSim.UI.StatusWindow;
 using RooStatsSim.UI.Manager;
 using RooStatsSim.UI.ACK;
 using RooStatsSim.User;
@@ -18,6 +18,7 @@ using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
 using System.Windows.Shapes;
+using RooStatsSim.UI.MonsterDamage;
 
 namespace RooStatsSim
 {
@@ -36,6 +37,7 @@ namespace RooStatsSim
         public StackBuffWindow _stacK_buff;
         public Equip _equip;
         public DBManager _db_manager;
+        public MonsterDamageCheck _damage_check;
 
         public MainWindow()
         {
@@ -51,6 +53,9 @@ namespace RooStatsSim
             _info = new ProgramInfo();
             _stacK_buff = new StackBuffWindow();
             _equip = new Equip();
+            _damage_check = new MonsterDamageCheck();
+            _damage_check.Show();
+            
 
             System.Windows.Media.Brush brush = DesigningCanvas.Background;
         }
@@ -94,11 +99,7 @@ namespace RooStatsSim
             //InputUIData();
 
             //double skill_damage = (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01;
-            //int calcATK_min = Convert.ToInt32(Math.Floor(job_selection.GetMinATK() * skill_damage));
-            //int calcATK_max = Convert.ToInt32(Math.Floor(job_selection.GetMaxATK() * skill_damage));
-
-            //retCalc.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
-            //txt_sATK.Text = Convert.ToString(job_selection.GetWinATK());
+            
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)

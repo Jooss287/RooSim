@@ -26,6 +26,10 @@ namespace RooStatsSim.DB.Table
             {ITYPE.WEAPON_MATK, "무기 MATK" },
             {ITYPE.STATUS_ATK, "STAT ATK" },
             {ITYPE.STATUS_MATK, "STAT MATK" },
+            {ITYPE.MASTERY_ATK, "마스터리 ATK" },
+            {ITYPE.MASTERY_MATK, "마스터리 MATK" },
+            {ITYPE.PHYSICAL_DAMAGE_ADDITIONAL, "추가 물리 데미지" },
+            {ITYPE.MAGICAL_DAMAGE_ADDITIONAL, "추가 마법 데미지" },
             {ITYPE.DEF, "DEF" },
             {ITYPE.MDEF, "MDEF" },
             {ITYPE.SMELTING_DEF, "제련 DEF" },
@@ -47,6 +51,8 @@ namespace RooStatsSim.DB.Table
             {DTYPE.MAGICAL_DAMAGE, "마법 데미지(%)" },
             {DTYPE.IGNORE_PHYSICAL_DEFENSE, "물리 방어 무시(%)" },
             {DTYPE.IGNORE_MAGICAL_DEFENSE, "마법 방어 무시(%)" },
+            {DTYPE.MELEE_PHYSICAL_DAMAGE, "원거리 물리 데미지(%)" },
+            {DTYPE.RANGE_PHYSICAL_DAMAGE, "원거리 물리 데미지(%)" },
             {DTYPE.PHYSICAL_DEC_DAMAGE, "물리 데미지 감소(%)" },
             {DTYPE.MAGICAL_DEC_DAMAGE, "마법 데미지 감소(%)" },
             {DTYPE.DEF_P, "DEF %" },
@@ -181,7 +187,22 @@ namespace RooStatsSim.DB.Table
             {EQUIP_TYPE_ENUM.ACCESSORIES2, "악세사리2"},
             {EQUIP_TYPE_ENUM.COSTUME, "코스튬"},
             {EQUIP_TYPE_ENUM.BACK_DECORATION, "등장식"},
-            
+        };
+        public static Dictionary<WEAPON_TYPE_ENUM, string> WEAPON_TYPE_ENUM_KOR = new Dictionary<WEAPON_TYPE_ENUM, string>()
+        {
+            {WEAPON_TYPE_ENUM.HAND, "손" },
+            {WEAPON_TYPE_ENUM.DAGGER, "단검" },
+            {WEAPON_TYPE_ENUM.SWARD, "한손검" },
+            {WEAPON_TYPE_ENUM.TWOHAND_SWARD, "양손검" },
+            {WEAPON_TYPE_ENUM.BLUNT, "둔기" },
+            {WEAPON_TYPE_ENUM.SPEAR, "한손창" },
+            {WEAPON_TYPE_ENUM.TWOHAND_SPEAR, "양손창" },
+            {WEAPON_TYPE_ENUM.AXE, "한손도끼" },
+            {WEAPON_TYPE_ENUM.TWOHAND_AXE, "양손도끼" },
+            {WEAPON_TYPE_ENUM.WAND, "한손지팡이" },
+            {WEAPON_TYPE_ENUM.TWOHAND_WAND, "양손지팡이" },
+            {WEAPON_TYPE_ENUM.BOW, "활" },
+            {WEAPON_TYPE_ENUM.JAMADHAR, "카타르" },
         };
     }
 }

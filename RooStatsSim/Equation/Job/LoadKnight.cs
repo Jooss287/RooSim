@@ -1,7 +1,9 @@
-﻿using RooStatsSim.DB;
+﻿
 using System;
 using System.Collections.Generic;
 
+using RooStatsSim.DB;
+using RooStatsSim.User;
 using RooStatsSim.Skills;
 
 namespace RooStatsSim.Equation.Job
@@ -42,19 +44,19 @@ namespace RooStatsSim.Equation.Job
         protected override double GetBaseTotalATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
         {
             int Enabled_Concentrate = Convert.ToInt32(buff_list[(int)BUFF_SKILL.CONCENTRATION]);
-            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_weapon + StatusATK.GetStatusBonusATK(attack_type, _user_data) + abilities.ATK_smelting) * buff_concentrate_ratio;
+            double buff_concentrate = Enabled_Concentrate * (User.WeaponATK() + StatusATK.GetStatusBonusATK(attack_type, User) + User.SmeltingATK()) * buff_concentrate_ratio;
             return base.GetBaseTotalATK(calc_standard) + Convert.ToInt32(buff_concentrate);
         }
         protected override double TotalEquipATK(double total_weapon_atk)
         {
             int Enabled_Concentrate = Convert.ToInt32(buff_list[(int)BUFF_SKILL.CONCENTRATION]);
-            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_equipment) * buff_concentrate_ratio;
+            double buff_concentrate = Enabled_Concentrate * User.EquipATK() * buff_concentrate_ratio;
             return base.TotalEquipATK(total_weapon_atk) + buff_concentrate;
         }
         protected override double WinTotalATK(double total_equip_atk_inc)
         {
             int Enabled_Concentrate = Convert.ToInt32(buff_list[(int)BUFF_SKILL.CONCENTRATION]);
-            double buff_concentrate = Enabled_Concentrate * (abilities.ATK_weapon + StatusATK.GetStatusBonusATK(attack_type, _user_data) + abilities.ATK_equipment) * buff_concentrate_ratio;
+            double buff_concentrate = Enabled_Concentrate * (User.WeaponATK() + StatusATK.GetStatusBonusATK(attack_type, User) + User.EquipATK()) * buff_concentrate_ratio;
             return  base.WinTotalATK(total_equip_atk_inc) + buff_concentrate;
         }
         #endregion

@@ -28,11 +28,7 @@ namespace RooStatsSim.Equation.Job
         하이위저드,
         하이프리스트
     }
-    enum ATTACK_TYPE
-    {
-        MELEE_TYPE,
-        RANGE_TYPE,
-    }
+    
     
     class JobSelect
     {
@@ -46,34 +42,16 @@ namespace RooStatsSim.Equation.Job
                 new HighWizard(),
                 new HighPrist()
             };
-        private JOB_LIST JobNum = new JOB_LIST();
+
+        private JOB_SELECT_LIST SelectedJob { get; set; }
+        private int GetJobNum { get { return (int)SelectedJob / 100; } }
 
 
-        public JobSelect(int param_job = (int)JOB_LIST.LOAD_KNIGHT)
+        public JobSelect(JOB_SELECT_LIST param_job = JOB_SELECT_LIST.NOVICE)
         {
-            JobNum = (JOB_LIST)param_job;
-        }
-        public JOB_LIST JobSelectNum
-        {
-            get { return JobNum; }
-            set { JobNum = value; }
+            SelectedJob = param_job;
         }
 
-
-        public void SetDB(ref ItemAbility param_abilities, ref MonsterDB param_mobDB,
-            ref double param_element, ref double param_size, ref bool[] param_buff_list)
-        {
-            Job[Convert.ToInt32(JobNum)].SetDB(ref param_abilities, ref param_mobDB,
-                ref param_element, ref param_size);
-            Job[Convert.ToInt32(JobNum)].SetBuffList(ref param_buff_list);
-
-        }
-        public List<SkillInfo> GetSkillCnt(int param_job)
-        {
-            //if (param_job >= Job.Count)
-            //    return null;
-            return Job[param_job].skillinfo;
-        }
         public double GetReverseATK(int sATK)
         {
             return Job.ElementAt(0).CalcReverseATK(sATK);
@@ -81,15 +59,15 @@ namespace RooStatsSim.Equation.Job
 
         public double GetMinATK()
         {
-            return Job.ElementAt(Convert.ToInt32(JobNum)).CalcATKdamage(CALC_STANDARD.MIN_DAMAGE);
+            return Job.ElementAt(GetJobNum).CalcATKdamage(CALC_STANDARD.MIN_DAMAGE);
         }
         public double GetMaxATK()
         {
-            return Job.ElementAt(Convert.ToInt32(JobNum)).CalcATKdamage(CALC_STANDARD.MAX_DAMAGE);
+            return Job.ElementAt(GetJobNum).CalcATKdamage(CALC_STANDARD.MAX_DAMAGE);
         }
         public int GetWinATK()
         {
-            return Job.ElementAt(Convert.ToInt32(JobNum)).CalcStatusWinATK();
+            return Job.ElementAt(GetJobNum).CalcStatusWinATK();
         }
     }
 }

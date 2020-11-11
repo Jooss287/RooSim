@@ -29,7 +29,7 @@ namespace RooStatsSim.DB
         MIDDLE,
         LARGE
     }
-    public enum WEAPON_TYPE
+    public enum WEAPON_TYPE_ENUM
     {
         HAND,
         DAGGER,

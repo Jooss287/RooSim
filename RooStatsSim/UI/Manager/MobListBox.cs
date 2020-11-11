@@ -1,16 +1,18 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using RooStatsSim.DB;
 using System.Collections.Generic;
+using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
+using RooStatsSim.UI.Menu;
 
 namespace RooStatsSim.UI.Manager
 {
     class MonsterDB_Binding : MonsterDB, INotifyPropertyChanged
     {
         public MonsterDB_Binding() { }
-        public MonsterDB_Binding(int mob_id, string name, int level, bool isBoss, int tribe, int element, int size,
+        public MonsterDB_Binding(int mob_id, string name, int level, bool isBoss, DB.Status status, int tribe, int element, int size,
             int atk, int matk, int hp, int def, int mdef, int hit, int flee)
-            : base(mob_id, name, level, isBoss, tribe, element, size, atk, matk, hp, def, mdef, hit, flee)
+            : base(mob_id, name, level, isBoss, status, tribe, element, size, atk, matk, hp, def, mdef, hit, flee)
         { }
 
         public new int MobId
@@ -33,20 +35,37 @@ namespace RooStatsSim.UI.Manager
             get { return _isBoss; }
             set { _isBoss = value; OnPropertyChanged("IsBoss"); }
         }
+        public new DB.Status StatusInfo
+        {
+            get {return _status; }
+            set { _status = value; }
+        }
         public new int Tribe
         {
             get { return _tribe; }
-            set { _tribe = value; OnPropertyChanged("Tribe"); }
+            set { _tribe = value; OnPropertyChanged("Tribe"); OnPropertyChanged("Tribe_Kor"); }
+        }
+        public string Tribe_Kor
+        {
+            get { return EnumProperty_Kor.TRIBE_TYPE_KOR[(TRIBE_TYPE)_tribe]; }
         }
         public new int Element
         {
             get { return _element; }
-            set { _element = value; OnPropertyChanged("Element"); }
+            set { _element = value; OnPropertyChanged("Element"); OnPropertyChanged("Element_Kor"); }
+        }
+        public string Element_Kor
+        {
+            get { return EnumProperty_Kor.ELEMENT_TYPE_KOR[(ELEMENT_TYPE)_element]; }
         }
         public new int Size
         {
             get { return _size; }
-            set { _size = value; OnPropertyChanged("Size"); }
+            set { _size = value; OnPropertyChanged("Size"); OnPropertyChanged("Size_Kor"); }
+        }
+        public string Size_Kor
+        {
+            get { return EnumProperty_Kor.MONSTER_SIZE_KOR[(MONSTER_SIZE)_size]; }
         }
         public new int Atk
         {
@@ -83,6 +102,36 @@ namespace RooStatsSim.UI.Manager
             get { return _flee; }
             set { _flee = value; OnPropertyChanged("Flee"); }
         }
+        public int Str
+        {
+            get { return _status.Str; }
+            set { _status.Str = value; OnPropertyChanged("Str"); }
+        }
+        public int Agi
+        {
+            get { return _status.Agi; }
+            set { _status.Agi = value; OnPropertyChanged("Agi"); }
+        }
+        public int Vit
+        {
+            get { return _status.Vit; }
+            set { _status.Vit = value; OnPropertyChanged("Vit"); }
+        }
+        public int Dex
+        {
+            get { return _status.Dex; }
+            set { _status.Dex = value; OnPropertyChanged("Dex"); }
+        }
+        public int Int
+        {
+            get { return _status.Int; }
+            set { _status.Int = value; OnPropertyChanged("Int"); }
+        }
+        public int Luk
+        {
+            get { return _status.Luk; }
+            set { _status.Luk = value; OnPropertyChanged("Luk"); }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -100,6 +149,7 @@ namespace RooStatsSim.UI.Manager
             Name = param.Name;
             Level = param.Level;
             IsBoss = param.IsBoss;
+            StatusInfo = param.StatusInfo;
             Tribe = param.Tribe;
             Element = param.Element;
             Size = param.Size;
@@ -118,12 +168,12 @@ namespace RooStatsSim.UI.Manager
     {
         public MonsterListBox()
         { }
-        public MonsterListBox(ref DBlist DB)
+        public MonsterListBox(Dictionary<int, MonsterDB> DB)
         {
-            foreach (KeyValuePair<int, MonsterDB> items in DB._mob_db )
+            foreach (KeyValuePair<int, MonsterDB> items in DB)
             {
                 MonsterDB db = items.Value;
-                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Tribe, db.Element, db.Size,
+                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.StatusInfo, db.Tribe, db.Element, db.Size,
                     db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
             }
         }
@@ -131,10 +181,10 @@ namespace RooStatsSim.UI.Manager
         public void AddList(MonsterDB db)
         {
             if (Count == db.MobId)
-                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Tribe, db.Element, db.Size,
+                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.StatusInfo, db.Tribe, db.Element, db.Size,
                     db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
             else
-                SetItem(db.MobId, new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.Tribe, db.Element, db.Size,
+                SetItem(db.MobId, new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.StatusInfo, db.Tribe, db.Element, db.Size,
                     db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
             
         }

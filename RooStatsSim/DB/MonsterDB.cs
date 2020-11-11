@@ -15,6 +15,7 @@ namespace RooStatsSim.DB
             _name = monsterDB.Name;
             _level = monsterDB.Level;
             _isBoss = monsterDB.IsBoss;
+            _status = monsterDB.StatusInfo;
             _tribe = monsterDB.Tribe;
             _element = monsterDB.Element;
             _size = monsterDB.Size;
@@ -27,7 +28,7 @@ namespace RooStatsSim.DB
             _flee = monsterDB.Flee;
         }
         public MonsterDB() { }
-        public MonsterDB(int mob_id, string name, int level, bool isBoss, int tribe, int element, int size,
+        public MonsterDB(int mob_id, string name, int level, bool isBoss, Status status, int tribe, int element, int size,
             int atk, int matk, int hp, int def, int mdef, int hit, int flee)
         {
             _mob_id = mob_id;
@@ -49,6 +50,7 @@ namespace RooStatsSim.DB
         protected string _name;
         protected bool _isBoss;
         protected int _level;
+        protected Status _status = new Status();
         protected int _tribe;
         protected int _element;
         protected int _size;
@@ -79,6 +81,11 @@ namespace RooStatsSim.DB
         {
             get { return _isBoss; }
             set { _isBoss = value; }
+        }
+        public Status StatusInfo
+        {
+            get { return _status; }
+            set { _status = value; }
         }
         public int Tribe
         {

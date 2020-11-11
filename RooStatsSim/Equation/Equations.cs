@@ -1,8 +1,6 @@
 ﻿using RooStatsSim.Equation;
-using RooStatsSim.Equation.Job;
 using RooStatsSim.User;
 using System;
-using System.Collections.Generic;
 
 namespace RooStatsSim.DB
 {
@@ -18,28 +16,16 @@ namespace RooStatsSim.DB
         public Equations(ATTACK_TYPE atk_type=ATTACK_TYPE.MELEE_TYPE)
         {
             attack_type = atk_type;
+            User = new GetValue();
         }
 
         protected readonly ATTACK_TYPE attack_type;
         //protected Status status = null;
-        protected UserData _user_data;
-        protected ItemAbility abilities = null;
-        protected MonsterDB mobDB = null;
-        public double element_inc;
-        public double size_panelty;
+        protected GetValue User;
         protected bool[] buff_list;
         const double RANDOM_ATK_WEIGHT = 0.1;
 
         #region DB Set Functions
-        public void SetDB(ref ItemAbility param_abilities, ref MonsterDB param_mobDB,
-            ref double param_element, ref double param_size)
-        {
-            _user_data = UserData.GetInstance;
-            abilities = param_abilities;
-            mobDB = param_mobDB;
-            element_inc = param_element;
-            size_panelty = param_size;
-        }
 
         public void SetBuffList(ref bool[] param_buff_list)
         {
@@ -48,38 +34,33 @@ namespace RooStatsSim.DB
         #endregion
 
         #region Common Call Functions
-        protected bool IsAlived()
-        {
-            if ((_user_data == null) || (abilities == null) || (mobDB == null))
-                return false;
-            return true;
-        }
-        protected virtual double GetRandomATK() { return abilities.ATK_weapon * RANDOM_ATK_WEIGHT; }
+        protected virtual double GetRandomATK() { return User.WeaponATK() * RANDOM_ATK_WEIGHT; }
+
         protected virtual double GetWeaponATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE) {
-            return abilities.ATK_weapon + StatusATK.GetStatusBonusATK(attack_type, _user_data) + GetRandomATK() * (int)calc_standard;
+            return User.WeaponATK() + StatusATK.GetStatusBonusATK(attack_type, User) + GetRandomATK() * (int)calc_standard;
         }
         protected virtual double GetBaseTotalATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE) {
-            return abilities.ATK_weapon + abilities.ATK_smelting + StatusATK.GetStatusBonusATK(attack_type, _user_data) + GetRandomATK() * (int)calc_standard;
+            return User.WeaponATK() + User.SmeltingATK() + StatusATK.GetStatusBonusATK(attack_type, User) + GetRandomATK() * (int)calc_standard;
         }
         protected virtual double GetTotalEquipATKRatio() {
-            return element_inc * abilities.element_increse * abilities.tribe_increse * abilities.size_increse * abilities.boss_increse * abilities.ATK_percent
-                * Defense.GetDefRatio(mobDB.Def, abilities.def_ignore);
+            return User.ElementInteraction() * User.ElementIncreseDamage() * User.TribeIncreseDamage() * User.SizeIncreseDamage() * User.MonsterTypeIncreseDamage()
+                * User.PercentATK() * User.DefenseRatio();
         }
         protected virtual double GetTotalATKRatio() {
-            return abilities.PDamage_percent * abilities.PDamage_attack_type;
+            return User.PercentPhysicalDamage(attack_type);
         }
         protected virtual double GetMasteryATK() {
-            return abilities.ATK_mastery;
+            return User.MasteryATK();
         }
         #endregion
 
         #region Attack Equation
         protected virtual double TotalWeaponATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE) {
-            return GetBaseTotalATK(calc_standard) * size_panelty;
+            return GetBaseTotalATK(calc_standard) * User.WeaponSizePanelty();
         }
         protected virtual double TotalEquipATK(double total_weapon_atk)
         {
-            return total_weapon_atk + abilities.ATK_equipment;
+            return total_weapon_atk + User.EquipATK();
         }
         protected virtual double TotalEquipATKinc(double total_equip_atk)
         {
@@ -87,18 +68,15 @@ namespace RooStatsSim.DB
         }
         protected virtual double TotalATK(double total_equip_atk_inc)
         {
-            return StatusATK.GetStatusATK(attack_type, _user_data) * 2 + GetMasteryATK() + total_equip_atk_inc;
+            return StatusATK.GetStatusATK(attack_type, User.User_Data) * 2 + GetMasteryATK() + total_equip_atk_inc;
         }
         protected virtual double TotalATKinc(double total_atk)
         {
-            return total_atk * GetTotalATKRatio() + abilities.PDamage_addition;
+            return total_atk * GetTotalATKRatio() + User.AdditionalPhysicalDamage();
         }
 
         public int CalcATKdamage(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
         {
-            if (!IsAlived())
-                return 0;
-
             double total_weapon_atk = TotalWeaponATK(calc_standard);
             double total_equip_atk = TotalEquipATK(total_weapon_atk);
             double total_equip_atk_inc = TotalEquipATKinc(total_equip_atk);
@@ -113,21 +91,18 @@ namespace RooStatsSim.DB
         #region StatusWindow ATK Equation
         protected virtual double WinTotalEquipATKinc(double total_equip_atk)
         {
-            return Math.Round(total_equip_atk * abilities.ATK_percent);
+            return Math.Round(total_equip_atk * User.PercentATK());
         }
         protected virtual double WinTotalEquipATK(double total_weapon_atk)
         {
-            return total_weapon_atk + abilities.ATK_equipment;
+            return total_weapon_atk + User.EquipATK();
         }
         protected virtual double WinTotalATK(double total_equip_atk_inc)
         {
-            return StatusATK.GetStatusATK(attack_type, _user_data) + GetMasteryATK() + total_equip_atk_inc;
+            return StatusATK.GetStatusATK(attack_type, User.User_Data) + GetMasteryATK() + total_equip_atk_inc;
         }
         public int CalcStatusWinATK()
         {
-            if (!IsAlived())
-                return 0;
-
             double total_weapon_atk = GetWeaponATK();
             double total_equip_atk = WinTotalEquipATK(total_weapon_atk);
             double total_equip_atk_inc = WinTotalEquipATKinc(total_equip_atk);
@@ -139,11 +114,8 @@ namespace RooStatsSim.DB
 
         public int CalcReverseATK(int sATK)
         {
-            if (!IsAlived())
-                return 0;
-
-            double status_atk = StatusATK.GetStatusATK(attack_type, _user_data);
-            double equipATK = (sATK - abilities.ATK_mastery - status_atk) / abilities.ATK_percent - abilities.ATK_weapon - StatusATK.GetStatusBonusATK(attack_type, _user_data);
+            double status_atk = StatusATK.GetStatusATK(attack_type, User.User_Data);
+            double equipATK = (sATK - User.MasteryATK() - status_atk) / User.PercentATK()- User.WeaponATK() - StatusATK.GetStatusBonusATK(attack_type, User);
 
             return Convert.ToInt32(Math.Floor(equipATK));
         }

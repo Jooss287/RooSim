@@ -5,7 +5,7 @@ using RooStatsSim.User;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 
-namespace RooStatsSim.UI.Status
+namespace RooStatsSim.UI.StatusWindow
 {
     class LevelList : ObservableCollection<AbilityBinding<int>>
     {
@@ -69,12 +69,46 @@ namespace RooStatsSim.UI.Status
         {
             Add(new AbilityBinding<double>("ASPD", user_data.User_Item.d_option[DTYPE.ASPD], 0, Enum.GetName(typeof(DTYPE), DTYPE.ASPD)));
             Add(new AbilityBinding<double>("이동속도", user_data.User_Item.d_option[DTYPE.MOVING_SPEED], 0, Enum.GetName(typeof(DTYPE), DTYPE.MOVING_SPEED)));
-            foreach(KeyValuePair<DTYPE, double> item in user_data.User_Item.d_option)
+            foreach(KeyValuePair<DTYPE, double> item in user_data.User_Item.D_OPTION)
             {
                 if ((item.Key == DTYPE.ASPD) || (item.Key == DTYPE.MOVING_SPEED))
                     continue;
                 Add(new AbilityBinding<double>(EnumProperty_Kor.DTYPE_KOR[item.Key], user_data.User_Item.d_option[item.Key], 0, Enum.GetName(typeof(DTYPE), item.Key)));
             }
+        }
+    }
+
+    class SpecialPropertyList : ObservableCollection<AbilityBinding<double>>
+    {
+        public SpecialPropertyList(ref UserData user_data)
+        {
+            foreach (KeyValuePair<STATUS_EFFECT_TYPE, double> item in user_data.User_Item.SE_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR[item.Key], user_data.User_Item.SE_OPTION[item.Key], 0, Enum.GetName(typeof(STATUS_EFFECT_TYPE), item.Key)));
+
+            foreach (KeyValuePair<ELEMENT_TYPE, double> item in user_data.User_Item.ELEMENT_INC_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.ELEMENT_TYPE_KOR[item.Key] + "데미지 증가(%)"
+                    , user_data.User_Item.ELEMENT_INC_OPTION[item.Key], 0, Enum.GetName(typeof(ELEMENT_TYPE), item.Key)));
+            foreach (KeyValuePair<ELEMENT_TYPE, double> item in user_data.User_Item.ELEMENT_DEC_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.ELEMENT_TYPE_KOR[item.Key] + "데미지 감소(%)"
+                    , user_data.User_Item.ELEMENT_INC_OPTION[item.Key], 0, Enum.GetName(typeof(ELEMENT_TYPE), item.Key)));
+            foreach (KeyValuePair<MONSTER_SIZE, double> item in user_data.User_Item.SIZE_INC_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.MONSTER_SIZE_KOR[item.Key] + "데미지 증가(%)"
+                    , user_data.User_Item.SIZE_INC_OPTION[item.Key], 0, Enum.GetName(typeof(MONSTER_SIZE), item.Key)));
+            foreach (KeyValuePair<MONSTER_SIZE, double> item in user_data.User_Item.SIZE_DEC_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.MONSTER_SIZE_KOR[item.Key] + "데미지 감소(%)"
+                    , user_data.User_Item.SIZE_DEC_OPTION[item.Key], 0, Enum.GetName(typeof(MONSTER_SIZE), item.Key)));
+            foreach (KeyValuePair<TRIBE_TYPE, double> item in user_data.User_Item.TRIBE_INC_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.TRIBE_TYPE_KOR[item.Key] + "데미지 증가(%)"
+                    , user_data.User_Item.TRIBE_INC_OPTION[item.Key], 0, Enum.GetName(typeof(TRIBE_TYPE), item.Key)));
+            foreach (KeyValuePair<TRIBE_TYPE, double> item in user_data.User_Item.TRIBE_DEC_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.TRIBE_TYPE_KOR[item.Key] + "데미지 감소(%)"
+                    , user_data.User_Item.TRIBE_DEC_OPTION[item.Key], 0, Enum.GetName(typeof(TRIBE_TYPE), item.Key)));
+            foreach (KeyValuePair<MONSTER_TYPE, double> item in user_data.User_Item.MOBTYPE_INC_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.MONSTER_TYPE_KOR[item.Key] + "데미지 증가(%)"
+                    , user_data.User_Item.MOBTYPE_INC_OPTION[item.Key], 0, Enum.GetName(typeof(MONSTER_TYPE), item.Key)));
+            foreach (KeyValuePair<MONSTER_TYPE, double> item in user_data.User_Item.MOBTYPE_DEC_OPTION)
+                Add(new AbilityBinding<double>(EnumProperty_Kor.MONSTER_TYPE_KOR[item.Key] + "데미지 감소(%)"
+                    , user_data.User_Item.MOBTYPE_DEC_OPTION[item.Key], 0, Enum.GetName(typeof(MONSTER_TYPE), item.Key)));
         }
     }
 }
