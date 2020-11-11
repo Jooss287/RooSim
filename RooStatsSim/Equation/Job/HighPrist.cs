@@ -1,8 +1,8 @@
-﻿using RooStatsSim.DB;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+using RooStatsSim.DB;
 using RooStatsSim.Skills;
+using RooStatsSim.User;
 
 namespace RooStatsSim.Equation.Job
 {

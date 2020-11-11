@@ -73,6 +73,10 @@ namespace RooStatsSim.DB
         WEAPON_MATK,
         STATUS_ATK,
         STATUS_MATK,
+        MASTERY_ATK,
+        MASTERY_MATK,
+        PHYSICAL_DAMAGE_ADDITIONAL,
+        MAGICAL_DAMAGE_ADDITIONAL,
         DEF = 2000,     //방어력 관련 스텟
         MDEF,
         SMELTING_DEF,
@@ -95,6 +99,8 @@ namespace RooStatsSim.DB
         MAGICAL_DAMAGE,
         IGNORE_PHYSICAL_DEFENSE,
         IGNORE_MAGICAL_DEFENSE,
+        MELEE_PHYSICAL_DAMAGE,
+        RANGE_PHYSICAL_DAMAGE,
         DEF_P = 2000,
         MDEF_P,
         PHYSICAL_DEC_DAMAGE,
@@ -217,12 +223,15 @@ namespace RooStatsSim.DB
 
         ITEM_TYPE_ENUM _item_type;
         EQUIP_TYPE_ENUM _equip_type;
+        WEAPON_TYPE _weapon_type = WEAPON_TYPE.HAND;
         protected int _id;
         protected string _name;
         protected int _level_limit;
         protected int _smelt;
         protected int _card_slot;
         protected int _enchant_slot;
+        protected ELEMENT_TYPE _attacker_element;
+        protected ELEMENT_TYPE _defenser_element;
         public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
         public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
         public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
@@ -270,6 +279,16 @@ namespace RooStatsSim.DB
             get { return _enchant_slot; }
             set { _enchant_slot = value; }
         }
+        public ELEMENT_TYPE AttackerElement
+        {
+            get { return _attacker_element; }
+            set { _attacker_element = value; }
+        }
+        public ELEMENT_TYPE DefenserElement
+        {
+            get { return _defenser_element; }
+            set { _defenser_element = value; }
+        }
         public ITEM_TYPE_ENUM Item_type
         {
             get { return _item_type; }
@@ -279,6 +298,11 @@ namespace RooStatsSim.DB
         {
             get { return _equip_type; }
             set { _equip_type = value; }
+        }
+        public WEAPON_TYPE Weapon_type
+        {
+            get { return _weapon_type; }
+            set { _weapon_type = value; }
         }
         public List<JOB_SELECT_LIST> Wear_job_limit
         {

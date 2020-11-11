@@ -36,35 +36,22 @@ namespace RooStatsSim.UI.Menu
         MainWindow _parents;
         public MenuBox(MainWindow parents)
         {
-            _parents = parents;
-            InitializeComponent();
-
-            job_UI_setting((int)(JOB_LIST.LOAD_KNIGHT));
-
             _roo_db = new DBlist();
             DBSerizator.ReadDB(ref _roo_db);
             _user_data = UserData.GetInstance;
+
+            _parents = parents;
+            InitializeComponent();
         }
 
 
         private void job_sel_Click(object sender, RoutedEventArgs e)
         {
             RadioButton source = e.Source as RadioButton;
-            //job_select = Convert.ToInt32(source.Tag);
+            _user_data.Job = (JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag));
 
-            //job_selection.JobSelectNum = (JOB_LIST)job_select;
-            //job_UI_setting(job_select);
+            //모든 값 초기화 시켜야 함
         }
-
-        private void job_UI_setting(int param_job_select)
-        {
-            //List<SkillInfo> skillNames = job_selection.GetSkillCnt(job_select);
-            //BuffList = new bool[skillNames.Count];
-
-            //if (SkillListBox != null)
-            //    SkillListBox.ItemsSource = new SkillAdd(skillNames);
-        }
-
         private void Status_window_Click(object sender, RoutedEventArgs e)
         {
             if (_parents._status.IsVisible)

@@ -25,19 +25,19 @@ namespace RooStatsSim.Equation
             }
             return statusATK;
         }
-        public static int GetStatusBonusATK(ATTACK_TYPE atk_type, UserData user)
+        public static int GetStatusBonusATK(ATTACK_TYPE atk_type, GetValue getvalue)
         {
-            int BASE = user.Base_Level.Point;
-            int STR = user.Status.List[(int)STATUS_ENUM.STR].Point + user.Status.List[(int)STATUS_ENUM.STR].AddPoint;
-            int DEX = user.Status.List[(int)STATUS_ENUM.DEX].Point + user.Status.List[(int)STATUS_ENUM.DEX].AddPoint;
+            int BASE = getvalue.User_Data.Base_Level.Point;
+            int STR = getvalue.User_Data.Status.List[(int)STATUS_ENUM.STR].Point + getvalue.User_Data.Status.List[(int)STATUS_ENUM.STR].AddPoint;
+            int DEX = getvalue.User_Data.Status.List[(int)STATUS_ENUM.DEX].Point + getvalue.User_Data.Status.List[(int)STATUS_ENUM.DEX].AddPoint;
             int statusBonusATK = 0;
             if (atk_type == ATTACK_TYPE.MELEE_TYPE)
             {
-                statusBonusATK = (int)(user.User_Item.i_option[ITYPE.WEAPON_ATK] * STR * STAT_WEIGHT);
+                statusBonusATK = (int)(getvalue.WeaponATK() * STR * STAT_WEIGHT);
             }
             else if (atk_type == ATTACK_TYPE.RANGE_TYPE)
             {
-                statusBonusATK = (int)(user.User_Item.i_option[ITYPE.WEAPON_ATK] * DEX * STAT_WEIGHT);
+                statusBonusATK = (int)(getvalue.WeaponATK() * DEX * STAT_WEIGHT);
             }
             return statusBonusATK;
         }

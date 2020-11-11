@@ -101,11 +101,11 @@
     <Compile Include="DB\Table\SmeltingTable.cs" />
     <Compile Include="DB\Table\StatsPointTable.cs" />
     <Compile Include="Equation\Equations.cs" />
-    <Compile Include="DB\ItemAbility.cs" />
     <Compile Include="DB\Table\AdvantageTable.cs" />
     <Compile Include="DB\MonsterDB.cs" />
     <Compile Include="DB\Status.cs" />
     <Compile Include="Equation\Defense.cs" />
+    <Compile Include="Equation\GetValue.cs" />
     <Compile Include="Equation\Job\AssassinCross.cs" />
     <Compile Include="Equation\Job\HighPrist.cs" />
     <Compile Include="Equation\Job\HighWizard.cs" />

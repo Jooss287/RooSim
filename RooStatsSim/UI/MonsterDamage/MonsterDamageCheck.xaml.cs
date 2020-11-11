@@ -3,6 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.UI.Manager;
+using RooStatsSim.User;
+using RooStatsSim.Equation.Job;
+using System;
 
 namespace RooStatsSim.UI.MonsterDamage
 {
@@ -11,6 +14,7 @@ namespace RooStatsSim.UI.MonsterDamage
     /// </summary>
     public partial class MonsterDamageCheck : Window
     {
+        UserData user_data;
         MonsterDB_Binding now_mob = new MonsterDB_Binding();
         MonsterListBox BindingMobList;
         public MonsterDamageCheck()
@@ -23,6 +27,8 @@ namespace RooStatsSim.UI.MonsterDamage
             BindingMobList = new MonsterListBox(MenuBox._roo_db.Mob_db);
             DB_ListBox.ItemsSource = BindingMobList;
 
+            user_data = UserData.GetInstance;
+            user_data.itemDataChanged += new UserData.UserDataChangedEventHandler(CalcDamage);
         }
         void InitializeContents()
         {
@@ -41,11 +47,30 @@ namespace RooStatsSim.UI.MonsterDamage
             now_mob.Flee = 0;
         }
 
+        void CalcDamage()
+        {
+            if (now_mob.Name == "")
+                return;
+
+            JobSelect jobsel = new JobSelect(user_data.Job);
+            int skill_damage = 1;
+            
+            int calcATK_min = Convert.ToInt32(Math.Floor(jobsel.GetMinATK() * skill_damage));
+            int calcATK_max = Convert.ToInt32(Math.Floor(jobsel.GetMaxATK() * skill_damage));
+
+            //retCalc.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
+            //txt_sATK.Text = Convert.ToString(job_selection.GetWinATK());
+        }
+
         private void DB_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MonsterDB_Binding temp = (MonsterDB_Binding)DB_ListBox.SelectedItem;
             if (temp != null)
+            { 
                 now_mob.ChangeValue(temp);
+                user_data.SelectedEnemy = temp.MobId;
+                CalcDamage();
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace RooStatsSim.User
         {
             int LastCardSetSlot = 0;
             int LastEnchantSlot = 0;
-            ItemDB _equip;
+            ItemDB _equip = new ItemDB();
             List<ItemDB> _cards;
             List<ItemDB> _enchant;
 

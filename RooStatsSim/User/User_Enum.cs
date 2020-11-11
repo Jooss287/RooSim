@@ -34,4 +34,9 @@ namespace RooStatsSim.User
         MAX_HP,
         ATK_MATK_PERCENT,
     }
+    public enum ATTACK_TYPE
+    {
+        MELEE_TYPE,
+        RANGE_TYPE,
+    }
 }

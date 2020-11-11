@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
+using RooStatsSim.UI.Menu;
 
 namespace RooStatsSim.UI.Manager
 {

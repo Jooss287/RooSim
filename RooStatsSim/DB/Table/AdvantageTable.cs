@@ -9,7 +9,7 @@ namespace RooStatsSim.DB.Table
 {
     class AdvantageTable
     {
-        readonly double[,] SizeRatio = new double[(int)WEAPON_TYPE.JAMADHAR+1, (int)MONSTER_SIZE.LARGE+1]
+        public static double[,] SizeRatio = new double[(int)WEAPON_TYPE.JAMADHAR+1, (int)MONSTER_SIZE.LARGE+1]
         {
             {1.0, 1.0, 1.0},        //HAND
             {1.0, 0.75, 0.5 },      //DAGGER
@@ -27,7 +27,7 @@ namespace RooStatsSim.DB.Table
         };
 
         //  [ATTACKER_ELEMENT, DEFENSER_ELEMENT]
-        readonly double[,] ElementRatio = new double[(int)ELEMENT_TYPE.UNDEAD+1, (int)ELEMENT_TYPE.UNDEAD+1]
+        public static double[,] ElementRatio = new double[(int)ELEMENT_TYPE.UNDEAD+1, (int)ELEMENT_TYPE.UNDEAD+1]
         {
             {0,    0,     0,     0,     0,     0,     0, 0,     -0.3, 0 },                     //NORMAL
             {0,    -0.75, -0.2,  0,     0.75,  0,     0, 0,     0,    0 },              //WIND
@@ -41,12 +41,12 @@ namespace RooStatsSim.DB.Table
             {0,    0,     0,     0,     0,     0,     0, 0,     0,    0 },                        //UNDEAD
         };
 
-        public double GetSizePanelty(WEAPON_TYPE attacker, WEAPON_TYPE defender)
+        public static double GetSizePanelty(WEAPON_TYPE attacker, MONSTER_SIZE defender)
         {
             return SizeRatio[Convert.ToInt32(attacker),Convert.ToInt32(defender)];
         }
 
-        public double GetElementRatio(ELEMENT_TYPE attacker, ELEMENT_TYPE defender)
+        public static double GetElementRatio(ELEMENT_TYPE attacker, ELEMENT_TYPE defender)
         {
             return ElementRatio[Convert.ToInt32(attacker), Convert.ToInt32(defender)];
         }

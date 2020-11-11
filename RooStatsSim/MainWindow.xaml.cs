@@ -99,11 +99,7 @@ namespace RooStatsSim
             //InputUIData();
 
             //double skill_damage = (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01;
-            //int calcATK_min = Convert.ToInt32(Math.Floor(job_selection.GetMinATK() * skill_damage));
-            //int calcATK_max = Convert.ToInt32(Math.Floor(job_selection.GetMaxATK() * skill_damage));
-
-            //retCalc.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
-            //txt_sATK.Text = Convert.ToString(job_selection.GetWinATK());
+            
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)

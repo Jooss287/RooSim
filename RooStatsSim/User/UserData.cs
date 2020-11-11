@@ -1,13 +1,15 @@
-﻿using RooStatsSim.DB;
+﻿using System.Diagnostics;
+using RooStatsSim.DB;
 using RooStatsSim.Equation;
-using System.Diagnostics;
+using RooStatsSim.User;
+
 
 namespace RooStatsSim.User
 {
     // User data singleton design pattern
     public sealed class UserData
     {
-        #region Single Pattern
+        #region Singleton Pattern
         private UserData() { }
         private static UserData _instance = null;
         public static UserData GetInstance
@@ -26,7 +28,7 @@ namespace RooStatsSim.User
         public BASE_LEVEL Base_Level = new BASE_LEVEL();
         public JOB_LEVEL Job_Level = new JOB_LEVEL();
         public STATUS Status = new STATUS();
-        public JOB_SELECT_LIST Job = JOB_SELECT_LIST.KNIGHT;
+        public JOB_SELECT_LIST Job = JOB_SELECT_LIST.NOVICE;
 
         public EQUIP Equip = new EQUIP();
         public GEAR Gear = new GEAR();
@@ -40,6 +42,7 @@ namespace RooStatsSim.User
         
 
         public UserItem User_Item = new UserItem();
+        public int SelectedEnemy = 0;
 
         #region Userdata event
         public delegate void UserDataChangedEventHandler();
@@ -50,7 +53,7 @@ namespace RooStatsSim.User
         {
             UserItem CalcUserItem = new UserItem();
 
-            CalcUserItem.i_option[ITYPE.STATUS_ATK] = StatusATK.GetStatusATK(Equation.Job.ATTACK_TYPE.MELEE_TYPE, this);
+            CalcUserItem.i_option[ITYPE.STATUS_ATK] = StatusATK.GetStatusATK(ATTACK_TYPE.MELEE_TYPE, this);
 
             CalcUserItem += Monster_Research.GetOption();
             CalcUserItem += Dress_Style.GetOption();
