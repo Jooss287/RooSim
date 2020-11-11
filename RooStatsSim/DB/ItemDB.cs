@@ -223,7 +223,7 @@ namespace RooStatsSim.DB
 
         ITEM_TYPE_ENUM _item_type;
         EQUIP_TYPE_ENUM _equip_type;
-        WEAPON_TYPE _weapon_type = WEAPON_TYPE.HAND;
+        WEAPON_TYPE_ENUM _weapon_type = WEAPON_TYPE_ENUM.HAND;
         protected int _id;
         protected string _name;
         protected int _level_limit;
@@ -299,7 +299,7 @@ namespace RooStatsSim.DB
             get { return _equip_type; }
             set { _equip_type = value; }
         }
-        public WEAPON_TYPE Weapon_type
+        public WEAPON_TYPE_ENUM Weapon_type
         {
             get { return _weapon_type; }
             set { _weapon_type = value; }

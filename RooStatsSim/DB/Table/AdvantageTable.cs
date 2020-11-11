@@ -9,7 +9,7 @@ namespace RooStatsSim.DB.Table
 {
     class AdvantageTable
     {
-        public static double[,] SizeRatio = new double[(int)WEAPON_TYPE.JAMADHAR+1, (int)MONSTER_SIZE.LARGE+1]
+        public static double[,] SizeRatio = new double[(int)WEAPON_TYPE_ENUM.JAMADHAR+1, (int)MONSTER_SIZE.LARGE+1]
         {
             {1.0, 1.0, 1.0},        //HAND
             {1.0, 0.75, 0.5 },      //DAGGER
@@ -41,7 +41,7 @@ namespace RooStatsSim.DB.Table
             {0,    0,     0,     0,     0,     0,     0, 0,     0,    0 },                        //UNDEAD
         };
 
-        public static double GetSizePanelty(WEAPON_TYPE attacker, MONSTER_SIZE defender)
+        public static double GetSizePanelty(WEAPON_TYPE_ENUM attacker, MONSTER_SIZE defender)
         {
             return SizeRatio[Convert.ToInt32(attacker),Convert.ToInt32(defender)];
         }
