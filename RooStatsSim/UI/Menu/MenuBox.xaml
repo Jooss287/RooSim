@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RooStatsSim.UI"
       mc:Ignorable="d" 
-      Background="#E6E6E6" Width="613" Height="100"
+      Background="#E6E6E6"
       Title="MenuBox">
 
     <Grid>
@@ -22,12 +22,12 @@
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <RadioButton x:Name="radio_job" Tag="NOVICE" IsChecked="True" Checked="job_sel_Click" Content="노&#10;비&#10;스" Grid.Column="0" GroupName="group_attack_type" />
-                    <RadioButton Tag="LOAD_KNIGHT" Checked="job_sel_Click" Content="로&#10;나" Grid.Column="1" GroupName="group_attack_type" />
-                    <RadioButton Tag="WHITE_SMITH" Checked="job_sel_Click" Content="블&#10;스" Grid.Column="2" GroupName="group_attack_type" />
-                    <RadioButton Tag="ASSASSIN_CROSS" Checked="job_sel_Click" Content="어&#10;크" Grid.Column="3" GroupName="group_attack_type" />
-                    <RadioButton Tag="SNIPER" Checked="job_sel_Click" Content="스&#10;나" Grid.Column="4" GroupName="group_attack_type"/>
-                    <RadioButton Tag="HIGH_WIZARD" Checked="job_sel_Click" Content="하&#10;위" Grid.Column="5" GroupName="group_attack_type" />
-                    <RadioButton Tag="HIGH_PRIST" Checked="job_sel_Click" Content="하&#10;프" Grid.Column="6" GroupName="group_attack_type" />
+                    <RadioButton Tag="KNIGHT" Checked="job_sel_Click" Content="로&#10;나" Grid.Column="1" GroupName="group_attack_type" />
+                    <RadioButton Tag="BLACKSMITH" Checked="job_sel_Click" Content="블&#10;스" Grid.Column="2" GroupName="group_attack_type" />
+                    <RadioButton Tag="ASSASSIN" Checked="job_sel_Click" Content="어&#10;크" Grid.Column="3" GroupName="group_attack_type" />
+                    <RadioButton Tag="HUNTER" Checked="job_sel_Click" Content="스&#10;나" Grid.Column="4" GroupName="group_attack_type"/>
+                    <RadioButton Tag="WIZARD" Checked="job_sel_Click" Content="하&#10;위" Grid.Column="5" GroupName="group_attack_type" />
+                    <RadioButton Tag="PRIST" Checked="job_sel_Click" Content="하&#10;프" Grid.Column="6" GroupName="group_attack_type" />
                 </Grid>
             </GroupBox>
             <GroupBox Header="Save Point">
@@ -38,7 +38,7 @@
                     <RadioButton />
                 </StackPanel>
             </GroupBox>
-            <Grid>
+            <Grid Width="330">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
@@ -49,19 +49,19 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Status" Grid.Row="0" Grid.Column="0"
+                <Button Content="Status" Grid.Row="0" Grid.Column="0" Margin="1,1,1,1"
                         Click="Status_window_Click"/>
-                <Button Content="Skill" Grid.Row="0" Grid.Column="1"
+                <Button Content="Skill" Grid.Row="0" Grid.Column="1" Margin="1,1,1,1"
                         Click="Skill_window_Click"/>
-                <Button Content="Equip" Grid.Row="0" Grid.Column="2"
+                <Button Content="Equip" Grid.Row="0" Grid.Column="2" Margin="1,1,1,1"
                         Click="Equip_window_Click"/>
-                <Button Content="StackBuff" Grid.Row="1" Grid.Column="0"
+                <Button Content="StackBuff" Grid.Row="1" Grid.Column="0" Margin="1,1,1,1"
                         Click="StackBuff_window_Click"/>
-                <Button Content="DamageCheck" Grid.Row="1" Grid.Column="1"
+                <Button Content="Monster" Grid.Row="1" Grid.Column="1" Margin="1,1,1,1"
                         Click="DamageCheck_window_Click"/>
-                <Button Content="DBManager" Grid.Row="2" Grid.Column="1"
+                <Button Content="DBManager" Grid.Row="2" Grid.Column="1" Margin="1,1,1,1"
                         Click="DBManager_window_Click"/>
-                <Button Content="Info" Grid.Row="2" Grid.Column="2"
+                <Button Content="Info" Grid.Row="2" Grid.Column="2" Margin="1,1,1,1"
                         Click="Info_window_Click"/>
             </Grid>
         </StackPanel>

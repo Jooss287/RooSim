@@ -18,10 +18,16 @@
         Title="RooSim" WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize" Background="{x:Null}" AllowsTransparency="True"
         Left="50" Top="50">
     <Window.Resources>
+        <Style TargetType="Border" x:Key="TitleBar">
+            <Setter Property="Background" Value="#ff3474fd"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="3"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Canvas Name="DesigningCanvas" Background="{x:Null}">
-            <Grid>
+            <Grid Canvas.Top="350" Canvas.Left="10">
                 <Grid.RowDefinitions>
                     <RowDefinition MaxHeight="24" Height="24" />
                     <RowDefinition Height="1*" />
@@ -32,11 +38,13 @@
                 </Grid.ColumnDefinitions>
                 <Frame x:Name="menu_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Rectangle Name="menu_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        CornerRadius="3,0,0,0"
+                        Grid.Column="0" Name="menu_titlebar"/>
                 <Button Content="X" Grid.Column="1" Name="closeButton"
                         Click="closeButton_Click"/>
             </Grid>
-            <Grid Canvas.Top="124">
+            <Grid Canvas.Top="10" Canvas.Left="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24" />
                     <RowDefinition Height="1*" />
@@ -46,10 +54,11 @@
                 </Grid.ColumnDefinitions>
                 <Frame x:Name="status_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Rectangle Name="status_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        Grid.Column="0" Name="status_titlebar"/>
             </Grid>
 
-            <Grid Canvas.Top="524">
+            <Grid Canvas.Top="350" Canvas.Left="685">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24" />
                     <RowDefinition Height="1*" />
@@ -59,10 +68,11 @@
                 </Grid.ColumnDefinitions>
                 <Frame x:Name="stack_buff_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Rectangle Name="stack_buff_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        Grid.Column="0" Name="stack_buff_titlebar"/>
             </Grid>
 
-            <Grid Canvas.Top="724">
+            <Grid Canvas.Top="476" Canvas.Left="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24" />
                     <RowDefinition Height="1*" />
@@ -72,10 +82,11 @@
                 </Grid.ColumnDefinitions>
                 <Frame x:Name="equip_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Rectangle Name="equip_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        Grid.Column="0" Name="equip_titlebar"/>
             </Grid>
 
-            <Grid Canvas.Top="724">
+            <Grid Canvas.Top="724" Canvas.Left="700">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24" />
                     <RowDefinition Height="1*" />
@@ -85,8 +96,10 @@
                 </Grid.ColumnDefinitions>
                 <Frame x:Name="damage_check_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Rectangle Name="damage_check_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        Grid.Column="0" Name="damage_check_titlebar"/>
             </Grid>
+
         </Canvas>
     </Grid>
 </Window>

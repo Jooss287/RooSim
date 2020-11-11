@@ -89,7 +89,7 @@ namespace RooStatsSim
         
         #endregion
 
-        void SetMouseEventControl(Rectangle titlebar)
+        void SetMouseEventControl(Border titlebar)
         {
             titlebar.PreviewMouseLeftButtonDown += this.ObjMouseLeftButtonDown;
             titlebar.PreviewMouseLeftButtonUp += this.ObjPreviewMouseLeftButtonUp;
@@ -109,7 +109,7 @@ namespace RooStatsSim
         {
             if (MovingObject == null)
             {
-                ClickedGrid = (sender as Rectangle).Parent as Grid;
+                ClickedGrid = (sender as Border).Parent as Grid;
                 objXPos = e.GetPosition(ClickedGrid).X;
                 objYPos = e.GetPosition(ClickedGrid).Y;
                 MovingObject = ClickedGrid;
