@@ -17,7 +17,7 @@ namespace RooStatsSim.UI.MonsterDamage
         UserData user_data;
         MonsterDB_Binding now_mob = new MonsterDB_Binding();
         MonsterListBox BindingMobList;
-        string normal_atk_binding = "";
+        CalcUserDamageBinding _calc_user_dmamge_binding;
         public MonsterDamageCheck()
         {
             InitializeComponent();
@@ -30,6 +30,7 @@ namespace RooStatsSim.UI.MonsterDamage
 
             user_data = UserData.GetInstance;
             user_data.itemDataChanged += new UserData.UserDataChangedEventHandler(CalcDamage);
+            CalcDamage();
         }
         void InitializeContents()
         {
@@ -59,8 +60,9 @@ namespace RooStatsSim.UI.MonsterDamage
             int calcATK_min = Convert.ToInt32(Math.Floor(jobsel.GetMinATK() * skill_damage));
             int calcATK_max = Convert.ToInt32(Math.Floor(jobsel.GetMaxATK() * skill_damage));
 
-            normalATK.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
-            //txt_sATK.Text = Convert.ToString(job_selection.GetWinATK());
+            string normal_atk = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
+            _calc_user_dmamge_binding = new CalcUserDamageBinding("평타", normal_atk);
+            CalcUserDamage.ItemsSource = _calc_user_dmamge_binding;
         }
 
         private void DB_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

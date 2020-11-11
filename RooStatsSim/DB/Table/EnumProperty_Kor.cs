@@ -203,6 +203,6 @@ namespace RooStatsSim.DB.Table
             {WEAPON_TYPE_ENUM.TWOHAND_WAND, "양손지팡이" },
             {WEAPON_TYPE_ENUM.BOW, "활" },
             {WEAPON_TYPE_ENUM.JAMADHAR, "카타르" },
-        }
+        };
     }
 }

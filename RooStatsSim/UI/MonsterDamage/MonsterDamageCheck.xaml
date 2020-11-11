@@ -135,13 +135,23 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="데미지 공식은 보완중입니다. 참고로만 사용하세요"
                                Foreground="Red" FontSize="8" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="평타" />
-                        <TextBlock Name="normalATK" Text="0 ~ 0"/>
-                    </StackPanel>
-                    <TextBlock Text="크리티컬" />
-                    <TextBlock Text="배쉬" />
-                    <TextBlock Text="스파이럴" />
+                    <ComboBox />
+
+                    <ItemsControl x:Name="CalcUserDamage" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="1" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Style="{Binding Source={StaticResource Custom_StackPanel}}">
+                                    <TextBlock Text="{Binding Path=SkillName}" Style="{Binding Source={StaticResource Custom_NameBlock}}"/>
+                                    <TextBlock Text="{Binding Path=DamageRange}" Style="{Binding Source={StaticResource Custom_ValueBlock}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
