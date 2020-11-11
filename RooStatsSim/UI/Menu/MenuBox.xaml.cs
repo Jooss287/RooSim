@@ -52,49 +52,60 @@ namespace RooStatsSim.UI.Menu
 
             //모든 값 초기화 시켜야 함
         }
+        private void TurnOnOff(Grid window)
+        {
+            if (window.IsVisible)
+            {
+                window.Visibility = Visibility.Hidden;
+                window.IsEnabled = false;
+            }
+            else
+            {
+                window.Visibility = Visibility.Visible;
+                window.IsEnabled = true;
+            }
+                
+        }
         private void Status_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_parents._status.IsVisible)
-                _parents._status.Visibility = Visibility.Hidden;
-            else
-                _parents._status.Visibility = Visibility.Visible;
+            TurnOnOff((_parents.status_contents.Parent as Grid));
         }
+        private void StackBuff_window_Click(object sender, RoutedEventArgs e)
+        {
+            TurnOnOff((_parents.stack_buff_contents.Parent as Grid));
+        }
+        private void Equip_window_Click(object sender, RoutedEventArgs e)
+        {
+            TurnOnOff((_parents.equip_contents.Parent as Grid));
+        }
+        private void DamageCheck_window_Click(object sender, RoutedEventArgs e)
+        {
+            TurnOnOff((_parents.damage_check_contents.Parent as Grid));
+        }
+        private void Skill_window_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+        
+
+        #region Window Modal
         private void DBManager_window_Click(object sender, RoutedEventArgs e)
         {
             if (_parents._db_manager == null)
                 _parents._db_manager = new DBManager();
             else
-                _parents._db_manager.Show();
+                _parents._db_manager.Focus();
         }
 
         private void Info_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_parents._info.IsVisible)
-                _parents._info.Hide();
+            if (_parents._info == null)
+                _parents._info = new ProgramInfo();
             else
-                _parents._info.Show();
+                _parents._info.Focus();
         }
+        #endregion
 
-        private void StackBuff_window_Click(object sender, RoutedEventArgs e)
-        {
-            if (_parents._stacK_buff.IsVisible)
-                _parents._stacK_buff.Hide();
-            else
-                _parents._stacK_buff.Show();
-        }
-
-        private void Skill_window_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Equip_window_Click(object sender, RoutedEventArgs e)
-        {
-            if (_parents._equip.IsVisible)
-                _parents._equip.Visibility = Visibility.Hidden;
-            else
-                _parents._equip.Visibility = Visibility.Visible;
-        }
+        
     }
 }

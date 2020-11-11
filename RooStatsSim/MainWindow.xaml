@@ -48,6 +48,45 @@
                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <Rectangle Name="status_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
             </Grid>
+
+            <Grid Canvas.Top="524">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="stack_buff_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Rectangle Name="stack_buff_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+            </Grid>
+
+            <Grid Canvas.Top="724">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="equip_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Rectangle Name="equip_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+            </Grid>
+
+            <Grid Canvas.Top="724">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="damage_check_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Rectangle Name="damage_check_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+            </Grid>
         </Canvas>
     </Grid>
 </Window>

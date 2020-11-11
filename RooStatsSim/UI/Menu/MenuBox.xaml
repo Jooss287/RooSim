@@ -57,6 +57,8 @@
                         Click="Equip_window_Click"/>
                 <Button Content="StackBuff" Grid.Row="1" Grid.Column="0"
                         Click="StackBuff_window_Click"/>
+                <Button Content="DamageCheck" Grid.Row="1" Grid.Column="1"
+                        Click="DamageCheck_window_Click"/>
                 <Button Content="DBManager" Grid.Row="2" Grid.Column="1"
                         Click="DBManager_window_Click"/>
                 <Button Content="Info" Grid.Row="2" Grid.Column="2"

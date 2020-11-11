@@ -31,6 +31,7 @@ namespace RooStatsSim
     {
         double objXPos, objYPos;
         object MovingObject;
+        Grid ClickedGrid;
         MenuBox _menu;
         public StatusWindow _status;
         public ProgramInfo _info;
@@ -44,18 +45,20 @@ namespace RooStatsSim
             InitializeComponent();
             _menu = new MenuBox(this);
             menu_contents.Navigate(_menu);
-            menu_titlebar.PreviewMouseLeftButtonDown += this.ObjMouseLeftButtonDown;
-            menu_titlebar.PreviewMouseLeftButtonUp += this.ObjPreviewMouseLeftButtonUp;
-            menu_titlebar.PreviewMouseMove += this.ObjMouseMove;
+            SetMouseEventControl(menu_titlebar);
 
             _status = new StatusWindow();
             status_contents.Navigate(_status);
-            _info = new ProgramInfo();
+            SetMouseEventControl(status_titlebar);
             _stacK_buff = new StackBuffWindow();
+            stack_buff_contents.Navigate(_stacK_buff);
+            SetMouseEventControl(stack_buff_titlebar);
             _equip = new Equip();
+            equip_contents.Navigate(_equip);
+            SetMouseEventControl(equip_titlebar);
             _damage_check = new MonsterDamageCheck();
-            _damage_check.Show();
-            
+            damage_check_contents.Navigate(_damage_check);
+            SetMouseEventControl(damage_check_titlebar);
 
             System.Windows.Media.Brush brush = DesigningCanvas.Background;
         }
@@ -86,29 +89,12 @@ namespace RooStatsSim
         
         #endregion
 
-
-        private void ATK_ReverseClick(object sender, RoutedEventArgs e)
+        void SetMouseEventControl(Rectangle titlebar)
         {
-            //InputUIData();
-
-            //txt_atk_equip.Text = Convert.ToString(job_selection.GetReverseATK(Convert.ToInt32(txt_sATK.Text)));
+            titlebar.PreviewMouseLeftButtonDown += this.ObjMouseLeftButtonDown;
+            titlebar.PreviewMouseLeftButtonUp += this.ObjPreviewMouseLeftButtonUp;
+            titlebar.PreviewMouseMove += this.ObjMouseMove;
         }
-
-        private void CalcSim_Click(object sender, RoutedEventArgs e)
-        {
-            //InputUIData();
-
-            //double skill_damage = (Convert.ToInt32(txt_skill_percent.Text) + Convert.ToInt32(txt_skill_add_percent.Text)) * 0.01;
-            
-        }
-
-        private void CheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            //BuffList[Convert.ToInt32(((e.Source as CheckBox).Tag))] = (bool)((e.Source as CheckBox).IsChecked);
-
-            //MessageBox.Show(Convert.ToString((e.Source as CheckBox).IsChecked));
-        }
-
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -121,10 +107,15 @@ namespace RooStatsSim
 
         private void ObjMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Grid moveTarget = (sender as Rectangle).Parent as Grid;
-            objXPos = e.GetPosition(moveTarget).X;
-            objYPos = e.GetPosition(moveTarget).Y;
-            MovingObject = (object)moveTarget;
+            if (MovingObject == null)
+            {
+                ClickedGrid = (sender as Rectangle).Parent as Grid;
+                objXPos = e.GetPosition(ClickedGrid).X;
+                objYPos = e.GetPosition(ClickedGrid).Y;
+                MovingObject = ClickedGrid;
+                ClickedGrid.CaptureMouse();
+            }
+            
         }
         private void ObjMouseMove(object sender, MouseEventArgs e)
         {
@@ -140,7 +131,8 @@ namespace RooStatsSim
 
         private void ObjPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-                MovingObject = null;
+            MovingObject = null;
+            ClickedGrid.ReleaseMouseCapture();
         }
 
     }

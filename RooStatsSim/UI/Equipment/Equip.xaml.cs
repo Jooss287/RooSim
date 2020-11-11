@@ -21,7 +21,7 @@ namespace RooStatsSim.UI.Equipment
     /// <summary>
     /// Equip.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class Equip : Window
+    public partial class Equip : Page
     {
         UserData _user_data;
         ItemListFilter EquipItemList;
