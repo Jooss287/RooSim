@@ -17,6 +17,7 @@ namespace RooStatsSim.UI.MonsterDamage
         UserData user_data;
         MonsterDB_Binding now_mob = new MonsterDB_Binding();
         MonsterListBox BindingMobList;
+        string normal_atk_binding = "";
         public MonsterDamageCheck()
         {
             InitializeComponent();
@@ -58,7 +59,7 @@ namespace RooStatsSim.UI.MonsterDamage
             int calcATK_min = Convert.ToInt32(Math.Floor(jobsel.GetMinATK() * skill_damage));
             int calcATK_max = Convert.ToInt32(Math.Floor(jobsel.GetMaxATK() * skill_damage));
 
-            //retCalc.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
+            normalATK.Text = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
             //txt_sATK.Text = Convert.ToString(job_selection.GetWinATK());
         }
 

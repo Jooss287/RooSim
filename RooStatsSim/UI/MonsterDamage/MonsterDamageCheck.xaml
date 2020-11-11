@@ -135,7 +135,10 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="데미지 공식은 보완중입니다. 참고로만 사용하세요"
                                Foreground="Red" FontSize="8" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <TextBlock Text="평타" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="평타" />
+                        <TextBlock Name="normalATK" Text="0 ~ 0"/>
+                    </StackPanel>
                     <TextBlock Text="크리티컬" />
                     <TextBlock Text="배쉬" />
                     <TextBlock Text="스파이럴" />
