@@ -3,10 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RooStatsSim"
-        xmlns:skill="clr-namespace:RooStatsSim.Skills"
-        
+        xmlns:mdix="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:w="clr-namespace:System.Windows;assembly=PresentationFramework"
+        xmlns:local="clr-namespace:RooStatsSim"
+        xmlns:mdixWindow="clr-namespace:MDIXWindow"
+        xmlns:mdi ="clr-namespace:WPF.MDI;assembly=WPF.MDI"
+        
+        Style="{StaticResource MaterialDesignWindow}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        mdixWindow:WindowEx.ShowMinimizeButton="True"
+        mdixWindow:WindowEx.ShowMaximizeButton="True"
+        
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -15,17 +23,32 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
          
         mc:Ignorable="d"
-        Title="RooSim" WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize" Background="{x:Null}" AllowsTransparency="True"
-        Left="50" Top="50">
-    <Window.Resources>
-        <Style TargetType="Border" x:Key="TitleBar">
-            <Setter Property="Background" Value="#ff3474fd"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="CornerRadius" Value="3"/>
-        </Style>
-    </Window.Resources>
-    <Grid>
+        WindowState="Maximized"
+        Title="RooSim">
+    <mdixWindow:MaterialDesignWindow.HeaderContent>
+        <Grid>
+            <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" HorizontalAlignment="Left" WindowChrome.IsHitTestVisibleInChrome="True" 
+                          x:Name="MenuToggleButton" />
+            <TextBlock Text="{Binding Title, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center" />
+        </Grid>
+
+    </mdixWindow:MaterialDesignWindow.HeaderContent>
+    <Window.Content >
+        <mdix:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}">
+            <mdix:DrawerHost.LeftDrawerContent>
+                <TextBlock Width="250" TextWrapping="Wrap" Text="Some left drawer content here. Perhaps navigation options?" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"
+                           Height="{x:Static w:SystemParameters.WindowCaptionHeight}"
+                           />
+            </mdix:DrawerHost.LeftDrawerContent>
+            <DockPanel>
+                <mdi:MdiContainer Name="RoosimContainer">
+                </mdi:MdiContainer>
+            </DockPanel>
+        </mdix:DrawerHost>
+    </Window.Content>
+    
+    <!--<Grid>
         <Canvas Name="DesigningCanvas" Background="{x:Null}">
             <Grid Canvas.Top="350" Canvas.Left="10">
                 <Grid.RowDefinitions>
@@ -101,5 +124,5 @@
             </Grid>
 
         </Canvas>
-    </Grid>
+    </Grid>-->
 </Window>

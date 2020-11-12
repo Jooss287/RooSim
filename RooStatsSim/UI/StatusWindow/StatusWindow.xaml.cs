@@ -10,7 +10,7 @@ namespace RooStatsSim.UI.StatusWindow
     /// <summary>
     /// StatusWindow.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class StatusWindow : Page
+    public partial class StatusWindow : UserControl
     {
         UserData user_data;
 
@@ -132,8 +132,12 @@ namespace RooStatsSim.UI.StatusWindow
                 StatusPointUp(dataCxtx);
         }
 
+
         #endregion
 
+        private void UserControl_ContextMenuClosing(object sender, ContextMenuEventArgs e)
+        {
 
+        }
     }
 }
