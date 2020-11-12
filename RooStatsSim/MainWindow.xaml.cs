@@ -17,8 +17,8 @@ using RooStatsSim.User;
 using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
-using System.Windows.Shapes;
 using RooStatsSim.UI.MonsterDamage;
+using MDIXWindow;
 
 namespace RooStatsSim
 {
@@ -43,24 +43,33 @@ namespace RooStatsSim
         public MainWindow()
         {
             InitializeComponent();
-            _menu = new MenuBox(this);
-            menu_contents.Navigate(_menu);
-            SetMouseEventControl(menu_titlebar);
 
-            _status = new StatusWindow();
-            status_contents.Navigate(_status);
-            SetMouseEventControl(status_titlebar);
-            _stacK_buff = new StackBuffWindow();
-            stack_buff_contents.Navigate(_stacK_buff);
-            SetMouseEventControl(stack_buff_titlebar);
-            _equip = new Equip();
-            equip_contents.Navigate(_equip);
-            SetMouseEventControl(equip_titlebar);
-            _damage_check = new MonsterDamageCheck();
-            damage_check_contents.Navigate(_damage_check);
-            SetMouseEventControl(damage_check_titlebar);
+            ContainerTest.Children.Add(new WPF.MDI.MdiChild
+            {
+                Title = "MenuBox",
+                Content = new MenuBox(this),
+                Width = 714,
+                Height = 734,
+                Position = new Point(300, 80),
+            });
+            //_menu = new MenuBox(this);
+            //menu_contents.Navigate(_menu);
+            //SetMouseEventControl(menu_titlebar);
 
-            System.Windows.Media.Brush brush = DesigningCanvas.Background;
+            //_status = new StatusWindow();
+            //status_contents.Navigate(_status);
+            //SetMouseEventControl(status_titlebar);
+            //_stacK_buff = new StackBuffWindow();
+            //stack_buff_contents.Navigate(_stacK_buff);
+            //SetMouseEventControl(stack_buff_titlebar);
+            //_equip = new Equip();
+            //equip_contents.Navigate(_equip);
+            //SetMouseEventControl(equip_titlebar);
+            //_damage_check = new MonsterDamageCheck();
+            //damage_check_contents.Navigate(_damage_check);
+            //SetMouseEventControl(damage_check_titlebar);
+
+            //System.Windows.Media.Brush brush = DesigningCanvas.Background;
         }
 
         #region UI Setting

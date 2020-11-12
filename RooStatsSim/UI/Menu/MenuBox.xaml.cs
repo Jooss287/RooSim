@@ -29,7 +29,7 @@ namespace RooStatsSim.UI.Menu
     /// <summary>
     /// MenuBox.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MenuBox : Page
+    public partial class MenuBox : UserControl
     {
         public static DBlist _roo_db;
         UserData _user_data;
@@ -68,19 +68,19 @@ namespace RooStatsSim.UI.Menu
         }
         private void Status_window_Click(object sender, RoutedEventArgs e)
         {
-            TurnOnOff((_parents.status_contents.Parent as Grid));
+            //TurnOnOff((_parents.status_contents.Parent as Grid));
         }
         private void StackBuff_window_Click(object sender, RoutedEventArgs e)
         {
-            TurnOnOff((_parents.stack_buff_contents.Parent as Grid));
+            //TurnOnOff((_parents.stack_buff_contents.Parent as Grid));
         }
         private void Equip_window_Click(object sender, RoutedEventArgs e)
         {
-            TurnOnOff((_parents.equip_contents.Parent as Grid));
+            //TurnOnOff((_parents.equip_contents.Parent as Grid));
         }
         private void DamageCheck_window_Click(object sender, RoutedEventArgs e)
         {
-            TurnOnOff((_parents.damage_check_contents.Parent as Grid));
+            //TurnOnOff((_parents.damage_check_contents.Parent as Grid));
         }
         private void Skill_window_Click(object sender, RoutedEventArgs e)
         {
