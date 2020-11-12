@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using RooStatsSim;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 using RooStatsSim.Equation.Job;
@@ -23,6 +24,7 @@ using RooStatsSim.UI.ACK;
 using RooStatsSim.User;
 using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
+using WPF.MDI;
 
 namespace RooStatsSim.UI.Menu
 {
@@ -52,8 +54,9 @@ namespace RooStatsSim.UI.Menu
 
             //모든 값 초기화 시켜야 함
         }
-        private void TurnOnOff(Grid window)
+        private void TurnOnOff(WINDOW_ENUM window_name)
         {
+            MdiChild window = _parents.RoosimContainer.Children[(int)window_name];
             if (window.IsVisible)
             {
                 window.Visibility = Visibility.Hidden;
@@ -68,19 +71,19 @@ namespace RooStatsSim.UI.Menu
         }
         private void Status_window_Click(object sender, RoutedEventArgs e)
         {
-            //TurnOnOff((_parents.status_contents.Parent as Grid));
+            TurnOnOff(WINDOW_ENUM.STATUS);
         }
         private void StackBuff_window_Click(object sender, RoutedEventArgs e)
         {
-            //TurnOnOff((_parents.stack_buff_contents.Parent as Grid));
+            TurnOnOff(WINDOW_ENUM.STACK_BUFF);
         }
         private void Equip_window_Click(object sender, RoutedEventArgs e)
         {
-            //TurnOnOff((_parents.equip_contents.Parent as Grid));
+            TurnOnOff(WINDOW_ENUM.EQUIP);
         }
         private void DamageCheck_window_Click(object sender, RoutedEventArgs e)
         {
-            //TurnOnOff((_parents.damage_check_contents.Parent as Grid));
+            TurnOnOff(WINDOW_ENUM.DAMAGE_CHECK);
         }
         private void Skill_window_Click(object sender, RoutedEventArgs e)
         {

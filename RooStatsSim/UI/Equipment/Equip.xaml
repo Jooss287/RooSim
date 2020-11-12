@@ -1,212 +1,214 @@
-﻿<Page x:Class="RooStatsSim.UI.Equipment.Equip"
+﻿<UserControl x:Class="RooStatsSim.UI.Equipment.Equip"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RooStatsSim.UI.Equipment"
-      mc:Ignorable="d"  Background="White"
-      Title="Equip">
-    <DockPanel>
-        <DockPanel.Resources>
-            <local:EquipList x:Key="EquipListResource"/>
-        </DockPanel.Resources>
+      mc:Ignorable="d"  Background="White">
+    <ScrollViewer>
+        <DockPanel>
+            <DockPanel.Resources>
+                <local:EquipList x:Key="EquipListResource"/>
+            </DockPanel.Resources>
 
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_TOP">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="head_top_tree" Header="머리_상단"
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_TOP">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="head_top_tree" Header="머리_상단"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_BOT">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="head_bot_tree" Header="머리_하단"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_BOT">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="head_bot_tree" Header="머리_하단"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}" />
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="WEAPON">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="main_weapon_tree" Header="주무기"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="WEAPON">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="main_weapon_tree" Header="주무기"
                                 ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="CLOAK">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="cloak_tree" Header="걸칠것"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="CLOAK">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="cloak_tree" Header="걸칠것"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ACCESSORIES1">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="acc1_tree" Header="악세사리"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ACCESSORIES1">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="acc1_tree" Header="악세사리"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectGear_MouseDoubleClick" Tag="GEAR">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="gear_tree" Header="기어"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectGear_MouseDoubleClick" Tag="GEAR">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="gear_tree" Header="기어"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-            </StackPanel>
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                </StackPanel>
 
-            <TextBlock Text="캐릭터스샷" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="캐릭터스샷" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1"/>
 
-            <StackPanel Orientation="Vertical">
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_MID">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="head_mid_tree" Header="머리_중단"
+                <StackPanel Orientation="Vertical">
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_MID">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="head_mid_tree" Header="머리_중단"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ARMOR">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="armor_tree" Header="갑옷"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ARMOR">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="armor_tree" Header="갑옷"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}" />
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="SUB_WEAPON">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="sub_weapon_tree" Header="보조무기"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="SUB_WEAPON">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="sub_weapon_tree" Header="보조무기"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="SHOES">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="shoes_tree" Header="신발"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="SHOES">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="shoes_tree" Header="신발"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ACCESSORIES2">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="acc2_tree" Header="악세사리"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ACCESSORIES2">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="acc2_tree" Header="악세사리"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
-                <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                    <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="COSTUME">
-                        <StackPanel Orientation="Vertical" Background="GhostWhite">
-                            <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                            <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                <TreeViewItem x:Name="none_tree" Header="코스튬"
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="COSTUME">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="none_tree" Header="코스튬"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                            </TreeView>
-                        </StackPanel>
-                    </ContentControl>
-                </Border>
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                </StackPanel>
+
+                <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+                            x:Name="ItemSlectorTab" Margin="20,0,0,0"
+                            Width="400">
+                    <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                        <TabItem.Header>
+                            <TextBlock Text="장비"/>
+                        </TabItem.Header>
+                        <ItemsControl x:Name="ItemSelector">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="10" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick">
+                                        <StackPanel Orientation="Vertical" Margin="8">
+                                            <Button Content="Img" Width="30" Height="30" Background="AntiqueWhite"/>
+                                            <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
+                                                   Margin="0,-10,0,0" TextAlignment="Center"/>
+                                        </StackPanel>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </TabItem>
+                    <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" >
+                        <TabItem.Header>
+                            <TextBlock Text="카드"/>
+                        </TabItem.Header>
+                        <ItemsControl x:Name="CardSelector">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="10" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick">
+                                        <StackPanel Orientation="Vertical" Margin="8">
+                                            <Button Content="Img" Width="30" Height="30" Background="AntiqueWhite"/>
+                                            <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
+                                                   Margin="0,-10,0,0" TextAlignment="Center"/>
+                                        </StackPanel>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </TabItem>
+                    <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                        <TabItem.Header>
+                            <TextBlock Text="인챈"/>
+                        </TabItem.Header>
+                    </TabItem>
+                </TabControl>
             </StackPanel>
+        </DockPanel>
 
-            <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-                        x:Name="ItemSlectorTab" Margin="20,0,0,0">
-                <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                    <TabItem.Header>
-                        <TextBlock Text="장비"/>
-                    </TabItem.Header>
-                    <ItemsControl x:Name="ItemSelector">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="10" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick">
-                                    <StackPanel Orientation="Vertical" Margin="8">
-                                        <Button Content="Img" Width="30" Height="30" Background="AntiqueWhite"/>
-                                        <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
-                                                   Margin="0,-10,0,0" TextAlignment="Center"/>
-                                    </StackPanel>
-                                </ContentControl>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </TabItem>
-                <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" >
-                    <TabItem.Header>
-                        <TextBlock Text="카드"/>
-                    </TabItem.Header>
-                    <ItemsControl x:Name="CardSelector">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="10" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick">
-                                    <StackPanel Orientation="Vertical" Margin="8">
-                                        <Button Content="Img" Width="30" Height="30" Background="AntiqueWhite"/>
-                                        <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
-                                                   Margin="0,-10,0,0" TextAlignment="Center"/>
-                                    </StackPanel>
-                                </ContentControl>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </TabItem>
-                <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                    <TabItem.Header>
-                        <TextBlock Text="인챈트"/>
-                    </TabItem.Header>
-
-                </TabItem>
-            </TabControl>
-        </StackPanel>
-    </DockPanel>
-</Page>
+    </ScrollViewer>
+</UserControl>

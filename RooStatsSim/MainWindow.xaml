@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mdix="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:w="clr-namespace:System.Windows;assembly=PresentationFramework"
         xmlns:local="clr-namespace:RooStatsSim"
         xmlns:mdixWindow="clr-namespace:MDIXWindow"
         xmlns:mdi ="clr-namespace:WPF.MDI;assembly=WPF.MDI"
@@ -22,16 +23,8 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
          
         mc:Ignorable="d"
-        Title="RooSim"
-        Left="50" Top="50">
-    <Window.Resources>
-        <Style TargetType="Border" x:Key="TitleBar">
-            <Setter Property="Background" Value="#ff3474fd"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="CornerRadius" Value="3"/>
-        </Style>
-    </Window.Resources>
+        WindowState="Maximized"
+        Title="RooSim">
     <mdixWindow:MaterialDesignWindow.HeaderContent>
         <Grid>
             <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" HorizontalAlignment="Left" WindowChrome.IsHitTestVisibleInChrome="True" 
@@ -40,15 +33,16 @@
         </Grid>
 
     </mdixWindow:MaterialDesignWindow.HeaderContent>
-    <Window.Content>
+    <Window.Content >
         <mdix:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}">
             <mdix:DrawerHost.LeftDrawerContent>
                 <TextBlock Width="250" TextWrapping="Wrap" Text="Some left drawer content here. Perhaps navigation options?" 
-                           VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+                           VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"
+                           Height="{x:Static w:SystemParameters.WindowCaptionHeight}"
+                           />
             </mdix:DrawerHost.LeftDrawerContent>
             <DockPanel>
-                <mdi:MdiContainer Name="ContainerTest">
-
+                <mdi:MdiContainer Name="RoosimContainer">
                 </mdi:MdiContainer>
             </DockPanel>
         </mdix:DrawerHost>

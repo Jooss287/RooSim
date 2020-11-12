@@ -12,7 +12,7 @@ namespace RooStatsSim.UI.MonsterDamage
     /// <summary>
     /// MonsterDamageCheck.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MonsterDamageCheck : Page
+    public partial class MonsterDamageCheck : UserControl
     {
         UserData user_data;
         MonsterDB_Binding now_mob = new MonsterDB_Binding();
