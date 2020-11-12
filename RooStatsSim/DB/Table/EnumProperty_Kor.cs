@@ -55,12 +55,20 @@ namespace RooStatsSim.DB.Table
             {DTYPE.RANGE_PHYSICAL_DAMAGE, "원거리 물리 데미지(%)" },
             {DTYPE.PHYSICAL_DEC_DAMAGE, "물리 데미지 감소(%)" },
             {DTYPE.MAGICAL_DEC_DAMAGE, "마법 데미지 감소(%)" },
+            {DTYPE.MELEE_PHYSICAL_DEC_DAMAGE, "근거리 물리 데미지 감소(%)" },
+            {DTYPE.RANGE_PHYSICAL_DEC_DAMAGE, "원거리 물리 데미지 감소(%)" },
             {DTYPE.DEF_P, "DEF %" },
             {DTYPE.MDEF_P, "MDEF %" },
             {DTYPE.MAX_HP_P, "HP %" },
             {DTYPE.MAX_SP_P, "SP %" },
+            {DTYPE.SP_WASTE, "SP 소모" },
             {DTYPE.ASPD, "ASPD" },
             {DTYPE.MOVING_SPEED,"이동속도" },
+            {DTYPE.HEALING,"치유량 증가(%)" },
+            {DTYPE.HEALING_RECERIVED,"받는 치유량(%)" },
+            {DTYPE.VERIABLE_CASTING,"변동 캐스팅(%)" },
+            {DTYPE.FIXED_CASTING,"고정 캐스팅(%)" },
+            {DTYPE.COMMON_SKILL_DELAY,"스킬 후 딜레이(%)" },
         };
         public static Dictionary<STATUS_EFFECT_TYPE, string> STATUS_EFFECT_TYPE_KOR = new Dictionary<STATUS_EFFECT_TYPE, string>()
         {
