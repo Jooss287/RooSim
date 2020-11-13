@@ -11,6 +11,12 @@ namespace RooStatsSim.UI.StatusWindow
     {
         public static List<ITYPE> NormalProperty = new List<ITYPE>()
         {
+            ITYPE.STR,
+            ITYPE.AGI,
+            ITYPE.VIT,
+            ITYPE.INT,
+            ITYPE.DEX,
+            ITYPE.LUK,
             ITYPE.HP,
             ITYPE.SP,
             ITYPE.ATK,

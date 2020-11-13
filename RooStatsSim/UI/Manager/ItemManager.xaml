@@ -138,6 +138,26 @@
                                 <ListBox x:Name="list_ifOption"
                                          ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
+
+                            <StackPanel Tag="ETC_INC_DAMAGE_TYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ComboBox Name="cmb_etc_inc_option" SelectedIndex="0"
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="%값"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
+                                            Click="Add_Option_Click"/>
+                                </StackPanel>
+                                <ListBox x:Name="list_etc_inc_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
+                            </StackPanel>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -326,7 +346,7 @@
                                     <ComboBox Name="cmb_element_inc_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="몬스터(속성)에게 증가데미지(%)"/>
+                                        materialDesign:HintAssist.Hint="몬스터(속성)에 증뎀(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
@@ -356,6 +376,25 @@
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_element_dec_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
+                            </StackPanel>
+                            <StackPanel Tag ="ETC_TYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ComboBox Name="cmb_etc_option" SelectedIndex="0"
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="입력x"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
+                                            Click="Add_Option_Click"/>
+                                </StackPanel>
+                                <ListBox x:Name="list_etc_option"
                                          ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
                         </StackPanel>

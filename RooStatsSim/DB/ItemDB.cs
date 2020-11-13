@@ -177,6 +177,8 @@ namespace RooStatsSim.DB
             tribe_dec_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_dec_option);
             mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>(item_db.mobtype_inc_option);
             mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>(item_db.mobtype_dec_option);
+            etc_option = new Dictionary<ETC_TYPE, double>(item_db.etc_option);
+            etc_inc_damage_option = new Dictionary<ETC_INC_DAMAGE_TYPE, double>(item_db.etc_inc_damage_option);
         }
         public ItemDB() { }
 
@@ -196,6 +198,8 @@ namespace RooStatsSim.DB
             AddOption<TRIBE_TYPE>(ref a.tribe_dec_option, b.tribe_dec_option);
             AddOption<MONSTER_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
             AddOption<MONSTER_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
+            AddOption<ETC_TYPE>(ref a.etc_option, b.etc_option);
+            AddOption<ETC_INC_DAMAGE_TYPE>(ref a.etc_inc_damage_option, b.etc_inc_damage_option);
             return a;
         }
         
@@ -275,6 +279,9 @@ namespace RooStatsSim.DB
         public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
         public Dictionary<MONSTER_TYPE, double> mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>();
         public Dictionary<MONSTER_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>();
+
+        public Dictionary<ETC_TYPE, double> etc_option = new Dictionary<ETC_TYPE, double>();
+        public Dictionary<ETC_INC_DAMAGE_TYPE, double> etc_inc_damage_option = new Dictionary<ETC_INC_DAMAGE_TYPE, double>();
 
         #region property
         public int Id
@@ -407,6 +414,16 @@ namespace RooStatsSim.DB
         {
             get { return mobtype_dec_option; }
             set { mobtype_dec_option = value; }
+        }
+        public Dictionary<ETC_TYPE, double> ETC_OPTION
+        {
+            get { return etc_option; }
+            set { etc_option = value; }
+        }
+        public Dictionary<ETC_INC_DAMAGE_TYPE, double> ETC_INC_DAMAGE_OPTION
+        {
+            get { return etc_inc_damage_option; }
+            set { etc_inc_damage_option = value; }
         }
         #endregion
     }

@@ -79,6 +79,18 @@ namespace RooStatsSim.DB.Table
             {STATUS_EFFECT_TYPE.CURSE, "저주" },
             {STATUS_EFFECT_TYPE.PETRIFICATION, "석화" },
         };
+        public static Dictionary<ETC_INC_DAMAGE_TYPE, string> ETC_INC_DAMAGE_TYPE_KOR = new Dictionary<ETC_INC_DAMAGE_TYPE, string>()
+        {
+            {ETC_INC_DAMAGE_TYPE.OAK_INC_DAMAGE, "오크에게 증가 데미지" },
+            {ETC_INC_DAMAGE_TYPE.GOBLIN_INC_DAMAGE, "고블린에게 증가 데미지" },
+            {ETC_INC_DAMAGE_TYPE.KOBOLD_INC_DAMAGE, "코볼트에게 증가 데미지" },
+            {ETC_INC_DAMAGE_TYPE.ALL_MONSTERS_DAMAGE, "모든 몬스터에게 증가 데미지(%)" },
+        };
+        public static Dictionary<ETC_TYPE, string> ETC_TYPE_KOR = new Dictionary<ETC_TYPE, string>()
+        {
+            { ETC_TYPE.NO_BREAK, "파괴 불가" },
+            { ETC_TYPE.NO_SIZE_PANELTY, "체형 패널티 없음" },
+        };
         
         public static Dictionary<ELEMENT_TYPE, string> ELEMENT_TYPE_KOR = new Dictionary<ELEMENT_TYPE, string>()
         {

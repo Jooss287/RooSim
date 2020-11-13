@@ -96,16 +96,16 @@ namespace RooStatsSim.UI.Menu
         {
             if (_parents._db_manager == null)
                 _parents._db_manager = new DBManager();
-            else
-                _parents._db_manager.Focus();
+            _parents._db_manager.Show();
+            _parents._db_manager.Focus();
         }
 
         private void Info_window_Click(object sender, RoutedEventArgs e)
         {
             if (_parents._info == null)
                 _parents._info = new ProgramInfo();
-            else
-                _parents._info.Focus();
+            _parents._db_manager.Show();
+            _parents._info.Focus();
         }
         #endregion
 
