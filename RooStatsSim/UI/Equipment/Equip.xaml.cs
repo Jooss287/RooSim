@@ -28,7 +28,7 @@ namespace RooStatsSim.UI.Equipment
         ItemListFilter EquipItemList;
         ItemListFilter CardItemList;
         ItemListFilter EnchantList;
-        Popup itemPopup;
+        Popup itemPopup = new Popup();
 
         EQUIP_TYPE_ENUM now_selected_equip_type;
         public Equip()
@@ -68,6 +68,13 @@ namespace RooStatsSim.UI.Equipment
         }
 
         #region Equipment window ui response
+        void setItemTextBlock(EquipId item)
+        {
+            TextBlock PopupText = new TextBlock();
+            PopupText.Text = "+" + Convert.ToString(item.Refine) + " " + item.Name;
+            PopupText.Background = Brushes.Silver;
+            itemPopup.Child = PopupText;
+        }
         private void SelectEquipment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             now_selected_equip_type = (EQUIP_TYPE_ENUM)Enum.Parse(typeof(EQUIP_TYPE_ENUM), (string)((sender as ContentControl).Tag));
@@ -93,7 +100,8 @@ namespace RooStatsSim.UI.Equipment
         private void Item_RefineWheel(object sender, MouseWheelEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
-            item.Refine++;
+            item.Refine += e.Delta > 0 ? 1 : -1;
+            setItemTextBlock(item);
         }
         private void SelectGear_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -107,24 +115,21 @@ namespace RooStatsSim.UI.Equipment
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
             _user_data.CalcUserData();
         }
-        #endregion
-
         private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            Popup codePopup = new Popup();
-            TextBlock PopupText = new TextBlock();
-            PopupText.Text = "Popup_text";
-            PopupText.Background = Brushes.LightBlue;
-            codePopup.Child = PopupText;
-            
-            codePopup.IsOpen = true;
-            
-            //(((sender as ContentControl).Content as StackPanel).Children[1] as StackPanel).Visibility = Visibility.Visible;
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+            setItemTextBlock(item);
+
+            itemPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
+            itemPopup.IsOpen = true;
         }
 
         private void ContentControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            //(((sender as ContentControl).Content as StackPanel).Children[1] as StackPanel).Visibility = Visibility.Hidden;
+            itemPopup.IsOpen = false;
         }
+        #endregion
+
+
     }
 }

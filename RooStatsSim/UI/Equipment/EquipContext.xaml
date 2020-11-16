@@ -37,10 +37,5 @@
         <Setter Property="Height" Value="30"/>
         <Setter Property="Width" Value="30"/>
         <Setter Property="Background" Value="AntiqueWhite"/>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <!--; <Setter Property=""-->
-            </Trigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>

@@ -173,14 +173,6 @@
                                                     MouseLeave="ContentControl_MouseLeave">
                                         <StackPanel Orientation="Vertical" Margin="8">
                                             <Button Style="{Binding Source={StaticResource ItemImgBtn}}"/>
-                                            <Popup Name="TestPopUp">
-                                                <StackPanel Visibility="Visible" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-10,0,0"
-                                                        Width="100">
-                                                    <TextBlock Text="+"/>
-                                                    <TextBlock Text="{Binding Path=Refine, UpdateSourceTrigger=PropertyChanged}"/>
-                                                    <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
-                                                </StackPanel>
-                                            </Popup>
                                         </StackPanel>
                                     </ContentControl>
                                 </DataTemplate>
@@ -200,10 +192,8 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick">
-                                        <StackPanel Orientation="Vertical" Margin="8">
-                                            <Button Content="Img" Width="30" Height="30" Background="AntiqueWhite"/>
-                                            <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
-                                                   Margin="0,-10,0,0" TextAlignment="Center"/>
+                                        <StackPanel Orientation="Vertical">
+                                            <Button Style="{Binding Source={StaticResource ItemImgBtn}}"/>
                                         </StackPanel>
                                     </ContentControl>
                                 </DataTemplate>

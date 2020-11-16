@@ -21,7 +21,6 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         FontFamily="{DynamicResource MaterialDesignFont}"
-         
         mc:Ignorable="d"
         WindowState="Maximized"
         Title="RooSim">

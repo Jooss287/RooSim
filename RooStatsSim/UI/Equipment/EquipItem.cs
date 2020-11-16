@@ -45,7 +45,13 @@ namespace RooStatsSim.UI.Equipment
         public int Refine
         {
             get { return _refine; }
-            set { _refine = value; OnPropertyChanged("Refine"); }
+            set { 
+                if ( ( value > 0) && ( value <= 15) )
+                {
+                    _refine = value;
+                    OnPropertyChanged("Refine");
+                }
+            }   
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
