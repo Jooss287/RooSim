@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -27,6 +28,7 @@ namespace RooStatsSim.UI.Equipment
         ItemListFilter EquipItemList;
         ItemListFilter CardItemList;
         ItemListFilter EnchantList;
+        Popup itemPopup;
 
         EQUIP_TYPE_ENUM now_selected_equip_type;
         public Equip()
@@ -64,17 +66,14 @@ namespace RooStatsSim.UI.Equipment
             }
             return null;
         }
-        
+
+        #region Equipment window ui response
         private void SelectEquipment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             now_selected_equip_type = (EQUIP_TYPE_ENUM)Enum.Parse(typeof(EQUIP_TYPE_ENUM), (string)((sender as ContentControl).Tag));
             EquipItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.EQUIPMENT, now_selected_equip_type);
             ItemSelector.ItemsSource = EquipItemList;
             ItemSlectorTab.SelectedIndex = 0;
-        }
-        private void SelectGear_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
         }
         private void SelectItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -91,7 +90,15 @@ namespace RooStatsSim.UI.Equipment
             ItemSlectorTab.SelectedIndex = 1;
             _user_data.CalcUserData();
         }
+        private void Item_RefineWheel(object sender, MouseWheelEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+            item.Refine++;
+        }
+        private void SelectGear_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
 
+        }
         private void SelectCard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
@@ -100,7 +107,24 @@ namespace RooStatsSim.UI.Equipment
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
             _user_data.CalcUserData();
         }
+        #endregion
 
-        
+        private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Popup codePopup = new Popup();
+            TextBlock PopupText = new TextBlock();
+            PopupText.Text = "Popup_text";
+            PopupText.Background = Brushes.LightBlue;
+            codePopup.Child = PopupText;
+            
+            codePopup.IsOpen = true;
+            
+            //(((sender as ContentControl).Content as StackPanel).Children[1] as StackPanel).Visibility = Visibility.Visible;
+        }
+
+        private void ContentControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            //(((sender as ContentControl).Content as StackPanel).Children[1] as StackPanel).Visibility = Visibility.Hidden;
+        }
     }
 }

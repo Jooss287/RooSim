@@ -1,5 +1,5 @@
 ﻿using RooStatsSim.DB;
-using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +18,7 @@ namespace RooStatsSim.UI.Equipment
         {
             Id = item.Id;
             Name = item.Name;
+            Refine = 0;
 
             SubList = new List<EquipTreeViewBinding>();
         }
@@ -25,9 +26,36 @@ namespace RooStatsSim.UI.Equipment
 
     }
 
-    public class EquipId
+    public class EquipId : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public int Id { get; set; }
+        string _name;
+        int _id;
+        int _refine;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; OnPropertyChanged("Name"); }
+        }
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; OnPropertyChanged("Id"); }
+        }
+        public int Refine
+        {
+            get { return _refine; }
+            set { _refine = value; OnPropertyChanged("Refine"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public override string ToString() => _name;
+
+        protected void OnPropertyChanged(string info)
+        {
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(info));
+        }
     }
 }

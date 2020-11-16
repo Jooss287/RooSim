@@ -154,7 +154,7 @@
 
                 <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
                             x:Name="ItemSlectorTab" Margin="20,0,0,0"
-                            Width="400">
+                            Width="540">
                     <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                         <TabItem.Header>
                             <TextBlock Text="장비"/>
@@ -162,16 +162,25 @@
                         <ItemsControl x:Name="ItemSelector">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <UniformGrid Columns="10" />
+                                    <UniformGrid Columns="6" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick">
+                                    <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
+                                                    MouseWheel="Item_RefineWheel"
+                                                    MouseEnter="ContentControl_MouseEnter"
+                                                    MouseLeave="ContentControl_MouseLeave">
                                         <StackPanel Orientation="Vertical" Margin="8">
-                                            <Button Content="Img" Width="30" Height="30" Background="AntiqueWhite"/>
-                                            <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
-                                                   Margin="0,-10,0,0" TextAlignment="Center"/>
+                                            <Button Style="{Binding Source={StaticResource ItemImgBtn}}"/>
+                                            <Popup Name="TestPopUp">
+                                                <StackPanel Visibility="Visible" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-10,0,0"
+                                                        Width="100">
+                                                    <TextBlock Text="+"/>
+                                                    <TextBlock Text="{Binding Path=Refine, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </StackPanel>
+                                            </Popup>
                                         </StackPanel>
                                     </ContentControl>
                                 </DataTemplate>
