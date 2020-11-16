@@ -27,9 +27,11 @@
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <ListBox x:Name="DB_ListBox" Width="200"
+            <ListBox x:Name="DB_ListBox" Width="200" MaxHeight="500" Margin="0,0,5,0"
                      ItemsSource="{Binding Source={StaticResource ItemList}}"
-                     SelectionChanged="DB_ListBox_SelectionChanged">
+                     SelectionChanged="DB_ListBox_SelectionChanged"
+                     materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True">
+                <!--ScrollViewer.VerticalScrollBarVisibility="Auto"-->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=Name}"/>
@@ -167,7 +169,7 @@
                                     <ComboBox Name="cmb_se_attackrate_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="상태이상저항(%)"/>
+                                        materialDesign:HintAssist.Hint="상태이상확률(%)"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"

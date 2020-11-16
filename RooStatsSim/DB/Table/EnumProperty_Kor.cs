@@ -78,6 +78,9 @@ namespace RooStatsSim.DB.Table
             {STATUS_EFFECT_TYPE.FROZEN, "동빙" },
             {STATUS_EFFECT_TYPE.CURSE, "저주" },
             {STATUS_EFFECT_TYPE.PETRIFICATION, "석화" },
+            {STATUS_EFFECT_TYPE.DARK, "암흑" },
+            {STATUS_EFFECT_TYPE.POISON, "독" },
+            {STATUS_EFFECT_TYPE.SLEEP, "수면" },
         };
         public static Dictionary<ETC_INC_DAMAGE_TYPE, string> ETC_INC_DAMAGE_TYPE_KOR = new Dictionary<ETC_INC_DAMAGE_TYPE, string>()
         {

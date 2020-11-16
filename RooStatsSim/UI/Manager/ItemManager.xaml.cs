@@ -331,13 +331,13 @@ namespace RooStatsSim.UI.Manager
                 case "SE_ATTACKRATE_TYPE":
                     {
                         STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
-                        now_item.SE_REGISTANCE_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        now_item.SE_ATTACKRATE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "SE_REGISTANCE_TYPE":
                     {
                         STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
-                        now_item.SE_ATTACKRATE_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        now_item.SE_REGISTANCE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ELEMENT_INC_TYPE":

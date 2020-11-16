@@ -149,6 +149,9 @@ namespace RooStatsSim.DB
         FROZEN,
         CURSE,
         PETRIFICATION,
+        DARK,
+        POISON,
+        SLEEP
     }
     public enum ETC_TYPE
     {
