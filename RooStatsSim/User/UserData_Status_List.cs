@@ -137,5 +137,9 @@ namespace RooStatsSim.User
             //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
             //}
         }
+        public int GetStatus(STATUS_ENUM status_name)
+        {
+            return List[(int)status_name].Point + List[(int)status_name].AddPoint;
+        }
     }
 }

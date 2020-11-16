@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Collections.Generic;
 using RooStatsSim.DB;
 using RooStatsSim.Equation;
 using RooStatsSim.User;
@@ -47,8 +48,8 @@ namespace RooStatsSim.User
         #region Userdata event
         public delegate void UserDataChangedEventHandler();
         public event UserDataChangedEventHandler itemDataChanged;
-        //public event UserDataChangedEventHandler StatusDataChanged;
 
+        
         public void CalcUserData()
         {
             UserItem CalcUserItem = new UserItem();
@@ -65,6 +66,8 @@ namespace RooStatsSim.User
             CalcUserItem += Equip.GetOption();
 
             User_Item = CalcUserItem;
+            //StatusBonus 더해야 함
+            User_Item.CalcIftypeValues(this);
 
             if (itemDataChanged != null)
                 itemDataChanged();

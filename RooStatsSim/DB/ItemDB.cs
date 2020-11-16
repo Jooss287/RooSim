@@ -1,9 +1,13 @@
-﻿using RooStatsSim.DB;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+
+using RooStatsSim.DB;
+using RooStatsSim.User;
 
 namespace RooStatsSim.DB
 {
@@ -120,10 +124,22 @@ namespace RooStatsSim.DB
     }
     public enum IFTYPE
     {
-        ATK_PER_STR = 1000,
-        ATK_PER_AGI = 2000,
-        HP_PER_VIT = 3000,
-        MATK_PER_INT = 4000,
+        ATK_PER_STR,
+        ATK_PER_AGI,
+        HP_PER_VIT,
+        MATK_PER_INT,
+        ASPD_PER_AGI,
+        PHYSICAL_DAMAGE_PER_HIT,
+        ADDITIONAL_PHYSICAL_DAMAGE_PER_FIXED,
+        
+        //REFINE 관련
+        HP_PER_REFINE = 1000,
+        
+        //TRIBE 관련
+        CRI_TO_TRIBE = 2000,
+
+        //SIMPLE IF
+        ATK_MORETHAN_STR,
     }
     public enum STATUS_EFFECT_TYPE
     {
@@ -238,7 +254,7 @@ namespace RooStatsSim.DB
                 if (a.ContainsKey(opt.Key) == true)
                 {
                     a[opt.Key].AddValue += opt.Value.AddValue;
-                    a[opt.Key].PerValue += opt.Value.PerValue;
+                    a[opt.Key].PerValue = opt.Value.PerValue;
                     a[opt.Key].IfType = opt.Value.IfType;
                 }
                 else
@@ -430,28 +446,109 @@ namespace RooStatsSim.DB
 
     public class AbilityPerStatus
     {
-        public delegate int CalcFunc(int value);
+        public delegate ItemDB CalcFunc(UserData user);
+        public delegate ItemDB CalcRefine(UserData user, int refine);
         public int AddValue;
         public int PerValue;
+        public int Selected;
         public IFTYPE IfType;
-        CalcFunc Calc;
+        public CalcFunc Calc;
+        public CalcRefine Calc_refine;
 
-        public AbilityPerStatus(IFTYPE iftype, int add_value, int per_value)
+        public AbilityPerStatus(IFTYPE iftype, int add_value, int per_value, int selected = 0)
         {
             AddValue = add_value;
             PerValue = per_value;
+            Selected = selected;
             IfType = iftype;
+
             switch (iftype)
             {
                 case IFTYPE.ATK_PER_STR:
                     Calc = ATK_PER_STR;
                     break;
+                case IFTYPE.HP_PER_REFINE:
+                    Calc = null;
+                    Calc_refine = HP_PER_REFINE;
+                    break;
             }
         }
 
-        public int ATK_PER_STR(int value)
+        #region iftype option equation
+        public ItemDB ATK_PER_STR(UserData user)
         {
-            return ((int)(value / PerValue) * AddValue);
+            ItemDB item = new ItemDB();
+            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.STR) / PerValue) * AddValue);
+            return item;
         }
+        public ItemDB ATK_PER_AGI(UserData user)
+        {
+            ItemDB item = new ItemDB();
+            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.AGI) / PerValue) * AddValue);
+            return item;
+        }
+        public ItemDB HP_PER_VIT(UserData user)
+        {
+            ItemDB item = new ItemDB();
+            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.VIT) / PerValue) * AddValue);
+            return item;
+        }
+        public ItemDB MATK_PER_INT(UserData user)
+        {
+            ItemDB item = new ItemDB();
+            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.INT) / PerValue) * AddValue);
+            return item;
+        }
+        public ItemDB ASPD_PER_AGI(UserData user)
+        {
+            ItemDB item = new ItemDB();
+            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.AGI) / PerValue) * AddValue);
+            return item;
+        }
+        public ItemDB PHYSICAL_DAMAGE_PER_HIT(UserData user)
+        {
+            ItemDB item = new ItemDB();
+            double physical_damage = user.User_Item.i_option[ITYPE.HIT] / PerValue * AddValue;
+            item.d_option.Add(DTYPE.PHYSICAL_DAMAGE, physical_damage);
+            return item;
+        }
+        public ItemDB ADDITIONAL_PHYSICAL_DAMAGE_PER_FIXED(UserData user)
+        {
+            ItemDB item = new ItemDB();
+            int physical_damage_add = 1;        //실험필요
+            item.i_option.Add(ITYPE.PHYSICAL_DAMAGE_ADDITIONAL, physical_damage_add);
+            return item;
+        }
+        public ItemDB CRI_TO_TRIBE(UserData user)
+        {
+            ItemDB item = new ItemDB();
+            int CRI = 1;        //추가필요
+            return item;
+        }
+        public ItemDB ATK_MORETHAN_STR(UserData user)
+        {
+            ItemDB item = new ItemDB();
+            if (user.Status.GetStatus(STATUS_ENUM.STR) >= PerValue)
+                item.i_option.Add(ITYPE.ATK, AddValue);
+            return item;
+        }
+        #endregion
+
+        #region REFINE(SMELTING) CALC
+        public ItemDB HP_PER_REFINE(UserData user, int refine)
+        {
+            ItemDB item = new ItemDB();
+            int hp = user.User_Item.I_OPTION[ITYPE.HP] * AddValue / (refine / PerValue);
+            item.I_OPTION.Add(ITYPE.HP, hp);
+            return item;
+        }
+        public ItemDB ELEMENT_DAMAGE_PER_REFINE(UserData user, int refine)
+        {
+            ItemDB item = new ItemDB();
+            double element_damage = AddValue / (refine / PerValue);
+            item.element_damage_option.Add((ELEMENT_TYPE)Selected, element_damage);
+            return item;
+        }
+        #endregion
     }
 }

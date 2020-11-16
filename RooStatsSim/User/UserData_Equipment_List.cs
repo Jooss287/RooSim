@@ -14,8 +14,9 @@ namespace RooStatsSim.User
     {
         public class EquipItem
         {
-            int LastCardSetSlot = 0;
-            int LastEnchantSlot = 0;
+            public int LastCardSetSlot { get; set; }
+            public int LastEnchantSlot { get; set; }
+            public int Smelting { get; set; }
             ItemDB _equip = new ItemDB();
             List<ItemDB> _cards;
             List<ItemDB> _enchant;
@@ -76,21 +77,20 @@ namespace RooStatsSim.User
             //}
         }
 
-        public ItemDB GetOption()
+        public UserItem GetOption()
         {
-            ItemDB option = new ItemDB();
+            UserItem option = new UserItem();
 
             foreach ( EquipItem equipment in List)
             {
                 if (equipment.Equip == null)
                     continue;
-                option += equipment.Equip;
                 foreach (ItemDB card in equipment.Card)
                     option += card;
                 foreach (ItemDB enchant in equipment.Enchant)
                     option += enchant;
+                option += equipment.Equip;
             }
-            
             return option;
         }
     }

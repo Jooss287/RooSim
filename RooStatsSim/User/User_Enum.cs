@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.User
 {
-    enum LEVEL_ENUM : int
+    public enum LEVEL_ENUM : int
     {
         BASE = 0,
         JOB,
     }
-    enum STATUS_ENUM : int
+    public enum STATUS_ENUM : int
     {
         STR = 0,
         AGI,
@@ -20,7 +20,7 @@ namespace RooStatsSim.User
         DEX,
         LUK
     }
-    enum MEDAL_ENUM : int
+    public enum MEDAL_ENUM : int
     {
         VALOR,
         GUARDIAN,
@@ -28,7 +28,7 @@ namespace RooStatsSim.User
         CHARM,
         GALE,
     }
-    enum RIDING_ENUM : int
+    public enum RIDING_ENUM : int
     {
         ATK_MATK,
         MAX_HP,
