@@ -64,8 +64,8 @@ namespace RooStatsSim
             {
                 Title = "StackBuff",
                 Content = new StackBuffWindow(),
-                Width = 298,
-                Height = 295,
+                Width = 415,    //284 257 14 38
+                Height = 415,
                 Position = new Point(1204, 0),
                 CloseBox = false,
             };
