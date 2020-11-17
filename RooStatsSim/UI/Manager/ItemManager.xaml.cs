@@ -66,7 +66,8 @@ namespace RooStatsSim.UI.Manager
             foreach (STATUS_EFFECT_TYPE option in Enum.GetValues(typeof(STATUS_EFFECT_TYPE)))
             {
                 string statusName = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR[option];
-                cmb_SEoption.Items.Add(statusName);
+                cmb_se_attackrate_option.Items.Add(statusName);
+                cmb_se_registance_option.Items.Add(statusName);
             }
             foreach (IFTYPE option in Enum.GetValues(typeof(IFTYPE)))
             {
@@ -78,6 +79,7 @@ namespace RooStatsSim.UI.Manager
                 string statusName = EnumProperty_Kor.ELEMENT_TYPE_KOR[option];
                 cmb_element_inc_option.Items.Add(statusName);
                 cmb_element_dec_option.Items.Add(statusName);
+                cmb_element_damage_option.Items.Add(statusName);
             }
             foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
             {
@@ -97,6 +99,17 @@ namespace RooStatsSim.UI.Manager
                 cmb_mobtype_inc_option.Items.Add(statusName);
                 cmb_mobtype_dec_option.Items.Add(statusName);
             }
+            foreach (ETC_TYPE option in Enum.GetValues(typeof(ETC_TYPE)))
+            {
+                string statusName = EnumProperty_Kor.ETC_TYPE_KOR[option];
+                cmb_etc_option.Items.Add(statusName);
+            }
+            foreach (ETC_INC_DAMAGE_TYPE option in Enum.GetValues(typeof(ETC_INC_DAMAGE_TYPE)))
+            {
+                string statusName = EnumProperty_Kor.ETC_INC_DAMAGE_TYPE_KOR[option];
+                cmb_etc_inc_option.Items.Add(statusName);
+            }
+            
         }
 
         void SetNowItemOption()
@@ -105,16 +118,20 @@ namespace RooStatsSim.UI.Manager
             list_Job_limit.ItemsSource = new Job_Limite_List(ref now_item._wear_job_limit);
             list_iOption.ItemsSource = new ItemOptionListBox<ITYPE, int>(ref now_item.i_option);
             list_dOption.ItemsSource = new ItemOptionListBox<DTYPE, double>(ref now_item.d_option);
-            list_seOption.ItemsSource = new ItemOptionListBox<STATUS_EFFECT_TYPE, double>(ref now_item.se_option);
             list_ifOption.ItemsSource = new ItemOptionListBox(ref now_item.if_option);
+            list_attackrate_option.ItemsSource = new ItemOptionListBox<STATUS_EFFECT_TYPE, double>(ref now_item.se_attackrate_option);
+            list_se_registance_option.ItemsSource = new ItemOptionListBox<STATUS_EFFECT_TYPE, double>(ref now_item.se_resistance_option);
             list_element_inc_option.ItemsSource = new ItemOptionListBox<ELEMENT_TYPE, double>(ref now_item.element_inc_option);
             list_element_dec_option.ItemsSource = new ItemOptionListBox<ELEMENT_TYPE, double>(ref now_item.element_dec_option);
+            list_element_damage_option.ItemsSource = new ItemOptionListBox<ELEMENT_TYPE, double>(ref now_item.element_damage_option);
             list_tribe_inc_option.ItemsSource = new ItemOptionListBox<TRIBE_TYPE, double>(ref now_item.tribe_inc_option);
             list_tribe_dec_option.ItemsSource = new ItemOptionListBox<TRIBE_TYPE, double>(ref now_item.tribe_dec_option);
             list_size_inc_option.ItemsSource = new ItemOptionListBox<MONSTER_SIZE, double>(ref now_item.size_inc_option);
             list_size_dec_option.ItemsSource = new ItemOptionListBox<MONSTER_SIZE, double>(ref now_item.size_dec_option);
             list_mobtype_inc_option.ItemsSource = new ItemOptionListBox<MONSTER_TYPE, double>(ref now_item.mobtype_inc_option);
             list_mobtype_dec_option.ItemsSource = new ItemOptionListBox<MONSTER_TYPE, double>(ref now_item.mobtype_dec_option);
+            list_etc_option.ItemsSource = new ItemOptionListBox<ETC_TYPE, double>(ref now_item.etc_option);
+            list_etc_inc_option.ItemsSource = new ItemOptionListBox<ETC_INC_DAMAGE_TYPE, double>(ref now_item.etc_inc_damage_option);
         }
 
 
@@ -132,19 +149,26 @@ namespace RooStatsSim.UI.Manager
             now_item.Item_type = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
             now_item._wear_job_limit.Clear();
-            now_item.i_option.Clear();
-            now_item.d_option.Clear();
+            now_item.I_OPTION.Clear();
+            now_item.D_OPTION.Clear();
             now_item.IF_OPTION.Clear();
-            now_item.se_option.Clear();
+            now_item.SE_ATTACKRATE_OPTION.Clear();
+            now_item.SE_REGISTANCE_OPTION.Clear();
 
-            now_item.mobtype_inc_option.Clear();
-            now_item.size_inc_option.Clear();
-            now_item.tribe_inc_option.Clear();
+
             now_item.element_inc_option.Clear();
-            now_item.mobtype_dec_option.Clear();
-            now_item.size_dec_option.Clear();
-            now_item.tribe_dec_option.Clear();
             now_item.element_dec_option.Clear();
+            now_item.ELEMENT_DAMAGE_OPTION.Clear();
+            now_item.mobtype_inc_option.Clear();
+            now_item.mobtype_dec_option.Clear();
+            now_item.size_inc_option.Clear();
+            now_item.size_dec_option.Clear();
+            now_item.tribe_inc_option.Clear();
+            now_item.tribe_dec_option.Clear();
+
+            now_item.ETC_INC_DAMAGE_OPTION.Clear();
+            now_item.ETC_OPTION.Clear();
+            
             SetNowItemOption();
         }
 
@@ -296,18 +320,24 @@ namespace RooStatsSim.UI.Manager
                         now_item.d_option[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
-                case "SETYPE":
-                    {
-                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
-                        now_item.se_option[type] = Convert.ToDouble(AddValue.Text);
-                        break;
-                    }
                 case "IFTYPE":
                     {
                         AddValue = OptionStack.Children[3] as TextBox;
                         TextBox PerValue = OptionStack.Children[1] as TextBox;
                         IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
                         now_item.IF_OPTION[type] = new AbilityPerStatus(type, Convert.ToInt32(AddValue.Text), Convert.ToInt32(PerValue.Text));
+                        break;
+                    }
+                case "SE_ATTACKRATE_TYPE":
+                    {
+                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.SE_ATTACKRATE_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "SE_REGISTANCE_TYPE":
+                    {
+                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.SE_REGISTANCE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ELEMENT_INC_TYPE":
@@ -358,6 +388,21 @@ namespace RooStatsSim.UI.Manager
                         now_item.MOBTYPE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
+                case "ETC_TYPE":
+                    {
+                        ETC_TYPE type = EnumProperty_Kor.ETC_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.ETC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "ETC_INC_DAMAGE_TYPE":
+                    {
+                        ETC_INC_DAMAGE_TYPE type = EnumProperty_Kor.ETC_INC_DAMAGE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.ETC_INC_DAMAGE_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                default:
+                    MessageBox.Show("선언되지 않은 case가 존재합니다");
+                    break;
             }
             SetNowItemOption();
             AddType.SelectedIndex = 0;
@@ -388,18 +433,25 @@ namespace RooStatsSim.UI.Manager
                         now_item.d_option.Remove(type);
                         break;
                     }
-                case "SETYPE":
-                    {
-                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<STATUS_EFFECT_TYPE, double>).Type_name;
-                        STATUS_EFFECT_TYPE type = (STATUS_EFFECT_TYPE)Enum.Parse(typeof(STATUS_EFFECT_TYPE), typeName);
-                        now_item.se_option.Remove(type);
-                        break;
-                    }
                 case "IFTYPE":
                     {
                         string typeName = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
                         IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
                         now_item.IF_OPTION.Remove(type);
+                        break;
+                    }
+                case "SE_REGISTANCE_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<STATUS_EFFECT_TYPE, double>).Type_name;
+                        STATUS_EFFECT_TYPE type = (STATUS_EFFECT_TYPE)Enum.Parse(typeof(STATUS_EFFECT_TYPE), typeName);
+                        now_item.SE_REGISTANCE_OPTION.Remove(type);
+                        break;
+                    }
+                case "SE_ATTACKRATE_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<STATUS_EFFECT_TYPE, double>).Type_name;
+                        STATUS_EFFECT_TYPE type = (STATUS_EFFECT_TYPE)Enum.Parse(typeof(STATUS_EFFECT_TYPE), typeName);
+                        now_item.se_attackrate_option.Remove(type);
                         break;
                     }
                 case "ELEMENT_INC_TYPE":
@@ -458,6 +510,23 @@ namespace RooStatsSim.UI.Manager
                         now_item.MOBTYPE_DEC_OPTION.Remove(type);
                         break;
                     }
+                case "ETC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ETC_TYPE, double>).Type_name;
+                        ETC_TYPE type = (ETC_TYPE)Enum.Parse(typeof(ETC_TYPE), typeName);
+                        now_item.ETC_OPTION.Remove(type);
+                        break;
+                    }
+                case "ETC_INC_DAMAGE_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ETC_INC_DAMAGE_TYPE, double>).Type_name;
+                        ETC_INC_DAMAGE_TYPE type = (ETC_INC_DAMAGE_TYPE)Enum.Parse(typeof(ETC_INC_DAMAGE_TYPE), typeName);
+                        now_item.ETC_INC_DAMAGE_OPTION.Remove(type);
+                        break;
+                    }
+                default:
+                    MessageBox.Show("선언되지 않은 case가 존재합니다");
+                    break;
             }
             SetNowItemOption();
         }
@@ -476,6 +545,11 @@ namespace RooStatsSim.UI.Manager
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+        }
+
+        private void cmb_element_damage_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

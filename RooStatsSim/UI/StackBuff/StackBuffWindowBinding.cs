@@ -24,7 +24,7 @@ namespace RooStatsSim.UI.StackBuff
     {
         public RidingList()
         { }
-        public RidingList(ref RIDING param_riding)
+        public RidingList(RIDING param_riding)
         {
             Add(new AbilityBinding<double>(EnumProperty_Kor.RIDING_ENUM_KOR[RIDING_ENUM.ATK_MATK], param_riding.List[(int)RIDING_ENUM.ATK_MATK], 0, Enum.GetName(typeof(RIDING_ENUM), RIDING_ENUM.ATK_MATK)));
             Add(new AbilityBinding<double>(EnumProperty_Kor.RIDING_ENUM_KOR[RIDING_ENUM.MAX_HP], param_riding.List[(int)RIDING_ENUM.MAX_HP], 0, Enum.GetName(typeof(RIDING_ENUM), RIDING_ENUM.MAX_HP)));

@@ -50,7 +50,7 @@ namespace RooStatsSim.UI.Manager
         }
         public int Count
         {
-            get { return i_option.Count + d_option.Count + if_option.Count + se_option.Count; }
+            get { return i_option.Count + d_option.Count + if_option.Count + se_attackrate_option.Count; }
         }
 
         public Dictionary<ITYPE, int> ITYPE_OPTION { get; set; }
@@ -81,9 +81,10 @@ namespace RooStatsSim.UI.Manager
             Wear_job_limit = param.Wear_job_limit;
             I_OPTION = param.I_OPTION;
             d_option = param.d_option;
-            se_option = param.se_option;
             if_option = param.if_option;
 
+            se_attackrate_option = param.se_attackrate_option;
+            se_resistance_option = param.se_resistance_option;
             element_inc_option = param.element_inc_option;
             element_dec_option = param.element_dec_option;
             size_inc_option = param.size_inc_option;

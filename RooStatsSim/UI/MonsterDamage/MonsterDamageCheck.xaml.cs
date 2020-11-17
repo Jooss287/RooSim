@@ -12,7 +12,7 @@ namespace RooStatsSim.UI.MonsterDamage
     /// <summary>
     /// MonsterDamageCheck.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MonsterDamageCheck : Window
+    public partial class MonsterDamageCheck : UserControl
     {
         UserData user_data;
         MonsterDB_Binding now_mob = new MonsterDB_Binding();
@@ -25,10 +25,10 @@ namespace RooStatsSim.UI.MonsterDamage
             DataContext = now_mob;
             InitializeContents();
 
-            BindingMobList = new MonsterListBox(MenuBox._roo_db.Mob_db);
+            BindingMobList = new MonsterListBox(MainWindow._roo_db.Mob_db);
             DB_ListBox.ItemsSource = BindingMobList;
 
-            user_data = UserData.GetInstance;
+            user_data = MainWindow._user_data;
             user_data.itemDataChanged += new UserData.UserDataChangedEventHandler(CalcDamage);
             CalcDamage();
         }

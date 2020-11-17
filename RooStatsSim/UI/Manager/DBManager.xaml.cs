@@ -14,7 +14,7 @@ namespace RooStatsSim.UI.Manager
     /// </summary>
     public partial class DBManager : Window
     {
-        private DBlist _DB = MenuBox._roo_db;
+        private DBlist _DB = MainWindow._roo_db;
         private MonsterManager mob_manager = null;
         private ItemManager item_manager = null;
 
@@ -52,7 +52,7 @@ namespace RooStatsSim.UI.Manager
             MessageBoxResult res = MessageBox.Show(" 저장하시겠습니까?", "Save", MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {
-                DBSerizator.SaveDataBase(ref _DB);
+                DBSerializer.SaveDataBase(ref _DB);
                 mob_manager.IsNew = false;
                 item_manager.IsNew = false;
             }
@@ -65,7 +65,7 @@ namespace RooStatsSim.UI.Manager
             {
                 MessageBoxResult res = MessageBox.Show("변경사항이 있습니다. 변경하시겠습니까?", "Save", MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.Yes)
-                    DBSerizator.SaveDataBase(ref _DB);
+                    DBSerializer.SaveDataBase(ref _DB);
             }    
         }
         #endregion

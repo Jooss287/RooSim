@@ -55,12 +55,20 @@ namespace RooStatsSim.DB.Table
             {DTYPE.RANGE_PHYSICAL_DAMAGE, "원거리 물리 데미지(%)" },
             {DTYPE.PHYSICAL_DEC_DAMAGE, "물리 데미지 감소(%)" },
             {DTYPE.MAGICAL_DEC_DAMAGE, "마법 데미지 감소(%)" },
+            {DTYPE.MELEE_PHYSICAL_DEC_DAMAGE, "근거리 물리 데미지 감소(%)" },
+            {DTYPE.RANGE_PHYSICAL_DEC_DAMAGE, "원거리 물리 데미지 감소(%)" },
             {DTYPE.DEF_P, "DEF %" },
             {DTYPE.MDEF_P, "MDEF %" },
             {DTYPE.MAX_HP_P, "HP %" },
             {DTYPE.MAX_SP_P, "SP %" },
+            {DTYPE.SP_WASTE, "SP 소모" },
             {DTYPE.ASPD, "ASPD" },
             {DTYPE.MOVING_SPEED,"이동속도" },
+            {DTYPE.HEALING,"치유량 증가(%)" },
+            {DTYPE.HEALING_RECERIVED,"받는 치유량(%)" },
+            {DTYPE.VERIABLE_CASTING,"변동 캐스팅(%)" },
+            {DTYPE.FIXED_CASTING,"고정 캐스팅(%)" },
+            {DTYPE.COMMON_SKILL_DELAY,"스킬 후 딜레이(%)" },
         };
         public static Dictionary<STATUS_EFFECT_TYPE, string> STATUS_EFFECT_TYPE_KOR = new Dictionary<STATUS_EFFECT_TYPE, string>()
         {
@@ -70,6 +78,21 @@ namespace RooStatsSim.DB.Table
             {STATUS_EFFECT_TYPE.FROZEN, "동빙" },
             {STATUS_EFFECT_TYPE.CURSE, "저주" },
             {STATUS_EFFECT_TYPE.PETRIFICATION, "석화" },
+            {STATUS_EFFECT_TYPE.DARK, "암흑" },
+            {STATUS_EFFECT_TYPE.POISON, "독" },
+            {STATUS_EFFECT_TYPE.SLEEP, "수면" },
+        };
+        public static Dictionary<ETC_INC_DAMAGE_TYPE, string> ETC_INC_DAMAGE_TYPE_KOR = new Dictionary<ETC_INC_DAMAGE_TYPE, string>()
+        {
+            {ETC_INC_DAMAGE_TYPE.OAK_INC_DAMAGE, "오크에게 증가 데미지" },
+            {ETC_INC_DAMAGE_TYPE.GOBLIN_INC_DAMAGE, "고블린에게 증가 데미지" },
+            {ETC_INC_DAMAGE_TYPE.KOBOLD_INC_DAMAGE, "코볼트에게 증가 데미지" },
+            {ETC_INC_DAMAGE_TYPE.ALL_MONSTERS_DAMAGE, "모든 몬스터에게 증가 데미지(%)" },
+        };
+        public static Dictionary<ETC_TYPE, string> ETC_TYPE_KOR = new Dictionary<ETC_TYPE, string>()
+        {
+            { ETC_TYPE.NO_BREAK, "파괴 불가" },
+            { ETC_TYPE.NO_SIZE_PANELTY, "체형 패널티 없음" },
         };
         
         public static Dictionary<ELEMENT_TYPE, string> ELEMENT_TYPE_KOR = new Dictionary<ELEMENT_TYPE, string>()

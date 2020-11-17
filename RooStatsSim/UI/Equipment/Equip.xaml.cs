@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -21,17 +22,18 @@ namespace RooStatsSim.UI.Equipment
     /// <summary>
     /// Equip.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class Equip : Window
+    public partial class Equip : UserControl
     {
         UserData _user_data;
         ItemListFilter EquipItemList;
         ItemListFilter CardItemList;
         ItemListFilter EnchantList;
+        Popup itemPopup = new Popup();
 
         EQUIP_TYPE_ENUM now_selected_equip_type;
         public Equip()
         {
-            _user_data = UserData.GetInstance;
+            _user_data = MainWindow._user_data;
 
             InitializeComponent();
         }
@@ -64,7 +66,15 @@ namespace RooStatsSim.UI.Equipment
             }
             return null;
         }
-        
+
+        #region Equipment window ui response
+        void setItemTextBlock(EquipId item)
+        {
+            TextBlock PopupText = new TextBlock();
+            PopupText.Text = "+" + Convert.ToString(item.Refine) + " " + item.Name;
+            PopupText.Background = Brushes.Silver;
+            itemPopup.Child = PopupText;
+        }
         private void SelectEquipment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             now_selected_equip_type = (EQUIP_TYPE_ENUM)Enum.Parse(typeof(EQUIP_TYPE_ENUM), (string)((sender as ContentControl).Tag));
@@ -72,15 +82,11 @@ namespace RooStatsSim.UI.Equipment
             ItemSelector.ItemsSource = EquipItemList;
             ItemSlectorTab.SelectedIndex = 0;
         }
-        private void SelectGear_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
         private void SelectItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.List[(int)now_selected_equip_type].Equip = MenuBox._roo_db.Equip_db[item.Id];
+            _user_data.Equip.List[(int)now_selected_equip_type].Equip = MainWindow._roo_db.Equip_db[item.Id];
             GetEquipTypeItem(now_selected_equip_type).Header = item.Name;
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
 
@@ -91,16 +97,39 @@ namespace RooStatsSim.UI.Equipment
             ItemSlectorTab.SelectedIndex = 1;
             _user_data.CalcUserData();
         }
+        private void Item_RefineWheel(object sender, MouseWheelEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+            item.Refine += e.Delta > 0 ? 1 : -1;
+            setItemTextBlock(item);
+        }
+        private void SelectGear_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
 
+        }
         private void SelectCard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MenuBox._roo_db.Card_db[item.Id]);
+            _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MainWindow._roo_db.Card_db[item.Id]);
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
             _user_data.CalcUserData();
         }
+        private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+            setItemTextBlock(item);
 
-        
+            itemPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
+            itemPopup.IsOpen = true;
+        }
+
+        private void ContentControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            itemPopup.IsOpen = false;
+        }
+        #endregion
+
+
     }
 }

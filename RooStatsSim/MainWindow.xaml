@@ -3,25 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RooStatsSim"
-        xmlns:skill="clr-namespace:RooStatsSim.Skills"
-        
+        xmlns:mdix="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:w="clr-namespace:System.Windows;assembly=PresentationFramework"
+        xmlns:local="clr-namespace:RooStatsSim"
+        xmlns:mdixWindow="clr-namespace:MDIXWindow"
+        xmlns:mdi ="clr-namespace:WPF.MDI;assembly=WPF.MDI"
+        
+        Style="{StaticResource MaterialDesignWindow}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        mdixWindow:WindowEx.ShowMinimizeButton="True"
+        mdixWindow:WindowEx.ShowMaximizeButton="True"
+        
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         FontFamily="{DynamicResource MaterialDesignFont}"
-         
         mc:Ignorable="d"
-        Title="RooSim" WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize" Background="{x:Null}" AllowsTransparency="True"
-        Left="50" Top="50">
-    <Window.Resources>
-    </Window.Resources>
-    <Grid>
+        WindowState="Maximized"
+        Title="RooSim" Closing="Window_Closing">
+    <mdixWindow:MaterialDesignWindow.HeaderContent>
+        <Grid>
+            <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" HorizontalAlignment="Left" WindowChrome.IsHitTestVisibleInChrome="True" 
+                          x:Name="MenuToggleButton" />
+            <TextBlock Text="{Binding Title, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center" />
+        </Grid>
+
+    </mdixWindow:MaterialDesignWindow.HeaderContent>
+    <Window.Content >
+        <mdix:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}">
+            <mdix:DrawerHost.LeftDrawerContent>
+                <TextBlock Width="250" TextWrapping="Wrap" Text="Some left drawer content here. Perhaps navigation options?" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"
+                           Height="{x:Static w:SystemParameters.WindowCaptionHeight}"
+                           />
+            </mdix:DrawerHost.LeftDrawerContent>
+            <DockPanel>
+                <mdi:MdiContainer Name="RoosimContainer">
+                </mdi:MdiContainer>
+            </DockPanel>
+        </mdix:DrawerHost>
+    </Window.Content>
+    
+    <!--<Grid>
         <Canvas Name="DesigningCanvas" Background="{x:Null}">
-            <Grid>
+            <Grid Canvas.Top="350" Canvas.Left="10">
                 <Grid.RowDefinitions>
                     <RowDefinition MaxHeight="24" Height="24" />
                     <RowDefinition Height="1*" />
@@ -32,11 +60,13 @@
                 </Grid.ColumnDefinitions>
                 <Frame x:Name="menu_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Rectangle Name="menu_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        CornerRadius="3,0,0,0"
+                        Grid.Column="0" Name="menu_titlebar"/>
                 <Button Content="X" Grid.Column="1" Name="closeButton"
                         Click="closeButton_Click"/>
             </Grid>
-            <Grid Canvas.Top="124">
+            <Grid Canvas.Top="10" Canvas.Left="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24" />
                     <RowDefinition Height="1*" />
@@ -46,8 +76,52 @@
                 </Grid.ColumnDefinitions>
                 <Frame x:Name="status_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Rectangle Name="status_titlebar" Stroke="Black" Fill="Lime" Grid.Column="0" StrokeThickness="0"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        Grid.Column="0" Name="status_titlebar"/>
             </Grid>
+
+            <Grid Canvas.Top="350" Canvas.Left="685">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="stack_buff_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        Grid.Column="0" Name="stack_buff_titlebar"/>
+            </Grid>
+
+            <Grid Canvas.Top="476" Canvas.Left="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="equip_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        Grid.Column="0" Name="equip_titlebar"/>
+            </Grid>
+
+            <Grid Canvas.Top="724" Canvas.Left="700">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="damage_check_contents" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"
+                    VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Border Style="{Binding Source={StaticResource TitleBar}}"
+                        Grid.Column="0" Name="damage_check_titlebar"/>
+            </Grid>
+
         </Canvas>
-    </Grid>
+    </Grid>-->
 </Window>

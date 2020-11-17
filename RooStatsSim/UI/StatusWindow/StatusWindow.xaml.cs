@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using RooStatsSim.User;
+using RooStatsSim.UI.Menu;
 using RooStatsSim.DB.Table;
 using System.Windows.Navigation;
 
@@ -10,7 +11,7 @@ namespace RooStatsSim.UI.StatusWindow
     /// <summary>
     /// StatusWindow.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class StatusWindow : Page
+    public partial class StatusWindow : UserControl
     {
         UserData user_data;
 
@@ -22,7 +23,7 @@ namespace RooStatsSim.UI.StatusWindow
         public StatusWindow()
         {
             //DB가 레퍼로 들어왔다 치고.
-            user_data = UserData.GetInstance;
+            user_data = MainWindow._user_data;
             user_data.itemDataChanged += new UserData.UserDataChangedEventHandler(CalcStatusProperty);
 
             InitializeComponent();
@@ -132,8 +133,12 @@ namespace RooStatsSim.UI.StatusWindow
                 StatusPointUp(dataCxtx);
         }
 
+
         #endregion
 
+        private void UserControl_ContextMenuClosing(object sender, ContextMenuEventArgs e)
+        {
 
+        }
     }
 }

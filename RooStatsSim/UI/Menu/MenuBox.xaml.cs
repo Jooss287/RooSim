@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using RooStatsSim;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 using RooStatsSim.Equation.Job;
@@ -23,23 +24,20 @@ using RooStatsSim.UI.ACK;
 using RooStatsSim.User;
 using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
+using WPF.MDI;
 
 namespace RooStatsSim.UI.Menu
 {
     /// <summary>
     /// MenuBox.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MenuBox : Page
+    public partial class MenuBox : UserControl
     {
-        public static DBlist _roo_db;
         UserData _user_data;
         MainWindow _parents;
         public MenuBox(MainWindow parents)
         {
-            _roo_db = new DBlist();
-            DBSerizator.ReadDB(ref _roo_db);
-            _user_data = UserData.GetInstance;
-
+            _user_data = MainWindow._user_data;
             _parents = parents;
             InitializeComponent();
         }
@@ -52,49 +50,61 @@ namespace RooStatsSim.UI.Menu
 
             //모든 값 초기화 시켜야 함
         }
+        private void TurnOnOff(WINDOW_ENUM window_name)
+        {
+            MdiChild window = _parents.RoosimContainer.Children[(int)window_name];
+            if (window.IsVisible)
+            {
+                window.Visibility = Visibility.Hidden;
+                window.IsEnabled = false;
+            }
+            else
+            {
+                window.Visibility = Visibility.Visible;
+                window.IsEnabled = true;
+            }
+                
+        }
         private void Status_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_parents._status.IsVisible)
-                _parents._status.Visibility = Visibility.Hidden;
-            else
-                _parents._status.Visibility = Visibility.Visible;
+            TurnOnOff(WINDOW_ENUM.STATUS);
         }
-
-        private void DBManager_window_Click(object sender, RoutedEventArgs e)
-        {
-            if (_parents._db_manager == null)
-                _parents._db_manager = new DBManager();
-            else
-                _parents._db_manager.Show();
-        }
-
-        private void Info_window_Click(object sender, RoutedEventArgs e)
-        {
-            if (_parents._info.IsVisible)
-                _parents._info.Hide();
-            else
-                _parents._info.Show();
-        }
-
         private void StackBuff_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_parents._stacK_buff.IsVisible)
-                _parents._stacK_buff.Hide();
-            else
-                _parents._stacK_buff.Show();
+            TurnOnOff(WINDOW_ENUM.STACK_BUFF);
         }
-
+        private void Equip_window_Click(object sender, RoutedEventArgs e)
+        {
+            TurnOnOff(WINDOW_ENUM.EQUIP);
+        }
+        private void DamageCheck_window_Click(object sender, RoutedEventArgs e)
+        {
+            TurnOnOff(WINDOW_ENUM.DAMAGE_CHECK);
+        }
         private void Skill_window_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        
 
-        private void Equip_window_Click(object sender, RoutedEventArgs e)
+        #region Window Modal
+        private void DBManager_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_parents._equip.IsVisible)
-                _parents._equip.Visibility = Visibility.Hidden;
-            else
-                _parents._equip.Visibility = Visibility.Visible;
+            if (_parents._db_manager == null)
+                _parents._db_manager = new DBManager();
+            _parents._db_manager.Show();
+            _parents._db_manager.Focus();
         }
+
+        private void Info_window_Click(object sender, RoutedEventArgs e)
+        {
+            if (_parents._info == null)
+                _parents._info = new ProgramInfo();
+            _parents._db_manager.Show();
+            _parents._info.Focus();
+        }
+        #endregion
+
+        
     }
 }

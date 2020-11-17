@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.User
 {
+    [Serializable]
     public class UserItem : ItemDB
     {
         public UserItem()
@@ -29,10 +30,11 @@ namespace RooStatsSim.User
         {
             AddOption<ITYPE>(ref a.i_option, b.i_option);
             AddOption<DTYPE>(ref a.d_option, b.d_option);
-            AddOption<STATUS_EFFECT_TYPE>(ref a.se_option, b.se_option);
-            AddOption(ref a.if_option, b.if_option);
+            AddOption<STATUS_EFFECT_TYPE>(ref a.se_attackrate_option, b.se_attackrate_option);
+            AddOption<STATUS_EFFECT_TYPE>(ref a.se_resistance_option, b.se_resistance_option);
             AddOption<ELEMENT_TYPE>(ref a.element_inc_option, b.element_inc_option);
             AddOption<ELEMENT_TYPE>(ref a.element_dec_option, b.element_dec_option);
+            AddOption<ELEMENT_TYPE>(ref a.element_damage_option, b.element_damage_option);
             AddOption<MONSTER_SIZE>(ref a.size_inc_option, b.size_inc_option);
             AddOption<MONSTER_SIZE>(ref a.size_dec_option, b.size_dec_option);
             AddOption<TRIBE_TYPE>(ref a.tribe_inc_option, b.tribe_inc_option);
@@ -40,6 +42,23 @@ namespace RooStatsSim.User
             AddOption<MONSTER_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
             AddOption<MONSTER_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
             return a;
+        }
+
+        public ItemDB CalcIftypeValues(UserData user)
+        {
+            ItemDB item_iftype = new ItemDB();
+
+            foreach (EQUIP.EquipItem equip_item in user.Equip.List)
+            {
+                foreach (KeyValuePair<IFTYPE, AbilityPerStatus> option in equip_item.Equip.IF_OPTION)
+                {
+                    if (option.Value.Calc != null)
+                        item_iftype += option.Value.Calc(user);
+                    else
+                        item_iftype += option.Value.Calc_refine(user, equip_item.Smelting);
+                }
+            }
+            return item_iftype;
         }
     }
 }
