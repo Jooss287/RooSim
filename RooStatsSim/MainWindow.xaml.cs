@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
+using RooStatsSim.DB;
+using RooStatsSim.User;
 using RooStatsSim.UI.StatusWindow;
 using RooStatsSim.UI.Manager;
 using RooStatsSim.UI.ACK;
@@ -28,6 +30,10 @@ namespace RooStatsSim
     };
     public partial class MainWindow : Window
     {
+        public static DBlist _roo_db;
+        public static UserData _user_data;
+        public static bool _user_data_edited = false;
+
         MdiChild _menu;
         MdiChild _status;
         MdiChild _stack_buff;
@@ -39,6 +45,11 @@ namespace RooStatsSim
 
         public MainWindow()
         {
+            _roo_db = new DBlist();
+            DBSerializer.ReadDB(ref _roo_db);
+            _user_data = new UserData();
+            User_Serializer.ReadDB(ref _user_data);
+
             MaterialDesignWindow.RegisterCommands(this);
             InitializeComponent();
 
@@ -120,7 +131,17 @@ namespace RooStatsSim
                 )
             );
         }
-        
+
         #endregion
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_user_data_edited)
+            {
+                MessageBoxResult res = MessageBox.Show("변경사항이 있습니다. 변경하시겠습니까?", "Save", MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.Yes)
+                    User_Serializer.SaveDataBase(ref _user_data);
+            }
+        }
     }
 }

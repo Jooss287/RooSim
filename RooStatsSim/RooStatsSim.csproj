@@ -191,6 +191,7 @@
     <Compile Include="User\UserData_Stackbuff_List.cs" />
     <Compile Include="User\UserItem.cs" />
     <Compile Include="User\User_Enum.cs" />
+    <Compile Include="User\User_Serializer.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Extension\MDIXWindow\MaterialDesignWindow.xaml">

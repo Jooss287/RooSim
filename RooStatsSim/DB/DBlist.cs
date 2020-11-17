@@ -72,7 +72,7 @@ namespace RooStatsSim.DB
         }
     }
     
-    class DBSerizator
+    class DBSerializer
     {
         const string file_name = "DB.roo";
         public static void SaveDataBase(ref DBlist DB)

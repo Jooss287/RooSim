@@ -1,50 +1,58 @@
-﻿using System.Diagnostics;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using RooStatsSim.Extension;
 using RooStatsSim.DB;
 using RooStatsSim.Equation;
 using RooStatsSim.User;
 
 
+
 namespace RooStatsSim.User
 {
-    // User data singleton design pattern
+    [Serializable]
     public sealed class UserData
     {
-        #region Singleton Pattern
-        private UserData() { }
-        private static UserData _instance = null;
-        public static UserData GetInstance
-        {
-            get
-            {
-                if (_instance == null)
-                { 
-                    _instance = new UserData();
-                }
-                return _instance;
-            }
-        }
-        #endregion
+        public UserData() {  }
 
-        public BASE_LEVEL Base_Level = new BASE_LEVEL();
-        public JOB_LEVEL Job_Level = new JOB_LEVEL();
-        public STATUS Status = new STATUS();
-        public JOB_SELECT_LIST Job = JOB_SELECT_LIST.NOVICE;
+        public BASE_LEVEL Base_Level { get; set; }
+        public JOB_LEVEL Job_Level { get; set; }
+        public STATUS Status { get; set; }
+        public JOB_SELECT_LIST Job { get; set; }
 
-        public EQUIP Equip = new EQUIP();
-        public GEAR Gear = new GEAR();
+        public EQUIP Equip { get; set; }
+        public GEAR Gear { get; set; }
 
-        public MEDAL Medal = new MEDAL();
-        public MONSTER_RESEARCH Monster_Research = new MONSTER_RESEARCH();
-        public DRESS_STYLE Dress_Style = new DRESS_STYLE();
-        public STICKER Sticker = new STICKER();
-        public RIDING Riding_ability = new RIDING();
-        public RIDING Riding_personality = new RIDING();
+        public MEDAL Medal { get; set; }
+        public MONSTER_RESEARCH Monster_Research { get; set; }
+        public DRESS_STYLE Dress_Style { get; set; }
+        public STICKER Sticker { get; set; }
+        public RIDING Riding_ability { get; set; }
+        public RIDING Riding_personality { get; set; }
         
 
-        public UserItem User_Item = new UserItem();
-        public int SelectedEnemy = 0;
+        public UserItem User_Item { get; set; }
+        public int SelectedEnemy { get; set; }
 
+        void Initializor()
+        {
+            Base_Level = new BASE_LEVEL();
+            Job_Level = new JOB_LEVEL();
+            Status = new STATUS();
+            Job = JOB_SELECT_LIST.NOVICE;
+            Equip = new EQUIP();
+            Gear = new GEAR();
+            Medal = new MEDAL();
+            Monster_Research = new MONSTER_RESEARCH();
+            Dress_Style = new DRESS_STYLE();
+            Sticker = new STICKER();
+            Riding_ability = new RIDING();
+            Riding_personality = new RIDING();
+            User_Item = new UserItem();
+            SelectedEnemy = 0;
+        }
+        
         #region Userdata event
         public delegate void UserDataChangedEventHandler();
         public event UserDataChangedEventHandler itemDataChanged;
@@ -71,6 +79,7 @@ namespace RooStatsSim.User
 
             if (itemDataChanged != null)
                 itemDataChanged();
+            MainWindow._user_data_edited = true;
         }
         #endregion
     }

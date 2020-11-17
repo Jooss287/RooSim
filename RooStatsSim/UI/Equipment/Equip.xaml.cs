@@ -33,7 +33,7 @@ namespace RooStatsSim.UI.Equipment
         EQUIP_TYPE_ENUM now_selected_equip_type;
         public Equip()
         {
-            _user_data = UserData.GetInstance;
+            _user_data = MainWindow._user_data;
 
             InitializeComponent();
         }
@@ -86,7 +86,7 @@ namespace RooStatsSim.UI.Equipment
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.List[(int)now_selected_equip_type].Equip = MenuBox._roo_db.Equip_db[item.Id];
+            _user_data.Equip.List[(int)now_selected_equip_type].Equip = MainWindow._roo_db.Equip_db[item.Id];
             GetEquipTypeItem(now_selected_equip_type).Header = item.Name;
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
 
@@ -111,7 +111,7 @@ namespace RooStatsSim.UI.Equipment
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MenuBox._roo_db.Card_db[item.Id]);
+            _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MainWindow._roo_db.Card_db[item.Id]);
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
             _user_data.CalcUserData();
         }

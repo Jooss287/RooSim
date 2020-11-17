@@ -7,6 +7,7 @@ using RooStatsSim.UI.Menu;
 
 namespace RooStatsSim.User
 {
+    [Serializable]
     public class MEDAL
     {
         public ObservableCollection<int> List { get; }
@@ -73,6 +74,7 @@ namespace RooStatsSim.User
         }
     }
 
+    [Serializable]
     public class RIDING
     {
         public ObservableCollection<double> List { get; }
@@ -110,6 +112,7 @@ namespace RooStatsSim.User
         }
     }
 
+    [Serializable]
     public class MONSTER_RESEARCH
     {
         int _level;
@@ -118,12 +121,12 @@ namespace RooStatsSim.User
             get { return _level; }
             set
             {
-                if (MenuBox._roo_db == null)
+                if (MainWindow._roo_db == null)
                 {
                     _level = 0;
                     return;
                 }
-                if ( (value < MenuBox._roo_db._monster_research_db.Count) &&
+                if ( (value < MainWindow._roo_db._monster_research_db.Count) &&
                     (value >= 0) )
                     _level = value;
             }
@@ -134,11 +137,12 @@ namespace RooStatsSim.User
             ItemDB option = new ItemDB();
             for (int i = 0; i <= Level; i++)
             {
-                option += MenuBox._roo_db._monster_research_db[i];
+                option += MainWindow._roo_db._monster_research_db[i];
             }
             return option;
         }
     }
+    [Serializable]
     public class DRESS_STYLE
     {
         int _level;
@@ -147,12 +151,12 @@ namespace RooStatsSim.User
             get { return _level; }
             set
             {
-                if (MenuBox._roo_db == null)
+                if (MainWindow._roo_db == null)
                 {
                     _level = 0;
                     return;
                 }
-                if ((value < MenuBox._roo_db._dress_style_db.Count) &&
+                if ((value < MainWindow._roo_db._dress_style_db.Count) &&
                     (value >= 0))
                     _level = value;
             }
@@ -163,11 +167,12 @@ namespace RooStatsSim.User
             ItemDB option = new ItemDB();
             for (int i = 0; i <= Level; i++)
             {
-                option += MenuBox._roo_db.Dress_style_db[i];
+                option += MainWindow._roo_db.Dress_style_db[i];
             }
             return option;
         }
     }
+    [Serializable]
     public class STICKER
     {
         int _level;
@@ -176,12 +181,12 @@ namespace RooStatsSim.User
             get { return _level; }
             set
             {
-                if (MenuBox._roo_db == null)
+                if (MainWindow._roo_db == null)
                 {
                     _level = 0;
                     return;
                 }
-                if ((value < MenuBox._roo_db._sticker_db.Count) &&
+                if ((value < MainWindow._roo_db._sticker_db.Count) &&
                     (value >= 0))
                     _level = value;
             }
@@ -192,7 +197,7 @@ namespace RooStatsSim.User
             ItemDB option = new ItemDB();
             for (int i = 0; i <= Level; i++)
             {
-                option += MenuBox._roo_db.Sticker_db[i];
+                option += MainWindow._roo_db.Sticker_db[i];
             }
             return option;
         }

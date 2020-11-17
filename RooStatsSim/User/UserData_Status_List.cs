@@ -5,6 +5,7 @@ using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.User
 {
+    [Serializable]
     public class ABILITTY<T> where T : struct
     {
         public T _point;
@@ -31,6 +32,7 @@ namespace RooStatsSim.User
         public ABILITTY() { Point = default(T); AddPoint = default(T); }
     }
 
+    [Serializable]
     public class BASE_LEVEL
     {
         int _point = 1;
@@ -59,6 +61,7 @@ namespace RooStatsSim.User
         }
     }
 
+    [Serializable]
     public class JOB_LEVEL
     {
         int _point = 1;
@@ -82,6 +85,7 @@ namespace RooStatsSim.User
         }
     }
 
+    [Serializable]
     public class STATUS
     {
         public class StatPoint
@@ -119,7 +123,7 @@ namespace RooStatsSim.User
                 }
             }
         }
-        public ObservableCollection<StatPoint> List { get; }
+        public ObservableCollection<StatPoint> List { get; set; }
         public STATUS()
         {
             List = new ObservableCollection<StatPoint>();
