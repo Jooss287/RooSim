@@ -186,13 +186,15 @@
                         <ItemsControl x:Name="CardSelector">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <UniformGrid Columns="10" />
+                                    <UniformGrid Columns="6" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick">
-                                        <StackPanel Orientation="Vertical">
+                                    <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
+                                                    MouseEnter="ContentControl_MouseEnter"
+                                                    MouseLeave="ContentControl_MouseLeave">
+                                        <StackPanel Orientation="Vertical" Margin="8">
                                             <Button Style="{Binding Source={StaticResource ItemImgBtn}}"/>
                                         </StackPanel>
                                     </ContentControl>

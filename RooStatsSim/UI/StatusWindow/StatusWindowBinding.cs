@@ -125,8 +125,7 @@ namespace RooStatsSim.UI.StatusWindow
                     , user_data.User_Item.SE_ATTACKRATE_OPTION[item.Key], 0, Enum.GetName(typeof(STATUS_EFFECT_TYPE), item.Key)));
             foreach (KeyValuePair<STATUS_EFFECT_TYPE, double> item in user_data.User_Item.SE_REGISTANCE_OPTION)
                 Add(new AbilityBinding<double>(EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR[item.Key] + "상태 저항(%)"
-                    , user_data.User_Item.SE_ATTACKRATE_OPTION[item.Key], 0, Enum.GetName(typeof(STATUS_EFFECT_TYPE), item.Key)));
-
+                    , user_data.User_Item.SE_REGISTANCE_OPTION[item.Key], 0, Enum.GetName(typeof(STATUS_EFFECT_TYPE), item.Key)));
             foreach (KeyValuePair<ELEMENT_TYPE, double> item in user_data.User_Item.ELEMENT_INC_OPTION)
                 Add(new AbilityBinding<double>("몬스터 ("+EnumProperty_Kor.ELEMENT_TYPE_KOR[item.Key] + ")에게 데미지 증가(%)"
                     , user_data.User_Item.ELEMENT_INC_OPTION[item.Key], 0, Enum.GetName(typeof(ELEMENT_TYPE), item.Key)));
