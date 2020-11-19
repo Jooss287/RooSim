@@ -119,6 +119,40 @@ namespace RooStatsSim.UI.Manager
         }
     }
 
+    class TotalItemOption_Binding : INotifyPropertyChanged
+    {
+        public TotalItemOption_Binding() { }
+        public TotalItemOption_Binding(string type_name, double value)
+        {
+            _type_name = type_name;
+            _type_value = value;
+        }
+
+        string _type_name;
+        double _type_value;
+        public string Type_name
+        {
+            get { return _type_name; }
+            set { _type_name = value; OnPropertyChanged("Type_name"); }
+        }
+
+        public double Type_value
+        {
+            get { return _type_value; }
+            set { _type_value = value; OnPropertyChanged("Type_value"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public override string ToString() => _type_name;
+
+        protected void OnPropertyChanged(string info)
+        {
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(info));
+        }
+    }
+
     class ItemOption_Binding<TYPE, D_TYPE> : INotifyPropertyChanged
     {
         public ItemOption_Binding() { }
@@ -199,7 +233,20 @@ namespace RooStatsSim.UI.Manager
         }
     }
 
+    class TotalItemOptionListBox : ObservableCollection<TotalItemOption_Binding>
+    {
+        public TotalItemOptionListBox()
+        { }
+        public TotalItemOptionListBox(int A)
+        {
+            
 
+            //foreach (KeyValuePair<TYPE, D_TYPE> items in DB)
+            //{
+            //    Add(new ItemOption_Binding<TYPE, D_TYPE>(items));
+            //}
+        }
+    }
     class ItemOptionListBox<TYPE,D_TYPE> : ObservableCollection<ItemOption_Binding<TYPE,D_TYPE>>
     {
         public ItemOptionListBox()

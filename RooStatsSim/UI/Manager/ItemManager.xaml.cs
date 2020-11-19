@@ -57,17 +57,21 @@ namespace RooStatsSim.UI.Manager
             {
                 string statusName = EnumProperty_Kor.ITYPE_KOR[option];
                 cmb_Ioption.Items.Add(statusName);
+                cmb_refine_if_option.Items.Add(statusName);
             }
             foreach (DTYPE option in Enum.GetValues(typeof(DTYPE)))
             {
                 string statusName = EnumProperty_Kor.DTYPE_KOR[option];
                 cmb_Doption.Items.Add(statusName);
+                cmb_refine_if_option.Items.Add(statusName);
             }
             foreach (STATUS_EFFECT_TYPE option in Enum.GetValues(typeof(STATUS_EFFECT_TYPE)))
             {
                 string statusName = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR[option];
                 cmb_se_attackrate_option.Items.Add(statusName);
                 cmb_se_registance_option.Items.Add(statusName);
+                cmb_refine_if_option.Items.Add(statusName+"공격확률");
+                cmb_refine_if_option.Items.Add(statusName+"저항확률");
             }
             foreach (IFTYPE option in Enum.GetValues(typeof(IFTYPE)))
             {
@@ -80,24 +84,33 @@ namespace RooStatsSim.UI.Manager
                 cmb_element_inc_option.Items.Add(statusName);
                 cmb_element_dec_option.Items.Add(statusName);
                 cmb_element_damage_option.Items.Add(statusName);
+                cmb_refine_if_option.Items.Add("몬스터("+statusName+")증뎀");
+                cmb_refine_if_option.Items.Add(statusName+"저항");
+                cmb_refine_if_option.Items.Add(statusName+"데미지");
             }
             foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
             {
                 string statusName = EnumProperty_Kor.MONSTER_SIZE_KOR[option];
                 cmb_size_inc_option.Items.Add(statusName);
                 cmb_size_dec_option.Items.Add(statusName);
+                cmb_refine_if_option.Items.Add(statusName+"증뎀");
+                cmb_refine_if_option.Items.Add(statusName+"저항");
             }
             foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
             {
                 string statusName = EnumProperty_Kor.TRIBE_TYPE_KOR[option];
                 cmb_tribe_inc_option.Items.Add(statusName);
                 cmb_tribe_dec_option.Items.Add(statusName);
+                cmb_refine_if_option.Items.Add(statusName+"증뎀");
+                cmb_refine_if_option.Items.Add(statusName+"저항");
             }
             foreach (MONSTER_TYPE option in Enum.GetValues(typeof(MONSTER_TYPE)))
             {
                 string statusName = EnumProperty_Kor.MONSTER_TYPE_KOR[option];
                 cmb_mobtype_inc_option.Items.Add(statusName);
                 cmb_mobtype_dec_option.Items.Add(statusName);
+                cmb_refine_if_option.Items.Add(statusName+"증뎀");
+                cmb_refine_if_option.Items.Add(statusName + "저항");
             }
             foreach (ETC_TYPE option in Enum.GetValues(typeof(ETC_TYPE)))
             {
@@ -109,7 +122,8 @@ namespace RooStatsSim.UI.Manager
                 string statusName = EnumProperty_Kor.ETC_INC_DAMAGE_TYPE_KOR[option];
                 cmb_etc_inc_option.Items.Add(statusName);
             }
-            
+            for (int i = 0; i <= 20; ++i)
+                cmb_refine_value.Items.Add(i);
         }
 
         void SetNowItemOption()
@@ -132,6 +146,8 @@ namespace RooStatsSim.UI.Manager
             list_mobtype_dec_option.ItemsSource = new ItemOptionListBox<MONSTER_TYPE, double>(ref now_item.mobtype_dec_option);
             list_etc_option.ItemsSource = new ItemOptionListBox<ETC_TYPE, double>(ref now_item.etc_option);
             list_etc_inc_option.ItemsSource = new ItemOptionListBox<ETC_INC_DAMAGE_TYPE, double>(ref now_item.etc_inc_damage_option);
+            
+            //list_refine_if_option.ItemsSource = new ItemOptionListBox<>
         }
 
 
@@ -550,6 +566,254 @@ namespace RooStatsSim.UI.Manager
         private void cmb_element_damage_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void cmb_refine_if_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StackPanel parentStackpanel = (sender as ComboBox).Parent as StackPanel;
+            TextBox AddValue = parentStackpanel.Children[3] as TextBox;
+
+            AddValue.Text = "";
+            AddValue.Focus();
+        }
+        private void Refine_Add_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            StackPanel OptionStack = parentStackpanel.Children[0] as StackPanel;
+
+            ComboBox Refine = OptionStack.Children[0] as ComboBox;
+            ComboBox AddType = OptionStack.Children[2] as ComboBox;
+            TextBox AddValue = OptionStack.Children[3] as TextBox;
+
+            if (AddValue.Text == "")
+                return;
+            if (Convert.ToInt32(AddValue.Text) == 0)
+                return;
+
+            string typeName = Convert.ToString(AddType.SelectedItem);
+            switch (Convert.ToString(parentStackpanel.Tag))
+            {
+                case "ITYPE":
+                    {
+                        ITYPE type = EnumProperty_Kor.ITYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.i_option[type] = Convert.ToInt32(AddValue.Text);
+                        break;
+                    }
+                case "DTYPE":
+                    {
+                        DTYPE type = EnumProperty_Kor.DTYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.d_option[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "IFTYPE":
+                    {
+                        AddValue = OptionStack.Children[3] as TextBox;
+                        TextBox PerValue = OptionStack.Children[1] as TextBox;
+                        IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
+                        now_item.IF_OPTION[type] = new AbilityPerStatus(type, Convert.ToInt32(AddValue.Text), Convert.ToInt32(PerValue.Text));
+                        break;
+                    }
+                case "SE_ATTACKRATE_TYPE":
+                    {
+                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.SE_ATTACKRATE_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "SE_REGISTANCE_TYPE":
+                    {
+                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.SE_REGISTANCE_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "ELEMENT_INC_TYPE":
+                    {
+                        ELEMENT_TYPE type = EnumProperty_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.ELEMENT_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "ELEMENT_DEC_TYPE":
+                    {
+                        ELEMENT_TYPE type = EnumProperty_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.ELEMENT_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "SIZE_INC_TYPE":
+                    {
+                        MONSTER_SIZE type = EnumProperty_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.SIZE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "SIZE_DEC_TYPE":
+                    {
+                        MONSTER_SIZE type = EnumProperty_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.SIZE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "TRIBE_INC_TYPE":
+                    {
+                        TRIBE_TYPE type = EnumProperty_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.TRIBE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "TRIBE_DEC_TYPE":
+                    {
+                        TRIBE_TYPE type = EnumProperty_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.TRIBE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "MOBTYPE_INC_TYPE":
+                    {
+                        MONSTER_TYPE type = EnumProperty_Kor.MONSTER_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.MOBTYPE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "MOBTYPE_DEC_TYPE":
+                    {
+                        MONSTER_TYPE type = EnumProperty_Kor.MONSTER_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.MOBTYPE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "ETC_TYPE":
+                    {
+                        ETC_TYPE type = EnumProperty_Kor.ETC_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.ETC_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                case "ETC_INC_DAMAGE_TYPE":
+                    {
+                        ETC_INC_DAMAGE_TYPE type = EnumProperty_Kor.ETC_INC_DAMAGE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        now_item.ETC_INC_DAMAGE_OPTION[type] = Convert.ToDouble(AddValue.Text);
+                        break;
+                    }
+                default:
+                    MessageBox.Show("선언되지 않은 case가 존재합니다");
+                    break;
+            }
+            SetNowItemOption();
+            AddType.SelectedIndex = 0;
+            AddValue.Text = null;
+        }
+
+        private void Refine_Del_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            ListBox OptionList = parentStackpanel.Children[2] as ListBox;
+
+            if (OptionList.SelectedItem == null)
+                return;
+
+            switch (Convert.ToString(parentStackpanel.Tag))
+            {
+                case "ITYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ITYPE, int>).Type_name;
+                        ITYPE type = (ITYPE)Enum.Parse(typeof(ITYPE), typeName);
+                        now_item.i_option.Remove(type);
+                        break;
+                    }
+                case "DTYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<DTYPE, double>).Type_name;
+                        DTYPE type = (DTYPE)Enum.Parse(typeof(DTYPE), typeName);
+                        now_item.d_option.Remove(type);
+                        break;
+                    }
+                case "IFTYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
+                        IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), typeName);
+                        now_item.IF_OPTION.Remove(type);
+                        break;
+                    }
+                case "SE_REGISTANCE_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<STATUS_EFFECT_TYPE, double>).Type_name;
+                        STATUS_EFFECT_TYPE type = (STATUS_EFFECT_TYPE)Enum.Parse(typeof(STATUS_EFFECT_TYPE), typeName);
+                        now_item.SE_REGISTANCE_OPTION.Remove(type);
+                        break;
+                    }
+                case "SE_ATTACKRATE_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<STATUS_EFFECT_TYPE, double>).Type_name;
+                        STATUS_EFFECT_TYPE type = (STATUS_EFFECT_TYPE)Enum.Parse(typeof(STATUS_EFFECT_TYPE), typeName);
+                        now_item.se_attackrate_option.Remove(type);
+                        break;
+                    }
+                case "ELEMENT_INC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ELEMENT_TYPE, double>).Type_name;
+                        ELEMENT_TYPE type = (ELEMENT_TYPE)Enum.Parse(typeof(ELEMENT_TYPE), typeName);
+                        now_item.ELEMENT_INC_OPTION.Remove(type);
+                        break;
+                    }
+                case "ELEMENT_DEC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ELEMENT_TYPE, double>).Type_name;
+                        ELEMENT_TYPE type = (ELEMENT_TYPE)Enum.Parse(typeof(ELEMENT_TYPE), typeName);
+                        now_item.ELEMENT_DEC_OPTION.Remove(type);
+                        break;
+                    }
+                case "SIZE_INC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_SIZE, double>).Type_name;
+                        MONSTER_SIZE type = (MONSTER_SIZE)Enum.Parse(typeof(MONSTER_SIZE), typeName);
+                        now_item.SIZE_INC_OPTION.Remove(type);
+                        break;
+                    }
+                case "SIZE_DEC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_SIZE, double>).Type_name;
+                        MONSTER_SIZE type = (MONSTER_SIZE)Enum.Parse(typeof(MONSTER_SIZE), typeName);
+                        now_item.SIZE_DEC_OPTION.Remove(type);
+                        break;
+                    }
+                case "TRIBE_INC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<TRIBE_TYPE, double>).Type_name;
+                        TRIBE_TYPE type = (TRIBE_TYPE)Enum.Parse(typeof(TRIBE_TYPE), typeName);
+                        now_item.TRIBE_INC_OPTION.Remove(type);
+                        break;
+                    }
+                case "TRIBE_DEC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<TRIBE_TYPE, double>).Type_name;
+                        TRIBE_TYPE type = (TRIBE_TYPE)Enum.Parse(typeof(TRIBE_TYPE), typeName);
+                        now_item.TRIBE_DEC_OPTION.Remove(type);
+                        break;
+                    }
+                case "MOBTYPE_INC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_TYPE, double>).Type_name;
+                        MONSTER_TYPE type = (MONSTER_TYPE)Enum.Parse(typeof(MONSTER_TYPE), typeName);
+                        now_item.MOBTYPE_INC_OPTION.Remove(type);
+                        break;
+                    }
+                case "MOBTYPE_DEC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_TYPE, double>).Type_name;
+                        MONSTER_TYPE type = (MONSTER_TYPE)Enum.Parse(typeof(MONSTER_TYPE), typeName);
+                        now_item.MOBTYPE_DEC_OPTION.Remove(type);
+                        break;
+                    }
+                case "ETC_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ETC_TYPE, double>).Type_name;
+                        ETC_TYPE type = (ETC_TYPE)Enum.Parse(typeof(ETC_TYPE), typeName);
+                        now_item.ETC_OPTION.Remove(type);
+                        break;
+                    }
+                case "ETC_INC_DAMAGE_TYPE":
+                    {
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ETC_INC_DAMAGE_TYPE, double>).Type_name;
+                        ETC_INC_DAMAGE_TYPE type = (ETC_INC_DAMAGE_TYPE)Enum.Parse(typeof(ETC_INC_DAMAGE_TYPE), typeName);
+                        now_item.ETC_INC_DAMAGE_OPTION.Remove(type);
+                        break;
+                    }
+                default:
+                    MessageBox.Show("선언되지 않은 case가 존재합니다");
+                    break;
+            }
+            SetNowItemOption();
         }
     }
 }

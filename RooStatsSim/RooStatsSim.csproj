@@ -117,6 +117,7 @@
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\Definition.cs" />
     <Compile Include="DB\ItemDB.cs" />
+    <Compile Include="DB\Table\EnumDetailProperty_Kor.cs" />
     <Compile Include="DB\Table\EnumProperty_Kor.cs" />
     <Compile Include="DB\Table\MedalTable.cs" />
     <Compile Include="DB\Table\RidingTable.cs" />
