@@ -281,7 +281,7 @@ namespace RooStatsSim.UI.Manager
                 bool value = false;
                 if (joblist.Contains(job))
                     value = true;
-                Add(new AbilityBinding<bool>(EnumProperty_Kor.JOB_SELECT_LIST_KOR_3WORD[job], value, false, Enum.GetName(typeof(JOB_SELECT_LIST), job)));
+                Add(new AbilityBinding<bool>(EnumBaseTable_Kor.JOB_SELECT_LIST_KOR_3WORD[job], value, false, Enum.GetName(typeof(JOB_SELECT_LIST), job)));
             }
         }
 

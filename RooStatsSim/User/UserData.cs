@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Collections.Generic;
-using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 using RooStatsSim.Equation;
 using RooStatsSim.User;
 

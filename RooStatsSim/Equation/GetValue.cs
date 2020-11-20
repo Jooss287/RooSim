@@ -59,7 +59,7 @@ namespace RooStatsSim.Equation
         public double ElementIncreseDamage() { return DefaultOneValue(user.User_Item.ELEMENT_INC_OPTION, (ELEMENT_TYPE)MenuBox._roo_db.Mob_db[user.SelectedEnemy].Element); }
         public double TribeIncreseDamage() { return DefaultOneValue(user.User_Item.TRIBE_INC_OPTION, (TRIBE_TYPE)MenuBox._roo_db.Mob_db[user.SelectedEnemy].Tribe); }
         public double SizeIncreseDamage() { return DefaultOneValue(user.User_Item.SIZE_INC_OPTION, (MONSTER_SIZE)MenuBox._roo_db.Mob_db[user.SelectedEnemy].Size); }
-        public double MonsterTypeIncreseDamage() { return DefaultOneValue(user.User_Item.MOBTYPE_INC_OPTION, (MONSTER_TYPE)0); } //MenuBox._roo_db.Mob_db[user.SelectedEnemy].IsBoss)}
+        public double MonsterTypeIncreseDamage() { return DefaultOneValue(user.User_Item.MOBTYPE_INC_OPTION, (MONSTER_KINDS_TYPE)0); } //MenuBox._roo_db.Mob_db[user.SelectedEnemy].IsBoss)}
         public double WeaponSizePanelty() { return AdvantageTable.GetSizePanelty(user.Equip.List[(int)EQUIP_TYPE_ENUM.WEAPON].Equip.Weapon_type, (MONSTER_SIZE)MenuBox._roo_db.Mob_db[user.SelectedEnemy].Size); }
         public double ElementInteraction() { return AdvantageTable.GetElementRatio(user.User_Item.AttackerElement, (ELEMENT_TYPE)MenuBox._roo_db.Mob_db[user.SelectedEnemy].Element); }
     }

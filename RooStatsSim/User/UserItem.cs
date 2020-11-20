@@ -1,4 +1,5 @@
 ﻿using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -38,8 +39,8 @@ namespace RooStatsSim.User
             AddOption<MONSTER_SIZE>(ref a.size_dec_option, b.size_dec_option);
             AddOption<TRIBE_TYPE>(ref a.tribe_inc_option, b.tribe_inc_option);
             AddOption<TRIBE_TYPE>(ref a.tribe_dec_option, b.tribe_dec_option);
-            AddOption<MONSTER_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
-            AddOption<MONSTER_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
+            AddOption<MONSTER_KINDS_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
+            AddOption<MONSTER_KINDS_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
             return a;
         }
 

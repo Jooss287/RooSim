@@ -46,7 +46,7 @@ namespace RooStatsSim.UI.Manager
 
             foreach (EQUIP_TYPE_ENUM equip in Enum.GetValues(typeof(EQUIP_TYPE_ENUM)))
             {
-                string statusName = EnumProperty_Kor.EQUIP_TYPE_ENUM_KOR[equip];
+                string statusName = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR[equip];
                 cmb_equip_type.Items.Add(statusName);
             }
             cmb_equip_type.SelectedIndex = (int)EQUIP_TYPE_ENUM.HEAD_TOP;
@@ -55,23 +55,21 @@ namespace RooStatsSim.UI.Manager
         {
             foreach (ITYPE option in Enum.GetValues(typeof(ITYPE)))
             {
-                string statusName = EnumProperty_Kor.ITYPE_KOR[option];
+                string statusName = EnumItemOptionTable_Kor.ITYPE_KOR[option];
                 cmb_Ioption.Items.Add(statusName);
                 cmb_refine_if_option.Items.Add(statusName);
             }
             foreach (DTYPE option in Enum.GetValues(typeof(DTYPE)))
             {
-                string statusName = EnumProperty_Kor.DTYPE_KOR[option];
+                string statusName = EnumItemOptionTable_Kor.DTYPE_KOR[option];
                 cmb_Doption.Items.Add(statusName);
                 cmb_refine_if_option.Items.Add(statusName);
             }
             foreach (STATUS_EFFECT_TYPE option in Enum.GetValues(typeof(STATUS_EFFECT_TYPE)))
             {
-                string statusName = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR[option];
+                string statusName = EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[option];
                 cmb_se_attackrate_option.Items.Add(statusName);
                 cmb_se_registance_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.ATTACK_RATE_OPTION_KOR);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.REGISTANCE_RATE_OPTION_KOR);
             }
             foreach (IFTYPE option in Enum.GetValues(typeof(IFTYPE)))
             {
@@ -80,46 +78,37 @@ namespace RooStatsSim.UI.Manager
             }
             foreach (ELEMENT_TYPE option in Enum.GetValues(typeof(ELEMENT_TYPE)))
             {
-                string statusName = EnumProperty_Kor.ELEMENT_TYPE_KOR[option];
+                string statusName = EnumBaseTable_Kor.ELEMENT_TYPE_KOR[option];
                 cmb_element_inc_option.Items.Add(statusName);
                 cmb_element_dec_option.Items.Add(statusName);
                 cmb_element_damage_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.MONSTER_INCREASE_RATE_OPTION_KOR);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.DECREASE_RATE_OPTION_KOR);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.INCREASE_RATE_OPTION_KOR);
             }
             foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
             {
-                string statusName = EnumProperty_Kor.MONSTER_SIZE_KOR[option];
+                string statusName = EnumBaseTable_Kor.MONSTER_SIZE_KOR[option];
                 cmb_size_inc_option.Items.Add(statusName);
                 cmb_size_dec_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.DECREASE_RATE_OPTION_KOR);
-                cmb_refine_if_option.Items.Add(statusName = EnumDetailProperty_Kor.INCREASE_RATE_OPTION_KOR);
             }
             foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
             {
-                string statusName = EnumProperty_Kor.TRIBE_TYPE_KOR[option];
+                string statusName = EnumBaseTable_Kor.TRIBE_TYPE_KOR[option];
                 cmb_tribe_inc_option.Items.Add(statusName);
                 cmb_tribe_dec_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.DECREASE_RATE_OPTION_KOR);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.INCREASE_RATE_OPTION_KOR);
             }
-            foreach (MONSTER_TYPE option in Enum.GetValues(typeof(MONSTER_TYPE)))
+            foreach (MONSTER_KINDS_TYPE option in Enum.GetValues(typeof(MONSTER_KINDS_TYPE)))
             {
-                string statusName = EnumProperty_Kor.MONSTER_TYPE_KOR[option];
+                string statusName = EnumBaseTable_Kor.MONSTER_KINDS_TYPE_KOR[option];
                 cmb_mobtype_inc_option.Items.Add(statusName);
                 cmb_mobtype_dec_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.DECREASE_RATE_OPTION_KOR);
-                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.INCREASE_RATE_OPTION_KOR);
             }
             foreach (ETC_TYPE option in Enum.GetValues(typeof(ETC_TYPE)))
             {
-                string statusName = EnumProperty_Kor.ETC_TYPE_KOR[option];
+                string statusName = EnumItemOptionTable_Kor.ETC_TYPE_KOR[option];
                 cmb_etc_option.Items.Add(statusName);
             }
-            foreach (ETC_INC_DAMAGE_TYPE option in Enum.GetValues(typeof(ETC_INC_DAMAGE_TYPE)))
+            foreach (ETC_DMG_TYPE option in Enum.GetValues(typeof(ETC_DMG_TYPE)))
             {
-                string statusName = EnumProperty_Kor.ETC_INC_DAMAGE_TYPE_KOR[option];
+                string statusName = EnumItemOptionTable_Kor.ETC_DMG_TYPE_KOR[option];
                 cmb_etc_inc_option.Items.Add(statusName);
             }
             for (int i = 0; i <= 20; ++i)
@@ -142,10 +131,10 @@ namespace RooStatsSim.UI.Manager
             list_tribe_dec_option.ItemsSource = new ItemOptionListBox<TRIBE_TYPE, double>(ref now_item.tribe_dec_option);
             list_size_inc_option.ItemsSource = new ItemOptionListBox<MONSTER_SIZE, double>(ref now_item.size_inc_option);
             list_size_dec_option.ItemsSource = new ItemOptionListBox<MONSTER_SIZE, double>(ref now_item.size_dec_option);
-            list_mobtype_inc_option.ItemsSource = new ItemOptionListBox<MONSTER_TYPE, double>(ref now_item.mobtype_inc_option);
-            list_mobtype_dec_option.ItemsSource = new ItemOptionListBox<MONSTER_TYPE, double>(ref now_item.mobtype_dec_option);
+            list_mobtype_inc_option.ItemsSource = new ItemOptionListBox<MONSTER_KINDS_TYPE, double>(ref now_item.mobtype_inc_option);
+            list_mobtype_dec_option.ItemsSource = new ItemOptionListBox<MONSTER_KINDS_TYPE, double>(ref now_item.mobtype_dec_option);
             list_etc_option.ItemsSource = new ItemOptionListBox<ETC_TYPE, double>(ref now_item.etc_option);
-            list_etc_inc_option.ItemsSource = new ItemOptionListBox<ETC_INC_DAMAGE_TYPE, double>(ref now_item.etc_inc_damage_option);
+            list_etc_inc_option.ItemsSource = new ItemOptionListBox<ETC_DMG_TYPE, double>(ref now_item.etc_inc_damage_option);
             
             //list_refine_if_option.ItemsSource = new ItemOptionListBox<>
         }
@@ -326,13 +315,13 @@ namespace RooStatsSim.UI.Manager
             {
                 case "ITYPE":
                     {
-                        ITYPE type = EnumProperty_Kor.ITYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ITYPE type = EnumItemOptionTable_Kor.ITYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.i_option[type] = Convert.ToInt32(AddValue.Text);
                         break;
                     }
                 case "DTYPE":
                     {
-                        DTYPE type = EnumProperty_Kor.DTYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        DTYPE type = EnumItemOptionTable_Kor.DTYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.d_option[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
@@ -346,73 +335,73 @@ namespace RooStatsSim.UI.Manager
                     }
                 case "SE_ATTACKRATE_TYPE":
                     {
-                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        STATUS_EFFECT_TYPE type = EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.SE_ATTACKRATE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "SE_REGISTANCE_TYPE":
                     {
-                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        STATUS_EFFECT_TYPE type = EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.SE_REGISTANCE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ELEMENT_INC_TYPE":
                     {
-                        ELEMENT_TYPE type = EnumProperty_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ELEMENT_TYPE type = EnumBaseTable_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.ELEMENT_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ELEMENT_DEC_TYPE":
                     {
-                        ELEMENT_TYPE type = EnumProperty_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ELEMENT_TYPE type = EnumBaseTable_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.ELEMENT_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "SIZE_INC_TYPE":
                     {
-                        MONSTER_SIZE type = EnumProperty_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        MONSTER_SIZE type = EnumBaseTable_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.SIZE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "SIZE_DEC_TYPE":
                     {
-                        MONSTER_SIZE type = EnumProperty_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        MONSTER_SIZE type = EnumBaseTable_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.SIZE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "TRIBE_INC_TYPE":
                     {
-                        TRIBE_TYPE type = EnumProperty_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        TRIBE_TYPE type = EnumBaseTable_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.TRIBE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "TRIBE_DEC_TYPE":
                     {
-                        TRIBE_TYPE type = EnumProperty_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        TRIBE_TYPE type = EnumBaseTable_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.TRIBE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "MOBTYPE_INC_TYPE":
                     {
-                        MONSTER_TYPE type = EnumProperty_Kor.MONSTER_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        MONSTER_KINDS_TYPE type = EnumBaseTable_Kor.MONSTER_KINDS_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.MOBTYPE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "MOBTYPE_DEC_TYPE":
                     {
-                        MONSTER_TYPE type = EnumProperty_Kor.MONSTER_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        MONSTER_KINDS_TYPE type = EnumBaseTable_Kor.MONSTER_KINDS_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.MOBTYPE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ETC_TYPE":
                     {
-                        ETC_TYPE type = EnumProperty_Kor.ETC_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ETC_TYPE type = EnumItemOptionTable_Kor.ETC_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.ETC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ETC_INC_DAMAGE_TYPE":
                     {
-                        ETC_INC_DAMAGE_TYPE type = EnumProperty_Kor.ETC_INC_DAMAGE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ETC_DMG_TYPE type = EnumItemOptionTable_Kor.ETC_DMG_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.ETC_INC_DAMAGE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
@@ -514,15 +503,15 @@ namespace RooStatsSim.UI.Manager
                     }
                 case "MOBTYPE_INC_TYPE":
                     {
-                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_TYPE, double>).Type_name;
-                        MONSTER_TYPE type = (MONSTER_TYPE)Enum.Parse(typeof(MONSTER_TYPE), typeName);
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_KINDS_TYPE, double>).Type_name;
+                        MONSTER_KINDS_TYPE type = (MONSTER_KINDS_TYPE)Enum.Parse(typeof(MONSTER_KINDS_TYPE), typeName);
                         now_item.MOBTYPE_INC_OPTION.Remove(type);
                         break;
                     }
                 case "MOBTYPE_DEC_TYPE":
                     {
-                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_TYPE, double>).Type_name;
-                        MONSTER_TYPE type = (MONSTER_TYPE)Enum.Parse(typeof(MONSTER_TYPE), typeName);
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_KINDS_TYPE, double>).Type_name;
+                        MONSTER_KINDS_TYPE type = (MONSTER_KINDS_TYPE)Enum.Parse(typeof(MONSTER_KINDS_TYPE), typeName);
                         now_item.MOBTYPE_DEC_OPTION.Remove(type);
                         break;
                     }
@@ -535,8 +524,8 @@ namespace RooStatsSim.UI.Manager
                     }
                 case "ETC_INC_DAMAGE_TYPE":
                     {
-                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ETC_INC_DAMAGE_TYPE, double>).Type_name;
-                        ETC_INC_DAMAGE_TYPE type = (ETC_INC_DAMAGE_TYPE)Enum.Parse(typeof(ETC_INC_DAMAGE_TYPE), typeName);
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ETC_DMG_TYPE, double>).Type_name;
+                        ETC_DMG_TYPE type = (ETC_DMG_TYPE)Enum.Parse(typeof(ETC_DMG_TYPE), typeName);
                         now_item.ETC_INC_DAMAGE_OPTION.Remove(type);
                         break;
                     }
@@ -595,13 +584,13 @@ namespace RooStatsSim.UI.Manager
             {
                 case "ITYPE":
                     {
-                        ITYPE type = EnumProperty_Kor.ITYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ITYPE type = EnumItemOptionTable_Kor.ITYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.i_option[type] = Convert.ToInt32(AddValue.Text);
                         break;
                     }
                 case "DTYPE":
                     {
-                        DTYPE type = EnumProperty_Kor.DTYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        DTYPE type = EnumItemOptionTable_Kor.DTYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.d_option[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
@@ -615,73 +604,73 @@ namespace RooStatsSim.UI.Manager
                     }
                 case "SE_ATTACKRATE_TYPE":
                     {
-                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        STATUS_EFFECT_TYPE type = EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.SE_ATTACKRATE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "SE_REGISTANCE_TYPE":
                     {
-                        STATUS_EFFECT_TYPE type = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        STATUS_EFFECT_TYPE type = EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.SE_REGISTANCE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ELEMENT_INC_TYPE":
                     {
-                        ELEMENT_TYPE type = EnumProperty_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ELEMENT_TYPE type = EnumBaseTable_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.ELEMENT_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ELEMENT_DEC_TYPE":
                     {
-                        ELEMENT_TYPE type = EnumProperty_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ELEMENT_TYPE type = EnumBaseTable_Kor.ELEMENT_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.ELEMENT_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "SIZE_INC_TYPE":
                     {
-                        MONSTER_SIZE type = EnumProperty_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        MONSTER_SIZE type = EnumBaseTable_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.SIZE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "SIZE_DEC_TYPE":
                     {
-                        MONSTER_SIZE type = EnumProperty_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        MONSTER_SIZE type = EnumBaseTable_Kor.MONSTER_SIZE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.SIZE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "TRIBE_INC_TYPE":
                     {
-                        TRIBE_TYPE type = EnumProperty_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        TRIBE_TYPE type = EnumBaseTable_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.TRIBE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "TRIBE_DEC_TYPE":
                     {
-                        TRIBE_TYPE type = EnumProperty_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        TRIBE_TYPE type = EnumBaseTable_Kor.TRIBE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.TRIBE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "MOBTYPE_INC_TYPE":
                     {
-                        MONSTER_TYPE type = EnumProperty_Kor.MONSTER_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        MONSTER_KINDS_TYPE type = EnumBaseTable_Kor.MONSTER_KINDS_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.MOBTYPE_INC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "MOBTYPE_DEC_TYPE":
                     {
-                        MONSTER_TYPE type = EnumProperty_Kor.MONSTER_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        MONSTER_KINDS_TYPE type = EnumBaseTable_Kor.MONSTER_KINDS_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.MOBTYPE_DEC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ETC_TYPE":
                     {
-                        ETC_TYPE type = EnumProperty_Kor.ETC_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ETC_TYPE type = EnumItemOptionTable_Kor.ETC_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.ETC_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
                 case "ETC_INC_DAMAGE_TYPE":
                     {
-                        ETC_INC_DAMAGE_TYPE type = EnumProperty_Kor.ETC_INC_DAMAGE_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
+                        ETC_DMG_TYPE type = EnumItemOptionTable_Kor.ETC_DMG_TYPE_KOR.FirstOrDefault(x => x.Value == typeName).Key;
                         now_item.ETC_INC_DAMAGE_OPTION[type] = Convert.ToDouble(AddValue.Text);
                         break;
                     }
@@ -783,15 +772,15 @@ namespace RooStatsSim.UI.Manager
                     }
                 case "MOBTYPE_INC_TYPE":
                     {
-                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_TYPE, double>).Type_name;
-                        MONSTER_TYPE type = (MONSTER_TYPE)Enum.Parse(typeof(MONSTER_TYPE), typeName);
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_KINDS_TYPE, double>).Type_name;
+                        MONSTER_KINDS_TYPE type = (MONSTER_KINDS_TYPE)Enum.Parse(typeof(MONSTER_KINDS_TYPE), typeName);
                         now_item.MOBTYPE_INC_OPTION.Remove(type);
                         break;
                     }
                 case "MOBTYPE_DEC_TYPE":
                     {
-                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_TYPE, double>).Type_name;
-                        MONSTER_TYPE type = (MONSTER_TYPE)Enum.Parse(typeof(MONSTER_TYPE), typeName);
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<MONSTER_KINDS_TYPE, double>).Type_name;
+                        MONSTER_KINDS_TYPE type = (MONSTER_KINDS_TYPE)Enum.Parse(typeof(MONSTER_KINDS_TYPE), typeName);
                         now_item.MOBTYPE_DEC_OPTION.Remove(type);
                         break;
                     }
@@ -804,8 +793,8 @@ namespace RooStatsSim.UI.Manager
                     }
                 case "ETC_INC_DAMAGE_TYPE":
                     {
-                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ETC_INC_DAMAGE_TYPE, double>).Type_name;
-                        ETC_INC_DAMAGE_TYPE type = (ETC_INC_DAMAGE_TYPE)Enum.Parse(typeof(ETC_INC_DAMAGE_TYPE), typeName);
+                        string typeName = (OptionList.SelectedItem as ItemOption_Binding<ETC_DMG_TYPE, double>).Type_name;
+                        ETC_DMG_TYPE type = (ETC_DMG_TYPE)Enum.Parse(typeof(ETC_DMG_TYPE), typeName);
                         now_item.ETC_INC_DAMAGE_OPTION.Remove(type);
                         break;
                     }

@@ -47,7 +47,7 @@ namespace RooStatsSim.UI.Manager
         }
         public string Tribe_Kor
         {
-            get { return EnumProperty_Kor.TRIBE_TYPE_KOR[(TRIBE_TYPE)_tribe]; }
+            get { return EnumBaseTable_Kor.TRIBE_TYPE_KOR[(TRIBE_TYPE)_tribe]; }
         }
         public new int Element
         {
@@ -56,7 +56,7 @@ namespace RooStatsSim.UI.Manager
         }
         public string Element_Kor
         {
-            get { return EnumProperty_Kor.ELEMENT_TYPE_KOR[(ELEMENT_TYPE)_element]; }
+            get { return EnumBaseTable_Kor.ELEMENT_TYPE_KOR[(ELEMENT_TYPE)_element]; }
         }
         public new int Size
         {
@@ -65,7 +65,7 @@ namespace RooStatsSim.UI.Manager
         }
         public string Size_Kor
         {
-            get { return EnumProperty_Kor.MONSTER_SIZE_KOR[(MONSTER_SIZE)_size]; }
+            get { return EnumBaseTable_Kor.MONSTER_SIZE_KOR[(MONSTER_SIZE)_size]; }
         }
         public new int Atk
         {

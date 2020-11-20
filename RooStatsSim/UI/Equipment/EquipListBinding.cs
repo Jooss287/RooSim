@@ -1,5 +1,6 @@
 ﻿using RooStatsSim;
 using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.User;

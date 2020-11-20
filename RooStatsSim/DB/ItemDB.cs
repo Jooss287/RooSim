@@ -8,164 +8,10 @@ using System.Reflection;
 
 using RooStatsSim.DB;
 using RooStatsSim.User;
+using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.DB
 {
-    public enum ITEM_TYPE_ENUM
-    {
-        MONSTER_RESEARCH,
-        STICKER,
-        DRESS_STYLE,
-        EQUIPMENT,
-        CARD,
-        ENCHANT,
-        GEAR,
-    }
-
-    public enum EQUIP_TYPE_ENUM
-    {
-        HEAD_TOP,
-        HEAD_MID,
-        HEAD_BOT,
-        WEAPON,
-        ARMOR,
-        SUB_WEAPON,
-        CLOAK,
-        SHOES,
-        ACCESSORIES1,
-        ACCESSORIES2,
-        COSTUME,
-        BACK_DECORATION,
-    }
-    public enum JOB_SELECT_LIST
-    {
-        NOVICE = 0,
-        SWORDMAN = 100,
-        KNIGHT = 110,
-        CRUSADER = 120,
-        MARCHANT = 200,
-        BLACKSMITH = 210,
-        ALCHEMIST = 220,
-        THIEF = 300,
-        ASSASSIN = 310,
-        LOGUE = 320,
-        ARCHER = 400,
-        HUNTER = 410,
-        BARD = 420,
-        DANCER = 430,
-        MAGICIAN = 500,
-        WIZARD = 510,
-        SAGE = 520,
-        ACOLYTE = 600,
-        PRIST = 610,
-        MONK = 620,
-    }
-
-    public enum ITYPE
-    {
-        STR = 0000,     //스테이터스 관련 스텟
-        AGI,
-        VIT,
-        INT,
-        DEX,
-        LUK,
-        ATK = 1000,     //공격력 관련 스텟
-        MATK,
-        SMELTING_ATK,
-        SMELTING_MATK,
-        WEAPON_ATK,
-        WEAPON_MATK,
-        STATUS_ATK,
-        STATUS_MATK,
-        MASTERY_ATK,
-        MASTERY_MATK,
-        PHYSICAL_DAMAGE_ADDITIONAL,
-        MAGICAL_DAMAGE_ADDITIONAL,
-        DEF = 2000,     //방어력 관련 스텟
-        MDEF,
-        SMELTING_DEF,
-        SMELTING_MDEF,
-        HP = 3000,      //HP,SP 관련 스텟
-        SP,
-        HP_RECOVERY,
-        SP_RECOVERY,
-        FLEE = 4000,    //회피명중 관련 스텟
-        HIT,
-        CRI = 5000,     //크리율 관련 스텟
-        CDEF,
-    }
-
-    public enum DTYPE
-    {
-        ATK_P = 1000,
-        MATK_P,
-        PHYSICAL_DAMAGE,
-        MAGICAL_DAMAGE,
-        IGNORE_PHYSICAL_DEFENSE,
-        IGNORE_MAGICAL_DEFENSE,
-        MELEE_PHYSICAL_DAMAGE,
-        RANGE_PHYSICAL_DAMAGE,
-        DEF_P = 2000,
-        MDEF_P,
-        PHYSICAL_DEC_DAMAGE,
-        MAGICAL_DEC_DAMAGE,
-        MELEE_PHYSICAL_DEC_DAMAGE,
-        RANGE_PHYSICAL_DEC_DAMAGE,
-        MAX_HP_P = 3000,
-        MAX_SP_P,
-        SP_WASTE,
-        ASPD = 6000,    //기타 관련 스텟
-        MOVING_SPEED,
-        HEALING,
-        HEALING_RECERIVED,
-        VERIABLE_CASTING,
-        FIXED_CASTING,
-        COMMON_SKILL_DELAY,
-    }
-    public enum IFTYPE
-    {
-        ATK_PER_STR,
-        ATK_PER_AGI,
-        HP_PER_VIT,
-        MATK_PER_INT,
-        ASPD_PER_AGI,
-        PHYSICAL_DAMAGE_PER_HIT,
-        ADDITIONAL_PHYSICAL_DAMAGE_PER_FIXED,
-        
-        //REFINE 관련
-        HP_PER_REFINE = 1000,
-        
-        //TRIBE 관련
-        CRI_TO_TRIBE = 2000,
-
-        //SIMPLE IF
-        ATK_MORETHAN_STR,
-    }
-    public enum STATUS_EFFECT_TYPE
-    {
-        STERN,
-        FEAR,
-        SILENCE,
-        FROZEN,
-        CURSE,
-        PETRIFICATION,
-        DARK,
-        POISON,
-        SLEEP
-    }
-    public enum ETC_TYPE
-    {
-        NO_SIZE_PANELTY,
-        NO_BREAK,
-    }
-    public enum ETC_INC_DAMAGE_TYPE
-    {
-        OAK_INC_DAMAGE,
-        KOBOLD_INC_DAMAGE,
-        GOBLIN_INC_DAMAGE,
-        ALL_MONSTERS_DAMAGE,
-    }
-
     [Serializable]
     public class ItemDB
     {
@@ -180,6 +26,8 @@ namespace RooStatsSim.DB
             CardSlot = item_db.CardSlot;
             EnchantSlot = item_db.EnchantSlot;
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
+
+
             i_option = new Dictionary<ITYPE, int>(item_db.i_option);
             d_option = new Dictionary<DTYPE, double>(item_db.d_option);
             if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
@@ -194,10 +42,10 @@ namespace RooStatsSim.DB
             size_dec_option = new Dictionary<MONSTER_SIZE, double>(item_db.size_dec_option);
             tribe_inc_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_inc_option);
             tribe_dec_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_dec_option);
-            mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>(item_db.mobtype_inc_option);
-            mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>(item_db.mobtype_dec_option);
+            mobtype_inc_option = new Dictionary<MONSTER_KINDS_TYPE, double>(item_db.mobtype_inc_option);
+            mobtype_dec_option = new Dictionary<MONSTER_KINDS_TYPE, double>(item_db.mobtype_dec_option);
             etc_option = new Dictionary<ETC_TYPE, double>(item_db.etc_option);
-            etc_inc_damage_option = new Dictionary<ETC_INC_DAMAGE_TYPE, double>(item_db.etc_inc_damage_option);
+            etc_inc_damage_option = new Dictionary<ETC_DMG_TYPE, double>(item_db.etc_inc_damage_option);
         }
         public ItemDB() { }
 
@@ -215,10 +63,10 @@ namespace RooStatsSim.DB
             AddOption<MONSTER_SIZE>(ref a.size_dec_option, b.size_dec_option);
             AddOption<TRIBE_TYPE>(ref a.tribe_inc_option, b.tribe_inc_option);
             AddOption<TRIBE_TYPE>(ref a.tribe_dec_option, b.tribe_dec_option);
-            AddOption<MONSTER_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
-            AddOption<MONSTER_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
+            AddOption<MONSTER_KINDS_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
+            AddOption<MONSTER_KINDS_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
             AddOption<ETC_TYPE>(ref a.etc_option, b.etc_option);
-            AddOption<ETC_INC_DAMAGE_TYPE>(ref a.etc_inc_damage_option, b.etc_inc_damage_option);
+            AddOption<ETC_DMG_TYPE>(ref a.etc_inc_damage_option, b.etc_inc_damage_option);
             return a;
         }
         
@@ -296,11 +144,11 @@ namespace RooStatsSim.DB
         public Dictionary<MONSTER_SIZE, double> size_dec_option = new Dictionary<MONSTER_SIZE, double>();
         public Dictionary<TRIBE_TYPE, double> tribe_inc_option = new Dictionary<TRIBE_TYPE, double>();
         public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
-        public Dictionary<MONSTER_TYPE, double> mobtype_inc_option = new Dictionary<MONSTER_TYPE, double>();
-        public Dictionary<MONSTER_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_TYPE, double>();
+        public Dictionary<MONSTER_KINDS_TYPE, double> mobtype_inc_option = new Dictionary<MONSTER_KINDS_TYPE, double>();
+        public Dictionary<MONSTER_KINDS_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_KINDS_TYPE, double>();
 
         public Dictionary<ETC_TYPE, double> etc_option = new Dictionary<ETC_TYPE, double>();
-        public Dictionary<ETC_INC_DAMAGE_TYPE, double> etc_inc_damage_option = new Dictionary<ETC_INC_DAMAGE_TYPE, double>();
+        public Dictionary<ETC_DMG_TYPE, double> etc_inc_damage_option = new Dictionary<ETC_DMG_TYPE, double>();
 
         #region property
         public int Id
@@ -409,7 +257,7 @@ namespace RooStatsSim.DB
             get { return tribe_inc_option; }
             set { tribe_inc_option = value; }
         }
-        public Dictionary<MONSTER_TYPE, double> MOBTYPE_INC_OPTION
+        public Dictionary<MONSTER_KINDS_TYPE, double> MOBTYPE_INC_OPTION
         {
             get { return mobtype_inc_option; }
             set { mobtype_inc_option = value; }
@@ -429,7 +277,7 @@ namespace RooStatsSim.DB
             get { return tribe_dec_option; }
             set { tribe_dec_option = value; }
         }
-        public Dictionary<MONSTER_TYPE, double> MOBTYPE_DEC_OPTION
+        public Dictionary<MONSTER_KINDS_TYPE, double> MOBTYPE_DEC_OPTION
         {
             get { return mobtype_dec_option; }
             set { mobtype_dec_option = value; }
@@ -439,7 +287,7 @@ namespace RooStatsSim.DB
             get { return etc_option; }
             set { etc_option = value; }
         }
-        public Dictionary<ETC_INC_DAMAGE_TYPE, double> ETC_INC_DAMAGE_OPTION
+        public Dictionary<ETC_DMG_TYPE, double> ETC_INC_DAMAGE_OPTION
         {
             get { return etc_inc_damage_option; }
             set { etc_inc_damage_option = value; }
