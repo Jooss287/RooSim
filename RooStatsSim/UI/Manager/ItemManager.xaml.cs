@@ -70,8 +70,8 @@ namespace RooStatsSim.UI.Manager
                 string statusName = EnumProperty_Kor.STATUS_EFFECT_TYPE_KOR[option];
                 cmb_se_attackrate_option.Items.Add(statusName);
                 cmb_se_registance_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName+"공격확률");
-                cmb_refine_if_option.Items.Add(statusName+"저항확률");
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.ATTACK_RATE_OPTION_KOR);
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.REGISTANCE_RATE_OPTION_KOR);
             }
             foreach (IFTYPE option in Enum.GetValues(typeof(IFTYPE)))
             {
@@ -84,33 +84,33 @@ namespace RooStatsSim.UI.Manager
                 cmb_element_inc_option.Items.Add(statusName);
                 cmb_element_dec_option.Items.Add(statusName);
                 cmb_element_damage_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add("몬스터("+statusName+")증뎀");
-                cmb_refine_if_option.Items.Add(statusName+"저항");
-                cmb_refine_if_option.Items.Add(statusName+"데미지");
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.MONSTER_INCREASE_RATE_OPTION_KOR);
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.DECREASE_RATE_OPTION_KOR);
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.INCREASE_RATE_OPTION_KOR);
             }
             foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
             {
                 string statusName = EnumProperty_Kor.MONSTER_SIZE_KOR[option];
                 cmb_size_inc_option.Items.Add(statusName);
                 cmb_size_dec_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName+"증뎀");
-                cmb_refine_if_option.Items.Add(statusName+"저항");
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.DECREASE_RATE_OPTION_KOR);
+                cmb_refine_if_option.Items.Add(statusName = EnumDetailProperty_Kor.INCREASE_RATE_OPTION_KOR);
             }
             foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
             {
                 string statusName = EnumProperty_Kor.TRIBE_TYPE_KOR[option];
                 cmb_tribe_inc_option.Items.Add(statusName);
                 cmb_tribe_dec_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName+"증뎀");
-                cmb_refine_if_option.Items.Add(statusName+"저항");
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.DECREASE_RATE_OPTION_KOR);
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.INCREASE_RATE_OPTION_KOR);
             }
             foreach (MONSTER_TYPE option in Enum.GetValues(typeof(MONSTER_TYPE)))
             {
                 string statusName = EnumProperty_Kor.MONSTER_TYPE_KOR[option];
                 cmb_mobtype_inc_option.Items.Add(statusName);
                 cmb_mobtype_dec_option.Items.Add(statusName);
-                cmb_refine_if_option.Items.Add(statusName+"증뎀");
-                cmb_refine_if_option.Items.Add(statusName + "저항");
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.DECREASE_RATE_OPTION_KOR);
+                cmb_refine_if_option.Items.Add(statusName + EnumDetailProperty_Kor.INCREASE_RATE_OPTION_KOR);
             }
             foreach (ETC_TYPE option in Enum.GetValues(typeof(ETC_TYPE)))
             {
