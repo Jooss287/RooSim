@@ -6,13 +6,96 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.DB.Table
 {
+    class EnumItemOptionTable_Kor2
+    {
+        public static string STR_ATK_RATE = "발생 확률";
+        public static string STR_REG_RATE = "저항 확률";
+        public static string STR_DMG = "증가데미지";
+        public static string STR_REG = "감소데미지";
+        public static string STR_MONSTER = "몬스터에게 ";
+        public static Dictionary<ITYPE, string> ITYPE_KOR = new Dictionary<ITYPE, string>()
+        {
+            {ITYPE.STR, "STR" },
+            {ITYPE.AGI, "AGI" },
+            {ITYPE.VIT, "VIT"},
+            {ITYPE.INT, "INT"},
+            {ITYPE.DEX, "DEX" },
+            {ITYPE.LUK, "LUK" },
+            {ITYPE.ATK, "ATK" },
+            {ITYPE.MATK, "MATK" },
+            {ITYPE.SMELTING_ATK, "제련 ATK" },
+            {ITYPE.SMELTING_MATK, "제련 MATK" },
+            {ITYPE.WEAPON_ATK, "무기 ATK" },
+            {ITYPE.WEAPON_MATK, "무기 MATK" },
+            {ITYPE.STATUS_ATK, "STAT ATK" },
+            {ITYPE.STATUS_MATK, "STAT MATK" },
+            {ITYPE.MASTERY_ATK, "마스터리 ATK" },
+            {ITYPE.MASTERY_MATK, "마스터리 MATK" },
+            {ITYPE.PHYSICAL_DAMAGE_ADDITIONAL, "추가 물리 데미지" },
+            {ITYPE.MAGICAL_DAMAGE_ADDITIONAL, "추가 마법 데미지" },
+            {ITYPE.DEF, "DEF" },
+            {ITYPE.MDEF, "MDEF" },
+            {ITYPE.SMELTING_DEF, "제련 DEF" },
+            {ITYPE.SMELTING_MDEF,"제련 MDEF" },
+            {ITYPE.HP,"HP" },
+            {ITYPE.SP,"SP" },
+            {ITYPE.HP_RECOVERY,"HP 자연 회복" },
+            {ITYPE.SP_RECOVERY,"SP 자연 회복" },
+            {ITYPE.FLEE,"FLEE" },
+            {ITYPE.HIT,"HIT" },
+            {ITYPE.CRI,"CRI" },
+            {ITYPE.CDEF,"CDEF" },
+        };
+        public static Dictionary<DTYPE, string> DTYPE_KOR = new Dictionary<DTYPE, string>()
+        {
+            {DTYPE.ATK_P, "ATK %" },
+            {DTYPE.MATK_P, "MATK %" },
+            {DTYPE.PHYSICAL_DAMAGE, "물리 데미지(%)" },
+            {DTYPE.MAGICAL_DAMAGE, "마법 데미지(%)" },
+            {DTYPE.IGNORE_PHYSICAL_DEFENSE, "물리 방어 무시(%)" },
+            {DTYPE.IGNORE_MAGICAL_DEFENSE, "마법 방어 무시(%)" },
+            {DTYPE.MELEE_PHYSICAL_DAMAGE, "원거리 물리 데미지(%)" },
+            {DTYPE.RANGE_PHYSICAL_DAMAGE, "원거리 물리 데미지(%)" },
+            {DTYPE.PHYSICAL_DEC_DAMAGE, "물리 데미지 감소(%)" },
+            {DTYPE.MAGICAL_DEC_DAMAGE, "마법 데미지 감소(%)" },
+            {DTYPE.MELEE_PHYSICAL_DEC_DAMAGE, "근거리 물리 데미지 감소(%)" },
+            {DTYPE.RANGE_PHYSICAL_DEC_DAMAGE, "원거리 물리 데미지 감소(%)" },
+            {DTYPE.DEF_P, "DEF %" },
+            {DTYPE.MDEF_P, "MDEF %" },
+            {DTYPE.MAX_HP_P, "HP %" },
+            {DTYPE.MAX_SP_P, "SP %" },
+            {DTYPE.SP_WASTE, "SP 소모" },
+            {DTYPE.ASPD, "ASPD" },
+            {DTYPE.MOVING_SPEED,"이동속도" },
+            {DTYPE.HEALING,"치유량 증가(%)" },
+            {DTYPE.HEALING_RECERIVED,"받는 치유량(%)" },
+            {DTYPE.VERIABLE_CASTING,"변동 캐스팅(%)" },
+            {DTYPE.FIXED_CASTING,"고정 캐스팅(%)" },
+            {DTYPE.COMMON_SKILL_DELAY,"스킬 후 딜레이(%)" },
+        };
+        public static Dictionary<SE_ATK_RATE_TYPE, string> SE_ATK_RATE_TYPE_KOR = new Dictionary<SE_ATK_RATE_TYPE, string>()
+        {
+            {SE_ATK_RATE_TYPE.STERN_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.STERN] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.FEAR_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.FEAR] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.SILENCE_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.SILENCE] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.FROZEN_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.FROZEN] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.CURSE_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.CURSE] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.PETRIFICATION_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.PETRIFICATION] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.DARK_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.DARK] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.POISON_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.POISON] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.SLEEP_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.SLEEP] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.SLEEP_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.SLEEP] +"발생 확률" },
+            {SE_ATK_RATE_TYPE.BLEEDING_ATK_RATE, EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.BLEEDING] +"발생 확률" },
+        };
+    }
     class EnumItemOptionTable_Kor
     {
-        public const string STR_ATK_RATE = "발생 확률";
-        public const string STR_REG_RATE = "저항 확률";
-        public const string STR_DMG = "증가데미지";
-        public const string STR_REG = "감소데미지";
-        public const string STR_MONSTER = "몬스터에게 ";
+        public static string STR_ATK_RATE = "발생 확률";
+        public static string STR_REG_RATE = "저항 확률";
+        public static string STR_DMG = "증가데미지";
+        public static string STR_REG = "감소데미지";
+        public static string STR_MONSTER = "몬스터에게 ";
+
         public static Dictionary<ITYPE, string> ITYPE_KOR = new Dictionary<ITYPE, string>()
         {
             {ITYPE.STR, "STR" },
@@ -145,11 +228,11 @@ namespace RooStatsSim.DB.Table
             { MONSTER_SIZE_DMG_TYPE.MIDDLE_DMG, EnumBaseTable_Kor.MONSTER_SIZE_KOR[MONSTER_SIZE.MIDDLE] + STR_DMG },
             { MONSTER_SIZE_DMG_TYPE.LARGE_DMG, EnumBaseTable_Kor.MONSTER_SIZE_KOR[MONSTER_SIZE.LARGE] + STR_DMG },
         };
-        public static Dictionary<MONSTER_SIZE_REG_SIZE, string> MONSTER_SIZE_REG_SIZE_KOR = new Dictionary<MONSTER_SIZE_REG_SIZE, string>()
+        public static Dictionary<MONSTER_SIZE_REG_TYPE, string> MONSTER_SIZE_REG_TYPE_KOR = new Dictionary<MONSTER_SIZE_REG_TYPE, string>()
         {
-            { MONSTER_SIZE_REG_SIZE.SMALL_REG, EnumBaseTable_Kor.MONSTER_SIZE_KOR[MONSTER_SIZE.SMALL] + STR_REG },
-            { MONSTER_SIZE_REG_SIZE.MIDDLE_REG, EnumBaseTable_Kor.MONSTER_SIZE_KOR[MONSTER_SIZE.MIDDLE] + STR_REG },
-            { MONSTER_SIZE_REG_SIZE.LARGE_REG, EnumBaseTable_Kor.MONSTER_SIZE_KOR[MONSTER_SIZE.LARGE] + STR_REG },
+            { MONSTER_SIZE_REG_TYPE.SMALL_REG, EnumBaseTable_Kor.MONSTER_SIZE_KOR[MONSTER_SIZE.SMALL] + STR_REG },
+            { MONSTER_SIZE_REG_TYPE.MIDDLE_REG, EnumBaseTable_Kor.MONSTER_SIZE_KOR[MONSTER_SIZE.MIDDLE] + STR_REG },
+            { MONSTER_SIZE_REG_TYPE.LARGE_REG, EnumBaseTable_Kor.MONSTER_SIZE_KOR[MONSTER_SIZE.LARGE] + STR_REG },
         };
         public static Dictionary<MONSTER_ELEMENT_DMG_TYPE, string> MONSTER_ELEMENT_DMG_TYPE_KOR = new Dictionary<MONSTER_ELEMENT_DMG_TYPE, string>()
         {

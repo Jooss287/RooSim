@@ -155,7 +155,7 @@ namespace RooStatsSim.DB.Table
         MIDDLE_DMG,
         LARGE_DMG,
     }
-    public enum MONSTER_SIZE_REG_SIZE
+    public enum MONSTER_SIZE_REG_TYPE
     {
         SMALL_REG,
         MIDDLE_REG,

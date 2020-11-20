@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 using RooStatsSim.DB;
 using RooStatsSim.User;
@@ -27,76 +28,33 @@ namespace RooStatsSim.DB
             EnchantSlot = item_db.EnchantSlot;
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
 
-
-            i_option = new Dictionary<ITYPE, int>(item_db.i_option);
-            d_option = new Dictionary<DTYPE, double>(item_db.d_option);
-            if_option = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.if_option);
-
-
-            se_attackrate_option = new Dictionary<STATUS_EFFECT_TYPE, double>(item_db.se_attackrate_option);
-            se_resistance_option = new Dictionary<STATUS_EFFECT_TYPE, double>(item_db.se_resistance_option);
-            element_inc_option = new Dictionary<ELEMENT_TYPE, double>(item_db.element_inc_option);
-            element_dec_option = new Dictionary<ELEMENT_TYPE, double>(item_db.element_dec_option);
-            element_damage_option = new Dictionary<ELEMENT_TYPE, double>(item_db.element_damage_option);
-            size_inc_option = new Dictionary<MONSTER_SIZE, double>(item_db.size_inc_option);
-            size_dec_option = new Dictionary<MONSTER_SIZE, double>(item_db.size_dec_option);
-            tribe_inc_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_inc_option);
-            tribe_dec_option = new Dictionary<TRIBE_TYPE, double>(item_db.tribe_dec_option);
-            mobtype_inc_option = new Dictionary<MONSTER_KINDS_TYPE, double>(item_db.mobtype_inc_option);
-            mobtype_dec_option = new Dictionary<MONSTER_KINDS_TYPE, double>(item_db.mobtype_dec_option);
-            etc_option = new Dictionary<ETC_TYPE, double>(item_db.etc_option);
-            etc_inc_damage_option = new Dictionary<ETC_DMG_TYPE, double>(item_db.etc_inc_damage_option);
+            Option = new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>(item_db.Option);
         }
         public ItemDB() { }
 
         public static ItemDB operator +(ItemDB a, ItemDB b)
         {
-            AddOption<ITYPE>(ref a.i_option, b.i_option);
-            AddOption<DTYPE>(ref a.d_option, b.d_option);
+            foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in b.Option)
+            {
+                if (a.Option.ContainsKey(item_option.Key) == true)
+                {
+                    foreach(KeyValuePair<string, double> detail_option in item_option.Value)
+                    {
+                        if (a.Option[item_option.Key].ContainsKey(detail_option.Key) == true)
+                        {
+                            a.Option[item_option.Key][detail_option.Key] += detail_option.Value;
+                        }
+                        else
+                            a.Option[item_option.Key][detail_option.Key] = detail_option.Value;
+                    }
+                }
+                else
+                {
+                    a.Option[item_option.Key] = item_option.Value;
+                }
+            }
             AddOption(ref a.if_option, b.if_option);
-            AddOption<STATUS_EFFECT_TYPE>(ref a.se_attackrate_option, b.se_attackrate_option);
-            AddOption<STATUS_EFFECT_TYPE>(ref a.se_resistance_option, b.se_resistance_option);
-            AddOption<ELEMENT_TYPE>(ref a.element_inc_option, b.element_inc_option);
-            AddOption<ELEMENT_TYPE>(ref a.element_dec_option, b.element_dec_option);
-            AddOption<ELEMENT_TYPE>(ref a.element_damage_option, b.element_damage_option);
-            AddOption<MONSTER_SIZE>(ref a.size_inc_option, b.size_inc_option);
-            AddOption<MONSTER_SIZE>(ref a.size_dec_option, b.size_dec_option);
-            AddOption<TRIBE_TYPE>(ref a.tribe_inc_option, b.tribe_inc_option);
-            AddOption<TRIBE_TYPE>(ref a.tribe_dec_option, b.tribe_dec_option);
-            AddOption<MONSTER_KINDS_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
-            AddOption<MONSTER_KINDS_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
-            AddOption<ETC_TYPE>(ref a.etc_option, b.etc_option);
-            AddOption<ETC_DMG_TYPE>(ref a.etc_inc_damage_option, b.etc_inc_damage_option);
             return a;
-        }
-        
-        protected static void AddOption<T1>(ref Dictionary<T1, int> a, Dictionary<T1, int> b)
-        {
-            foreach (KeyValuePair<T1, int> opt in b)
-            {
-                if (a.ContainsKey(opt.Key) == true)
-                {
-                    a[opt.Key] = a[opt.Key] + opt.Value;
-                }
-                else
-                {
-                    a[opt.Key] = opt.Value;
-                }
-            }
-        }
-        protected static void AddOption<T1>(ref Dictionary<T1, double> a, Dictionary<T1, double> b)
-        {
-            foreach (KeyValuePair<T1, double> opt in b)
-            {
-                if (a.ContainsKey(opt.Key) == true)
-                {
-                    a[opt.Key] = a[opt.Key] + opt.Value;
-                }
-                else
-                {
-                    a[opt.Key] = opt.Value;
-                }
-            }
         }
         protected static void AddOption(ref Dictionary<IFTYPE, AbilityPerStatus> a, Dictionary<IFTYPE, AbilityPerStatus> b)
         {
@@ -129,28 +87,12 @@ namespace RooStatsSim.DB
         protected ELEMENT_TYPE _attacker_element;
         protected ELEMENT_TYPE _defenser_element;
         public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
-        public Dictionary<ITYPE, int> i_option = new Dictionary<ITYPE, int>();
-        public Dictionary<DTYPE, double> d_option = new Dictionary<DTYPE, double>();
+
+        protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
         public Dictionary<IFTYPE, AbilityPerStatus> if_option = new Dictionary<IFTYPE, AbilityPerStatus>();
 
-        public Dictionary<STATUS_EFFECT_TYPE, double> se_attackrate_option = new Dictionary<STATUS_EFFECT_TYPE, double>();
-        public Dictionary<STATUS_EFFECT_TYPE, double> se_resistance_option = new Dictionary<STATUS_EFFECT_TYPE, double>();
 
-        public Dictionary<ELEMENT_TYPE, double> element_inc_option = new Dictionary<ELEMENT_TYPE, double>();
-        public Dictionary<ELEMENT_TYPE, double> element_dec_option = new Dictionary<ELEMENT_TYPE, double>();
-        public Dictionary<ELEMENT_TYPE, double> element_damage_option = new Dictionary<ELEMENT_TYPE, double>();
-
-        public Dictionary<MONSTER_SIZE, double> size_inc_option = new Dictionary<MONSTER_SIZE, double>();
-        public Dictionary<MONSTER_SIZE, double> size_dec_option = new Dictionary<MONSTER_SIZE, double>();
-        public Dictionary<TRIBE_TYPE, double> tribe_inc_option = new Dictionary<TRIBE_TYPE, double>();
-        public Dictionary<TRIBE_TYPE, double> tribe_dec_option = new Dictionary<TRIBE_TYPE, double>();
-        public Dictionary<MONSTER_KINDS_TYPE, double> mobtype_inc_option = new Dictionary<MONSTER_KINDS_TYPE, double>();
-        public Dictionary<MONSTER_KINDS_TYPE, double> mobtype_dec_option = new Dictionary<MONSTER_KINDS_TYPE, double>();
-
-        public Dictionary<ETC_TYPE, double> etc_option = new Dictionary<ETC_TYPE, double>();
-        public Dictionary<ETC_DMG_TYPE, double> etc_inc_damage_option = new Dictionary<ETC_DMG_TYPE, double>();
-
-        #region property
+        #region Property
         public int Id
         {
             get { return _id; }
@@ -191,6 +133,21 @@ namespace RooStatsSim.DB
             get { return _defenser_element; }
             set { _defenser_element = value; }
         }
+        public Dictionary<ITEM_OPTION_TYPE, Dictionary<string,double>> Option
+        {
+            get
+            {
+                if (_option == null)
+                    _option = new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>();
+                return _option;
+            }
+            set { _option = value; }
+        }
+        public Dictionary<IFTYPE, AbilityPerStatus> IF_OPTION
+        {
+            get { return if_option; }
+            set { if_option = value; }
+        }
         public ITEM_TYPE_ENUM Item_type
         {
             get { return _item_type; }
@@ -211,86 +168,188 @@ namespace RooStatsSim.DB
             get { return _wear_job_limit; }
             set { _wear_job_limit = value; }
         }
-        public Dictionary<ITYPE, int> I_OPTION
-        {
-            get { return i_option; }
-            set { i_option = value; }
-        }
-        public Dictionary<DTYPE, double> D_OPTION
-        {
-            get { return d_option; }
-            set { d_option = value; }
-        }
-        public Dictionary<IFTYPE, AbilityPerStatus> IF_OPTION
-        {
-            get { return if_option; }
-            set { if_option = value; }
-        }
+        #endregion
 
-        public Dictionary<STATUS_EFFECT_TYPE, double> SE_ATTACKRATE_OPTION
+        #region ShortCut OptionAccess
+        [JsonIgnore] public Dictionary<string, double> Option_ITYPE
         {
-            get { return se_attackrate_option; }
-            set { se_attackrate_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.ITYPE))
+                    Option.Add(ITEM_OPTION_TYPE.ITYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.ITYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.ITYPE] = value;
+            }
         }
-        public Dictionary<STATUS_EFFECT_TYPE, double> SE_REGISTANCE_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_DTYPE
         {
-            get { return se_resistance_option; }
-            set { se_resistance_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.DTYPE))
+                    Option.Add(ITEM_OPTION_TYPE.DTYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.DTYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.DTYPE] = value;
+            }
         }
-        public Dictionary<ELEMENT_TYPE, double> ELEMENT_INC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_SE_ATK_RATE_TYPE
         {
-            get { return element_inc_option; }
-            set { element_inc_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE] = value;
+            }
         }
-        public Dictionary<ELEMENT_TYPE, double> ELEMENT_DAMAGE_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_SE_REG_RATE_TYPE
         {
-            get { return element_damage_option; }
-            set { element_damage_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.SE_REG_RATE_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.SE_REG_RATE_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.SE_REG_RATE_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.SE_REG_RATE_TYPE] = value;
+            }
         }
-        public Dictionary<MONSTER_SIZE, double> SIZE_INC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_TRIBE_DMG_TYPE
         {
-            get { return size_inc_option; }
-            set { size_inc_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.TRIBE_DMG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.TRIBE_DMG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.TRIBE_DMG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.TRIBE_DMG_TYPE] = value;
+            }
         }
-        public Dictionary<TRIBE_TYPE, double> TRIBE_INC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_TRIBE_REG_TYPE
         {
-            get { return tribe_inc_option; }
-            set { tribe_inc_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.TRIBE_REG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.TRIBE_REG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.TRIBE_REG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.TRIBE_REG_TYPE] = value;
+            }
         }
-        public Dictionary<MONSTER_KINDS_TYPE, double> MOBTYPE_INC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_MONSTER_KINDS_DMG_TYPE
         {
-            get { return mobtype_inc_option; }
-            set { mobtype_inc_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE] = value;
+            }
         }
-        public Dictionary<ELEMENT_TYPE, double> ELEMENT_DEC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_MONSTER_KINDS_REG_TYPE
         {
-            get { return element_dec_option; }
-            set { element_dec_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE] = value;
+            }
         }
-        public Dictionary<MONSTER_SIZE, double> SIZE_DEC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_MONSTER_SIZE_DMG_TYPE
         {
-            get { return size_dec_option; }
-            set { size_dec_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE] = value;
+            }
         }
-        public Dictionary<TRIBE_TYPE, double> TRIBE_DEC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_MONSTER_SIZE_REG_TYPE
         {
-            get { return tribe_dec_option; }
-            set { tribe_dec_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE] = value;
+            }
         }
-        public Dictionary<MONSTER_KINDS_TYPE, double> MOBTYPE_DEC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_MONSTER_ELEMENT_DMG_TYPE
         {
-            get { return mobtype_dec_option; }
-            set { mobtype_dec_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE] = value;
+            }
         }
-        public Dictionary<ETC_TYPE, double> ETC_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_ELEMENT_DMG_TYPE
         {
-            get { return etc_option; }
-            set { etc_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE] = value;
+            }
         }
-        public Dictionary<ETC_DMG_TYPE, double> ETC_INC_DAMAGE_OPTION
+        [JsonIgnore] public Dictionary<string, double> Option_ELEMENT_REG_TYPE
         {
-            get { return etc_inc_damage_option; }
-            set { etc_inc_damage_option = value; }
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.ELEMENT_REG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.ELEMENT_REG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.ELEMENT_REG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.ELEMENT_REG_TYPE] = value;
+            }
+        }
+        [JsonIgnore] public Dictionary<string, double> Option_ETC_TYPE
+        {
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.ETC_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.ETC_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.ETC_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.ETC_TYPE] = value;
+            }
+        }
+        [JsonIgnore] public Dictionary<string, double> Option_ETC_DMG_TYPE
+        {
+            get {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.ETC_DMG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.ETC_DMG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.ETC_DMG_TYPE]; 
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.ETC_DMG_TYPE] = value;
+            }
         }
         #endregion
     }
@@ -329,45 +388,46 @@ namespace RooStatsSim.DB
         public ItemDB ATK_PER_STR(UserData user)
         {
             ItemDB item = new ItemDB();
-            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.STR) / PerValue) * AddValue);
+            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.ATK), (int)(user.Status.GetStatus(STATUS_ENUM.STR) / PerValue) * AddValue);
             return item;
         }
         public ItemDB ATK_PER_AGI(UserData user)
         {
             ItemDB item = new ItemDB();
-            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.AGI) / PerValue) * AddValue);
+            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.ATK), (int)(user.Status.GetStatus(STATUS_ENUM.AGI) / PerValue) * AddValue);
             return item;
         }
         public ItemDB HP_PER_VIT(UserData user)
         {
             ItemDB item = new ItemDB();
-            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.VIT) / PerValue) * AddValue);
+            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.HP), (int)(user.Status.GetStatus(STATUS_ENUM.VIT) / PerValue) * AddValue);
             return item;
         }
         public ItemDB MATK_PER_INT(UserData user)
         {
             ItemDB item = new ItemDB();
-            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.INT) / PerValue) * AddValue);
+            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.MATK), (int)(user.Status.GetStatus(STATUS_ENUM.INT) / PerValue) * AddValue);
             return item;
         }
         public ItemDB ASPD_PER_AGI(UserData user)
         {
             ItemDB item = new ItemDB();
-            item.i_option.Add(ITYPE.STR, (int)(user.Status.GetStatus(STATUS_ENUM.AGI) / PerValue) * AddValue);
+            item.Option[ITEM_OPTION_TYPE.DTYPE].Add(Enum.GetName(typeof(DTYPE), DTYPE.ASPD), (int)(user.Status.GetStatus(STATUS_ENUM.AGI) / PerValue) * AddValue);
             return item;
         }
         public ItemDB PHYSICAL_DAMAGE_PER_HIT(UserData user)
         {
             ItemDB item = new ItemDB();
-            double physical_damage = user.User_Item.i_option[ITYPE.HIT] / PerValue * AddValue;
-            item.d_option.Add(DTYPE.PHYSICAL_DAMAGE, physical_damage);
+            int hit = Convert.ToInt32(user.User_Item.Option[ITEM_OPTION_TYPE.ITYPE][Enum.GetName(typeof(ITYPE), ITYPE.HIT)]);
+            double physical_damage = hit / PerValue * AddValue;
+            item.Option[ITEM_OPTION_TYPE.DTYPE].Add(Enum.GetName(typeof(DTYPE), DTYPE.PHYSICAL_DAMAGE), physical_damage);
             return item;
         }
         public ItemDB ADDITIONAL_PHYSICAL_DAMAGE_PER_FIXED(UserData user)
         {
             ItemDB item = new ItemDB();
             int physical_damage_add = 1;        //실험필요
-            item.i_option.Add(ITYPE.PHYSICAL_DAMAGE_ADDITIONAL, physical_damage_add);
+            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.PHYSICAL_DAMAGE_ADDITIONAL), physical_damage_add);
             return item;
         }
         public ItemDB CRI_TO_TRIBE(UserData user)
@@ -380,7 +440,7 @@ namespace RooStatsSim.DB
         {
             ItemDB item = new ItemDB();
             if (user.Status.GetStatus(STATUS_ENUM.STR) >= PerValue)
-                item.i_option.Add(ITYPE.ATK, AddValue);
+                item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.ATK), AddValue);
             return item;
         }
         #endregion
@@ -389,15 +449,16 @@ namespace RooStatsSim.DB
         public ItemDB HP_PER_REFINE(UserData user, int refine)
         {
             ItemDB item = new ItemDB();
-            int hp = user.User_Item.I_OPTION[ITYPE.HP] * AddValue / (refine / PerValue);
-            item.I_OPTION.Add(ITYPE.HP, hp);
+            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.HP), (int)(user.Status.GetStatus(STATUS_ENUM.VIT) / PerValue) * AddValue);
+            int hp = Convert.ToInt32(user.User_Item.Option[ITEM_OPTION_TYPE.ITYPE][Enum.GetName(typeof(ITYPE), ITYPE.HP)]) * AddValue / (refine / PerValue);
+            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.HP), hp);
             return item;
         }
         public ItemDB ELEMENT_DAMAGE_PER_REFINE(UserData user, int refine)
         {
             ItemDB item = new ItemDB();
             double element_damage = AddValue / (refine / PerValue);
-            item.element_damage_option.Add((ELEMENT_TYPE)Selected, element_damage);
+            item.Option[ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE].Add(Enum.GetName(typeof(ELEMENT_DMG_TYPE), (ELEMENT_DMG_TYPE)Selected), element_damage);
             return item;
         }
         #endregion

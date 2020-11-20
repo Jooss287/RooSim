@@ -44,20 +44,19 @@ namespace RooStatsSim.UI.Manager
             get { return _enchant_slot; }
             set { _enchant_slot = value; OnPropertyChanged("EnchantSlot"); }
         }
-        public string Itype_name
-        {
-           get { return Enum.GetName(typeof(ITYPE), i_option.Keys); }
-        }
+        //public string Itype_name
+        //{
+        //   get { return Enum.GetName(typeof(ITYPE), i_option.Keys); }
+        //}
         public int Count
         {
-            get { return i_option.Count + d_option.Count + if_option.Count + se_attackrate_option.Count; }
+            get { return Option.Count + if_option.Count; }
         }
 
-        public Dictionary<ITYPE, int> ITYPE_OPTION { get; set; }
-        public string Itype_value
-        {
-            get { return Convert.ToString(i_option.Values); }
-        }
+        //public string Itype_value
+        //{
+        //    get { return Convert.ToString(i_option.Values); }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -79,20 +78,8 @@ namespace RooStatsSim.UI.Manager
             Item_type = param.Item_type;
             Equip_type = param.Equip_type;
             Wear_job_limit = param.Wear_job_limit;
-            I_OPTION = param.I_OPTION;
-            d_option = param.d_option;
+            Option = param.Option;
             if_option = param.if_option;
-
-            se_attackrate_option = param.se_attackrate_option;
-            se_resistance_option = param.se_resistance_option;
-            element_inc_option = param.element_inc_option;
-            element_dec_option = param.element_dec_option;
-            size_inc_option = param.size_inc_option;
-            size_dec_option = param.size_dec_option;
-            tribe_inc_option = param.tribe_inc_option;
-            tribe_dec_option = param.tribe_dec_option;
-            mobtype_inc_option = param.mobtype_inc_option;
-            mobtype_dec_option = param.mobtype_dec_option;
         }
     }
 
@@ -153,24 +140,24 @@ namespace RooStatsSim.UI.Manager
         }
     }
 
-    class ItemOption_Binding<TYPE, D_TYPE> : INotifyPropertyChanged
+    class ItemOption_Binding : INotifyPropertyChanged
     {
         public ItemOption_Binding() { }
-        public ItemOption_Binding(KeyValuePair<TYPE, D_TYPE> db)
+        public ItemOption_Binding(KeyValuePair<string, double> db)
         {
-            _type_name = Enum.GetName(typeof(TYPE), db.Key);
+            _type_name = db.Key;
             _type_value = db.Value;
         }
 
         string _type_name;
-        D_TYPE _type_value;
+        double _type_value;
         public string Type_name
         { 
             get { return _type_name; } 
             set { _type_name = value; OnPropertyChanged("Type_name"); } 
         }
         
-        public D_TYPE Type_value
+        public double Type_value
         {
             get { return _type_value; }
             set { _type_value = value; OnPropertyChanged("Type_value"); }
@@ -187,12 +174,12 @@ namespace RooStatsSim.UI.Manager
         }
     }
 
-    class ItemOption_Binding : INotifyPropertyChanged
+    class ItemOption_Binding<TYPE> : INotifyPropertyChanged
     {
         public ItemOption_Binding() { }
-        public ItemOption_Binding(KeyValuePair<IFTYPE, AbilityPerStatus> db)
+        public ItemOption_Binding(KeyValuePair<TYPE, AbilityPerStatus> db)
         {
-            _type_name = Enum.GetName(typeof(IFTYPE), db.Key);
+            _type_name = Enum.GetName(typeof(TYPE), db.Key);
             _type_value = db.Value;
         }
 
@@ -247,27 +234,27 @@ namespace RooStatsSim.UI.Manager
             //}
         }
     }
-    class ItemOptionListBox<TYPE,D_TYPE> : ObservableCollection<ItemOption_Binding<TYPE,D_TYPE>>
-    {
-        public ItemOptionListBox()
-        { }
-        public ItemOptionListBox(ref Dictionary<TYPE, D_TYPE> DB)
-        {
-            foreach (KeyValuePair<TYPE, D_TYPE> items in DB)
-            {
-                Add(new ItemOption_Binding<TYPE,D_TYPE>(items)) ;
-            }
-        }
-    }
     class ItemOptionListBox : ObservableCollection<ItemOption_Binding>
     {
         public ItemOptionListBox()
         { }
-        public ItemOptionListBox(ref Dictionary<IFTYPE, AbilityPerStatus> DB)
+        public ItemOptionListBox(Dictionary<string, double> DB)
         {
-            foreach (KeyValuePair<IFTYPE, AbilityPerStatus> items in DB)
+            foreach (KeyValuePair<string, double> items in DB)
             {
-                Add(new ItemOption_Binding(items));
+                Add(new ItemOption_Binding(items)) ;
+            }
+        }
+    }
+    class ItemOptionListBox<TYPE> : ObservableCollection<ItemOption_Binding<TYPE>>
+    {
+        public ItemOptionListBox()
+        { }
+        public ItemOptionListBox(Dictionary<TYPE, AbilityPerStatus> DB)
+        {
+            foreach (KeyValuePair<TYPE, AbilityPerStatus> items in DB)
+            {
+                Add(new ItemOption_Binding<TYPE>(items));
             }
         }
     }

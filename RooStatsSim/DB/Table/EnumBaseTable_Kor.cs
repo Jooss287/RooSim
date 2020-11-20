@@ -10,7 +10,39 @@ namespace RooStatsSim.DB.Table
 {
     class EnumBaseTable_Kor
     {
-        
+        public static Dictionary<ITYPE, string> ITYPE_KOR = new Dictionary<ITYPE, string>()
+        {
+            {ITYPE.STR, "STR" },
+            {ITYPE.AGI, "AGI" },
+            {ITYPE.VIT, "VIT"},
+            {ITYPE.INT, "INT"},
+            {ITYPE.DEX, "DEX" },
+            {ITYPE.LUK, "LUK" },
+            {ITYPE.ATK, "ATK" },
+            {ITYPE.MATK, "MATK" },
+            {ITYPE.SMELTING_ATK, "제련 ATK" },
+            {ITYPE.SMELTING_MATK, "제련 MATK" },
+            {ITYPE.WEAPON_ATK, "무기 ATK" },
+            {ITYPE.WEAPON_MATK, "무기 MATK" },
+            {ITYPE.STATUS_ATK, "STAT ATK" },
+            {ITYPE.STATUS_MATK, "STAT MATK" },
+            {ITYPE.MASTERY_ATK, "마스터리 ATK" },
+            {ITYPE.MASTERY_MATK, "마스터리 MATK" },
+            {ITYPE.PHYSICAL_DAMAGE_ADDITIONAL, "추가 물리 데미지" },
+            {ITYPE.MAGICAL_DAMAGE_ADDITIONAL, "추가 마법 데미지" },
+            {ITYPE.DEF, "DEF" },
+            {ITYPE.MDEF, "MDEF" },
+            {ITYPE.SMELTING_DEF, "제련 DEF" },
+            {ITYPE.SMELTING_MDEF,"제련 MDEF" },
+            {ITYPE.HP,"HP" },
+            {ITYPE.SP,"SP" },
+            {ITYPE.HP_RECOVERY,"HP 자연 회복" },
+            {ITYPE.SP_RECOVERY,"SP 자연 회복" },
+            {ITYPE.FLEE,"FLEE" },
+            {ITYPE.HIT,"HIT" },
+            {ITYPE.CRI,"CRI" },
+            {ITYPE.CDEF,"CDEF" },
+        };
         public static Dictionary<STATUS_EFFECT_TYPE, string> STATUS_EFFECT_TYPE_KOR = new Dictionary<STATUS_EFFECT_TYPE, string>()
         {
             {STATUS_EFFECT_TYPE.STERN, "스턴" },

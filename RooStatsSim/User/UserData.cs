@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using RooStatsSim.DB.Table;
 using RooStatsSim.Equation;
@@ -54,7 +55,7 @@ namespace RooStatsSim.User
         {
             UserItem CalcUserItem = new UserItem();
 
-            CalcUserItem.i_option[ITYPE.STATUS_ATK] = StatusATK.GetStatusATK(ATTACK_TYPE.MELEE_TYPE, this);
+            CalcUserItem.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STATUS_ATK)] = StatusATK.GetStatusATK(ATTACK_TYPE.MELEE_TYPE, this);
 
             CalcUserItem += Monster_Research.GetOption();
             CalcUserItem += Dress_Style.GetOption();
