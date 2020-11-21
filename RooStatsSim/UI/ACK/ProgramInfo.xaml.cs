@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using RooStatsSim.Extension;
 using System.Text.Json;
 
@@ -8,7 +9,7 @@ namespace RooStatsSim.UI.ACK
     /// <summary>
     /// Thanks.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class ProgramInfo : Window
+    public partial class ProgramInfo : UserControl
     {
         // 프로그램 저작권 MIT 라이센스 공유
         const string _LICENSE = "Copyright (c) <2020> <Jooss287>\n" +
@@ -26,7 +27,8 @@ namespace RooStatsSim.UI.ACK
         const string _EMAIL = "Jooss287@gmail.com";
         // Library사용목록
         // 도와주신 분들
-        const string _THANKS= "[프론]백은하, [프론]써노, [프론]코로나바이러스, [프론]달토끼, [프론]렌탈히어로MK3, [프론]영혼의트롤링";
+        const string _THANKS= "[프론]백은하, [프론]써노, [프론]코로나바이러스, [프론]달토끼, [프론]렌탈히어로MK3, [프론]영혼의트롤링," +
+            "[모로크]롱롱, [프론]스눕";
 
         
 
@@ -50,16 +52,22 @@ namespace RooStatsSim.UI.ACK
         public static string GetLeastVersion()
         {
             string api_response = APIExtension.callWebClient(_LATEST_VER_API_URL);
-            var r = JsonDocument.Parse(api_response);
-            //return Convert.ToString(r["tag_name"]);
-            return "";
+            if (api_response == "")
+                return "";
+            JsonDocument document = JsonDocument.Parse(api_response);
+            JsonElement root = document.RootElement;
+            JsonElement tag_name = root.GetProperty("tag_name");
+            return tag_name.GetString();
         }
         public static string GetLeastURL()
         {
             string api_response = APIExtension.callWebClient(_LATEST_VER_API_URL);
-            var r = JsonDocument.Parse(api_response);
-            //return Convert.ToString(r["html_url"]);
-            return "";
+            if (api_response == "")
+                return "";
+            JsonDocument document = JsonDocument.Parse(api_response);
+            JsonElement root = document.RootElement;
+            JsonElement url_link = root.GetProperty("html_url");
+            return url_link.GetString();
         }
 
         public static bool IsLastestVer()

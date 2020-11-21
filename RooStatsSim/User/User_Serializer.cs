@@ -21,10 +21,14 @@ namespace RooStatsSim.User
             File.WriteAllText(file_name, jsonString);
         }
 
-        public static void ReadDB(ref UserData DB)
+        public static void ReadDB(ref UserData User)
         {
             if (!IsFileAvailable())
+            {
+                User = new UserData();
                 return;
+            }
+                
 
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
@@ -32,7 +36,7 @@ namespace RooStatsSim.User
             serializeOptions.WriteIndented = true;
 
             string jsonString = File.ReadAllText(file_name);
-            DB = JsonSerializer.Deserialize<UserData>(jsonString, serializeOptions);
+            User = JsonSerializer.Deserialize<UserData>(jsonString, serializeOptions);
         }
 
         public static bool IsFileAvailable()
