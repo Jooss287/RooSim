@@ -6,81 +6,6 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.DB.Table
 {
-    class EnumItemOptionTable_Kor2
-    {
-        public static string STR_ATK_RATE = "발생 확률";
-        public static string STR_REG_RATE = "저항 확률";
-        public static string STR_DMG = "증가데미지";
-        public static string STR_REG = "감소데미지";
-        public static string STR_MONSTER = "몬스터에게 ";
-        public static Dictionary<ITYPE, string> ITYPE_KOR = new Dictionary<ITYPE, string>()
-        {
-            {ITYPE.STR, "STR" },
-            {ITYPE.AGI, "AGI" },
-            {ITYPE.VIT, "VIT"},
-            {ITYPE.INT, "INT"},
-            {ITYPE.DEX, "DEX" },
-            {ITYPE.LUK, "LUK" },
-            {ITYPE.ATK, "ATK" },
-            {ITYPE.MATK, "MATK" },
-            {ITYPE.SMELTING_ATK, "제련 ATK" },
-            {ITYPE.SMELTING_MATK, "제련 MATK" },
-            {ITYPE.WEAPON_ATK, "무기 ATK" },
-            {ITYPE.WEAPON_MATK, "무기 MATK" },
-            {ITYPE.STATUS_ATK, "STAT ATK" },
-            {ITYPE.STATUS_MATK, "STAT MATK" },
-            {ITYPE.MASTERY_ATK, "마스터리 ATK" },
-            {ITYPE.MASTERY_MATK, "마스터리 MATK" },
-            {ITYPE.PHYSICAL_DAMAGE_ADDITIONAL, "추가 물리 데미지" },
-            {ITYPE.MAGICAL_DAMAGE_ADDITIONAL, "추가 마법 데미지" },
-            {ITYPE.DEF, "DEF" },
-            {ITYPE.MDEF, "MDEF" },
-            {ITYPE.SMELTING_DEF, "제련 DEF" },
-            {ITYPE.SMELTING_MDEF,"제련 MDEF" },
-            {ITYPE.HP,"HP" },
-            {ITYPE.SP,"SP" },
-            {ITYPE.HP_RECOVERY,"HP 자연 회복" },
-            {ITYPE.SP_RECOVERY,"SP 자연 회복" },
-            {ITYPE.FLEE,"FLEE" },
-            {ITYPE.HIT,"HIT" },
-            {ITYPE.CRI,"CRI" },
-            {ITYPE.CDEF,"CDEF" },
-        };
-        public static Dictionary<DTYPE, string> DTYPE_KOR = new Dictionary<DTYPE, string>()
-        {
-            {DTYPE.ATK_P, "ATK %" },
-            {DTYPE.MATK_P, "MATK %" },
-            {DTYPE.PHYSICAL_DAMAGE, "물리 데미지(%)" },
-            {DTYPE.MAGICAL_DAMAGE, "마법 데미지(%)" },
-            {DTYPE.IGNORE_PHYSICAL_DEFENSE, "물리 방어 무시(%)" },
-            {DTYPE.IGNORE_MAGICAL_DEFENSE, "마법 방어 무시(%)" },
-            {DTYPE.MELEE_PHYSICAL_DAMAGE, "원거리 물리 데미지(%)" },
-            {DTYPE.RANGE_PHYSICAL_DAMAGE, "원거리 물리 데미지(%)" },
-            {DTYPE.PHYSICAL_DEC_DAMAGE, "물리 데미지 감소(%)" },
-            {DTYPE.MAGICAL_DEC_DAMAGE, "마법 데미지 감소(%)" },
-            {DTYPE.MELEE_PHYSICAL_DEC_DAMAGE, "근거리 물리 데미지 감소(%)" },
-            {DTYPE.RANGE_PHYSICAL_DEC_DAMAGE, "원거리 물리 데미지 감소(%)" },
-            {DTYPE.DEF_P, "DEF %" },
-            {DTYPE.MDEF_P, "MDEF %" },
-            {DTYPE.MAX_HP_P, "HP %" },
-            {DTYPE.MAX_SP_P, "SP %" },
-            {DTYPE.SP_WASTE, "SP 소모" },
-            {DTYPE.ASPD, "ASPD" },
-            {DTYPE.MOVING_SPEED,"이동속도" },
-            {DTYPE.HEALING,"치유량 증가(%)" },
-            {DTYPE.HEALING_RECERIVED,"받는 치유량(%)" },
-            {DTYPE.VERIABLE_CASTING,"변동 캐스팅(%)" },
-            {DTYPE.FIXED_CASTING,"고정 캐스팅(%)" },
-            {DTYPE.COMMON_SKILL_DELAY,"스킬 후 딜레이(%)" },
-        };
-        public static Dictionary<SE_ATK_RATE_TYPE, string> SE_ATK_RATE_TYPE_KOR = new Dictionary<SE_ATK_RATE_TYPE, string>()
-        {
-            {SE_ATK_RATE_TYPE.STERN_ATK_RATE, "발생 확률" + EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.STERN]},
-            {SE_ATK_RATE_TYPE.FEAR_ATK_RATE, "발생 확률" + EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.FEAR] },
-            {SE_ATK_RATE_TYPE.SILENCE_ATK_RATE, "발생 확률"+ EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.SILENCE] },
-            {SE_ATK_RATE_TYPE.BLEEDING_ATK_RATE, "발생 확률" + EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.BLEEDING] },
-        };
-    }
     class EnumItemOptionTable_Kor
     {
         public static string STR_ATK_RATE = "발생 확률";
@@ -253,16 +178,16 @@ namespace RooStatsSim.DB.Table
         };
         public static Dictionary<ELEMENT_REG_TYPE, string> ELEMENT_REG_TYPE_KOR = new Dictionary<ELEMENT_REG_TYPE, string>()
         {
-            { ELEMENT_REG_TYPE.NORMAL_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.NORMAL] + STR_DMG },
-            { ELEMENT_REG_TYPE.WIND_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.WIND] + STR_DMG },
-            { ELEMENT_REG_TYPE.EARTH_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.EARTH] + STR_DMG },
-            { ELEMENT_REG_TYPE.FIRE_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.FIRE] + STR_DMG },
-            { ELEMENT_REG_TYPE.WATER_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.WATER] + STR_DMG },
-            { ELEMENT_REG_TYPE.POISON_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.POISON] + STR_DMG },
-            { ELEMENT_REG_TYPE.HOLY_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.HOLY] + STR_DMG },
-            { ELEMENT_REG_TYPE.DARK_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.DARK] + STR_DMG },
-            { ELEMENT_REG_TYPE.ASTRAL_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.ASTRAL] + STR_DMG },
-            { ELEMENT_REG_TYPE.UNDEAD_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.UNDEAD] + STR_DMG },
+            { ELEMENT_REG_TYPE.NORMAL_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.NORMAL] + STR_REG },
+            { ELEMENT_REG_TYPE.WIND_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.WIND] + STR_REG },
+            { ELEMENT_REG_TYPE.EARTH_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.EARTH] + STR_REG },
+            { ELEMENT_REG_TYPE.FIRE_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.FIRE] + STR_REG },
+            { ELEMENT_REG_TYPE.WATER_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.WATER] + STR_REG },
+            { ELEMENT_REG_TYPE.POISON_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.POISON] + STR_REG },
+            { ELEMENT_REG_TYPE.HOLY_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.HOLY] + STR_REG },
+            { ELEMENT_REG_TYPE.DARK_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.DARK] + STR_REG },
+            { ELEMENT_REG_TYPE.ASTRAL_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.ASTRAL] + STR_REG },
+            { ELEMENT_REG_TYPE.UNDEAD_REG, EnumBaseTable_Kor.ELEMENT_TYPE_KOR[ELEMENT_TYPE.UNDEAD] + STR_REG },
         };
         public static Dictionary<ETC_DMG_TYPE, string> ETC_DMG_TYPE_KOR = new Dictionary<ETC_DMG_TYPE, string>()
         {
@@ -276,5 +201,102 @@ namespace RooStatsSim.DB.Table
             { ETC_TYPE.NO_BREAK, "파괴 불가" },
             { ETC_TYPE.NO_SIZE_PANELTY, "체형 패널티 없음" },
         };
+
+        public static ITEM_OPTION_TYPE GET_ITEM_OPTION_TYPE(ref string option_name)
+        {
+            string intput_name = option_name;
+            if (ITYPE_KOR.ContainsValue(option_name))
+            {
+                ITYPE type = ITYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(ITYPE), type);
+                return ITEM_OPTION_TYPE.ITYPE;
+            }
+            if (DTYPE_KOR.ContainsValue(option_name))
+            {
+                DTYPE type = DTYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(DTYPE), type);
+                return ITEM_OPTION_TYPE.DTYPE;
+            }
+            if (SE_ATK_RATE_TYPE_KOR.ContainsValue(option_name))
+            {
+                SE_ATK_RATE_TYPE type = SE_ATK_RATE_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(SE_ATK_RATE_TYPE), type);
+                return ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE;
+            }
+            if (SE_REG_RATE_TYPE_KOR.ContainsValue(option_name))
+            {
+                SE_REG_RATE_TYPE type = SE_REG_RATE_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(SE_REG_RATE_TYPE), type);
+                return ITEM_OPTION_TYPE.SE_REG_RATE_TYPE;
+            }
+            if (TRIBE_DMG_TYPE_KOR.ContainsValue(option_name))
+            {
+                TRIBE_DMG_TYPE type = TRIBE_DMG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(TRIBE_DMG_TYPE), type);
+                return ITEM_OPTION_TYPE.TRIBE_DMG_TYPE;
+            }
+            if (TRIBE_REG_TYPE_KOR.ContainsValue(option_name))
+            {
+                TRIBE_REG_TYPE type = TRIBE_REG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(TRIBE_REG_TYPE), type);
+                return ITEM_OPTION_TYPE.TRIBE_REG_TYPE;
+            }
+            if (MONSTER_KINDS_DMG_TYPE_KOR.ContainsValue(option_name))
+            {
+                MONSTER_KINDS_DMG_TYPE type = MONSTER_KINDS_DMG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(MONSTER_KINDS_DMG_TYPE), type);
+                return ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE;
+            }
+            if (MONSTER_KINDS_REG_TYPE_KOR.ContainsValue(option_name))
+            {
+                MONSTER_KINDS_REG_TYPE type = MONSTER_KINDS_REG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(MONSTER_KINDS_REG_TYPE), type);
+                return ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE;
+            }
+            if (MONSTER_SIZE_DMG_TYPE_KOR.ContainsValue(option_name))
+            {
+                MONSTER_SIZE_DMG_TYPE type = MONSTER_SIZE_DMG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(MONSTER_SIZE_DMG_TYPE), type);
+                return ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE;
+            }
+            if (MONSTER_SIZE_REG_TYPE_KOR.ContainsValue(option_name))
+            {
+                MONSTER_SIZE_REG_TYPE type = MONSTER_SIZE_REG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(MONSTER_SIZE_REG_TYPE), type);
+                return ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE;
+            }
+            if (MONSTER_ELEMENT_DMG_TYPE_KOR.ContainsValue(option_name))
+            {
+                MONSTER_ELEMENT_DMG_TYPE type = MONSTER_ELEMENT_DMG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(MONSTER_ELEMENT_DMG_TYPE), type);
+                return ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE;
+            }
+            if (ELEMENT_DMG_TYPE_KOR.ContainsValue(option_name))
+            {
+                ELEMENT_DMG_TYPE type = ELEMENT_DMG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(ELEMENT_DMG_TYPE), type);
+                return ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE;
+            }
+            if (ELEMENT_REG_TYPE_KOR.ContainsValue(option_name))
+            {
+                ELEMENT_REG_TYPE type = ELEMENT_REG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(ELEMENT_REG_TYPE), type);
+                return ITEM_OPTION_TYPE.ELEMENT_REG_TYPE;
+            }
+            if (ETC_DMG_TYPE_KOR.ContainsValue(option_name))
+            {
+                ETC_DMG_TYPE type = ETC_DMG_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(ETC_DMG_TYPE), type);
+                return ITEM_OPTION_TYPE.ETC_DMG_TYPE;
+            }
+            if (ETC_TYPE_KOR.ContainsValue(option_name))
+            {
+                ETC_TYPE type = ETC_TYPE_KOR.FirstOrDefault(x => x.Value == intput_name).Key;
+                option_name = Enum.GetName(typeof(ETC_TYPE), type);
+                return ITEM_OPTION_TYPE.ETC_TYPE;
+            }
+            
+            return ITEM_OPTION_TYPE.ETC_TYPE;
+        }
     }
 }

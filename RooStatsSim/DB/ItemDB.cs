@@ -28,7 +28,24 @@ namespace RooStatsSim.DB
             EnchantSlot = item_db.EnchantSlot;
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
 
-            Option = new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>(item_db.Option);
+            IF_OPTION = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.IF_OPTION);
+            Option_ITYPE = new Dictionary<string, double>(item_db.Option_ITYPE);
+            Option_DTYPE = new Dictionary<string, double>(item_db.Option_DTYPE);
+            Option_SE_ATK_RATE_TYPE = new Dictionary<string, double>(item_db.Option_SE_ATK_RATE_TYPE);
+            Option_SE_REG_RATE_TYPE = new Dictionary<string, double>(item_db.Option_SE_REG_RATE_TYPE);
+            Option_ELEMENT_DMG_TYPE = new Dictionary<string, double>(item_db.Option_ELEMENT_DMG_TYPE);
+            Option_ELEMENT_REG_TYPE = new Dictionary<string, double>(item_db.Option_ELEMENT_REG_TYPE);
+            Option_MONSTER_ELEMENT_DMG_TYPE = new Dictionary<string, double>(item_db.Option_MONSTER_ELEMENT_DMG_TYPE);
+            Option_MONSTER_KINDS_DMG_TYPE = new Dictionary<string, double>(item_db.Option_MONSTER_KINDS_DMG_TYPE);
+            Option_MONSTER_KINDS_REG_TYPE = new Dictionary<string, double>(item_db.Option_MONSTER_KINDS_REG_TYPE);
+            Option_MONSTER_SIZE_DMG_TYPE = new Dictionary<string, double>(item_db.Option_MONSTER_SIZE_DMG_TYPE);
+            Option_MONSTER_SIZE_REG_TYPE = new Dictionary<string, double>(item_db.Option_MONSTER_SIZE_REG_TYPE);
+            Option_TRIBE_DMG_TYPE = new Dictionary<string, double>(item_db.Option_TRIBE_DMG_TYPE);
+            Option_TRIBE_REG_TYPE = new Dictionary<string, double>(item_db.Option_TRIBE_REG_TYPE);
+            Option_ETC_DMG_TYPE = new Dictionary<string, double>(item_db.Option_ETC_DMG_TYPE);
+            Option_ETC_TYPE = new Dictionary<string, double>(item_db.Option_ETC_TYPE);
+            
+            //Option = new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>(item_db.Option);
         }
         public ItemDB() { }
 
