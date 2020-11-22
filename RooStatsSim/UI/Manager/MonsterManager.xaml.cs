@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.UI.Manager
 {
@@ -31,6 +32,7 @@ namespace RooStatsSim.UI.Manager
             
             DataContext = now_mob;
             InitializeContents();
+            InitUIsetting();
 
             BindingMobList = new MonsterListBox(_DB.Mob_db);
             DB_ListBox.ItemsSource = BindingMobList;
@@ -46,7 +48,7 @@ namespace RooStatsSim.UI.Manager
             
             now_mob.Name = "";
             now_mob.Level = 0;
-            now_mob.IsBoss = false;
+            now_mob.Type = MONSTER_KINDS_TYPE.NORMAL;
             now_mob.Tribe = 0;
             now_mob.Element = 0;
             now_mob.Size = 0;
@@ -59,6 +61,16 @@ namespace RooStatsSim.UI.Manager
             now_mob.Flee = 0;
         }
         #endregion
+
+        void InitUIsetting()
+        {
+            foreach (MONSTER_KINDS_TYPE option in Enum.GetValues(typeof(MONSTER_KINDS_TYPE)))
+            {
+                string statusName = Enum.GetName(typeof(MONSTER_KINDS_TYPE), option);
+                cmb_monster_type.Items.Add(statusName);
+            }
+            cmb_monster_type.SelectedIndex = (int)MONSTER_KINDS_TYPE.NORMAL;
+        }
 
         #region To pass mainwindow
         private bool _isNew = false;
@@ -117,8 +129,13 @@ namespace RooStatsSim.UI.Manager
                 )
             );
         }
+
         #endregion
 
-        
+        private void cmb_monster_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MONSTER_KINDS_TYPE type = (MONSTER_KINDS_TYPE)(sender as ComboBox).SelectedIndex;
+            now_mob.Type = type;
+        }
     }
 }

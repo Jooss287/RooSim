@@ -34,7 +34,8 @@
             <GroupBox Header="DB Info" >
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="Boss/Mini" IsChecked="{Binding Path=IsBoss}" x:Name="checkBoss" Margin="5,5,5,5"/>
+                        <ComboBox Name="cmb_monster_type" SelectedIndex="0" Margin="5,5,5,5"
+                                  SelectionChanged="cmb_monster_type_SelectionChanged"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
@@ -98,7 +99,9 @@
                             </ComboBox>
                         </StackPanel>
                     </StackPanel>
-
+                    <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
+                        <!--스텟 정리-->
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                             <TextBlock Text="ATK" Width="40" TextAlignment="Center"/>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.DB
 {
@@ -11,30 +12,30 @@ namespace RooStatsSim.DB
     {
         public MonsterDB(MonsterDB monsterDB)
         {
-            _mob_id = monsterDB.MobId;
-            _name = monsterDB.Name;
-            _level = monsterDB.Level;
-            _isBoss = monsterDB.IsBoss;
-            _status = monsterDB.StatusInfo;
-            _tribe = monsterDB.Tribe;
-            _element = monsterDB.Element;
-            _size = monsterDB.Size;
-            _atk = monsterDB.Atk;
-            _matk = monsterDB.Matk;
-            _hp = monsterDB.Hp;
-            _def = monsterDB.Def;
-            _mdef = monsterDB.Mdef;
-            _hit = monsterDB.Hit;
-            _flee = monsterDB.Flee;
+            MobId = monsterDB.MobId;
+            Name = monsterDB.Name;
+            Level = monsterDB.Level;
+            Type = monsterDB.Type;
+            StatusInfo = monsterDB.StatusInfo;
+            Tribe = monsterDB.Tribe;
+            Element = monsterDB.Element;
+            Size = monsterDB.Size;
+            Atk = monsterDB.Atk;
+            Matk = monsterDB.Matk;
+            Hp = monsterDB.Hp;
+            Def = monsterDB.Def;
+            Mdef = monsterDB.Mdef;
+            Hit = monsterDB.Hit;
+            Flee = monsterDB.Flee;
         }
         public MonsterDB() { }
-        public MonsterDB(int mob_id, string name, int level, bool isBoss, Status status, int tribe, int element, int size,
+        public MonsterDB(int mob_id, string name, int level, MONSTER_KINDS_TYPE Type, Status status, int tribe, int element, int size,
             int atk, int matk, int hp, int def, int mdef, int hit, int flee)
         {
             _mob_id = mob_id;
             _name = name;
             _level = level;
-            _isBoss = isBoss;
+            _type = MONSTER_KINDS_TYPE.NORMAL;
             _tribe = tribe;
             _element = element;
             _size = size;
@@ -49,6 +50,7 @@ namespace RooStatsSim.DB
         protected int _mob_id;
         protected string _name;
         protected bool _isBoss;
+        protected MONSTER_KINDS_TYPE _type;
         protected int _level;
         protected Status _status = new Status();
         protected int _tribe;
@@ -77,10 +79,10 @@ namespace RooStatsSim.DB
             get { return _level; }
             set { _level = value; }
         }
-        public bool IsBoss
+        public MONSTER_KINDS_TYPE Type
         {
-            get { return _isBoss; }
-            set { _isBoss = value; }
+            get { return _type; }
+            set { _type = value; }
         }
         public Status StatusInfo
         {

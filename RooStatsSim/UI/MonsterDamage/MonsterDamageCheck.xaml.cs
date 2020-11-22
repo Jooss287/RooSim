@@ -5,6 +5,7 @@ using RooStatsSim.UI.Menu;
 using RooStatsSim.UI.Manager;
 using RooStatsSim.User;
 using RooStatsSim.Equation.Job;
+using RooStatsSim.DB.Table;
 using System;
 
 namespace RooStatsSim.UI.MonsterDamage
@@ -36,7 +37,7 @@ namespace RooStatsSim.UI.MonsterDamage
         {
             now_mob.Name = "";
             now_mob.Level = 0;
-            now_mob.IsBoss = false;
+            now_mob.Type = MONSTER_KINDS_TYPE.NORMAL;
             now_mob.Tribe = 0;
             now_mob.Element = 0;
             now_mob.Size = 0;
