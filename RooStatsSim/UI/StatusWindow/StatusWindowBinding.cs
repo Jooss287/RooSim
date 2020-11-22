@@ -96,13 +96,6 @@ namespace RooStatsSim.UI.StatusWindow
         }
         void AddType(UserData user_data, ITYPE type)
         {
-            string b = EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[STATUS_EFFECT_TYPE.BLEEDING];
-            string c = EnumItemOptionTable_Kor2.ITYPE_KOR[type];
-            if (EnumItemOptionTable_Kor.ITYPE_KOR.ContainsKey(type))
-            {
-                int a = 1;
-            }
-                
             string eng = Enum.GetName(typeof(ITYPE), type);
             this.Add(new AbilityBinding<double>(eng, user_data.User_Item.Option_ITYPE[Enum.GetName(typeof(ITYPE), type)], 0, Enum.GetName(typeof(ITYPE), type)));
         }
@@ -119,14 +112,14 @@ namespace RooStatsSim.UI.StatusWindow
                 ITYPE itype = (ITYPE)Enum.Parse(typeof(ITYPE), item.Key);
                 if (EnumList.NormalProperty.Contains(itype))
                     continue;
-                Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.ITYPE_KOR[itype], user_data.User_Item.Option_ITYPE[item.Key], 0, Enum.GetName(typeof(ITYPE), item.Key)));
+                Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.ITYPE_KOR[itype], (int)user_data.User_Item.Option_ITYPE[item.Key], 0, Enum.GetName(typeof(ITYPE), itype)));
             }
             foreach(KeyValuePair<string, double> item in user_data.User_Item.Option_DTYPE)
             {
-                DTYPE itype = (DTYPE)Enum.Parse(typeof(DTYPE), item.Key);
-                if ((itype == DTYPE.ASPD) || (itype == DTYPE.MOVING_SPEED))
+                DTYPE dtype = (DTYPE)Enum.Parse(typeof(DTYPE), item.Key);
+                if ((dtype == DTYPE.ASPD) || (dtype == DTYPE.MOVING_SPEED))
                     continue;
-                Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.DTYPE_KOR[itype], user_data.User_Item.Option_DTYPE[item.Key], 0, Enum.GetName(typeof(DTYPE), item.Key)));
+                Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.DTYPE_KOR[dtype], user_data.User_Item.Option_DTYPE[item.Key], 0, Enum.GetName(typeof(DTYPE), dtype)));
             }
         }
     }
