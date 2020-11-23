@@ -102,8 +102,8 @@ namespace RooStatsSim.UI.Menu
                 _parents._info = new ProgramInfo();
 
             _parents._info.Owner = _parents;
-            if (_parents._info.ShowDialog() == true) { 
-            }
+            if (_parents._info.ShowDialog() == true) { }
+            _parents._info = null;
         }
         #endregion
 

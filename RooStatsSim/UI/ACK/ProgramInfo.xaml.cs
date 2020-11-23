@@ -75,5 +75,10 @@ namespace RooStatsSim.UI.ACK
             return string.Equals(GetLeastVersion(), _PROGRAM_VER);
         }
         #endregion
+
+        private void WindowClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
