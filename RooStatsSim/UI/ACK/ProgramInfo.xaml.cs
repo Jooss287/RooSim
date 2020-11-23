@@ -9,7 +9,7 @@ namespace RooStatsSim.UI.ACK
     /// <summary>
     /// Thanks.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class ProgramInfo : UserControl
+    public partial class ProgramInfo : Window
     {
         // 프로그램 저작권 MIT 라이센스 공유
         const string _LICENSE = "Copyright (c) <2020> <Jooss287>\n" +

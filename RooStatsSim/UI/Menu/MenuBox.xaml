@@ -60,7 +60,8 @@
                         Click="DamageCheck_window_Click"/>
                 <Button Content="DBManager" Grid.Row="2" Grid.Column="1" Margin="1,1,1,1"
                         Click="DBManager_window_Click"/>
-                <Button Content="Info" Grid.Row="2" Grid.Column="2" Margin="1,1,1,1"/>
+                <Button Content="Info" Grid.Row="2" Grid.Column="2" Margin="1,1,1,1" Click="Info_window_Click">
+                </Button>
             </Grid>
         </StackPanel>
     </Grid>
