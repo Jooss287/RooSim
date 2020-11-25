@@ -14,7 +14,7 @@ namespace RooStatsSim.UI.ACK
         // 프로그램 저작권 MIT 라이센스 공유
         const string _LICENSE = "Copyright (c) <2020> <Jooss287>\n" +
                                 "이 프로그램은 오픈소스정신 하 MIT 라이센스를 가지며 사용자는 무상으로 취급해도 좋습니다." + 
-                                "단, 수정&배포 시 저작권 표시 및 허가 표시를 바랍니다.\n" +
+                                " 단, 수정&배포 시 저작권 표시 및 허가 표시를 바랍니다.\n" +
                                 "저자 또는 저작권자는 소프트웨어에 관해 아무런 책임을 지지 않습니다.";
         // 원작 라그나로크 오리진 안내
         const string _ROO_URL = "https://cafe.naver.com/ragnarokorigin";
