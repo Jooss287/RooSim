@@ -17,7 +17,7 @@ namespace RooStatsSim.UI.ACK
                                 "단, 수정&배포 시 저작권 표시 및 허가 표시를 바랍니다.\n" +
                                 "저자 또는 저작권자는 소프트웨어에 관해 아무런 책임을 지지 않습니다.";
         // 원작 라그나로크 오리진 안내
-        const string _ROO_URL = "https://community.gnjoy.com/RAGNAROKORIGIN";
+        const string _ROO_URL = "https://cafe.naver.com/ragnarokorigin";
         // 프로그램 버전
         const string _PROGRAM_VER = "v0.0";
         const string _LATEST_VER_API_URL = "https://api.github.com/repos/Jooss287/RooSim/releases/latest";
@@ -34,6 +34,7 @@ namespace RooStatsSim.UI.ACK
 
         public ProgramInfo()
         {
+            DataContext = this;
             InitializeComponent();
 
             txt_license.Text = _LICENSE;
