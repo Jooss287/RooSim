@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RooStatsSim.DB.Table;
+using RooStatsSim.UI.Manager;
 
 namespace RooStatsSim.DB
 {
@@ -16,7 +17,7 @@ namespace RooStatsSim.DB
             Name = monsterDB.Name;
             Level = monsterDB.Level;
             Type = monsterDB.Type;
-            StatusInfo = monsterDB.StatusInfo;
+            StatusInfo = new Status(monsterDB.StatusInfo);
             Tribe = monsterDB.Tribe;
             Element = monsterDB.Element;
             Size = monsterDB.Size;
@@ -29,23 +30,24 @@ namespace RooStatsSim.DB
             Flee = monsterDB.Flee;
         }
         public MonsterDB() { }
-        public MonsterDB(int mob_id, string name, int level, MONSTER_KINDS_TYPE Type, Status status, int tribe, int element, int size,
+        public MonsterDB(int mob_id, string name, int level, MONSTER_KINDS_TYPE type, Status status, int tribe, int element, int size,
             int atk, int matk, int hp, int def, int mdef, int hit, int flee)
         {
-            _mob_id = mob_id;
-            _name = name;
-            _level = level;
-            _type = MONSTER_KINDS_TYPE.NORMAL;
-            _tribe = tribe;
-            _element = element;
-            _size = size;
-            _atk = atk;
-            _matk = matk;
-            _hp = hp;
-            _def = def;
-            _mdef = mdef;
-            _hit = hit;
-            _flee = flee;
+            MobId = mob_id;
+            Name = name;
+            Level = level;
+            Type = type;
+            StatusInfo = new Status(status);
+            Tribe = tribe;
+            Element = element;
+            Size = size;
+            Atk = atk;
+            Matk = matk;
+            Hp = hp;
+            Def = def;
+            Mdef = mdef;
+            Hit = hit;
+            Flee = flee;
         }
         protected int _mob_id;
         protected string _name;

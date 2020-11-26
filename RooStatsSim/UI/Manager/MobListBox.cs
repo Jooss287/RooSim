@@ -30,15 +30,22 @@ namespace RooStatsSim.UI.Manager
             get { return _level; }
             set { _level = value; OnPropertyChanged("Level"); }
         }
-        public new MONSTER_KINDS_TYPE Type
+        public new int Type
         {
-            get { return _type; }
-            set { _type = value; OnPropertyChanged("Type"); }
+            get { return (int)_type; }
+            set { _type = (MONSTER_KINDS_TYPE)value; OnPropertyChanged("Type"); }
         }
         public new DB.Status StatusInfo
         {
             get {return _status; }
-            set { _status = value; }
+            set { _status = value;
+                OnPropertyChanged("Str");
+                OnPropertyChanged("Agi");
+                OnPropertyChanged("Vit");
+                OnPropertyChanged("Int");
+                OnPropertyChanged("Dex");
+                OnPropertyChanged("Luk");
+            }
         }
         public new int Tribe
         {
@@ -149,7 +156,7 @@ namespace RooStatsSim.UI.Manager
             Name = param.Name;
             Level = param.Level;
             Type = param.Type;
-            StatusInfo = param.StatusInfo;
+            StatusInfo = new Status(param.StatusInfo);
             Tribe = param.Tribe;
             Element = param.Element;
             Size = param.Size;

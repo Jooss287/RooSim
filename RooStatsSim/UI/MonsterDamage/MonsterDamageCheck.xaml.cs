@@ -37,7 +37,8 @@ namespace RooStatsSim.UI.MonsterDamage
         {
             now_mob.Name = "";
             now_mob.Level = 0;
-            now_mob.Type = MONSTER_KINDS_TYPE.NORMAL;
+            now_mob.Type = (int)MONSTER_KINDS_TYPE.NORMAL;
+            now_mob.StatusInfo = new DB.Status();
             now_mob.Tribe = 0;
             now_mob.Element = 0;
             now_mob.Size = 0;
