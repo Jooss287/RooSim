@@ -27,11 +27,12 @@
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <ListBox x:Name="DB_ListBox" Width="200" MaxHeight="500" Margin="0,0,5,0"
+            <ListBox x:Name="DB_ListBox" Width="200" Height="400" Margin="0,0,5,0"
                      ItemsSource="{Binding Source={StaticResource ItemList}}"
+                     VerticalAlignment="Top"
+                     VerticalContentAlignment="Stretch"
                      SelectionChanged="DB_ListBox_SelectionChanged"
                      materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True">
-                <!--ScrollViewer.VerticalScrollBarVisibility="Auto"-->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=Name}"/>
@@ -420,7 +421,7 @@
                                             Click="Refine_Add_Option_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_refine_if_option"
-                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_RefineNameValue}}"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

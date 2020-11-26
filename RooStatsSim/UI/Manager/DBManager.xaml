@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RooStatsSim.UI.Manager"
-        mc:Ignorable="d"
-        Title="DBmanager" MinHeight="900" MinWidth="500">
+        mc:Ignorable="d" Width="1050" Height="900"
+        Title="DBmanager" >
 
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
         <StackPanel Orientation="Horizontal">

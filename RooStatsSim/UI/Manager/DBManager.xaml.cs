@@ -38,10 +38,14 @@ namespace RooStatsSim.UI.Manager
             {
                 if (string.Compare(contents, "ItemDB") == 0)
                 {
+                    this.Width = 1050;
+                    this.Height = 900;
                     frame_contents.Navigate(item_manager);
                 }
                 else
                 {
+                    this.Width = 585;
+                    this.Height = 477;
                     frame_contents.Navigate(mob_manager);
                 }
             }

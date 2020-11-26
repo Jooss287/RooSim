@@ -171,6 +171,11 @@ namespace RooStatsSim.UI.Manager
             {
                 item_option.Value.Clear();
             }
+            foreach(KeyValuePair<int,Dictionary<ITEM_OPTION_TYPE, Dictionary<string,double>>> refine in now_item.Refine_Option)
+            {
+                foreach (KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in refine.Value)
+                    item_option.Value.Clear();
+            }
             
             SetNowItemOption();
         }
@@ -392,8 +397,13 @@ namespace RooStatsSim.UI.Manager
             string type_name = AddType.SelectedItem.ToString();
             double add_value = Convert.ToDouble(AddValue.Text);
             ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-            Dictionary<string, double> item_option = GetRefineItemOptionDictionary(refine, type);
-            item_option[type_name] = add_value;
+            if (now_item.Refine_Option.ContainsKey(refine) == false)
+                now_item.Refine_Option.Add(refine, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+
+            if (now_item.Refine_Option[refine].ContainsKey(type) == false)
+                now_item.Refine_Option[refine].Add(type, new Dictionary<string, double>());
+            now_item.Refine_Option[refine][type][type_name] = add_value;
+            //Dictionary<string, double> item_option = GetRefineItemOptionDictionary(refine, type);
 
             SetNowItemOption();
             AddType.SelectedIndex = 0;
@@ -484,72 +494,6 @@ namespace RooStatsSim.UI.Manager
         }
         Dictionary<string, double> GetRefineItemOptionDictionary(int refine, ITEM_OPTION_TYPE item_option_type)
         {
-            switch (item_option_type)
-            {
-                case ITEM_OPTION_TYPE.ITYPE:
-                    {
-                        return now_item.Option_ITYPE;
-                    }
-                case ITEM_OPTION_TYPE.DTYPE:
-                    {
-                        return now_item.Option_DTYPE;
-                    }
-                case ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE:
-                    {
-                        return now_item.Option_SE_ATK_RATE_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.SE_REG_RATE_TYPE:
-                    {
-                        return now_item.Option_SE_REG_RATE_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE:
-                    {
-                        return now_item.Option_ELEMENT_DMG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.ELEMENT_REG_TYPE:
-                    {
-                        return now_item.Option_ELEMENT_REG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE:
-                    {
-                        return now_item.Option_MONSTER_ELEMENT_DMG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE:
-                    {
-                        return now_item.Option_MONSTER_SIZE_DMG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE:
-                    {
-                        return now_item.Option_MONSTER_SIZE_REG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.TRIBE_DMG_TYPE:
-                    {
-                        return now_item.Option_TRIBE_DMG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.TRIBE_REG_TYPE:
-                    {
-                        return now_item.Option_TRIBE_REG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE:
-                    {
-                        return now_item.Option_MONSTER_KINDS_DMG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE:
-                    {
-                        return now_item.Option_MONSTER_KINDS_REG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.ETC_DMG_TYPE:
-                    {
-                        return now_item.Option_ETC_DMG_TYPE;
-                    }
-                case ITEM_OPTION_TYPE.ETC_TYPE:
-                    {
-                        return now_item.Option_ETC_TYPE;
-                    }
-                default:
-                    MessageBox.Show("선언되지 않은 case가 존재합니다");
-                    break;
-            }
             return null;
         }
         #endregion

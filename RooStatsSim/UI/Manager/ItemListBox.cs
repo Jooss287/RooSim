@@ -79,7 +79,8 @@ namespace RooStatsSim.UI.Manager
             Equip_type = param.Equip_type;
             Wear_job_limit = param.Wear_job_limit;
             Option = param.Option;
-            if_option = param.if_option;
+            IF_OPTION = param.IF_OPTION;
+            Refine_Option = param.Refine_Option;
         }
     }
 
@@ -238,7 +239,7 @@ namespace RooStatsSim.UI.Manager
                 foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string,double>> item_option in options.Value)
                 {
                     foreach (KeyValuePair<string, double> items in item_option.Value)
-                        Add(new TotalItemOption_Binding());
+                        Add(new TotalItemOption_Binding(options.Key, items));
                 }
             }
 
