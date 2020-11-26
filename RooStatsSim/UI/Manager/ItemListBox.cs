@@ -109,14 +109,21 @@ namespace RooStatsSim.UI.Manager
     class TotalItemOption_Binding : INotifyPropertyChanged
     {
         public TotalItemOption_Binding() { }
-        public TotalItemOption_Binding(string type_name, double value)
+        public TotalItemOption_Binding(int refine, KeyValuePair<string, double> db)
         {
-            _type_name = type_name;
-            _type_value = value;
+            _refine = refine;
+            _type_name = db.Key;
+            _type_value = db.Value;
         }
 
+        int _refine;
         string _type_name;
         double _type_value;
+        public int Refine
+        {
+            get { return _refine; }
+            set { _refine = value; OnPropertyChanged("Refine"); }
+        }
         public string Type_name
         {
             get { return _type_name; }
@@ -224,9 +231,16 @@ namespace RooStatsSim.UI.Manager
     {
         public TotalItemOptionListBox()
         { }
-        public TotalItemOptionListBox(int A)
+        public TotalItemOptionListBox(Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> DB)
         {
-            
+            foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> options in DB)
+            {
+                foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string,double>> item_option in options.Value)
+                {
+                    foreach (KeyValuePair<string, double> items in item_option.Value)
+                        Add(new TotalItemOption_Binding());
+                }
+            }
 
             //foreach (KeyValuePair<TYPE, D_TYPE> items in DB)
             //{

@@ -45,35 +45,31 @@ namespace RooStatsSim.DB
             Option_ETC_DMG_TYPE = new Dictionary<string, double>(item_db.Option_ETC_DMG_TYPE);
             Option_ETC_TYPE = new Dictionary<string, double>(item_db.Option_ETC_TYPE);
             
-            //Option = new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>(item_db.Option);
+            foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option in item_db.Refine_Option)
+            {
+                Refine_Option.Add(option.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+                foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in option.Value)
+                {
+                    Refine_Option[option.Key].Add(item_option.Key, new Dictionary<string, double>(item_option.Value));
+                }
+            }
         }
         public ItemDB() { }
 
         public static ItemDB operator +(ItemDB a, ItemDB b)
         {
-            foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in b.Option)
+            AddOption(a.Option, b.Option);
+            AddIfOption(ref a.if_option, b.if_option);
+            
+            foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> refine_num in b.Refine_Option)
             {
-                if (a.Option.ContainsKey(item_option.Key) == true)
-                {
-                    foreach(KeyValuePair<string, double> detail_option in item_option.Value)
-                    {
-                        if (a.Option[item_option.Key].ContainsKey(detail_option.Key) == true)
-                        {
-                            a.Option[item_option.Key][detail_option.Key] += detail_option.Value;
-                        }
-                        else
-                            a.Option[item_option.Key][detail_option.Key] = detail_option.Value;
-                    }
-                }
-                else
-                {
-                    a.Option[item_option.Key] = item_option.Value;
-                }
+                if (a.Refine_Option.ContainsKey(refine_num.Key) == false)
+                    a.Refine_Option.Add(refine_num.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+                AddOption(a.Refine_Option[refine_num.Key], b.Refine_Option[refine_num.Key]);
             }
-            AddOption(ref a.if_option, b.if_option);
             return a;
         }
-        protected static void AddOption(ref Dictionary<IFTYPE, AbilityPerStatus> a, Dictionary<IFTYPE, AbilityPerStatus> b)
+        protected static void AddIfOption(ref Dictionary<IFTYPE, AbilityPerStatus> a, Dictionary<IFTYPE, AbilityPerStatus> b)
         {
             foreach (KeyValuePair<IFTYPE, AbilityPerStatus> opt in b)
             {
@@ -89,7 +85,35 @@ namespace RooStatsSim.DB
                 }
             }
         }
+        protected static void AddOption(Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> A, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> B)
+        {
+            foreach (KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in B)
+            {
+                if (A.ContainsKey(item_option.Key) == true)  //A, B 모두 존재
+                {
+                    foreach (KeyValuePair<string, double> detail_option in item_option.Value)
+                    {
+                        if (A[item_option.Key].ContainsKey(detail_option.Key) == true)
+                        {
+                            A[item_option.Key][detail_option.Key] += detail_option.Value;
+                        }
+                        else
+                        {
+                            A[item_option.Key].Add(detail_option.Key, detail_option.Value);
+                        }
 
+                    }
+                }
+                else                                                //B에만 존재
+                {
+                    A.Add(item_option.Key, new Dictionary<string, double>());
+                    foreach (KeyValuePair<string, double> detail_option in item_option.Value)
+                    {
+                        A[item_option.Key].Add(detail_option.Key, detail_option.Value);
+                    }
+                }
+            }
+        }
 
 
         ITEM_TYPE_ENUM _item_type;
@@ -107,6 +131,7 @@ namespace RooStatsSim.DB
 
         protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
         public Dictionary<IFTYPE, AbilityPerStatus> if_option = new Dictionary<IFTYPE, AbilityPerStatus>();
+        public Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> _refine_option;
 
 
         #region Property
@@ -164,6 +189,15 @@ namespace RooStatsSim.DB
         {
             get { return if_option; }
             set { if_option = value; }
+        }
+        public Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> Refine_Option
+        {
+            get {
+                if (_refine_option == null)
+                    _refine_option = new Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>>();
+                return _refine_option; 
+            }
+            set { _refine_option = value; }
         }
         public ITEM_TYPE_ENUM Item_type
         {

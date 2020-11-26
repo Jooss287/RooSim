@@ -327,7 +327,7 @@
                                         Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <ComboBox Name="cmb_element_damage_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_element_damage_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
                                         materialDesign:HintAssist.Hint="(%)"/>
                                 </StackPanel>
