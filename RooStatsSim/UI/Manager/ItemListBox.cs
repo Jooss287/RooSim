@@ -253,12 +253,16 @@ namespace RooStatsSim.UI.Manager
     {
         public ItemOptionListBox()
         { }
-        public ItemOptionListBox(Dictionary<string, double> DB)
+        public ItemOptionListBox(params Dictionary<string, double>[] DB)
         {
-            foreach (KeyValuePair<string, double> items in DB)
+            foreach (Dictionary<string, double> pairs in DB)
             {
-                Add(new ItemOption_Binding(items)) ;
+                foreach (KeyValuePair<string, double> items in pairs)
+                {
+                    Add(new ItemOption_Binding(items));
+                }
             }
+            
         }
     }
     class ItemOptionListBox<TYPE> : ObservableCollection<ItemOption_Binding<TYPE>>

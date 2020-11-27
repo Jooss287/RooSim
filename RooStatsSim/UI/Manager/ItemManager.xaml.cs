@@ -73,17 +73,17 @@ namespace RooStatsSim.UI.Manager
             foreach (STATUS_EFFECT_TYPE option in Enum.GetValues(typeof(STATUS_EFFECT_TYPE)))
             {
                 string statusName = EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[option];
-                cmb_se_attackrate_option.Items.Add(EnumItemOptionTable_Kor.SE_ATK_RATE_TYPE_KOR[(SE_ATK_RATE_TYPE)option]);
-                cmb_se_registance_option.Items.Add(EnumItemOptionTable_Kor.SE_REG_RATE_TYPE_KOR[(SE_REG_RATE_TYPE)option]);
+                cmb_status_effect_option.Items.Add(EnumItemOptionTable_Kor.SE_ATK_RATE_TYPE_KOR[(SE_ATK_RATE_TYPE)option]);
+                cmb_status_effect_option.Items.Add(EnumItemOptionTable_Kor.SE_REG_RATE_TYPE_KOR[(SE_REG_RATE_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.SE_ATK_RATE_TYPE_KOR[(SE_ATK_RATE_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.SE_REG_RATE_TYPE_KOR[(SE_REG_RATE_TYPE)option]);
             }
             foreach (ELEMENT_TYPE option in Enum.GetValues(typeof(ELEMENT_TYPE)))
             {
                 string statusName = EnumBaseTable_Kor.ELEMENT_TYPE_KOR[option];
-                cmb_element_inc_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_DMG_TYPE_KOR[(ELEMENT_DMG_TYPE)option]);
-                cmb_element_dec_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[(ELEMENT_REG_TYPE)option]);
-                cmb_element_damage_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_ELEMENT_DMG_TYPE_KOR[(MONSTER_ELEMENT_DMG_TYPE)option]);
+                cmb_element_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_DMG_TYPE_KOR[(ELEMENT_DMG_TYPE)option]);
+                cmb_element_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[(ELEMENT_REG_TYPE)option]);
+                cmb_element_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_ELEMENT_DMG_TYPE_KOR[(MONSTER_ELEMENT_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_DMG_TYPE_KOR[(ELEMENT_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[(ELEMENT_REG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_ELEMENT_DMG_TYPE_KOR[(MONSTER_ELEMENT_DMG_TYPE)option]);
@@ -91,24 +91,24 @@ namespace RooStatsSim.UI.Manager
             foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
             {
                 string statusName = EnumBaseTable_Kor.MONSTER_SIZE_KOR[option];
-                cmb_size_inc_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_DMG_TYPE_KOR[(MONSTER_SIZE_DMG_TYPE)option]);
-                cmb_size_dec_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_REG_TYPE_KOR[(MONSTER_SIZE_REG_TYPE)option]);
+                cmb_size_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_DMG_TYPE_KOR[(MONSTER_SIZE_DMG_TYPE)option]);
+                cmb_size_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_REG_TYPE_KOR[(MONSTER_SIZE_REG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_DMG_TYPE_KOR[(MONSTER_SIZE_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_REG_TYPE_KOR[(MONSTER_SIZE_REG_TYPE)option]);
             }
             foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
             {
                 string statusName = EnumBaseTable_Kor.TRIBE_TYPE_KOR[option];
-                cmb_tribe_inc_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_DMG_TYPE_KOR[(TRIBE_DMG_TYPE)option]);
-                cmb_tribe_dec_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_REG_TYPE_KOR[(TRIBE_REG_TYPE)option]);
+                cmb_tribe_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_DMG_TYPE_KOR[(TRIBE_DMG_TYPE)option]);
+                cmb_tribe_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_REG_TYPE_KOR[(TRIBE_REG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_DMG_TYPE_KOR[(TRIBE_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_REG_TYPE_KOR[(TRIBE_REG_TYPE)option]);
             }
             foreach (MONSTER_KINDS_TYPE option in Enum.GetValues(typeof(MONSTER_KINDS_TYPE)))
             {
                 string statusName = EnumBaseTable_Kor.MONSTER_KINDS_TYPE_KOR[option];
-                cmb_mobtype_inc_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_DMG_TYPE_KOR[(MONSTER_KINDS_DMG_TYPE)option]);
-                cmb_mobtype_dec_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_REG_TYPE_KOR[(MONSTER_KINDS_REG_TYPE)option]);
+                cmb_mobtype_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_DMG_TYPE_KOR[(MONSTER_KINDS_DMG_TYPE)option]);
+                cmb_mobtype_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_REG_TYPE_KOR[(MONSTER_KINDS_REG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_DMG_TYPE_KOR[(MONSTER_KINDS_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_REG_TYPE_KOR[(MONSTER_KINDS_REG_TYPE)option]);
             }
@@ -121,7 +121,7 @@ namespace RooStatsSim.UI.Manager
             foreach (ETC_DMG_TYPE option in Enum.GetValues(typeof(ETC_DMG_TYPE)))
             {
                 string statusName = EnumItemOptionTable_Kor.ETC_DMG_TYPE_KOR[option];
-                cmb_etc_inc_option.Items.Add(statusName);
+                cmb_etc_option.Items.Add(statusName);
                 cmb_refine_if_option.Items.Add(statusName);
             }
             for (int i = 0; i <= 20; ++i)
@@ -135,19 +135,14 @@ namespace RooStatsSim.UI.Manager
             list_iOption.ItemsSource = new ItemOptionListBox(now_item.Option_ITYPE);
             list_dOption.ItemsSource = new ItemOptionListBox(now_item.Option_DTYPE);
             list_ifOption.ItemsSource = new ItemOptionListBox<IFTYPE>(now_item.if_option);
-            list_attackrate_option.ItemsSource = new ItemOptionListBox(now_item.Option_SE_ATK_RATE_TYPE);
-            list_se_registance_option.ItemsSource = new ItemOptionListBox(now_item.Option_SE_REG_RATE_TYPE);
-            list_element_damage_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_ELEMENT_DMG_TYPE);
-            list_element_inc_option.ItemsSource = new ItemOptionListBox(now_item.Option_ELEMENT_DMG_TYPE);
-            list_element_dec_option.ItemsSource = new ItemOptionListBox(now_item.Option_ELEMENT_REG_TYPE);
-            list_tribe_inc_option.ItemsSource = new ItemOptionListBox(now_item.Option_TRIBE_DMG_TYPE);
-            list_tribe_dec_option.ItemsSource = new ItemOptionListBox(now_item.Option_TRIBE_REG_TYPE);
-            list_size_inc_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_SIZE_DMG_TYPE);
-            list_size_dec_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_SIZE_REG_TYPE);
-            list_mobtype_inc_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_KINDS_DMG_TYPE);
-            list_mobtype_dec_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_KINDS_REG_TYPE);
-            list_etc_option.ItemsSource = new ItemOptionListBox(now_item.Option_ETC_TYPE);
-            list_etc_inc_option.ItemsSource = new ItemOptionListBox(now_item.Option_ETC_DMG_TYPE);
+
+            list_status_effect_option.ItemsSource = new ItemOptionListBox(now_item.Option_SE_ATK_RATE_TYPE, now_item.Option_SE_REG_RATE_TYPE);
+            list_element_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_ELEMENT_DMG_TYPE, now_item.Option_ELEMENT_DMG_TYPE, now_item.Option_ELEMENT_REG_TYPE);
+            list_tribe_option.ItemsSource = new ItemOptionListBox(now_item.Option_TRIBE_DMG_TYPE, now_item.Option_TRIBE_REG_TYPE);
+            list_size_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_SIZE_DMG_TYPE, now_item.Option_MONSTER_SIZE_REG_TYPE);
+            list_mobtype_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_KINDS_DMG_TYPE, now_item.Option_MONSTER_KINDS_REG_TYPE);
+            list_etc_option.ItemsSource = new ItemOptionListBox(now_item.Option_ETC_TYPE, now_item.Option_ETC_DMG_TYPE);
+
             list_refine_if_option.ItemsSource = new TotalItemOptionListBox(now_item.Refine_Option);
         }
 
@@ -403,7 +398,6 @@ namespace RooStatsSim.UI.Manager
             if (now_item.Refine_Option[refine].ContainsKey(type) == false)
                 now_item.Refine_Option[refine].Add(type, new Dictionary<string, double>());
             now_item.Refine_Option[refine][type][type_name] = add_value;
-            //Dictionary<string, double> item_option = GetRefineItemOptionDictionary(refine, type);
 
             SetNowItemOption();
             AddType.SelectedIndex = 0;
@@ -418,6 +412,11 @@ namespace RooStatsSim.UI.Manager
             if (OptionList.SelectedItem == null)
                 return;
 
+            int refine = (OptionList.SelectedItem as TotalItemOption_Binding).Refine;
+            string type_name = (OptionList.SelectedItem as TotalItemOption_Binding).Type_name;
+            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
+            Dictionary<string, double> item_option = GetItemOptionDictionary(type);
+            item_option.Remove(type_name);
 
             SetNowItemOption();
         }
@@ -490,10 +489,6 @@ namespace RooStatsSim.UI.Manager
                     MessageBox.Show("선언되지 않은 case가 존재합니다");
                     break;
             }
-            return null;
-        }
-        Dictionary<string, double> GetRefineItemOptionDictionary(int refine, ITEM_OPTION_TYPE item_option_type)
-        {
             return null;
         }
         #endregion
