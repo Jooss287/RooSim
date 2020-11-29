@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:RooStatsSim.UI.Manager"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      Title="ItemManager">
+      Title="ItemManager" Background="White">
     <Page.Resources>
         <local:ItemListBox x:Key="ItemList"/>
     </Page.Resources>
@@ -122,11 +122,13 @@
                             <StackPanel Tag="IFTYPE"
                                         Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_IFoption" SelectedIndex="0"
+                                    <ComboBox Name="cmb_if_per_option" SelectedIndex="0"
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="Ex)힘10"/>
+                                        materialDesign:HintAssist.Hint="조건값"/>
                                     <TextBlock Text="당" VerticalAlignment="Bottom" Margin="5,0,0,3" HorizontalAlignment="Center"/>
+                                    <ComboBox Name="cmb_if_add_option" SelectedIndex="0"
+                                              SelectionChanged="cmb_if_add_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
                                         materialDesign:HintAssist.Hint="증가량"/>
                                 </StackPanel>
@@ -201,26 +203,6 @@
                                 <ListBox x:Name="list_tribe_option"
                                          ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
-
-                            <StackPanel Tag="MOBTYPE_INC_TYPE"
-                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_mobtype_option" SelectedIndex="0"
-                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
-                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
-                                        materialDesign:HintAssist.Hint="(%)"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
-                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
-                                            Click="Del_Option_Click"/>
-                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
-                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
-                                            Click="Add_Option_Click"/>
-                                </StackPanel>
-                                <ListBox x:Name="list_mobtype_option"
-                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
-                            </StackPanel>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -241,6 +223,25 @@
                                             Click="Add_Option_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_element_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
+                            </StackPanel>
+                            <StackPanel Tag="MOBTYPE_INC_TYPE"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ComboBox Name="cmb_mobtype_option" SelectedIndex="0"
+                                              SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
+                                        materialDesign:HintAssist.Hint="(%)"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Option_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
+                                            Click="Add_Option_Click"/>
+                                </StackPanel>
+                                <ListBox x:Name="list_mobtype_option"
                                          ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
                             </StackPanel>
                             <StackPanel

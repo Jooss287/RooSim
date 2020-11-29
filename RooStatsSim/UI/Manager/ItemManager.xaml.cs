@@ -53,15 +53,11 @@ namespace RooStatsSim.UI.Manager
         }
         void SetComboBox()
         {
-            foreach (IFTYPE option in Enum.GetValues(typeof(IFTYPE)))
-            {
-                string statusName = Enum.GetName(typeof(IFTYPE), option);
-                cmb_IFoption.Items.Add(statusName);
-            }
             foreach (ITYPE option in Enum.GetValues(typeof(ITYPE)))
             {
                 string statusName = EnumItemOptionTable_Kor.ITYPE_KOR[option];
                 cmb_Ioption.Items.Add(statusName);
+                //cmb_if_per_option.Items
                 cmb_refine_if_option.Items.Add(statusName);
             }
             foreach (DTYPE option in Enum.GetValues(typeof(DTYPE)))
@@ -362,6 +358,14 @@ namespace RooStatsSim.UI.Manager
             AddValue.Text = "";
             AddValue.Focus();
         }
+        private void cmb_if_add_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StackPanel parentStackpanel = (sender as ComboBox).Parent as StackPanel;
+            TextBox AddValue = parentStackpanel.Children[4] as TextBox;
+
+            AddValue.Text = "";
+            AddValue.Focus();
+        }
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
@@ -493,5 +497,6 @@ namespace RooStatsSim.UI.Manager
         }
         #endregion
 
+        
     }
 }
