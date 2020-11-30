@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using RooStatsSim.User;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.DB.Table;
@@ -116,29 +117,32 @@ namespace RooStatsSim.UI.StatusWindow
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            int value = 1;
             if (e.Delta < 0)
-                LevelChange(dataCxtx, -1);
-            else
-                LevelChange(dataCxtx, +1);
-                
+                value = -1;
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                value *= 10;
+
+            LevelChange(dataCxtx, value);
+
         }
 
         private void Status_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            if (e.Delta < 0)
-                StatusPointDown(dataCxtx);
-            else
-                StatusPointUp(dataCxtx);
+            int value = 1;
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                value *= 10;
+
+            for (int i = value; i != 0; i--)
+            {
+                if (e.Delta < 0)
+                    StatusPointDown(dataCxtx);
+                else
+                    StatusPointUp(dataCxtx);
+            }
         }
-
-
         #endregion
-
-        private void UserControl_ContextMenuClosing(object sender, ContextMenuEventArgs e)
-        {
-
-        }
     }
 }
