@@ -49,7 +49,7 @@ class ItemListFilter : ObservableCollection<EquipId>
 {
     public ItemListFilter(ref UserData user, ITEM_TYPE_ENUM itemtype, EQUIP_TYPE_ENUM equiptype)
     {
-        foreach(KeyValuePair<int, ItemDB> itemPair in GetItemList(itemtype))
+        foreach(KeyValuePair<int, ItemDB> itemPair in GetItemList(itemtype, equiptype))
         {
             if ( ( (itemPair.Value)._wear_job_limit.Count != 0 ) &&
                 (!(itemPair.Value)._wear_job_limit.Contains(user.Job)) )
@@ -64,12 +64,12 @@ class ItemListFilter : ObservableCollection<EquipId>
         }
     }
 
-    Dictionary<int, ItemDB> GetItemList(ITEM_TYPE_ENUM itemtype)
+    Dictionary<int, ItemDB> GetItemList(ITEM_TYPE_ENUM itemtype, EQUIP_TYPE_ENUM equiptype = EQUIP_TYPE_ENUM.HEAD_TOP)
     {
         switch(itemtype)
         {
             case ITEM_TYPE_ENUM.EQUIPMENT:
-                return MainWindow._roo_db.Equip_db;
+                return MainWindow._roo_db.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[equiptype]];
             case ITEM_TYPE_ENUM.CARD:
                 return MainWindow._roo_db.Card_db;
             case ITEM_TYPE_ENUM.ENCHANT:

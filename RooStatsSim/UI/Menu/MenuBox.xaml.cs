@@ -92,8 +92,13 @@ namespace RooStatsSim.UI.Menu
         {
             if (_parents._db_manager == null)
                 _parents._db_manager = new DBManager();
-            _parents._db_manager.Show();
-            _parents._db_manager.Focus();
+
+            _parents._db_manager.Owner = _parents;
+            if (_parents._db_manager.ShowDialog() == true) { }
+            _parents._db_manager.Close();
+            _parents._db_manager = null;
+
+            User_Serializer.ReadDB(ref MainWindow._user_data);
         }
 
         private void Info_window_Click(object sender, RoutedEventArgs e)
