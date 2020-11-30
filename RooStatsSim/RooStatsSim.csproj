@@ -117,9 +117,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DB\AllSkillList.cs" />
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\ItemDB.cs" />
+    <Compile Include="DB\Skill\JobSkill\LoadKnightSkill.cs" />
+    <Compile Include="DB\Skill\SkillInfo.cs" />
+    <Compile Include="DB\Skill\JobSkill\SwordmanSkill.cs" />
     <Compile Include="DB\Table\EnumBaseTable.cs" />
     <Compile Include="DB\Table\EnumItemOptionTable.cs" />
     <Compile Include="DB\Table\EnumItemOptionTable_Kor.cs" />
@@ -296,6 +298,7 @@
     <Content Include="DLL\WPF.MDI.dll" />
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
