@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using RooStatsSim.Extension;
-using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 using RooStatsSim.Equation;
 using RooStatsSim.User;
 
