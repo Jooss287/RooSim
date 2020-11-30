@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.User
 {
+    [Serializable]
     public class UserItem : ItemDB
     {
         public UserItem()

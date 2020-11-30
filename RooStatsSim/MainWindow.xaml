@@ -23,7 +23,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="RooSim">
+        Title="RooSim" Closing="Window_Closing">
     <mdixWindow:MaterialDesignWindow.HeaderContent>
         <Grid>
             <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" HorizontalAlignment="Left" WindowChrome.IsHitTestVisibleInChrome="True" 

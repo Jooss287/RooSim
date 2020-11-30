@@ -10,6 +10,7 @@ using RooStatsSim.UI.Equipment;
 
 namespace RooStatsSim.User
 {
+    [Serializable]
     public class EQUIP
     {
         public class EquipItem
@@ -95,6 +96,7 @@ namespace RooStatsSim.User
         }
     }
 
+    [Serializable]
     public class GEAR
     {
         public ObservableCollection<ItemDB> List { get; }

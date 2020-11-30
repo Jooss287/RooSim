@@ -33,15 +33,11 @@ namespace RooStatsSim.UI.Menu
     /// </summary>
     public partial class MenuBox : UserControl
     {
-        public static DBlist _roo_db;
         UserData _user_data;
         MainWindow _parents;
         public MenuBox(MainWindow parents)
         {
-            _roo_db = new DBlist();
-            DBSerizator.ReadDB(ref _roo_db);
-            _user_data = UserData.GetInstance;
-
+            _user_data = MainWindow._user_data;
             _parents = parents;
             InitializeComponent();
         }

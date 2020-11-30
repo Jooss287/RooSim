@@ -69,13 +69,13 @@ class ItemListFilter : ObservableCollection<EquipId>
         switch(itemtype)
         {
             case ITEM_TYPE_ENUM.EQUIPMENT:
-                return MenuBox._roo_db.Equip_db;
+                return MainWindow._roo_db.Equip_db;
             case ITEM_TYPE_ENUM.CARD:
-                return MenuBox._roo_db.Card_db;
+                return MainWindow._roo_db.Card_db;
             case ITEM_TYPE_ENUM.ENCHANT:
-                return MenuBox._roo_db.Enchant_db;
+                return MainWindow._roo_db.Enchant_db;
             case ITEM_TYPE_ENUM.GEAR:
-                return MenuBox._roo_db.Gear_db;
+                return MainWindow._roo_db.Gear_db;
         }
         return null;
     }

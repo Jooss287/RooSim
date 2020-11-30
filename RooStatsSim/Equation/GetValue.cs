@@ -13,7 +13,7 @@ namespace RooStatsSim.Equation
         UserData user;
         public GetValue()
         {
-            user = UserData.GetInstance;
+            user = MainWindow._user_data;
         }
         public UserData User_Data { get { return user; } }
 
