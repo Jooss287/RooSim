@@ -16,7 +16,6 @@ namespace RooStatsSim.DB.Table
         ENCHANT,
         GEAR,
     }
-
     public enum EQUIP_TYPE_ENUM
     {
         HEAD_TOP,
@@ -81,14 +80,12 @@ namespace RooStatsSim.DB.Table
         ANGEL,
         UNDEAD
     }
-
     public enum MONSTER_KINDS_TYPE
     {
         NORMAL,
         MINI,
         MVP
     }
-
     public enum MONSTER_SIZE
     {
         SMALL,
@@ -111,7 +108,6 @@ namespace RooStatsSim.DB.Table
         BOW,
         JAMADHAR
     }
-
     public enum ELEMENT_TYPE
     {
         NORMAL,
@@ -124,5 +120,17 @@ namespace RooStatsSim.DB.Table
         DARK,
         ASTRAL,
         UNDEAD
+    }
+    public enum EQUIP_DB_ENUM
+    {
+        HEAD,
+        WEAPON,
+        ARMOR,
+        SUB_WEAPON,
+        CLOAK,
+        SHOES,
+        ACC,
+        COSTUME,
+        BACK_DECO,
     }
 }

@@ -56,8 +56,6 @@ namespace RooStatsSim.DB.Table
             {STATUS_EFFECT_TYPE.SLEEP, "수면" },
             {STATUS_EFFECT_TYPE.BLEEDING, "출혈" },
         };
-        
-        
         public static Dictionary<ELEMENT_TYPE, string> ELEMENT_TYPE_KOR = new Dictionary<ELEMENT_TYPE, string>()
         {
             {ELEMENT_TYPE.NORMAL, "무속성" },
@@ -96,7 +94,6 @@ namespace RooStatsSim.DB.Table
             {MONSTER_KINDS_TYPE.MINI, "MINI" },
             {MONSTER_KINDS_TYPE.MVP, "MVP" },
         };
-
         public static Dictionary<MEDAL_ENUM, string> MEDAL_ENUM_KOR = new Dictionary<MEDAL_ENUM, string>()
         {
             {MEDAL_ENUM.VALOR, "용맹훈장" },
@@ -105,14 +102,12 @@ namespace RooStatsSim.DB.Table
             {MEDAL_ENUM.CHARM, "매력훈장" },
             {MEDAL_ENUM.GALE, "질풍훈장" },
         };
-
         public static Dictionary<RIDING_ENUM, string> RIDING_ENUM_KOR = new Dictionary<RIDING_ENUM, string>()
         {
             {RIDING_ENUM.ATK_MATK, "ATK/MATK" },
             {RIDING_ENUM.MAX_HP, "MAX_HP" },
             {RIDING_ENUM.ATK_MATK_PERCENT, "ATK%/MATK%" },
         };
-
         public static Dictionary<JOB_SELECT_LIST, string> JOB_SELECT_LIST_KOR = new Dictionary<JOB_SELECT_LIST, string>()
         {
             {JOB_SELECT_LIST.NOVICE, "노비스"},
@@ -190,5 +185,21 @@ namespace RooStatsSim.DB.Table
             {WEAPON_TYPE_ENUM.BOW, "활" },
             {WEAPON_TYPE_ENUM.JAMADHAR, "카타르" },
         };
+
+        public static Dictionary<EQUIP_TYPE_ENUM, EQUIP_DB_ENUM> EQUIP_TYPE_TO_DB_ENUM = new Dictionary<EQUIP_TYPE_ENUM, EQUIP_DB_ENUM>()
+    {
+        {EQUIP_TYPE_ENUM.HEAD_TOP, EQUIP_DB_ENUM.HEAD },
+        {EQUIP_TYPE_ENUM.HEAD_MID, EQUIP_DB_ENUM.HEAD },
+        {EQUIP_TYPE_ENUM.HEAD_BOT, EQUIP_DB_ENUM.HEAD },
+        {EQUIP_TYPE_ENUM.WEAPON, EQUIP_DB_ENUM.WEAPON },
+        {EQUIP_TYPE_ENUM.ARMOR, EQUIP_DB_ENUM.ARMOR },
+        {EQUIP_TYPE_ENUM.SUB_WEAPON, EQUIP_DB_ENUM.SUB_WEAPON},
+        {EQUIP_TYPE_ENUM.CLOAK, EQUIP_DB_ENUM.CLOAK },
+        {EQUIP_TYPE_ENUM.SHOES, EQUIP_DB_ENUM.SHOES },
+        {EQUIP_TYPE_ENUM.ACCESSORIES1, EQUIP_DB_ENUM.ACC},
+        {EQUIP_TYPE_ENUM.ACCESSORIES2, EQUIP_DB_ENUM.ACC },
+        {EQUIP_TYPE_ENUM.COSTUME, EQUIP_DB_ENUM.COSTUME },
+        {EQUIP_TYPE_ENUM.BACK_DECORATION, EQUIP_DB_ENUM.BACK_DECO},
+    };
     }
 }

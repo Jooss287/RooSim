@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RooStatsSim.UI.Manager"
         mc:Ignorable="d" Width="1050" Height="900"
-        Title="DBmanager" >
+        Title="DBmanager"
+        Closing="Window_Closing">
 
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
         <StackPanel Orientation="Horizontal">

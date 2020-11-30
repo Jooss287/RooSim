@@ -49,11 +49,13 @@ namespace RooStatsSim.User
 
             public void AddCard(ItemDB input_card)
             {
+                if (Equip.CardSlot == 0)
+                    return;
                 if (Card.Count < Equip.CardSlot)
                     Card.Add(input_card);
                 else
                 {
-                    if (LastCardSetSlot - 1 == Equip.CardSlot)
+                    if (LastCardSetSlot - 1 <= Equip.CardSlot)
                         LastCardSetSlot = 0;
                     Card[LastCardSetSlot] = input_card;
                 }

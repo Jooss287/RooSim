@@ -35,21 +35,22 @@ namespace RooStatsSim.UI.Manager
             SetComboBox();
         }
 
+        #region Initialize UI Binding
         void InitUIsetting()
         {
-            foreach (ITEM_TYPE_ENUM option in Enum.GetValues(typeof(ITEM_TYPE_ENUM)))
-            {
-                string statusName = Enum.GetName(typeof(ITEM_TYPE_ENUM), option);
-                cmb_item_type.Items.Add(statusName);
-            }
-            cmb_item_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
-
             foreach (EQUIP_TYPE_ENUM equip in Enum.GetValues(typeof(EQUIP_TYPE_ENUM)))
             {
                 string statusName = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR[equip];
                 cmb_equip_type.Items.Add(statusName);
             }
             cmb_equip_type.SelectedIndex = (int)EQUIP_TYPE_ENUM.HEAD_TOP;
+
+            foreach (ITEM_TYPE_ENUM option in Enum.GetValues(typeof(ITEM_TYPE_ENUM)))
+            {
+                string statusName = Enum.GetName(typeof(ITEM_TYPE_ENUM), option);
+                cmb_item_type.Items.Add(statusName);
+            }
+            cmb_item_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
         }
         void SetComboBox()
         {
@@ -150,7 +151,6 @@ namespace RooStatsSim.UI.Manager
             //Refine
             cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.REFINE_TYPE_KOR[REFINE_TYPE.REFINE]);
         }
-
         void SetNowItemOption()
         {
             cmb_equip_type.SelectedIndex = (int)now_item.Equip_type;
@@ -168,8 +168,6 @@ namespace RooStatsSim.UI.Manager
 
             list_refine_if_option.ItemsSource = new ItemOptionRefineListBox(now_item.Refine_Option);
         }
-
-
         void InitializeContents()
         {
             if (now_DB == null)
@@ -198,7 +196,7 @@ namespace RooStatsSim.UI.Manager
             
             SetNowItemOption();
         }
-
+        #endregion
         #region To pass mainwindow
         private bool _isNew = false;
         public bool IsNew
@@ -215,19 +213,19 @@ namespace RooStatsSim.UI.Manager
             switch (selected)
             {
                 case ITEM_TYPE_ENUM.MONSTER_RESEARCH:
-                    return _DB._monster_research_db;
+                    return _DB.Mob_research_db;
                 case ITEM_TYPE_ENUM.STICKER:
-                    return _DB._sticker_db;
+                    return _DB.Sticker_db;
                 case ITEM_TYPE_ENUM.DRESS_STYLE:
-                    return _DB._dress_style_db;
+                    return _DB.Dress_style_db;
                 case ITEM_TYPE_ENUM.EQUIPMENT:
-                    return _DB._equip_db;
+                    return _DB.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[(EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex]];
                 case ITEM_TYPE_ENUM.CARD:
-                    return _DB._card_db;
+                    return _DB.Card_db;
                 case ITEM_TYPE_ENUM.ENCHANT:
-                    return _DB._enchant_db;
+                    return _DB.Enchant_db;
                 case ITEM_TYPE_ENUM.GEAR:
-                    return _DB._gear_db;
+                    return _DB.Gear_db;
             }
 
             return null;
@@ -312,10 +310,20 @@ namespace RooStatsSim.UI.Manager
         }
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            now_DB = SelectedItemType();
+            if (now_DB == null)
+                return;
+            else
+                SetSelectedItemTypeUI();
+
+            InitializeContents();
+            BindingItemList = new ItemListBox(ref now_DB);
+            DB_ListBox.ItemsSource = BindingItemList;
+            SetNowItemOption();
+
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
         }
         #endregion
-
         #region normal option callback
         private void Add_Option_Click(object sender, RoutedEventArgs e)
         {
@@ -435,7 +443,6 @@ namespace RooStatsSim.UI.Manager
             return null;
         }
         #endregion
-
         #region if type option callback
         private void cmb_if_add_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
