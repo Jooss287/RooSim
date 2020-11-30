@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.UI.Manager
 {
@@ -31,6 +32,7 @@ namespace RooStatsSim.UI.Manager
             
             DataContext = now_mob;
             InitializeContents();
+            InitUIsetting();
 
             BindingMobList = new MonsterListBox(_DB.Mob_db);
             DB_ListBox.ItemsSource = BindingMobList;
@@ -46,7 +48,8 @@ namespace RooStatsSim.UI.Manager
             
             now_mob.Name = "";
             now_mob.Level = 0;
-            now_mob.IsBoss = false;
+            now_mob.Type = (int)MONSTER_KINDS_TYPE.NORMAL;
+            now_mob.StatusInfo = new Status();
             now_mob.Tribe = 0;
             now_mob.Element = 0;
             now_mob.Size = 0;
@@ -59,6 +62,31 @@ namespace RooStatsSim.UI.Manager
             now_mob.Flee = 0;
         }
         #endregion
+
+        void InitUIsetting()
+        {
+            foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
+            {
+                string statusName = Enum.GetName(typeof(TRIBE_TYPE), option);
+                MobTribe.Items.Add(statusName);
+            }
+            foreach (ELEMENT_TYPE option in Enum.GetValues(typeof(ELEMENT_TYPE)))
+            {
+                string statusName = Enum.GetName(typeof(ELEMENT_TYPE), option);
+                MobElement.Items.Add(statusName);
+            }
+            foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
+            {
+                string statusName = Enum.GetName(typeof(MONSTER_SIZE), option);
+                MobSize.Items.Add(statusName);
+            }
+            foreach (MONSTER_KINDS_TYPE option in Enum.GetValues(typeof(MONSTER_KINDS_TYPE)))
+            {
+                string statusName = Enum.GetName(typeof(MONSTER_KINDS_TYPE), option);
+                cmb_monster_type.Items.Add(statusName);
+            }
+            cmb_monster_type.SelectedIndex = (int)MONSTER_KINDS_TYPE.NORMAL;
+        }
 
         #region To pass mainwindow
         private bool _isNew = false;
@@ -93,6 +121,8 @@ namespace RooStatsSim.UI.Manager
             MonsterDB_Binding temp = (MonsterDB_Binding)DB_ListBox.SelectedItem;
             if ( temp != null)
                 now_mob.ChangeValue(temp);
+
+            MobName.Focus();
         }
 
         public bool IsNumeric(string source)
@@ -117,8 +147,7 @@ namespace RooStatsSim.UI.Manager
                 )
             );
         }
-        #endregion
 
-        
+        #endregion
     }
 }

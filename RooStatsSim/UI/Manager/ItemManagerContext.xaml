@@ -14,6 +14,26 @@
         </StackPanel>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type local:ItemOption_IfType_Binding}" x:Key="DataTemplate_IfTypeNameValue">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Path=PerTypeName}"/>
+            <TextBlock Text="{Binding Path=PerTypeValue}"/>
+            <TextBlock Text="당 "/>
+            <TextBlock Text="{Binding Path=AddTypeName}"/>
+            <TextBlock Text="{Binding Path=AddTypeValue}"/>
+        </StackPanel>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type local:ItemOption_Refine_Binding}" x:Key="DataTemplate_RefineNameValue">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Path=Refine}"/>
+            <TextBlock Text="제련시 "/>
+            <TextBlock Text="{Binding Path=Type_name}"/>
+            <TextBlock Text=" : "/>
+            <TextBlock Text="{Binding Path=Type_value}"/>
+        </StackPanel>
+    </DataTemplate>
+
     <Style TargetType="{x:Type StackPanel}" x:Key="ItemManagerListStackPanel">
         <Setter Property="Orientation" Value="Vertical"/>
         <Setter Property="Width" Value="200"/>

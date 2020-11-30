@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace RooStatsSim.UI.Manager
 {
-    
+    #region UI Binding
     class ItemDB_Binding : ItemDB, INotifyPropertyChanged
     {
         public ItemDB_Binding() { }
@@ -44,19 +44,9 @@ namespace RooStatsSim.UI.Manager
             get { return _enchant_slot; }
             set { _enchant_slot = value; OnPropertyChanged("EnchantSlot"); }
         }
-        public string Itype_name
-        {
-           get { return Enum.GetName(typeof(ITYPE), i_option.Keys); }
-        }
         public int Count
         {
-            get { return i_option.Count + d_option.Count + if_option.Count + se_attackrate_option.Count; }
-        }
-
-        public Dictionary<ITYPE, int> ITYPE_OPTION { get; set; }
-        public string Itype_value
-        {
-            get { return Convert.ToString(i_option.Values); }
+            get { return Option.Count + Option_IF_TYPE.Count + Refine_Option.Count; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -79,20 +69,9 @@ namespace RooStatsSim.UI.Manager
             Item_type = param.Item_type;
             Equip_type = param.Equip_type;
             Wear_job_limit = param.Wear_job_limit;
-            I_OPTION = param.I_OPTION;
-            d_option = param.d_option;
-            if_option = param.if_option;
-
-            se_attackrate_option = param.se_attackrate_option;
-            se_resistance_option = param.se_resistance_option;
-            element_inc_option = param.element_inc_option;
-            element_dec_option = param.element_dec_option;
-            size_inc_option = param.size_inc_option;
-            size_dec_option = param.size_dec_option;
-            tribe_inc_option = param.tribe_inc_option;
-            tribe_dec_option = param.tribe_dec_option;
-            mobtype_inc_option = param.mobtype_inc_option;
-            mobtype_dec_option = param.mobtype_dec_option;
+            Option = param.Option;
+            Option_IF_TYPE = param.Option_IF_TYPE;
+            Refine_Option = param.Refine_Option;
         }
     }
 
@@ -118,25 +97,73 @@ namespace RooStatsSim.UI.Manager
             
         }
     }
+    class Job_Limite_List : ObservableCollection<AbilityBinding<bool>>
+    {
+        public Job_Limite_List(ref List<JOB_SELECT_LIST> joblist)
+        {
+            foreach (JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
+            {
+                bool value = false;
+                if (joblist.Contains(job))
+                    value = true;
+                Add(new AbilityBinding<bool>(EnumBaseTable_Kor.JOB_SELECT_LIST_KOR_3WORD[job], value, false, Enum.GetName(typeof(JOB_SELECT_LIST), job)));
+            }
+        }
 
-    class ItemOption_Binding<TYPE, D_TYPE> : INotifyPropertyChanged
+        public void SelectClass(JOB_SELECT_LIST select_job, bool value)
+        {
+            int inx = 0;
+            int ClassRoot = 0;
+            if ((int)select_job % 100 == 0)
+                ClassRoot = 100;
+            else if ((int)select_job % 10 == 0)
+                ClassRoot = 10;
+
+            foreach (JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
+            {
+                if (((int)job >= (int)select_job) && ((int)job < (int)select_job + ClassRoot))
+                {
+                    this[inx].Point = value;
+                }
+                inx++;
+            }
+        }
+
+        public List<JOB_SELECT_LIST> GetLimitedJobList()
+        {
+            List<JOB_SELECT_LIST> retValue = new List<JOB_SELECT_LIST>();
+
+            foreach (AbilityBinding<bool> ability in this)
+            {
+                if (ability.Point)
+                {
+                    retValue.Add((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), ability.EnumName));
+                }
+            }
+            return retValue;
+        }
+    }
+    #endregion
+
+    #region Normal Option Binding
+    class ItemOption_Binding : INotifyPropertyChanged
     {
         public ItemOption_Binding() { }
-        public ItemOption_Binding(KeyValuePair<TYPE, D_TYPE> db)
+        public ItemOption_Binding(KeyValuePair<string, double> db)
         {
-            _type_name = Enum.GetName(typeof(TYPE), db.Key);
+            _type_name = db.Key;
             _type_value = db.Value;
         }
 
         string _type_name;
-        D_TYPE _type_value;
+        double _type_value;
         public string Type_name
         { 
             get { return _type_name; } 
             set { _type_name = value; OnPropertyChanged("Type_name"); } 
         }
         
-        public D_TYPE Type_value
+        public double Type_value
         {
             get { return _type_value; }
             set { _type_value = value; OnPropertyChanged("Type_value"); }
@@ -152,40 +179,105 @@ namespace RooStatsSim.UI.Manager
             handler?.Invoke(this, new PropertyChangedEventArgs(info));
         }
     }
-
-    class ItemOption_Binding : INotifyPropertyChanged
+    class ItemOptionListBox : ObservableCollection<ItemOption_Binding>
     {
-        public ItemOption_Binding() { }
-        public ItemOption_Binding(KeyValuePair<IFTYPE, AbilityPerStatus> db)
+        public ItemOptionListBox()
+        { }
+        public ItemOptionListBox(params Dictionary<string, double>[] DB)
         {
-            _type_name = Enum.GetName(typeof(IFTYPE), db.Key);
+            foreach (Dictionary<string, double> pairs in DB)
+            {
+                foreach (KeyValuePair<string, double> items in pairs)
+                {
+                    Add(new ItemOption_Binding(items));
+                }
+            }
+
+        }
+    }
+    #endregion
+
+    #region If Type Option Binding
+    class ItemOption_IfType_Binding : INotifyPropertyChanged
+    {
+        public ItemOption_IfType_Binding(AbilityPerStatus db)
+        {
+            _value = new AbilityPerStatus(db);
+        }
+
+        AbilityPerStatus _value;
+
+        public string PerTypeName
+        {
+            get { return _value.PerType; }
+            set { _value.PerType = value; OnPropertyChanged("PerTypeName"); }
+        }
+        public string AddTypeName
+        {
+            get { return _value.AddType; }
+            set { _value.AddType = value; OnPropertyChanged("AddTypeName"); }
+        }
+        public double PerTypeValue
+        {
+            get { return _value.PerValue; }
+            set { _value.PerValue = value; OnPropertyChanged("PerTypeValue"); }
+        }
+        public double AddTypeValue
+        {
+            get { return _value.AddValue; }
+            set { _value.AddValue = value; OnPropertyChanged("AddTypeValue"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string info)
+        {
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(info));
+        }
+    }
+    class ItemOptionIfTypeListBox : ObservableCollection<ItemOption_IfType_Binding>
+    {
+        public ItemOptionIfTypeListBox()
+        { }
+        public ItemOptionIfTypeListBox(List<AbilityPerStatus> DB)
+        {
+            foreach (AbilityPerStatus items in DB)
+            {
+                Add(new ItemOption_IfType_Binding(items));
+            }
+        }
+    }
+    #endregion
+    #region Refine Type Option Binding
+    class ItemOption_Refine_Binding : INotifyPropertyChanged
+    {
+        public ItemOption_Refine_Binding() { }
+        public ItemOption_Refine_Binding(int refine, KeyValuePair<string, double> db)
+        {
+            _refine = refine;
+            _type_name = db.Key;
             _type_value = db.Value;
         }
 
+        int _refine;
         string _type_name;
-        AbilityPerStatus _type_value;
+        double _type_value;
+        public int Refine
+        {
+            get { return _refine; }
+            set { _refine = value; OnPropertyChanged("Refine"); }
+        }
         public string Type_name
         {
             get { return _type_name; }
             set { _type_name = value; OnPropertyChanged("Type_name"); }
         }
 
-        public string Type_value
+        public double Type_value
         {
-            get {
-                string temp = Convert.ToString(Type_per_value) + "당 +" + Convert.ToString(Type_add_value);
-                return temp;
-            }
-        }
-        public int Type_add_value
-        {
-            get { return _type_value.AddValue; }
-            set { _type_value.AddValue = value; OnPropertyChanged("Type_value"); }
-        }
-        public int Type_per_value
-        {
-            get { return _type_value.PerValue; }
-            set { _type_value.PerValue = value; OnPropertyChanged("Type_value"); }
+            get { return _type_value; }
+            set { _type_value = value; OnPropertyChanged("Type_value"); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -198,78 +290,22 @@ namespace RooStatsSim.UI.Manager
             handler?.Invoke(this, new PropertyChangedEventArgs(info));
         }
     }
-
-
-    class ItemOptionListBox<TYPE,D_TYPE> : ObservableCollection<ItemOption_Binding<TYPE,D_TYPE>>
+    class ItemOptionRefineListBox : ObservableCollection<ItemOption_Refine_Binding>
     {
-        public ItemOptionListBox()
+        public ItemOptionRefineListBox()
         { }
-        public ItemOptionListBox(ref Dictionary<TYPE, D_TYPE> DB)
+        public ItemOptionRefineListBox(Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> DB)
         {
-            foreach (KeyValuePair<TYPE, D_TYPE> items in DB)
+            foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> options in DB)
             {
-                Add(new ItemOption_Binding<TYPE,D_TYPE>(items)) ;
-            }
-        }
-    }
-    class ItemOptionListBox : ObservableCollection<ItemOption_Binding>
-    {
-        public ItemOptionListBox()
-        { }
-        public ItemOptionListBox(ref Dictionary<IFTYPE, AbilityPerStatus> DB)
-        {
-            foreach (KeyValuePair<IFTYPE, AbilityPerStatus> items in DB)
-            {
-                Add(new ItemOption_Binding(items));
-            }
-        }
-    }
-
-    class Job_Limite_List : ObservableCollection<AbilityBinding<bool>>
-    {
-        public Job_Limite_List(ref List<JOB_SELECT_LIST> joblist)
-        {
-            foreach(JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
-            {
-                bool value = false;
-                if (joblist.Contains(job))
-                    value = true;
-                Add(new AbilityBinding<bool>(EnumProperty_Kor.JOB_SELECT_LIST_KOR_3WORD[job], value, false, Enum.GetName(typeof(JOB_SELECT_LIST), job)));
-            }
-        }
-
-        public void SelectClass(JOB_SELECT_LIST select_job, bool value)
-        {
-            int inx = 0;
-            int ClassRoot = 0;
-            if ( (int)select_job % 100 == 0)
-                ClassRoot = 100;
-            else if ((int)select_job % 10 == 0)
-                ClassRoot = 10;
-            
-            foreach(JOB_SELECT_LIST job in Enum.GetValues(typeof(JOB_SELECT_LIST)))
-            {
-                if ( ( (int)job >= (int)select_job) && ((int)job < (int)select_job+ ClassRoot))
+                foreach (KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in options.Value)
                 {
-                    this[inx].Point = value;
-                }
-                inx++;
-            }
-        }
-
-        public List<JOB_SELECT_LIST> GetLimitedJobList()
-        {
-            List <JOB_SELECT_LIST> retValue = new List<JOB_SELECT_LIST>();
-            
-            foreach(AbilityBinding<bool> ability in this)
-            {
-                if (ability.Point)
-                {
-                    retValue.Add((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), ability.EnumName));
+                    foreach (KeyValuePair<string, double> items in item_option.Value)
+                        Add(new ItemOption_Refine_Binding(options.Key, items));
                 }
             }
-            return retValue;
         }
     }
+    #endregion
 }
 

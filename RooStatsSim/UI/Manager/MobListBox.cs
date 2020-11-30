@@ -10,9 +10,9 @@ namespace RooStatsSim.UI.Manager
     class MonsterDB_Binding : MonsterDB, INotifyPropertyChanged
     {
         public MonsterDB_Binding() { }
-        public MonsterDB_Binding(int mob_id, string name, int level, bool isBoss, DB.Status status, int tribe, int element, int size,
+        public MonsterDB_Binding(int mob_id, string name, int level, MONSTER_KINDS_TYPE Type, DB.Status status, int tribe, int element, int size,
             int atk, int matk, int hp, int def, int mdef, int hit, int flee)
-            : base(mob_id, name, level, isBoss, status, tribe, element, size, atk, matk, hp, def, mdef, hit, flee)
+            : base(mob_id, name, level, Type, status, tribe, element, size, atk, matk, hp, def, mdef, hit, flee)
         { }
 
         public new int MobId
@@ -30,15 +30,22 @@ namespace RooStatsSim.UI.Manager
             get { return _level; }
             set { _level = value; OnPropertyChanged("Level"); }
         }
-        public new bool IsBoss
+        public new int Type
         {
-            get { return _isBoss; }
-            set { _isBoss = value; OnPropertyChanged("IsBoss"); }
+            get { return (int)_type; }
+            set { _type = (MONSTER_KINDS_TYPE)value; OnPropertyChanged("Type"); }
         }
         public new DB.Status StatusInfo
         {
             get {return _status; }
-            set { _status = value; }
+            set { _status = value;
+                OnPropertyChanged("Str");
+                OnPropertyChanged("Agi");
+                OnPropertyChanged("Vit");
+                OnPropertyChanged("Int");
+                OnPropertyChanged("Dex");
+                OnPropertyChanged("Luk");
+            }
         }
         public new int Tribe
         {
@@ -47,7 +54,7 @@ namespace RooStatsSim.UI.Manager
         }
         public string Tribe_Kor
         {
-            get { return EnumProperty_Kor.TRIBE_TYPE_KOR[(TRIBE_TYPE)_tribe]; }
+            get { return EnumBaseTable_Kor.TRIBE_TYPE_KOR[(TRIBE_TYPE)_tribe]; }
         }
         public new int Element
         {
@@ -56,7 +63,7 @@ namespace RooStatsSim.UI.Manager
         }
         public string Element_Kor
         {
-            get { return EnumProperty_Kor.ELEMENT_TYPE_KOR[(ELEMENT_TYPE)_element]; }
+            get { return EnumBaseTable_Kor.ELEMENT_TYPE_KOR[(ELEMENT_TYPE)_element]; }
         }
         public new int Size
         {
@@ -65,7 +72,7 @@ namespace RooStatsSim.UI.Manager
         }
         public string Size_Kor
         {
-            get { return EnumProperty_Kor.MONSTER_SIZE_KOR[(MONSTER_SIZE)_size]; }
+            get { return EnumBaseTable_Kor.MONSTER_SIZE_KOR[(MONSTER_SIZE)_size]; }
         }
         public new int Atk
         {
@@ -148,8 +155,8 @@ namespace RooStatsSim.UI.Manager
             MobId = param.MobId;
             Name = param.Name;
             Level = param.Level;
-            IsBoss = param.IsBoss;
-            StatusInfo = param.StatusInfo;
+            Type = param.Type;
+            StatusInfo = new Status(param.StatusInfo);
             Tribe = param.Tribe;
             Element = param.Element;
             Size = param.Size;
@@ -173,7 +180,7 @@ namespace RooStatsSim.UI.Manager
             foreach (KeyValuePair<int, MonsterDB> items in DB)
             {
                 MonsterDB db = items.Value;
-                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.StatusInfo, db.Tribe, db.Element, db.Size,
+                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.Type, db.StatusInfo, db.Tribe, db.Element, db.Size,
                     db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
             }
         }
@@ -181,10 +188,10 @@ namespace RooStatsSim.UI.Manager
         public void AddList(MonsterDB db)
         {
             if (Count == db.MobId)
-                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.StatusInfo, db.Tribe, db.Element, db.Size,
+                Add(new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.Type, db.StatusInfo, db.Tribe, db.Element, db.Size,
                     db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
             else
-                SetItem(db.MobId, new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.IsBoss, db.StatusInfo, db.Tribe, db.Element, db.Size,
+                SetItem(db.MobId, new MonsterDB_Binding(db.MobId, db.Name, db.Level, db.Type, db.StatusInfo, db.Tribe, db.Element, db.Size,
                     db.Atk, db.Matk, db.Hp, db.Def, db.Mdef, db.Hit, db.Flee));
             
         }

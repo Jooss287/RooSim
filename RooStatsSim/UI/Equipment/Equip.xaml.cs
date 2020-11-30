@@ -1,4 +1,4 @@
-﻿using RooStatsSim.DB;
+﻿using RooStatsSim.DB.Table;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.User;
 using System;

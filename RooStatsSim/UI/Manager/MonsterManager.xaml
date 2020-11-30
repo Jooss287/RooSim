@@ -9,6 +9,16 @@
       Title="MonsterManager">
     <Page.Resources>
         <local:MonsterListBox x:Key="MobList"/>
+        <Style TargetType="TextBlock" x:Key="Custom_Name" BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="Custom_Value" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="TabIndex" Value="2"/>
+        </Style>
     </Page.Resources>
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
@@ -34,23 +44,24 @@
             <GroupBox Header="DB Info" >
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox Content="Boss/Mini" IsChecked="{Binding Path=IsBoss}" x:Name="checkBoss" Margin="5,5,5,5"/>
+                        <ComboBox Name="cmb_monster_type" SelectedIndex="{Binding Path=Type}" Margin="5,5,5,5"
+                                  TabIndex="0"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                            <TextBlock Text="번호" Width="40" TextAlignment="Center"/>
+                            <TextBlock Text="번호" Style="{Binding Source={StaticResource Custom_Name}}"/>
                             <TextBox x:Name="MobNumber" Text="{Binding Path=MobId}" TextAlignment="Center"
                                      Width="70" Height="22" IsEnabled="False"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="이름" Width="40" TextAlignment="Center"/>
+                            <TextBlock Text="이름" Style="{Binding Source={StaticResource Custom_Name}}"/>
                             <TextBox x:Name="MobName" Text="{Binding Path=Name}" TextAlignment="Center"
                                      Width="70" TabIndex="0"
                                      GotFocus="TxtboxSelectAll"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="레벨" Width="40" TextAlignment="Center"/>
+                            <TextBlock Text="레벨" Style="{Binding Source={StaticResource Custom_Name}}"/>
                             <TextBox x:Name="MobLevel" Text="{Binding Path=Level}" TextAlignment="Center"
                                      Width="70" TabIndex="0"
                                      GotFocus="TxtboxSelectAll"
@@ -60,57 +71,102 @@
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                            <TextBlock Text="종족" Width="40" TextAlignment="Center"/>
-                            <ComboBox Name="MobTribe" Width="70" TabIndex="1" SelectedIndex="{Binding Path=Tribe}">
-                                <ComboBoxItem Content="동물형"/>
-                                <ComboBoxItem Content="식물형"/>
-                                <ComboBoxItem Content="곤충형"/>
-                                <ComboBoxItem Content="인간형"/>
-                                <ComboBoxItem Content="어패류"/>
-                                <ComboBoxItem Content="악마형"/>
-                                <ComboBoxItem Content="용족"/>
-                                <ComboBoxItem Content="무형"/>
-                                <ComboBoxItem Content="천사형"/>
-                                <ComboBoxItem Content="불사형"/>
-                            </ComboBox>
+                            <TextBlock Text="종족" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <ComboBox Name="MobTribe" Width="70" TabIndex="1" SelectedIndex="{Binding Path=Tribe}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="속성" Width="40" TextAlignment="Center"/>
-                            <ComboBox Name="MobElement" Width="70" TabIndex="1" SelectedIndex="{Binding Path=Element}">
-                                <ComboBoxItem Content="무속성"/>
-                                <ComboBoxItem Content="풍속성"/>
-                                <ComboBoxItem Content="지속성"/>
-                                <ComboBoxItem Content="화속성"/>
-                                <ComboBoxItem Content="수속성"/>
-                                <ComboBoxItem Content="독속성"/>
-                                <ComboBoxItem Content="성속성"/>
-                                <ComboBoxItem Content="암속성"/>
-                                <ComboBoxItem Content="염속성"/>
-                                <ComboBoxItem Content="불사"/>
-                            </ComboBox>
+                            <TextBlock Text="속성" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <ComboBox Name="MobElement" Width="70" TabIndex="1" SelectedIndex="{Binding Path=Element}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="크기" Width="40" TextAlignment="Center"/>
-                            <ComboBox Name="MobSize" Width="70" TabIndex="1" SelectedIndex="{Binding Path=Size}" Margin="0,0,5,0">
-                                <ComboBoxItem Content="소형"/>
-                                <ComboBoxItem Content="중형"/>
-                                <ComboBoxItem Content="대형"/>
-                            </ComboBox>
+                            <TextBlock Text="크기" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <ComboBox Name="MobSize" Width="70" TabIndex="1" SelectedIndex="{Binding Path=Size}" Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Str" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobStr" Text="{Binding Path=Str}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Agi" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobAgi" Text="{Binding Path=Agi}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Vit" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobVit" Text="{Binding Path=Vit}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Int" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                                <TextBox x:Name="MobInt" Text="{Binding Path=Int}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Dex" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                                <TextBox x:Name="MobDex" Text="{Binding Path=Dex}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Luk" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                                <TextBox x:Name="MobLuk" Text="{Binding Path=Luk}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                            <TextBlock Text="ATK" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobAtk" Text="{Binding Path=Atk}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                            <TextBlock Text="MATK" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobMatk" Text="{Binding Path=Matk}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                            <TextBlock Text="ATK" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobAtk" Text="{Binding Path=Atk}" TextAlignment="Center"
-                                     Width="70" Height="22"  TabIndex="3"
+                            <TextBlock Text="HP" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobHp" Text="{Binding Path=Hp}" 
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
                                      GotFocus="TxtboxSelectAll"
                                      PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="MATK" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobMatk" Text="{Binding Path=Matk}" TextAlignment="Center"
-                                     Width="70" Height="22" TabIndex="6"
+                            <TextBlock Text="DEF" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobDef" Text="{Binding Path=Def}"
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
+                                     GotFocus="TxtboxSelectAll"
+                                     PreviewTextInput="NurmericCheckFunc"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                            <TextBlock Text="MDEF" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobMdef" Text="{Binding Path=Mdef}"
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
                                      GotFocus="TxtboxSelectAll"
                                      PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
@@ -118,40 +174,16 @@
 
                     <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                            <TextBlock Text="HP" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobHp" Text="{Binding Path=Hp}" TextAlignment="Center"
-                                     Width="70" Height="22" TabIndex="2"
+                            <TextBlock Text="HIT" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobHit" Text="{Binding Path=Hit}"
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
                                      GotFocus="TxtboxSelectAll"
                                      PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="DEF" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobDef" Text="{Binding Path=Def}" TextAlignment="Center"
-                                     Width="70" Height="22" TabIndex="4"
-                                     GotFocus="TxtboxSelectAll"
-                                     PreviewTextInput="NurmericCheckFunc"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="MDEF" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobMdef" Text="{Binding Path=Mdef}" TextAlignment="Center"
-                                     Width="70" Height="22" TabIndex="7"
-                                     GotFocus="TxtboxSelectAll"
-                                     PreviewTextInput="NurmericCheckFunc"/>
-                        </StackPanel>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="2,5,2,0">
-                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                            <TextBlock Text="HIT" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobHit" Text="{Binding Path=Hit}" TextAlignment="Center"
-                                     Width="70" Height="22" TabIndex="5"
-                                     GotFocus="TxtboxSelectAll"
-                                     PreviewTextInput="NurmericCheckFunc"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                            <TextBlock Text="Flee" Width="40" TextAlignment="Center"/>
-                            <TextBox x:Name="MobFlee" Text="{Binding Path=Flee}" TextAlignment="Center"
-                                     Width="70" Height="22" TabIndex="7"
+                            <TextBlock Text="Flee" Style="{Binding Source={StaticResource Custom_Name}}"/>
+                            <TextBox x:Name="MobFlee" Text="{Binding Path=Flee}"
+                                     Style="{Binding Source={StaticResource Custom_Value}}"
                                      GotFocus="TxtboxSelectAll"
                                      PreviewTextInput="NurmericCheckFunc"/>
                         </StackPanel>

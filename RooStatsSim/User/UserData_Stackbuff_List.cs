@@ -39,16 +39,16 @@ namespace RooStatsSim.User
 
             for (int i = 0; i < List[(int)MEDAL_ENUM.VALOR]; i++)
                 atk += MedalTable.Get_ATK_MATK(i);
-            option.i_option[ITYPE.ATK] = atk;
-            option.i_option[ITYPE.MATK] = atk;
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.ATK)] = atk;
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.MATK)] = atk;
 
             for (int i = 0; i <= List[(int)MEDAL_ENUM.GUARDIAN]; i++)
             {
                 hp += MedalTable.Get_MaxHP(i);
                 damage += MedalTable.Get_P_M_Damage(i);
             }
-            option.i_option[ITYPE.HP] = (int)hp;
-            option.d_option[DTYPE.PHYSICAL_DAMAGE] = damage;
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.HP)] = (int)hp;
+            option.Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.PHYSICAL_DAMAGE)] = damage;
 
             hp = 0;
             damage = 0.0;
@@ -57,18 +57,18 @@ namespace RooStatsSim.User
                 hp += MedalTable.Get_MaxHP(i);
                 damage += MedalTable.Get_P_M_Damage(i);
             }
-            option.i_option[ITYPE.HP] += (int)hp;
-            option.d_option[DTYPE.MAGICAL_DAMAGE] = damage;
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.HP)] += (int)hp;
+            option.Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.MAGICAL_DAMAGE)] = damage;
 
             damage = 0.0;
             for (int i = 0; i <= List[(int)MEDAL_ENUM.CHARM]; i++)
                 damage += MedalTable.Get_Dec_Damage(i);
-            option.d_option[DTYPE.PHYSICAL_DEC_DAMAGE] = damage;
+            option.Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.PHYSICAL_DEC_DAMAGE)] = damage;
 
             damage = 0.0;
             for (int i = 0; i <= List[(int)MEDAL_ENUM.GALE]; i++)
                 damage += MedalTable.Get_Dec_Damage(i);
-            option.d_option[DTYPE.MAGICAL_DEC_DAMAGE] = damage;
+            option.Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.MAGICAL_DEC_DAMAGE)] = damage;
 
             return option;
         }
@@ -100,13 +100,13 @@ namespace RooStatsSim.User
         {
             ItemDB option = new ItemDB();
 
-            option.i_option[ITYPE.ATK] = (int)List[(int)RIDING_ENUM.ATK_MATK];
-            option.i_option[ITYPE.MATK] = (int)List[(int)RIDING_ENUM.ATK_MATK];
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.ATK)] = (int)List[(int)RIDING_ENUM.ATK_MATK];
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.MATK)] = (int)List[(int)RIDING_ENUM.ATK_MATK];
 
-            option.i_option[ITYPE.HP] = (int)List[(int)RIDING_ENUM.MAX_HP];
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.HP)] = (int)List[(int)RIDING_ENUM.MAX_HP];
 
-            option.d_option[DTYPE.ATK_P] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
-            option.d_option[DTYPE.MATK_P] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), DTYPE.ATK_P)] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
+            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), DTYPE.MATK_P)] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
 
             return option;
         }

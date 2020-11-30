@@ -58,6 +58,17 @@ namespace RooStatsSim.DB
         }
 
         public Status() { }
+        public Status(Status status)
+        {
+            Base = status.Base;
+            Job = status.Job;
+            Str = status.Str;
+            Agi = status.Agi;
+            Vit = status.Vit;
+            Int = status.Int;
+            Dex = status.Dex;
+            Luk = status.Luk;
+        }
         public Status(int BASE, int JOB, int STR, int AGI, int VIT, int INT, int DEX, int LUK)
         {
             _base = BASE;

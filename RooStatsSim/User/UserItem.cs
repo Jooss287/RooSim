@@ -1,4 +1,5 @@
 ﻿using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -16,31 +17,36 @@ namespace RooStatsSim.User
             MakeNormalProperty();
         }
         
-        public void MakeNormalProperty()
+        private void MakeNormalProperty()
         {
-            foreach(ITYPE type in Enum.GetValues(typeof(ITYPE)))
+            foreach(string type_name in Enum.GetNames(typeof(ITYPE)))
             {
-                i_option[type] = 0;
+                Option_ITYPE.Add(type_name, 0);
             }
-
-            d_option[DTYPE.ASPD] = 0;
-            d_option[DTYPE.MOVING_SPEED] = 0;
+            Option_DTYPE.Add(Enum.GetName(typeof(DTYPE), DTYPE.ASPD), 0);
+            Option_DTYPE.Add(Enum.GetName(typeof(DTYPE), DTYPE.MOVING_SPEED), 0);
         }
         public static UserItem operator +(UserItem a, ItemDB b)
         {
-            AddOption<ITYPE>(ref a.i_option, b.i_option);
-            AddOption<DTYPE>(ref a.d_option, b.d_option);
-            AddOption<STATUS_EFFECT_TYPE>(ref a.se_attackrate_option, b.se_attackrate_option);
-            AddOption<STATUS_EFFECT_TYPE>(ref a.se_resistance_option, b.se_resistance_option);
-            AddOption<ELEMENT_TYPE>(ref a.element_inc_option, b.element_inc_option);
-            AddOption<ELEMENT_TYPE>(ref a.element_dec_option, b.element_dec_option);
-            AddOption<ELEMENT_TYPE>(ref a.element_damage_option, b.element_damage_option);
-            AddOption<MONSTER_SIZE>(ref a.size_inc_option, b.size_inc_option);
-            AddOption<MONSTER_SIZE>(ref a.size_dec_option, b.size_dec_option);
-            AddOption<TRIBE_TYPE>(ref a.tribe_inc_option, b.tribe_inc_option);
-            AddOption<TRIBE_TYPE>(ref a.tribe_dec_option, b.tribe_dec_option);
-            AddOption<MONSTER_TYPE>(ref a.mobtype_inc_option, b.mobtype_inc_option);
-            AddOption<MONSTER_TYPE>(ref a.mobtype_dec_option, b.mobtype_dec_option);
+            foreach (KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in b.Option)
+            {
+                if (a.Option.ContainsKey(item_option.Key) == true)
+                {
+                    foreach (KeyValuePair<string, double> detail_option in item_option.Value)
+                    {
+                        if (a.Option[item_option.Key].ContainsKey(detail_option.Key) == true)
+                        {
+                            a.Option[item_option.Key][detail_option.Key] += detail_option.Value;
+                        }
+                        else
+                            a.Option[item_option.Key][detail_option.Key] = detail_option.Value;
+                    }
+                }
+                else
+                {
+                    a.Option[item_option.Key] = item_option.Value;
+                }
+            }
             return a;
         }
 
@@ -48,16 +54,16 @@ namespace RooStatsSim.User
         {
             ItemDB item_iftype = new ItemDB();
 
-            foreach (EQUIP.EquipItem equip_item in user.Equip.List)
-            {
-                foreach (KeyValuePair<IFTYPE, AbilityPerStatus> option in equip_item.Equip.IF_OPTION)
-                {
-                    if (option.Value.Calc != null)
-                        item_iftype += option.Value.Calc(user);
-                    else
-                        item_iftype += option.Value.Calc_refine(user, equip_item.Smelting);
-                }
-            }
+            //foreach (EQUIP.EquipItem equip_item in user.Equip.List)
+            //{
+            //    foreach (KeyValuePair<IFTYPE, AbilityPerStatus> option in equip_item.Equip.IF_OPTION)
+            //    {
+            //        if (option.Value.Calc != null)
+            //            item_iftype += option.Value.Calc(user);
+            //        else
+            //            item_iftype += option.Value.Calc_refine(user, equip_item.Smelting);
+            //    }
+            //}
             return item_iftype;
         }
     }
