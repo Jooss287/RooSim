@@ -90,7 +90,11 @@ namespace RooStatsSim.DB
         public static void ReadDB(ref DBlist DB)
         {
             if (!IsFileAvailable())
+            {
+                DB = new DBlist();
                 return;
+            }
+                
 
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());

@@ -98,13 +98,15 @@ namespace RooStatsSim.UI.Menu
 
         private void Info_window_Click(object sender, RoutedEventArgs e)
         {
-            if (_parents._info == null)
+            if ( _parents._info == null)
                 _parents._info = new ProgramInfo();
-            _parents._db_manager.Show();
-            _parents._info.Focus();
+
+            _parents._info.Owner = _parents;
+            if (_parents._info.ShowDialog() == true) { }
+            _parents._info = null;
         }
         #endregion
 
-        
+
     }
 }

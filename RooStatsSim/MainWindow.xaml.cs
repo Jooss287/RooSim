@@ -45,6 +45,8 @@ namespace RooStatsSim
 
         public MainWindow()
         {
+            Version();
+
             _roo_db = new DBlist();
             DBSerializer.ReadDB(ref _roo_db);
             _user_data = new UserData();
@@ -141,6 +143,19 @@ namespace RooStatsSim
                 MessageBoxResult res = MessageBox.Show("변경사항이 있습니다. 변경하시겠습니까?", "Save", MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.Yes)
                     User_Serializer.SaveDataBase(ref _user_data);
+            }
+        }
+
+        private void Version()
+        {
+            if (ProgramInfo.IsLastestVer())
+                return;
+
+            MessageBoxResult MsgRes = MessageBox.Show("최신 버전이 아닙니다.최신 버전을 다운받으시겠습니까?", "VersionCheck", MessageBoxButton.YesNo);
+            if (MsgRes == MessageBoxResult.Yes)
+            {
+                System.Diagnostics.Process.Start(ProgramInfo.GetLeastURL());
+                this.Close();
             }
         }
     }

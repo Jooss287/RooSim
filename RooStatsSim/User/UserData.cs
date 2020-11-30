@@ -14,7 +14,7 @@ namespace RooStatsSim.User
     [Serializable]
     public sealed class UserData
     {
-        public UserData() {  }
+        public UserData() { Initializor(); }
 
         public BASE_LEVEL Base_Level { get; set; }
         public JOB_LEVEL Job_Level { get; set; }
