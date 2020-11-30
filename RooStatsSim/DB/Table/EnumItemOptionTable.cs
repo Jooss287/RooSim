@@ -212,7 +212,10 @@ namespace RooStatsSim.DB.Table
         GOBLIN_DMG,
         ALL_DMG,
     }
-
+    public enum REFINE_TYPE
+    {
+        REFINE,
+    }
     public enum IFTYPE
     {
         ATK_PER_STR,

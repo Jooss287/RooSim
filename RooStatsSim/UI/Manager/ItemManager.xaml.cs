@@ -57,54 +57,74 @@ namespace RooStatsSim.UI.Manager
             {
                 string statusName = EnumItemOptionTable_Kor.ITYPE_KOR[option];
                 cmb_Ioption.Items.Add(statusName);
-                //cmb_if_per_option.Items
+                cmb_if_per_option.Items.Add(statusName);
+                cmb_if_add_option.Items.Add(statusName);
                 cmb_refine_if_option.Items.Add(statusName);
             }
             foreach (DTYPE option in Enum.GetValues(typeof(DTYPE)))
             {
                 string statusName = EnumItemOptionTable_Kor.DTYPE_KOR[option];
                 cmb_Doption.Items.Add(statusName);
+                cmb_if_per_option.Items.Add(statusName);
+                cmb_if_add_option.Items.Add(statusName);
                 cmb_refine_if_option.Items.Add(statusName);
             }
             foreach (STATUS_EFFECT_TYPE option in Enum.GetValues(typeof(STATUS_EFFECT_TYPE)))
             {
-                string statusName = EnumBaseTable_Kor.STATUS_EFFECT_TYPE_KOR[option];
                 cmb_status_effect_option.Items.Add(EnumItemOptionTable_Kor.SE_ATK_RATE_TYPE_KOR[(SE_ATK_RATE_TYPE)option]);
                 cmb_status_effect_option.Items.Add(EnumItemOptionTable_Kor.SE_REG_RATE_TYPE_KOR[(SE_REG_RATE_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.SE_ATK_RATE_TYPE_KOR[(SE_ATK_RATE_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.SE_ATK_RATE_TYPE_KOR[(SE_ATK_RATE_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.SE_REG_RATE_TYPE_KOR[(SE_REG_RATE_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.SE_REG_RATE_TYPE_KOR[(SE_REG_RATE_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.SE_ATK_RATE_TYPE_KOR[(SE_ATK_RATE_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.SE_REG_RATE_TYPE_KOR[(SE_REG_RATE_TYPE)option]);
             }
             foreach (ELEMENT_TYPE option in Enum.GetValues(typeof(ELEMENT_TYPE)))
             {
-                string statusName = EnumBaseTable_Kor.ELEMENT_TYPE_KOR[option];
                 cmb_element_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_DMG_TYPE_KOR[(ELEMENT_DMG_TYPE)option]);
                 cmb_element_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[(ELEMENT_REG_TYPE)option]);
                 cmb_element_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_ELEMENT_DMG_TYPE_KOR[(MONSTER_ELEMENT_DMG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_DMG_TYPE_KOR[(ELEMENT_DMG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_DMG_TYPE_KOR[(ELEMENT_DMG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[(ELEMENT_REG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[(ELEMENT_REG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_ELEMENT_DMG_TYPE_KOR[(MONSTER_ELEMENT_DMG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_ELEMENT_DMG_TYPE_KOR[(MONSTER_ELEMENT_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_DMG_TYPE_KOR[(ELEMENT_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[(ELEMENT_REG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_ELEMENT_DMG_TYPE_KOR[(MONSTER_ELEMENT_DMG_TYPE)option]);
             }
             foreach (MONSTER_SIZE option in Enum.GetValues(typeof(MONSTER_SIZE)))
             {
-                string statusName = EnumBaseTable_Kor.MONSTER_SIZE_KOR[option];
                 cmb_size_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_DMG_TYPE_KOR[(MONSTER_SIZE_DMG_TYPE)option]);
                 cmb_size_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_REG_TYPE_KOR[(MONSTER_SIZE_REG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_DMG_TYPE_KOR[(MONSTER_SIZE_DMG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_DMG_TYPE_KOR[(MONSTER_SIZE_DMG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_REG_TYPE_KOR[(MONSTER_SIZE_REG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_REG_TYPE_KOR[(MONSTER_SIZE_REG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_DMG_TYPE_KOR[(MONSTER_SIZE_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_SIZE_REG_TYPE_KOR[(MONSTER_SIZE_REG_TYPE)option]);
             }
             foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
             {
-                string statusName = EnumBaseTable_Kor.TRIBE_TYPE_KOR[option];
                 cmb_tribe_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_DMG_TYPE_KOR[(TRIBE_DMG_TYPE)option]);
                 cmb_tribe_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_REG_TYPE_KOR[(TRIBE_REG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_DMG_TYPE_KOR[(TRIBE_DMG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_DMG_TYPE_KOR[(TRIBE_DMG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_REG_TYPE_KOR[(TRIBE_REG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_REG_TYPE_KOR[(TRIBE_REG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_DMG_TYPE_KOR[(TRIBE_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.TRIBE_REG_TYPE_KOR[(TRIBE_REG_TYPE)option]);
             }
             foreach (MONSTER_KINDS_TYPE option in Enum.GetValues(typeof(MONSTER_KINDS_TYPE)))
             {
-                string statusName = EnumBaseTable_Kor.MONSTER_KINDS_TYPE_KOR[option];
                 cmb_mobtype_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_DMG_TYPE_KOR[(MONSTER_KINDS_DMG_TYPE)option]);
                 cmb_mobtype_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_REG_TYPE_KOR[(MONSTER_KINDS_REG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_DMG_TYPE_KOR[(MONSTER_KINDS_DMG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_DMG_TYPE_KOR[(MONSTER_KINDS_DMG_TYPE)option]);
+                cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_REG_TYPE_KOR[(MONSTER_KINDS_REG_TYPE)option]);
+                cmb_if_add_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_REG_TYPE_KOR[(MONSTER_KINDS_REG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_DMG_TYPE_KOR[(MONSTER_KINDS_DMG_TYPE)option]);
                 cmb_refine_if_option.Items.Add(EnumItemOptionTable_Kor.MONSTER_KINDS_REG_TYPE_KOR[(MONSTER_KINDS_REG_TYPE)option]);
             }
@@ -112,16 +132,23 @@ namespace RooStatsSim.UI.Manager
             {
                 string statusName = EnumItemOptionTable_Kor.ETC_TYPE_KOR[option];
                 cmb_etc_option.Items.Add(statusName);
+                cmb_if_per_option.Items.Add(statusName);
+                cmb_if_add_option.Items.Add(statusName);
                 cmb_refine_if_option.Items.Add(statusName);
             }
             foreach (ETC_DMG_TYPE option in Enum.GetValues(typeof(ETC_DMG_TYPE)))
             {
                 string statusName = EnumItemOptionTable_Kor.ETC_DMG_TYPE_KOR[option];
                 cmb_etc_option.Items.Add(statusName);
+                cmb_if_per_option.Items.Add(statusName);
+                cmb_if_add_option.Items.Add(statusName);
                 cmb_refine_if_option.Items.Add(statusName);
             }
             for (int i = 0; i <= 20; ++i)
                 cmb_refine_value.Items.Add(i);
+            
+            //Refine
+            cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.REFINE_TYPE_KOR[REFINE_TYPE.REFINE]);
         }
 
         void SetNowItemOption()
@@ -130,7 +157,7 @@ namespace RooStatsSim.UI.Manager
             list_Job_limit.ItemsSource = new Job_Limite_List(ref now_item._wear_job_limit);
             list_iOption.ItemsSource = new ItemOptionListBox(now_item.Option_ITYPE);
             list_dOption.ItemsSource = new ItemOptionListBox(now_item.Option_DTYPE);
-            list_ifOption.ItemsSource = new ItemOptionListBox<IFTYPE>(now_item.if_option);
+            list_ifOption.ItemsSource = new ItemOptionIfTypeListBox(now_item.Option_IF_TYPE);
 
             list_status_effect_option.ItemsSource = new ItemOptionListBox(now_item.Option_SE_ATK_RATE_TYPE, now_item.Option_SE_REG_RATE_TYPE);
             list_element_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_ELEMENT_DMG_TYPE, now_item.Option_ELEMENT_DMG_TYPE, now_item.Option_ELEMENT_REG_TYPE);
@@ -139,7 +166,7 @@ namespace RooStatsSim.UI.Manager
             list_mobtype_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_KINDS_DMG_TYPE, now_item.Option_MONSTER_KINDS_REG_TYPE);
             list_etc_option.ItemsSource = new ItemOptionListBox(now_item.Option_ETC_TYPE, now_item.Option_ETC_DMG_TYPE);
 
-            list_refine_if_option.ItemsSource = new TotalItemOptionListBox(now_item.Refine_Option);
+            list_refine_if_option.ItemsSource = new ItemOptionRefineListBox(now_item.Refine_Option);
         }
 
 
@@ -156,7 +183,8 @@ namespace RooStatsSim.UI.Manager
             now_item.EnchantSlot = 0;
             now_item.Item_type = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
-            now_item._wear_job_limit.Clear();
+            now_item.Wear_job_limit.Clear();
+            now_item.Option_IF_TYPE.Clear();
             
             foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string,double>> item_option in now_item.Option)
             {
@@ -249,12 +277,6 @@ namespace RooStatsSim.UI.Manager
             DB_ListBox.SelectedIndex = -1;
             _isNew = true;
         }
-
-        private void DB_Type_Click(object sender, RoutedEventArgs e)
-        {
-            RadioButton a = sender as RadioButton;
-        }
-
         private void DB_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ItemDB_Binding temp = (ItemDB_Binding)DB_ListBox.SelectedItem;
@@ -264,7 +286,6 @@ namespace RooStatsSim.UI.Manager
                 SetNowItemOption();
             }
         }
-
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             Job_Limite_List temp_list = (Job_Limite_List)list_Job_limit.ItemsSource;
@@ -276,7 +297,6 @@ namespace RooStatsSim.UI.Manager
             now_item.Wear_job_limit = temp_list.GetLimitedJobList();
             SetNowItemOption();
         }
-
         private void cmb_item_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             now_DB = SelectedItemType();
@@ -290,7 +310,13 @@ namespace RooStatsSim.UI.Manager
             DB_ListBox.ItemsSource = BindingItemList;
             SetNowItemOption();
         }
+        private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+        }
+        #endregion
 
+        #region normal option callback
         private void Add_Option_Click(object sender, RoutedEventArgs e)
         {
             StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
@@ -306,19 +332,9 @@ namespace RooStatsSim.UI.Manager
 
             string type_name = AddType.SelectedItem.ToString();
             double add_value = Convert.ToDouble(AddValue.Text);
-            if ( Convert.ToString(parentStackpanel.Tag) == "IFTYPE")
-            {
-                AddValue = OptionStack.Children[3] as TextBox;
-                TextBox PerValue = OptionStack.Children[1] as TextBox;
-                IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), type_name);
-                now_item.IF_OPTION[type] = new AbilityPerStatus(type, Convert.ToInt32(AddValue.Text), Convert.ToInt32(PerValue.Text));
-            }    
-            else
-            {
-                ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-                Dictionary<string,double> item_option = GetItemOptionDictionary(type);
-                item_option[type_name] = add_value;
-            }
+            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
+            Dictionary<string,double> item_option = GetItemOptionDictionary(type);
+            item_option[type_name] = add_value;
             
             SetNowItemOption();
             AddType.SelectedIndex = 0;
@@ -333,20 +349,10 @@ namespace RooStatsSim.UI.Manager
             if (OptionList.SelectedItem == null)
                 return;
 
-
-            if ( Convert.ToString(parentStackpanel.Tag) == "ITYPE")
-            {
-                string type_name = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
-                IFTYPE type = (IFTYPE)Enum.Parse(typeof(IFTYPE), type_name);
-                now_item.IF_OPTION.Remove(type);
-            }
-            else
-            {
-                string type_name = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
-                ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-                Dictionary<string, double> item_option = GetItemOptionDictionary(type);
-                item_option.Remove(type_name);
-            }
+            string type_name = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
+            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
+            Dictionary<string, double> item_option = GetItemOptionDictionary(type);
+            item_option.Remove(type_name);
 
             SetNowItemOption();
         }
@@ -358,73 +364,6 @@ namespace RooStatsSim.UI.Manager
             AddValue.Text = "";
             AddValue.Focus();
         }
-        private void cmb_if_add_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            StackPanel parentStackpanel = (sender as ComboBox).Parent as StackPanel;
-            TextBox AddValue = parentStackpanel.Children[4] as TextBox;
-
-            AddValue.Text = "";
-            AddValue.Focus();
-        }
-        private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
-        }
-        private void cmb_refine_if_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            StackPanel parentStackpanel = (sender as ComboBox).Parent as StackPanel;
-            TextBox AddValue = parentStackpanel.Children[3] as TextBox;
-
-            AddValue.Text = "";
-            AddValue.Focus();
-        }
-        private void Refine_Add_Option_Click(object sender, RoutedEventArgs e)
-        {
-            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
-            StackPanel OptionStack = parentStackpanel.Children[0] as StackPanel;
-
-            ComboBox Refine = OptionStack.Children[0] as ComboBox;
-            ComboBox AddType = OptionStack.Children[2] as ComboBox;
-            TextBox AddValue = OptionStack.Children[3] as TextBox;
-
-            if (AddValue.Text == "")
-                return;
-            if (Convert.ToInt32(AddValue.Text) == 0)
-                return;
-
-            int refine = Refine.SelectedIndex;
-            string type_name = AddType.SelectedItem.ToString();
-            double add_value = Convert.ToDouble(AddValue.Text);
-            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-            if (now_item.Refine_Option.ContainsKey(refine) == false)
-                now_item.Refine_Option.Add(refine, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
-
-            if (now_item.Refine_Option[refine].ContainsKey(type) == false)
-                now_item.Refine_Option[refine].Add(type, new Dictionary<string, double>());
-            now_item.Refine_Option[refine][type][type_name] = add_value;
-
-            SetNowItemOption();
-            AddType.SelectedIndex = 0;
-            AddValue.Text = null;
-        }
-
-        private void Refine_Del_Option_Click(object sender, RoutedEventArgs e)
-        {
-            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
-            ListBox OptionList = parentStackpanel.Children[2] as ListBox;
-
-            if (OptionList.SelectedItem == null)
-                return;
-
-            int refine = (OptionList.SelectedItem as TotalItemOption_Binding).Refine;
-            string type_name = (OptionList.SelectedItem as TotalItemOption_Binding).Type_name;
-            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-            Dictionary<string, double> item_option = GetItemOptionDictionary(type);
-            item_option.Remove(type_name);
-
-            SetNowItemOption();
-        }
-
         Dictionary<string, double> GetItemOptionDictionary(ITEM_OPTION_TYPE item_option_type)
         {
             switch (item_option_type)
@@ -494,6 +433,114 @@ namespace RooStatsSim.UI.Manager
                     break;
             }
             return null;
+        }
+        #endregion
+
+        #region if type option callback
+        private void cmb_if_add_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StackPanel parentStackpanel = (sender as ComboBox).Parent as StackPanel;
+            TextBox AddValue = parentStackpanel.Children[4] as TextBox;
+
+            AddValue.Text = "";
+            AddValue.Focus();
+        }
+        private void Add_if_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            StackPanel OptionStack = parentStackpanel.Children[0] as StackPanel;
+
+            ComboBox PerType = OptionStack.Children[0] as ComboBox;
+            TextBox PerValue = OptionStack.Children[1] as TextBox;
+            ComboBox AddType = OptionStack.Children[3] as ComboBox;
+            TextBox AddValue = OptionStack.Children[4] as TextBox;
+
+            if (AddValue.Text == "")
+                return;
+            if (Convert.ToInt32(AddValue.Text) == 0)
+                return;
+
+            string per_type_name = PerType.SelectedItem.ToString();
+            string add_type_name = AddType.SelectedItem.ToString();
+            double per_value = Convert.ToDouble(PerValue.Text);
+            double add_value = Convert.ToDouble(AddValue.Text);
+
+            now_item.Option_IF_TYPE.Add(new AbilityPerStatus(per_type_name, per_value, add_type_name, add_value));
+
+            SetNowItemOption();
+            AddType.SelectedIndex = 0;
+            AddValue.Text = null;
+        }
+
+        private void Del_if_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            ListBox OptionList = parentStackpanel.Children[2] as ListBox;
+
+            if (OptionList.SelectedItem == null)
+                return;
+
+            int selectIndex = OptionList.SelectedIndex;
+            now_item.Option_IF_TYPE.RemoveAt(selectIndex);
+
+            SetNowItemOption();
+        }
+        #endregion
+        #region refine type option callback
+        private void cmb_refine_if_option_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StackPanel parentStackpanel = (sender as ComboBox).Parent as StackPanel;
+            TextBox AddValue = parentStackpanel.Children[3] as TextBox;
+
+            AddValue.Text = "";
+            AddValue.Focus();
+        }
+
+        private void Refine_Add_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            StackPanel OptionStack = parentStackpanel.Children[0] as StackPanel;
+
+            ComboBox Refine = OptionStack.Children[0] as ComboBox;
+            ComboBox AddType = OptionStack.Children[2] as ComboBox;
+            TextBox AddValue = OptionStack.Children[3] as TextBox;
+
+            if (AddValue.Text == "")
+                return;
+            if (Convert.ToInt32(AddValue.Text) == 0)
+                return;
+
+            int refine = Refine.SelectedIndex;
+            string type_name = AddType.SelectedItem.ToString();
+            double add_value = Convert.ToDouble(AddValue.Text);
+            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
+            if (now_item.Refine_Option.ContainsKey(refine) == false)
+                now_item.Refine_Option.Add(refine, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+
+            if (now_item.Refine_Option[refine].ContainsKey(type) == false)
+                now_item.Refine_Option[refine].Add(type, new Dictionary<string, double>());
+            now_item.Refine_Option[refine][type][type_name] = add_value;
+
+            SetNowItemOption();
+            AddType.SelectedIndex = 0;
+            AddValue.Text = null;
+        }
+
+        private void Refine_Del_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            ListBox OptionList = parentStackpanel.Children[2] as ListBox;
+
+            if (OptionList.SelectedItem == null)
+                return;
+
+            int refine = (OptionList.SelectedItem as ItemOption_Refine_Binding).Refine;
+            string type_name = (OptionList.SelectedItem as ItemOption_Refine_Binding).Type_name;
+            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
+            Dictionary<string, double> item_option = GetItemOptionDictionary(type);
+            item_option.Remove(type_name);
+
+            SetNowItemOption();
         }
         #endregion
 

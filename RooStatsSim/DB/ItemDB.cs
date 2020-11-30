@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +27,7 @@ namespace RooStatsSim.DB
             EnchantSlot = item_db.EnchantSlot;
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
 
-            IF_OPTION = new Dictionary<IFTYPE, AbilityPerStatus>(item_db.IF_OPTION);
+            Option_IF_TYPE = new List<AbilityPerStatus>(item_db.Option_IF_TYPE);
             Option_ITYPE = new Dictionary<string, double>(item_db.Option_ITYPE);
             Option_DTYPE = new Dictionary<string, double>(item_db.Option_DTYPE);
             Option_SE_ATK_RATE_TYPE = new Dictionary<string, double>(item_db.Option_SE_ATK_RATE_TYPE);
@@ -59,8 +58,11 @@ namespace RooStatsSim.DB
         public static ItemDB operator +(ItemDB a, ItemDB b)
         {
             AddOption(a.Option, b.Option);
-            AddIfOption(ref a.if_option, b.if_option);
-            
+
+            foreach(AbilityPerStatus ability in b.Option_IF_TYPE)
+            {
+                a.Option_IF_TYPE.Add(new AbilityPerStatus(ability));
+            }
             foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> refine_num in b.Refine_Option)
             {
                 if (a.Refine_Option.ContainsKey(refine_num.Key) == false)
@@ -68,22 +70,6 @@ namespace RooStatsSim.DB
                 AddOption(a.Refine_Option[refine_num.Key], b.Refine_Option[refine_num.Key]);
             }
             return a;
-        }
-        protected static void AddIfOption(ref Dictionary<IFTYPE, AbilityPerStatus> a, Dictionary<IFTYPE, AbilityPerStatus> b)
-        {
-            foreach (KeyValuePair<IFTYPE, AbilityPerStatus> opt in b)
-            {
-                if (a.ContainsKey(opt.Key) == true)
-                {
-                    a[opt.Key].AddValue += opt.Value.AddValue;
-                    a[opt.Key].PerValue = opt.Value.PerValue;
-                    a[opt.Key].IfType = opt.Value.IfType;
-                }
-                else
-                {
-                    a[opt.Key] = opt.Value;
-                }
-            }
         }
         protected static void AddOption(Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> A, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> B)
         {
@@ -130,8 +116,8 @@ namespace RooStatsSim.DB
         public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
 
         protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
-        public Dictionary<IFTYPE, AbilityPerStatus> if_option = new Dictionary<IFTYPE, AbilityPerStatus>();
-        public Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> _refine_option;
+        protected List<AbilityPerStatus> _option_if_type;
+        protected Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> _refine_option;
 
 
         #region Property
@@ -185,10 +171,15 @@ namespace RooStatsSim.DB
             }
             set { _option = value; }
         }
-        public Dictionary<IFTYPE, AbilityPerStatus> IF_OPTION
+        public List<AbilityPerStatus> Option_IF_TYPE
         {
-            get { return if_option; }
-            set { if_option = value; }
+            get 
+            {
+                if (_option_if_type == null)
+                    _option_if_type = new List<AbilityPerStatus>();
+                return _option_if_type; 
+            }
+            set { _option_if_type = value; }
         }
         public Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> Refine_Option
         {
@@ -407,111 +398,24 @@ namespace RooStatsSim.DB
 
     public class AbilityPerStatus
     {
-        public delegate ItemDB CalcFunc(UserData user);
-        public delegate ItemDB CalcRefine(UserData user, int refine);
-        public int AddValue;
-        public int PerValue;
-        public int Selected;
-        public IFTYPE IfType;
-        public CalcFunc Calc;
-        public CalcRefine Calc_refine;
+        public string PerType { get; set; }
+        public string AddType { get; set; }
+        public double PerValue { get; set; }
+        public double AddValue { get; set; }
 
-        public AbilityPerStatus(IFTYPE iftype, int add_value, int per_value, int selected = 0)
+        public AbilityPerStatus(string per_type, double per_value, string add_type, double add_value)
         {
-            AddValue = add_value;
+            PerType = per_type;
             PerValue = per_value;
-            Selected = selected;
-            IfType = iftype;
-
-            switch (iftype)
-            {
-                case IFTYPE.ATK_PER_STR:
-                    Calc = ATK_PER_STR;
-                    break;
-                case IFTYPE.HP_PER_REFINE:
-                    Calc = null;
-                    Calc_refine = HP_PER_REFINE;
-                    break;
-            }
+            AddType = add_type;
+            AddValue = add_value;
         }
-
-        #region iftype option equation
-        public ItemDB ATK_PER_STR(UserData user)
+        public AbilityPerStatus(AbilityPerStatus ability)
         {
-            ItemDB item = new ItemDB();
-            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.ATK), (int)(user.Status.GetStatus(STATUS_ENUM.STR) / PerValue) * AddValue);
-            return item;
+            PerType = ability.PerType;
+            PerValue = ability.PerValue;
+            AddType = ability.AddType;
+            AddValue = ability.AddValue;
         }
-        public ItemDB ATK_PER_AGI(UserData user)
-        {
-            ItemDB item = new ItemDB();
-            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.ATK), (int)(user.Status.GetStatus(STATUS_ENUM.AGI) / PerValue) * AddValue);
-            return item;
-        }
-        public ItemDB HP_PER_VIT(UserData user)
-        {
-            ItemDB item = new ItemDB();
-            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.HP), (int)(user.Status.GetStatus(STATUS_ENUM.VIT) / PerValue) * AddValue);
-            return item;
-        }
-        public ItemDB MATK_PER_INT(UserData user)
-        {
-            ItemDB item = new ItemDB();
-            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.MATK), (int)(user.Status.GetStatus(STATUS_ENUM.INT) / PerValue) * AddValue);
-            return item;
-        }
-        public ItemDB ASPD_PER_AGI(UserData user)
-        {
-            ItemDB item = new ItemDB();
-            item.Option[ITEM_OPTION_TYPE.DTYPE].Add(Enum.GetName(typeof(DTYPE), DTYPE.ASPD), (int)(user.Status.GetStatus(STATUS_ENUM.AGI) / PerValue) * AddValue);
-            return item;
-        }
-        public ItemDB PHYSICAL_DAMAGE_PER_HIT(UserData user)
-        {
-            ItemDB item = new ItemDB();
-            int hit = Convert.ToInt32(user.User_Item.Option[ITEM_OPTION_TYPE.ITYPE][Enum.GetName(typeof(ITYPE), ITYPE.HIT)]);
-            double physical_damage = hit / PerValue * AddValue;
-            item.Option[ITEM_OPTION_TYPE.DTYPE].Add(Enum.GetName(typeof(DTYPE), DTYPE.PHYSICAL_DAMAGE), physical_damage);
-            return item;
-        }
-        public ItemDB ADDITIONAL_PHYSICAL_DAMAGE_PER_FIXED(UserData user)
-        {
-            ItemDB item = new ItemDB();
-            int physical_damage_add = 1;        //실험필요
-            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.PHYSICAL_DAMAGE_ADDITIONAL), physical_damage_add);
-            return item;
-        }
-        public ItemDB CRI_TO_TRIBE(UserData user)
-        {
-            ItemDB item = new ItemDB();
-            int CRI = 1;        //추가필요
-            return item;
-        }
-        public ItemDB ATK_MORETHAN_STR(UserData user)
-        {
-            ItemDB item = new ItemDB();
-            if (user.Status.GetStatus(STATUS_ENUM.STR) >= PerValue)
-                item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.ATK), AddValue);
-            return item;
-        }
-        #endregion
-
-        #region REFINE(SMELTING) CALC
-        public ItemDB HP_PER_REFINE(UserData user, int refine)
-        {
-            ItemDB item = new ItemDB();
-            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.HP), (int)(user.Status.GetStatus(STATUS_ENUM.VIT) / PerValue) * AddValue);
-            int hp = Convert.ToInt32(user.User_Item.Option[ITEM_OPTION_TYPE.ITYPE][Enum.GetName(typeof(ITYPE), ITYPE.HP)]) * AddValue / (refine / PerValue);
-            item.Option[ITEM_OPTION_TYPE.ITYPE].Add(Enum.GetName(typeof(ITYPE), ITYPE.HP), hp);
-            return item;
-        }
-        public ItemDB ELEMENT_DAMAGE_PER_REFINE(UserData user, int refine)
-        {
-            ItemDB item = new ItemDB();
-            double element_damage = AddValue / (refine / PerValue);
-            item.Option[ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE].Add(Enum.GetName(typeof(ELEMENT_DMG_TYPE), (ELEMENT_DMG_TYPE)Selected), element_damage);
-            return item;
-        }
-        #endregion
     }
 }

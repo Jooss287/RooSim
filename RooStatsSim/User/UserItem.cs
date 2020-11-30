@@ -53,16 +53,16 @@ namespace RooStatsSim.User
         {
             ItemDB item_iftype = new ItemDB();
 
-            foreach (EQUIP.EquipItem equip_item in user.Equip.List)
-            {
-                foreach (KeyValuePair<IFTYPE, AbilityPerStatus> option in equip_item.Equip.IF_OPTION)
-                {
-                    if (option.Value.Calc != null)
-                        item_iftype += option.Value.Calc(user);
-                    else
-                        item_iftype += option.Value.Calc_refine(user, equip_item.Smelting);
-                }
-            }
+            //foreach (EQUIP.EquipItem equip_item in user.Equip.List)
+            //{
+            //    foreach (KeyValuePair<IFTYPE, AbilityPerStatus> option in equip_item.Equip.IF_OPTION)
+            //    {
+            //        if (option.Value.Calc != null)
+            //            item_iftype += option.Value.Calc(user);
+            //        else
+            //            item_iftype += option.Value.Calc_refine(user, equip_item.Smelting);
+            //    }
+            //}
             return item_iftype;
         }
     }

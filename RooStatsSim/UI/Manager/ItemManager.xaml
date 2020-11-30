@@ -126,7 +126,7 @@
                                               SelectionChanged="cmb_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
                                         materialDesign:HintAssist.Hint="조건값"/>
-                                    <TextBlock Text="당" VerticalAlignment="Bottom" Margin="5,0,0,3" HorizontalAlignment="Center"/>
+                                    <TextBlock Text=" 당 " VerticalAlignment="Bottom" Margin="5,0,0,3" HorizontalAlignment="Center"/>
                                     <ComboBox Name="cmb_if_add_option" SelectedIndex="0"
                                               SelectionChanged="cmb_if_add_option_SelectionChanged" VerticalAlignment="Bottom"/>
                                     <TextBox Style="{Binding Source={StaticResource ItemManagerValueBox}}"
@@ -135,13 +135,13 @@
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
                                             Content="{materialDesign:PackIcon ArrowCollapseUp}"
-                                            Click="Del_Option_Click"/>
+                                            Click="Del_if_Option_Click"/>
                                     <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
                                             Content="{materialDesign:PackIcon ArrowCollapseDown}"
-                                            Click="Add_Option_Click"/>
+                                            Click="Add_if_Option_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_ifOption"
-                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_IfTypeNameValue}}"/>
                             </StackPanel>
                         </StackPanel>
 

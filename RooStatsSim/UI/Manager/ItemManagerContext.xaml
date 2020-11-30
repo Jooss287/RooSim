@@ -14,7 +14,17 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type local:TotalItemOptionListBox}" x:Key="DataTemplate_RefineNameValue">
+    <DataTemplate DataType="{x:Type local:ItemOption_IfType_Binding}" x:Key="DataTemplate_IfTypeNameValue">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Path=PerTypeName}"/>
+            <TextBlock Text="{Binding Path=PerTypeValue}"/>
+            <TextBlock Text="당 "/>
+            <TextBlock Text="{Binding Path=AddTypeName}"/>
+            <TextBlock Text="{Binding Path=AddTypeValue}"/>
+        </StackPanel>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type local:ItemOption_Refine_Binding}" x:Key="DataTemplate_RefineNameValue">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="{Binding Path=Refine}"/>
             <TextBlock Text="제련시 "/>
