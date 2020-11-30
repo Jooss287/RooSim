@@ -19,7 +19,7 @@ namespace RooStatsSim.UI.ACK
         // 원작 라그나로크 오리진 안내
         const string _ROO_URL = "https://cafe.naver.com/ragnarokorigin";
         // 프로그램 버전
-        const string _PROGRAM_VER = "v0.0";
+        const string _PROGRAM_VER = "ver.0.1";
         const string _LATEST_VER_API_URL = "https://api.github.com/repos/Jooss287/RooSim/releases/latest";
         // Github 주소
         const string _CONTACT_URL = "https://api.github.com/repos/Jooss287/RooSim/Issue \n" + 
