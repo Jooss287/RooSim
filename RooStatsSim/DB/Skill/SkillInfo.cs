@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RooStatsSim.DB.Skill
 {
-    enum SKILL_TYPE
+    public enum SKILL_TYPE
     {
         ACTIVE,
         PASSIVE,
@@ -14,7 +14,7 @@ namespace RooStatsSim.DB.Skill
         DEBUFF,
     }
 
-    class SkillInfo
+    public class SkillInfo
     {
         public string NAME { get; set; }
         public string NAME_KOR { get; set; }

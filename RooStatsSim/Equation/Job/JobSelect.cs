@@ -1,6 +1,5 @@
 ﻿using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
-using RooStatsSim.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;

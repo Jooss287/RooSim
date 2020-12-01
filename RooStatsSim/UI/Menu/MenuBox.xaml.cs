@@ -17,7 +17,6 @@ using RooStatsSim;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 using RooStatsSim.Equation.Job;
-using RooStatsSim.Skills;
 using RooStatsSim.UI.StatusWindow;
 using RooStatsSim.UI.Manager;
 using RooStatsSim.UI.ACK;

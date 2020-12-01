@@ -7,17 +7,17 @@ using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.DB.Skill.JobSkill
 {
-    class SwordmanSkill
+    public enum SWORDMAN_SKILL
     {
-        public enum SWORDMAN_SKILL
-        {
-            CHIVALRY,
-            SWORD_MASTERY,
-            BASH,
-            MAGNUM_BRAKE,
-            PROVOQUE,
-            ENDURE,
-        }
+        CHIVALRY,
+        SWORD_MASTERY,
+        BASH,
+        MAGNUM_BRAKE,
+        PROVOQUE,
+        ENDURE,
+    }
+    public class SwordmanSkill
+    {
         public static Dictionary<SWORDMAN_SKILL, string> SWORDMAN_SKILL_KOR = new Dictionary<SWORDMAN_SKILL, string>()
         {
             {SWORDMAN_SKILL.CHIVALRY, "기사도" },

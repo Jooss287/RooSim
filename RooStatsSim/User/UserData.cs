@@ -31,8 +31,8 @@ namespace RooStatsSim.User
         public RIDING Riding_ability { get; set; }
         public RIDING Riding_personality { get; set; }
         
-
         public UserItem User_Item { get; set; }
+        public UserSkill User_Skill { get; set; }
         public int SelectedEnemy { get; set; }
 
         void Initializor()

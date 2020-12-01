@@ -7,29 +7,29 @@ using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.DB.Skill.JobSkill
 {
-    class LoadKnightSkill
+    public enum LOADKNIGHT_SKILL
     {
-        public enum LOADKNIGHT_SKILL
-        {
-            //2차
-            SPEAR_MASTERY,
-            FIERCE,
-            BRANDISH_SPEAR,
-            SPEAR_BOOMERANG,
-            CHARGE_ATTACK,
-            SOLID_BLOW,
-            RYAN_RAPIDS,
-            SWORD_QUIKEN,
-            BOWLING_BASH,
-            VANGUARD_CHASE,
-            //3차
-            CONCENTRATION,
-            HEAD_CRUSH,
-            VITAL_STRIKE,
-            SPIRAL_PIERCE,
-            AURA_BALDE,
-            BERSERK,
-        }
+        //2차
+        SPEAR_MASTERY,
+        FIERCE,
+        BRANDISH_SPEAR,
+        SPEAR_BOOMERANG,
+        CHARGE_ATTACK,
+        SOLID_BLOW,
+        RYAN_RAPIDS,
+        SWORD_QUIKEN,
+        BOWLING_BASH,
+        VANGUARD_CHASE,
+        //3차
+        CONCENTRATION,
+        HEAD_CRUSH,
+        VITAL_STRIKE,
+        SPIRAL_PIERCE,
+        AURA_BALDE,
+        BERSERK,
+    }
+    public class LoadKnightSkill
+    {
         public static Dictionary<LOADKNIGHT_SKILL, string> SWORDMAN_SKILL_KOR = new Dictionary<LOADKNIGHT_SKILL, string>()
         {
             {LOADKNIGHT_SKILL.SPEAR_MASTERY, "스피어 마스터리" },

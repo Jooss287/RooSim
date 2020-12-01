@@ -15,6 +15,7 @@ using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.UI.MonsterDamage;
+using RooStatsSim.DB.Skill.JobSkill;
 using MDIXWindow;
 using WPF.MDI;
 

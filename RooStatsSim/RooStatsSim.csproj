@@ -155,9 +155,6 @@
     <Compile Include="Extension\MDIXWindow\Behaviors\DragWindowBehavior.cs" />
     <Compile Include="Extension\MDIXWindow\Behaviors\TemplateBindingBehavior.cs" />
     <Compile Include="Extension\MDIXWindow\WindowEx.cs" />
-    <Compile Include="Skills\SkillCheckBox.cs" />
-    <Compile Include="Skills\SkillAdd.cs" />
-    <Compile Include="Skills\SkillInfo.cs" />
     <Compile Include="UI\AbilityBinding.cs" />
     <Compile Include="UI\ACK\ProgramInfo.xaml.cs">
       <DependentUpon>ProgramInfo.xaml</DependentUpon>
@@ -185,6 +182,9 @@
     <Compile Include="UI\MonsterDamage\MonsterDamageCheck.xaml.cs">
       <DependentUpon>MonsterDamageCheck.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SkillWindow\SkillWindow.xaml.cs">
+      <DependentUpon>SkillWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
       <DependentUpon>StackBuff.xaml</DependentUpon>
     </Compile>
@@ -200,6 +200,7 @@
     <Compile Include="User\UserItem.cs" />
     <Compile Include="User\User_Enum.cs" />
     <Compile Include="User\User_Serializer.cs" />
+    <Compile Include="User\UserSkill.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Extension\MDIXWindow\MaterialDesignWindow.xaml">
@@ -251,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\MonsterDamage\MonsterDamageCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SkillWindow\SkillWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
