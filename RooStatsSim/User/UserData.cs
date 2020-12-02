@@ -50,6 +50,7 @@ namespace RooStatsSim.User
             Riding_ability = new RIDING();
             Riding_personality = new RIDING();
             User_Item = new UserItem();
+            User_Skill = new UserSkill();
             SelectedEnemy = 0;
         }
         

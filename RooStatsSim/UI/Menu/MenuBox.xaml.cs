@@ -23,6 +23,7 @@ using RooStatsSim.UI.ACK;
 using RooStatsSim.User;
 using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
+using RooStatsSim.UI.SkillWindow;
 using WPF.MDI;
 
 namespace RooStatsSim.UI.Menu
@@ -44,9 +45,13 @@ namespace RooStatsSim.UI.Menu
 
         private void job_sel_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult res = MessageBox.Show("세팅된 모든 정보가 변경될 수 있습니다. 변경하시겠습니까?", "ClassChange", MessageBoxButton.YesNo);
+            if (res == MessageBoxResult.No)
+                return;
+
             RadioButton source = e.Source as RadioButton;
             _user_data.Job = (JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag));
-
+            //_user_data.User_Skill.InitSkills(SkillWindow.SkillWindow._)
             //모든 값 초기화 시켜야 함
         }
         private void TurnOnOff(WINDOW_ENUM window_name)

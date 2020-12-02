@@ -11,26 +11,6 @@ using System.Windows.Documents;
 
 namespace RooStatsSim.Equation.Job
 {
-    enum JOB_LIST
-    {
-        LOAD_KNIGHT,
-        WHITE_SMITH,
-        ASSASSIN_CROSS,
-        SNIPER,
-        HIGH_WIZARD,
-        HIGH_PRIST
-    }
-    enum JOB_LIST_KOR
-    {
-        로드나이트,
-        화이트스미스,
-        어세신크로스,
-        스나이퍼,
-        하이위저드,
-        하이프리스트
-    }
-    
-    
     class JobSelect
     {
         List<dynamic> Job = new List<dynamic>()
