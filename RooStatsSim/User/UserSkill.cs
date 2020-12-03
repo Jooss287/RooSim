@@ -36,16 +36,19 @@ namespace RooStatsSim.User
             //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
             //}
         }
-        public void InitSkills(Dictionary<string, SkillInfo> skills)
+        public void InitSkills(params Dictionary<string, SkillInfo>[] skills)
         {
             List.Clear();
-            foreach(KeyValuePair<string, SkillInfo> skill in skills)
+            foreach(Dictionary<string, SkillInfo> jobskill in skills)
             {
-                UserSkillInfo user_skill = new UserSkillInfo();
-                user_skill.Name = skill.Key;
-                user_skill.Level = 0;
-                user_skill.Detail = skill.Value;
-                List.Add(user_skill);
+                foreach (KeyValuePair<string, SkillInfo> skill in jobskill)
+                {
+                    UserSkillInfo user_skill = new UserSkillInfo();
+                    user_skill.Name = skill.Key;
+                    user_skill.Level = 0;
+                    user_skill.Detail = skill.Value;
+                    List.Add(user_skill);
+                }
             }
         }
         public void AddSkill(KeyValuePair<string, SkillInfo> skill)

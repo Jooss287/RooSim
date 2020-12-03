@@ -12,6 +12,9 @@ namespace RooStatsSim.Equation.Job
         public Sniper() : base(ATTACK_TYPE.RANGE_TYPE)
         {
         }
+        public void SetSkillInit()
+        {
+        }
     }
 
 }

@@ -16,10 +16,6 @@ namespace RooStatsSim.Equation.Job
 
         public LordKnight() : base(ATTACK_TYPE.MELEE_TYPE)
         {
-            foreach(string skill in Enum.GetNames(typeof(SWORDMAN_SKILL)))
-                Skill.Add(skill, SkillWindow._swordman_skill.Skill[skill]);
-            foreach (string skill in Enum.GetNames(typeof(LOADKNIGHT_SKILL)))
-                Skill.Add(skill, SkillWindow._loadknight_skill.Skill[skill]);
         }
         #region override Skill
         protected override double GetBaseTotalATK(CALC_STANDARD calc_standard = CALC_STANDARD.NONE)
@@ -44,5 +40,10 @@ namespace RooStatsSim.Equation.Job
             return 0;
         }
         #endregion
+
+        public void SetSkillInit()
+        {
+            MainWindow._user_data.User_Skill.InitSkills(SkillWindow._swordman_skill.Skill, SkillWindow._loadknight_skill.Skill);
+        }
     }
 }

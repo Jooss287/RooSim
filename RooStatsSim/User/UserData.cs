@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using RooStatsSim.Extension;
 using RooStatsSim.DB.Table;
 using RooStatsSim.Equation;
+using RooStatsSim.Equation.Job;
 using RooStatsSim.User;
 
 
@@ -20,6 +22,7 @@ namespace RooStatsSim.User
         public JOB_LEVEL Job_Level { get; set; }
         public STATUS Status { get; set; }
         public JOB_SELECT_LIST Job { get; set; }
+        [JsonIgnore]public JobSelect JobSelect { get; set; }
 
         public EQUIP Equip { get; set; }
         public GEAR Gear { get; set; }

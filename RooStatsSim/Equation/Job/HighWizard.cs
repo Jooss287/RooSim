@@ -10,6 +10,9 @@ namespace RooStatsSim.Equation.Job
         public HighWizard() : base(ATTACK_TYPE.MELEE_TYPE)
         {
         }
+        public void SetSkillInit()
+        {
+        }
     }
 
 }

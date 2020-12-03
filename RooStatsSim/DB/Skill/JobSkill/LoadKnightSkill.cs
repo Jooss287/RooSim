@@ -53,6 +53,7 @@ namespace RooStatsSim.DB.Skill.JobSkill
         public Dictionary<string, SkillInfo> Skill { get; set; }
         public LoadKnightSkill()
         {
+            Skill = new Dictionary<string, SkillInfo>();
             foreach (string name in Enum.GetNames(typeof(LOADKNIGHT_SKILL)))
             {
                 Skill.Add(name, new SkillInfo(name, SWORDMAN_SKILL_KOR[(LOADKNIGHT_SKILL)Enum.Parse(typeof(LOADKNIGHT_SKILL), name)]));

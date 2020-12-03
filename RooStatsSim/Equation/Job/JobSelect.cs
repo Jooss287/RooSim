@@ -11,7 +11,7 @@ using System.Windows.Documents;
 
 namespace RooStatsSim.Equation.Job
 {
-    class JobSelect
+    public class JobSelect
     {
         List<dynamic> Job = new List<dynamic>()
             {
@@ -31,6 +31,7 @@ namespace RooStatsSim.Equation.Job
         public JobSelect(JOB_SELECT_LIST param_job = JOB_SELECT_LIST.NOVICE)
         {
             SelectedJob = param_job;
+            Job.ElementAt(GetJobNum).SetSkillInit();
         }
 
         public double GetReverseATK(int sATK)

@@ -30,6 +30,7 @@ namespace RooStatsSim.DB.Skill.JobSkill
         public Dictionary<string, SkillInfo> Skill { get; set; }
         public SwordmanSkill()
         {
+            Skill = new Dictionary<string, SkillInfo>();
             foreach (string name in Enum.GetNames(typeof(SWORDMAN_SKILL)))
             {
                 Skill.Add(name, new SkillInfo(name, SWORDMAN_SKILL_KOR[(SWORDMAN_SKILL)Enum.Parse(typeof(SWORDMAN_SKILL), name)]));

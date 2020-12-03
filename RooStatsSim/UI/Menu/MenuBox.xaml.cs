@@ -34,24 +34,29 @@ namespace RooStatsSim.UI.Menu
     public partial class MenuBox : UserControl
     {
         UserData _user_data;
-        MainWindow _parents;
+        MainWindow _parents = null;
         public MenuBox(MainWindow parents)
         {
             _user_data = MainWindow._user_data;
-            _parents = parents;
             InitializeComponent();
+            _parents = parents;
         }
 
 
         private void job_sel_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult res = MessageBox.Show("세팅된 모든 정보가 변경될 수 있습니다. 변경하시겠습니까?", "ClassChange", MessageBoxButton.YesNo);
-            if (res == MessageBoxResult.No)
-                return;
+            if (_parents != null)
+            {
+                MessageBoxResult res = MessageBox.Show("세팅된 모든 정보가 변경될 수 있습니다. 변경하시겠습니까?", "ClassChange", MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.No)
+                    return;
+            }
+            
+            MainWindow._user_data = new UserData();
 
             RadioButton source = e.Source as RadioButton;
             _user_data.Job = (JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag));
-            //_user_data.User_Skill.InitSkills(SkillWindow.SkillWindow._)
+            _user_data.JobSelect = new JobSelect(_user_data.Job);
             //모든 값 초기화 시켜야 함
         }
         private void TurnOnOff(WINDOW_ENUM window_name)
