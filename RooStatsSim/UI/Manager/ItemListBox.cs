@@ -63,6 +63,7 @@ namespace RooStatsSim.UI.Manager
         {
             Id = param.Id;
             Name = param.Name;
+            ImageName = param.ImageName;
             LevelLimit = param.LevelLimit;
             CardSlot = param.CardSlot;
             EnchantSlot = param.EnchantSlot;

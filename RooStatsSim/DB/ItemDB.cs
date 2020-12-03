@@ -19,6 +19,7 @@ namespace RooStatsSim.DB
         {
             Id = item_db.Id;
             Name = item_db.Name;
+            ImageName = item_db.ImageName;
             LevelLimit = item_db.LevelLimit;
             Item_type = item_db.Item_type;
             Equip_type = item_db.Equip_type;
@@ -107,6 +108,7 @@ namespace RooStatsSim.DB
         WEAPON_TYPE_ENUM _weapon_type = WEAPON_TYPE_ENUM.HAND;
         protected int _id;
         protected string _name;
+        protected string _image_name = "";
         protected int _level_limit;
         protected int _smelt;
         protected int _card_slot;
@@ -130,6 +132,11 @@ namespace RooStatsSim.DB
         {
             get { return _name; }
             set { _name = value; }
+        }
+        public string ImageName
+        {
+            get { return _image_name; }
+            set { _image_name = value; }
         }
         public int LevelLimit
         {

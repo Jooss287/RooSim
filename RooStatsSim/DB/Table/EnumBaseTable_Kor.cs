@@ -201,5 +201,17 @@ namespace RooStatsSim.DB.Table
         {EQUIP_TYPE_ENUM.COSTUME, EQUIP_DB_ENUM.COSTUME },
         {EQUIP_TYPE_ENUM.BACK_DECORATION, EQUIP_DB_ENUM.BACK_DECO},
     };
+        public static Dictionary<EQUIP_DB_ENUM, string> EQUIP_DB_ENUM_KOR = new Dictionary<EQUIP_DB_ENUM, string>()
+        {
+            {EQUIP_DB_ENUM.HEAD, "머리"},
+            {EQUIP_DB_ENUM.WEAPON, "주무기"},
+            {EQUIP_DB_ENUM.ARMOR, "갑옷"},
+            {EQUIP_DB_ENUM.SUB_WEAPON, "보조무기"},
+            {EQUIP_DB_ENUM.CLOAK, "걸칠것"},
+            {EQUIP_DB_ENUM.SHOES, "신발"},
+            {EQUIP_DB_ENUM.ACC, "악세사리"},
+            {EQUIP_DB_ENUM.COSTUME, "코스튬"},
+            {EQUIP_DB_ENUM.BACK_DECO, "등장식"},
+        };
     }
 }

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using RooStatsSim.DB;
 using System.Collections.Generic;
+using System.IO;
 
 using RooStatsSim.DB.Table;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace RooStatsSim.UI.Manager
         Dictionary<int, ItemDB> now_DB;
         ItemDB_Binding now_item = new ItemDB_Binding();
         ItemListBox BindingItemList;
+        const string _image_path = "Img";
+        List<string> _image_list = new List<string>();
 
         public ItemManager(ref DBlist DB)
         {
@@ -38,6 +41,12 @@ namespace RooStatsSim.UI.Manager
         #region Initialize UI Binding
         void InitUIsetting()
         {
+            foreach(EQUIP_DB_ENUM equip_db in Enum.GetValues(typeof(EQUIP_DB_ENUM)))
+            {
+                string statusName = EnumBaseTable_Kor.EQUIP_DB_ENUM_KOR[equip_db];
+                cmb_db_type.Items.Add(statusName);
+            }
+            cmb_db_type.SelectedIndex = (int)EQUIP_DB_ENUM.HEAD;
             foreach (EQUIP_TYPE_ENUM equip in Enum.GetValues(typeof(EQUIP_TYPE_ENUM)))
             {
                 string statusName = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR[equip];
@@ -51,6 +60,16 @@ namespace RooStatsSim.UI.Manager
                 cmb_item_type.Items.Add(statusName);
             }
             cmb_item_type.SelectedIndex = (int)ITEM_TYPE_ENUM.EQUIPMENT;
+
+            if (Directory.Exists(_image_path))
+            {
+                DirectoryInfo di = new DirectoryInfo(_image_path);
+                foreach(var item in di.GetFiles())
+                {
+                    _image_list.Add(item.Name);
+                    cmb_Item_image.Items.Add(item.Name);
+                }
+            }
         }
         void SetComboBox()
         {
@@ -154,6 +173,7 @@ namespace RooStatsSim.UI.Manager
         void SetNowItemOption()
         {
             cmb_equip_type.SelectedIndex = (int)now_item.Equip_type;
+            cmb_Item_image.SelectedIndex = _image_list.IndexOf(now_item.ImageName);
             list_Job_limit.ItemsSource = new Job_Limite_List(ref now_item._wear_job_limit);
             list_iOption.ItemsSource = new ItemOptionListBox(now_item.Option_ITYPE);
             list_dOption.ItemsSource = new ItemOptionListBox(now_item.Option_DTYPE);
@@ -176,6 +196,7 @@ namespace RooStatsSim.UI.Manager
                 now_item.Id = now_DB.Count;
 
             now_item.Name = "";
+            now_item.ImageName = "";
             now_item.LevelLimit = 0;
             now_item.CardSlot = 0;
             now_item.EnchantSlot = 0;
@@ -219,7 +240,7 @@ namespace RooStatsSim.UI.Manager
                 case ITEM_TYPE_ENUM.DRESS_STYLE:
                     return _DB.Dress_style_db;
                 case ITEM_TYPE_ENUM.EQUIPMENT:
-                    return _DB.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[(EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex]];
+                    return _DB.Equip_db[cmb_db_type.SelectedIndex];
                 case ITEM_TYPE_ENUM.CARD:
                     return _DB.Card_db;
                 case ITEM_TYPE_ENUM.ENCHANT:
@@ -234,24 +255,31 @@ namespace RooStatsSim.UI.Manager
         {
             ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
 
+            cmb_db_type.IsEnabled = false;
             cmb_equip_type.IsEnabled = false;
             list_Job_limit.IsEnabled = false;
             Item_EnchantSlot.IsEnabled = false;
             Item_CardSlot.IsEnabled = false;
             Item_Level.IsEnabled = false;
+            cmb_Item_image.IsEnabled = false;
 
             if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
             {
+                cmb_db_type.IsEnabled = true;
                 cmb_equip_type.IsEnabled = true;
                 list_Job_limit.IsEnabled = true;
                 Item_EnchantSlot.IsEnabled = true;
                 Item_CardSlot.IsEnabled = true;
                 Item_Level.IsEnabled = true;
+                cmb_Item_image.IsEnabled = true;
             }
             else if (selected == ITEM_TYPE_ENUM.GEAR)
                 list_Job_limit.IsEnabled = true;
             else if (selected == ITEM_TYPE_ENUM.CARD)
+            {
+                cmb_db_type.IsEnabled = true;
                 cmb_equip_type.IsEnabled = true;
+            }
         }
 
         #region CLICK FUNCTION
@@ -295,6 +323,19 @@ namespace RooStatsSim.UI.Manager
             now_item.Wear_job_limit = temp_list.GetLimitedJobList();
             SetNowItemOption();
         }
+        private void cmb_db_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            now_DB = SelectedItemType();
+            if (now_DB == null)
+                return;
+            else
+                SetSelectedItemTypeUI();
+
+            InitializeContents();
+            BindingItemList = new ItemListBox(ref now_DB);
+            DB_ListBox.ItemsSource = BindingItemList;
+            SetNowItemOption();
+        }
         private void cmb_item_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             now_DB = SelectedItemType();
@@ -310,17 +351,6 @@ namespace RooStatsSim.UI.Manager
         }
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            now_DB = SelectedItemType();
-            if (now_DB == null)
-                return;
-            else
-                SetSelectedItemTypeUI();
-
-            InitializeContents();
-            BindingItemList = new ItemListBox(ref now_DB);
-            DB_ListBox.ItemsSource = BindingItemList;
-            SetNowItemOption();
-
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
         }
         #endregion
@@ -549,7 +579,14 @@ namespace RooStatsSim.UI.Manager
 
             SetNowItemOption();
         }
+
         #endregion
+
+        private void Item_image_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ComboBox).SelectedItem != null)
+                now_item.ImageName = (sender as ComboBox).SelectedItem.ToString();
+        }
 
         
     }
