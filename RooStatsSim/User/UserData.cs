@@ -38,7 +38,7 @@ namespace RooStatsSim.User
         public UserSkill User_Skill { get; set; }
         public int SelectedEnemy { get; set; }
 
-        void Initializor()
+        public void Initializor()
         {
             Base_Level = new BASE_LEVEL();
             Job_Level = new JOB_LEVEL();
@@ -57,11 +57,9 @@ namespace RooStatsSim.User
             SelectedEnemy = 0;
         }
         
-        #region Userdata event
+        #region Item Changed Event
         public delegate void UserDataChangedEventHandler();
         public event UserDataChangedEventHandler itemDataChanged;
-
-        
         public void CalcUserData()
         {
             UserItem CalcUserItem = new UserItem();
@@ -83,6 +81,22 @@ namespace RooStatsSim.User
 
             if (itemDataChanged != null)
                 itemDataChanged();
+            MainWindow._user_data_edited = true;
+        }
+        #endregion
+
+        #region Job Changed Event
+        public delegate void JobChangedEventHandler();
+        public event JobChangedEventHandler JobDataChanged;
+        public void JobChanged(JOB_SELECT_LIST job)
+        {
+            Job = job;
+            JobSelect = new JobSelect(job);
+
+            // Job가 변경되면 설정되어야 할 것들
+
+            if (JobDataChanged != null)
+                JobDataChanged();
             MainWindow._user_data_edited = true;
         }
         #endregion

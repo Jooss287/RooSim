@@ -7,6 +7,24 @@
              mc:Ignorable="d" Background="#c9c9c9"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <ItemsControl x:Name="SkillSelector">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="6" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl MouseWheel="skill_lv_Wheel"
+                                    MouseEnter="ContentControl_MouseEnter"
+                                    MouseLeave="ContentControl_MouseLeave">
+                        <StackPanel Orientation="Vertical" Margin="8">
+                            <Button Style="{Binding Source={StaticResource SkillImgBtn}}"/>
+                            <TextBlock Text="{Binding Path=Name_Kor}"/>
+                        </StackPanel>
+                    </ContentControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>

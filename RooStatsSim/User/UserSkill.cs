@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Collections.Specialized;
-using System.Windows.Media;
-using MaterialDesignThemes.Wpf;
 using System.Text.Json.Serialization;
-using RooStatsSim.DB;
-using RooStatsSim.DB.Table;
-using RooStatsSim.UI.Equipment;
 using RooStatsSim.DB.Skill;
 
 namespace RooStatsSim.User
@@ -15,12 +11,52 @@ namespace RooStatsSim.User
     [Serializable]
     public class UserSkill
     {
-        public class UserSkillInfo
+        public class UserSkillInfo : INotifyPropertyChanged
         {
-            public string Name { get; set; }
-            public int Level { get; set; }
+            string _name;
+            string _name_kor;
+            int _level;
+
+            public string Name
+            {
+                get { return _name; }
+                set
+                {
+                    _name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
+            public string Name_Kor
+            {
+                get { return _name_kor; }
+                set
+                {
+                    _name_kor = value;
+                    OnPropertyChanged("Name_Kor");
+                }
+            }
+            public int Level
+            {
+                get { return _level; }
+                set
+                {
+                    if (value > Detail.MAX_LV)
+                        return;
+                    _level = value;
+                    OnPropertyChanged("Level");
+                }
+            }
             [JsonIgnore]public SkillInfo Detail { get; set; }
-            
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            public override string ToString() => _name;
+
+            protected void OnPropertyChanged(string info)
+            {
+                var handler = PropertyChanged;
+                handler?.Invoke(this, new PropertyChangedEventArgs(info));
+            }
         }
 
         public ObservableCollection<UserSkillInfo> List { get; }
@@ -45,8 +81,8 @@ namespace RooStatsSim.User
                 {
                     UserSkillInfo user_skill = new UserSkillInfo();
                     user_skill.Name = skill.Key;
-                    user_skill.Level = 0;
                     user_skill.Detail = skill.Value;
+                    user_skill.Level = 0;
                     List.Add(user_skill);
                 }
             }

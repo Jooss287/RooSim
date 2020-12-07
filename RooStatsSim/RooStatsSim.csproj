@@ -185,6 +185,7 @@
     <Compile Include="UI\SkillWindow\SkillWindow.xaml.cs">
       <DependentUpon>SkillWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SkillWindow\SkillWindowBinding.cs" />
     <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
       <DependentUpon>StackBuff.xaml</DependentUpon>
     </Compile>
@@ -252,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\MonsterDamage\MonsterDamageCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SkillWindow\SkillContents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

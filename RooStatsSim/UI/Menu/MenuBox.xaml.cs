@@ -49,15 +49,14 @@ namespace RooStatsSim.UI.Menu
             {
                 MessageBoxResult res = MessageBox.Show("세팅된 모든 정보가 변경될 수 있습니다. 변경하시겠습니까?", "ClassChange", MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.No)
+                { 
                     return;
+                }
             }
-            
-            MainWindow._user_data = new UserData();
 
             RadioButton source = e.Source as RadioButton;
-            _user_data.Job = (JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag));
-            _user_data.JobSelect = new JobSelect(_user_data.Job);
-            //모든 값 초기화 시켜야 함
+            _user_data.Initializor();
+            _user_data.JobChanged((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag)));
         }
         private void TurnOnOff(WINDOW_ENUM window_name)
         {
