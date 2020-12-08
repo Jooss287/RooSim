@@ -2,6 +2,7 @@
 using RooStatsSim.UI.Menu;
 using RooStatsSim.User;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,8 +35,16 @@ namespace RooStatsSim.UI.Equipment
         public Equip()
         {
             _user_data = MainWindow._user_data;
-
+            this.DataContext = this;
             InitializeComponent();
+
+            string filename = @"Img/buckler.png";
+            FileInfo fi = new FileInfo(filename);
+            if (fi.Exists)
+            {
+                var path = System.IO.Path.Combine(Environment.CurrentDirectory, "Img", "buckler.png");
+                Image_Char.Source = new BitmapImage(new Uri(path));
+            } 
         }
 
 

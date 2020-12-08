@@ -81,7 +81,8 @@
                     </Border>
                 </StackPanel>
 
-                <TextBlock Text="캐릭터스샷" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1"/>
+                <!--<TextBlock Text="캐릭터스샷" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1"/>-->
+                <Image x:Name="Image_Char" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1" Width="100" Stretch="Fill"/>
 
                 <StackPanel Orientation="Vertical">
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
@@ -172,7 +173,9 @@
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
                                         <StackPanel Orientation="Vertical" Margin="8">
-                                            <Button Style="{Binding Source={StaticResource ItemImgBtn}}"/>
+                                            <Border BorderThickness="2" BorderBrush="Black">
+                                            <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
+                                            </Border>
                                         </StackPanel>
                                     </ContentControl>
                                 </DataTemplate>

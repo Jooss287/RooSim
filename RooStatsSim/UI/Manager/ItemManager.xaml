@@ -24,7 +24,7 @@
                       Margin="5,5,5,5"
                       VerticalAlignment="Top" HorizontalAlignment="Left"
                       SelectionChanged="cmb_item_type_SelectionChanged"/>
-            <ComboBox Name="cmb_equip_type" SelectionChanged="cmb_equip_type_SelectionChanged"
+            <ComboBox Name="cmb_db_type" SelectionChanged="cmb_db_type_SelectionChanged"
                       Width="130" Height="30" Margin="5,5,5,5"
                       VerticalAlignment="Top" HorizontalAlignment="Left" />
         </StackPanel>
@@ -50,6 +50,9 @@
                             <TextBox x:Name="Item_name" Text="{Binding Path=Name}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="아이템 이름" Width="150" Margin="10,0,0,0" />
+                            <ComboBox Name="cmb_equip_type" SelectionChanged="cmb_equip_type_SelectionChanged"
+                                      Width="130" Height="30" Margin="10,0,0,0"
+                                      VerticalAlignment="Bottom" HorizontalAlignment="Left" />
                             <TextBox x:Name="Item_Level" Text="{Binding Path=LevelLimit}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="레벨 제한" Width="60" Margin="10,0,0,0" />
@@ -59,6 +62,9 @@
                             <TextBox x:Name="Item_EnchantSlot" Text="{Binding Path=EnchantSlot}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="인챈트 개수" Width="70" Margin="10,0,0,0"/>
+                            <ComboBox x:Name="cmb_Item_image" Width="130" Height="30" Margin="10,0,0,0"
+                                      VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                      SelectionChanged="Item_image_SelectionChanged"/>
                         </StackPanel>
                         <StackPanel>
                             <ListBox x:Name="list_Job_limit" Visibility="Visible">

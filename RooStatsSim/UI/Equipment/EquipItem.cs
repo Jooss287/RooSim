@@ -1,9 +1,10 @@
-﻿using RooStatsSim.DB;
+﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using System.Windows.Controls;
+
+using RooStatsSim.DB;
 
 namespace RooStatsSim.UI.Equipment
 {
@@ -31,6 +32,8 @@ namespace RooStatsSim.UI.Equipment
         string _name;
         int _id;
         int _refine;
+        string _image_name;
+        BitmapImage _image;
 
         public string Name
         {
@@ -52,6 +55,23 @@ namespace RooStatsSim.UI.Equipment
                     OnPropertyChanged("Refine");
                 }
             }   
+        }
+        public string ImageRoot
+        {
+            get { return _image_name; }
+            set { _image_name = value; OnPropertyChanged("ImageRoot"); GetImage(); }
+        }
+        public BitmapImage ImageFile
+        {
+            get { return _image; }
+        }
+        void GetImage()
+        {
+            if (_image_name == null)
+                return;
+
+            var path = System.IO.Path.Combine(Environment.CurrentDirectory, "Img", _image_name);
+            _image = new BitmapImage(new Uri(path));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
