@@ -11,7 +11,6 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
 
-          <ResourceDictionary Source="UI\UIextension\Button.xaml"/>
           <ResourceDictionary Source="UI\Equipment\Equipcontext.xaml"/>
           <ResourceDictionary Source="UI\SkillWindow\SkillContents.xaml"/>
           <ResourceDictionary Source="UI\Manager\ItemManagerContext.xaml"/>

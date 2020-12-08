@@ -4,11 +4,11 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
-    <Style TargetType="{x:Type Button}" x:Key="SkillImgBtn">
-        <Setter Property="Content" Value="Img"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="Background" Value="AntiqueWhite"/>
+
+    <Style TargetType="{x:Type Image}" x:Key="SkillImgBtn">
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Source" Value="{Binding Path=ImageFile}"/>
+        <Setter Property="Stretch" Value="Fill"/>
     </Style>
 </ResourceDictionary>

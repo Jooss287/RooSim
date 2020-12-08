@@ -10,7 +10,8 @@
         <ItemsControl x:Name="SkillSelector">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="6" />
+                    <WrapPanel Orientation="Horizontal"/>
+                    <!--<UniformGrid Columns="8" />-->
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -19,8 +20,8 @@
                                     MouseEnter="ContentControl_MouseEnter"
                                     MouseLeave="ContentControl_MouseLeave">
                         <StackPanel Orientation="Vertical" Margin="8">
-                            <Button Style="{Binding Source={StaticResource SkillImgBtn}}"/>
-                            <TextBlock Text="{Binding Path=Name_Kor}"/>
+                            <Image Style="{Binding Source={StaticResource SkillImgBtn}}"/>
+                            <TextBlock Text="{Binding Path=Show_Level}" HorizontalAlignment="Right" Background="#c9c9c9" Margin="0,-13,0,0"/>
                         </StackPanel>
                     </ContentControl>
                 </DataTemplate>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -28,7 +29,7 @@ namespace RooStatsSim.UI.SkillWindow
         #endregion
 
         UserData _user_data;
-        
+        Popup skillPopup = new Popup();
 
         public SkillWindow()
         {
@@ -45,17 +46,33 @@ namespace RooStatsSim.UI.SkillWindow
 
         private void skill_lv_Wheel(object sender, MouseWheelEventArgs e)
         {
-
+            UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
+            skill.Level += e.Delta > 0 ? 1 : -1;
+            //setItemTextBlock(item);
         }
 
         private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
         {
+            UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
+            SetSkillTextBlock(skill);
 
+            skillPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
+            skillPopup.IsOpen = true;
         }
 
         private void ContentControl_MouseLeave(object sender, MouseEventArgs e)
         {
-
+            skillPopup.IsOpen = false;
         }
-    }
+
+        void SetSkillTextBlock(UserSkill.UserSkillInfo skill)
+        {
+            TextBlock PopupText = new TextBlock
+            {
+                Text = skill.Name_Kor,
+                Background = Brushes.Silver
+            };
+            skillPopup.Child = PopupText;
+        }
+}
 }

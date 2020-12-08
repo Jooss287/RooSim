@@ -158,6 +158,7 @@
     <Compile Include="Extension\MDIXWindow\Behaviors\DragWindowBehavior.cs" />
     <Compile Include="Extension\MDIXWindow\Behaviors\TemplateBindingBehavior.cs" />
     <Compile Include="Extension\MDIXWindow\WindowEx.cs" />
+    <Compile Include="Extension\ResourceExtension.cs" />
     <Compile Include="UI\AbilityBinding.cs" />
     <Compile Include="UI\ACK\ProgramInfo.xaml.cs">
       <DependentUpon>ProgramInfo.xaml</DependentUpon>
@@ -188,7 +189,6 @@
     <Compile Include="UI\SkillWindow\SkillWindow.xaml.cs">
       <DependentUpon>SkillWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SkillWindow\SkillWindowBinding.cs" />
     <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
       <DependentUpon>StackBuff.xaml</DependentUpon>
     </Compile>
@@ -275,10 +275,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\UIextension\Button.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -309,6 +305,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\WPF.MDI.dll" />
+    <Resource Include="Resources\image-not-found.png" />
+    <Resource Include="Resources\Skills\BASH.png" />
+    <Resource Include="Resources\Skills\CHARGE_ATTACK.png" />
+    <Resource Include="Resources\Skills\CONCENTRATION.png" />
+    <Resource Include="Resources\Skills\ENDURE.png" />
+    <Resource Include="Resources\Skills\HEAD_CRUSH.png" />
+    <Resource Include="Resources\Skills\MAGNUM_BRAKE.png" />
+    <Resource Include="Resources\Skills\PIERCE.png" />
+    <Resource Include="Resources\Skills\PROVOQUE.png" />
+    <Resource Include="Resources\Skills\RYAN_RAPIDS.png" />
+    <Resource Include="Resources\Skills\SOLID_BLOW.png" />
+    <Resource Include="Resources\Skills\SPIRAL_PIERCE.png" />
+    <Resource Include="Resources\Skills\VITAL_STRIKE.png" />
     <Resource Include="Resources\Job\acolyte.png" />
     <Resource Include="Resources\Job\archer.png" />
     <Resource Include="Resources\Job\assassin_cross.png" />

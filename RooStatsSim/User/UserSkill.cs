@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
 using RooStatsSim.DB.Skill;
+using RooStatsSim.Extension;
 
 namespace RooStatsSim.User
 {
@@ -16,6 +18,8 @@ namespace RooStatsSim.User
             string _name;
             string _name_kor;
             int _level;
+            int _max_level;
+            BitmapImage _image;
 
             public string Name
             {
@@ -24,6 +28,7 @@ namespace RooStatsSim.User
                 {
                     _name = value;
                     OnPropertyChanged("Name");
+                    GetImage();
                 }
             }
             public string Name_Kor
@@ -40,13 +45,39 @@ namespace RooStatsSim.User
                 get { return _level; }
                 set
                 {
-                    if (value > Detail.MAX_LV)
+                    if (value > _max_level)
                         return;
                     _level = value;
                     OnPropertyChanged("Level");
                 }
             }
+            public int Max_Level
+            {
+                get { return _max_level; }
+                set
+                {
+                    if (value >= Detail.MAX_LV)
+                        return;
+                    _max_level = value;
+                    OnPropertyChanged("Max_Level");
+                }
+            }
+            public string Show_Level
+            {
+                get { return string.Format("({0}/{1})", Level, Max_Level); }
+            }
             [JsonIgnore]public SkillInfo Detail { get; set; }
+            [JsonIgnore]public BitmapImage ImageFile
+            {
+                get { return _image; }
+            }
+            void GetImage()
+            {
+                if (_name == null)
+                    return;
+                string resource_name = "Resources/Skills/" + _name + ".png";
+                _image = new BitmapImage(ResourceExtension.GetUri(resource_name));
+            }
 
             public event PropertyChangedEventHandler PropertyChanged;
 
@@ -81,8 +112,10 @@ namespace RooStatsSim.User
                 {
                     UserSkillInfo user_skill = new UserSkillInfo();
                     user_skill.Name = skill.Key;
+                    user_skill.Name_Kor = skill.Value.NAME_KOR;
                     user_skill.Detail = skill.Value;
                     user_skill.Level = 0;
+                    user_skill.Max_Level = skill.Value.MAX_LV;
                     List.Add(user_skill);
                 }
             }

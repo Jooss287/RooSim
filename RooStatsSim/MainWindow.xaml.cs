@@ -107,7 +107,7 @@ namespace RooStatsSim
                 Title = "스킬",
                 Content = new SkillWindow(),
                 Width = 728,
-                Height = 258,
+                Height = 258,   //132
                 Position = new Point(700, 0),
                 CloseBox = false,
             };
