@@ -21,7 +21,7 @@
                                     MouseLeave="ContentControl_MouseLeave">
                         <StackPanel Orientation="Vertical" Margin="8">
                             <Image Style="{Binding Source={StaticResource SkillImgBtn}}"/>
-                            <TextBlock Text="{Binding Path=Show_Level}" HorizontalAlignment="Right" Background="#c9c9c9" Margin="0,-13,0,0"/>
+                            <TextBlock Text="{Binding Path=Show_Level}" HorizontalAlignment="Right" Background="#c9c9c9" Margin="0,-13,0,0" FontSize="8"/>
                         </StackPanel>
                     </ContentControl>
                 </DataTemplate>

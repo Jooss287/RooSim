@@ -47,8 +47,11 @@ namespace RooStatsSim.User
                 {
                     if (value > _max_level)
                         return;
+                    if (value < 0)
+                        return;
                     _level = value;
                     OnPropertyChanged("Level");
+                    OnPropertyChanged("Show_Level");
                 }
             }
             public int Max_Level
@@ -56,7 +59,7 @@ namespace RooStatsSim.User
                 get { return _max_level; }
                 set
                 {
-                    if (value >= Detail.MAX_LV)
+                    if (value > Detail.MAX_LV)
                         return;
                     _max_level = value;
                     OnPropertyChanged("Max_Level");

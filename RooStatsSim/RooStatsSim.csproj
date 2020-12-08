@@ -305,6 +305,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\WPF.MDI.dll" />
+    <Resource Include="Resources\Skills\BERSERK.png" />
+    <Resource Include="Resources\Skills\BRANDISH_SPEAR.png" />
+    <Resource Include="Resources\Skills\SPEAR_BOOMERANG.png" />
+    <Resource Include="Resources\Skills\AURA_BALDE.png" />
+    <Resource Include="Resources\Skills\BOWLING_BASH.png" />
+    <Resource Include="Resources\Skills\CHIVALRY.png" />
+    <Resource Include="Resources\Skills\SPEAR_MASTERY.png" />
+    <Resource Include="Resources\Skills\SWORD_MASTERY.png" />
+    <Resource Include="Resources\Skills\SWORD_QUIKEN.png" />
+    <Resource Include="Resources\Skills\VANGUARD_CHASE.png" />
     <Resource Include="Resources\image-not-found.png" />
     <Resource Include="Resources\Skills\BASH.png" />
     <Resource Include="Resources\Skills\CHARGE_ATTACK.png" />
