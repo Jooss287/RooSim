@@ -1,12 +1,8 @@
-﻿using System.Windows;
-using System.Collections.Generic;
-using RooStatsSim.User;
-using System.Windows.Data;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System;
 using System.Windows.Controls;
-using RooStatsSim.DB.Table;
-using RooStatsSim.UI.Menu;
+using System.Windows.Input;
+using RooStatsSim.User;
 
 namespace RooStatsSim.UI.StackBuff
 {
@@ -195,7 +191,9 @@ namespace RooStatsSim.UI.StackBuff
         void MedalPointChange(AbilityBinding<int> dataCxtx, int changingPoint)
         {
             MEDAL_ENUM medalName = (MEDAL_ENUM)Enum.Parse(typeof(MEDAL_ENUM), dataCxtx.EnumName);
-            
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                changingPoint *= 10;
+
             _user_data.Medal.List[(int)medalName] += changingPoint;
             BindingMedalPoint[(int)medalName].Point = _user_data.Medal.List[(int)medalName];
             _user_data.CalcUserData();
@@ -204,6 +202,8 @@ namespace RooStatsSim.UI.StackBuff
         void RidingPointChange(RIDING riding, ref RidingList bindingList, AbilityBinding<double> dataCxtx, double changingPoint)
         {
             RIDING_ENUM ridingName = (RIDING_ENUM)Enum.Parse(typeof(RIDING_ENUM), dataCxtx.EnumName);
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                changingPoint *= 10;
 
             if (ridingName == RIDING_ENUM.ATK_MATK_PERCENT)
                 changingPoint /= 100;
