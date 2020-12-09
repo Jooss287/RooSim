@@ -14,6 +14,7 @@ namespace RooStatsSim.DB
     {
         public Dictionary<int, MonsterDB> _mob_db = new Dictionary<int, MonsterDB>();
         public Dictionary<int, Dictionary<int, ItemDB>> _equip_db = new Dictionary<int, Dictionary<int, ItemDB>>();
+        public Dictionary<string, SetItemDB> _set_equip_db = new Dictionary<string, SetItemDB>();
         public Dictionary<int, ItemDB> _card_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _enchant_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _gear_db = new Dictionary<int, ItemDB>();
@@ -21,6 +22,7 @@ namespace RooStatsSim.DB
         public Dictionary<int, ItemDB> _dress_style_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _sticker_db = new Dictionary<int, ItemDB>();
 
+        #region Properties
         public Dictionary<int, MonsterDB> Mob_db
         {
             get { return _mob_db; }
@@ -103,6 +105,11 @@ namespace RooStatsSim.DB
                     return Equip_db[(int)EQUIP_DB_ENUM.BACK_DECO]; }
             set { Equip_db[(int)EQUIP_DB_ENUM.BACK_DECO] = value; }
         }
+        public Dictionary<string, SetItemDB> Set_Equip_db
+        {
+            get { return _set_equip_db; }
+            set { _set_equip_db = value; }
+        }
         public Dictionary<int, ItemDB> Card_db
         {
             get { return _card_db; }
@@ -133,7 +140,8 @@ namespace RooStatsSim.DB
             get { return _sticker_db; }
             set { _sticker_db = value; }
         }
-
+        #endregion
+        
         public DBlist() { }
 
         public void AddMonsterDB(MonsterDB monsterDB)

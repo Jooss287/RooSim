@@ -20,6 +20,7 @@ namespace RooStatsSim.DB
             Id = item_db.Id;
             Name = item_db.Name;
             ImageName = item_db.ImageName;
+            SetName = item_db.SetName;
             LevelLimit = item_db.LevelLimit;
             Item_type = item_db.Item_type;
             Equip_type = item_db.Equip_type;
@@ -27,6 +28,7 @@ namespace RooStatsSim.DB
             CardSlot = item_db.CardSlot;
             EnchantSlot = item_db.EnchantSlot;
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
+            SetPosition = new List<EQUIP_TYPE_ENUM>(item_db.SetPosition);
 
             Option_IF_TYPE = new List<AbilityPerStatus>(item_db.Option_IF_TYPE);
             Option_ITYPE = new Dictionary<string, double>(item_db.Option_ITYPE);
@@ -109,6 +111,7 @@ namespace RooStatsSim.DB
         protected int _id;
         protected string _name;
         protected string _image_name = "";
+        protected string _set_name = null;
         protected int _level_limit;
         protected int _smelt;
         protected int _card_slot;
@@ -116,6 +119,7 @@ namespace RooStatsSim.DB
         protected ELEMENT_TYPE _attacker_element;
         protected ELEMENT_TYPE _defenser_element;
         public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
+        protected List<EQUIP_TYPE_ENUM> _set_pos;
 
         protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
         protected List<AbilityPerStatus> _option_if_type;
@@ -137,6 +141,11 @@ namespace RooStatsSim.DB
         {
             get { return _image_name; }
             set { _image_name = value; }
+        }
+        public string SetName
+        {
+            get { return _set_name; }
+            set { _set_name = value; }
         }
         public int LevelLimit
         {
@@ -167,6 +176,11 @@ namespace RooStatsSim.DB
         {
             get { return _defenser_element; }
             set { _defenser_element = value; }
+        }
+        public List<EQUIP_TYPE_ENUM> SetPosition
+        {
+            get { return _set_pos; }
+            set { _set_pos = value; }
         }
         public Dictionary<ITEM_OPTION_TYPE, Dictionary<string,double>> Option
         {

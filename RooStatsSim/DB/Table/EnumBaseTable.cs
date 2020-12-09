@@ -15,6 +15,7 @@ namespace RooStatsSim.DB.Table
         CARD,
         ENCHANT,
         GEAR,
+        SET_OPTION,
     }
     public enum EQUIP_TYPE_ENUM
     {

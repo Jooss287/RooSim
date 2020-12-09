@@ -292,6 +292,24 @@
                                 <ListBox x:Name="list_refine_if_option"
                                          ItemTemplate="{Binding Source={StaticResource DataTemplate_RefineNameValue}}"/>
                             </StackPanel>
+                            <StackPanel Tag="SET_OPTION" x:Name="SetOptionPanel"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ComboBox Name="cmb_set_equips" SelectedIndex="0"
+                                              SelectionChanged="cmb_set_equips_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="세트부위등록" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,0,5,3"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Set_Equips_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
+                                            Click="Add_Set_Equips_Click"/>
+                                </StackPanel>
+                                <ListBox x:Name="list_set_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

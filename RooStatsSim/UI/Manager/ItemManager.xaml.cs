@@ -51,6 +51,7 @@ namespace RooStatsSim.UI.Manager
             {
                 string statusName = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR[equip];
                 cmb_equip_type.Items.Add(statusName);
+                cmb_set_equips.Items.Add(statusName);
             }
             cmb_equip_type.SelectedIndex = (int)EQUIP_TYPE_ENUM.HEAD_TOP;
 
@@ -187,6 +188,7 @@ namespace RooStatsSim.UI.Manager
             list_etc_option.ItemsSource = new ItemOptionListBox(now_item.Option_ETC_TYPE, now_item.Option_ETC_DMG_TYPE);
 
             list_refine_if_option.ItemsSource = new ItemOptionRefineListBox(now_item.Refine_Option);
+            list_set_option.ItemsSource = new itemoption
         }
         void InitializeContents()
         {
@@ -262,6 +264,7 @@ namespace RooStatsSim.UI.Manager
             Item_CardSlot.IsEnabled = false;
             Item_Level.IsEnabled = false;
             cmb_Item_image.IsEnabled = false;
+            SetOptionPanel.Visibility = Visibility.Hidden;
 
             if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
             {
@@ -280,6 +283,8 @@ namespace RooStatsSim.UI.Manager
                 cmb_db_type.IsEnabled = true;
                 cmb_equip_type.IsEnabled = true;
             }
+            else if (selected == ITEM_TYPE_ENUM.SET_OPTION)
+                SetOptionPanel.Visibility = Visibility.Visible;
         }
 
         #region CLICK FUNCTION
@@ -588,6 +593,36 @@ namespace RooStatsSim.UI.Manager
                 now_item.ImageName = (sender as ComboBox).SelectedItem.ToString();
         }
 
-        
+        private void Del_Set_Equips_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            ListBox OptionList = parentStackpanel.Children[2] as ListBox;
+
+            if (OptionList.SelectedItem == null)
+                return;
+
+            string type_name = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
+            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
+            Dictionary<string, double> item_option = GetItemOptionDictionary(type);
+            item_option.Remove(type_name);
+
+            SetNowItemOption();
+        }
+
+        private void Add_Set_Equips_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            StackPanel OptionStack = parentStackpanel.Children[0] as StackPanel;
+
+            ComboBox AddType = OptionStack.Children[0] as ComboBox;
+
+            string type_name_kor = AddType.SelectedItem.ToString();
+
+            EQUIP_TYPE_ENUM type = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR.FirstOrDefault(x => x.Value == type_name_kor).Key;
+            now_item.SetPosition.Add(type);
+
+            SetNowItemOption();
+            AddType.SelectedIndex = 0;
+        }
     }
 }
