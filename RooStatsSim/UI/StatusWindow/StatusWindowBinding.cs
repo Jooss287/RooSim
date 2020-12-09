@@ -133,67 +133,67 @@ namespace RooStatsSim.UI.StatusWindow
             {
                 SE_ATK_RATE_TYPE type = (SE_ATK_RATE_TYPE)Enum.Parse(typeof(SE_ATK_RATE_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.SE_ATK_RATE_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_SE_ATK_RATE_TYPE[item.Key], 0, Enum.GetName(typeof(SE_ATK_RATE_TYPE), item.Key)));
+                    , user_data.User_Item.Option_SE_ATK_RATE_TYPE[item.Key], 0, Enum.GetName(typeof(SE_ATK_RATE_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_SE_REG_RATE_TYPE)
             {
                 SE_REG_RATE_TYPE type = (SE_REG_RATE_TYPE)Enum.Parse(typeof(SE_REG_RATE_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.SE_REG_RATE_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_SE_REG_RATE_TYPE[item.Key], 0, Enum.GetName(typeof(SE_REG_RATE_TYPE), item.Key)));
+                    , user_data.User_Item.Option_SE_REG_RATE_TYPE[item.Key], 0, Enum.GetName(typeof(SE_REG_RATE_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_MONSTER_ELEMENT_DMG_TYPE)
             {
                 MONSTER_ELEMENT_DMG_TYPE type = (MONSTER_ELEMENT_DMG_TYPE)Enum.Parse(typeof(MONSTER_ELEMENT_DMG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.MONSTER_ELEMENT_DMG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_MONSTER_ELEMENT_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_ELEMENT_DMG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_MONSTER_ELEMENT_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_ELEMENT_DMG_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_ELEMENT_DMG_TYPE)
             {
                 ELEMENT_DMG_TYPE type = (ELEMENT_DMG_TYPE)Enum.Parse(typeof(ELEMENT_DMG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.ELEMENT_DMG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_ELEMENT_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(ELEMENT_DMG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_ELEMENT_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(ELEMENT_DMG_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_ELEMENT_REG_TYPE)
             {
                 ELEMENT_REG_TYPE type = (ELEMENT_REG_TYPE)Enum.Parse(typeof(ELEMENT_DMG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_ELEMENT_REG_TYPE[item.Key], 0, Enum.GetName(typeof(ELEMENT_REG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_ELEMENT_REG_TYPE[item.Key], 0, Enum.GetName(typeof(ELEMENT_REG_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_MONSTER_SIZE_DMG_TYPE)
             {
                 MONSTER_SIZE_DMG_TYPE type = (MONSTER_SIZE_DMG_TYPE)Enum.Parse(typeof(MONSTER_SIZE_DMG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.MONSTER_SIZE_DMG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_MONSTER_SIZE_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_SIZE_DMG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_MONSTER_SIZE_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_SIZE_DMG_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_MONSTER_SIZE_REG_TYPE)
             {
                 MONSTER_SIZE_REG_TYPE type = (MONSTER_SIZE_REG_TYPE)Enum.Parse(typeof(MONSTER_SIZE_REG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.MONSTER_SIZE_REG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_MONSTER_SIZE_REG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_SIZE_REG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_MONSTER_SIZE_REG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_SIZE_REG_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_TRIBE_DMG_TYPE)
             {
                 TRIBE_DMG_TYPE type = (TRIBE_DMG_TYPE)Enum.Parse(typeof(TRIBE_DMG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.TRIBE_DMG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_TRIBE_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(TRIBE_DMG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_TRIBE_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(TRIBE_DMG_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_TRIBE_REG_TYPE)
             {
                 TRIBE_REG_TYPE type = (TRIBE_REG_TYPE)Enum.Parse(typeof(TRIBE_REG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.TRIBE_REG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_TRIBE_REG_TYPE[item.Key], 0, Enum.GetName(typeof(TRIBE_REG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_TRIBE_REG_TYPE[item.Key], 0, Enum.GetName(typeof(TRIBE_REG_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_MONSTER_KINDS_DMG_TYPE)
             {
                 MONSTER_KINDS_DMG_TYPE type = (MONSTER_KINDS_DMG_TYPE)Enum.Parse(typeof(MONSTER_KINDS_DMG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.MONSTER_KINDS_DMG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_MONSTER_KINDS_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_KINDS_DMG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_MONSTER_KINDS_DMG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_KINDS_DMG_TYPE), type)));
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_MONSTER_KINDS_REG_TYPE)
             {
                 MONSTER_KINDS_REG_TYPE type = (MONSTER_KINDS_REG_TYPE)Enum.Parse(typeof(MONSTER_KINDS_REG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.MONSTER_KINDS_REG_TYPE_KOR[type] + "(%)"
-                    , user_data.User_Item.Option_MONSTER_KINDS_REG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_KINDS_REG_TYPE), item.Key)));
+                    , user_data.User_Item.Option_MONSTER_KINDS_REG_TYPE[item.Key], 0, Enum.GetName(typeof(MONSTER_KINDS_REG_TYPE), type)));
             }
         }
     }

@@ -105,8 +105,8 @@ namespace RooStatsSim.User
 
             option.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.HP)] = (int)List[(int)RIDING_ENUM.MAX_HP];
 
-            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), DTYPE.ATK_P)] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
-            option.Option_ITYPE[Enum.GetName(typeof(ITYPE), DTYPE.MATK_P)] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
+            option.Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.ATK_P)] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
+            option.Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.MATK_P)] = List[(int)RIDING_ENUM.ATK_MATK_PERCENT];
 
             return option;
         }
