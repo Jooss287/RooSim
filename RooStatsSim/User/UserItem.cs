@@ -12,9 +12,11 @@ namespace RooStatsSim.User
     [Serializable]
     public class UserItem : ItemDB
     {
-        public UserItem()
+        public UserItem() { }
+        public UserItem(Boolean makeProperty)
         {
-            MakeNormalProperty();
+            if (makeProperty)
+                MakeNormalProperty();
         }
         
         private void MakeNormalProperty()

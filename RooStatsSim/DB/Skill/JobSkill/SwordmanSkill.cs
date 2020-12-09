@@ -36,9 +36,10 @@ namespace RooStatsSim.DB.Skill.JobSkill
                 Skill.Add(name, new SkillInfo(name, SWORDMAN_SKILL_KOR[(SWORDMAN_SKILL)Enum.Parse(typeof(SWORDMAN_SKILL), name)]));
             }
             //기사도
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.CHIVALRY)].MAX_LV = 0;
+            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.CHIVALRY)].MAX_LV = 1;
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.CHIVALRY)].TYPE = SKILL_TYPE.PASSIVE;
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.CHIVALRY)].ADD_EFFECT.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.ATK)] = 10;
+            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.CHIVALRY)].OPTION.Add(new ItemDB());
+            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.CHIVALRY)].OPTION[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.ATK)] = 10;
             //소드 마스터리
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.SWORD_MASTERY)].MAX_LV = 10;
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.SWORD_MASTERY)].TYPE = SKILL_TYPE.PASSIVE;
@@ -54,11 +55,16 @@ namespace RooStatsSim.DB.Skill.JobSkill
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.BASH)].DAMAGE = new List<double>() { 1.20, 1.45, 1.70, 1.95, 2.20, 2.45, 2.70, 2.95, 3.20, 3.50 };
 
             //매그넘 브레이크
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.MAGNUM_BRAKE)].MAX_LV = 10;
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.MAGNUM_BRAKE)].TYPE = SKILL_TYPE.ACTIVE;
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.MAGNUM_BRAKE)].DAMAGE = new List<double>() { 1.60, 1.70, 1.80, 1.90, 2.00, 2.10, 2.20, 2.30, 2.40, 2.50 };
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.MAGNUM_BRAKE)].ADD_EFFECT = new ItemDB();
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.MAGNUM_BRAKE)].ADD_EFFECT.Option_ITYPE[Enum.GetName(typeof(ELEMENT_DMG_TYPE), ELEMENT_DMG_TYPE.FIRE_DMG)] = 20;
+            SkillInfo skill = Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.MAGNUM_BRAKE)];
+            skill.MAX_LV = 10;
+            skill.TYPE = SKILL_TYPE.ACTIVE;
+            skill.DAMAGE = new List<double>() { 1.60, 1.70, 1.80, 1.90, 2.00, 2.10, 2.20, 2.30, 2.40, 2.50 };
+            for (int i =0; i < skill.MAX_LV; i++)
+            {
+                skill.OPTION.Add(new ItemDB());
+                skill.OPTION[i].Option_ELEMENT_DMG_TYPE[Enum.GetName(typeof(ELEMENT_DMG_TYPE), ELEMENT_DMG_TYPE.FIRE_DMG)] = 20;
+            }
+                
             //프로보크
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.PROVOQUE)].MAX_LV = 10;
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.PROVOQUE)].TYPE = SKILL_TYPE.DEBUFF;

@@ -52,7 +52,7 @@ namespace RooStatsSim.User
             Sticker = new STICKER();
             Riding_ability = new RIDING();
             Riding_personality = new RIDING();
-            User_Item = new UserItem();
+            User_Item = new UserItem(true);
             User_Skill = new UserSkill();
             SelectedEnemy = 0;
         }
@@ -62,9 +62,11 @@ namespace RooStatsSim.User
         public event UserDataChangedEventHandler itemDataChanged;
         public void CalcUserData()
         {
-            UserItem CalcUserItem = new UserItem();
+            UserItem CalcUserItem = new UserItem(true);
 
             CalcUserItem.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STATUS_ATK)] = StatusATK.GetStatusATK(ATTACK_TYPE.MELEE_TYPE, this);
+
+            CalcUserItem += User_Skill.GetOption();
 
             CalcUserItem += Monster_Research.GetOption();
             CalcUserItem += Dress_Style.GetOption();

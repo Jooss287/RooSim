@@ -17,6 +17,8 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ContentControl MouseWheel="skill_lv_Wheel"
+                                    MouseLeftButtonDown="ContentControl_MouseLeftButtonDown"
+                                    MouseRightButtonDown="ContentControl_MouseRightButtonDown"
                                     MouseEnter="ContentControl_MouseEnter"
                                     MouseLeave="ContentControl_MouseLeave">
                         <StackPanel Orientation="Vertical" Margin="8">

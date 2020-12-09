@@ -44,11 +44,27 @@ namespace RooStatsSim.UI.SkillWindow
             SkillSelector.ItemsSource = _user_data.User_Skill.List;
         }
 
+        void ChangeSkillLevel(UserSkill.UserSkillInfo skill, int i)
+        {
+            skill.Level += i;
+            if (skill.Detail.OPTION.Count != 0)
+                _user_data.CalcUserData();
+        }
         private void skill_lv_Wheel(object sender, MouseWheelEventArgs e)
         {
             UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
-            skill.Level += e.Delta > 0 ? 1 : -1;
-            //setItemTextBlock(item);
+            ChangeSkillLevel(skill, e.Delta > 0 ? 1 : -1);
+        }
+        private void ContentControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
+            ChangeSkillLevel(skill, 1);
+        }
+
+        private void ContentControl_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
+            ChangeSkillLevel(skill, 1);
         }
 
         private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
@@ -74,5 +90,5 @@ namespace RooStatsSim.UI.SkillWindow
             };
             skillPopup.Child = PopupText;
         }
-}
+    }
 }

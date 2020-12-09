@@ -27,12 +27,6 @@ namespace RooStatsSim.DB.Skill
                 return _option; }
             set { _option = value; }
         }
-        public ItemDB ADD_EFFECT 
-        {
-            get { if (_add_effect == null) _add_effect = new ItemDB();
-                    return _add_effect; }
-            set { _add_effect = value; }
-        }
         public SkillInfo(string name, string name_kor, int max_lv=0, SKILL_TYPE type=SKILL_TYPE.ACTIVE)
         {
             NAME = name;
@@ -42,6 +36,5 @@ namespace RooStatsSim.DB.Skill
         }
 
         List<ItemDB> _option;
-        ItemDB _add_effect;
     }
 }

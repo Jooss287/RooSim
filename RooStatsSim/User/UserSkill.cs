@@ -145,16 +145,14 @@ namespace RooStatsSim.User
         {
             UserItem option = new UserItem();
 
-            //foreach (UserSkillInfo equipment in List)
-            //{
-            //    if (equipment.Equip == null)
-            //        continue;
-            //    foreach (ItemDB card in equipment.Card)
-            //        option += card;
-            //    foreach (ItemDB enchant in equipment.Enchant)
-            //        option += enchant;
-            //    option += equipment.Equip;
-            //}
+            foreach (UserSkillInfo skill in List)
+            {
+                if (skill.Level == 0)
+                    continue;
+                if (skill.Detail.OPTION.Count == 0)
+                    continue;
+                option += skill.Detail.OPTION[skill.Level-1];
+            }
             return option;
         }
     }
