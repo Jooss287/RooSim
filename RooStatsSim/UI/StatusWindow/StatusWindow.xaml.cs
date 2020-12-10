@@ -135,10 +135,5 @@ namespace RooStatsSim.UI.StatusWindow
 
 
         #endregion
-
-        private void UserControl_ContextMenuClosing(object sender, ContextMenuEventArgs e)
-        {
-
-        }
     }
 }

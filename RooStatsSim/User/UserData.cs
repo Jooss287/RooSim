@@ -62,21 +62,24 @@ namespace RooStatsSim.User
         {
             UserItem CalcUserItem = new UserItem();
 
-            CalcUserItem.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STATUS_ATK)] = StatusATK.GetStatusATK(ATTACK_TYPE.MELEE_TYPE, this);
+            //직업별 추가 능력치
 
+            //Stack Options
             CalcUserItem += Monster_Research.GetOption();
             CalcUserItem += Dress_Style.GetOption();
             CalcUserItem += Sticker.GetOption();
             CalcUserItem += Medal.GetOption();
             CalcUserItem += Riding_ability.GetOption();
             CalcUserItem += Riding_personality.GetOption();
-
+            //장비 옵션
             CalcUserItem += Equip.GetOption();
-
-            User_Item = CalcUserItem;
-            //StatusBonus 더해야 함
+            //스텟 옵션
+            CalcUserItem.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STATUS_ATK)] = StatusATK.GetStatusATK(ATTACK_TYPE.MELEE_TYPE, this);
+            Status.SetAddStatus(User_Item);
+            //조건부 옵션 계산
             User_Item.CalcIftypeValues(this);
 
+            User_Item = CalcUserItem;
             if (itemDataChanged != null)
                 itemDataChanged();
             MainWindow._user_data_edited = true;

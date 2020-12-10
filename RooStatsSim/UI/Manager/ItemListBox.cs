@@ -63,12 +63,14 @@ namespace RooStatsSim.UI.Manager
         {
             Id = param.Id;
             Name = param.Name;
+            SetName = param.SetName;
             ImageName = param.ImageName;
             LevelLimit = param.LevelLimit;
             CardSlot = param.CardSlot;
             EnchantSlot = param.EnchantSlot;
             Item_type = param.Item_type;
             Equip_type = param.Equip_type;
+            SetPosition = param.SetPosition;
             Wear_job_limit = param.Wear_job_limit;
             Option = param.Option;
             Option_IF_TYPE = param.Option_IF_TYPE;

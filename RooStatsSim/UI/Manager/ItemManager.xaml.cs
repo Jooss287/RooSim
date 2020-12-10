@@ -265,7 +265,7 @@ namespace RooStatsSim.UI.Manager
             Item_CardSlot.IsEnabled = false;
             Item_Level.IsEnabled = false;
             cmb_Item_image.IsEnabled = false;
-            cmb_set_equips.IsEnabled = false;
+            cmb_set_name_list.IsEnabled = false;
             SetOptionPanel.Visibility = Visibility.Hidden;
 
             if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
@@ -277,7 +277,7 @@ namespace RooStatsSim.UI.Manager
                 Item_CardSlot.IsEnabled = true;
                 Item_Level.IsEnabled = true;
                 cmb_Item_image.IsEnabled = true;
-                cmb_set_equips.IsEnabled = true;
+                cmb_set_name_list.IsEnabled = true;
             }
             else if (selected == ITEM_TYPE_ENUM.GEAR)
                 list_Job_limit.IsEnabled = true;
