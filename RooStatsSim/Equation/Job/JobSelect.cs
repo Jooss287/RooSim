@@ -1,6 +1,5 @@
 ﻿using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
-using RooStatsSim.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,27 +11,7 @@ using System.Windows.Documents;
 
 namespace RooStatsSim.Equation.Job
 {
-    enum JOB_LIST
-    {
-        LOAD_KNIGHT,
-        WHITE_SMITH,
-        ASSASSIN_CROSS,
-        SNIPER,
-        HIGH_WIZARD,
-        HIGH_PRIST
-    }
-    enum JOB_LIST_KOR
-    {
-        로드나이트,
-        화이트스미스,
-        어세신크로스,
-        스나이퍼,
-        하이위저드,
-        하이프리스트
-    }
-    
-    
-    class JobSelect
+    public class JobSelect
     {
         List<dynamic> Job = new List<dynamic>()
             {
@@ -52,6 +31,7 @@ namespace RooStatsSim.Equation.Job
         public JobSelect(JOB_SELECT_LIST param_job = JOB_SELECT_LIST.NOVICE)
         {
             SelectedJob = param_job;
+            Job.ElementAt(GetJobNum).SetSkillInit();
         }
 
         public double GetReverseATK(int sATK)

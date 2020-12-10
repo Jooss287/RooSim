@@ -18,6 +18,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using RooStatsSim.Extension;
+
 namespace RooStatsSim.UI.Equipment
 {
     /// <summary>
@@ -35,18 +37,16 @@ namespace RooStatsSim.UI.Equipment
         public Equip()
         {
             _user_data = MainWindow._user_data;
+            _user_data.JobDataChanged += new UserData.JobChangedEventHandler(JobSelectedEvent);
             this.DataContext = this;
             InitializeComponent();
-
-            string filename = @"Img/buckler.png";
-            FileInfo fi = new FileInfo(filename);
-            if (fi.Exists)
-            {
-                var path = System.IO.Path.Combine(Environment.CurrentDirectory, "Img", "buckler.png");
-                Image_Char.Source = new BitmapImage(new Uri(path));
-            } 
         }
 
+        void JobSelectedEvent()
+        {
+            string filename = "Resources/image-not-found1.png";
+            Image_Char.Source = new BitmapImage(ResourceExtension.GetUri(filename));
+        }
 
         private TreeViewItem GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
         {
@@ -138,8 +138,7 @@ namespace RooStatsSim.UI.Equipment
         {
             itemPopup.IsOpen = false;
         }
+
         #endregion
-
-
     }
 }

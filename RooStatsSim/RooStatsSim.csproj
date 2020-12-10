@@ -120,9 +120,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DB\AllSkillList.cs" />
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\ItemDB.cs" />
+    <Compile Include="DB\Skill\JobSkill\LoadKnightSkill.cs" />
+    <Compile Include="DB\Skill\SkillInfo.cs" />
+    <Compile Include="DB\Skill\JobSkill\SwordmanSkill.cs" />
     <Compile Include="DB\Table\EnumBaseTable.cs" />
     <Compile Include="DB\Table\EnumItemOptionTable.cs" />
     <Compile Include="DB\Table\EnumItemOptionTable_Kor.cs" />
@@ -156,9 +158,7 @@
     <Compile Include="Extension\MDIXWindow\Behaviors\DragWindowBehavior.cs" />
     <Compile Include="Extension\MDIXWindow\Behaviors\TemplateBindingBehavior.cs" />
     <Compile Include="Extension\MDIXWindow\WindowEx.cs" />
-    <Compile Include="Skills\SkillCheckBox.cs" />
-    <Compile Include="Skills\SkillAdd.cs" />
-    <Compile Include="Skills\SkillInfo.cs" />
+    <Compile Include="Extension\ResourceExtension.cs" />
     <Compile Include="UI\AbilityBinding.cs" />
     <Compile Include="UI\ACK\ProgramInfo.xaml.cs">
       <DependentUpon>ProgramInfo.xaml</DependentUpon>
@@ -186,6 +186,9 @@
     <Compile Include="UI\MonsterDamage\MonsterDamageCheck.xaml.cs">
       <DependentUpon>MonsterDamageCheck.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SkillWindow\SkillWindow.xaml.cs">
+      <DependentUpon>SkillWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\StackBuff\StackBuff.xaml.cs">
       <DependentUpon>StackBuff.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,7 @@
     <Compile Include="User\UserItem.cs" />
     <Compile Include="User\User_Enum.cs" />
     <Compile Include="User\User_Serializer.cs" />
+    <Compile Include="User\UserSkill.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Extension\MDIXWindow\MaterialDesignWindow.xaml">
@@ -255,15 +259,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\SkillWindow\SkillContents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SkillWindow\SkillWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\StackBuff\StackBuff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\StatusWindow\StatusWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\UIextension\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,6 +305,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\WPF.MDI.dll" />
+    <Resource Include="Resources\Skills\BERSERK.png" />
+    <Resource Include="Resources\Skills\BRANDISH_SPEAR.png" />
+    <Resource Include="Resources\Skills\SPEAR_BOOMERANG.png" />
+    <Resource Include="Resources\Skills\AURA_BALDE.png" />
+    <Resource Include="Resources\Skills\BOWLING_BASH.png" />
+    <Resource Include="Resources\Skills\CHIVALRY.png" />
+    <Resource Include="Resources\Skills\SPEAR_MASTERY.png" />
+    <Resource Include="Resources\Skills\SWORD_MASTERY.png" />
+    <Resource Include="Resources\Skills\SWORD_QUIKEN.png" />
+    <Resource Include="Resources\Skills\VANGUARD_CHASE.png" />
+    <Resource Include="Resources\image-not-found.png" />
+    <Resource Include="Resources\Skills\BASH.png" />
+    <Resource Include="Resources\Skills\CHARGE_ATTACK.png" />
+    <Resource Include="Resources\Skills\CONCENTRATION.png" />
+    <Resource Include="Resources\Skills\ENDURE.png" />
+    <Resource Include="Resources\Skills\HEAD_CRUSH.png" />
+    <Resource Include="Resources\Skills\MAGNUM_BRAKE.png" />
+    <Resource Include="Resources\Skills\PIERCE.png" />
+    <Resource Include="Resources\Skills\PROVOQUE.png" />
+    <Resource Include="Resources\Skills\RYAN_RAPIDS.png" />
+    <Resource Include="Resources\Skills\SOLID_BLOW.png" />
+    <Resource Include="Resources\Skills\SPIRAL_PIERCE.png" />
+    <Resource Include="Resources\Skills\VITAL_STRIKE.png" />
     <Resource Include="Resources\Job\acolyte.png" />
     <Resource Include="Resources\Job\archer.png" />
     <Resource Include="Resources\Job\assassin_cross.png" />

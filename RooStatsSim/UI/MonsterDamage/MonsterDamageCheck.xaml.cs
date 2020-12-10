@@ -56,11 +56,11 @@ namespace RooStatsSim.UI.MonsterDamage
             if (now_mob.Name == "")
                 return;
 
-            JobSelect jobsel = new JobSelect(user_data.Job);
+            //JobSelect jobsel = new JobSelect(user_data.Job);
             int skill_damage = 1;
             
-            int calcATK_min = Convert.ToInt32(Math.Floor(jobsel.GetMinATK() * skill_damage));
-            int calcATK_max = Convert.ToInt32(Math.Floor(jobsel.GetMaxATK() * skill_damage));
+            int calcATK_min = Convert.ToInt32(Math.Floor(user_data.JobSelect.GetMinATK() * skill_damage));
+            int calcATK_max = Convert.ToInt32(Math.Floor(user_data.JobSelect.GetMaxATK() * skill_damage));
 
             string normal_atk = Convert.ToString(calcATK_min) + " ~ " + Convert.ToString(calcATK_max);
             _calc_user_dmamge_binding = new CalcUserDamageBinding("평타", normal_atk);

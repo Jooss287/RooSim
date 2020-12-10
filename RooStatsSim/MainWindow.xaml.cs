@@ -15,6 +15,7 @@ using RooStatsSim.UI.StackBuff;
 using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.UI.MonsterDamage;
+using RooStatsSim.UI.SkillWindow;
 using MDIXWindow;
 using WPF.MDI;
 
@@ -39,6 +40,7 @@ namespace RooStatsSim
         MdiChild _stack_buff;
         MdiChild _equip;
         MdiChild _damage_check;
+        MdiChild _skill;
 
         public ProgramInfo _info;
         public DBManager _db_manager;
@@ -100,6 +102,15 @@ namespace RooStatsSim
                 Position = new Point(885, 490),
                 CloseBox = false,
             };
+            _skill = new MdiChild()
+            {
+                Title = "스킬",
+                Content = new SkillWindow(),
+                Width = 728,
+                Height = 258,   //132
+                Position = new Point(700, 0),
+                CloseBox = false,
+            };
 
 
             RoosimContainer.Children.Add(_menu);
@@ -107,7 +118,8 @@ namespace RooStatsSim
             RoosimContainer.Children.Add(_stack_buff);
             RoosimContainer.Children.Add(_equip);
             RoosimContainer.Children.Add(_damage_check);
-
+            RoosimContainer.Children.Add(_skill);
+            
             _user_data.CalcUserData();
         }
 
@@ -135,8 +147,6 @@ namespace RooStatsSim
             );
         }
 
-        #endregion
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_user_data_edited)
@@ -159,5 +169,6 @@ namespace RooStatsSim
                 this.Close();
             }
         }
+        #endregion
     }
 }

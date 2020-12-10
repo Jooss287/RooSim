@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using RooStatsSim.Extension;
 using RooStatsSim.DB.Table;
 using RooStatsSim.Equation;
+using RooStatsSim.Equation.Job;
 using RooStatsSim.User;
 
 
@@ -20,6 +22,7 @@ namespace RooStatsSim.User
         public JOB_LEVEL Job_Level { get; set; }
         public STATUS Status { get; set; }
         public JOB_SELECT_LIST Job { get; set; }
+        [JsonIgnore]public JobSelect JobSelect { get; set; }
 
         public EQUIP Equip { get; set; }
         public GEAR Gear { get; set; }
@@ -31,11 +34,11 @@ namespace RooStatsSim.User
         public RIDING Riding_ability { get; set; }
         public RIDING Riding_personality { get; set; }
         
-
         public UserItem User_Item { get; set; }
+        public UserSkill User_Skill { get; set; }
         public int SelectedEnemy { get; set; }
 
-        void Initializor()
+        public void Initializor()
         {
             Base_Level = new BASE_LEVEL();
             Job_Level = new JOB_LEVEL();
@@ -49,21 +52,20 @@ namespace RooStatsSim.User
             Sticker = new STICKER();
             Riding_ability = new RIDING();
             Riding_personality = new RIDING();
-            User_Item = new UserItem();
+            User_Item = new UserItem(true);
+            User_Skill = new UserSkill();
             SelectedEnemy = 0;
         }
         
-        #region Userdata event
+        #region Item Changed Event
         public delegate void UserDataChangedEventHandler();
         public event UserDataChangedEventHandler itemDataChanged;
-
-        
         public void CalcUserData()
         {
-            UserItem CalcUserItem = new UserItem();
+            UserItem CalcUserItem = new UserItem(true);
 
             //직업별 추가 능력치
-
+            CalcUserItem += User_Skill.GetOption();
             //Stack Options
             CalcUserItem += Monster_Research.GetOption();
             CalcUserItem += Dress_Style.GetOption();
@@ -82,6 +84,22 @@ namespace RooStatsSim.User
             User_Item = CalcUserItem;
             if (itemDataChanged != null)
                 itemDataChanged();
+            MainWindow._user_data_edited = true;
+        }
+        #endregion
+
+        #region Job Changed Event
+        public delegate void JobChangedEventHandler();
+        public event JobChangedEventHandler JobDataChanged;
+        public void JobChanged(JOB_SELECT_LIST job)
+        {
+            Job = job;
+            JobSelect = new JobSelect(job);
+
+            // Job가 변경되면 설정되어야 할 것들
+
+            if (JobDataChanged != null)
+                JobDataChanged();
             MainWindow._user_data_edited = true;
         }
         #endregion
