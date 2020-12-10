@@ -416,7 +416,8 @@ namespace RooStatsSim.DB
         }
         #endregion
     }
-
+    
+    [Serializable]
     public class AbilityPerStatus
     {
         public string PerType { get; set; }
@@ -424,6 +425,7 @@ namespace RooStatsSim.DB
         public double PerValue { get; set; }
         public double AddValue { get; set; }
 
+        public AbilityPerStatus() { }
         public AbilityPerStatus(string per_type, double per_value, string add_type, double add_value)
         {
             PerType = per_type;

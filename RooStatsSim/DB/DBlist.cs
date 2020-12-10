@@ -179,6 +179,7 @@ namespace RooStatsSim.DB
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            //serializeOptions.Converters.Add(new JsonConvertExt_List_class_DB());
             serializeOptions.WriteIndented = true;
 
             string jsonString;
@@ -201,7 +202,7 @@ namespace RooStatsSim.DB
             if (DB.Dress_style_db == null) DB.Dress_style_db = new Dictionary<int, ItemDB>();
             DB.Sticker_db = LoadDataBase<Dictionary<int, ItemDB>>("Sticker_db.roo");
             if (DB.Sticker_db == null) DB.Sticker_db = new Dictionary<int, ItemDB>();
-            DB.Set_Equip_db = LoadDataBase<Dictionary<int, ItemDB>>("Set_Itemdb.roo");
+            DB.Set_Equip_db = LoadDataBase<Dictionary<int, ItemDB>>("Set_Item_db.roo");
             if (DB.Set_Equip_db == null) DB.Set_Equip_db = new Dictionary<int, ItemDB>();
             foreach (EQUIP_DB_ENUM db_enum in Enum.GetValues(typeof(EQUIP_DB_ENUM)))
             {
@@ -220,6 +221,7 @@ namespace RooStatsSim.DB
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            serializeOptions.Converters.Add(new JsonConvertExt_List_class_DB());
             serializeOptions.WriteIndented = true;
 
             string jsonString = File.ReadAllText(file_relative_root + name);

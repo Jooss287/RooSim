@@ -21,6 +21,7 @@ namespace RooStatsSim.UI.Manager
         ItemListBox BindingItemList;
         const string _image_path = "Img";
         List<string> _image_list = new List<string>();
+        List<string> _set_option_list = new List<string>();
 
         public ItemManager(ref DBlist DB)
         {
@@ -70,6 +71,11 @@ namespace RooStatsSim.UI.Manager
                     _image_list.Add(item.Name);
                     cmb_Item_image.Items.Add(item.Name);
                 }
+            }
+            foreach(KeyValuePair<int, ItemDB> set_option in _DB.Set_Equip_db)
+            {
+                _set_option_list.Add(set_option.Value.SetName);
+                cmb_set_name_list.Items.Add(set_option.Value.SetName);
             }
         }
         void SetComboBox()
@@ -175,6 +181,7 @@ namespace RooStatsSim.UI.Manager
         {
             cmb_equip_type.SelectedIndex = (int)now_item.Equip_type;
             cmb_Item_image.SelectedIndex = _image_list.IndexOf(now_item.ImageName);
+            cmb_set_name_list.SelectedIndex = _set_option_list.IndexOf(now_item.SetName);
             list_Job_limit.ItemsSource = new Job_Limite_List(ref now_item._wear_job_limit);
             list_iOption.ItemsSource = new ItemOptionListBox(now_item.Option_ITYPE);
             list_dOption.ItemsSource = new ItemOptionListBox(now_item.Option_DTYPE);
@@ -221,16 +228,6 @@ namespace RooStatsSim.UI.Manager
             
             SetNowItemOption();
         }
-        #endregion
-        #region To pass mainwindow
-        private bool _isNew = false;
-        public bool IsNew
-        {
-            get { return _isNew; }
-            set { _isNew = value; }
-        }
-        #endregion
-
         private Dictionary<int, ItemDB> SelectedItemType()
         {
             ITEM_TYPE_ENUM selected = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
@@ -268,6 +265,7 @@ namespace RooStatsSim.UI.Manager
             Item_CardSlot.IsEnabled = false;
             Item_Level.IsEnabled = false;
             cmb_Item_image.IsEnabled = false;
+            cmb_set_equips.IsEnabled = false;
             SetOptionPanel.Visibility = Visibility.Hidden;
 
             if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
@@ -279,6 +277,7 @@ namespace RooStatsSim.UI.Manager
                 Item_CardSlot.IsEnabled = true;
                 Item_Level.IsEnabled = true;
                 cmb_Item_image.IsEnabled = true;
+                cmb_set_equips.IsEnabled = true;
             }
             else if (selected == ITEM_TYPE_ENUM.GEAR)
                 list_Job_limit.IsEnabled = true;
@@ -290,7 +289,15 @@ namespace RooStatsSim.UI.Manager
             else if (selected == ITEM_TYPE_ENUM.SET_OPTION)
                 SetOptionPanel.Visibility = Visibility.Visible;
         }
-
+        #endregion
+        #region To pass mainwindow
+        private bool _isNew = false;
+        public bool IsNew
+        {
+            get { return _isNew; }
+            set { _isNew = value; }
+        }
+        #endregion
         #region CLICK FUNCTION
         private void New_DB_Click(object sender, RoutedEventArgs e)
         {
@@ -361,6 +368,16 @@ namespace RooStatsSim.UI.Manager
         private void cmb_equip_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+        }
+        private void Item_image_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ComboBox).SelectedItem != null)
+                now_item.ImageName = (sender as ComboBox).SelectedItem.ToString();
+        }
+        private void cmb_set_name_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ComboBox).SelectedItem != null)
+                now_item.SetName = (sender as ComboBox).SelectedItem.ToString();
         }
         #endregion
         #region normal option callback
@@ -622,10 +639,7 @@ namespace RooStatsSim.UI.Manager
             AddType.SelectedIndex = 0;
         }
         #endregion
-        private void Item_image_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if ((sender as ComboBox).SelectedItem != null)
-                now_item.ImageName = (sender as ComboBox).SelectedItem.ToString();
-        }
+
+        
     }
 }

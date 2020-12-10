@@ -53,6 +53,8 @@
                             <ComboBox Name="cmb_equip_type" SelectionChanged="cmb_equip_type_SelectionChanged"
                                       Width="130" Height="30" Margin="10,0,0,0"
                                       VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <TextBox x:Name="Item_Level" Text="{Binding Path=LevelLimit}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="레벨 제한" Width="60" Margin="10,0,0,0" />
@@ -65,6 +67,9 @@
                             <ComboBox x:Name="cmb_Item_image" Width="130" Height="30" Margin="10,0,0,0"
                                       VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                       SelectionChanged="Item_image_SelectionChanged"/>
+                            <ComboBox Name="cmb_set_name_list" Width="70" Margin="10,0,0,0"
+                                      VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                      SelectionChanged="cmb_set_name_list_SelectionChanged"/>
                         </StackPanel>
                         <StackPanel>
                             <ListBox x:Name="list_Job_limit" Visibility="Visible">
