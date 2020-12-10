@@ -79,46 +79,33 @@ namespace RooStatsSim.User
             private void SetRefineOption()
             {
                 ItemDB db = null;
-                foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option in Equip.Refine_Option)
+                CalcRefineOption(ref db, Equip);
+                foreach(ItemDB card in Card)
                 {
-                    if (Refine >= option.Key)
+                    CalcRefineOption(ref db, card);
+                }
+                _equip_refine_option = db;
+            }
+            void CalcRefineOption(ref ItemDB db, ItemDB item_db)
+            {
+                foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> keyValue in item_db.Refine_Option)
+                {
+                    if (Refine >= keyValue.Key)
                     {
                         if (db == null)
                             db = new ItemDB();
-                        ItemDB.AddOption(db.Option, option.Value);
+                        ItemDB.AddOption(db.Option, keyValue.Value);
                     }
                 }
-                foreach (AbilityPerStatus ability in Equip.Option_IF_TYPE)
+                foreach (AbilityPerStatus ability in item_db.Option_IF_TYPE)
                 {
                     if (db == null)
                         db = new ItemDB();
                     db += ability.GetRefineOption(Refine);
                 }
-                foreach(ItemDB card in Card)
-                {
-                    foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option in card.Refine_Option)
-                    {
-                        if (Refine >= option.Key)
-                        {
-                            if (db == null)
-                                db = new ItemDB();
-                            ItemDB.AddOption(db.Option, option.Value);
-                        }
-                    }
-                    foreach (AbilityPerStatus ability in card.Option_IF_TYPE)
-                    {
-                        if (db == null)
-                            db = new ItemDB();
-                        db += ability.GetRefineOption(Refine);
-                    }
-                }
-                _equip_refine_option = db;
             }
         }
-        void CalcRefineOption(ref ItemDB db, KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option)
-        {
-
-        }
+        
         public ObservableCollection<EquipItem> List { get; }
         public EQUIP()
         {
