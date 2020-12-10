@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using RooStatsSim.User;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.DB.Table;
@@ -48,25 +49,35 @@ namespace RooStatsSim.UI.StatusWindow
             SpecialProperty.ItemsSource = specialPropertyList;
         }
 
-        void StatusPointUp(AbilityBinding<int> dataCxtx)
+        void StatusPointUp(AbilityBinding<int> dataCxtx, int changeValue)
         {
             if (dataCxtx == null)
                 return;
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                changeValue *= 10;
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
-            user_data.Base_Level.RemainPoint -= user_data.Status.List[(int)statusName].NecessaryPoint;
-            user_data.Status.List[(int)statusName].Point++;
+            for (int i = changeValue; i != 0; i--)
+            {
+                user_data.Base_Level.RemainPoint -= user_data.Status.List[(int)statusName].NecessaryPoint;
+                user_data.Status.List[(int)statusName].Point++;
+            }
             user_data.CalcUserData();
         }
 
-        void StatusPointDown(AbilityBinding<int> dataCxtx)
+        void StatusPointDown(AbilityBinding<int> dataCxtx, int changeValue)
         {
             if (dataCxtx == null)
                 return;
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                changeValue *= 10;
             STATUS_ENUM statusName = (STATUS_ENUM)Enum.Parse(typeof(STATUS_ENUM), dataCxtx.Name);
-            int nextPoint = user_data.Status.List[(int)statusName].Point - 1;
-            user_data.Status.List[(int)statusName].Point = nextPoint;
-            if (nextPoint != 0)
-                user_data.Base_Level.RemainPoint += user_data.Status.List[(int)statusName].NecessaryPoint;
+            for (int i = changeValue; i != 0; i--)
+            {
+                int nextPoint = user_data.Status.List[(int)statusName].Point - 1;
+                user_data.Status.List[(int)statusName].Point = nextPoint;
+                if (nextPoint != 0)
+                    user_data.Base_Level.RemainPoint += user_data.Status.List[(int)statusName].NecessaryPoint;
+            }
             user_data.CalcUserData();
         }
 
@@ -74,6 +85,8 @@ namespace RooStatsSim.UI.StatusWindow
         {
             if (dataCxtx == null)
                 return;
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                changeValue *= 10;
             LEVEL_ENUM LevelName = (LEVEL_ENUM)Enum.Parse(typeof(LEVEL_ENUM), dataCxtx.EnumName);
             if (LevelName == LEVEL_ENUM.BASE)
                 user_data.Base_Level.Point += changeValue;
@@ -88,14 +101,14 @@ namespace RooStatsSim.UI.StatusWindow
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            StatusPointUp(dataCxtx);
+            StatusPointUp(dataCxtx, 1);
         }
 
         private void StatusDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            StatusPointDown(dataCxtx);
+            StatusPointDown(dataCxtx, 1);
         }
 
         private void LevelUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -116,29 +129,24 @@ namespace RooStatsSim.UI.StatusWindow
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            int value = 1;
             if (e.Delta < 0)
-                LevelChange(dataCxtx, -1);
-            else
-                LevelChange(dataCxtx, +1);
-                
+                value = -1;
+
+            LevelChange(dataCxtx, value);
+
         }
 
         private void Status_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             var tb = sender as StackPanel;
             AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            
             if (e.Delta < 0)
-                StatusPointDown(dataCxtx);
+                StatusPointDown(dataCxtx, 1);
             else
-                StatusPointUp(dataCxtx);
+                StatusPointUp(dataCxtx, 1);
         }
-
-
         #endregion
-
-        private void UserControl_ContextMenuClosing(object sender, ContextMenuEventArgs e)
-        {
-
-        }
     }
 }

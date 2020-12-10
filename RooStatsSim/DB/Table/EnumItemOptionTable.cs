@@ -235,4 +235,72 @@ namespace RooStatsSim.DB.Table
         //SIMPLE IF
         ATK_MORETHAN_STR,
     }
-}
+
+    class EnumItemOptionTable
+    {
+        public static ITEM_OPTION_TYPE GET_ITEM_OPTION_TYPE(string option_name)
+        {
+            if (Enum.IsDefined(typeof(ITYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.ITYPE;
+            }
+            if (Enum.IsDefined(typeof(DTYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.DTYPE;
+            }
+            if (Enum.IsDefined(typeof(SE_ATK_RATE_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE;
+            }
+            if (Enum.IsDefined(typeof(SE_REG_RATE_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.SE_REG_RATE_TYPE;
+            }
+            if (Enum.IsDefined(typeof(TRIBE_DMG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.TRIBE_DMG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(TRIBE_REG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.TRIBE_REG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(MONSTER_KINDS_DMG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(MONSTER_SIZE_DMG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(MONSTER_KINDS_REG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(MONSTER_SIZE_REG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(MONSTER_ELEMENT_DMG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(ELEMENT_DMG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(ELEMENT_REG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.ELEMENT_REG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(ETC_DMG_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.ETC_DMG_TYPE;
+            }
+            if (Enum.IsDefined(typeof(ETC_TYPE), option_name))
+            {
+                return ITEM_OPTION_TYPE.ETC_TYPE;
+            }
+
+            return ITEM_OPTION_TYPE.ETC_TYPE;
+        }
+    }}

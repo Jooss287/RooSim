@@ -53,6 +53,8 @@
                             <ComboBox Name="cmb_equip_type" SelectionChanged="cmb_equip_type_SelectionChanged"
                                       Width="130" Height="30" Margin="10,0,0,0"
                                       VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <TextBox x:Name="Item_Level" Text="{Binding Path=LevelLimit}"
                                      Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
                                      materialDesign:HintAssist.Hint="레벨 제한" Width="60" Margin="10,0,0,0" />
@@ -65,6 +67,9 @@
                             <ComboBox x:Name="cmb_Item_image" Width="130" Height="30" Margin="10,0,0,0"
                                       VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                       SelectionChanged="Item_image_SelectionChanged"/>
+                            <ComboBox Name="cmb_set_name_list" Width="70" Margin="10,0,0,0"
+                                      VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                      SelectionChanged="cmb_set_name_list_SelectionChanged"/>
                         </StackPanel>
                         <StackPanel>
                             <ListBox x:Name="list_Job_limit" Visibility="Visible">
@@ -291,6 +296,23 @@
                                 </StackPanel>
                                 <ListBox x:Name="list_refine_if_option"
                                          ItemTemplate="{Binding Source={StaticResource DataTemplate_RefineNameValue}}"/>
+                            </StackPanel>
+                            <StackPanel Tag="SET_OPTION" x:Name="SetOptionPanel"
+                                        Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ComboBox Name="cmb_set_equips" SelectedIndex="0" VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="세트부위등록" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,0,5,3"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseUp}"
+                                            Click="Del_Set_Equips_Click"/>
+                                    <Button Style="{Binding Source={StaticResource Style_Btn_UpDownload}}"
+                                            Content="{materialDesign:PackIcon ArrowCollapseDown}"
+                                            Click="Add_Set_Equips_Click"/>
+                                </StackPanel>
+                                <ListBox x:Name="list_set_option"
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_SetNameValue}}"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

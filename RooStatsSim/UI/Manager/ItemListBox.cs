@@ -63,12 +63,14 @@ namespace RooStatsSim.UI.Manager
         {
             Id = param.Id;
             Name = param.Name;
+            SetName = param.SetName;
             ImageName = param.ImageName;
             LevelLimit = param.LevelLimit;
             CardSlot = param.CardSlot;
             EnchantSlot = param.EnchantSlot;
             Item_type = param.Item_type;
             Equip_type = param.Equip_type;
+            SetPosition = param.SetPosition;
             Wear_job_limit = param.Wear_job_limit;
             Option = param.Option;
             Option_IF_TYPE = param.Option_IF_TYPE;
@@ -197,7 +199,6 @@ namespace RooStatsSim.UI.Manager
         }
     }
     #endregion
-
     #region If Type Option Binding
     class ItemOption_IfType_Binding : INotifyPropertyChanged
     {
@@ -305,6 +306,51 @@ namespace RooStatsSim.UI.Manager
                         Add(new ItemOption_Refine_Binding(options.Key, items));
                 }
             }
+        }
+    }
+    #endregion
+    #region Set Option Binding
+    class SetItemOption_Binding : INotifyPropertyChanged
+    {
+        public SetItemOption_Binding() { }
+        public SetItemOption_Binding(EQUIP_TYPE_ENUM equ_db)
+        {
+            _type_name = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR[equ_db];
+        }
+
+        string _type_name;
+        public string Type_name
+        {
+            get { return _type_name; }
+            set { _type_name = value; OnPropertyChanged("Type_name"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public override string ToString() => _type_name;
+
+        protected void OnPropertyChanged(string info)
+        {
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(info));
+        }
+    }
+    class SetItemOptionListBox : ObservableCollection<SetItemOption_Binding>
+    {
+        public SetItemOptionListBox()
+        { }
+        public SetItemOptionListBox(params List<EQUIP_TYPE_ENUM>[] equip_type)
+        {
+            foreach (List<EQUIP_TYPE_ENUM> list in equip_type)
+            {
+                if (list == null)
+                    continue;
+                foreach (EQUIP_TYPE_ENUM equ_type in list)
+                {
+                    Add(new SetItemOption_Binding(equ_type));
+                }
+            }
+
         }
     }
     #endregion
