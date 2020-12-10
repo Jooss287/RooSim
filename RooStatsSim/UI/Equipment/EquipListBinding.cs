@@ -59,7 +59,8 @@ class ItemListFilter : ObservableCollection<EquipId>
             Add(new EquipId()
             {
                 Id = itemPair.Key,
-                Name = itemPair.Value.Name
+                Name = itemPair.Value.Name,
+                ImageRoot = itemPair.Value.ImageName
             });
         }
     }

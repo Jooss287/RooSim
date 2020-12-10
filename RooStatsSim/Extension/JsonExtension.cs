@@ -10,6 +10,109 @@ using System.Reflection;
 
 namespace RooStatsSim.Extension
 {
+    public class JsonConvertExt_List_class_DB : JsonConverterFactory
+    {
+        public override bool CanConvert(Type typeToConvert)
+        {
+            if (!typeToConvert.IsGenericType)
+            {
+                return false;
+            }
+
+            if (typeToConvert.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public override JsonConverter CreateConverter(
+            Type type,
+            JsonSerializerOptions options)
+        {
+            Type ListType = type.GetGenericArguments()[0];
+
+            JsonConverter converter = (JsonConverter)Activator.CreateInstance(
+                typeof(ListConverterInner<>).MakeGenericType(
+                    new Type[] { ListType }),
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: new object[] { options },
+                culture: null);
+
+            return converter;
+        }
+
+        private class ListConverterInner<TValue> :
+            JsonConverter<List<TValue>>
+        {
+            private readonly JsonConverter<TValue> _valueConverter;
+            private Type _listType;
+
+            public ListConverterInner(JsonSerializerOptions options)
+            {
+                // For performance, use the existing converter if available.
+                _valueConverter = (JsonConverter<TValue>)options
+                    .GetConverter(typeof(TValue));
+
+                // Cache the key and value types.
+                _listType = typeof(TValue);
+            }
+
+            public override List<TValue> Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options)
+            {
+                if (reader.TokenType != JsonTokenType.StartArray)
+                {
+                    throw new JsonException();
+                }
+
+                List<TValue> list = new List<TValue>();
+
+                while (reader.Read())
+                {
+                    if (reader.TokenType == JsonTokenType.EndArray)
+                    {
+                        return list;
+                    }
+
+                    // Get the value.
+                    TValue v;
+                    if (_valueConverter != null)
+                    {
+                        //reader.Read();
+                        v = _valueConverter.Read(ref reader, _listType, options);
+                    }
+                    else
+                    {
+                        v = JsonSerializer.Deserialize<TValue>(ref reader, options);
+                    }
+
+                    list.Add(v);
+                }
+
+                throw new JsonException();
+            }
+
+            public override void Write(
+                Utf8JsonWriter writer,
+                List<TValue> list,
+                JsonSerializerOptions options)
+            {
+                writer.WriteStartObject();
+
+                foreach (TValue kvp in list)
+                {
+                    JsonSerializer.Serialize(writer, kvp, options);
+                }
+
+                writer.WriteEndObject();
+            }
+        }
+    }
+
     public class JsonConvertExt_Dic_int_DB : JsonConverterFactory
     {
         public override bool CanConvert(Type typeToConvert)
@@ -152,7 +255,9 @@ namespace RooStatsSim.Extension
                 return false;
             }
 
-            return typeToConvert.GetGenericArguments()[0].IsEnum;
+            if (typeToConvert.GetGenericArguments()[0].IsEnum)
+                return true;
+            return false;
         }
 
         public override JsonConverter CreateConverter(

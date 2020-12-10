@@ -14,6 +14,7 @@ namespace RooStatsSim.DB
     {
         public Dictionary<int, MonsterDB> _mob_db = new Dictionary<int, MonsterDB>();
         public Dictionary<int, Dictionary<int, ItemDB>> _equip_db = new Dictionary<int, Dictionary<int, ItemDB>>();
+        public Dictionary<int, ItemDB> _set_equip_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _card_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _enchant_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _gear_db = new Dictionary<int, ItemDB>();
@@ -21,6 +22,7 @@ namespace RooStatsSim.DB
         public Dictionary<int, ItemDB> _dress_style_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _sticker_db = new Dictionary<int, ItemDB>();
 
+        #region Properties
         public Dictionary<int, MonsterDB> Mob_db
         {
             get { return _mob_db; }
@@ -103,6 +105,11 @@ namespace RooStatsSim.DB
                     return Equip_db[(int)EQUIP_DB_ENUM.BACK_DECO]; }
             set { Equip_db[(int)EQUIP_DB_ENUM.BACK_DECO] = value; }
         }
+        public Dictionary<int, ItemDB> Set_Equip_db
+        {
+            get { return _set_equip_db; }
+            set { _set_equip_db = value; }
+        }
         public Dictionary<int, ItemDB> Card_db
         {
             get { return _card_db; }
@@ -133,7 +140,8 @@ namespace RooStatsSim.DB
             get { return _sticker_db; }
             set { _sticker_db = value; }
         }
-
+        #endregion
+        
         public DBlist() { }
 
         public void AddMonsterDB(MonsterDB monsterDB)
@@ -159,6 +167,7 @@ namespace RooStatsSim.DB
             SaveDataBase<Dictionary<int, ItemDB>>(DB.Mob_research_db, "Mob_research_db.roo");
             SaveDataBase<Dictionary<int, ItemDB>>(DB.Dress_style_db, "Dress_style_db.roo");
             SaveDataBase<Dictionary<int, ItemDB>>(DB.Sticker_db, "Sticker_db.roo");
+            SaveDataBase<Dictionary<int, ItemDB>>(DB.Set_Equip_db, "Set_Item_db.roo");
             foreach(EQUIP_DB_ENUM db_enum in Enum.GetValues(typeof(EQUIP_DB_ENUM)))
             {
                 string name = Enum.GetName(typeof(EQUIP_DB_ENUM), db_enum);
@@ -170,6 +179,7 @@ namespace RooStatsSim.DB
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            //serializeOptions.Converters.Add(new JsonConvertExt_List_class_DB());
             serializeOptions.WriteIndented = true;
 
             string jsonString;
@@ -192,6 +202,8 @@ namespace RooStatsSim.DB
             if (DB.Dress_style_db == null) DB.Dress_style_db = new Dictionary<int, ItemDB>();
             DB.Sticker_db = LoadDataBase<Dictionary<int, ItemDB>>("Sticker_db.roo");
             if (DB.Sticker_db == null) DB.Sticker_db = new Dictionary<int, ItemDB>();
+            DB.Set_Equip_db = LoadDataBase<Dictionary<int, ItemDB>>("Set_Item_db.roo");
+            if (DB.Set_Equip_db == null) DB.Set_Equip_db = new Dictionary<int, ItemDB>();
             foreach (EQUIP_DB_ENUM db_enum in Enum.GetValues(typeof(EQUIP_DB_ENUM)))
             {
                 string name = Enum.GetName(typeof(EQUIP_DB_ENUM), db_enum);
@@ -209,6 +221,7 @@ namespace RooStatsSim.DB
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            serializeOptions.Converters.Add(new JsonConvertExt_List_class_DB());
             serializeOptions.WriteIndented = true;
 
             string jsonString = File.ReadAllText(file_relative_root + name);

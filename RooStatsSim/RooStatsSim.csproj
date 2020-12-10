@@ -37,6 +37,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\rs.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
@@ -294,8 +297,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\WPF.MDI.dll" />
+    <Resource Include="Resources\Job\acolyte.png" />
+    <Resource Include="Resources\Job\archer.png" />
+    <Resource Include="Resources\Job\assassin_cross.png" />
+    <Resource Include="Resources\Job\high_prist.png" />
+    <Resource Include="Resources\Job\high_wizard.png" />
+    <Resource Include="Resources\Job\lord_knight.png" />
+    <Resource Include="Resources\Job\magician.png" />
+    <Resource Include="Resources\Job\marchant.png" />
+    <Resource Include="Resources\Job\sniper.png" />
+    <Resource Include="Resources\Job\swordman.png" />
+    <Resource Include="Resources\Job\thief.png" />
+    <Resource Include="Resources\Job\white_smith.png" />
+    <Resource Include="Resources\rs.ico" />
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

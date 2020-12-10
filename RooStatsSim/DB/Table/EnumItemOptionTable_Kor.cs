@@ -206,6 +206,7 @@ namespace RooStatsSim.DB.Table
             { REFINE_TYPE.REFINE, "제련도" },
         };
 
+
         public static ITEM_OPTION_TYPE GET_ITEM_OPTION_TYPE(ref string option_name)
         {
             string intput_name = option_name;

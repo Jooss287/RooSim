@@ -28,24 +28,15 @@ namespace RooStatsSim.User
         }
         public static UserItem operator +(UserItem a, ItemDB b)
         {
-            foreach (KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in b.Option)
+            AddOption(a.Option, b.Option);
+
+            foreach (AbilityPerStatus ability in b.Option_IF_TYPE)
+                a.Option_IF_TYPE.Add(new AbilityPerStatus(ability));
+            foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> refine_num in b.Refine_Option)
             {
-                if (a.Option.ContainsKey(item_option.Key) == true)
-                {
-                    foreach (KeyValuePair<string, double> detail_option in item_option.Value)
-                    {
-                        if (a.Option[item_option.Key].ContainsKey(detail_option.Key) == true)
-                        {
-                            a.Option[item_option.Key][detail_option.Key] += detail_option.Value;
-                        }
-                        else
-                            a.Option[item_option.Key][detail_option.Key] = detail_option.Value;
-                    }
-                }
-                else
-                {
-                    a.Option[item_option.Key] = item_option.Value;
-                }
+                if (a.Refine_Option.ContainsKey(refine_num.Key) == false)
+                    a.Refine_Option.Add(refine_num.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+                AddOption(a.Refine_Option[refine_num.Key], b.Refine_Option[refine_num.Key]);
             }
             return a;
         }
@@ -54,17 +45,23 @@ namespace RooStatsSim.User
         {
             ItemDB item_iftype = new ItemDB();
 
-            //foreach (EQUIP.EquipItem equip_item in user.Equip.List)
-            //{
-            //    foreach (KeyValuePair<IFTYPE, AbilityPerStatus> option in equip_item.Equip.IF_OPTION)
-            //    {
-            //        if (option.Value.Calc != null)
-            //            item_iftype += option.Value.Calc(user);
-            //        else
-            //            item_iftype += option.Value.Calc_refine(user, equip_item.Smelting);
-            //    }
-            //}
+            foreach (AbilityPerStatus ability in user.User_Item.Option_IF_TYPE)
+            {
+                item_iftype += GetOptionWithoutRefine(user, ability);
+            }
             return item_iftype;
+        }
+
+        private ItemDB GetOptionWithoutRefine(UserData user_data, AbilityPerStatus abilities)
+        {
+            ItemDB db = new ItemDB();
+
+            if (abilities.PerType == Enum.GetName(typeof(REFINE_TYPE), REFINE_TYPE.REFINE))
+                return db;
+
+            db.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(abilities.AddType)][abilities.AddType] = abilities.AddValue *
+                (user_data.User_Item.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(abilities.PerType)][abilities.PerType] / abilities.PerValue);
+            return db;
         }
     }
 }

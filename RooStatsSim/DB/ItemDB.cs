@@ -15,10 +15,13 @@ namespace RooStatsSim.DB
     [Serializable]
     public class ItemDB
     {
+        public ItemDB() { }
         public ItemDB(ItemDB item_db)
         {
             Id = item_db.Id;
             Name = item_db.Name;
+            ImageName = item_db.ImageName;
+            SetName = item_db.SetName;
             LevelLimit = item_db.LevelLimit;
             Item_type = item_db.Item_type;
             Equip_type = item_db.Equip_type;
@@ -26,6 +29,7 @@ namespace RooStatsSim.DB
             CardSlot = item_db.CardSlot;
             EnchantSlot = item_db.EnchantSlot;
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
+            SetPosition = new List<EQUIP_TYPE_ENUM>(item_db.SetPosition);
 
             Option_IF_TYPE = new List<AbilityPerStatus>(item_db.Option_IF_TYPE);
             Option_ITYPE = new Dictionary<string, double>(item_db.Option_ITYPE);
@@ -53,25 +57,43 @@ namespace RooStatsSim.DB
                 }
             }
         }
-        public ItemDB() { }
 
+        ITEM_TYPE_ENUM _item_type;
+        EQUIP_TYPE_ENUM _equip_type;
+        WEAPON_TYPE_ENUM _weapon_type = WEAPON_TYPE_ENUM.HAND;
+        protected int _id;
+        protected string _name;
+        protected string _image_name = "";
+        protected string _set_name = null;
+        protected int _level_limit;
+        protected int _smelt;
+        protected int _card_slot;
+        protected int _enchant_slot;
+        protected ELEMENT_TYPE _attacker_element;
+        protected ELEMENT_TYPE _defenser_element;
+        public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
+        protected List<EQUIP_TYPE_ENUM> _set_pos = new List<EQUIP_TYPE_ENUM>();
+
+        protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
+        protected List<AbilityPerStatus> _option_if_type;
+        protected Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> _refine_option;
+
+        #region operator overriding
         public static ItemDB operator +(ItemDB a, ItemDB b)
         {
             AddOption(a.Option, b.Option);
 
-            foreach(AbilityPerStatus ability in b.Option_IF_TYPE)
-            {
+            foreach (AbilityPerStatus ability in b.Option_IF_TYPE)
                 a.Option_IF_TYPE.Add(new AbilityPerStatus(ability));
-            }
-            foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> refine_num in b.Refine_Option)
-            {
-                if (a.Refine_Option.ContainsKey(refine_num.Key) == false)
-                    a.Refine_Option.Add(refine_num.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
-                AddOption(a.Refine_Option[refine_num.Key], b.Refine_Option[refine_num.Key]);
-            }
+            //foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> refine_num in b.Refine_Option)
+            //{
+            //    if (a.Refine_Option.ContainsKey(refine_num.Key) == false)
+            //        a.Refine_Option.Add(refine_num.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+            //    AddOption(a.Refine_Option[refine_num.Key], b.Refine_Option[refine_num.Key]);
+            //}
             return a;
         }
-        protected static void AddOption(Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> A, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> B)
+        public static void AddOption(Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> A, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> B)
         {
             foreach (KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in B)
             {
@@ -100,26 +122,7 @@ namespace RooStatsSim.DB
                 }
             }
         }
-
-
-        ITEM_TYPE_ENUM _item_type;
-        EQUIP_TYPE_ENUM _equip_type;
-        WEAPON_TYPE_ENUM _weapon_type = WEAPON_TYPE_ENUM.HAND;
-        protected int _id;
-        protected string _name;
-        protected int _level_limit;
-        protected int _smelt;
-        protected int _card_slot;
-        protected int _enchant_slot;
-        protected ELEMENT_TYPE _attacker_element;
-        protected ELEMENT_TYPE _defenser_element;
-        public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
-
-        protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
-        protected List<AbilityPerStatus> _option_if_type;
-        protected Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> _refine_option;
-
-
+        #endregion
         #region Property
         public int Id
         {
@@ -130,6 +133,16 @@ namespace RooStatsSim.DB
         {
             get { return _name; }
             set { _name = value; }
+        }
+        public string ImageName
+        {
+            get { return _image_name; }
+            set { _image_name = value; }
+        }
+        public string SetName
+        {
+            get { return _set_name; }
+            set { _set_name = value; }
         }
         public int LevelLimit
         {
@@ -160,6 +173,11 @@ namespace RooStatsSim.DB
         {
             get { return _defenser_element; }
             set { _defenser_element = value; }
+        }
+        public List<EQUIP_TYPE_ENUM> SetPosition
+        {
+            get { return _set_pos; }
+            set { _set_pos = value; }
         }
         public Dictionary<ITEM_OPTION_TYPE, Dictionary<string,double>> Option
         {
@@ -211,7 +229,6 @@ namespace RooStatsSim.DB
             set { _wear_job_limit = value; }
         }
         #endregion
-
         #region ShortCut OptionAccess
         [JsonIgnore] public Dictionary<string, double> Option_ITYPE
         {
@@ -395,7 +412,8 @@ namespace RooStatsSim.DB
         }
         #endregion
     }
-
+    
+    [Serializable]
     public class AbilityPerStatus
     {
         public string PerType { get; set; }
@@ -403,6 +421,7 @@ namespace RooStatsSim.DB
         public double PerValue { get; set; }
         public double AddValue { get; set; }
 
+        public AbilityPerStatus() { }
         public AbilityPerStatus(string per_type, double per_value, string add_type, double add_value)
         {
             PerType = per_type;
@@ -416,6 +435,17 @@ namespace RooStatsSim.DB
             PerValue = ability.PerValue;
             AddType = ability.AddType;
             AddValue = ability.AddValue;
+        }
+
+        public ItemDB GetRefineOption(int Refine)
+        {
+            ItemDB db = new ItemDB();
+            if (PerType != Enum.GetName(typeof(REFINE_TYPE), REFINE_TYPE.REFINE))
+                return db;
+
+            db.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(AddType)][AddType] = (AddValue * Refine / PerValue);
+
+            return db;
         }
     }
 }

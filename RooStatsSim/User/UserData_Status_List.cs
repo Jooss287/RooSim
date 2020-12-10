@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 
 namespace RooStatsSim.User
@@ -144,6 +145,15 @@ namespace RooStatsSim.User
         public int GetStatus(STATUS_ENUM status_name)
         {
             return List[(int)status_name].Point + List[(int)status_name].AddPoint;
+        }
+        public void SetAddStatus(ItemDB db)
+        {
+            List[(int)STATUS_ENUM.STR].AddPoint = (int)db.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)];
+            List[(int)STATUS_ENUM.AGI].AddPoint = (int)db.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.AGI)];
+            List[(int)STATUS_ENUM.VIT].AddPoint = (int)db.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.VIT)];
+            List[(int)STATUS_ENUM.DEX].AddPoint = (int)db.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.DEX)];
+            List[(int)STATUS_ENUM.INT].AddPoint = (int)db.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.INT)];
+            List[(int)STATUS_ENUM.LUK].AddPoint = (int)db.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.LUK)];
         }
     }
 }

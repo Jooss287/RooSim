@@ -102,12 +102,13 @@ namespace RooStatsSim
             };
 
 
-
             RoosimContainer.Children.Add(_menu);
             RoosimContainer.Children.Add(_status);
             RoosimContainer.Children.Add(_stack_buff);
             RoosimContainer.Children.Add(_equip);
             RoosimContainer.Children.Add(_damage_check);
+
+            _user_data.CalcUserData();
         }
 
         #region UI Setting
