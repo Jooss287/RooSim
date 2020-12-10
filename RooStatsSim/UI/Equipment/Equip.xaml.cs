@@ -96,7 +96,8 @@ namespace RooStatsSim.UI.Equipment
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
             _user_data.Equip.List[(int)now_selected_equip_type].Equip = MainWindow._roo_db.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[now_selected_equip_type]][item.Id];
-            GetEquipTypeItem(now_selected_equip_type).Header = item.Name;
+            _user_data.Equip.List[(int)now_selected_equip_type].Refine = item.Refine;
+            GetEquipTypeItem(now_selected_equip_type).Header = string.Format("+{0} {1}",item.Refine, item.Name);
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
 
             CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, now_selected_equip_type);
