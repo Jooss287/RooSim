@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using RooStatsSim.DB;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
+using System.Windows.Threading;
 using System.IO;
-
-using RooStatsSim.DB.Table;
 using System.Linq;
+
+using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
+
 
 namespace RooStatsSim.UI.Manager
 {
@@ -38,7 +42,28 @@ namespace RooStatsSim.UI.Manager
 
             SetComboBox();
         }
+        public bool IsNumeric(string source)
+        {
+            Regex regex = new Regex("[^0-9.-]+");
+            return !regex.IsMatch(source);
+        }
+        private void NurmericCheckFunc(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsNumeric(e.Text);
+        }
 
+        private void TxtboxSelectAll(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.CurrentDispatcher.BeginInvoke(
+                DispatcherPriority.ContextIdle,
+                new Action(
+                    delegate
+                    {
+                        (sender as TextBox).SelectAll();
+                    }
+                )
+            );
+        }
         #region Initialize UI Binding
         void InitUIsetting()
         {
@@ -532,6 +557,7 @@ namespace RooStatsSim.UI.Manager
 
             SetNowItemOption();
             AddType.SelectedIndex = 0;
+            PerValue.Text = null;
             AddValue.Text = null;
         }
 
@@ -600,8 +626,7 @@ namespace RooStatsSim.UI.Manager
             int refine = (OptionList.SelectedItem as ItemOption_Refine_Binding).Refine;
             string type_name = (OptionList.SelectedItem as ItemOption_Refine_Binding).Type_name;
             ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-            Dictionary<string, double> item_option = GetItemOptionDictionary(type);
-            item_option.Remove(type_name);
+            now_item.Refine_Option[refine][type].Remove(type_name);
 
             SetNowItemOption();
         }

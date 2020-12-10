@@ -96,8 +96,7 @@ namespace RooStatsSim.UI.StatusWindow
         }
         void AddType(UserData user_data, ITYPE type)
         {
-            string eng = Enum.GetName(typeof(ITYPE), type);
-            this.Add(new AbilityBinding<double>(eng, user_data.User_Item.Option_ITYPE[Enum.GetName(typeof(ITYPE), type)], 0, Enum.GetName(typeof(ITYPE), type)));
+            Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.ITYPE_KOR[type], user_data.User_Item.Option_ITYPE[Enum.GetName(typeof(ITYPE), type)], 0, Enum.GetName(typeof(ITYPE), type)));
         }
     }
 
