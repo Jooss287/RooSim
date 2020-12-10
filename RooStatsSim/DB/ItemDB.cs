@@ -119,7 +119,7 @@ namespace RooStatsSim.DB
         protected ELEMENT_TYPE _attacker_element;
         protected ELEMENT_TYPE _defenser_element;
         public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
-        protected List<EQUIP_TYPE_ENUM> _set_pos;
+        protected List<EQUIP_TYPE_ENUM> _set_pos = new List<EQUIP_TYPE_ENUM>();
 
         protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
         protected List<AbilityPerStatus> _option_if_type;

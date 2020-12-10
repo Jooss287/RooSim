@@ -14,7 +14,7 @@ namespace RooStatsSim.DB
     {
         public Dictionary<int, MonsterDB> _mob_db = new Dictionary<int, MonsterDB>();
         public Dictionary<int, Dictionary<int, ItemDB>> _equip_db = new Dictionary<int, Dictionary<int, ItemDB>>();
-        public Dictionary<string, SetItemDB> _set_equip_db = new Dictionary<string, SetItemDB>();
+        public Dictionary<int, ItemDB> _set_equip_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _card_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _enchant_db = new Dictionary<int, ItemDB>();
         public Dictionary<int, ItemDB> _gear_db = new Dictionary<int, ItemDB>();
@@ -105,7 +105,7 @@ namespace RooStatsSim.DB
                     return Equip_db[(int)EQUIP_DB_ENUM.BACK_DECO]; }
             set { Equip_db[(int)EQUIP_DB_ENUM.BACK_DECO] = value; }
         }
-        public Dictionary<string, SetItemDB> Set_Equip_db
+        public Dictionary<int, ItemDB> Set_Equip_db
         {
             get { return _set_equip_db; }
             set { _set_equip_db = value; }
@@ -167,6 +167,7 @@ namespace RooStatsSim.DB
             SaveDataBase<Dictionary<int, ItemDB>>(DB.Mob_research_db, "Mob_research_db.roo");
             SaveDataBase<Dictionary<int, ItemDB>>(DB.Dress_style_db, "Dress_style_db.roo");
             SaveDataBase<Dictionary<int, ItemDB>>(DB.Sticker_db, "Sticker_db.roo");
+            SaveDataBase<Dictionary<int, ItemDB>>(DB.Set_Equip_db, "Set_Item_db.roo");
             foreach(EQUIP_DB_ENUM db_enum in Enum.GetValues(typeof(EQUIP_DB_ENUM)))
             {
                 string name = Enum.GetName(typeof(EQUIP_DB_ENUM), db_enum);
@@ -200,6 +201,8 @@ namespace RooStatsSim.DB
             if (DB.Dress_style_db == null) DB.Dress_style_db = new Dictionary<int, ItemDB>();
             DB.Sticker_db = LoadDataBase<Dictionary<int, ItemDB>>("Sticker_db.roo");
             if (DB.Sticker_db == null) DB.Sticker_db = new Dictionary<int, ItemDB>();
+            DB.Set_Equip_db = LoadDataBase<Dictionary<int, ItemDB>>("Set_Itemdb.roo");
+            if (DB.Set_Equip_db == null) DB.Set_Equip_db = new Dictionary<int, ItemDB>();
             foreach (EQUIP_DB_ENUM db_enum in Enum.GetValues(typeof(EQUIP_DB_ENUM)))
             {
                 string name = Enum.GetName(typeof(EQUIP_DB_ENUM), db_enum);

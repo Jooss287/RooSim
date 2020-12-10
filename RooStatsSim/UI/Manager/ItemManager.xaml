@@ -295,8 +295,7 @@
                             <StackPanel Tag="SET_OPTION" x:Name="SetOptionPanel"
                                         Style="{Binding Source={StaticResource ItemManagerListStackPanel}}">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <ComboBox Name="cmb_set_equips" SelectedIndex="0"
-                                              SelectionChanged="cmb_set_equips_SelectionChanged" VerticalAlignment="Bottom"/>
+                                    <ComboBox Name="cmb_set_equips" SelectedIndex="0" VerticalAlignment="Bottom"/>
                                     <TextBlock Text="세트부위등록" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,0,5,3"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -308,7 +307,7 @@
                                             Click="Add_Set_Equips_Click"/>
                                 </StackPanel>
                                 <ListBox x:Name="list_set_option"
-                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_NameValue}}"/>
+                                         ItemTemplate="{Binding Source={StaticResource DataTemplate_SetNameValue}}"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

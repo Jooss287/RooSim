@@ -34,6 +34,12 @@
         </StackPanel>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type local:SetItemOptionListBox}" x:Key="DataTemplate_SetNameValue">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Path=Type_name}"/>
+        </StackPanel>
+    </DataTemplate>
+
     <Style TargetType="{x:Type StackPanel}" x:Key="ItemManagerListStackPanel">
         <Setter Property="Orientation" Value="Vertical"/>
         <Setter Property="Width" Value="200"/>

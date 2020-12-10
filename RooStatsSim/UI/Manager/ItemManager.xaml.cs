@@ -188,7 +188,7 @@ namespace RooStatsSim.UI.Manager
             list_etc_option.ItemsSource = new ItemOptionListBox(now_item.Option_ETC_TYPE, now_item.Option_ETC_DMG_TYPE);
 
             list_refine_if_option.ItemsSource = new ItemOptionRefineListBox(now_item.Refine_Option);
-            list_set_option.ItemsSource = new itemoption
+            list_set_option.ItemsSource = new SetItemOptionListBox(now_item.SetPosition);
         }
         void InitializeContents()
         {
@@ -198,6 +198,7 @@ namespace RooStatsSim.UI.Manager
                 now_item.Id = now_DB.Count;
 
             now_item.Name = "";
+            now_item.SetName = "";
             now_item.ImageName = "";
             now_item.LevelLimit = 0;
             now_item.CardSlot = 0;
@@ -206,6 +207,7 @@ namespace RooStatsSim.UI.Manager
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
             now_item.Wear_job_limit.Clear();
             now_item.Option_IF_TYPE.Clear();
+            now_item.SetPosition.Clear();
             
             foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string,double>> item_option in now_item.Option)
             {
@@ -249,6 +251,8 @@ namespace RooStatsSim.UI.Manager
                     return _DB.Enchant_db;
                 case ITEM_TYPE_ENUM.GEAR:
                     return _DB.Gear_db;
+                case ITEM_TYPE_ENUM.SET_OPTION:
+                    return _DB.Set_Equip_db;
             }
 
             return null;
@@ -586,13 +590,7 @@ namespace RooStatsSim.UI.Manager
         }
 
         #endregion
-
-        private void Item_image_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if ((sender as ComboBox).SelectedItem != null)
-                now_item.ImageName = (sender as ComboBox).SelectedItem.ToString();
-        }
-
+        #region Set items option callback
         private void Del_Set_Equips_Click(object sender, RoutedEventArgs e)
         {
             StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
@@ -601,11 +599,9 @@ namespace RooStatsSim.UI.Manager
             if (OptionList.SelectedItem == null)
                 return;
 
-            string type_name = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
-            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-            Dictionary<string, double> item_option = GetItemOptionDictionary(type);
-            item_option.Remove(type_name);
-
+            string type_name_kor = (OptionList.SelectedItem as SetItemOption_Binding).Type_name;
+            EQUIP_TYPE_ENUM type = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR.FirstOrDefault(x => x.Value == type_name_kor).Key;
+            now_item.SetPosition.Remove(type);
             SetNowItemOption();
         }
 
@@ -620,9 +616,16 @@ namespace RooStatsSim.UI.Manager
 
             EQUIP_TYPE_ENUM type = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR.FirstOrDefault(x => x.Value == type_name_kor).Key;
             now_item.SetPosition.Add(type);
+            now_item.SetName = now_item.Name;
 
             SetNowItemOption();
             AddType.SelectedIndex = 0;
+        }
+        #endregion
+        private void Item_image_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ComboBox).SelectedItem != null)
+                now_item.ImageName = (sender as ComboBox).SelectedItem.ToString();
         }
     }
 }
