@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
-using System.Windows.Controls;
 
 using RooStatsSim.DB;
+using RooStatsSim.Extension;
 
 namespace RooStatsSim.UI.Equipment
 {
@@ -67,11 +67,19 @@ namespace RooStatsSim.UI.Equipment
         }
         void GetImage()
         {
-            if (_image_name == null)
-                return;
+            
+            //if ((_image_name == null) || (_image_name == ""))
+            //{
+            //    string filename = "Resources/image-not-found1.png";
+            //    Image_Char.Source = new BitmapImage(ResourceExtension.GetUri(filename));
+            //}
+            //else
+            //{
+
+            //}
 
             var path = System.IO.Path.Combine(Environment.CurrentDirectory, "Img", _image_name);
-            _image = new BitmapImage(new Uri(path));
+            _image = new BitmapImage(ResourceExtension.GetUri(path));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

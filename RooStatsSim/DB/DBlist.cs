@@ -214,7 +214,7 @@ namespace RooStatsSim.DB
         }
         public static T LoadDataBase<T>(string name)
         {
-            if (!IsFileAvailable(file_relative_root + name))
+            if (!ResourceExtension.IsFileExists(file_relative_root + name))
             {
                 return default;
             }
@@ -227,15 +227,6 @@ namespace RooStatsSim.DB
             string jsonString = File.ReadAllText(file_relative_root + name);
             T DB = JsonSerializer.Deserialize<T>(jsonString, serializeOptions);
             return DB;
-        }
-        
-        public static bool IsFileAvailable(string name)
-        {
-            FileInfo fi = new FileInfo(name);
-            if (fi.Exists)
-                return true;
-            else
-                return false;
         }
     }
 }

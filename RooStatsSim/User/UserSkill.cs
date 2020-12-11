@@ -79,7 +79,7 @@ namespace RooStatsSim.User
                 if (_name == null)
                     return;
                 string resource_name = "Resources/Skills/" + _name + ".png";
-                _image = new BitmapImage(ResourceExtension.GetUri(resource_name));
+                _image = new BitmapImage(ResourceExtension.GetAssemblyUri(resource_name));
             }
 
             public event PropertyChangedEventHandler PropertyChanged;

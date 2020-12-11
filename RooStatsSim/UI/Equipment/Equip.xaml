@@ -173,9 +173,7 @@
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
                                         <StackPanel Orientation="Vertical" Margin="8">
-                                            <Border BorderThickness="2" BorderBrush="Black">
                                             <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
-                                            </Border>
                                         </StackPanel>
                                     </ContentControl>
                                 </DataTemplate>

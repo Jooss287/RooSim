@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace RooStatsSim.Extension
 {
     class ResourceExtension
     {
         const string image_not_found = "Resources/image-not-found.png";
-        public static Uri GetUri(string resourceName)
+        public static Uri GetUri(string imageName)
+        {
+            if (IsFileExists(imageName))
+                return new Uri(imageName);
+            else
+                return GetResourceUri(null, image_not_found);
+        }
+        public static bool IsFileExists(string imagePath)
+        {
+            FileInfo fi = new FileInfo(imagePath);
+            if (fi.Exists)
+                return true;
+            else
+                return false;
+        }
+        #region Assembly Resource
+        public static Uri GetAssemblyUri(string resourceName)
         {
             if (ResourceExists(resourceName))
                 return GetResourceUri(null, resourceName);
@@ -63,5 +78,6 @@ namespace RooStatsSim.Extension
                 return new Uri(string.Format("pack://application:,,,/{0};component/{1}", assemblyName, resourcePath));
             }
         }
+        #endregion
     }
 }

@@ -23,7 +23,7 @@ namespace RooStatsSim.User
 
         public static void ReadDB(ref UserData User)
         {
-            if (!IsFileAvailable())
+            if (!ResourceExtension.IsFileExists(file_name))
             {
                 User = new UserData();
                 return;
@@ -37,15 +37,6 @@ namespace RooStatsSim.User
 
             string jsonString = File.ReadAllText(file_name);
             User = JsonSerializer.Deserialize<UserData>(jsonString, serializeOptions);
-        }
-
-        public static bool IsFileAvailable()
-        {
-            FileInfo fi = new FileInfo(file_name);
-            if (fi.Exists)
-                return true;
-            else
-                return false;
         }
     }
 }
