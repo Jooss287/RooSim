@@ -34,11 +34,11 @@ namespace RooStatsSim.User
 
             foreach (AbilityPerStatus ability in b.Option_IF_TYPE)
                 a.Option_IF_TYPE.Add(new AbilityPerStatus(ability));
-            foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> refine_num in b.Refine_Option)
+            foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> refine_num in b.Option_Refine)
             {
-                if (a.Refine_Option.ContainsKey(refine_num.Key) == false)
-                    a.Refine_Option.Add(refine_num.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
-                AddOption(a.Refine_Option[refine_num.Key], b.Refine_Option[refine_num.Key]);
+                if (a.Option_Refine.ContainsKey(refine_num.Key) == false)
+                    a.Option_Refine.Add(refine_num.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+                AddOption(a.Option_Refine[refine_num.Key], b.Option_Refine[refine_num.Key]);
             }
             return a;
         }

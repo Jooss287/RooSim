@@ -47,13 +47,14 @@ namespace RooStatsSim.DB
             Option_TRIBE_REG_TYPE = new Dictionary<string, double>(item_db.Option_TRIBE_REG_TYPE);
             Option_ETC_DMG_TYPE = new Dictionary<string, double>(item_db.Option_ETC_DMG_TYPE);
             Option_ETC_TYPE = new Dictionary<string, double>(item_db.Option_ETC_TYPE);
+            Option_Skill = new Dictionary<string, double>(item_db.Option_Skill);
             
-            foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option in item_db.Refine_Option)
+            foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option in item_db.Option_Refine)
             {
-                Refine_Option.Add(option.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+                Option_Refine.Add(option.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
                 foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in option.Value)
                 {
-                    Refine_Option[option.Key].Add(item_option.Key, new Dictionary<string, double>(item_option.Value));
+                    Option_Refine[option.Key].Add(item_option.Key, new Dictionary<string, double>(item_option.Value));
                 }
             }
         }
@@ -76,7 +77,8 @@ namespace RooStatsSim.DB
 
         protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
         protected List<AbilityPerStatus> _option_if_type;
-        protected Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> _refine_option;
+        protected Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> _option_refine;
+        protected Dictionary<string, double> _option_skill;
 
         #region operator overriding
         public static ItemDB operator +(ItemDB a, ItemDB b)
@@ -199,14 +201,24 @@ namespace RooStatsSim.DB
             }
             set { _option_if_type = value; }
         }
-        public Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> Refine_Option
+        public Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> Option_Refine
         {
             get {
-                if (_refine_option == null)
-                    _refine_option = new Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>>();
-                return _refine_option; 
+                if (_option_refine == null)
+                    _option_refine = new Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>>();
+                return _option_refine; 
             }
-            set { _refine_option = value; }
+            set { _option_refine = value; }
+        }
+        public Dictionary<string, double> Option_Skill
+        {
+            get
+            {
+                if (_option_skill == null)
+                    _option_skill = new Dictionary<string, double>();
+                return _option_skill;
+            }
+            set { _option_skill = value; }
         }
         public ITEM_TYPE_ENUM Item_type
         {
