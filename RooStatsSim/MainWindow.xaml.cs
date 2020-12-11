@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Threading;
+using System.IO;
 
 using RooStatsSim.DB;
 using RooStatsSim.User;
@@ -16,6 +12,7 @@ using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.UI.MonsterDamage;
 using RooStatsSim.UI.SkillWindow;
+using RooStatsSim.Extension;
 using MDIXWindow;
 using WPF.MDI;
 
@@ -28,12 +25,15 @@ namespace RooStatsSim
         STACK_BUFF,
         EQUIP,
         DAMAGE_CHECK,
+        SKILL,
+        ADDITIONAL_BUFF,
     };
     public partial class MainWindow : Window
     {
         public static DBlist _roo_db;
         public static UserData _user_data;
         public static bool _user_data_edited = false;
+        public static int _user_data_number = 1;
 
         MdiChild _menu;
         MdiChild _status;
@@ -48,15 +48,21 @@ namespace RooStatsSim
         public MainWindow()
         {
             Version();
+            CreateFolder();
 
+            _user_data = new UserData();
             _roo_db = new DBlist();
             DBSerializer.ReadDB(ref _roo_db);
-            _user_data = new UserData();
-            User_Serializer.ReadDB(ref _user_data);
 
             MaterialDesignWindow.RegisterCommands(this);
             InitializeComponent();
 
+            InitializeMDI();
+        }
+
+        #region Initialize
+        private void InitializeMDI()
+        {
             _menu = new MdiChild()
             {
                 Title = "MenuBox",
@@ -84,7 +90,7 @@ namespace RooStatsSim
                 Position = new Point(1204, 0),
                 CloseBox = false,
             };
-            _equip= new MdiChild()
+            _equip = new MdiChild()
             {
                 Title = "장비창",
                 Content = new Equip(),
@@ -119,22 +125,30 @@ namespace RooStatsSim
             RoosimContainer.Children.Add(_equip);
             RoosimContainer.Children.Add(_damage_check);
             RoosimContainer.Children.Add(_skill);
-            
-            _user_data.CalcUserData();
         }
-
-        #region UI Setting
-
+        private void CreateFolder()
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, "Img");
+            ResourceExtension.CreateFolder(path);
+            path = Path.Combine(Environment.CurrentDirectory, "user");
+            ResourceExtension.CreateFolder(path);
+        }
+        #endregion
+        #region UI Callback
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CheckUserDataChanged();
+        }
+        public static void CheckUserDataChanged()
         {
             if (_user_data_edited)
             {
                 MessageBoxResult res = MessageBox.Show("변경사항이 있습니다. 변경하시겠습니까?", "Save", MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.Yes)
-                    User_Serializer.SaveDataBase(ref _user_data);
+                    User_Serializer.SaveDataBase(ref _user_data, _user_data_number);
+                _user_data_edited = false;
             }
         }
-
         private void Version()
         {
             if (ProgramInfo.IsLastestVer())

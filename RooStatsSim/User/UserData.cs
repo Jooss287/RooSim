@@ -60,7 +60,7 @@ namespace RooStatsSim.User
         #region Item Changed Event
         public delegate void UserDataChangedEventHandler();
         public event UserDataChangedEventHandler itemDataChanged;
-        public void CalcUserData()
+        public void CalcUserData(bool _new_edit = true)
         {
             UserItem CalcUserItem = new UserItem(true);
 
@@ -82,9 +82,8 @@ namespace RooStatsSim.User
             User_Item.CalcIftypeValues(this);
 
             User_Item = CalcUserItem;
-            if (itemDataChanged != null)
-                itemDataChanged();
-            MainWindow._user_data_edited = true;
+            itemDataChanged?.Invoke();
+            MainWindow._user_data_edited = _new_edit;
         }
         #endregion
 

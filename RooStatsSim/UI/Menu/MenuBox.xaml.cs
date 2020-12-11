@@ -1,29 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-using RooStatsSim;
-using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
-using RooStatsSim.Equation.Job;
-using RooStatsSim.UI.StatusWindow;
 using RooStatsSim.UI.Manager;
 using RooStatsSim.UI.ACK;
 using RooStatsSim.User;
-using RooStatsSim.UI.StackBuff;
-using RooStatsSim.UI.Equipment;
-using RooStatsSim.UI.SkillWindow;
 using WPF.MDI;
 
 namespace RooStatsSim.UI.Menu
@@ -40,9 +22,11 @@ namespace RooStatsSim.UI.Menu
             _user_data = MainWindow._user_data;
             InitializeComponent();
             _parents = parents;
+
+            DataContext = new CheckboxBinding();
         }
 
-
+        #region UI callbacks
         private void job_sel_Click(object sender, RoutedEventArgs e)
         {
             if (_parents != null)
@@ -93,10 +77,16 @@ namespace RooStatsSim.UI.Menu
         }
         private void Skill_window_Click(object sender, RoutedEventArgs e)
         {
-
+            TurnOnOff(WINDOW_ENUM.SKILL);
         }
-        
-
+        private void UserSave_Checked(object sender, RoutedEventArgs e)
+        {
+            MainWindow.CheckUserDataChanged();
+            _user_data.Initializor();
+            User_Serializer.ReadDB(ref _user_data, Convert.ToInt32((sender as RadioButton).Tag));
+            _user_data.CalcUserData();
+        }
+        #endregion
         #region Window Modal
         private void DBManager_window_Click(object sender, RoutedEventArgs e)
         {
@@ -120,8 +110,9 @@ namespace RooStatsSim.UI.Menu
             if (_parents._info.ShowDialog() == true) { }
             _parents._info = null;
         }
+
         #endregion
 
-
+        
     }
 }

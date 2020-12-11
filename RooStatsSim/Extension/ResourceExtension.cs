@@ -25,6 +25,12 @@ namespace RooStatsSim.Extension
             else
                 return false;
         }
+        public static void CreateFolder(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            if (di.Exists == false)
+                di.Create();
+        }
         #region Assembly Resource
         public static Uri GetAssemblyUri(string resourceName)
         {

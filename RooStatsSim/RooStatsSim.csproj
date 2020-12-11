@@ -179,6 +179,7 @@
     <Compile Include="UI\Manager\MonsterManager.xaml.cs">
       <DependentUpon>MonsterManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Menu\CheckboxBinding.cs" />
     <Compile Include="UI\Menu\MenuBox.xaml.cs">
       <DependentUpon>MenuBox.xaml</DependentUpon>
     </Compile>
