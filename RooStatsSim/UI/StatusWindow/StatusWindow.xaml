@@ -23,18 +23,23 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Margin="0,5"
+                                <Grid Margin="15,10,0,0"
                                         MouseLeftButtonDown="LevelUp_Click"
                                         MouseRightButtonDown="LevelDown_Click"
                                         MouseWheel="Level_MouseWheel">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="45"/>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" 
                                            FontSize="15" FontWeight="Bold" 
-                                           Margin="15,0,0,0" />
+                                           Grid.Column="0"/>
                                     <TextBlock Text="{Binding Path=Point, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="15" FontWeight="Bold" 
                                            HorizontalAlignment="Center" 
-                                           Margin="15,0,0,0" />
-                                    <Border Background="Blue" CornerRadius="2" Width="15" Height="15" Margin="5,0,0,0">
+                                           Grid.Column="1"/>
+                                    <Border Background="Blue" CornerRadius="2" Width="15" Height="15" Margin="5,0,0,0" Grid.Column="2">
                                         <Path Stretch="Fill"
                                           Fill="white"
                                           Stroke="{x:Null}"
@@ -42,7 +47,7 @@
                                           Data="M3.875,0 L5.125,0 5.125,3.875 9,3.875 9,5.125 5.125,5.125 5.125,9 3.875,9 3.875,5.125 0,5.125 0,3.875 3.875,3.875 3.875,0 z"
                                           Margin="3,3,3,3"/>
                                     </Border>
-                                </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

@@ -21,9 +21,10 @@ namespace RooStatsSim.UI.StatusWindow
         NormalPropertyList normalPropertyList;
         AdvancedPropertyList advancedPropertyList;
         SpecialPropertyList specialPropertyList;
+
+        #region Initialize
         public StatusWindow()
         {
-            //DB가 레퍼로 들어왔다 치고.
             user_data = MainWindow._user_data;
             user_data.itemDataChanged += new UserData.UserDataChangedEventHandler(CalcStatusProperty);
 
@@ -33,7 +34,6 @@ namespace RooStatsSim.UI.StatusWindow
             
             CalcStatusProperty();
         }
-
         void CalcStatusProperty()
         {
             bindingLevel = new LevelList(ref user_data);
@@ -48,7 +48,31 @@ namespace RooStatsSim.UI.StatusWindow
             specialPropertyList = new SpecialPropertyList(ref user_data);
             SpecialProperty.ItemsSource = specialPropertyList;
         }
+        #endregion
+        #region Status Point
+        private void StatusUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            StatusPointUp(dataCxtx, 1);
+        }
 
+        private void StatusDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            StatusPointDown(dataCxtx, 1);
+        }
+        private void Status_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            var tb = sender as StackPanel;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+
+            if (e.Delta < 0)
+                StatusPointDown(dataCxtx, 1);
+            else
+                StatusPointUp(dataCxtx, 1);
+        }
         void StatusPointUp(AbilityBinding<int> dataCxtx, int changeValue)
         {
             if (dataCxtx == null)
@@ -80,6 +104,32 @@ namespace RooStatsSim.UI.StatusWindow
             }
             user_data.CalcUserData();
         }
+        #endregion
+        #region Level Point
+        private void LevelUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as Grid;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            LevelChange(dataCxtx, 1);
+        }
+
+        private void LevelDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var tb = sender as Grid;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            LevelChange(dataCxtx, -1);
+        }
+
+        private void Level_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            var tb = sender as Grid;
+            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
+            int value = 1;
+            if (e.Delta < 0)
+                value = -1;
+
+            LevelChange(dataCxtx, value);
+        }
 
         void LevelChange(AbilityBinding<int> dataCxtx, int changeValue)
         {
@@ -94,58 +144,6 @@ namespace RooStatsSim.UI.StatusWindow
                 user_data.Job_Level.Point += changeValue;
 
             user_data.CalcUserData();
-        }
-
-        #region Mouse reaction func
-        private void StatusUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            StatusPointUp(dataCxtx, 1);
-        }
-
-        private void StatusDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            StatusPointDown(dataCxtx, 1);
-        }
-
-        private void LevelUp_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            LevelChange(dataCxtx, 1);
-        }
-
-        private void LevelDown_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            LevelChange(dataCxtx, -1);
-        }
-
-        private void Level_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
-        {
-            var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            int value = 1;
-            if (e.Delta < 0)
-                value = -1;
-
-            LevelChange(dataCxtx, value);
-
-        }
-
-        private void Status_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
-        {
-            var tb = sender as StackPanel;
-            AbilityBinding<int> dataCxtx = tb.DataContext as AbilityBinding<int>;
-            
-            if (e.Delta < 0)
-                StatusPointDown(dataCxtx, 1);
-            else
-                StatusPointUp(dataCxtx, 1);
         }
         #endregion
     }
