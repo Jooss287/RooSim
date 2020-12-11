@@ -124,28 +124,6 @@ namespace RooStatsSim
         }
 
         #region UI Setting
-        public bool IsNumeric(string source)
-        {
-            Regex regex = new Regex("[^0-9.-]+");
-            return !regex.IsMatch(source);
-        }
-        private void NurmericCheckFunc(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsNumeric(e.Text);
-        }
-
-        private void TxtboxSelectAll(object sender, RoutedEventArgs e)
-        {
-            Dispatcher.CurrentDispatcher.BeginInvoke(
-                DispatcherPriority.ContextIdle,
-                new Action(
-                    delegate
-                    {
-                        (sender as TextBox).SelectAll();
-                    }
-                )
-            );
-        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

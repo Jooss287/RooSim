@@ -61,8 +61,6 @@ namespace RooStatsSim.UI.Manager
             now_mob.Hit = 0;
             now_mob.Flee = 0;
         }
-        #endregion
-
         void InitUIsetting()
         {
             foreach (TRIBE_TYPE option in Enum.GetValues(typeof(TRIBE_TYPE)))
@@ -87,7 +85,7 @@ namespace RooStatsSim.UI.Manager
             }
             cmb_monster_type.SelectedIndex = (int)MONSTER_KINDS_TYPE.NORMAL;
         }
-
+        #endregion
         #region To pass mainwindow
         private bool _isNew = false;
         public bool IsNew
@@ -96,7 +94,6 @@ namespace RooStatsSim.UI.Manager
             set { _isNew = value; }
         }
         #endregion
-
         #region UI Binding, Contents settings
         private void New_DB_Click(object sender, RoutedEventArgs e)
         {

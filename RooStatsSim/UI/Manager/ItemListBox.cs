@@ -46,7 +46,7 @@ namespace RooStatsSim.UI.Manager
         }
         public int Count
         {
-            get { return Option.Count + Option_IF_TYPE.Count + Refine_Option.Count; }
+            get { return Option.Count + Option_IF_TYPE.Count + Option_Refine.Count; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -74,7 +74,8 @@ namespace RooStatsSim.UI.Manager
             Wear_job_limit = param.Wear_job_limit;
             Option = param.Option;
             Option_IF_TYPE = param.Option_IF_TYPE;
-            Refine_Option = param.Refine_Option;
+            Option_Refine = param.Option_Refine;
+            Option_Skill = param.Option_Skill;
         }
     }
 

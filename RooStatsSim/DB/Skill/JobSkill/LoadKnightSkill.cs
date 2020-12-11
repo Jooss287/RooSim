@@ -30,25 +30,25 @@ namespace RooStatsSim.DB.Skill.JobSkill
     }
     public class LoadKnightSkill
     {
-        public static Dictionary<LOADKNIGHT_SKILL, string> SWORDMAN_SKILL_KOR = new Dictionary<LOADKNIGHT_SKILL, string>()
+        public static Dictionary<string, string> SKILL_KOR = new Dictionary<string, string>()
         {
-            {LOADKNIGHT_SKILL.SPEAR_MASTERY, "스피어 마스터리" },
-            {LOADKNIGHT_SKILL.PIERCE, "피어스" },
-            {LOADKNIGHT_SKILL.BRANDISH_SPEAR, "브랜디쉬 스피어" },
-            {LOADKNIGHT_SKILL.SPEAR_BOOMERANG, "스피어 부메랑" },
-            {LOADKNIGHT_SKILL.CHARGE_ATTACK, "차지 어택" },
-            {LOADKNIGHT_SKILL.SOLID_BLOW, "견고한 타격" },
-            {LOADKNIGHT_SKILL.RYAN_RAPIDS, "라이언 래피드" },
-            {LOADKNIGHT_SKILL.SWORD_QUIKEN, "소드 퀴큰" },
-            {LOADKNIGHT_SKILL.BOWLING_BASH, "볼링 배쉬" },
-            {LOADKNIGHT_SKILL.VANGUARD_CHASE, "뱅가드 체이스" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.SPEAR_MASTERY), "스피어 마스터리" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.PIERCE), "피어스" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.BRANDISH_SPEAR), "브랜디쉬 스피어" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.SPEAR_BOOMERANG), "스피어 부메랑" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.CHARGE_ATTACK), "차지 어택" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.SOLID_BLOW), "견고한 타격" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.RYAN_RAPIDS), "라이언 래피드" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.SWORD_QUIKEN), "소드 퀴큰" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.BOWLING_BASH), "볼링 배쉬" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.VANGUARD_CHASE), "뱅가드 체이스" },
 
-            {LOADKNIGHT_SKILL.CONCENTRATION, "컨센트레이션" },
-            {LOADKNIGHT_SKILL.HEAD_CRUSH, "헤드 크러쉬" },
-            {LOADKNIGHT_SKILL.VITAL_STRIKE, "조인트 비트" },
-            {LOADKNIGHT_SKILL.SPIRAL_PIERCE, "스파이럴 피어스" },
-            {LOADKNIGHT_SKILL.AURA_BALDE, "오라 블레이드" },
-            {LOADKNIGHT_SKILL.BERSERK, "버서크" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.CONCENTRATION), "컨센트레이션" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.HEAD_CRUSH), "헤드 크러쉬" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.VITAL_STRIKE), "조인트 비트" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.SPIRAL_PIERCE), "스파이럴 피어스" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.AURA_BALDE), "오라 블레이드" },
+            {Enum.GetName(typeof(LOADKNIGHT_SKILL),LOADKNIGHT_SKILL.BERSERK), "버서크" },
         };
         public Dictionary<string, SkillInfo> Skill { get; set; }
         public LoadKnightSkill()
@@ -56,7 +56,7 @@ namespace RooStatsSim.DB.Skill.JobSkill
             Skill = new Dictionary<string, SkillInfo>();
             foreach (string name in Enum.GetNames(typeof(LOADKNIGHT_SKILL)))
             {
-                Skill.Add(name, new SkillInfo(name, SWORDMAN_SKILL_KOR[(LOADKNIGHT_SKILL)Enum.Parse(typeof(LOADKNIGHT_SKILL), name)]));
+                Skill.Add(name, new SkillInfo(name, SKILL_KOR[name]));
             }
             //스피어 마스터리
             Skill[Enum.GetName(typeof(LOADKNIGHT_SKILL), LOADKNIGHT_SKILL.SPEAR_MASTERY)].MAX_LV = 10;

@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using RooStatsSim.DB;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
+using System.Windows.Threading;
 using System.IO;
-
-using RooStatsSim.DB.Table;
 using System.Linq;
+
+using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
+using RooStatsSim.DB.Skill;
+using RooStatsSim.DB.Skill.JobSkill;
+using RooStatsSim.UI.SkillWindow;
+
 
 namespace RooStatsSim.UI.Manager
 {
@@ -38,7 +45,28 @@ namespace RooStatsSim.UI.Manager
 
             SetComboBox();
         }
+        public bool IsNumeric(string source)
+        {
+            Regex regex = new Regex("[^0-9.-]+");
+            return !regex.IsMatch(source);
+        }
+        private void NurmericCheckFunc(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsNumeric(e.Text);
+        }
 
+        private void TxtboxSelectAll(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.CurrentDispatcher.BeginInvoke(
+                DispatcherPriority.ContextIdle,
+                new Action(
+                    delegate
+                    {
+                        (sender as TextBox).SelectAll();
+                    }
+                )
+            );
+        }
         #region Initialize UI Binding
         void InitUIsetting()
         {
@@ -176,6 +204,14 @@ namespace RooStatsSim.UI.Manager
             
             //Refine
             cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.REFINE_TYPE_KOR[REFINE_TYPE.REFINE]);
+
+            {
+                foreach (KeyValuePair<string, SkillInfo> skill in SkillWindow.SkillWindow._swordman_skill.Skill)
+                    cmb_skill_option.Items.Add(SwordmanSkill.SKILL_KOR[skill.Key]);
+                foreach (KeyValuePair<string, SkillInfo> skill in SkillWindow.SkillWindow._loadknight_skill.Skill)
+                    cmb_skill_option.Items.Add(LoadKnightSkill.SKILL_KOR[skill.Key]);
+            }
+            
         }
         void SetNowItemOption()
         {
@@ -194,8 +230,9 @@ namespace RooStatsSim.UI.Manager
             list_mobtype_option.ItemsSource = new ItemOptionListBox(now_item.Option_MONSTER_KINDS_DMG_TYPE, now_item.Option_MONSTER_KINDS_REG_TYPE);
             list_etc_option.ItemsSource = new ItemOptionListBox(now_item.Option_ETC_TYPE, now_item.Option_ETC_DMG_TYPE);
 
-            list_refine_if_option.ItemsSource = new ItemOptionRefineListBox(now_item.Refine_Option);
+            list_refine_if_option.ItemsSource = new ItemOptionRefineListBox(now_item.Option_Refine);
             list_set_option.ItemsSource = new SetItemOptionListBox(now_item.SetPosition);
+            list_skill_option.ItemsSource = new ItemOptionListBox(now_item.Option_Skill);
         }
         void InitializeContents()
         {
@@ -215,12 +252,13 @@ namespace RooStatsSim.UI.Manager
             now_item.Wear_job_limit.Clear();
             now_item.Option_IF_TYPE.Clear();
             now_item.SetPosition.Clear();
+            now_item.Option_Skill.Clear();
             
             foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string,double>> item_option in now_item.Option)
             {
                 item_option.Value.Clear();
             }
-            foreach(KeyValuePair<int,Dictionary<ITEM_OPTION_TYPE, Dictionary<string,double>>> refine in now_item.Refine_Option)
+            foreach(KeyValuePair<int,Dictionary<ITEM_OPTION_TYPE, Dictionary<string,double>>> refine in now_item.Option_Refine)
             {
                 foreach (KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in refine.Value)
                     item_option.Value.Clear();
@@ -532,6 +570,7 @@ namespace RooStatsSim.UI.Manager
 
             SetNowItemOption();
             AddType.SelectedIndex = 0;
+            PerValue.Text = null;
             AddValue.Text = null;
         }
 
@@ -577,12 +616,12 @@ namespace RooStatsSim.UI.Manager
             string type_name = AddType.SelectedItem.ToString();
             double add_value = Convert.ToDouble(AddValue.Text);
             ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-            if (now_item.Refine_Option.ContainsKey(refine) == false)
-                now_item.Refine_Option.Add(refine, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+            if (now_item.Option_Refine.ContainsKey(refine) == false)
+                now_item.Option_Refine.Add(refine, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
 
-            if (now_item.Refine_Option[refine].ContainsKey(type) == false)
-                now_item.Refine_Option[refine].Add(type, new Dictionary<string, double>());
-            now_item.Refine_Option[refine][type][type_name] = add_value;
+            if (now_item.Option_Refine[refine].ContainsKey(type) == false)
+                now_item.Option_Refine[refine].Add(type, new Dictionary<string, double>());
+            now_item.Option_Refine[refine][type][type_name] = add_value;
 
             SetNowItemOption();
             AddType.SelectedIndex = 0;
@@ -600,8 +639,7 @@ namespace RooStatsSim.UI.Manager
             int refine = (OptionList.SelectedItem as ItemOption_Refine_Binding).Refine;
             string type_name = (OptionList.SelectedItem as ItemOption_Refine_Binding).Type_name;
             ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
-            Dictionary<string, double> item_option = GetItemOptionDictionary(type);
-            item_option.Remove(type_name);
+            now_item.Option_Refine[refine][type].Remove(type_name);
 
             SetNowItemOption();
         }
@@ -639,7 +677,55 @@ namespace RooStatsSim.UI.Manager
             AddType.SelectedIndex = 0;
         }
         #endregion
+        #region Skill option callback
+        private void Add_Skill_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            StackPanel OptionStack = parentStackpanel.Children[0] as StackPanel;
 
-        
+            ComboBox AddType = OptionStack.Children[0] as ComboBox;
+            TextBox AddValue = OptionStack.Children[1] as TextBox;
+
+            if (AddValue.Text == "")
+                return;
+            if (Convert.ToInt32(AddValue.Text) == 0)
+                return;
+
+            string type_name_kor = AddType.SelectedItem.ToString();
+            double add_value = Convert.ToDouble(AddValue.Text);
+
+            string type_name = GetSkillName(type_name_kor);
+            now_item.Option_Skill[type_name] = add_value;
+
+            SetNowItemOption();
+            AddType.SelectedIndex = 0;
+            AddValue.Text = null;
+        }
+
+        private void Del_Skill_Option_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel parentStackpanel = ((sender as Button).Parent as StackPanel).Parent as StackPanel;
+            ListBox OptionList = parentStackpanel.Children[2] as ListBox;
+
+            if (OptionList.SelectedItem == null)
+                return;
+
+            string type_name = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
+            now_item.Option_Skill.Remove(type_name);
+
+            SetNowItemOption();
+        }
+        private string GetSkillName(string skill_name_kor)
+        {
+            string skill_name = null;
+            skill_name = SwordmanSkill.SKILL_KOR.FirstOrDefault(x => x.Value == skill_name_kor).Key;
+            if (skill_name != null) return skill_name;
+            skill_name = LoadKnightSkill.SKILL_KOR.FirstOrDefault(x => x.Value == skill_name_kor).Key;
+            if (skill_name != null) return skill_name;
+
+            return null;
+        }
+        #endregion
+
     }
 }

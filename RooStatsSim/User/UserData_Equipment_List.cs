@@ -88,7 +88,7 @@ namespace RooStatsSim.User
             }
             void CalcRefineOption(ref ItemDB db, ItemDB item_db)
             {
-                foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> keyValue in item_db.Refine_Option)
+                foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> keyValue in item_db.Option_Refine)
                 {
                     if (Refine >= keyValue.Key)
                     {

@@ -18,14 +18,14 @@ namespace RooStatsSim.DB.Skill.JobSkill
     }
     public class SwordmanSkill
     {
-        public static Dictionary<SWORDMAN_SKILL, string> SWORDMAN_SKILL_KOR = new Dictionary<SWORDMAN_SKILL, string>()
+        public static Dictionary<string, string> SKILL_KOR = new Dictionary<string, string>()
         {
-            {SWORDMAN_SKILL.CHIVALRY, "기사도" },
-            {SWORDMAN_SKILL.SWORD_MASTERY, "검계열 수련" },
-            {SWORDMAN_SKILL.BASH, "배쉬" },
-            {SWORDMAN_SKILL.MAGNUM_BRAKE, "매그넘 브레이크" },
-            {SWORDMAN_SKILL.PROVOQUE, "프로보크" },
-            {SWORDMAN_SKILL.ENDURE, "인듀어" },
+            {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.CHIVALRY), "기사도" },
+            {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.SWORD_MASTERY), "검계열 수련" },
+            {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.BASH), "배쉬" },
+            {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.MAGNUM_BRAKE), "매그넘 브레이크" },
+            {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.PROVOQUE), "프로보크" },
+            {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.ENDURE), "인듀어" },
         };
         public Dictionary<string, SkillInfo> Skill { get; set; }
         public SwordmanSkill()
@@ -33,7 +33,7 @@ namespace RooStatsSim.DB.Skill.JobSkill
             Skill = new Dictionary<string, SkillInfo>();
             foreach (string name in Enum.GetNames(typeof(SWORDMAN_SKILL)))
             {
-                Skill.Add(name, new SkillInfo(name, SWORDMAN_SKILL_KOR[(SWORDMAN_SKILL)Enum.Parse(typeof(SWORDMAN_SKILL), name)]));
+                Skill.Add(name, new SkillInfo(name, SKILL_KOR[name]));
             }
             //기사도
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.CHIVALRY)].MAX_LV = 1;
