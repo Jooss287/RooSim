@@ -100,7 +100,6 @@ namespace RooStatsSim.User
 
             if (JobDataChanged != null)
                 JobDataChanged();
-            MainWindow._user_data_edited = true;
         }
         #endregion
     }

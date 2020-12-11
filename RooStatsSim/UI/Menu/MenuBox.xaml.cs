@@ -52,6 +52,8 @@ namespace RooStatsSim.UI.Menu
                 { 
                     return;
                 }
+
+                MainWindow._user_data_edited = true;
             }
 
             RadioButton source = e.Source as RadioButton;
