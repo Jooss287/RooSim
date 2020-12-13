@@ -1,6 +1,4 @@
-﻿using RooStatsSim.DB;
-using RooStatsSim.DB.Table;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 
+using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
+using RooStatsSim.User;
 
 namespace RooStatsSim.Equation.Job
 {
@@ -33,12 +34,14 @@ namespace RooStatsSim.Equation.Job
             SelectedJob = param_job;
             Job.ElementAt(GetJobNum).SetSkillInit();
         }
-
+        public void SetUserData(UserData user)
+        {
+            Job.ElementAt(GetJobNum).User = new GetValue(user);
+        }
         public double GetReverseATK(int sATK)
         {
-            return Job.ElementAt(0).CalcReverseATK(sATK);
+            return Job.ElementAt(GetJobNum).CalcReverseATK(sATK);
         }
-
         public double GetMinATK()
         {
             return Job.ElementAt(GetJobNum).CalcATKdamage(CALC_STANDARD.MIN_DAMAGE);

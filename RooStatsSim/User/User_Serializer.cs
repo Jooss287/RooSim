@@ -11,7 +11,7 @@ namespace RooStatsSim.User
         const string default_path = "User\\";
         const string default_file_name = "User";
         const string default_file_extension = ".roo";
-        public static void SaveDataBase(ref UserData User, int file_number = 1)
+        public static void SaveDataBase(UserData User, int file_number = 1)
         {
             string file_name = string.Format("{0}{1}{2}{3}", default_path, default_file_name, file_number, default_file_extension);
             var serializeOptions = new JsonSerializerOptions();
@@ -24,7 +24,7 @@ namespace RooStatsSim.User
             File.WriteAllText(file_name, jsonString);
         }
 
-        public static void ReadDB(ref UserData User, int file_number = 1)
+        public static void ReadDB(UserData User, int file_number = 1)
         {
             string file_name = string.Format("{0}{1}{2}{3}", default_path, default_file_name, file_number, default_file_extension);
             if (!ResourceExtension.IsFileExists(file_name))

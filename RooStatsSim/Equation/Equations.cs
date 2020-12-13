@@ -16,17 +16,14 @@ namespace RooStatsSim.DB
         public Equations(ATTACK_TYPE atk_type=ATTACK_TYPE.MELEE_TYPE)
         {
             attack_type = atk_type;
-            User = new GetValue();
         }
 
         protected readonly ATTACK_TYPE attack_type;
-        //protected Status status = null;
-        protected GetValue User;
+        public GetValue User { get; set; }
         protected bool[] buff_list;
         const double RANDOM_ATK_WEIGHT = 0.1;
 
         #region DB Set Functions
-
         public void SetBuffList(ref bool[] param_buff_list)
         {
             buff_list = param_buff_list;

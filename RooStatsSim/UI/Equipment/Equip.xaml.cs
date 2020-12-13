@@ -36,12 +36,16 @@ namespace RooStatsSim.UI.Equipment
         EQUIP_TYPE_ENUM now_selected_equip_type;
         public Equip()
         {
-            _user_data = MainWindow._user_data;
-            _user_data.JobDataChanged += new UserData.JobChangedEventHandler(JobSelectedEvent);
+            GetUserData();
+            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(JobSelectedEvent);
             this.DataContext = this;
             InitializeComponent();
         }
-
+        void GetUserData()
+        {
+            _user_data = MainWindow._user_data_manager.Data;
+        }
         void JobSelectedEvent()
         {
             string filename = "Resources/image-not-found1.png";
@@ -105,7 +109,7 @@ namespace RooStatsSim.UI.Equipment
             //EnchantList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.ENCHANT, now_selected_equip_type);
 
             ItemSlectorTab.SelectedIndex = 1;
-            _user_data.CalcUserData();
+            MainWindow._user_data_manager.CalcUserData();
         }
         private void Item_RefineWheel(object sender, MouseWheelEventArgs e)
         {
@@ -123,7 +127,7 @@ namespace RooStatsSim.UI.Equipment
 
             _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MainWindow._roo_db.Card_db[item.Id]);
             GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
-            _user_data.CalcUserData();
+            MainWindow._user_data_manager.CalcUserData();
         }
         private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
         {

@@ -33,11 +33,16 @@ namespace RooStatsSim.UI.SkillWindow
 
         public SkillWindow()
         {
-            _user_data = MainWindow._user_data;
-            _user_data.JobDataChanged += new UserData.JobChangedEventHandler(RefrashSkill);
+            GetUserData();
+            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(RefrashSkill);
             InitializeComponent();
 
             RefrashSkill();
+        }
+        void GetUserData()
+        {
+            _user_data = MainWindow._user_data_manager.Data;
         }
         public void RefrashSkill()
         {
@@ -48,7 +53,7 @@ namespace RooStatsSim.UI.SkillWindow
         {
             skill.Level += i;
             if (skill.Detail.OPTION.Count != 0)
-                _user_data.CalcUserData();
+                MainWindow._user_data_manager.CalcUserData();
         }
         private void skill_lv_Wheel(object sender, MouseWheelEventArgs e)
         {

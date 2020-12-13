@@ -27,21 +27,11 @@ namespace RooStatsSim.UI.Menu
             set {
                 if (_point == value)
                     return;
-                bool _new_edit = true;
-                if (_point == 0)
-                    _new_edit = false;
-                ChangeSavePoint((int)value, _new_edit);
+
+                MainWindow._user_data_manager.SetUserData((int)value);
                 _point = value;
                 OnPropertyChanged("Point");
             }
-        }
-
-        void ChangeSavePoint(int save_number, bool _new_edit = true)
-        {
-            MainWindow.CheckUserDataChanged();
-            MainWindow._user_data.Initializor();
-            User_Serializer.ReadDB(ref MainWindow._user_data, save_number);
-            MainWindow._user_data.CalcUserData(_new_edit);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -56,50 +56,5 @@ namespace RooStatsSim.User
             User_Skill = new UserSkill();
             SelectedEnemy = 0;
         }
-        
-        #region Item Changed Event
-        public delegate void UserDataChangedEventHandler();
-        public event UserDataChangedEventHandler itemDataChanged;
-        public void CalcUserData(bool _new_edit = true)
-        {
-            UserItem CalcUserItem = new UserItem(true);
-
-            //직업별 추가 능력치
-            CalcUserItem += User_Skill.GetOption();
-            //Stack Options
-            CalcUserItem += Monster_Research.GetOption();
-            CalcUserItem += Dress_Style.GetOption();
-            CalcUserItem += Sticker.GetOption();
-            CalcUserItem += Medal.GetOption();
-            CalcUserItem += Riding_ability.GetOption();
-            CalcUserItem += Riding_personality.GetOption();
-            //장비 옵션
-            CalcUserItem += Equip.GetOption();
-            //스텟 옵션
-            CalcUserItem.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STATUS_ATK)] = StatusATK.GetStatusATK(ATTACK_TYPE.MELEE_TYPE, this);
-            Status.SetAddStatus(User_Item);
-            //조건부 옵션 계산
-            User_Item.CalcIftypeValues(this);
-
-            User_Item = CalcUserItem;
-            itemDataChanged?.Invoke();
-            MainWindow._user_data_edited = _new_edit;
-        }
-        #endregion
-
-        #region Job Changed Event
-        public delegate void JobChangedEventHandler();
-        public event JobChangedEventHandler JobDataChanged;
-        public void JobChanged(JOB_SELECT_LIST job)
-        {
-            Job = job;
-            JobSelect = new JobSelect(job);
-
-            // Job가 변경되면 설정되어야 할 것들
-
-            if (JobDataChanged != null)
-                JobDataChanged();
-        }
-        #endregion
     }
 }

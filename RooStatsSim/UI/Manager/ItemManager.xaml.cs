@@ -348,7 +348,9 @@ namespace RooStatsSim.UI.Manager
             if (string.Compare(Item_name.Text, "") == 0)
                 return;
 
-            
+            if (cmb_item_type.SelectedIndex == (int)ITEM_TYPE_ENUM.SET_OPTION)
+                now_item.SetName = now_item.Name;
+
             now_DB[now_item.Id] = new ItemDB(now_item);
             BindingItemList.AddList(new ItemDB(now_item));
 
@@ -671,7 +673,6 @@ namespace RooStatsSim.UI.Manager
 
             EQUIP_TYPE_ENUM type = EnumBaseTable_Kor.EQUIP_TYPE_ENUM_KOR.FirstOrDefault(x => x.Value == type_name_kor).Key;
             now_item.SetPosition.Add(type);
-            now_item.SetName = now_item.Name;
 
             SetNowItemOption();
             AddType.SelectedIndex = 0;

@@ -17,7 +17,8 @@ namespace RooStatsSim.UI.StackBuff
         MedalList BindingMedalPoint;
         public StackBuffWindow()
         {
-            _user_data = MainWindow._user_data;
+            GetUserData();
+            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
 
             InitializeComponent();
             DataContext = this;
@@ -29,13 +30,16 @@ namespace RooStatsSim.UI.StackBuff
             BindingMedalPoint = new MedalList(ref _user_data);
             MedalPoint.ItemsSource = BindingMedalPoint;
         }
-
+        void GetUserData()
+        {
+            _user_data = MainWindow._user_data_manager.Data;
+        }
         public int Monster_Research
         {
             get { return _user_data.Monster_Research.Level; }
             set {
                 _user_data.Monster_Research.Level = value;
-                _user_data.CalcUserData();
+                MainWindow._user_data_manager.CalcUserData();
                 OnPropertyChanged("Monster_Research");
             }
         }
@@ -45,7 +49,7 @@ namespace RooStatsSim.UI.StackBuff
             set
             {
                 _user_data.Dress_Style.Level = value;
-                _user_data.CalcUserData();
+                MainWindow._user_data_manager.CalcUserData();
                 OnPropertyChanged("Dress_Style");
             }
         }
@@ -55,14 +59,12 @@ namespace RooStatsSim.UI.StackBuff
             set
             {
                 _user_data.Sticker.Level = value;
-                _user_data.CalcUserData();
+                MainWindow._user_data_manager.CalcUserData();
                 OnPropertyChanged("Sticker");
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        //public override string ToString() => _name;
 
         protected void OnPropertyChanged(string info)
         {
@@ -196,7 +198,7 @@ namespace RooStatsSim.UI.StackBuff
 
             _user_data.Medal.List[(int)medalName] += changingPoint;
             BindingMedalPoint[(int)medalName].Point = _user_data.Medal.List[(int)medalName];
-            _user_data.CalcUserData();
+            MainWindow._user_data_manager.CalcUserData();
         }
 
         void RidingPointChange(RIDING riding, ref RidingList bindingList, AbilityBinding<double> dataCxtx, double changingPoint)
@@ -209,7 +211,7 @@ namespace RooStatsSim.UI.StackBuff
                 changingPoint /= 100;
             riding.List[(int)ridingName] += changingPoint;
             bindingList[(int)ridingName].Point = riding.List[(int)ridingName];
-            _user_data.CalcUserData();
+            MainWindow._user_data_manager.CalcUserData();
         }
 
     }

@@ -15,7 +15,6 @@ namespace RooStatsSim.UI.MonsterDamage
     /// </summary>
     public partial class MonsterDamageCheck : UserControl
     {
-        UserData user_data;
         MonsterDB_Binding now_mob = new MonsterDB_Binding();
         MonsterListBox BindingMobList;
         CalcUserDamageBinding _calc_user_dmamge_binding;
@@ -29,8 +28,7 @@ namespace RooStatsSim.UI.MonsterDamage
             BindingMobList = new MonsterListBox(MainWindow._roo_db.Mob_db);
             DB_ListBox.ItemsSource = BindingMobList;
 
-            user_data = MainWindow._user_data;
-            user_data.itemDataChanged += new UserData.UserDataChangedEventHandler(CalcDamage);
+            MainWindow._user_data_manager.itemDataChanged += new UserDataManager.UserDataChangedEventHandler(CalcDamage);
             CalcDamage();
         }
         void InitializeContents()
@@ -50,13 +48,13 @@ namespace RooStatsSim.UI.MonsterDamage
             now_mob.Hit = 0;
             now_mob.Flee = 0;
         }
-
         void CalcDamage()
         {
             if (now_mob.Name == "")
                 return;
 
-            //JobSelect jobsel = new JobSelect(user_data.Job);
+            UserData user_data = MainWindow._user_data_manager.Data;
+            user_data.JobSelect.SetUserData(user_data);
             int skill_damage = 1;
             
             int calcATK_min = Convert.ToInt32(Math.Floor(user_data.JobSelect.GetMinATK() * skill_damage));
@@ -73,7 +71,7 @@ namespace RooStatsSim.UI.MonsterDamage
             if (temp != null)
             { 
                 now_mob.ChangeValue(temp);
-                user_data.SelectedEnemy = temp.MobId;
+                MainWindow._user_data_manager.Data.SelectedEnemy = temp.MobId;
                 CalcDamage();
             }
         }

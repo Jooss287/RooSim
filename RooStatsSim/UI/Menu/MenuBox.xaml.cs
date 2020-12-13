@@ -15,11 +15,9 @@ namespace RooStatsSim.UI.Menu
     /// </summary>
     public partial class MenuBox : UserControl
     {
-        UserData _user_data;
         MainWindow _parents = null;
         public MenuBox(MainWindow parents)
         {
-            _user_data = MainWindow._user_data;
             InitializeComponent();
             _parents = parents;
 
@@ -37,12 +35,11 @@ namespace RooStatsSim.UI.Menu
                     return;
                 }
 
-                MainWindow._user_data_edited = true;
+                MainWindow._user_data_manager._user_data_edited = true;
             }
 
             RadioButton source = e.Source as RadioButton;
-            _user_data.Initializor();
-            _user_data.JobChanged((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag)));
+            MainWindow._user_data_manager.JobChanged((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag)));
         }
         private void TurnOnOff(WINDOW_ENUM window_name)
         {
@@ -79,13 +76,6 @@ namespace RooStatsSim.UI.Menu
         {
             TurnOnOff(WINDOW_ENUM.SKILL);
         }
-        private void UserSave_Checked(object sender, RoutedEventArgs e)
-        {
-            MainWindow.CheckUserDataChanged();
-            _user_data.Initializor();
-            User_Serializer.ReadDB(ref _user_data, Convert.ToInt32((sender as RadioButton).Tag));
-            _user_data.CalcUserData();
-        }
         #endregion
         #region Window Modal
         private void DBManager_window_Click(object sender, RoutedEventArgs e)
@@ -98,7 +88,7 @@ namespace RooStatsSim.UI.Menu
             _parents._db_manager.Close();
             _parents._db_manager = null;
 
-            User_Serializer.ReadDB(ref MainWindow._user_data);
+            DB.DBSerializer.ReadDB(ref MainWindow._roo_db);
         }
 
         private void Info_window_Click(object sender, RoutedEventArgs e)

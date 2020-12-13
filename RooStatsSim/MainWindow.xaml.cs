@@ -31,9 +31,7 @@ namespace RooStatsSim
     public partial class MainWindow : Window
     {
         public static DBlist _roo_db;
-        public static UserData _user_data;
-        public static bool _user_data_edited = false;
-        public static int _user_data_number = 1;
+        public static UserDataManager _user_data_manager;
 
         MdiChild _menu;
         MdiChild _status;
@@ -50,9 +48,9 @@ namespace RooStatsSim
             Version();
             CreateFolder();
 
-            _user_data = new UserData();
             _roo_db = new DBlist();
             DBSerializer.ReadDB(ref _roo_db);
+            _user_data_manager = new UserDataManager();
 
             MaterialDesignWindow.RegisterCommands(this);
             InitializeComponent();
@@ -137,17 +135,7 @@ namespace RooStatsSim
         #region UI Callback
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            CheckUserDataChanged();
-        }
-        public static void CheckUserDataChanged()
-        {
-            if (_user_data_edited)
-            {
-                MessageBoxResult res = MessageBox.Show("변경사항이 있습니다. 변경하시겠습니까?", "Save", MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes)
-                    User_Serializer.SaveDataBase(ref _user_data, _user_data_number);
-                _user_data_edited = false;
-            }
+            _user_data_manager.CheckUserDataChanged();
         }
         private void Version()
         {
