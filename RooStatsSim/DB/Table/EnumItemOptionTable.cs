@@ -68,6 +68,7 @@ namespace RooStatsSim.DB.Table
         IGNORE_MAGICAL_DEFENSE,
         MELEE_PHYSICAL_DAMAGE,
         RANGE_PHYSICAL_DAMAGE,
+        CRI_DAMAGE,
         DEF_P = 2000,
         MDEF_P,
         PHYSICAL_DEC_DAMAGE,

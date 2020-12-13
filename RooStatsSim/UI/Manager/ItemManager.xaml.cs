@@ -454,7 +454,7 @@ namespace RooStatsSim.UI.Manager
                 return;
 
             string type_name = (OptionList.SelectedItem as ItemOption_Binding).Type_name;
-            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
+            ITEM_OPTION_TYPE type = EnumItemOptionTable.GET_ITEM_OPTION_TYPE(type_name);
             Dictionary<string, double> item_option = GetItemOptionDictionary(type);
             item_option.Remove(type_name);
 
@@ -640,7 +640,7 @@ namespace RooStatsSim.UI.Manager
 
             int refine = (OptionList.SelectedItem as ItemOption_Refine_Binding).Refine;
             string type_name = (OptionList.SelectedItem as ItemOption_Refine_Binding).Type_name;
-            ITEM_OPTION_TYPE type = EnumItemOptionTable_Kor.GET_ITEM_OPTION_TYPE(ref type_name);
+            ITEM_OPTION_TYPE type = EnumItemOptionTable.GET_ITEM_OPTION_TYPE(type_name);
             now_item.Option_Refine[refine][type].Remove(type_name);
 
             SetNowItemOption();
