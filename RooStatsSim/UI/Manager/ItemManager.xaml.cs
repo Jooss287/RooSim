@@ -551,6 +551,7 @@ namespace RooStatsSim.UI.Manager
             TextBox PerValue = OptionStack.Children[1] as TextBox;
             ComboBox AddType = OptionStack.Children[3] as ComboBox;
             TextBox AddValue = OptionStack.Children[4] as TextBox;
+            TextBox MaxValue = OptionStack.Children[5] as TextBox;
 
             if (AddValue.Text == "")
                 return;
@@ -561,8 +562,9 @@ namespace RooStatsSim.UI.Manager
             string add_type_name = AddType.SelectedItem.ToString();
             double per_value = Convert.ToDouble(PerValue.Text);
             double add_value = Convert.ToDouble(AddValue.Text);
+            double max_value = Convert.ToDouble(MaxValue.Text);
 
-            now_item.Option_IF_TYPE.Add(new AbilityPerStatus(per_type_name, per_value, add_type_name, add_value));
+            now_item.Option_IF_TYPE.Add(new AbilityPerStatus(per_type_name, per_value, add_type_name, add_value, max_value));
 
             SetNowItemOption();
             AddType.SelectedIndex = 0;

@@ -435,14 +435,16 @@ namespace RooStatsSim.DB
         public string AddType { get; set; }
         public double PerValue { get; set; }
         public double AddValue { get; set; }
+        public double MaxValue { get; set; }
 
         public AbilityPerStatus() { }
-        public AbilityPerStatus(string per_type, double per_value, string add_type, double add_value)
+        public AbilityPerStatus(string per_type, double per_value, string add_type, double add_value, double max_value = 0)
         {
             PerType = per_type;
             PerValue = per_value;
             AddType = add_type;
             AddValue = add_value;
+            MaxValue = max_value;
         }
         public AbilityPerStatus(AbilityPerStatus ability)
         {
@@ -450,6 +452,7 @@ namespace RooStatsSim.DB
             PerValue = ability.PerValue;
             AddType = ability.AddType;
             AddValue = ability.AddValue;
+            MaxValue = ability.MaxValue;
         }
 
         public ItemDB GetRefineOption(int Refine)
@@ -458,7 +461,9 @@ namespace RooStatsSim.DB
             if (PerType != Enum.GetName(typeof(REFINE_TYPE), REFINE_TYPE.REFINE))
                 return db;
 
-            db.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(AddType)][AddType] = (AddValue * Refine / PerValue);
+            double add_value = AddValue * Refine / PerValue;
+            if ((add_value >= MaxValue) && (MaxValue != 0)) add_value = MaxValue;
+            db.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(AddType)][AddType] = add_value;
 
             return db;
         }
