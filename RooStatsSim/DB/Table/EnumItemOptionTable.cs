@@ -23,6 +23,7 @@ namespace RooStatsSim.DB.Table
         ELEMENT_REG_TYPE,
         ETC_TYPE,
         ETC_DMG_TYPE,
+        SKILL_DMG_TYPE,
     }
 
     public enum ITYPE

@@ -14,11 +14,43 @@ namespace RooStatsSim.UI.Manager
     #region UI Binding
     class ItemDB_Binding : ItemDB, INotifyPropertyChanged
     {
-        public ItemDB_Binding() { }
+        public ItemDB_Binding()
+            : base(){ NowRefineOption = Option_Refine[0]; }
         public ItemDB_Binding(ItemDB db)
             : base(db)
-        { }
+        {
+            NowRefineOption = db.Option;
+        }
 
+        Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _now_refine_option;
+        public Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> NowRefineOption
+        {
+            get
+            {
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.ITYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.ITYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.DTYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.DTYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.SE_ATK_RATE_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.SE_REG_RATE_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.SE_REG_RATE_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.ELEMENT_DMG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.ELEMENT_REG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.ELEMENT_REG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.MONSTER_ELEMENT_DMG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.MONSTER_KINDS_DMG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.MONSTER_KINDS_REG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.MONSTER_SIZE_DMG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.MONSTER_SIZE_REG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.TRIBE_DMG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.TRIBE_DMG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.TRIBE_REG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.TRIBE_REG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.ETC_DMG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.ETC_DMG_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.ETC_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.ETC_TYPE, new Dictionary<string, double>());
+                if (!_now_refine_option.ContainsKey(ITEM_OPTION_TYPE.SKILL_DMG_TYPE)) _now_refine_option.Add(ITEM_OPTION_TYPE.SKILL_DMG_TYPE, new Dictionary<string, double>());
+
+                return _now_refine_option;
+            }
+            set
+            {
+                _now_refine_option = value;
+            }
+        }
         public new int Id
         {
             get { return _id; }
@@ -61,6 +93,8 @@ namespace RooStatsSim.UI.Manager
 
         public void ChangeValue(ItemDB_Binding param)
         {
+            NowRefineOption = param.NowRefineOption;
+
             Id = param.Id;
             Name = param.Name;
             SetName = param.SetName;
@@ -75,7 +109,7 @@ namespace RooStatsSim.UI.Manager
             Option = param.Option;
             Option_IF_TYPE = param.Option_IF_TYPE;
             Option_Refine = param.Option_Refine;
-            Option_Skill = param.Option_Skill;
+            Option_SKILL_DMG_TYPE = param.Option_SKILL_DMG_TYPE;
         }
     }
 
