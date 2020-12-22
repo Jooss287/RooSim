@@ -207,6 +207,7 @@ namespace RooStatsSim.DB.Table
     {
         NO_SIZE_PANELTY,
         NO_BREAK,
+        ADD_DMG_ATK_MULTIPLE_STR_DEVICE_VALUE,
     }
     public enum ETC_DMG_TYPE
     {
