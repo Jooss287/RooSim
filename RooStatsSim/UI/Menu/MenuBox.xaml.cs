@@ -84,6 +84,8 @@ namespace RooStatsSim.UI.Menu
                 _parents._db_manager = new DBManager();
 
             _parents._db_manager.Owner = _parents;
+            _parents._db_manager.Left = 100;
+            _parents._db_manager.Top = 50;
             if (_parents._db_manager.ShowDialog() == true) { }
             _parents._db_manager.Close();
             _parents._db_manager = null;

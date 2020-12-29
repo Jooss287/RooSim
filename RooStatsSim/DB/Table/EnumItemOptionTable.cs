@@ -23,6 +23,7 @@ namespace RooStatsSim.DB.Table
         ELEMENT_REG_TYPE,
         ETC_TYPE,
         ETC_DMG_TYPE,
+        SKILL_DMG_TYPE,
     }
 
     public enum ITYPE
@@ -206,6 +207,7 @@ namespace RooStatsSim.DB.Table
     {
         NO_SIZE_PANELTY,
         NO_BREAK,
+        ADD_DMG_ATK_MULTIPLE_STR_DEVICE_VALUE,
     }
     public enum ETC_DMG_TYPE
     {

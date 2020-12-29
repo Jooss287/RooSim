@@ -202,6 +202,7 @@ namespace RooStatsSim.DB.Table
         {
             { ETC_TYPE.NO_BREAK, "파괴 불가" },
             { ETC_TYPE.NO_SIZE_PANELTY, "체형 패널티 없음" },
+            { ETC_TYPE.ADD_DMG_ATK_MULTIPLE_STR_DEVICE_VALUE, "STR*ATK/값 만큼 추가데미지" }
         };
         public static Dictionary<REFINE_TYPE, string> REFINE_TYPE_KOR = new Dictionary<REFINE_TYPE, string>()
         {

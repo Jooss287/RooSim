@@ -15,7 +15,7 @@ namespace RooStatsSim.DB
     [Serializable]
     public class ItemDB
     {
-        public ItemDB() { }
+        public ItemDB() { Option_Refine.Add(0, Option); }
         public ItemDB(ItemDB item_db)
         {
             Id = item_db.Id;
@@ -47,8 +47,9 @@ namespace RooStatsSim.DB
             Option_TRIBE_REG_TYPE = new Dictionary<string, double>(item_db.Option_TRIBE_REG_TYPE);
             Option_ETC_DMG_TYPE = new Dictionary<string, double>(item_db.Option_ETC_DMG_TYPE);
             Option_ETC_TYPE = new Dictionary<string, double>(item_db.Option_ETC_TYPE);
-            Option_Skill = new Dictionary<string, double>(item_db.Option_Skill);
-            
+            Option_SKILL_DMG_TYPE = new Dictionary<string, double>(item_db.Option_SKILL_DMG_TYPE);
+
+            Option_Refine[0] = Option;
             foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option in item_db.Option_Refine)
             {
                 Option_Refine.Add(option.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
@@ -78,7 +79,6 @@ namespace RooStatsSim.DB
         protected Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> _option;
         protected List<AbilityPerStatus> _option_if_type;
         protected Dictionary<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> _option_refine;
-        protected Dictionary<string, double> _option_skill;
 
         #region operator overriding
         public static ItemDB operator +(ItemDB a, ItemDB b)
@@ -209,16 +209,6 @@ namespace RooStatsSim.DB
                 return _option_refine; 
             }
             set { _option_refine = value; }
-        }
-        public Dictionary<string, double> Option_Skill
-        {
-            get
-            {
-                if (_option_skill == null)
-                    _option_skill = new Dictionary<string, double>();
-                return _option_skill;
-            }
-            set { _option_skill = value; }
         }
         public ITEM_TYPE_ENUM Item_type
         {
@@ -422,6 +412,19 @@ namespace RooStatsSim.DB
                 Option[ITEM_OPTION_TYPE.ETC_DMG_TYPE] = value;
             }
         }
+        [JsonIgnore] public Dictionary<string, double> Option_SKILL_DMG_TYPE
+        {
+            get
+            {
+                if (!Option.ContainsKey(ITEM_OPTION_TYPE.SKILL_DMG_TYPE))
+                    Option.Add(ITEM_OPTION_TYPE.SKILL_DMG_TYPE, new Dictionary<string, double>());
+                return Option[ITEM_OPTION_TYPE.SKILL_DMG_TYPE];
+            }
+            set
+            {
+                Option[ITEM_OPTION_TYPE.SKILL_DMG_TYPE] = value;
+            }
+        }
         #endregion
     }
     
@@ -432,14 +435,16 @@ namespace RooStatsSim.DB
         public string AddType { get; set; }
         public double PerValue { get; set; }
         public double AddValue { get; set; }
+        public double MaxValue { get; set; }
 
         public AbilityPerStatus() { }
-        public AbilityPerStatus(string per_type, double per_value, string add_type, double add_value)
+        public AbilityPerStatus(string per_type, double per_value, string add_type, double add_value, double max_value = 0)
         {
             PerType = per_type;
             PerValue = per_value;
             AddType = add_type;
             AddValue = add_value;
+            MaxValue = max_value;
         }
         public AbilityPerStatus(AbilityPerStatus ability)
         {
@@ -447,6 +452,7 @@ namespace RooStatsSim.DB
             PerValue = ability.PerValue;
             AddType = ability.AddType;
             AddValue = ability.AddValue;
+            MaxValue = ability.MaxValue;
         }
 
         public ItemDB GetRefineOption(int Refine)
@@ -455,7 +461,9 @@ namespace RooStatsSim.DB
             if (PerType != Enum.GetName(typeof(REFINE_TYPE), REFINE_TYPE.REFINE))
                 return db;
 
-            db.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(AddType)][AddType] = (AddValue * Refine / PerValue);
+            double add_value = AddValue * Refine / PerValue;
+            if ((add_value >= MaxValue) && (MaxValue != 0)) add_value = MaxValue;
+            db.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(AddType)][AddType] = add_value;
 
             return db;
         }
