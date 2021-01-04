@@ -18,7 +18,7 @@ using WPF.MDI;
 
 namespace RooStatsSim
 {
-    public enum WINDOW_ENUM
+    public enum WINDOW_ENUM   //테스트 커밋
     {
         MENU,
         STATUS,
