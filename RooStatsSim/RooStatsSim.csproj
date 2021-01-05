@@ -131,7 +131,7 @@
     <Compile Include="DB\Table\EnumBaseTable_Kor.cs" />
     <Compile Include="DB\Table\MedalTable.cs" />
     <Compile Include="DB\Table\RidingTable.cs" />
-    <Compile Include="DB\Table\SmeltingTable.cs" />
+    <Compile Include="DB\Table\RefineTable.cs" />
     <Compile Include="DB\Table\StatsPointTable.cs" />
     <Compile Include="Equation\Equations.cs" />
     <Compile Include="DB\Table\AdvantageTable.cs" />

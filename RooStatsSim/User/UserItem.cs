@@ -30,6 +30,8 @@ namespace RooStatsSim.User
         }
         public static UserItem operator +(UserItem a, ItemDB b)
         {
+            if (b == null)
+                return a;
             AddOption(a.Option, b.Option);
 
             foreach (AbilityPerStatus ability in b.Option_IF_TYPE)

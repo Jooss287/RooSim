@@ -103,6 +103,12 @@ namespace RooStatsSim.User
                         db = new ItemDB();
                     db += ability.GetRefineOption(Refine);
                 }
+                if ( Refine > 0 )
+                {
+                    if (db == null)
+                        db = new ItemDB();
+                    db += RefineTable.GetRefineOption(REFINE_OPTION_TYPE.COMMON, Refine);
+                }
             }
         }
         
@@ -138,6 +144,7 @@ namespace RooStatsSim.User
                 foreach (ItemDB enchant in equipment.Enchant)
                     option += enchant;
                 option += equipment.Equip;
+                option += equipment.RefineOption;
 
                 if (equipment.Equip.SetName != null)
                     set_name.Add(equipment.Equip.SetName);
@@ -149,6 +156,8 @@ namespace RooStatsSim.User
             {
                 bool set_access = true;
                 ItemDB set_item = MainWindow._roo_db.Set_Equip_db.FirstOrDefault(x => x.Value.SetName == set).Value;
+                if (set_item == null)
+                    continue;
                 foreach(EQUIP_TYPE_ENUM type in set_item.SetPosition)
                 {
                     if ( List[(int)type].Equip.SetName != set)
@@ -160,6 +169,7 @@ namespace RooStatsSim.User
                 if (set_access)
                     option += set_item;
             }
+
             return option;
         }
     }
