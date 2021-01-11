@@ -48,8 +48,10 @@ namespace RooStatsSim.UI.Equipment
         }
         void JobSelectedEvent()
         {
-            string filename = "Resources/image-not-found1.png";
-            Image_Char.Source = new BitmapImage(ResourceExtension.GetUri(filename));
+            string job_name = Enum.GetName(typeof(JOB_SELECT_LIST), ((int)((int)_user_data.Job / 100) * 100)).ToLower();
+            string filename = "Resources/Job/" + job_name + ".png";
+
+            Image_Char.Source = new BitmapImage(ResourceExtension.GetAssemblyUri(filename));
         }
 
         private TreeViewItem GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
