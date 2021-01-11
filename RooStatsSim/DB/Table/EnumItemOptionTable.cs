@@ -84,7 +84,7 @@ namespace RooStatsSim.DB.Table
         MOVING_SPEED,
         HEALING,
         HEALING_RECERIVED,
-        VERIABLE_CASTING,
+        VARIABLE_CASTING,
         FIXED_CASTING,
         COMMON_SKILL_DELAY,
     }

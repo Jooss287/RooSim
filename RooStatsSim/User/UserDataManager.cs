@@ -68,6 +68,8 @@ namespace RooStatsSim.User
             CalcUserItem += Data.Medal.GetOption();
             CalcUserItem += Data.Riding_ability.GetOption();
             CalcUserItem += Data.Riding_personality.GetOption();
+            //소모품 버프
+            CalcUserItem += Data.User_ConBuff.GetOption();
             //장비 옵션
             CalcUserItem += Data.Equip.GetOption();
             //스텟 옵션

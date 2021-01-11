@@ -35,6 +35,7 @@ namespace RooStatsSim.User
         public RIDING Riding_personality { get; set; }
         
         public UserItem User_Item { get; set; }
+        public UserConsumableBuff User_ConBuff { get; set; }
         public UserSkill User_Skill { get; set; }
         public int SelectedEnemy { get; set; }
 
@@ -53,6 +54,7 @@ namespace RooStatsSim.User
             Riding_ability = new RIDING();
             Riding_personality = new RIDING();
             User_Item = new UserItem(true);
+            User_ConBuff = new UserConsumableBuff();
             User_Skill = new UserSkill();
             SelectedEnemy = 0;
         }
