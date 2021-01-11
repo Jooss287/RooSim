@@ -121,6 +121,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\ConsumableItem\CookingConsumable.cs" />
+    <Compile Include="DB\ConsumableItem\ConsumableBuffInfo.cs" />
+    <Compile Include="DB\ConsumableItem\PortionConsumable.cs" />
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\ItemDB.cs" />
     <Compile Include="DB\Skill\JobSkill\LoadKnightSkill.cs" />
@@ -165,6 +168,10 @@
     <Compile Include="UI\ACK\ProgramInfo.xaml.cs">
       <DependentUpon>ProgramInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ConsumableBuff\ConsumableBuffWindow.xaml.cs">
+      <DependentUpon>ConsumableBuffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ConsumableBuff\ConsumableBinding.cs" />
     <Compile Include="UI\Equipment\Equip.xaml.cs">
       <DependentUpon>Equip.xaml</DependentUpon>
     </Compile>
@@ -206,6 +213,7 @@
     <Compile Include="User\UserData_Status_List.cs" />
     <Compile Include="User\UserData_Stackbuff_List.cs" />
     <Compile Include="User\UserItem.cs" />
+    <Compile Include="User\UserData_ConsumableBuff_List.cs" />
     <Compile Include="User\User_Enum.cs" />
     <Compile Include="User\User_Serializer.cs" />
     <Compile Include="User\UserSkill.cs" />
@@ -230,6 +238,10 @@
     <Page Include="UI\ACK\ProgramInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ConsumableBuff\ConsumableBuffWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Equipment\Equip.xaml">
       <SubType>Designer</SubType>

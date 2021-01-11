@@ -13,6 +13,7 @@ using RooStatsSim.UI.Equipment;
 using RooStatsSim.UI.Menu;
 using RooStatsSim.UI.MonsterDamage;
 using RooStatsSim.UI.SkillWindow;
+using RooStatsSim.UI.ConsumableBuff;
 using RooStatsSim.Extension;
 using MDIXWindow;
 using WPF.MDI;
@@ -27,7 +28,7 @@ namespace RooStatsSim
         EQUIP,
         DAMAGE_CHECK,
         SKILL,
-        ADDITIONAL_BUFF,
+        CONSUMABLE_BUFF,
     };
     public partial class MainWindow : Window
     {
@@ -40,6 +41,7 @@ namespace RooStatsSim
         MdiChild _equip;
         MdiChild _damage_check;
         MdiChild _skill;
+        MdiChild _consumable_buff;
 
         public ProgramInfo _info;
         public DBManager _db_manager;
@@ -147,6 +149,15 @@ namespace RooStatsSim
                                     Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.SKILL].Y),
                 CloseBox = false,
             };
+            _consumable_buff = new MdiChild()
+            {
+                Title = "소모성 버프아이템",
+                Content = new ConsumableBuffWindow(),
+                Width = 728,
+                Height = 258,   //132
+                Position = new Point(700, 0),
+                CloseBox = false,
+            };
 
             RoosimContainer.Children.Add(_menu);
             RoosimContainer.Children.Add(_status);
@@ -154,6 +165,7 @@ namespace RooStatsSim
             RoosimContainer.Children.Add(_equip);
             RoosimContainer.Children.Add(_damage_check);
             RoosimContainer.Children.Add(_skill);
+            RoosimContainer.Children.Add(_consumable_buff);
         }
         private void CreateFolder()
         {
