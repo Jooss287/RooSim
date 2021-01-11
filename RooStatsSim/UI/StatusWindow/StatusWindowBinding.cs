@@ -154,7 +154,7 @@ namespace RooStatsSim.UI.StatusWindow
             }
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_ELEMENT_REG_TYPE)
             {
-                ELEMENT_REG_TYPE type = (ELEMENT_REG_TYPE)Enum.Parse(typeof(ELEMENT_DMG_TYPE), item.Key);
+                ELEMENT_REG_TYPE type = (ELEMENT_REG_TYPE)Enum.Parse(typeof(ELEMENT_REG_TYPE), item.Key);
                 Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.ELEMENT_REG_TYPE_KOR[type] + "(%)"
                     , user_data.User_Item.Option_ELEMENT_REG_TYPE[item.Key], 0, Enum.GetName(typeof(ELEMENT_REG_TYPE), type)));
             }
