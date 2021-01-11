@@ -74,6 +74,7 @@ namespace RooStatsSim
                     new Point(0, 490),
                     new Point(885, 490),
                     new Point(700, 0),
+                    new Point(700, 400),
                 };
             }
             if (Properties.Settings.Default.setting_window_W_H == null)
@@ -84,6 +85,7 @@ namespace RooStatsSim
                     new Point(1203, 352),
                     new Point(415, 415),
                     new Point(886, 378),
+                    new Point(728, 258),
                     new Point(728, 258),
                     new Point(728, 258),
                 };
@@ -153,9 +155,10 @@ namespace RooStatsSim
             {
                 Title = "소모성 버프아이템",
                 Content = new ConsumableBuffWindow(),
-                Width = 728,
-                Height = 258,   //132
-                Position = new Point(700, 0),
+                Width = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.CONSUMABLE_BUFF].X,
+                Height = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.CONSUMABLE_BUFF].Y,
+                Position = new Point(Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.CONSUMABLE_BUFF].X,
+                                    Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.CONSUMABLE_BUFF].Y),
                 CloseBox = false,
             };
 
