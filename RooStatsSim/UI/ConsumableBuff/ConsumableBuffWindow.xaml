@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="RooStatsSim.UI.ConsumableBuff.ConsumableBuffWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RooStatsSim.UI.ConsumableBuff"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Image}" x:Key="ConsumableBuffImgBtn">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Source" Value="{Binding Path=ImageFile}"/>
+            <Setter Property="Stretch" Value="Fill"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <ItemsControl x:Name="BuffSelector">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl MouseWheel="buff_lv_Wheel"
+                                    MouseLeftButtonDown="ContentControl_MouseLeftButtonDown"
+                                    MouseRightButtonDown="ContentControl_MouseRightButtonDown"
+                                    MouseEnter="ContentControl_MouseEnter"
+                                    MouseLeave="ContentControl_MouseLeave">
+                        <StackPanel Orientation="Vertical" Margin="8">
+                            <Image Style="{Binding Source={StaticResource ConsumableBuffImgBtn}}"/>
+                            <TextBlock Text="{Binding Path=Show_Level}" HorizontalAlignment="Right" Background="#c9c9c9" Margin="0,-13,0,0" FontSize="8"/>
+                        </StackPanel>
+                    </ContentControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>
