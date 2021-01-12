@@ -146,7 +146,8 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Style="{Binding Source={StaticResource Custom_StackPanel}}">
                                     <TextBlock Text="{Binding Path=SkillName}" Style="{Binding Source={StaticResource Custom_NameBlock}}"/>
-                                    <TextBlock Text="{Binding Path=DamageRange}" Style="{Binding Source={StaticResource Custom_ValueBlock}}"/>
+                                    <TextBlock Text="{Binding Path=DamageRange}" Style="{Binding Source={StaticResource Custom_ValueBlock}}"
+                                               Width="80"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

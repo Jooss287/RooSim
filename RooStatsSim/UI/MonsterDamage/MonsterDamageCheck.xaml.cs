@@ -65,9 +65,11 @@ namespace RooStatsSim.UI.MonsterDamage
             _calc_user_dmamge_binding = new CalcUserDamageBinding("평타", normal_atk);
             foreach(UserSkill.UserSkillInfo info in user_data.User_Skill.GetActiveSkills())
             {
+                if (info.Level == 0)
+                    continue;
                 //if ( info.Detail.HAS_DMG_EQUATION )
-                //normal_atk = Convert.ToString(calcATK_min*info.Detail.d) + " ~ " + Convert.ToString(calcATK_max);
-                //_calc_user_dmamge_binding.Add(info.Name_Kor, )    
+                normal_atk = Convert.ToString(calcATK_min*info.Detail.DAMAGE[info.Level]) + " ~ " + Convert.ToString(calcATK_max * info.Detail.DAMAGE[info.Level]);
+                _calc_user_dmamge_binding.AddDamageBinding(info.Name_Kor, normal_atk);
             }
             CalcUserDamage.ItemsSource = _calc_user_dmamge_binding;
         }
