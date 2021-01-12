@@ -74,7 +74,7 @@ namespace RooStatsSim.DB.Table
             {DTYPE.MOVING_SPEED,"이동속도" },
             {DTYPE.HEALING,"치유량 증가(%)" },
             {DTYPE.HEALING_RECERIVED,"받는 치유량(%)" },
-            {DTYPE.VERIABLE_CASTING,"변동 캐스팅(%)" },
+            {DTYPE.VARIABLE_CASTING,"변동 캐스팅(%)" },
             {DTYPE.FIXED_CASTING,"고정 캐스팅(%)" },
             {DTYPE.COMMON_SKILL_DELAY,"스킬 후 딜레이(%)" },
         };

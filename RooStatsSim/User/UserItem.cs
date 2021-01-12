@@ -32,10 +32,9 @@ namespace RooStatsSim.User
         {
             if (b == null)
                 return a;
-            AddOption(a.Option, b.Option);
-
             foreach (AbilityPerStatus ability in b.Option_IF_TYPE)
                 a.Option_IF_TYPE.Add(new AbilityPerStatus(ability));
+
             foreach (KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> refine_num in b.Option_Refine)
             {
                 if (a.Option_Refine.ContainsKey(refine_num.Key) == false)

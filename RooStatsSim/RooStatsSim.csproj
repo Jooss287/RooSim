@@ -73,6 +73,7 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -120,6 +121,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\ConsumableItem\CookingConsumable.cs" />
+    <Compile Include="DB\ConsumableItem\ConsumableBuffInfo.cs" />
+    <Compile Include="DB\ConsumableItem\PortionConsumable.cs" />
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\ItemDB.cs" />
     <Compile Include="DB\Skill\JobSkill\LoadKnightSkill.cs" />
@@ -159,10 +163,15 @@
     <Compile Include="Extension\MDIXWindow\Behaviors\TemplateBindingBehavior.cs" />
     <Compile Include="Extension\MDIXWindow\WindowEx.cs" />
     <Compile Include="Extension\ResourceExtension.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="UI\AbilityBinding.cs" />
     <Compile Include="UI\ACK\ProgramInfo.xaml.cs">
       <DependentUpon>ProgramInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ConsumableBuff\ConsumableBuffWindow.xaml.cs">
+      <DependentUpon>ConsumableBuffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ConsumableBuff\ConsumableBinding.cs" />
     <Compile Include="UI\Equipment\Equip.xaml.cs">
       <DependentUpon>Equip.xaml</DependentUpon>
     </Compile>
@@ -204,6 +213,7 @@
     <Compile Include="User\UserData_Status_List.cs" />
     <Compile Include="User\UserData_Stackbuff_List.cs" />
     <Compile Include="User\UserItem.cs" />
+    <Compile Include="User\UserData_ConsumableBuff_List.cs" />
     <Compile Include="User\User_Enum.cs" />
     <Compile Include="User\User_Serializer.cs" />
     <Compile Include="User\UserSkill.cs" />
@@ -228,6 +238,10 @@
     <Page Include="UI\ACK\ProgramInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ConsumableBuff\ConsumableBuffWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Equipment\Equip.xaml">
       <SubType>Designer</SubType>
@@ -307,6 +321,61 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\WPF.MDI.dll" />
+    <Resource Include="Resources\ConsumableBuff\STR_VIT.png" />
+    <Resource Include="Resources\ConsumableBuff\AGI.png" />
+    <Resource Include="Resources\ConsumableBuff\AGI_DEX.png" />
+    <Resource Include="Resources\ConsumableBuff\AGI_VIT.png" />
+    <Resource Include="Resources\ConsumableBuff\CAVIAR.png" />
+    <Resource Include="Resources\ConsumableBuff\CAVIAR_BIBIM_NOODLES.png" />
+    <Resource Include="Resources\ConsumableBuff\CAVIAR_MEAT_ROLLS.png" />
+    <Resource Include="Resources\ConsumableBuff\CAVIAR_SUSHI.png" />
+    <Resource Include="Resources\ConsumableBuff\CLAM_CRAB_MEAT_PORRIDGE.png" />
+    <Resource Include="Resources\ConsumableBuff\CLAM_PORRIDGE.png" />
+    <Resource Include="Resources\ConsumableBuff\CRAB_MEAT.png" />
+    <Resource Include="Resources\ConsumableBuff\CRAB_MEAT_SUSHI.png" />
+    <Resource Include="Resources\ConsumableBuff\DEX.png" />
+    <Resource Include="Resources\ConsumableBuff\DEX_LUK.png" />
+    <Resource Include="Resources\ConsumableBuff\DEX_VIT.png" />
+    <Resource Include="Resources\ConsumableBuff\FINEST_SHELLFISH_PORRIDGE.png" />
+    <Resource Include="Resources\ConsumableBuff\FRIED_SPECIAL_SCALLOPS.png" />
+    <Resource Include="Resources\ConsumableBuff\GIANT_SSAMBAP.png" />
+    <Resource Include="Resources\ConsumableBuff\GRILLED_SEAFOOD_SKEWERS.png" />
+    <Resource Include="Resources\ConsumableBuff\INT.png" />
+    <Resource Include="Resources\ConsumableBuff\INT_AGI.png" />
+    <Resource Include="Resources\ConsumableBuff\INT_DEX.png" />
+    <Resource Include="Resources\ConsumableBuff\INT_LUK.png" />
+    <Resource Include="Resources\ConsumableBuff\INT_VIT.png" />
+    <Resource Include="Resources\ConsumableBuff\KING_SCALLOPS.png" />
+    <Resource Include="Resources\ConsumableBuff\LUK.png" />
+    <Resource Include="Resources\ConsumableBuff\LUK_VIT.png" />
+    <Resource Include="Resources\ConsumableBuff\NOODLE.png" />
+    <Resource Include="Resources\ConsumableBuff\RICE_BALLS.png" />
+    <Resource Include="Resources\ConsumableBuff\SCALLOP.png" />
+    <Resource Include="Resources\ConsumableBuff\SCALLOP_SEAFOOD_NOODLES.png" />
+    <Resource Include="Resources\ConsumableBuff\SCALLOP_SEAFOOD_PORRIDGE.png" />
+    <Resource Include="Resources\ConsumableBuff\SCALLOP_SUSHI.png" />
+    <Resource Include="Resources\ConsumableBuff\SEAFOOD_DISHES.png" />
+    <Resource Include="Resources\ConsumableBuff\SEAFOOD_FRIED_NOODLES.png" />
+    <Resource Include="Resources\ConsumableBuff\SEAFOOD_FRIED_RICE.png" />
+    <Resource Include="Resources\ConsumableBuff\SHELLFISH_TUNA_PORRIDGE.png" />
+    <Resource Include="Resources\ConsumableBuff\SHRIMP.png" />
+    <Resource Include="Resources\ConsumableBuff\SHRIMP_BIBIM_NOODLES.png" />
+    <Resource Include="Resources\ConsumableBuff\SHRIMP_CAVIAR.png" />
+    <Resource Include="Resources\ConsumableBuff\SHRIMP_CRAB_MEAT.png" />
+    <Resource Include="Resources\ConsumableBuff\SHRIMP_PORRIDGE.png" />
+    <Resource Include="Resources\ConsumableBuff\SHRIMP_SUSHI.png" />
+    <Resource Include="Resources\ConsumableBuff\SHRIMP_TUNA_BIBIMBAP.png" />
+    <Resource Include="Resources\ConsumableBuff\SPECIAL_GRILLED_TUNA_SKEWERS.png" />
+    <Resource Include="Resources\ConsumableBuff\STEAMED_CRAB.png" />
+    <Resource Include="Resources\ConsumableBuff\STR.png" />
+    <Resource Include="Resources\ConsumableBuff\STR_AGI.png" />
+    <Resource Include="Resources\ConsumableBuff\STR_DEX.png" />
+    <Resource Include="Resources\ConsumableBuff\STR_INT.png" />
+    <Resource Include="Resources\ConsumableBuff\STR_LUK.png" />
+    <Resource Include="Resources\ConsumableBuff\TUNA_SUSHI.png" />
+    <Resource Include="Resources\ConsumableBuff\TUNNY.png" />
+    <Resource Include="Resources\ConsumableBuff\VIT.png" />
+    <Resource Include="Resources\ConsumableBuff\AGI_LUK.png" />
     <Resource Include="Resources\Skills\BERSERK.png" />
     <Resource Include="Resources\Skills\BRANDISH_SPEAR.png" />
     <Resource Include="Resources\Skills\SPEAR_BOOMERANG.png" />
