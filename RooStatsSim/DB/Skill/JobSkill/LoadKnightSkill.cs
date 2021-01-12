@@ -132,6 +132,7 @@ namespace RooStatsSim.DB.Skill.JobSkill
             Skill[Enum.GetName(typeof(LOADKNIGHT_SKILL), LOADKNIGHT_SKILL.SPIRAL_PIERCE)].MAX_LV = 10;
             Skill[Enum.GetName(typeof(LOADKNIGHT_SKILL), LOADKNIGHT_SKILL.SPIRAL_PIERCE)].TYPE = SKILL_TYPE.ACTIVE;
             Skill[Enum.GetName(typeof(LOADKNIGHT_SKILL), LOADKNIGHT_SKILL.SPIRAL_PIERCE)].DAMAGE = new List<double>() { 3.00, 4.00, 5.00, 6.00, 7.00, 8.00, 9.00, 10.00, 11.00, 12.00 };
+            Skill[Enum.GetName(typeof(LOADKNIGHT_SKILL), LOADKNIGHT_SKILL.SPIRAL_PIERCE)].HAS_DMG_EQUATION = true;
             //오라 블레이드
             Skill[Enum.GetName(typeof(LOADKNIGHT_SKILL), LOADKNIGHT_SKILL.AURA_BALDE)].MAX_LV = 10;
             Skill[Enum.GetName(typeof(LOADKNIGHT_SKILL), LOADKNIGHT_SKILL.AURA_BALDE)].TYPE = SKILL_TYPE.BUFF;
