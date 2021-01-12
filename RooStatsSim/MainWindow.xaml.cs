@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.IO;
+using System.Collections.Generic;
 
 using RooStatsSim.DB;
 using RooStatsSim.User;
@@ -63,70 +64,103 @@ namespace RooStatsSim
         #region Initialize
         private void InitializeMDI()
         {
+            if (Properties.Settings.Default.setting_window_pos == null)
+            {
+                Properties.Settings.Default.setting_window_pos = new List<Point>()
+                {
+                    new Point(0,0),
+                    new Point(0,138),
+                    new Point(1204, 0),
+                    new Point(0, 490),
+                    new Point(885, 490),
+                    new Point(700, 0),
+                    new Point(700, 400),
+                };
+            }
+            if (Properties.Settings.Default.setting_window_W_H == null)
+            {
+                Properties.Settings.Default.setting_window_W_H = new List<Point>()
+                {
+                    new Point(698, 139),
+                    new Point(1203, 352),
+                    new Point(415, 415),
+                    new Point(886, 378),
+                    new Point(728, 258),
+                    new Point(728, 258),
+                    new Point(728, 258),
+                };
+            }
+
             _menu = new MdiChild()
             {
                 Title = "MenuBox",
                 Content = new MenuBox(this),
-                Width = 698,
-                Height = 139,
-                Position = new Point(0, 0),
+                Width = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.MENU].X,
+                Height = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.MENU].Y,
+                Position = new Point(Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.MENU].X,
+                                    Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.MENU].Y),
                 CloseBox = false,
             };
             _status = new MdiChild()
             {
                 Title = "스테이터스",
                 Content = new StatusWindow(),
-                Width = 1203,
-                Height = 352,
-                Position = new Point(0, 138),
+                Width = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.STATUS].X,
+                Height = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.STATUS].Y,
+                Position = new Point(Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.STATUS].X,
+                                    Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.STATUS].Y),
                 CloseBox = false,
             };
             _stack_buff = new MdiChild()
             {
                 Title = "StackBuff",
                 Content = new StackBuffWindow(),
-                Width = 415,    //284 257 14 38
-                Height = 415,
-                Position = new Point(1204, 0),
+                Width = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.STACK_BUFF].X,
+                Height = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.STACK_BUFF].Y, //284 257 14 38
+                Position = new Point(Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.STACK_BUFF].X,
+                                    Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.STACK_BUFF].Y),
                 CloseBox = false,
             };
             _equip = new MdiChild()
             {
                 Title = "장비창",
                 Content = new Equip(),
-                Width = 886,
-                Height = 378,
-                Position = new Point(0, 490),
+                Width = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.EQUIP].X,
+                Height = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.EQUIP].Y,
+                Position = new Point(Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.EQUIP].X,
+                                    Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.EQUIP].Y),
                 CloseBox = false,
             };
             _damage_check = new MdiChild()
             {
                 Title = "데미지 계산기",
                 Content = new MonsterDamageCheck(),
-                Width = 728,
-                Height = 258,
-                Position = new Point(885, 490),
+                Width = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.DAMAGE_CHECK].X,
+                Height = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.DAMAGE_CHECK].Y,
+                Position = new Point(Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.DAMAGE_CHECK].X,
+                                    Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.DAMAGE_CHECK].Y),
                 CloseBox = false,
             };
             _skill = new MdiChild()
             {
                 Title = "스킬",
                 Content = new SkillWindow(),
-                Width = 728,
-                Height = 258,   //132
-                Position = new Point(700, 0),
+                Width = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.SKILL].X,
+                Height = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.SKILL].Y,
+                Position = new Point(Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.SKILL].X,
+                                    Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.SKILL].Y),
                 CloseBox = false,
             };
             _consumable_buff = new MdiChild()
             {
                 Title = "소모성 버프아이템",
                 Content = new ConsumableBuffWindow(),
-                Width = 728,
-                Height = 258,   //132
-                Position = new Point(700, 0),
+                Width = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.CONSUMABLE_BUFF].X,
+                Height = Properties.Settings.Default.setting_window_W_H[(int)WINDOW_ENUM.CONSUMABLE_BUFF].Y,
+                Position = new Point(Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.CONSUMABLE_BUFF].X,
+                                    Properties.Settings.Default.setting_window_pos[(int)WINDOW_ENUM.CONSUMABLE_BUFF].Y),
                 CloseBox = false,
             };
-
 
             RoosimContainer.Children.Add(_menu);
             RoosimContainer.Children.Add(_status);
@@ -148,6 +182,7 @@ namespace RooStatsSim
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _user_data_manager.CheckUserDataChanged();
+            SavedWindowPos();
         }
         private void Version()
         {
@@ -160,6 +195,17 @@ namespace RooStatsSim
                 System.Diagnostics.Process.Start(ProgramInfo.GetLeastURL());
                 this.Close();
             }
+        }
+        private void SavedWindowPos()
+        {
+            Properties.Settings.Default.setting_window_pos.Clear();
+            Properties.Settings.Default.setting_window_W_H.Clear();
+            foreach (MdiChild mdi in RoosimContainer.Children)
+            {
+                Properties.Settings.Default.setting_window_pos.Add(new Point(mdi.Position.X, mdi.Position.Y));
+                Properties.Settings.Default.setting_window_W_H.Add(new Point(mdi.Width, mdi.Height));
+            }
+            Properties.Settings.Default.Save();
         }
         #endregion
     }
