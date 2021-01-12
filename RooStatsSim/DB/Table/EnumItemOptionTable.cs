@@ -77,6 +77,8 @@ namespace RooStatsSim.DB.Table
         MELEE_PHYSICAL_DEC_DAMAGE,
         RANGE_PHYSICAL_DEC_DAMAGE,
         CRI_DEF,
+        REFINE_DEF,
+        REFINE_MDEF,
         MAX_HP_P = 3000,
         MAX_SP_P,
         SP_WASTE,

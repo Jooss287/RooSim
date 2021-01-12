@@ -65,6 +65,8 @@ namespace RooStatsSim.DB.Table
             {DTYPE.MELEE_PHYSICAL_DEC_DAMAGE, "근거리 물리 데미지 감소(%)" },
             {DTYPE.RANGE_PHYSICAL_DEC_DAMAGE, "원거리 물리 데미지 감소(%)" },
             {DTYPE.CRI_DEF, "CRI.DEF" },
+            {DTYPE.REFINE_DEF, "제련방어력" },
+            {DTYPE.REFINE_MDEF, "제련마법방어력" },
             {DTYPE.MAX_HP_P, "HP %" },
             {DTYPE.MAX_SP_P, "SP %" },
             {DTYPE.SP_WASTE, "SP 소모" },
