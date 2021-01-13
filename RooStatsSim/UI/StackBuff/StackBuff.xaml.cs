@@ -32,6 +32,9 @@ namespace RooStatsSim.UI.StackBuff
             RidingPersonality.ItemsSource = BindingRidingPersonality;
             BindingMedalPoint = new MedalList(ref _user_data);
             MedalPoint.ItemsSource = BindingMedalPoint;
+            Monster_Research = _user_data.Monster_Research.Level;
+            Dress_Style = _user_data.Dress_Style.Level;
+            Sticker = _user_data.Sticker.Level;
         }
         public int Monster_Research
         {
