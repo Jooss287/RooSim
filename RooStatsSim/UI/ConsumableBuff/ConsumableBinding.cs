@@ -6,11 +6,10 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
 using RooStatsSim.DB.ConsumableItem;
-using RooStatsSim.UI.ConsumableBuff;
 using RooStatsSim.User;
 using RooStatsSim.Extension;
 
-namespace RooStatsSim.UI
+namespace RooStatsSim.UI.ConsumableBuff
 {
     public class ConsumableBinding : ObservableCollection<ConsumableBindingInfo>
     {

@@ -34,6 +34,7 @@ namespace RooStatsSim.User
                 Level = level;
             }
 
+            #region Property
             public string Name
             {
                 get { return _name; }
@@ -59,11 +60,9 @@ namespace RooStatsSim.User
             public int Max_Level
             {
                 get { return _max_level; }
-                set
-                {
-                    _max_level = value;
-                }
+                set { _max_level = value; }
             }
+            #endregion
         }
 
         public Dictionary<string, UserConsumableBuffnfo> Dic { get; set; }

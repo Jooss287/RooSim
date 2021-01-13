@@ -32,8 +32,6 @@ namespace RooStatsSim.Equation.Job
         public JobSelect(UserData Data, JOB_SELECT_LIST param_job = JOB_SELECT_LIST.NOVICE)
         {
             SelectedJob = param_job;
-            if ( Data.User_Skill.List.Count == 0)
-                Job.ElementAt(GetJobNum).SetSkillInit();
         }
         public void SetUserData(UserData user)
         {

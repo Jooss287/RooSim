@@ -15,13 +15,11 @@ namespace RooStatsSim.User
     public class UserSkill
     {
         [Serializable]
-        public class UserSkillInfo : INotifyPropertyChanged
+        public class UserSkillInfo
         {
             string _name;
-            string _name_kor;
             int _level;
             int _max_level;
-            BitmapImage _image;
 
             public UserSkillInfo() { }
             public UserSkillInfo(string name, int level = 0, int max_level = 0)
@@ -31,7 +29,6 @@ namespace RooStatsSim.User
 
                 SkillInfo skill = SkillWindow._skill_db.Dic[name];
                 Name = skill.NAME;
-                Name_Kor = skill.NAME_KOR;
                 if (max_level == 0)
                     Max_Level = skill.MAX_LV;
                 Level = level;
@@ -45,11 +42,7 @@ namespace RooStatsSim.User
                 {
                     SkillInfo skill = SkillWindow._skill_db.Dic[value];
                     _name = skill.NAME;
-                    Name_Kor = skill.NAME_KOR;
-                    Detail = skill;
                     Max_Level = skill.MAX_LV;
-                    OnPropertyChanged("Name");
-                    GetImage();
                 }
             }
             public int Level
@@ -62,109 +55,49 @@ namespace RooStatsSim.User
                     if (value < 0)
                         return;
                     _level = value;
-                    OnPropertyChanged("Level");
-                    OnPropertyChanged("Show_Level");
                 }
             }
-            [JsonIgnore]public string Name_Kor
-            {
-                get { return _name_kor; }
-                set
-                {
-                    _name_kor = value;
-                    OnPropertyChanged("Name_Kor");
-                }
-            }
-
             public int Max_Level
             {
                 get { return _max_level; }
-                set
-                {
-                    if (value > Detail.MAX_LV)
-                        return;
-                    _max_level = value;
-                    OnPropertyChanged("Max_Level");
-                }
-            }
-            [JsonIgnore]public string Show_Level
-            {
-                get { return string.Format("({0}/{1})", Level, Max_Level); }
-            }
-            [JsonIgnore]public SkillInfo Detail { get; set; }
-            [JsonIgnore]public BitmapImage ImageFile
-            {
-                get { return _image; }
-            }
-
-            private void GetImage()
-            {
-                if (_name == null)
-                    return;
-                string resource_name = "Resources/Skills/" + _name + ".png";
-                _image = new BitmapImage(ResourceExtension.GetAssemblyUri(resource_name));
-            }
-            private void SetName(string name)
-            {
-
-            }
-            #endregion
-            #region EventHandler
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            public override string ToString() => _name;
-
-            protected void OnPropertyChanged(string info)
-            {
-                var handler = PropertyChanged;
-                handler?.Invoke(this, new PropertyChangedEventArgs(info));
+                set { _max_level = value; }
             }
             #endregion
         }
-        public ObservableCollection<UserSkillInfo> List { get; set; }
+        public Dictionary<string, UserSkillInfo> Dic { get; set; }
         public UserSkill()
         {
-            List = new ObservableCollection<UserSkillInfo>();
-            List.CollectionChanged += OnListChanged;
+            Dic = new Dictionary<string, UserSkillInfo>();
         }
 
         #region UserCommand
-        public void InitSkills(params Dictionary<string, SkillInfo>[] skills)
+        //public UserSkillInfo FindSkillInfo(string skill_name)
+        //{
+        //    foreach(UserSkillInfo skill in Dic)
+        //        if ( skill.Name == skill_name)
+        //            return skill;
+        //    return null;
+        //}
+        public void SetSkillLevel(string name, int level, int max_level = 0)
         {
-            List.Clear();
-            foreach(Dictionary<string, SkillInfo> jobskill in skills)
+            if (level == 0)
             {
-                foreach (KeyValuePair<string, SkillInfo> skill in jobskill)
-                {
-                    List.Add(new UserSkillInfo(skill.Key));
-                }
+                if (Dic.ContainsKey(name))
+                    Dic.Remove(name);
+                return;
             }
-        }
-        public void AddSkill(KeyValuePair<string, SkillInfo> skill)
-        {
-            if ( FindSkillInfo(skill.Key) == null)
-            {
-                List.Add(new UserSkillInfo(skill.Key));
-            }    
-        }
-        public UserSkillInfo FindSkillInfo(string skill_name)
-        {
-            foreach(UserSkillInfo skill in List)
-                if ( skill.Name == skill_name)
-                    return skill;
-            return null;
+            else
+                Dic[name] = new UserSkillInfo(name, level, max_level);
         }
         public UserItem GetOption()
         {
             UserItem option = new UserItem();
 
-            foreach (UserSkillInfo skill in List)
+            foreach (KeyValuePair<string,UserSkillInfo> skill in Dic)
             {
-                if (skill.Level == 0)
+                if (SkillWindow._skill_db.Dic[skill.Key].OPTION.Count == 0)
                     continue;
-                if (skill.Detail.OPTION.Count == 0)
-                    continue;
-                option += skill.Detail.OPTION[skill.Level-1];
+                option += SkillWindow._skill_db.Dic[skill.Key].OPTION[skill.Value.Level - 1];
             }
             return option;
         }

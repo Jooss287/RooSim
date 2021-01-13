@@ -2,10 +2,9 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Collections.Generic;
-using RooStatsSim.DB.Skill;
-using RooStatsSim.DB.Skill.JobSkill;
 using RooStatsSim.User;
+using RooStatsSim.DB.Skill;
+
 
 namespace RooStatsSim.UI.SkillWindow
 {
@@ -18,6 +17,7 @@ namespace RooStatsSim.UI.SkillWindow
 
         UserData _user_data;
         Popup skillPopup = new Popup();
+        SkillBinding _skill_binding;
 
         public SkillWindow()
         {
@@ -27,12 +27,18 @@ namespace RooStatsSim.UI.SkillWindow
         void GetUserData()
         {
             _user_data = MainWindow._user_data_manager.Data;
-            SkillSelector.ItemsSource = _user_data.User_Skill.List;
+            CalcSkillProperty();
+        }
+        void CalcSkillProperty()
+        {
+            _skill_binding = new SkillBinding(_user_data, _skill_db.GetJobInitSkills(_user_data.Job));
+            SkillSelector.ItemsSource = _skill_binding;
         }
 
-        void ChangeSkillLevel(UserSkill.UserSkillInfo skill, int i)
+        void ChangeSkillLevel(SkillBindingInfo skill, int i)
         {
             skill.Level += i;
+            _user_data.User_Skill.SetSkillLevel(skill.Name, skill.Level);
             if (skill.Detail.OPTION.Count != 0)
                 MainWindow._user_data_manager.CalcUserData();
             else
@@ -40,24 +46,24 @@ namespace RooStatsSim.UI.SkillWindow
         }
         private void skill_lv_Wheel(object sender, MouseWheelEventArgs e)
         {
-            UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
+            SkillBindingInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as SkillBindingInfo;
             ChangeSkillLevel(skill, e.Delta > 0 ? 1 : -1);
         }
         private void ContentControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
+            SkillBindingInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as SkillBindingInfo;
             ChangeSkillLevel(skill, 1);
         }
 
         private void ContentControl_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
+            SkillBindingInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as SkillBindingInfo;
             ChangeSkillLevel(skill, 1);
         }
 
         private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            UserSkill.UserSkillInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as UserSkill.UserSkillInfo;
+            SkillBindingInfo skill = ((sender as ContentControl).Content as StackPanel).DataContext as SkillBindingInfo;
             SetSkillTextBlock(skill);
 
             skillPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
@@ -69,7 +75,7 @@ namespace RooStatsSim.UI.SkillWindow
             skillPopup.IsOpen = false;
         }
 
-        void SetSkillTextBlock(UserSkill.UserSkillInfo skill)
+        void SetSkillTextBlock(SkillBindingInfo skill)
         {
             TextBlock PopupText = new TextBlock
             {

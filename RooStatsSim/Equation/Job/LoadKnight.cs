@@ -12,8 +12,6 @@ namespace RooStatsSim.Equation.Job
 {
     class LordKnight : Equations
     {
-        public Dictionary<string, SkillInfo> Skill { get; set; }
-
         public LordKnight() : base(ATTACK_TYPE.MELEE_TYPE)
         {
         }
@@ -40,10 +38,5 @@ namespace RooStatsSim.Equation.Job
             return 0;
         }
         #endregion
-
-        public void SetSkillInit()
-        {
-            MainWindow._user_data_manager.Data.User_Skill.InitSkills(Skill_DB._swordman_skill.Skill, Skill_DB._loadknight_skill.Skill);
-        }
     }
 }
