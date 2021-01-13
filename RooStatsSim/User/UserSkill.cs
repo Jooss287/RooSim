@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
 using RooStatsSim.DB.Skill;
+using RooStatsSim.UI.SkillWindow;
 using RooStatsSim.Extension;
 
 namespace RooStatsSim.User
@@ -13,6 +14,7 @@ namespace RooStatsSim.User
     [Serializable]
     public class UserSkill
     {
+        [Serializable]
         public class UserSkillInfo : INotifyPropertyChanged
         {
             string _name;
@@ -21,23 +23,33 @@ namespace RooStatsSim.User
             int _max_level;
             BitmapImage _image;
 
+            public UserSkillInfo() { }
+            public UserSkillInfo(string name, int level = 0, int max_level = 0)
+            {
+                if (!SkillWindow._skill_db.Dic.ContainsKey(name))
+                    return;
+
+                SkillInfo skill = SkillWindow._skill_db.Dic[name];
+                Name = skill.NAME;
+                Name_Kor = skill.NAME_KOR;
+                if (max_level == 0)
+                    Max_Level = skill.MAX_LV;
+                Level = level;
+            }
+
+            #region Property
             public string Name
             {
                 get { return _name; }
                 set
                 {
-                    _name = value;
+                    SkillInfo skill = SkillWindow._skill_db.Dic[value];
+                    _name = skill.NAME;
+                    Name_Kor = skill.NAME_KOR;
+                    Detail = skill;
+                    Max_Level = skill.MAX_LV;
                     OnPropertyChanged("Name");
                     GetImage();
-                }
-            }
-            public string Name_Kor
-            {
-                get { return _name_kor; }
-                set
-                {
-                    _name_kor = value;
-                    OnPropertyChanged("Name_Kor");
                 }
             }
             public int Level
@@ -45,7 +57,7 @@ namespace RooStatsSim.User
                 get { return _level; }
                 set
                 {
-                    if (value > _max_level)
+                    if (value > Max_Level)
                         return;
                     if (value < 0)
                         return;
@@ -54,6 +66,16 @@ namespace RooStatsSim.User
                     OnPropertyChanged("Show_Level");
                 }
             }
+            [JsonIgnore]public string Name_Kor
+            {
+                get { return _name_kor; }
+                set
+                {
+                    _name_kor = value;
+                    OnPropertyChanged("Name_Kor");
+                }
+            }
+
             public int Max_Level
             {
                 get { return _max_level; }
@@ -65,7 +87,7 @@ namespace RooStatsSim.User
                     OnPropertyChanged("Max_Level");
                 }
             }
-            public string Show_Level
+            [JsonIgnore]public string Show_Level
             {
                 get { return string.Format("({0}/{1})", Level, Max_Level); }
             }
@@ -74,14 +96,20 @@ namespace RooStatsSim.User
             {
                 get { return _image; }
             }
-            void GetImage()
+
+            private void GetImage()
             {
                 if (_name == null)
                     return;
                 string resource_name = "Resources/Skills/" + _name + ".png";
                 _image = new BitmapImage(ResourceExtension.GetAssemblyUri(resource_name));
             }
+            private void SetName(string name)
+            {
 
+            }
+            #endregion
+            #region EventHandler
             public event PropertyChangedEventHandler PropertyChanged;
 
             public override string ToString() => _name;
@@ -91,21 +119,16 @@ namespace RooStatsSim.User
                 var handler = PropertyChanged;
                 handler?.Invoke(this, new PropertyChangedEventArgs(info));
             }
+            #endregion
         }
-
-        public ObservableCollection<UserSkillInfo> List { get; }
+        public ObservableCollection<UserSkillInfo> List { get; set; }
         public UserSkill()
         {
             List = new ObservableCollection<UserSkillInfo>();
             List.CollectionChanged += OnListChanged;
         }
-        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
-        {
-            //if (Convert.ToInt32(args.NewItems[0]) < 0)
-            //{
-            //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
-            //}
-        }
+
+        #region UserCommand
         public void InitSkills(params Dictionary<string, SkillInfo>[] skills)
         {
             List.Clear();
@@ -113,13 +136,7 @@ namespace RooStatsSim.User
             {
                 foreach (KeyValuePair<string, SkillInfo> skill in jobskill)
                 {
-                    UserSkillInfo user_skill = new UserSkillInfo();
-                    user_skill.Name = skill.Key;
-                    user_skill.Name_Kor = skill.Value.NAME_KOR;
-                    user_skill.Detail = skill.Value;
-                    user_skill.Level = 0;
-                    user_skill.Max_Level = skill.Value.MAX_LV;
-                    List.Add(user_skill);
+                    List.Add(new UserSkillInfo(skill.Key));
                 }
             }
         }
@@ -127,11 +144,7 @@ namespace RooStatsSim.User
         {
             if ( FindSkillInfo(skill.Key) == null)
             {
-                UserSkillInfo user_skill = new UserSkillInfo();
-                user_skill.Name = skill.Key;
-                user_skill.Level = 0;
-                user_skill.Detail = skill.Value;
-                List.Add(user_skill);
+                List.Add(new UserSkillInfo(skill.Key));
             }    
         }
         public UserSkillInfo FindSkillInfo(string skill_name)
@@ -155,5 +168,15 @@ namespace RooStatsSim.User
             }
             return option;
         }
+        #endregion
+        #region EventHandler
+        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            //if (Convert.ToInt32(args.NewItems[0]) < 0)
+            //{
+            //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
+            //}
+        }
+        #endregion
     }
 }

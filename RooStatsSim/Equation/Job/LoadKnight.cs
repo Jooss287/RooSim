@@ -43,7 +43,7 @@ namespace RooStatsSim.Equation.Job
 
         public void SetSkillInit()
         {
-            MainWindow._user_data_manager.Data.User_Skill.InitSkills(SkillWindow._swordman_skill.Skill, SkillWindow._loadknight_skill.Skill);
+            MainWindow._user_data_manager.Data.User_Skill.InitSkills(Skill_DB._swordman_skill.Skill, Skill_DB._loadknight_skill.Skill);
         }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using RooStatsSim.DB;
 using System.Reflection;
 
 namespace RooStatsSim.Extension
@@ -250,7 +247,8 @@ namespace RooStatsSim.Extension
                 return false;
             }
 
-            if (typeToConvert.GetGenericTypeDefinition() != typeof(Dictionary<,>))
+            if (!( (typeToConvert.GetGenericTypeDefinition() == typeof(Dictionary<,>)))) //) ||
+                 //(typeToConvert.GetGenericTypeDefinition() == typeof(List<>)) ))
             {
                 return false;
             }

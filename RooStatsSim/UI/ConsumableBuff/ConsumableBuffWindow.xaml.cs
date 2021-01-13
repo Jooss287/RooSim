@@ -24,23 +24,16 @@ namespace RooStatsSim.UI.ConsumableBuff
 
         public ConsumableBuffWindow()
         {
-            GetUserData();
-            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
-            _user_data.User_ConBuff.InitBuffs(_cooking_consumable.Buff, _portion_consumable.Buff);
-
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(GetUserData);
             InitializeComponent();
-            SetConsumableBuff();
         }
 
         void GetUserData()
         {
             _user_data = MainWindow._user_data_manager.Data;
-        }
-        public void SetConsumableBuff()
-        {
+            _user_data.User_ConBuff.InitBuffs(_cooking_consumable.Buff, _portion_consumable.Buff);
             BuffSelector.ItemsSource = _user_data.User_ConBuff.List;
         }
-
         void ChangeBuffLevel(UserConsumableBuff.UserConsumableBuffnfo buff, int i)
         {
             buff.Level += i;

@@ -179,7 +179,7 @@ namespace RooStatsSim.DB
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
-            //serializeOptions.Converters.Add(new JsonConvertExt_List_class_DB());
+            serializeOptions.Converters.Add(new JsonConvertExt_List_class_DB());
             serializeOptions.WriteIndented = true;
 
             string jsonString;

@@ -36,18 +36,13 @@ namespace RooStatsSim.UI.Equipment
         EQUIP_TYPE_ENUM now_selected_equip_type;
         public Equip()
         {
-            GetUserData();
-            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
-            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(JobSelectedEvent);
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(GetUserData);
             this.DataContext = this;
             InitializeComponent();
         }
         void GetUserData()
         {
             _user_data = MainWindow._user_data_manager.Data;
-        }
-        void JobSelectedEvent()
-        {
             string job_name = Enum.GetName(typeof(JOB_SELECT_LIST), ((int)((int)_user_data.Job / 100) * 100)).ToLower();
             string filename = "Resources/Job/" + job_name + ".png";
 

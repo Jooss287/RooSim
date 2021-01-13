@@ -129,6 +129,7 @@
     <Compile Include="DB\Skill\JobSkill\LoadKnightSkill.cs" />
     <Compile Include="DB\Skill\SkillInfo.cs" />
     <Compile Include="DB\Skill\JobSkill\SwordmanSkill.cs" />
+    <Compile Include="DB\Skill\Skill_DB.cs" />
     <Compile Include="DB\Table\EnumBaseTable.cs" />
     <Compile Include="DB\Table\EnumItemOptionTable.cs" />
     <Compile Include="DB\Table\EnumItemOptionTable_Kor.cs" />

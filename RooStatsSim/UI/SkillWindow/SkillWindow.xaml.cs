@@ -2,6 +2,8 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Collections.Generic;
+using RooStatsSim.DB.Skill;
 using RooStatsSim.DB.Skill.JobSkill;
 using RooStatsSim.User;
 
@@ -12,29 +14,19 @@ namespace RooStatsSim.UI.SkillWindow
     /// </summary>
     public partial class SkillWindow : UserControl
     {
-        #region skill Info
-        public static SwordmanSkill _swordman_skill = new SwordmanSkill();
-        public static LoadKnightSkill _loadknight_skill = new LoadKnightSkill();
-        #endregion
+        public static Skill_DB _skill_db = new Skill_DB();
 
         UserData _user_data;
         Popup skillPopup = new Popup();
 
         public SkillWindow()
         {
-            GetUserData();
-            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
-            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(RefrashSkill);
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(GetUserData);
             InitializeComponent();
-
-            RefrashSkill();
         }
         void GetUserData()
         {
             _user_data = MainWindow._user_data_manager.Data;
-        }
-        public void RefrashSkill()
-        {
             SkillSelector.ItemsSource = _user_data.User_Skill.List;
         }
 
@@ -43,6 +35,8 @@ namespace RooStatsSim.UI.SkillWindow
             skill.Level += i;
             if (skill.Detail.OPTION.Count != 0)
                 MainWindow._user_data_manager.CalcUserData();
+            else
+                MainWindow._user_data_manager._user_data_edited = true;
         }
         private void skill_lv_Wheel(object sender, MouseWheelEventArgs e)
         {

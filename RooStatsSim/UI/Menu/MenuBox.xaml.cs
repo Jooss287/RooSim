@@ -36,10 +36,9 @@ namespace RooStatsSim.UI.Menu
                 }
 
                 MainWindow._user_data_manager._user_data_edited = true;
+                RadioButton source = e.Source as RadioButton;
+                MainWindow._user_data_manager.JobChanged((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag)), true);
             }
-
-            RadioButton source = e.Source as RadioButton;
-            MainWindow._user_data_manager.JobChanged((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag)));
         }
         private void TurnOnOff(WINDOW_ENUM window_name)
         {

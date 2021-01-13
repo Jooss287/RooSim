@@ -17,22 +17,21 @@ namespace RooStatsSim.UI.StackBuff
         MedalList BindingMedalPoint;
         public StackBuffWindow()
         {
-            GetUserData();
-            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(GetUserData);
 
             InitializeComponent();
             DataContext = this;
 
+        }
+        void GetUserData()
+        {
+            _user_data = MainWindow._user_data_manager.Data;
             BindingRidingAbility = new RidingList(_user_data.Riding_ability);
             RidingAbility.ItemsSource = BindingRidingAbility;
             BindingRidingPersonality = new RidingList(_user_data.Riding_personality);
             RidingPersonality.ItemsSource = BindingRidingPersonality;
             BindingMedalPoint = new MedalList(ref _user_data);
             MedalPoint.ItemsSource = BindingMedalPoint;
-        }
-        void GetUserData()
-        {
-            _user_data = MainWindow._user_data_manager.Data;
         }
         public int Monster_Research
         {

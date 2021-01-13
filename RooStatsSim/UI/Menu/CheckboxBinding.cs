@@ -28,7 +28,7 @@ namespace RooStatsSim.UI.Menu
                 if (_point == value)
                     return;
 
-                MainWindow._user_data_manager.SetUserData((int)value);
+                //MainWindow._user_data_manager.SetUserData((int)value);
                 _point = value;
                 OnPropertyChanged("Point");
             }
