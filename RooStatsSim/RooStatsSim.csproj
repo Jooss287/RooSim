@@ -121,6 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\ConsumableItem\ConsumableBuff_DB.cs" />
     <Compile Include="DB\ConsumableItem\CookingConsumable.cs" />
     <Compile Include="DB\ConsumableItem\ConsumableBuffInfo.cs" />
     <Compile Include="DB\ConsumableItem\PortionConsumable.cs" />

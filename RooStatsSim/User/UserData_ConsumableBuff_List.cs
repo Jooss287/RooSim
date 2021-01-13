@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
 using RooStatsSim.DB.ConsumableItem;
+using RooStatsSim.UI.ConsumableBuff;
 using RooStatsSim.Extension;
 
 namespace RooStatsSim.User
@@ -13,31 +14,34 @@ namespace RooStatsSim.User
     [Serializable]
     public class UserConsumableBuff
     {
-        public class UserConsumableBuffnfo : INotifyPropertyChanged
+        [Serializable]
+        public class UserConsumableBuffnfo
         {
             string _name;
-            string _name_kor;
             int _level;
             int _max_level;
-            BitmapImage _image;
+
+            public UserConsumableBuffnfo() { }
+            public UserConsumableBuffnfo(string name, int level = 0, int max_level = 0)
+            {
+                if (!ConsumableBuffWindow._consumable_buff_db.Dic.ContainsKey(name))
+                    return;
+
+                ConsumableBuffInfo buff = ConsumableBuffWindow._consumable_buff_db.Dic[name];
+                Name = buff.NAME;
+                if (max_level == 0)
+                    Max_Level = buff.MAX_LV;
+                Level = level;
+            }
 
             public string Name
             {
                 get { return _name; }
                 set
                 {
-                    _name = value;
-                    OnPropertyChanged("Name");
-                    GetImage();
-                }
-            }
-            public string Name_Kor
-            {
-                get { return _name_kor; }
-                set
-                {
-                    _name_kor = value;
-                    OnPropertyChanged("Name_Kor");
+                    ConsumableBuffInfo buff = ConsumableBuffWindow._consumable_buff_db.Dic[value];
+                    _name = buff.NAME;
+                    Max_Level = buff.MAX_LV;
                 }
             }
             public int Level
@@ -45,13 +49,11 @@ namespace RooStatsSim.User
                 get { return _level; }
                 set
                 {
-                    if (value > _max_level)
+                    if (value > Max_Level)
                         return;
                     if (value < 0)
                         return;
                     _level = value;
-                    OnPropertyChanged("Level");
-                    OnPropertyChanged("Show_Level");
                 }
             }
             public int Max_Level
@@ -59,80 +61,33 @@ namespace RooStatsSim.User
                 get { return _max_level; }
                 set
                 {
-                    if (value > Detail.MAX_LV)
-                        return;
                     _max_level = value;
-                    OnPropertyChanged("Max_Level");
                 }
-            }
-            public string Show_Level
-            {
-                get { return new string('★', Level); }
-            }
-            [JsonIgnore]public ConsumableBuffInfo Detail { get; set; }
-            [JsonIgnore]public BitmapImage ImageFile
-            {
-                get { return _image; }
-            }
-            void GetImage()
-            {
-                if (_name == null)
-                    return;
-                string resource_name = "Resources/ConsumableBuff/" + _name + ".png";
-                _image = new BitmapImage(ResourceExtension.GetAssemblyUri(resource_name));
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            public override string ToString() => _name;
-
-            protected void OnPropertyChanged(string info)
-            {
-                var handler = PropertyChanged;
-                handler?.Invoke(this, new PropertyChangedEventArgs(info));
             }
         }
 
-        public ObservableCollection<UserConsumableBuffnfo> List { get; }
+        public Dictionary<string, UserConsumableBuffnfo> Dic { get; }
         public UserConsumableBuff()
         {
-            List = new ObservableCollection<UserConsumableBuffnfo>();
-            List.CollectionChanged += OnListChanged;
+            Dic = new Dictionary<string, UserConsumableBuffnfo>();
         }
-        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
+
+        public void SetSkillLevel(string name, int level, int max_level = 0)
         {
-            //if (Convert.ToInt32(args.NewItems[0]) < 0)
-            //{
-            //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
-            //}
-        }
-        public void InitBuffs(params Dictionary<string, ConsumableBuffInfo>[] buff_list)
-        {
-            List.Clear();
-            foreach(Dictionary<string, ConsumableBuffInfo> consumable in buff_list)
-            {
-                foreach (KeyValuePair<string, ConsumableBuffInfo> buff in consumable)
-                {
-                    UserConsumableBuffnfo user_buff = new UserConsumableBuffnfo();
-                    user_buff.Name = buff.Key;
-                    user_buff.Name_Kor = buff.Value.NAME_KOR;
-                    user_buff.Detail = buff.Value;
-                    user_buff.Level = 0;
-                    user_buff.Max_Level = buff.Value.MAX_LV;
-                    List.Add(user_buff);
-                }
+            if (level == 0)
+            { 
+                if (Dic.ContainsKey(name))
+                    Dic.Remove(name);
+                return;
             }
+            else
+                Dic[name] = new UserConsumableBuffnfo(name, level, max_level);
         }
         public UserItem GetOption()
         {
             UserItem option = new UserItem();
-
-            foreach (UserConsumableBuffnfo buff in List)
-            {
-                if (buff.Level == 0)
-                    continue;
-                option += buff.Detail.OPTION[buff.Level-1];
-            }
+            foreach (KeyValuePair<string, UserConsumableBuffnfo> buff in Dic)
+                option += ConsumableBuffWindow._consumable_buff_db.Dic[buff.Key].OPTION[buff.Value.Level-1];
             return option;
         }
     }

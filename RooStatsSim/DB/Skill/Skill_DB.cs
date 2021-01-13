@@ -16,10 +16,10 @@ namespace RooStatsSim.DB.Skill
         public Skill_DB()
         {
             Dic = new Dictionary<string, SkillInfo>();
-            MakeSkillDB(_swordman_skill.Skill, _loadknight_skill.Skill);
+            MakeDB(_swordman_skill.Skill, _loadknight_skill.Skill);
         }
         
-        void MakeSkillDB(params Dictionary<string, SkillInfo>[] param)
+        void MakeDB(params Dictionary<string, SkillInfo>[] param)
         {
             Dic.Clear();
             foreach(Dictionary<string, SkillInfo> skills in param)

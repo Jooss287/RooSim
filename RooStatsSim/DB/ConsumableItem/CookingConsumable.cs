@@ -44,7 +44,7 @@ namespace RooStatsSim.DB.ConsumableItem
         SHELLFISH_TUNA_PORRIDGE,
         FINEST_SHELLFISH_PORRIDGE,
     }
-    class CookingConsumable
+    public class CookingConsumable
     {
         public static Dictionary<string, string> BASIC_COOKING_CONSUMABLE_ITEM_KOR = new Dictionary<string, string>()
         {
