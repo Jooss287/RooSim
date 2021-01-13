@@ -40,6 +40,7 @@ namespace RooStatsSim.UI.ConsumableBuff
         void ChangeBuffLevel(ConsumableBindingInfo buff, int i)
         {
             buff.Level += i;
+            _user_data.User_ConBuff.SetBuffLevel(buff.Name, buff.Level);
             MainWindow._user_data_manager.CalcUserData();
         }
         private void buff_lv_Wheel(object sender, MouseWheelEventArgs e)

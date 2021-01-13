@@ -66,13 +66,13 @@ namespace RooStatsSim.User
             }
         }
 
-        public Dictionary<string, UserConsumableBuffnfo> Dic { get; }
+        public Dictionary<string, UserConsumableBuffnfo> Dic { get; set; }
         public UserConsumableBuff()
         {
             Dic = new Dictionary<string, UserConsumableBuffnfo>();
         }
 
-        public void SetSkillLevel(string name, int level, int max_level = 0)
+        public void SetBuffLevel(string name, int level, int max_level = 0)
         {
             if (level == 0)
             { 
