@@ -38,6 +38,12 @@ namespace RooStatsSim.Equation.Job
         {
             Job.ElementAt(GetJobNum).User = new GetValue(user);
         }
+
+        public ItemDB GetOption()
+        {
+            return Job.ElementAt(GetJobNum).GetOption();
+        }
+        #region Equations
         public double GetReverseATK(int sATK)
         {
             return Job.ElementAt(GetJobNum).CalcReverseATK(sATK);
@@ -54,5 +60,6 @@ namespace RooStatsSim.Equation.Job
         {
             return Job.ElementAt(GetJobNum).CalcStatusWinATK();
         }
+        #endregion
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
-using RooStatsSim.DB.Skill;
+using RooStatsSim.DB.Job;
 using RooStatsSim.Extension;
 
 namespace RooStatsSim.User

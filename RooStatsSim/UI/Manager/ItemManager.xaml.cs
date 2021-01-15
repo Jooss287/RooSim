@@ -10,8 +10,8 @@ using System.Linq;
 
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
-using RooStatsSim.DB.Skill;
-using RooStatsSim.DB.Skill.JobSkill;
+using RooStatsSim.DB.Job;
+using RooStatsSim.DB.Job.JobInfo;
 using RooStatsSim.UI.SkillWindow;
 
 

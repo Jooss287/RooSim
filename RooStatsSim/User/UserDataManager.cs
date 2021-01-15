@@ -60,6 +60,7 @@ namespace RooStatsSim.User
             UserItem CalcUserItem = new UserItem(true);
 
             //직업별 추가 능력치
+            CalcUserItem += Data.JobSelect.GetOption();
             CalcUserItem += Data.User_Skill.GetOption();
             //Stack Options
             CalcUserItem += Data.Monster_Research.GetOption();

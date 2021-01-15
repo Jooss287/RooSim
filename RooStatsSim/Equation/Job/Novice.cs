@@ -13,5 +13,9 @@ namespace RooStatsSim.Equation.Job
         public void SetSkillInit()
         {
         }
+        public ItemDB GetOption()
+        {
+            return null;
+        }
     }
 }

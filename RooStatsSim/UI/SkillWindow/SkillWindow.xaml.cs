@@ -2,7 +2,7 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using RooStatsSim.DB.Skill.JobSkill;
+using RooStatsSim.DB.Job.JobInfo;
 using RooStatsSim.User;
 
 namespace RooStatsSim.UI.SkillWindow
