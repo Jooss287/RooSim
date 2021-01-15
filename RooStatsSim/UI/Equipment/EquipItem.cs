@@ -49,7 +49,7 @@ namespace RooStatsSim.UI.Equipment
         {
             get { return _refine; }
             set { 
-                if ( ( value > 0) && ( value <= 15) )
+                if ( ( value >= 0) && ( value <= 15) )
                 {
                     _refine = value;
                     OnPropertyChanged("Refine");
