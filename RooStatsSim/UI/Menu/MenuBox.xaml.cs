@@ -18,6 +18,8 @@ namespace RooStatsSim.UI.Menu
         MainWindow _parents = null;
         public MenuBox(MainWindow parents)
         {
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(GetUserData);
+
             InitializeComponent();
             _parents = parents;
 
@@ -25,19 +27,24 @@ namespace RooStatsSim.UI.Menu
         }
 
         #region UI callbacks
+        void GetUserData()
+        {
+            UserData user_data = MainWindow._user_data_manager.Data;
+            (DataContext as CheckboxBinding).Job = user_data.Job;
+        }
         private void job_sel_Click(object sender, RoutedEventArgs e)
         {
             if (_parents != null)
             {
                 MessageBoxResult res = MessageBox.Show("세팅된 모든 정보가 변경될 수 있습니다. 변경하시겠습니까?", "ClassChange", MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.No)
-                { 
+                {
+                    GetUserData();
                     return;
                 }
 
                 MainWindow._user_data_manager._user_data_edited = true;
-                RadioButton source = e.Source as RadioButton;
-                MainWindow._user_data_manager.JobChanged((JOB_SELECT_LIST)Enum.Parse(typeof(JOB_SELECT_LIST), Convert.ToString(source.Tag)), true);
+                MainWindow._user_data_manager.JobChanged(MainWindow._user_data_manager.Data.Job, true);
             }
         }
         private void TurnOnOff(WINDOW_ENUM window_name)

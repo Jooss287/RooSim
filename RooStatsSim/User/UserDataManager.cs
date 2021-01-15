@@ -32,6 +32,7 @@ namespace RooStatsSim.User
                 _dic_user_data.Add(number, user);
             }
             SavePointNumber = number;
+
             JobChanged(_dic_user_data[number].Job);
             //JobDataChanged?.Invoke();
             CalcUserData(_user_data_edited);
