@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RooStatsSim.DB.Skill
+namespace RooStatsSim.DB.Job
 {
     public enum SKILL_TYPE
     {
