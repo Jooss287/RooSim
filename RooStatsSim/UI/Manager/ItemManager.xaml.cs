@@ -191,12 +191,8 @@ namespace RooStatsSim.UI.Manager
             //Refine
             cmb_if_per_option.Items.Add(EnumItemOptionTable_Kor.REFINE_TYPE_KOR[REFINE_TYPE.REFINE]);
 
-            {
-                foreach (KeyValuePair<string, SkillInfo> skill in SkillWindow.SkillWindow._swordman_skill.Skill)
-                    cmb_skill_option.Items.Add(SwordmanSkill.SKILL_KOR[skill.Key]);
-                foreach (KeyValuePair<string, SkillInfo> skill in SkillWindow.SkillWindow._loadknight_skill.Skill)
-                    cmb_skill_option.Items.Add(LoadKnightSkill.SKILL_KOR[skill.Key]);
-            }
+            foreach (KeyValuePair<string, SkillInfo> skill in SkillWindow.SkillWindow._skill_db.Dic)
+                cmb_skill_option.Items.Add(skill.Value.NAME_KOR);
             
         }
         void SetNowItemOption()

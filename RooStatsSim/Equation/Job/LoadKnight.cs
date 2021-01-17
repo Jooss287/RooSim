@@ -11,10 +11,13 @@ namespace RooStatsSim.Equation.Job
 {
     class LordKnight : Equations
     {
+<<<<<<< .merge_file_a20168
         public Dictionary<string, SkillInfo> Skill { get; set; }
         public SwordmanJobBonus JobBonus_1st = new SwordmanJobBonus();
         public LoadKnightJobBonus JobBonus = new LoadKnightJobBonus();
 
+=======
+>>>>>>> .merge_file_a07976
         public LordKnight() : base(ATTACK_TYPE.MELEE_TYPE)
         {
         }
@@ -41,6 +44,7 @@ namespace RooStatsSim.Equation.Job
             return 0;
         }
         #endregion
+<<<<<<< .merge_file_a20168
 
         public void SetSkillInit()
         {
@@ -64,5 +68,7 @@ namespace RooStatsSim.Equation.Job
             }
             return option;
         }
+=======
+>>>>>>> .merge_file_a07976
     }
 }

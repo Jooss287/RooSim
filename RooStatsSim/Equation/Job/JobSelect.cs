@@ -29,10 +29,9 @@ namespace RooStatsSim.Equation.Job
         private int GetJobNum { get { return (int)SelectedJob / 100; } }
 
 
-        public JobSelect(JOB_SELECT_LIST param_job = JOB_SELECT_LIST.NOVICE)
+        public JobSelect(UserData Data, JOB_SELECT_LIST param_job = JOB_SELECT_LIST.NOVICE)
         {
             SelectedJob = param_job;
-            Job.ElementAt(GetJobNum).SetSkillInit();
         }
         public void SetUserData(UserData user)
         {

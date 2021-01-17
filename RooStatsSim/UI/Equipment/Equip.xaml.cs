@@ -36,22 +36,51 @@ namespace RooStatsSim.UI.Equipment
         EQUIP_TYPE_ENUM now_selected_equip_type;
         public Equip()
         {
-            GetUserData();
-            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
-            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(JobSelectedEvent);
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(GetUserData);
             this.DataContext = this;
             InitializeComponent();
         }
         void GetUserData()
         {
             _user_data = MainWindow._user_data_manager.Data;
-        }
-        void JobSelectedEvent()
-        {
+
+            foreach(KeyValuePair<EQUIP_TYPE_ENUM, EQUIP.EquipItem> equipment in _user_data.Equip.Dic)
+            {
+                if (equipment.Value == null)
+                    continue;
+
+                EquipId equip_id = new EquipId()
+                {
+                    Id = equipment.Value.EquipInfo.Id,
+                    Name = equipment.Value.EquipInfo.Name,
+                    Refine = equipment.Value.Refine,
+                    ImageRoot = equipment.Value.EquipInfo.ImageName
+                };
+                SetUserItemChanged(equip_id, equipment.Key);
+            }
+
             string job_name = Enum.GetName(typeof(JOB_SELECT_LIST), ((int)((int)_user_data.Job / 100) * 100)).ToLower();
             string filename = "Resources/Job/" + job_name + ".png";
-
             Image_Char.Source = new BitmapImage(ResourceExtension.GetAssemblyUri(filename));
+        }
+        void SetUserItemChanged(EquipId item, EQUIP_TYPE_ENUM equip_type, ITEM_TYPE_ENUM item_type = ITEM_TYPE_ENUM.EQUIPMENT)
+        {
+            if ( item_type == ITEM_TYPE_ENUM.EQUIPMENT)
+            { 
+                GetEquipTypeItem(equip_type).Header = string.Format("+{0} {1}", item.Refine, item.Name);
+                GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
+
+                CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, equip_type);
+                CardSelector.ItemsSource = CardItemList;
+                //EnchantList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.ENCHANT, now_selected_equip_type);
+
+            }
+            else if (( item_type == ITEM_TYPE_ENUM.CARD) || (item_type == ITEM_TYPE_ENUM.ENCHANT))
+            {
+                GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
+            }
+
+            MainWindow._user_data_manager.CalcUserData();
         }
 
         private TreeViewItem GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
@@ -78,6 +107,10 @@ namespace RooStatsSim.UI.Equipment
                     return acc1_tree;
                 case EQUIP_TYPE_ENUM.ACCESSORIES2:
                     return acc2_tree;
+                case EQUIP_TYPE_ENUM.COSTUME:
+                    return costume_tree;
+                case EQUIP_TYPE_ENUM.BACK_DECORATION:
+                    return backdeco_tree;
             }
             return null;
         }
@@ -101,17 +134,14 @@ namespace RooStatsSim.UI.Equipment
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.List[(int)now_selected_equip_type].Equip = MainWindow._roo_db.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[now_selected_equip_type]][item.Id];
-            _user_data.Equip.List[(int)now_selected_equip_type].Refine = item.Refine;
-            GetEquipTypeItem(now_selected_equip_type).Header = string.Format("+{0} {1}",item.Refine, item.Name);
-            GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
+            if (!_user_data.Equip.Dic.ContainsKey(now_selected_equip_type))
+                _user_data.Equip.Dic[now_selected_equip_type] = new EQUIP.EquipItem();
+            _user_data.Equip.Dic[now_selected_equip_type].EquipType = now_selected_equip_type;
+            _user_data.Equip.Dic[now_selected_equip_type].Equip = item.Id;
+            _user_data.Equip.Dic[now_selected_equip_type].Refine = item.Refine;
 
-            CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, now_selected_equip_type);
-            CardSelector.ItemsSource = CardItemList;
-            //EnchantList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.ENCHANT, now_selected_equip_type);
-
+            SetUserItemChanged(item, now_selected_equip_type);
             ItemSlectorTab.SelectedIndex = 1;
-            MainWindow._user_data_manager.CalcUserData();
         }
         private void Item_RefineWheel(object sender, MouseWheelEventArgs e)
         {
@@ -127,10 +157,10 @@ namespace RooStatsSim.UI.Equipment
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.List[(int)now_selected_equip_type].AddCard(MainWindow._roo_db.Card_db[item.Id]);
-            GetEquipTypeItem(now_selected_equip_type).ItemsSource = new EquipList(_user_data.Equip.List[(int)now_selected_equip_type]);
-            MainWindow._user_data_manager.CalcUserData();
+            _user_data.Equip.Dic[now_selected_equip_type].AddCard(item.Id);
+            SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.CARD);
         }
+
         private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;

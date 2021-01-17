@@ -17,74 +17,75 @@ namespace RooStatsSim.User
     [Serializable]
     public class EQUIP
     {
+        [Serializable]
         public class EquipItem
         {
-            int _refine;
+            public EQUIP_TYPE_ENUM EquipType { get; set; }
             public int LastCardSetSlot { get; set; }
             public int LastEnchantSlot { get; set; }
-            public int Refine 
+
+            int _equip;
+            List<int> _cards;
+            List<int> _enchant;
+
+            [JsonIgnore] public ItemDB EquipInfo { get; set; }
+            //[JsonIgnore] Dictionary<ItemDB> CardInfo { get; set; }
+
+            int _refine;
+            public int Refine
             {
                 get { return _refine; }
-                set { _refine = value; SetRefineOption(); }
+                set { _refine = value; }
             }
-            ItemDB _equip = new ItemDB();
-            ItemDB _equip_refine_option;
-            List<ItemDB> _cards;
-            List<ItemDB> _enchant;
-
-            public ItemDB Equip
+            public int Equip
             {
                 get { return _equip; }
-                set { _equip = value; }
+                set { _equip = value; EquipInfo = MainWindow._roo_db.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[EquipType]][Equip]; }
             }
             
-            public List<ItemDB> Card
+            public List<int> Card
             {
                 get {
                     if (_cards == null)
-                        _cards = new List<ItemDB>();
+                        _cards = new List<int>();
                     return _cards;
                 }
                 set { _cards = value; }
             }
-            public List<ItemDB> Enchant
+            public List<int> Enchant
             {
                 get {
                     if (_enchant == null)
-                        _enchant = new List<ItemDB>();
+                        _enchant = new List<int>();
                     return _enchant;
                 }
                 set { _enchant = value; }
             }
-            [JsonIgnore]
-            public ItemDB RefineOption
-            {
-                get { return _equip_refine_option; }
-                set { _equip_refine_option = value; }
-            }
 
-            public void AddCard(ItemDB input_card)
+            public void AddCard(int input_card)
             {
-                if (Equip.CardSlot == 0)
+                ItemDB item = MainWindow._roo_db.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[EquipType]][Equip];
+                if (item.CardSlot == 0)
                     return;
-                if (Card.Count < Equip.CardSlot)
+                if (Card.Count < item.CardSlot)
                     Card.Add(input_card);
                 else
                 {
-                    if (LastCardSetSlot - 1 <= Equip.CardSlot)
+                    if (LastCardSetSlot - 1 <= item.CardSlot)
                         LastCardSetSlot = 0;
                     Card[LastCardSetSlot] = input_card;
                 }
             }
-            private void SetRefineOption()
+            public ItemDB GetRefineOption()
             {
                 ItemDB db = null;
-                CalcRefineOption(ref db, Equip);
-                foreach(ItemDB card in Card)
+                CalcRefineOption(ref db, EquipInfo);
+                foreach(int card_id in Card)
                 {
-                    CalcRefineOption(ref db, card);
+                    ItemDB item = MainWindow._roo_db.Card_db[card_id];
+                    CalcRefineOption(ref db, item);
                 }
-                _equip_refine_option = db;
+                return db;
             }
             void CalcRefineOption(ref ItemDB db, ItemDB item_db)
             {
@@ -112,22 +113,14 @@ namespace RooStatsSim.User
             }
         }
         
-        public ObservableCollection<EquipItem> List { get; }
+        public Dictionary<EQUIP_TYPE_ENUM, EquipItem> Dic { get; set; }
         public EQUIP()
         {
-            List = new ObservableCollection<EquipItem>();
-            List.CollectionChanged += OnListChanged;
-
-            foreach (string equip_type in Enum.GetNames(typeof(EQUIP_TYPE_ENUM)))
-            {
-                List.Add(new EquipItem());
-            }
-        }
-        private void OnListChanged(object sender, NotifyCollectionChangedEventArgs args)
-        {
-            //if (Convert.ToInt32(args.NewItems[0]) < 0)
+            Dic = new Dictionary<EQUIP_TYPE_ENUM, EquipItem>();
+            
+            //foreach (EQUIP_TYPE_ENUM equip_type in Enum.GetValues(typeof(EQUIP_TYPE_ENUM)))
             //{
-            //    List[args.NewStartingIndex] = Convert.ToInt32(args.OldItems[0]);
+            //    Dic[equip_type] = new EquipItem();
             //}
         }
 
@@ -135,19 +128,19 @@ namespace RooStatsSim.User
         {
             UserItem option = new UserItem();
             List<string> set_name = new List<string>();
-            foreach ( EquipItem equipment in List)
+            foreach (KeyValuePair<EQUIP_TYPE_ENUM, EquipItem> equipment in Dic)
             {
-                if (equipment.Equip == null)
+                if (equipment.Value == null)
                     continue;
-                foreach (ItemDB card in equipment.Card)
-                    option += card;
-                foreach (ItemDB enchant in equipment.Enchant)
-                    option += enchant;
-                option += equipment.Equip;
-                option += equipment.RefineOption;
+                foreach (int card_id in equipment.Value.Card)
+                    option += MainWindow._roo_db.Card_db[card_id];
+                foreach (int enchant_id in equipment.Value.Enchant)
+                    option += MainWindow._roo_db.Card_db[enchant_id];
+                option += equipment.Value.EquipInfo;
+                option += equipment.Value.GetRefineOption();
 
-                if (equipment.Equip.SetName != null)
-                    set_name.Add(equipment.Equip.SetName);
+                if (equipment.Value.EquipInfo != null)
+                    set_name.Add(equipment.Value.EquipInfo.SetName);
             }
 
             // 세트 아이템 효과 적용
@@ -160,7 +153,7 @@ namespace RooStatsSim.User
                     continue;
                 foreach(EQUIP_TYPE_ENUM type in set_item.SetPosition)
                 {
-                    if ( List[(int)type].Equip.SetName != set)
+                    if ( Dic[type].EquipInfo.SetName != set)
                     {
                         set_access = false;
                         break;

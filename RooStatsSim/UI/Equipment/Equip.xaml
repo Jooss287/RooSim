@@ -69,6 +69,22 @@
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="COSTUME">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite">
+                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
+                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
+                                    <TreeViewItem x:Name="costume_tree" Header="코스튬"
+                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
+                                </TreeView>
+                            </StackPanel>
+                        </ContentControl>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <Image x:Name="Image_Char" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1" Width="100" Stretch="Fill"/>
+
+                    <Border Style="{Binding Source={StaticResource Tree_Border}}">
                         <ContentControl MouseDoubleClick="SelectGear_MouseDoubleClick" Tag="GEAR">
                             <StackPanel Orientation="Vertical" Background="GhostWhite">
                                 <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
@@ -80,10 +96,7 @@
                         </ContentControl>
                     </Border>
                 </StackPanel>
-
-                <!--<TextBlock Text="캐릭터스샷" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1"/>-->
-                <Image x:Name="Image_Char" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1" Width="100" Stretch="Fill"/>
-
+                
                 <StackPanel Orientation="Vertical">
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
                         <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_MID">
@@ -141,21 +154,22 @@
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="COSTUME">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="BACK_DECO">
                             <StackPanel Orientation="Vertical" Background="GhostWhite">
                                 <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
                                 <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="none_tree" Header="코스튬"
+                                    <TreeViewItem x:Name="backdeco_tree" Header="등장식"
                                     ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
                                 </TreeView>
                             </StackPanel>
                         </ContentControl>
                     </Border>
+                    
                 </StackPanel>
 
                 <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
                             x:Name="ItemSlectorTab" Margin="20,0,0,0"
-                            Width="540">
+                            Width="540" Height="336" VerticalAlignment="Top">
                     <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                         <TabItem.Header>
                             <TextBlock Text="장비"/>
@@ -196,7 +210,7 @@
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
                                         <StackPanel Orientation="Vertical" Margin="8">
-                                            <Button Style="{Binding Source={StaticResource ItemImgBtn}}"/>
+                                            <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
                                         </StackPanel>
                                     </ContentControl>
                                 </DataTemplate>

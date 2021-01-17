@@ -45,6 +45,7 @@ namespace RooStatsSim.UI.StatusWindow
         { }
         public LevelList(ref UserData param_status)
         {
+            if (param_status == null) return;
             Add(new AbilityBinding<int>("Level", param_status.Base_Level.Point,
                                                         param_status.Base_Level.RemainPoint,
                                                         Enum.GetName(typeof(LEVEL_ENUM), LEVEL_ENUM.BASE)));
@@ -60,6 +61,7 @@ namespace RooStatsSim.UI.StatusWindow
         { }
         public StatusList(ref UserData param_status)
         {
+            if (param_status == null) return;
             foreach (STATUS_ENUM status in Enum.GetValues(typeof(STATUS_ENUM)))
             {
                 string statusName = Enum.GetName(typeof(STATUS_ENUM), status);
@@ -73,6 +75,7 @@ namespace RooStatsSim.UI.StatusWindow
     {
         public NormalPropertyList(ref UserData user_data)
         {
+            if (user_data == null) return;
             AddType(user_data, ITYPE.HP);
             AddType(user_data, ITYPE.SP);
             AddType(user_data, ITYPE.ATK);
@@ -104,6 +107,7 @@ namespace RooStatsSim.UI.StatusWindow
     {
         public AdvancedPropertyList(ref UserData user_data)
         {
+            if (user_data == null) return;
             Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.DTYPE_KOR[DTYPE.ASPD], user_data.User_Item.Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.ASPD)], 0, Enum.GetName(typeof(DTYPE), DTYPE.ASPD)));
             Add(new AbilityBinding<double>(EnumItemOptionTable_Kor.DTYPE_KOR[DTYPE.MOVING_SPEED], user_data.User_Item.Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.MOVING_SPEED)], 0, Enum.GetName(typeof(DTYPE), DTYPE.MOVING_SPEED)));
             foreach(KeyValuePair<string, double> item in user_data.User_Item.Option_ITYPE)
@@ -127,7 +131,7 @@ namespace RooStatsSim.UI.StatusWindow
     {
         public SpecialPropertyList(ref UserData user_data)
         {
-
+            if (user_data == null) return;
             foreach (KeyValuePair<string, double> item in user_data.User_Item.Option_SE_ATK_RATE_TYPE)
             {
                 SE_ATK_RATE_TYPE type = (SE_ATK_RATE_TYPE)Enum.Parse(typeof(SE_ATK_RATE_TYPE), item.Key);

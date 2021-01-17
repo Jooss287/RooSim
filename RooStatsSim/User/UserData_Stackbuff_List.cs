@@ -10,7 +10,7 @@ namespace RooStatsSim.User
     [Serializable]
     public class MEDAL
     {
-        public ObservableCollection<int> List { get; }
+        public ObservableCollection<int> List { get; set; }
 
         public MEDAL()
         {
@@ -77,7 +77,7 @@ namespace RooStatsSim.User
     [Serializable]
     public class RIDING
     {
-        public ObservableCollection<double> List { get; }
+        public ObservableCollection<double> List { get; set; }
         public RIDING()
         {
             List = new ObservableCollection<double>();

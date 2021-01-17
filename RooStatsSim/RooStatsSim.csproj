@@ -121,6 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\ConsumableItem\ConsumableBuff_DB.cs" />
     <Compile Include="DB\ConsumableItem\CookingConsumable.cs" />
     <Compile Include="DB\ConsumableItem\ConsumableBuffInfo.cs" />
     <Compile Include="DB\ConsumableItem\PortionConsumable.cs" />
@@ -129,6 +130,7 @@
 	<Compile Include="DB\Job\SkillInfo.cs" />
     <Compile Include="DB\Job\JobInfo\LoadKnight.cs" />
     <Compile Include="DB\Job\JobInfo\Swordman.cs" />
+    <Compile Include="DB\Job\Skill_DB.cs" />
     <Compile Include="DB\Table\EnumBaseTable.cs" />
     <Compile Include="DB\Table\EnumItemOptionTable.cs" />
     <Compile Include="DB\Table\EnumItemOptionTable_Kor.cs" />
@@ -196,6 +198,7 @@
     <Compile Include="UI\MonsterDamage\MonsterDamageCheck.xaml.cs">
       <DependentUpon>MonsterDamageCheck.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SkillWindow\SkillBinding.cs" />
     <Compile Include="UI\SkillWindow\SkillWindow.xaml.cs">
       <DependentUpon>SkillWindow.xaml</DependentUpon>
     </Compile>

@@ -25,18 +25,18 @@ namespace RooStatsSim.UI.StatusWindow
         #region Initialize
         public StatusWindow()
         {
-            MainWindow._user_data_manager.savePointChanged += new UserDataManager.SavePointChangedEvnetHandler(GetUserData);
+            MainWindow._user_data_manager.JobDataChanged += new UserDataManager.JobChangedEventHandler(GetUserData);
             MainWindow._user_data_manager.itemDataChanged += new UserDataManager.UserDataChangedEventHandler(CalcStatusProperty);
 
             InitializeComponent();
             DataContext = this;
 
             GetUserData();
-            CalcStatusProperty();
         }
         void GetUserData()
         {
             user_data = MainWindow._user_data_manager.Data;
+            CalcStatusProperty();
         }
         void CalcStatusProperty()
         {

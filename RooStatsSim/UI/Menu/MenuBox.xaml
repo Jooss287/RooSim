@@ -22,13 +22,20 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <RadioButton x:Name="radio_job" Tag="NOVICE" IsChecked="True" Checked="job_sel_Click" Content="노&#10;비&#10;스" Grid.Column="0" GroupName="group_attack_type" />
-                    <RadioButton Tag="KNIGHT" Checked="job_sel_Click" Content="로&#10;나" Grid.Column="1" GroupName="group_attack_type"/>
-                    <RadioButton Tag="BLACKSMITH" Checked="job_sel_Click" Content="블&#10;스" Grid.Column="2" GroupName="group_attack_type"/>
-                    <RadioButton Tag="ASSASSIN" Checked="job_sel_Click" Content="어&#10;크" Grid.Column="3" GroupName="group_attack_type"/>
-                    <RadioButton Tag="HUNTER" Checked="job_sel_Click" Content="스&#10;나" Grid.Column="4" GroupName="group_attack_type"/>
-                    <RadioButton Tag="WIZARD" Checked="job_sel_Click" Content="하&#10;위" Grid.Column="5" GroupName="group_attack_type"/>
-                    <RadioButton Tag="PRIST" Checked="job_sel_Click" Content="하&#10;프" Grid.Column="6" GroupName="group_attack_type"/>
+                    <RadioButton Content="노&#10;비&#10;스" Grid.Column="0" Click="job_sel_Click"
+                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=NOVICE}"/>
+                    <RadioButton Content="로&#10;나" Grid.Column="1" Click="job_sel_Click"
+                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=KNIGHT}"/>
+                    <RadioButton Content="화&#10;스" Grid.Column="2" Click="job_sel_Click"
+                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=BLACKSMITH}"/>
+                    <RadioButton Content="어&#10;크" Grid.Column="3" Click="job_sel_Click"
+                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=ASSASSIN}"/>
+                    <RadioButton Content="스&#10;나" Grid.Column="4" Click="job_sel_Click"
+                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=HUNTER}"/>
+                    <RadioButton Content="하&#10;위" Grid.Column="5" Click="job_sel_Click"
+                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=WIZARD}"/>
+                    <RadioButton Content="하&#10;프" Grid.Column="6" Click="job_sel_Click"
+                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=PRIST}"/>
                 </Grid>
             </GroupBox>
             <GroupBox Header="Save Point">
