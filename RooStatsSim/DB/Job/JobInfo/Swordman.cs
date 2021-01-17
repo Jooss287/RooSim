@@ -82,6 +82,7 @@ namespace RooStatsSim.DB.Job.JobInfo
         public Dictionary<int, ItemDB> Bonus { get; set; }
         public SwordmanJobBonus()
         {
+            Bonus = new Dictionary<int, ItemDB>();
             for ( int i = 5; i <= 40; i+=5)
                 Bonus[i] = new ItemDB();
             

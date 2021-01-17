@@ -62,6 +62,7 @@ namespace RooStatsSim.User
             if (abilities.PerType == Enum.GetName(typeof(REFINE_TYPE), REFINE_TYPE.REFINE))
                 return db;
 
+            db.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(abilities.AddType)] = new Dictionary<string, double>();
             db.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(abilities.AddType)][abilities.AddType] = abilities.AddValue *
                 (user_data.User_Item.Option[EnumItemOptionTable.GET_ITEM_OPTION_TYPE(abilities.PerType)][abilities.PerType] / abilities.PerValue);
             return db;

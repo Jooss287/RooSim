@@ -41,5 +41,22 @@ namespace RooStatsSim.Equation.Job
             return 0;
         }
         #endregion
+
+        public ItemDB GetOption()
+        {
+            ItemDB option = new ItemDB();
+            int job_level = MainWindow._user_data_manager.Data.Job_Level.Point;
+            foreach (KeyValuePair<int, ItemDB> bonus in JobBonus_1st.Bonus)
+            {
+                option += bonus.Value;
+            }
+            foreach (KeyValuePair<int, ItemDB> bonus in JobBonus.Bonus)
+            {
+                if (bonus.Key > job_level)
+                    continue;
+                option += bonus.Value;
+            }
+            return option;
+        }
     }
 }
