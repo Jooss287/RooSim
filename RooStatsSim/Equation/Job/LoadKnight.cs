@@ -11,13 +11,10 @@ namespace RooStatsSim.Equation.Job
 {
     class LordKnight : Equations
     {
-<<<<<<< .merge_file_a20168
         public Dictionary<string, SkillInfo> Skill { get; set; }
         public SwordmanJobBonus JobBonus_1st = new SwordmanJobBonus();
         public LoadKnightJobBonus JobBonus = new LoadKnightJobBonus();
 
-=======
->>>>>>> .merge_file_a07976
         public LordKnight() : base(ATTACK_TYPE.MELEE_TYPE)
         {
         }
@@ -44,31 +41,5 @@ namespace RooStatsSim.Equation.Job
             return 0;
         }
         #endregion
-<<<<<<< .merge_file_a20168
-
-        public void SetSkillInit()
-        {
-            MainWindow._user_data_manager.Data.User_Skill.InitSkills(SkillWindow._swordman_skill.Skill, SkillWindow._loadknight_skill.Skill);
-        }
-        public ItemDB GetOption()
-        {
-            ItemDB option = new ItemDB();
-            int job_level = MainWindow._user_data_manager.Data.Job_Level.Point;
-            foreach(KeyValuePair<int, ItemDB> bonus in JobBonus_1st.Bonus)
-            {
-                if (bonus.Key > job_level)
-                    continue;
-                option += bonus.Value;
-            }
-            foreach(KeyValuePair<int, ItemDB> bonus in JobBonus.Bonus)
-            {
-                if (bonus.Key > job_level)
-                    continue;
-                option += bonus.Value;
-            }
-            return option;
-        }
-=======
->>>>>>> .merge_file_a07976
     }
 }

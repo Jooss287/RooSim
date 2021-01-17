@@ -5,12 +5,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
-<<<<<<< HEAD
 using RooStatsSim.DB.Job;
-=======
-using RooStatsSim.DB.Skill;
 using RooStatsSim.UI.SkillWindow;
->>>>>>> Bugfix/UserDataSaveFile
 using RooStatsSim.Extension;
 
 namespace RooStatsSim.User

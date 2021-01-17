@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using RooStatsSim.DB.Table;
-using RooStatsSim.DB.Skill.JobSkill;
+using RooStatsSim.DB.Job;
+using RooStatsSim.DB.Job.JobInfo;
 
 namespace RooStatsSim.DB.Skill
 {

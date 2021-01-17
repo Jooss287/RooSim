@@ -2,10 +2,7 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-<<<<<<< HEAD
 using RooStatsSim.DB.Job.JobInfo;
-=======
->>>>>>> Bugfix/UserDataSaveFile
 using RooStatsSim.User;
 using RooStatsSim.DB.Skill;
 

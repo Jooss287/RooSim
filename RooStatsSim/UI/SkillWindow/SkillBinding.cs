@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Specialized;
-using RooStatsSim.DB.Skill;
+using RooStatsSim.DB.Job;
 using RooStatsSim.User;
 using RooStatsSim.Extension;
 
