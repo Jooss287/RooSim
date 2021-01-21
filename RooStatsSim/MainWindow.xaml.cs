@@ -66,20 +66,22 @@ namespace RooStatsSim
         #region Initialize
         private void InitializeMDI()
         {
-            if (Properties.Settings.Default.setting_window_pos == null)
+            if ((Properties.Settings.Default.setting_window_pos == null) ||
+                (Properties.Settings.Default.setting_window_pos.Count != Enum.GetNames(typeof(WINDOW_ENUM)).Length) )
             {
                 Properties.Settings.Default.setting_window_pos = new List<Point>()
                 {
                     new Point(0,0),
-                    new Point(0,138),
-                    new Point(1204, 0),
-                    new Point(0, 490),
-                    new Point(885, 490),
+                    new Point(0,204),
+                    new Point(1204, 258),
+                    new Point(0, 556),
+                    new Point(887, 676),
                     new Point(700, 0),
-                    new Point(700, 400),
+                    new Point(1202, 0),
                 };
             }
-            if (Properties.Settings.Default.setting_window_W_H == null)
+            if ((Properties.Settings.Default.setting_window_W_H == null) ||
+                (Properties.Settings.Default.setting_window_W_H.Count != Enum.GetNames(typeof(WINDOW_ENUM)).Length) )
             {
                 Properties.Settings.Default.setting_window_W_H = new List<Point>()
                 {
@@ -88,8 +90,8 @@ namespace RooStatsSim
                     new Point(415, 415),
                     new Point(886, 378),
                     new Point(728, 258),
-                    new Point(728, 258),
-                    new Point(728, 258),
+                    new Point(504, 206),
+                    new Point(685, 258),
                 };
             }
 

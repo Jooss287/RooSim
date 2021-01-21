@@ -89,6 +89,16 @@ namespace RooStatsSim.User
             else
                 Dic[name] = new UserSkillInfo(name, level, max_level);
         }
+        public List<UserSkillInfo> GetActiveSkills()
+        {
+            List<UserSkillInfo> ret = new List<UserSkillInfo>();
+            foreach(UserSkillInfo info in List)
+            {
+                if (info.Detail.TYPE == SKILL_TYPE.ACTIVE)
+                    ret.Add(info);
+            }
+            return ret;
+        }
         public UserItem GetOption()
         {
             UserItem option = new UserItem();
