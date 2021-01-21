@@ -196,7 +196,10 @@ namespace RooStatsSim
             MessageBoxResult MsgRes = MessageBox.Show("최신 버전이 아닙니다.최신 버전을 다운받으시겠습니까?", "VersionCheck", MessageBoxButton.YesNo);
             if (MsgRes == MessageBoxResult.Yes)
             {
-                System.Diagnostics.Process.Start(ProgramInfo.GetLeastURL());
+                string last_url = ProgramInfo.GetLeastURL();
+                if (last_url == "")
+                    last_url = ProgramInfo._ROOSIM_URL;
+                System.Diagnostics.Process.Start(last_url);
                 this.Close();
             }
         }

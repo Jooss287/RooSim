@@ -30,7 +30,8 @@ namespace RooStatsSim.UI.Menu
         void GetUserData()
         {
             UserData user_data = MainWindow._user_data_manager.Data;
-            (DataContext as CheckboxBinding).Job = user_data.Job;
+            if ( DataContext != null)
+                (DataContext as CheckboxBinding).Job = user_data.Job;
         }
         private void job_sel_Click(object sender, RoutedEventArgs e)
         {
@@ -42,8 +43,10 @@ namespace RooStatsSim.UI.Menu
                     GetUserData();
                     return;
                 }
-
-                MainWindow._user_data_manager._user_data_edited = true;
+                else
+                {
+                    MainWindow._user_data_manager._user_data_edited = true;
+                }
                 MainWindow._user_data_manager.JobChanged(MainWindow._user_data_manager.Data.Job, true);
             }
         }

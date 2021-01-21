@@ -127,7 +127,7 @@
     <Compile Include="DB\ConsumableItem\PortionConsumable.cs" />
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\ItemDB.cs" />
-	<Compile Include="DB\Job\SkillInfo.cs" />
+    <Compile Include="DB\Job\SkillInfo.cs" />
     <Compile Include="DB\Job\JobInfo\LoadKnight.cs" />
     <Compile Include="DB\Job\JobInfo\Swordman.cs" />
     <Compile Include="DB\Job\Skill_DB.cs" />

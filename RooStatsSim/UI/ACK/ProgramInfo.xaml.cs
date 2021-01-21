@@ -19,7 +19,7 @@ namespace RooStatsSim.UI.ACK
         // 원작 라그나로크 오리진 안내
         const string _ROO_URL = "https://cafe.naver.com/ragnarokorigin";
         // 프로그램 버전
-        const string _PROGRAM_VER = "ver.0.2";
+        const string _PROGRAM_VER = "v0.3-alpha";
         const string _LATEST_VER_API_URL = "https://api.github.com/repos/Jooss287/RooSim/releases/latest";
         // Github 주소
         const string _CONTACT_URL = "https://api.github.com/repos/Jooss287/RooSim/Issue \n" + 
@@ -30,7 +30,7 @@ namespace RooStatsSim.UI.ACK
         const string _THANKS= "[프론]백은하, [프론]써노, [프론]코로나바이러스, [프론]달토끼, [프론]렌탈히어로MK3, [프론]영혼의트롤링," +
             "[모로크]롱롱, [프론]스눕, [신프론]박과장, [프론]판피린Q, [프론]쪼꼬케끼, [프론]킁킁탐정, [프론]파더긔";
 
-        
+        public static readonly string _ROOSIM_URL = "https://github.com/Jooss287/RooSim";
 
         public ProgramInfo()
         {

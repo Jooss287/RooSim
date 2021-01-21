@@ -18,7 +18,7 @@ namespace RooStatsSim.UI.Menu
     }
     public class CheckboxBinding : INotifyPropertyChanged
     {
-        public CheckboxBinding() { Point = SavePoint.A; Job = JOB_SELECT_LIST.NOVICE; }
+        public CheckboxBinding() { _job = JOB_SELECT_LIST.NOVICE; _point = SavePoint.A; OnPropertyChanged("Point"); }
         private SavePoint _point;
         private JOB_SELECT_LIST _job;
         public SavePoint Point
@@ -28,7 +28,7 @@ namespace RooStatsSim.UI.Menu
                 if (_point == value)
                     return;
 
-                //MainWindow._user_data_manager.SetUserData((int)value);
+                MainWindow._user_data_manager.SetUserData((int)value);
                 _point = value;
                 OnPropertyChanged("Point");
             }
@@ -41,6 +41,7 @@ namespace RooStatsSim.UI.Menu
                 if (_job == value)
                     return;
 
+                MainWindow._user_data_manager.Data.Job = value;
                 _job = value;
                 OnPropertyChanged("Job");
             }

@@ -67,17 +67,6 @@ namespace RooStatsSim.UI.Equipment
         }
         void GetImage()
         {
-            
-            //if ((_image_name == null) || (_image_name == ""))
-            //{
-            //    string filename = "Resources/image-not-found1.png";
-            //    Image_Char.Source = new BitmapImage(ResourceExtension.GetUri(filename));
-            //}
-            //else
-            //{
-
-            //}
-
             var path = System.IO.Path.Combine(Environment.CurrentDirectory, "Img", _image_name);
             _image = new BitmapImage(ResourceExtension.GetUri(path));
         }
