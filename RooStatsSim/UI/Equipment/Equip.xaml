@@ -154,7 +154,7 @@
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="BACK_DECO">
+                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="BACK_DECORATION">
                             <StackPanel Orientation="Vertical" Background="GhostWhite">
                                 <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
                                 <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">

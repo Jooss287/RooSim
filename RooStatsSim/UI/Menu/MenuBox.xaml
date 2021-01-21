@@ -26,15 +26,15 @@
                                  IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=NOVICE}"/>
                     <RadioButton Content="로&#10;나" Grid.Column="1" Click="job_sel_Click"
                                  IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=KNIGHT}"/>
-                    <RadioButton Content="화&#10;스" Grid.Column="2" Click="job_sel_Click"
+                    <RadioButton Content="화&#10;스" Grid.Column="2" Click="job_sel_Click" IsEnabled="False"
                                  IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=BLACKSMITH}"/>
-                    <RadioButton Content="어&#10;크" Grid.Column="3" Click="job_sel_Click"
+                    <RadioButton Content="어&#10;크" Grid.Column="3" Click="job_sel_Click" IsEnabled="False"
                                  IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=ASSASSIN}"/>
-                    <RadioButton Content="스&#10;나" Grid.Column="4" Click="job_sel_Click"
+                    <RadioButton Content="스&#10;나" Grid.Column="4" Click="job_sel_Click" IsEnabled="False"
                                  IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=HUNTER}"/>
-                    <RadioButton Content="하&#10;위" Grid.Column="5" Click="job_sel_Click"
+                    <RadioButton Content="하&#10;위" Grid.Column="5" Click="job_sel_Click" IsEnabled="False"
                                  IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=WIZARD}"/>
-                    <RadioButton Content="하&#10;프" Grid.Column="6" Click="job_sel_Click"
+                    <RadioButton Content="하&#10;프" Grid.Column="6" Click="job_sel_Click" IsEnabled="False"
                                  IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=PRIST}"/>
                 </Grid>
             </GroupBox>

@@ -92,10 +92,11 @@ namespace RooStatsSim.User
         public List<UserSkillInfo> GetActiveSkills()
         {
             List<UserSkillInfo> ret = new List<UserSkillInfo>();
-            foreach(UserSkillInfo info in List)
+            foreach(KeyValuePair<string, UserSkillInfo> info in Dic)
             {
-                if (info.Detail.TYPE == SKILL_TYPE.ACTIVE)
-                    ret.Add(info);
+                SkillInfo skill = SkillWindow._skill_db.Dic[info.Key];
+                if (skill.TYPE == SKILL_TYPE.ACTIVE)
+                    ret.Add(info.Value);
             }
             return ret;
         }

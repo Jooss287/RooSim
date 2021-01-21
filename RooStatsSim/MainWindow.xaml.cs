@@ -73,11 +73,11 @@ namespace RooStatsSim
                 {
                     new Point(0,0),
                     new Point(0,204),
-                    new Point(1204, 258),
+                    new Point(1211, 256),
                     new Point(0, 556),
                     new Point(887, 676),
-                    new Point(700, 0),
-                    new Point(1202, 0),
+                    new Point(709, 0),
+                    new Point(1212, 0),
                 };
             }
             if ((Properties.Settings.Default.setting_window_W_H == null) ||
@@ -85,8 +85,8 @@ namespace RooStatsSim
             {
                 Properties.Settings.Default.setting_window_W_H = new List<Point>()
                 {
-                    new Point(698, 139),
-                    new Point(1203, 352),
+                    new Point(712, 139),
+                    new Point(1213, 352),
                     new Point(415, 415),
                     new Point(886, 378),
                     new Point(728, 258),

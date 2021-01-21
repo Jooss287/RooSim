@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using RooStatsSim.UI.Menu;
 using RooStatsSim.UI.Manager;
+using RooStatsSim.UI.SkillWindow;
 using RooStatsSim.User;
 using RooStatsSim.Equation.Job;
 using RooStatsSim.DB.Table;
-using RooStatsSim.User;
+using RooStatsSim.DB.Job;
 using System;
 
 namespace RooStatsSim.UI.MonsterDamage
@@ -68,8 +68,9 @@ namespace RooStatsSim.UI.MonsterDamage
                 if (info.Level == 0)
                     continue;
                 //if ( info.Detail.HAS_DMG_EQUATION )
-                normal_atk = Convert.ToString(calcATK_min*info.Detail.DAMAGE[info.Level]) + " ~ " + Convert.ToString(calcATK_max * info.Detail.DAMAGE[info.Level]);
-                _calc_user_dmamge_binding.AddDamageBinding(info.Name_Kor, normal_atk);
+                SkillInfo skill = SkillWindow.SkillWindow._skill_db.Dic[info.Name];
+                normal_atk = Convert.ToString(calcATK_min*skill.DAMAGE[info.Level]) + " ~ " + Convert.ToString(calcATK_max * skill.DAMAGE[info.Level]);
+                _calc_user_dmamge_binding.AddDamageBinding(skill.NAME_KOR, normal_atk);
             }
             CalcUserDamage.ItemsSource = _calc_user_dmamge_binding;
         }
