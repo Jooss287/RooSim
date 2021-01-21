@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RooStatsSim.DB.Table;
 
-namespace RooStatsSim.DB.Skill.JobSkill
+namespace RooStatsSim.DB.Job.JobInfo
 {
     public enum SWORDMAN_SKILL
     {
@@ -77,6 +74,54 @@ namespace RooStatsSim.DB.Skill.JobSkill
                 opt.Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.MDEF)] = i;
                 Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.ENDURE)].OPTION.Add(opt);
             }
+        }
+    }
+
+    public class SwordmanJobBonus
+    {
+        public Dictionary<int, ItemDB> Bonus { get; set; }
+        public SwordmanJobBonus()
+        {
+            Bonus = new Dictionary<int, ItemDB>();
+            for ( int i = 5; i <= 40; i+=5)
+                Bonus[i] = new ItemDB();
+            
+            Bonus[5].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.DEX)] = 1;
+            Bonus[5].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.VIT)] = 1;
+            Bonus[10].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 1;
+            Bonus[10].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.VIT)] = 1;
+            Bonus[15].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 1;
+            Bonus[15].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.LUK)] = 1;
+            Bonus[20].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 1;
+            Bonus[20].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.AGI)] = 1;
+            Bonus[25].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 1;
+            Bonus[25].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.LUK)] = 1;
+            Bonus[30].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 1;
+            Bonus[30].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.AGI)] = 1;
+            Bonus[35].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 1;
+            Bonus[35].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.DEX)] = 2;
+            Bonus[40].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 1;
+            Bonus[40].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.VIT)] = 1;
+
+            //            크루
+            //5   vit2 int1
+            //10 int1 luk2
+            //15 agi1 luk2
+            //20 str2 agi1
+            //25 str2 vit2
+            //30 dex3 luk1
+            //35 vit3 int2
+            //40 str3 int2
+
+            //팔라
+            //5   str3 vit2
+            //10 agi2 luk3
+            //15 str2 dex3
+            //20 agi2 vit4
+            //25 int3 dex3
+            //30 str4 agi2
+            //35 int4 dex2
+            //40 agi2 vit4
         }
     }
 }

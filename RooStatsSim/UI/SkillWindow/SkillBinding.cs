@@ -4,31 +4,30 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Specialized;
-using System.Text.Json.Serialization;
-using RooStatsSim.DB.ConsumableItem;
+using RooStatsSim.DB.Job;
 using RooStatsSim.User;
 using RooStatsSim.Extension;
 
-namespace RooStatsSim.UI.ConsumableBuff
+namespace RooStatsSim.UI.SkillWindow
 {
-    public class ConsumableBinding : ObservableCollection<ConsumableBindingInfo>
+    public class SkillBinding : ObservableCollection<SkillBindingInfo>
     {
-        public ConsumableBinding(UserData user_data, params Dictionary<string, ConsumableBuffInfo>[] buff_list)
+        public SkillBinding(UserData user_data, params Dictionary<string, SkillInfo>[] buff_list)
         {
             if (user_data == null) return;
 
-            foreach (Dictionary<string, ConsumableBuffInfo> consumable in buff_list)
+            foreach (Dictionary<string, SkillInfo> consumable in buff_list)
             {
-                foreach (KeyValuePair<string, ConsumableBuffInfo> buff in consumable)
+                foreach (KeyValuePair<string, SkillInfo> buff in consumable)
                 {
                     int level = 0;
                     int max_level = buff.Value.MAX_LV;
-                    if (user_data.User_ConBuff.Dic.ContainsKey(buff.Key))
+                    if (user_data.User_Skill.Dic.ContainsKey(buff.Key))
                     { 
-                        level = user_data.User_ConBuff.Dic[buff.Key].Level;
-                        max_level = user_data.User_ConBuff.Dic[buff.Key].Max_Level;
+                        level = user_data.User_Skill.Dic[buff.Key].Level;
+                        max_level = user_data.User_Skill.Dic[buff.Key].Max_Level;
                     }
-                    Add(new ConsumableBindingInfo(buff.Key, level, max_level));
+                    Add(new SkillBindingInfo(buff.Key, level, max_level));
                 }
             }
         }
@@ -42,7 +41,7 @@ namespace RooStatsSim.UI.ConsumableBuff
         }
     }
 
-    public class ConsumableBindingInfo : INotifyPropertyChanged
+    public class SkillBindingInfo : INotifyPropertyChanged
     {
         string _name;
         string _name_kor;
@@ -50,13 +49,13 @@ namespace RooStatsSim.UI.ConsumableBuff
         int _max_level;
         BitmapImage _image;
 
-        public ConsumableBindingInfo() { }
-        public ConsumableBindingInfo(string name, int level = 0, int max_level = 0)
+        public SkillBindingInfo() { }
+        public SkillBindingInfo(string name, int level = 0, int max_level = 0)
         {
-            if (!ConsumableBuffWindow._consumable_buff_db.Dic.ContainsKey(name))
+            if (!SkillWindow._skill_db.Dic.ContainsKey(name))
                 return;
 
-            ConsumableBuffInfo buff = ConsumableBuffWindow._consumable_buff_db.Dic[name];
+            SkillInfo buff = SkillWindow._skill_db.Dic[name];
             Name = buff.NAME;
             Name_Kor = buff.NAME_KOR;
             if (max_level == 0)
@@ -70,7 +69,7 @@ namespace RooStatsSim.UI.ConsumableBuff
             get { return _name; }
             set
             {
-                ConsumableBuffInfo buff = ConsumableBuffWindow._consumable_buff_db.Dic[value];
+                SkillInfo buff = SkillWindow._skill_db.Dic[value];
                 _name = buff.NAME;
                 Name_Kor = buff.NAME_KOR;
                 Detail = buff;
@@ -115,9 +114,9 @@ namespace RooStatsSim.UI.ConsumableBuff
         }
         public string Show_Level
         {
-            get { return new string('★', Level); }
+            get { return string.Format("({0}/{1})", Level, Max_Level); }
         }
-        public ConsumableBuffInfo Detail { get; set; }
+        public SkillInfo Detail { get; set; }
         public BitmapImage ImageFile
         {
             get { return _image; }
@@ -126,7 +125,7 @@ namespace RooStatsSim.UI.ConsumableBuff
         {
             if (_name == null)
                 return;
-            string resource_name = "Resources/ConsumableBuff/" + _name + ".png";
+            string resource_name = "Resources/Skills/" + _name + ".png";
             _image = new BitmapImage(ResourceExtension.GetAssemblyUri(resource_name));
         }
         #endregion

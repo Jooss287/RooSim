@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RooStatsSim.DB.Table;
 
-namespace RooStatsSim.DB.Skill.JobSkill
+namespace RooStatsSim.DB.Job.JobInfo
 {
     public enum LOADKNIGHT_SKILL
     {
@@ -146,4 +143,40 @@ namespace RooStatsSim.DB.Skill.JobSkill
             Skill[Enum.GetName(typeof(LOADKNIGHT_SKILL), LOADKNIGHT_SKILL.BERSERK)].TYPE = SKILL_TYPE.BUFF;
         }
     }
+    public class LoadKnightJobBonus
+    {
+        public Dictionary<int, ItemDB> Bonus { get; set; }
+        public LoadKnightJobBonus()
+        {
+            Bonus = new Dictionary<int, ItemDB>();
+            Bonus[0] = new ItemDB();
+            for (int i = 5; i <= 40; i += 5)
+                Bonus[i] = new ItemDB();
+
+            //Knight
+            Bonus[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 8;
+            Bonus[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.AGI)] = 2;
+            Bonus[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.VIT)] = 10;
+            Bonus[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.DEX)] = 6;
+            Bonus[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.LUK)] = 4;
+            //LoadKnight
+            Bonus[5].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.INT)] = 2;
+            Bonus[5].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.AGI)] = 3;
+            Bonus[10].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.DEX)] = 3;
+            Bonus[10].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.VIT)] = 2;
+            Bonus[15].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.VIT)] = 2;
+            Bonus[15].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.LUK)] = 3;
+            Bonus[20].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 4;
+            Bonus[20].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.DEX)] = 2;
+            Bonus[25].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 4;
+            Bonus[25].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.AGI)] = 2;
+            Bonus[30].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 2;
+            Bonus[30].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.DEX)] = 4;
+            Bonus[35].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 2;
+            Bonus[35].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.VIT)] = 4;
+            Bonus[40].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.STR)] = 3;
+            Bonus[40].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.AGI)] = 3;
+        }
+    }
+
 }

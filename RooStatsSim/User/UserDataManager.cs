@@ -20,18 +20,21 @@ namespace RooStatsSim.User
             get { return _data_number; }
         }
         
-        public UserDataManager(int number = 1) { SetUserData(number); }
+        public UserDataManager() {}
 
         public void SetUserData(int number)
         {
             CheckUserDataChanged();
             if (!_dic_user_data.ContainsKey(number))
             {
-                _dic_user_data.Add(number, new UserData());
-                User_Serializer.ReadDB(_dic_user_data[number], number);
+                UserData user = new UserData();
+                User_Serializer.ReadDB(ref user, number);
+                _dic_user_data.Add(number, user);
             }
             SavePointNumber = number;
-            savePointChanged?.Invoke();
+
+            JobChanged(_dic_user_data[number].Job);
+            //JobDataChanged?.Invoke();
             CalcUserData(_user_data_edited);
         }
         public void CheckUserDataChanged()
@@ -48,10 +51,6 @@ namespace RooStatsSim.User
         {
             return _dic_user_data[SavePointNumber];
         }
-        #region SavePoint Changed Event
-        public delegate void SavePointChangedEvnetHandler();
-        public event SavePointChangedEvnetHandler savePointChanged;
-        #endregion
         #region Item Changed Event
         public delegate void UserDataChangedEventHandler();
         public event UserDataChangedEventHandler itemDataChanged;
@@ -60,6 +59,7 @@ namespace RooStatsSim.User
             UserItem CalcUserItem = new UserItem(true);
 
             //직업별 추가 능력치
+            CalcUserItem += Data.JobSelect.GetOption();
             CalcUserItem += Data.User_Skill.GetOption();
             //Stack Options
             CalcUserItem += Data.Monster_Research.GetOption();
@@ -87,16 +87,16 @@ namespace RooStatsSim.User
         #region Job Changed Event
         public delegate void JobChangedEventHandler();
         public event JobChangedEventHandler JobDataChanged;
-        public void JobChanged(JOB_SELECT_LIST job)
+        public void JobChanged(JOB_SELECT_LIST job, bool initialize = false)
         {
-            Data.Initializor();
+            if (initialize)
+                Data.Initializor();
             Data.Job = job;
-            Data.JobSelect = new JobSelect(job);
+            Data.JobSelect = new JobSelect(Data, job);
 
             // Job가 변경되면 설정되어야 할 것들
 
-            if (JobDataChanged != null)
-                JobDataChanged();
+            JobDataChanged?.Invoke();
         }
         #endregion
     }

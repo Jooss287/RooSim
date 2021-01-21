@@ -29,15 +29,20 @@ namespace RooStatsSim.Equation.Job
         private int GetJobNum { get { return (int)SelectedJob / 100; } }
 
 
-        public JobSelect(JOB_SELECT_LIST param_job = JOB_SELECT_LIST.NOVICE)
+        public JobSelect(UserData Data, JOB_SELECT_LIST param_job = JOB_SELECT_LIST.NOVICE)
         {
             SelectedJob = param_job;
-            Job.ElementAt(GetJobNum).SetSkillInit();
         }
         public void SetUserData(UserData user)
         {
             Job.ElementAt(GetJobNum).User = new GetValue(user);
         }
+
+        public ItemDB GetOption()
+        {
+            return Job.ElementAt(GetJobNum).GetOption();
+        }
+        #region Equations
         public double GetReverseATK(int sATK)
         {
             return Job.ElementAt(GetJobNum).CalcReverseATK(sATK);
@@ -54,5 +59,6 @@ namespace RooStatsSim.Equation.Job
         {
             return Job.ElementAt(GetJobNum).CalcStatusWinATK();
         }
+        #endregion
     }
 }

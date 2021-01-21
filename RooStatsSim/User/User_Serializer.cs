@@ -17,6 +17,7 @@ namespace RooStatsSim.User
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            //serializeOptions.Converters.Add(new JsonConvertExt_List_class_DB());
             serializeOptions.WriteIndented = true;
 
             string jsonString;
@@ -24,7 +25,7 @@ namespace RooStatsSim.User
             File.WriteAllText(file_name, jsonString);
         }
 
-        public static void ReadDB(UserData User, int file_number = 1)
+        public static void ReadDB(ref UserData User, int file_number = 1)
         {
             string file_name = string.Format("{0}{1}{2}{3}", default_path, default_file_name, file_number, default_file_extension);
             if (!ResourceExtension.IsFileExists(file_name))
@@ -36,6 +37,8 @@ namespace RooStatsSim.User
             var serializeOptions = new JsonSerializerOptions();
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_int_DB());
             serializeOptions.Converters.Add(new JsonConvertExt_Dic_Enum_BasicType());
+            serializeOptions.Converters.Add(new JsonConvertExt_List_class_DB());
+            //serializeOptions.Converters.Add(new JsonConvertExt_ObserveList_class_DB());
             serializeOptions.WriteIndented = true;
 
             string jsonString = File.ReadAllText(file_name);

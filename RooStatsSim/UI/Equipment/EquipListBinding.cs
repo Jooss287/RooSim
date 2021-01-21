@@ -27,17 +27,19 @@ namespace RooStatsSim.UI.Equipment
         }
         public EquipList(EQUIP.EquipItem equip_item)
         {
-            Name = equip_item.Equip.Name;
+            Name = equip_item.EquipInfo.Name;
             EquipTreeViewBinding CardTree = new EquipTreeViewBinding("카드");
             Add(CardTree);
-            foreach (ItemDB card in equip_item.Card)
+            foreach (int card_id in equip_item.Card)
             {
+                ItemDB card = MainWindow._roo_db.Card_db[card_id];
                 CardTree.SubList.Add(new EquipTreeViewBinding(card));
             }
             EquipTreeViewBinding EnchantTree = new EquipTreeViewBinding("인챈트");
             Add(EnchantTree);
-            foreach (ItemDB Enchant in equip_item.Enchant)
+            foreach (int Enchant_id in equip_item.Enchant)
             {
+                ItemDB Enchant = MainWindow._roo_db.Enchant_db[Enchant_id];
                 EnchantTree.SubList.Add(new EquipTreeViewBinding(Enchant));
             }
         }

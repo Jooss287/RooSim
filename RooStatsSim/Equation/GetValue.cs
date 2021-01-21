@@ -76,7 +76,7 @@ namespace RooStatsSim.Equation
         {
             return DefaultOneValue(_user.User_Item.Option_MONSTER_KINDS_DMG_TYPE, Enum.GetName(typeof(MONSTER_KINDS_DMG_TYPE), (MONSTER_KINDS_DMG_TYPE)MainWindow._roo_db.Mob_db[_user.SelectedEnemy].Type));
         } 
-        public double WeaponSizePanelty() { return AdvantageTable.GetSizePanelty(_user.Equip.List[(int)EQUIP_TYPE_ENUM.WEAPON].Equip.Weapon_type, (MONSTER_SIZE)MainWindow._roo_db.Mob_db[_user.SelectedEnemy].Size); }
+        public double WeaponSizePanelty() { return AdvantageTable.GetSizePanelty(_user.Equip.Dic[EQUIP_TYPE_ENUM.WEAPON].EquipInfo.Weapon_type, (MONSTER_SIZE)MainWindow._roo_db.Mob_db[_user.SelectedEnemy].Size); }
         public double ElementInteraction() { return AdvantageTable.GetElementRatio(_user.User_Item.AttackerElement, (ELEMENT_TYPE)MainWindow._roo_db.Mob_db[_user.SelectedEnemy].Element); }
     }
 }

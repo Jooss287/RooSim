@@ -1,11 +1,10 @@
 ﻿
-using System;
 using System.Collections.Generic;
 
 using RooStatsSim.DB;
 using RooStatsSim.User;
-using RooStatsSim.DB.Skill;
-using RooStatsSim.DB.Skill.JobSkill;
+using RooStatsSim.DB.Job;
+using RooStatsSim.DB.Job.JobInfo;
 using RooStatsSim.UI.SkillWindow;
 
 namespace RooStatsSim.Equation.Job
@@ -13,6 +12,8 @@ namespace RooStatsSim.Equation.Job
     class LordKnight : Equations
     {
         public Dictionary<string, SkillInfo> Skill { get; set; }
+        public SwordmanJobBonus JobBonus_1st = new SwordmanJobBonus();
+        public LoadKnightJobBonus JobBonus = new LoadKnightJobBonus();
 
         public LordKnight() : base(ATTACK_TYPE.MELEE_TYPE)
         {
@@ -41,9 +42,21 @@ namespace RooStatsSim.Equation.Job
         }
         #endregion
 
-        public void SetSkillInit()
+        public ItemDB GetOption()
         {
-            MainWindow._user_data_manager.Data.User_Skill.InitSkills(SkillWindow._swordman_skill.Skill, SkillWindow._loadknight_skill.Skill);
+            ItemDB option = new ItemDB();
+            int job_level = MainWindow._user_data_manager.Data.Job_Level.Point;
+            foreach (KeyValuePair<int, ItemDB> bonus in JobBonus_1st.Bonus)
+            {
+                option += bonus.Value;
+            }
+            foreach (KeyValuePair<int, ItemDB> bonus in JobBonus.Bonus)
+            {
+                if (bonus.Key > job_level)
+                    continue;
+                option += bonus.Value;
+            }
+            return option;
         }
     }
 }

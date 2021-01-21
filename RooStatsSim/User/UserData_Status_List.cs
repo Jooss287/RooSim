@@ -130,7 +130,7 @@ namespace RooStatsSim.User
             List = new ObservableCollection<StatPoint>();
             List.CollectionChanged += OnListChanged;
 
-            foreach (string medal_name in Enum.GetNames(typeof(STATUS_ENUM)))
+            foreach (string stats_name in Enum.GetNames(typeof(STATUS_ENUM)))
             {
                 List.Add(new StatPoint());
             }

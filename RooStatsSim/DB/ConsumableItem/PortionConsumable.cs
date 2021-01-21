@@ -31,7 +31,7 @@ namespace RooStatsSim.DB.ConsumableItem
         DEX_LUK,
         LUK_VIT,
     }
-    class PortionConsumable
+    public class PortionConsumable
     {
         public static Dictionary<string, string> BASIC_PORTION_CONSUMABLE_ITEM_KOR = new Dictionary<string, string>()
         {

@@ -59,6 +59,8 @@ namespace RooStatsSim
             InitializeComponent();
 
             InitializeMDI();
+
+            _user_data_manager.SetUserData(1);
         }
 
         #region Initialize
