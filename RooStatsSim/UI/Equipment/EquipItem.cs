@@ -30,6 +30,7 @@ namespace RooStatsSim.UI.Equipment
     public class EquipId : INotifyPropertyChanged
     {
         string _name;
+        string _name_eng;
         int _id;
         int _refine;
         string _image_name;
@@ -39,6 +40,11 @@ namespace RooStatsSim.UI.Equipment
         {
             get { return _name; }
             set { _name = value; OnPropertyChanged("Name"); }
+        }
+        public string Name_Eng
+        {
+            get { return _name_eng; }
+            set { _name_eng = value; OnPropertyChanged("Name_Eng"); }
         }
         public int Id
         {
@@ -61,6 +67,7 @@ namespace RooStatsSim.UI.Equipment
             get { return _image_name; }
             set { _image_name = value; OnPropertyChanged("ImageRoot"); GetImage(); }
         }
+        public int Point { get; set; }
         public BitmapImage ImageFile
         {
             get { return _image; }

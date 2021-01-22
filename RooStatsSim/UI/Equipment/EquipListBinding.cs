@@ -7,10 +7,8 @@ using RooStatsSim.User;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using RooStatsSim.DB.Enchant;
 
 namespace RooStatsSim.UI.Equipment
 {
@@ -63,6 +61,19 @@ class ItemListFilter : ObservableCollection<EquipId>
                 Id = itemPair.Key,
                 Name = itemPair.Value.Name,
                 ImageRoot = itemPair.Value.ImageName
+            });
+        }
+    }
+    public ItemListFilter(ITEM_TYPE_ENUM itemtype, EQUIP_TYPE_ENUM equiptype)
+    {
+        if (itemtype != ITEM_TYPE_ENUM.ENCHANT)
+            return;
+        foreach (KeyValuePair<string, EnchantInfo> itemPair in Equip._enchant_db.Dic)
+        {
+            Add(new EquipId()
+            {
+                Name_Eng = itemPair.Value.NAME,
+                Name = itemPair.Value.NAME_KOR
             });
         }
     }

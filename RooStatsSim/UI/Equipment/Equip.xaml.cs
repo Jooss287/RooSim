@@ -1,23 +1,14 @@
-﻿using RooStatsSim.DB.Table;
-using RooStatsSim.UI.Menu;
-using RooStatsSim.User;
-using System;
-using System.IO;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
+using RooStatsSim.DB.Table;
+using RooStatsSim.DB.Enchant;
+using RooStatsSim.User;
 using RooStatsSim.Extension;
 
 namespace RooStatsSim.UI.Equipment
@@ -27,6 +18,8 @@ namespace RooStatsSim.UI.Equipment
     /// </summary>
     public partial class Equip : UserControl
     {
+        public static Enchant_DB _enchant_db = new Enchant_DB();
+
         UserData _user_data;
         ItemListFilter EquipItemList;
         ItemListFilter CardItemList;
@@ -72,8 +65,8 @@ namespace RooStatsSim.UI.Equipment
 
                 CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, equip_type);
                 CardSelector.ItemsSource = CardItemList;
-                //EnchantList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.ENCHANT, now_selected_equip_type);
-
+                EnchantList = new ItemListFilter(ITEM_TYPE_ENUM.ENCHANT, equip_type) ;
+                EnchantSelector.ItemsSource = EnchantList;
             }
             else if (( item_type == ITEM_TYPE_ENUM.CARD) || (item_type == ITEM_TYPE_ENUM.ENCHANT))
             {
@@ -118,9 +111,11 @@ namespace RooStatsSim.UI.Equipment
         #region Equipment window ui response
         void setItemTextBlock(EquipId item)
         {
-            TextBlock PopupText = new TextBlock();
-            PopupText.Text = "+" + Convert.ToString(item.Refine) + " " + item.Name;
-            PopupText.Background = Brushes.Silver;
+            TextBlock PopupText = new TextBlock
+            {
+                Text = "+" + Convert.ToString(item.Refine) + " " + item.Name,
+                Background = Brushes.Silver
+            };
             itemPopup.Child = PopupText;
         }
         private void SelectEquipment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -175,6 +170,51 @@ namespace RooStatsSim.UI.Equipment
             itemPopup.IsOpen = false;
         }
 
+        void setEnchantTextBlock(EquipId item)
+        {
+            TextBlock PopupText = new TextBlock
+            {
+                Text = "+" + Convert.ToString(item.Refine) + " " + item.Name,
+                Background = Brushes.Silver
+            };
+            itemPopup.Child = PopupText;
+        }
+
+        private void Enchant_Option_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            int changeValue = e.Delta > 0 ? 1 : -1;
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                changeValue *= 10;
+            item.Point += changeValue;
+            setItemTextBlock(item);
+        }
+
+        private void Enchant_Option_MouseEnter(object sender, MouseEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            EnchantInfo enchant_info = Equip._enchant_db.Dic[item.Name_Eng];
+            string txt;
+            if (enchant_info.IsAdvanced)
+                txt = enchant_info.NAME_KOR + Convert.ToString(item.Refine);
+            //else
+            //    txt = item.Point * enchant_info.OPTION[0].Option
+
+            TextBlock PopupText = new TextBlock
+            {
+                Text = item.Name + Convert.ToString(item.Refine),
+                Background = Brushes.Silver
+            };
+            itemPopup.Child = PopupText;
+
+            itemPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
+            itemPopup.IsOpen = true;
+        }
+
         #endregion
+
+
     }
 }

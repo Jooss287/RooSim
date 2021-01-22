@@ -169,7 +169,7 @@
 
                 <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
                             x:Name="ItemSlectorTab" Margin="20,0,0,0"
-                            Width="540" Height="336" VerticalAlignment="Top">
+                            Width="483" Height="336" VerticalAlignment="Top">
                     <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                         <TabItem.Header>
                             <TextBlock Text="장비"/>
@@ -221,6 +221,26 @@
                         <TabItem.Header>
                             <TextBlock Text="인챈"/>
                         </TabItem.Header>
+                        <ItemsControl x:Name="EnchantSelector">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="5" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
+                                                    MouseWheel="Enchant_Option_MouseWheel"
+                                                    MouseEnter="Enchant_Option_MouseEnter"
+                                                    MouseLeave="ContentControl_MouseLeave">
+                                        <StackPanel Orientation="Vertical" Margin="8" VerticalAlignment="Center">
+                                            <TextBlock Height="20" TextAlignment="Center" VerticalAlignment="Stretch" FontWeight="bold"
+                                                           Width="60" Text="{Binding Path=Name}"/>
+                                        </StackPanel>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </TabItem>
                 </TabControl>
             </StackPanel>
