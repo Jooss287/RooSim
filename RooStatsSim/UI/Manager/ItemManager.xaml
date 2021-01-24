@@ -54,6 +54,11 @@
                                 <ComboBox Name="cmb_equip_type" SelectionChanged="cmb_equip_type_SelectionChanged"
                                           Width="130" Height="30" Margin="10,0,0,0"
                                           VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                                <TextBox x:Name="Item_Weight" Text="{Binding Path=Weight}"
+                                         Style="{Binding Source={StaticResource MaterialDesignFloatingHintTextBox}}"
+                                         materialDesign:HintAssist.Hint="무게" Width="60" Margin="10,0,0,0"
+                                         GotFocus="TxtboxSelectAll"
+                                         PreviewTextInput="NurmericCheckFunc"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox x:Name="Item_Level" Text="{Binding Path=LevelLimit}"
