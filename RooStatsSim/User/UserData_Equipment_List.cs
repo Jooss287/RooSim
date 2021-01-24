@@ -26,7 +26,7 @@ namespace RooStatsSim.User
 
             int _equip;
             List<int> _cards;
-            List<int> _enchant;
+            List<string> _enchant;
 
             [JsonIgnore] public ItemDB EquipInfo { get; set; }
             //[JsonIgnore] Dictionary<ItemDB> CardInfo { get; set; }
@@ -52,11 +52,11 @@ namespace RooStatsSim.User
                 }
                 set { _cards = value; }
             }
-            public List<int> Enchant
+            public List<string> Enchant
             {
                 get {
                     if (_enchant == null)
-                        _enchant = new List<int>();
+                        _enchant = new List<string>();
                     return _enchant;
                 }
                 set { _enchant = value; }
@@ -76,6 +76,21 @@ namespace RooStatsSim.User
                     Card[LastCardSetSlot] = input_card;
                 }
             }
+            public void AddEnchant(string input_enchant)
+            {
+                ItemDB item = MainWindow._roo_db.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[EquipType]][Equip];
+                if (item.EnchantSlot == 0)
+                    return;
+                if (Enchant.Count < item.EnchantSlot)
+                    Enchant.Add(input_enchant);
+                else
+                {
+                    if (LastEnchantSlot - 1 <= item.EnchantSlot)
+                        LastEnchantSlot = 0;
+                    Enchant[LastEnchantSlot] = input_enchant;
+                }
+            }
+
             public ItemDB GetRefineOption()
             {
                 ItemDB db = null;
@@ -134,8 +149,8 @@ namespace RooStatsSim.User
                     continue;
                 foreach (int card_id in equipment.Value.Card)
                     option += MainWindow._roo_db.Card_db[card_id];
-                foreach (int enchant_id in equipment.Value.Enchant)
-                    option += MainWindow._roo_db.Card_db[enchant_id];
+                foreach (string enchant_id in equipment.Value.Enchant)
+                    option += Equip._enchant_db.Dic[enchant_id].OPTION[0];
                 option += equipment.Value.EquipInfo;
                 option += equipment.Value.GetRefineOption();
 

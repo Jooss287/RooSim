@@ -170,11 +170,18 @@ namespace RooStatsSim.UI.Equipment
             itemPopup.IsOpen = false;
         }
 
-        void setEnchantTextBlock(EquipId item)
+        void SetEnchantTextBlock(EquipId item)
         {
+            EnchantInfo enchant_info = Equip._enchant_db.Dic[item.Name_Eng];
+            string txt = "";
+            if (enchant_info.IsAdvanced)
+                txt = enchant_info.NAME_KOR + " " + Convert.ToString(item.Point);
+            else
+                txt = enchant_info.NAME_KOR + " " + Convert.ToString(item.Point);
+
             TextBlock PopupText = new TextBlock
             {
-                Text = "+" + Convert.ToString(item.Refine) + " " + item.Name,
+                Text = txt,
                 Background = Brushes.Silver
             };
             itemPopup.Child = PopupText;
@@ -188,31 +195,25 @@ namespace RooStatsSim.UI.Equipment
             if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
                 changeValue *= 10;
             item.Point += changeValue;
-            setItemTextBlock(item);
+            SetEnchantTextBlock(item);
         }
 
         private void Enchant_Option_MouseEnter(object sender, MouseEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            EnchantInfo enchant_info = Equip._enchant_db.Dic[item.Name_Eng];
-            string txt;
-            if (enchant_info.IsAdvanced)
-                txt = enchant_info.NAME_KOR + Convert.ToString(item.Refine);
-            //else
-            //    txt = item.Point * enchant_info.OPTION[0].Option
-
-            TextBlock PopupText = new TextBlock
-            {
-                Text = item.Name + Convert.ToString(item.Refine),
-                Background = Brushes.Silver
-            };
-            itemPopup.Child = PopupText;
-
+            SetEnchantTextBlock(item);
             itemPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
             itemPopup.IsOpen = true;
         }
 
+        private void Enchant_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            _user_data.Equip.Dic[now_selected_equip_type].AddEnchant(item.Name_Eng);
+            SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.ENCHANT);
+        }
         #endregion
 
 

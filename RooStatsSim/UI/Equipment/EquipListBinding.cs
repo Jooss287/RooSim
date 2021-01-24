@@ -35,9 +35,9 @@ namespace RooStatsSim.UI.Equipment
             }
             EquipTreeViewBinding EnchantTree = new EquipTreeViewBinding("인챈트");
             Add(EnchantTree);
-            foreach (int Enchant_id in equip_item.Enchant)
+            foreach (string Enchant_id in equip_item.Enchant)
             {
-                ItemDB Enchant = MainWindow._roo_db.Enchant_db[Enchant_id];
+                ItemDB Enchant = Equip._enchant_db.Dic[Enchant_id].OPTION[0];
                 EnchantTree.SubList.Add(new EquipTreeViewBinding(Enchant));
             }
         }

@@ -229,7 +229,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
+                                    <ContentControl MouseDoubleClick="Enchant_MouseDoubleClick"
                                                     MouseWheel="Enchant_Option_MouseWheel"
                                                     MouseEnter="Enchant_Option_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
