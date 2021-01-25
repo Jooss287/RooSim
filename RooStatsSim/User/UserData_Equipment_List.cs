@@ -96,9 +96,9 @@ namespace RooStatsSim.User
                     Enchant.Add(new Enchant_param(input_enchant, point));
                 else
                 {
-                    if (LastEnchantSlot - 1 <= item.EnchantSlot)
+                    if (LastEnchantSlot >= item.EnchantSlot-1)
                         LastEnchantSlot = 0;
-                    Enchant[LastEnchantSlot] = new Enchant_param(input_enchant, point);
+                    Enchant[LastEnchantSlot++] = new Enchant_param(input_enchant, point);
                 }
             }
 

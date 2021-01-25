@@ -37,8 +37,10 @@ namespace RooStatsSim.UI.Equipment
             Add(EnchantTree);
             foreach (EQUIP.EquipItem.Enchant_param enchant_id in equip_item.Enchant)
             {
-                ItemDB Enchant = new ItemDB();
-                Enchant.Name = Equip._enchant_db.Dic[enchant_id.name].NAME_KOR + " " + Convert.ToString(enchant_id.point);
+                ItemDB Enchant = new ItemDB
+                {
+                    Name = Equip._enchant_db.Dic[enchant_id.name].NAME_KOR + " " + Convert.ToString(enchant_id.point)
+                };
                 if (Equip._enchant_db.Dic[enchant_id.name].IsAdvanced)
                 {
                     Enchant += Equip._enchant_db.Dic[enchant_id.name].OPTION[enchant_id.point];

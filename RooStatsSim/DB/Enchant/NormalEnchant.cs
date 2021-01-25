@@ -81,13 +81,13 @@ namespace RooStatsSim.DB.Enchant
             //ATK
             Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.ATK)].OPTION[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.ATK)] = 1;
             //ATK_P
-            Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.ATK_P)].OPTION[0].Option_ITYPE[Enum.GetName(typeof(DTYPE), DTYPE.ATK_P)] = 1;
+            Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.ATK_P)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.ATK_P)] = 1;
             //ASPD
-            Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.ASPD)].OPTION[0].Option_ITYPE[Enum.GetName(typeof(DTYPE), DTYPE.ASPD)] = 1;
+            Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.ASPD)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.ASPD)] = 1;
             //MATK
             Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.MATK)].OPTION[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.MATK)] = 1;
             //MATK_P
-            Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.MATK_P)].OPTION[0].Option_ITYPE[Enum.GetName(typeof(DTYPE), DTYPE.MATK_P)] = 1;
+            Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.MATK_P)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.MATK_P)] = 1;
 
             //MAX_HP
             Dic[Enum.GetName(typeof(NORMAL_ENCHANT_ITEM), NORMAL_ENCHANT_ITEM.MAX_HP)].OPTION[0].Option_ITYPE[Enum.GetName(typeof(ITYPE), ITYPE.HP)] = 1;
