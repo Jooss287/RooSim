@@ -35,9 +35,17 @@ namespace RooStatsSim.UI.Equipment
             }
             EquipTreeViewBinding EnchantTree = new EquipTreeViewBinding("인챈트");
             Add(EnchantTree);
-            foreach (string Enchant_id in equip_item.Enchant)
+            foreach (EQUIP.EquipItem.Enchant_param enchant_id in equip_item.Enchant)
             {
-                ItemDB Enchant = Equip._enchant_db.Dic[Enchant_id].OPTION[0];
+                ItemDB Enchant = new ItemDB();
+                Enchant.Name = Equip._enchant_db.Dic[enchant_id.name].NAME_KOR + " " + Convert.ToString(enchant_id.point);
+                if (Equip._enchant_db.Dic[enchant_id.name].IsAdvanced)
+                {
+                    Enchant += Equip._enchant_db.Dic[enchant_id.name].OPTION[enchant_id.point];
+                }
+                else
+                    Enchant += (Equip._enchant_db.Dic[enchant_id.name].OPTION[0] * enchant_id.point);
+
                 EnchantTree.SubList.Add(new EquipTreeViewBinding(Enchant));
             }
         }

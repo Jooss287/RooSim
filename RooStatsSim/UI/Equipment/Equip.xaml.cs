@@ -211,7 +211,7 @@ namespace RooStatsSim.UI.Equipment
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
-            _user_data.Equip.Dic[now_selected_equip_type].AddEnchant(item.Name_Eng);
+            _user_data.Equip.Dic[now_selected_equip_type].AddEnchant(item.Name_Eng, item.Point);
             SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.ENCHANT);
         }
         #endregion
