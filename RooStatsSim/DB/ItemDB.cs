@@ -52,7 +52,7 @@ namespace RooStatsSim.DB
             Option_Refine[0] = Option;
             foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option in item_db.Option_Refine)
             {
-                Option_Refine.Add(option.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+                Option_Refine[option.Key] = new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>();
                 foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in option.Value)
                 {
                     Option_Refine[option.Key].Add(item_option.Key, new Dictionary<string, double>(item_option.Value));
@@ -93,6 +93,18 @@ namespace RooStatsSim.DB
             //        a.Refine_Option.Add(refine_num.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
             //    AddOption(a.Refine_Option[refine_num.Key], b.Refine_Option[refine_num.Key]);
             //}
+            return a;
+        }
+        public static ItemDB operator *(ItemDB a, int b)
+        {
+            ItemDB temp = new ItemDB(a);
+            foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in a.Option)
+            {
+                foreach(KeyValuePair<string, double> option in item_option.Value)
+                {
+                    temp.Option[item_option.Key][option.Key] *= b;
+                }
+            }
             return a;
         }
         public static void AddOption(Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> A, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> B)
