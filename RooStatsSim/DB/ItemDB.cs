@@ -54,7 +54,7 @@ namespace RooStatsSim.DB
             Option_Refine[0] = Option;
             foreach(KeyValuePair<int, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>> option in item_db.Option_Refine)
             {
-                Option_Refine.Add(option.Key, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
+                Option_Refine[option.Key] = new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>();
                 foreach(KeyValuePair<ITEM_OPTION_TYPE, Dictionary<string, double>> item_option in option.Value)
                 {
                     Option_Refine[option.Key].Add(item_option.Key, new Dictionary<string, double>(item_option.Value));
