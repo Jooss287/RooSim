@@ -105,7 +105,7 @@ namespace RooStatsSim.DB
                     temp.Option[item_option.Key][option.Key] *= b;
                 }
             }
-            return a;
+            return temp;
         }
         public static void AddOption(Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> A, Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>> B)
         {
