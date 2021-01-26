@@ -292,6 +292,7 @@ namespace RooStatsSim.UI.Manager
             cmb_Item_image.IsEnabled = false;
             cmb_set_name_list.IsEnabled = false;
             SetOptionPanel.Visibility = Visibility.Hidden;
+            Item_Weight.Visibility = Visibility.Hidden;
 
             if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
             {
@@ -304,6 +305,7 @@ namespace RooStatsSim.UI.Manager
                 Item_Level.IsEnabled = true;
                 cmb_Item_image.IsEnabled = true;
                 cmb_set_name_list.IsEnabled = true;
+                Item_Weight.Visibility = Visibility.Visible;
             }
             else if (selected == ITEM_TYPE_ENUM.GEAR)
                 list_Job_limit.IsEnabled = true;
