@@ -229,6 +229,7 @@ namespace RooStatsSim.UI.Manager
             now_item.LevelLimit = 0;
             now_item.CardSlot = 0;
             now_item.EnchantSlot = 0;
+            now_item.Weight = 0;
             now_item.Item_type = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
             now_item.Wear_job_limit.Clear();
@@ -281,11 +282,13 @@ namespace RooStatsSim.UI.Manager
             cmb_equip_type.IsEnabled = false;
             list_Job_limit.IsEnabled = false;
             Item_EnchantSlot.IsEnabled = false;
+            Item_Weight.IsEnabled = false;
             Item_CardSlot.IsEnabled = false;
             Item_Level.IsEnabled = false;
             cmb_Item_image.IsEnabled = false;
             cmb_set_name_list.IsEnabled = false;
             SetOptionPanel.Visibility = Visibility.Hidden;
+            Item_Weight.Visibility = Visibility.Hidden;
 
             if (selected == ITEM_TYPE_ENUM.EQUIPMENT)
             {
@@ -293,10 +296,12 @@ namespace RooStatsSim.UI.Manager
                 cmb_equip_type.IsEnabled = true;
                 list_Job_limit.IsEnabled = true;
                 Item_EnchantSlot.IsEnabled = true;
+                Item_Weight.IsEnabled = true;
                 Item_CardSlot.IsEnabled = true;
                 Item_Level.IsEnabled = true;
                 cmb_Item_image.IsEnabled = true;
                 cmb_set_name_list.IsEnabled = true;
+                Item_Weight.Visibility = Visibility.Visible;
             }
             else if (selected == ITEM_TYPE_ENUM.GEAR)
                 list_Job_limit.IsEnabled = true;
