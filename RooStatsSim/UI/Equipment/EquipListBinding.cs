@@ -39,14 +39,14 @@ namespace RooStatsSim.UI.Equipment
             {
                 ItemDB Enchant = new ItemDB
                 {
-                    Name = Equip._enchant_db.Dic[enchant_id.name].NAME_KOR + " " + Convert.ToString(enchant_id.point)
+                    Name = Equip._enchant_db.Dic[enchant_id.Name].NAME_KOR + " " + Convert.ToString(enchant_id.Point)
                 };
-                if (Equip._enchant_db.Dic[enchant_id.name].IsAdvanced)
+                if (Equip._enchant_db.Dic[enchant_id.Name].IsAdvanced)
                 {
-                    Enchant += Equip._enchant_db.Dic[enchant_id.name].OPTION[enchant_id.point];
+                    Enchant += Equip._enchant_db.Dic[enchant_id.Name].OPTION[enchant_id.Point];
                 }
                 else
-                    Enchant += (Equip._enchant_db.Dic[enchant_id.name].OPTION[0] * enchant_id.point);
+                    Enchant += (Equip._enchant_db.Dic[enchant_id.Name].OPTION[0] * enchant_id.Point);
 
                 EnchantTree.SubList.Add(new EquipTreeViewBinding(Enchant));
             }

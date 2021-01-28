@@ -20,15 +20,16 @@ namespace RooStatsSim.User
         [Serializable]
         public class EquipItem
         {
-            public struct Enchant_param
+            public class Enchant_param
             {
-                public string name;
-                public int point;
+                public string Name { get; set; }
+                public int Point { get; set; }
 
+                public Enchant_param() { Name = ""; Point = 0; }
                 public Enchant_param(string name, int point)
                 {
-                    this.name = name;
-                    this.point = point;
+                    Name = name;
+                    Point = point;
                 }
             }
             public EQUIP_TYPE_ENUM EquipType { get; set; }
@@ -162,12 +163,12 @@ namespace RooStatsSim.User
                     option += MainWindow._roo_db.Card_db[card_id];
                 foreach (EquipItem.Enchant_param enchant_id in equipment.Value.Enchant)
                 {
-                    if (Equip._enchant_db.Dic[enchant_id.name].IsAdvanced)
+                    if (Equip._enchant_db.Dic[enchant_id.Name].IsAdvanced)
                     {
-                        option += Equip._enchant_db.Dic[enchant_id.name].OPTION[enchant_id.point];
+                        option += Equip._enchant_db.Dic[enchant_id.Name].OPTION[enchant_id.Point];
                     }
                     else
-                        option += (Equip._enchant_db.Dic[enchant_id.name].OPTION[0] * enchant_id.point);
+                        option += (Equip._enchant_db.Dic[enchant_id.Name].OPTION[0] * enchant_id.Point);
                 }
                     
                 option += equipment.Value.EquipInfo;
