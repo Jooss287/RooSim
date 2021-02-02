@@ -18,6 +18,13 @@ namespace RooStatsSim.UI.Equipment
     /// </summary>
     public partial class Equip : UserControl
     {
+        enum EQUIP_UI_ENUM
+        {
+            EQUIP_IMAGE,
+            EQUIP_NAME,
+            CARD_ITEM_CTRL,
+            ENCHANT_ITEM_CTRL,
+        }
         public static Enchant_DB _enchant_db = new Enchant_DB();
 
         UserData _user_data;
@@ -59,9 +66,13 @@ namespace RooStatsSim.UI.Equipment
         void SetUserItemChanged(EquipId item, EQUIP_TYPE_ENUM equip_type, ITEM_TYPE_ENUM item_type = ITEM_TYPE_ENUM.EQUIPMENT)
         {
             if ( item_type == ITEM_TYPE_ENUM.EQUIPMENT)
-            { 
-                GetEquipTypeItem(equip_type).Header = string.Format("+{0} {1}", item.Refine, item.Name);
-                GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
+            {
+                StackPanel now_panel = GetEquipTypeItem(equip_type);
+
+                (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_IMAGE] as Image).Source = item.ImageFile;
+                (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_NAME] as TextBlock).Text = string.Format("+{0} {1}", item.Refine, item.Name);
+                //(now_panel.Children[(int)EQUIP_UI_ENUM.CARD_ITEM_CTRL] as ItemsControl).ItemsSource = 
+                //(now_panel.Children[(int)EQUIP_UI_ENUM.ENCHANT_ITEM_CTRL] as ItemsControl).ItemsSource = 
 
                 CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, equip_type);
                 CardSelector.ItemsSource = CardItemList;
@@ -70,40 +81,40 @@ namespace RooStatsSim.UI.Equipment
             }
             else if (( item_type == ITEM_TYPE_ENUM.CARD) || (item_type == ITEM_TYPE_ENUM.ENCHANT))
             {
-                GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
+                //GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
             }
 
             MainWindow._user_data_manager.CalcUserData();
         }
 
-        private TreeViewItem GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
+        private StackPanel GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
         {
             switch (equip_type)
             {
-                case EQUIP_TYPE_ENUM.HEAD_TOP:
-                    return head_top_tree;
-                case EQUIP_TYPE_ENUM.HEAD_MID:
-                    return head_mid_tree;
-                case EQUIP_TYPE_ENUM.HEAD_BOT:
-                    return head_bot_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_TOP:
+                //    return head_top_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_MID:
+                //    return head_mid_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_BOT:
+                //    return head_bot_tree;
                 case EQUIP_TYPE_ENUM.WEAPON:
-                    return main_weapon_tree;
-                case EQUIP_TYPE_ENUM.SUB_WEAPON:
-                    return sub_weapon_tree;
-                case EQUIP_TYPE_ENUM.ARMOR:
-                    return armor_tree;
-                case EQUIP_TYPE_ENUM.CLOAK:
-                    return cloak_tree;
-                case EQUIP_TYPE_ENUM.SHOES:
-                    return shoes_tree;
-                case EQUIP_TYPE_ENUM.ACCESSORIES1:
-                    return acc1_tree;
-                case EQUIP_TYPE_ENUM.ACCESSORIES2:
-                    return acc2_tree;
-                case EQUIP_TYPE_ENUM.COSTUME:
-                    return costume_tree;
-                case EQUIP_TYPE_ENUM.BACK_DECORATION:
-                    return backdeco_tree;
+                    return main_weapon_panel;
+                //case EQUIP_TYPE_ENUM.SUB_WEAPON:
+                //    return sub_weapon_tree;
+                //case EQUIP_TYPE_ENUM.ARMOR:
+                //    return armor_tree;
+                //case EQUIP_TYPE_ENUM.CLOAK:
+                //    return cloak_tree;
+                //case EQUIP_TYPE_ENUM.SHOES:
+                //    return shoes_tree;
+                //case EQUIP_TYPE_ENUM.ACCESSORIES1:
+                //    return acc1_tree;
+                //case EQUIP_TYPE_ENUM.ACCESSORIES2:
+                //    return acc2_tree;
+                //case EQUIP_TYPE_ENUM.COSTUME:
+                //    return costume_tree;
+                //case EQUIP_TYPE_ENUM.BACK_DECORATION:
+                //    return backdeco_tree;
             }
             return null;
         }

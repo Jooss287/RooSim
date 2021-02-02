@@ -37,12 +37,21 @@
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
                         <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="WEAPON">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="main_weapon_tree" Header="주무기"
-                                ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="main_weapon_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="주무기" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
