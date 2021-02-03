@@ -37,12 +37,21 @@
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
                         <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="WEAPON">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="main_weapon_tree" Header="주무기"
-                                ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="main_weapon_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="주무기" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
@@ -174,142 +183,73 @@
                         <TabItem.Header>
                             <TextBlock Text="장비"/>
                         </TabItem.Header>
-                        <StackPanel Orientation="Vertical">
-                            <ItemsControl x:Name="ItemSelected">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="6" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
-                                                    MouseEnter="ContentControl_MouseEnter"
-                                                    MouseLeave="ContentControl_MouseLeave">
-                                            <StackPanel Orientation="Horizontal" Margin="8">
-                                                <Image Style="{Binding Source={StaticResource ItemImgBtn}}">
-                                                    <Image.Effect>
-                                                        <DropShadowEffect Direction="0" Color="OrangeRed" ShadowDepth="0" BlurRadius="20"/>
-                                                    </Image.Effect>
-                                                </Image>
-                                            </StackPanel>
-                                        </ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <ItemsControl x:Name="ItemSelector">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="6" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
+                        <ItemsControl x:Name="ItemSelector">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="6" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
                                                     MouseWheel="Item_RefineWheel"
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
-                                            <StackPanel Orientation="Vertical" Margin="8">
-                                                <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
-                                            </StackPanel>
-                                        </ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="8">
+                                            <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
+                                        </StackPanel>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </TabItem>
                     <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" >
                         <TabItem.Header>
                             <TextBlock Text="카드"/>
                         </TabItem.Header>
-                        <StackPanel Orientation="Vertical">
-                            <ItemsControl x:Name="CardSelected">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="6" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
+                        <ItemsControl x:Name="CardSelector">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="6" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
-                                            <StackPanel Orientation="Horizontal" Margin="8">
-                                                <Image Style="{Binding Source={StaticResource ItemImgBtn}}">
-                                                    <Image.Effect>
-                                                        <DropShadowEffect Direction="0" Color="OrangeRed" ShadowDepth="0" BlurRadius="20"/>
-                                                    </Image.Effect>
-                                                </Image>
-                                            </StackPanel>
-                                        </ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <ItemsControl x:Name="CardSelector">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="6" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
-                                                    MouseEnter="ContentControl_MouseEnter"
-                                                    MouseLeave="ContentControl_MouseLeave">
-                                            <StackPanel Orientation="Vertical" Margin="8">
-                                                <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
-                                            </StackPanel>
-                                        </ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="8">
+                                            <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
+                                        </StackPanel>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </TabItem>
                     <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                         <TabItem.Header>
                             <TextBlock Text="인챈"/>
                         </TabItem.Header>
-                        <StackPanel Orientation="Vertical">
-                            <ItemsControl x:Name="EnchantSelected">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="6" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl MouseDoubleClick="Enchant_MouseDoubleClick"
-                                                    MouseEnter="Enchant_Option_MouseEnter"
-                                                    MouseLeave="ContentControl_MouseLeave">
-                                            <TextBlock Height="20" TextAlignment="Center" VerticalAlignment="Stretch" FontWeight="bold"
-                                                           Width="60" Margin="8" Text="{Binding Path=Name}">
-                                                <TextBlock.Effect>
-                                                    <DropShadowEffect Direction="0" Color="OrangeRed" ShadowDepth="0" BlurRadius="20"/>
-                                                </TextBlock.Effect>
-                                            </TextBlock>
-                                        </ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <ItemsControl x:Name="EnchantSelector">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="5" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <ContentControl MouseDoubleClick="Enchant_MouseDoubleClick"
+                        <ItemsControl x:Name="EnchantSelector">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="5" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl MouseDoubleClick="Enchant_MouseDoubleClick"
                                                     MouseWheel="Enchant_Option_MouseWheel"
                                                     MouseEnter="Enchant_Option_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
+                                        <StackPanel Orientation="Vertical" Margin="8" VerticalAlignment="Center">
                                             <TextBlock Height="20" TextAlignment="Center" VerticalAlignment="Stretch" FontWeight="bold"
-                                                           Width="60" Margin="8" Text="{Binding Path=Name}"/>
-                                        </ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
+                                                           Width="60" Text="{Binding Path=Name}"/>
+                                        </StackPanel>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </TabItem>
                 </TabControl>
             </StackPanel>

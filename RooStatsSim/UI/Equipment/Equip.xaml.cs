@@ -18,6 +18,13 @@ namespace RooStatsSim.UI.Equipment
     /// </summary>
     public partial class Equip : UserControl
     {
+        enum EQUIP_UI_ENUM
+        {
+            EQUIP_IMAGE,
+            EQUIP_NAME,
+            CARD_ITEM_CTRL,
+            ENCHANT_ITEM_CTRL,
+        }
         public static Enchant_DB _enchant_db = new Enchant_DB();
 
         UserData _user_data;
@@ -58,84 +65,62 @@ namespace RooStatsSim.UI.Equipment
         }
         void SetUserItemChanged(EquipId item, EQUIP_TYPE_ENUM equip_type, ITEM_TYPE_ENUM item_type = ITEM_TYPE_ENUM.EQUIPMENT)
         {
-            switch (item_type)
+            if ( item_type == ITEM_TYPE_ENUM.EQUIPMENT)
             {
-                case ITEM_TYPE_ENUM.EQUIPMENT:
-                    GetEquipTypeItem(equip_type).Header = string.Format("+{0} {1}", item.Refine, item.Name);
-                    GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
+                StackPanel now_panel = GetEquipTypeItem(equip_type);
 
-                    CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, equip_type);
-                    CardSelector.ItemsSource = CardItemList;
-                    EnchantList = new ItemListFilter(ITEM_TYPE_ENUM.ENCHANT, equip_type);
-                    EnchantSelector.ItemsSource = EnchantList;
-                    ItemSelected.ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.EQUIPMENT, now_selected_equip_type);
-                    break;
-                case ITEM_TYPE_ENUM.CARD:
-                case ITEM_TYPE_ENUM.ENCHANT:
-                    GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
-                    break;
-                default:
-                    break;
+                (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_IMAGE] as Image).Source = item.ImageFile;
+                (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_NAME] as TextBlock).Text = string.Format("+{0} {1}", item.Refine, item.Name);
+                //(now_panel.Children[(int)EQUIP_UI_ENUM.CARD_ITEM_CTRL] as ItemsControl).ItemsSource = 
+                //(now_panel.Children[(int)EQUIP_UI_ENUM.ENCHANT_ITEM_CTRL] as ItemsControl).ItemsSource = 
+
+                CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, equip_type);
+                CardSelector.ItemsSource = CardItemList;
+                EnchantList = new ItemListFilter(ITEM_TYPE_ENUM.ENCHANT, equip_type) ;
+                EnchantSelector.ItemsSource = EnchantList;
             }
+            else if (( item_type == ITEM_TYPE_ENUM.CARD) || (item_type == ITEM_TYPE_ENUM.ENCHANT))
+            {
+                //GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
+            }
+
             MainWindow._user_data_manager.CalcUserData();
         }
 
-        private TreeViewItem GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
+        private StackPanel GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
         {
             switch (equip_type)
             {
-                case EQUIP_TYPE_ENUM.HEAD_TOP:
-                    return head_top_tree;
-                case EQUIP_TYPE_ENUM.HEAD_MID:
-                    return head_mid_tree;
-                case EQUIP_TYPE_ENUM.HEAD_BOT:
-                    return head_bot_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_TOP:
+                //    return head_top_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_MID:
+                //    return head_mid_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_BOT:
+                //    return head_bot_tree;
                 case EQUIP_TYPE_ENUM.WEAPON:
-                    return main_weapon_tree;
-                case EQUIP_TYPE_ENUM.SUB_WEAPON:
-                    return sub_weapon_tree;
-                case EQUIP_TYPE_ENUM.ARMOR:
-                    return armor_tree;
-                case EQUIP_TYPE_ENUM.CLOAK:
-                    return cloak_tree;
-                case EQUIP_TYPE_ENUM.SHOES:
-                    return shoes_tree;
-                case EQUIP_TYPE_ENUM.ACCESSORIES1:
-                    return acc1_tree;
-                case EQUIP_TYPE_ENUM.ACCESSORIES2:
-                    return acc2_tree;
-                case EQUIP_TYPE_ENUM.COSTUME:
-                    return costume_tree;
-                case EQUIP_TYPE_ENUM.BACK_DECORATION:
-                    return backdeco_tree;
+                    return main_weapon_panel;
+                //case EQUIP_TYPE_ENUM.SUB_WEAPON:
+                //    return sub_weapon_tree;
+                //case EQUIP_TYPE_ENUM.ARMOR:
+                //    return armor_tree;
+                //case EQUIP_TYPE_ENUM.CLOAK:
+                //    return cloak_tree;
+                //case EQUIP_TYPE_ENUM.SHOES:
+                //    return shoes_tree;
+                //case EQUIP_TYPE_ENUM.ACCESSORIES1:
+                //    return acc1_tree;
+                //case EQUIP_TYPE_ENUM.ACCESSORIES2:
+                //    return acc2_tree;
+                //case EQUIP_TYPE_ENUM.COSTUME:
+                //    return costume_tree;
+                //case EQUIP_TYPE_ENUM.BACK_DECORATION:
+                //    return backdeco_tree;
             }
             return null;
         }
 
-        #region Equipment Window UI
-        private void SelectEquipment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            now_selected_equip_type = (EQUIP_TYPE_ENUM)Enum.Parse(typeof(EQUIP_TYPE_ENUM), (string)((sender as ContentControl).Tag));
-            EquipItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.EQUIPMENT, now_selected_equip_type);
-            ItemSelector.ItemsSource = EquipItemList;
-            if (_user_data.Equip.Dic.ContainsKey(now_selected_equip_type))
-            { 
-                ItemSelected.ItemsSource = new UsedItemList(_user_data.Equip.Dic[now_selected_equip_type], ITEM_TYPE_ENUM.EQUIPMENT, now_selected_equip_type);
-                CardSelected.ItemsSource = new UsedItemList(_user_data.Equip.Dic[now_selected_equip_type], ITEM_TYPE_ENUM.CARD, now_selected_equip_type);
-                EnchantSelected.ItemsSource = new UsedItemList(_user_data.Equip.Dic[now_selected_equip_type], ITEM_TYPE_ENUM.ENCHANT, now_selected_equip_type);
-            }
-            else
-            {
-                ItemSelected.ItemsSource = new UsedItemList();
-                CardSelected.ItemsSource = new UsedItemList();
-                EnchantSelected.ItemsSource = new UsedItemList();
-            }
-            ItemSlectorTab.SelectedIndex = 0;
-        }
-        #endregion
-
-        #region Common function
-        void SetItemTextBlock(EquipId item)
+        #region Equipment window ui response
+        void setItemTextBlock(EquipId item)
         {
             TextBlock PopupText = new TextBlock
             {
@@ -144,16 +129,48 @@ namespace RooStatsSim.UI.Equipment
             };
             itemPopup.Child = PopupText;
         }
+        private void SelectEquipment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            now_selected_equip_type = (EQUIP_TYPE_ENUM)Enum.Parse(typeof(EQUIP_TYPE_ENUM), (string)((sender as ContentControl).Tag));
+            EquipItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.EQUIPMENT, now_selected_equip_type);
+            ItemSelector.ItemsSource = EquipItemList;
+            ItemSlectorTab.SelectedIndex = 0;
+        }
+        private void SelectItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            if (!_user_data.Equip.Dic.ContainsKey(now_selected_equip_type))
+                _user_data.Equip.Dic[now_selected_equip_type] = new EQUIP.EquipItem();
+            _user_data.Equip.Dic[now_selected_equip_type].EquipType = now_selected_equip_type;
+            _user_data.Equip.Dic[now_selected_equip_type].Equip = item.Id;
+            _user_data.Equip.Dic[now_selected_equip_type].Refine = item.Refine;
+
+            SetUserItemChanged(item, now_selected_equip_type);
+            ItemSlectorTab.SelectedIndex = 1;
+        }
         private void Item_RefineWheel(object sender, MouseWheelEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
             item.Refine += e.Delta > 0 ? 1 : -1;
-            SetItemTextBlock(item);
+            setItemTextBlock(item);
         }
+        private void SelectGear_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void SelectCard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            _user_data.Equip.Dic[now_selected_equip_type].AddCard(item.Id);
+            SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.CARD);
+        }
+
         private void ContentControl_MouseEnter(object sender, MouseEventArgs e)
         {
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
-            SetItemTextBlock(item);
+            setItemTextBlock(item);
 
             itemPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
             itemPopup.IsOpen = true;
@@ -163,37 +180,7 @@ namespace RooStatsSim.UI.Equipment
         {
             itemPopup.IsOpen = false;
         }
-        #endregion
 
-        #region Equip list
-        private void SelectItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
-            
-            if (!_user_data.Equip.Dic.ContainsKey(now_selected_equip_type))
-                _user_data.Equip.Dic[now_selected_equip_type] = new EQUIP.EquipItem();
-            
-            EQUIP.EquipItem user_item = _user_data.Equip.Dic[now_selected_equip_type];
-            user_item.EquipType = now_selected_equip_type;
-            user_item.Equip = item.Id;
-            user_item.Refine = item.Refine;
-
-            SetUserItemChanged(item, now_selected_equip_type);
-            ItemSlectorTab.SelectedIndex = 1;
-        }
-        #endregion
-
-        #region Card list
-        private void SelectCard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
-
-            _user_data.Equip.Dic[now_selected_equip_type].AddCard(item.Id);
-            SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.CARD);
-        }
-        #endregion
-
-        #region Enchant list
         void SetEnchantTextBlock(EquipId item)
         {
             EnchantInfo enchant_info = Equip._enchant_db.Dic[item.Name_Eng];
@@ -213,7 +200,7 @@ namespace RooStatsSim.UI.Equipment
 
         private void Enchant_Option_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            EquipId item = (sender as ContentControl).DataContext as EquipId;
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
             int changeValue = e.Delta > 0 ? 1 : -1;
             if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
@@ -224,27 +211,22 @@ namespace RooStatsSim.UI.Equipment
 
         private void Enchant_Option_MouseEnter(object sender, MouseEventArgs e)
         {
-            EquipId item = (sender as ContentControl).DataContext as EquipId;
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
             SetEnchantTextBlock(item);
-            itemPopup.PlacementTarget = (sender as ContentControl).Content as TextBlock;
+            itemPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
             itemPopup.IsOpen = true;
         }
 
         private void Enchant_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            EquipId item = (sender as ContentControl).DataContext as EquipId;
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
             _user_data.Equip.Dic[now_selected_equip_type].AddEnchant(item.Name_Eng, item.Point);
             SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.ENCHANT);
         }
         #endregion
 
-        #region Gear list
-        private void SelectGear_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
 
-        }
-        #endregion
     }
 }
