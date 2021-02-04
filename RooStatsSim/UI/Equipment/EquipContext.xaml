@@ -24,15 +24,7 @@
         <Setter Property="BorderThickness" Value="1.5,1,1.5,1"/>
         <Setter Property="CornerRadius" Value="5"/>
     </Style>
-
-    <Style TargetType="{x:Type Button}" x:Key="Tree_Image"
-           BasedOn="{StaticResource MaterialDesignFloatingActionMiniDarkButton}">
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="5,0,0,0"/>
-    </Style>
-
+    
     <Style TargetType="{x:Type Image}" x:Key="ItemImage">
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
@@ -48,33 +40,20 @@
     </Style>
 
     <Style TargetType="{x:Type Image}" x:Key="CardImgBtn">
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="Width" Value="15"/>
         <Setter Property="Source" Value="{Binding Path=ImageFile}"/>
         <Setter Property="Stretch" Value="Fill"/>
     </Style>
 
-    <local:EquipContentsCtrl>
-        <Border Style="{Binding Source={StaticResource Tree_Border}}">
-            <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="WEAPON">
-                <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="main_weapon_panel">
-                    <Image Style="{Binding Source={StaticResource ItemImage}}"/>
-                    <TextBlock Text="주무기" Margin="10,0,0,0"/>
-                    <ItemsControl Margin="40,-40,0,0">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="3" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </ContentControl>
-        </Border>
-    </local:EquipContentsCtrl>
+    <Style TargetType="{x:Type TextBlock}" x:Key="EnchantText">
+        <Setter Property="Height" Value="8"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Text" Value="{Binding Path=EnchantName}"/>
+        <Setter Property="FontSize" Value="8"/>
+        <Setter Property="Foreground" Value="Red"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
 
 </ResourceDictionary>

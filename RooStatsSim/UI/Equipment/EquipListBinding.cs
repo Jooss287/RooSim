@@ -138,8 +138,9 @@ class UsedItemList : ObservableCollection<EquipId>
                 {
                     Add(new EquipId()
                     {
-                        Name = enchant_id.Name,
-                        Name_Eng = Equip._enchant_db.Dic[enchant_id.Name].NAME,
+                        Name = Equip._enchant_db.Dic[enchant_id.Name].NAME_KOR,
+                        Name_Eng = enchant_id.Name,
+                        EnchantName = Equip._enchant_db.Dic[enchant_id.Name].NAME_KOR + " " + Convert.ToString(enchant_id.Point),
                         Point = enchant_id.Point
                     });
                 }

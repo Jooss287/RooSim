@@ -14,29 +14,71 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_TOP">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="head_top_tree" Header="머리_상단"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="HEAD_TOP">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="head_top_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="머리상단" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_BOT">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="head_bot_tree" Header="머리_하단"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}" />
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="HEAD_BOT">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="head_bot_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="머리하단" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="WEAPON">
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="WEAPON">
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="main_weapon_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="주무기" Margin="10,0,0,0"/>
@@ -52,39 +94,114 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="CLOAK">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="cloak_tree" Header="걸칠것"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="CLOAK">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="cloak_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="걸칠것" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ACCESSORIES1">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="acc1_tree" Header="악세사리"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="ACCESSORIES1">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="acc1_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="악세서리" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="COSTUME">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="costume_tree" Header="코스튬"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="COSTUME">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="costume_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="코스튬" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
@@ -95,12 +212,9 @@
 
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
                         <ContentControl MouseDoubleClick="SelectGear_MouseDoubleClick" Tag="GEAR">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="gear_tree" Header="기어"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="gear_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="기어" Margin="10,0,0,0"/>
                             </StackPanel>
                         </ContentControl>
                     </Border>
@@ -108,68 +222,194 @@
                 
                 <StackPanel Orientation="Vertical">
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="HEAD_MID">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="head_mid_tree" Header="머리_중단"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="HEAD_MID">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="head_mid_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="머리중단" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ARMOR">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="armor_tree" Header="갑옷"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}" />
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="ARMOR">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="armor_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="갑옷" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="SUB_WEAPON">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="sub_weapon_tree" Header="보조무기"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="SUB_WEAPON">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="sub_weapon_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="보조무기" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="SHOES">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="shoes_tree" Header="신발"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="SHOES">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="shoes_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="신발" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="ACCESSORIES2">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="acc2_tree" Header="악세사리"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="ACCESSORIES2">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="acc2_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="악세서리" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
                     <Border Style="{Binding Source={StaticResource Tree_Border}}">
-                        <ContentControl MouseDoubleClick="SelectEquipment_MouseDoubleClick" Tag="BACK_DECORATION">
-                            <StackPanel Orientation="Vertical" Background="GhostWhite">
-                                <Button Content="Img" Style="{Binding Source={StaticResource Tree_Image}}"/>
-                                <TreeView Style="{Binding Source={StaticResource Custom_EquipTree}}">
-                                    <TreeViewItem x:Name="backdeco_tree" Header="등장식"
-                                    ItemsSource="{Binding Source={StaticResource EquipListResource}}"/>
-                                </TreeView>
+                        <ContentControl MouseDoubleClick="EquipmentPanel_MouseDoubleClick" Tag="BACK_DECORATION">
+                            <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="back_deco_panel">
+                                <Image Style="{Binding Source={StaticResource ItemImage}}"/>
+                                <TextBlock Text="등장식" Margin="10,0,0,0"/>
+                                <ItemsControl Margin="40,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Style="{Binding Source={StaticResource CardImgBtn}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl Margin="80,-40,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{Binding Source={StaticResource EnchantText}}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ContentControl>
                     </Border>
@@ -183,73 +423,147 @@
                         <TabItem.Header>
                             <TextBlock Text="장비"/>
                         </TabItem.Header>
-                        <ItemsControl x:Name="ItemSelector">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <UniformGrid Columns="6" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
+                        <StackPanel Orientation="Vertical">
+                            <ItemsControl x:Name="ItemSelected">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="6" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
                                                     MouseWheel="Item_RefineWheel"
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
-                                        <StackPanel Orientation="Vertical" Margin="8">
-                                            <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
-                                        </StackPanel>
-                                    </ContentControl>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                                            <StackPanel Orientation="Vertical" Margin="8">
+                                                <Image Style="{Binding Source={StaticResource ItemImgBtn}}">
+                                                    <Image.Effect>
+                                                        <DropShadowEffect Direction="0" Color="OrangeRed" ShadowDepth="0" BlurRadius="20"/>
+                                                    </Image.Effect>
+                                                </Image>
+                                            </StackPanel>
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl x:Name="ItemSelector">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="6" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
+                                                    MouseWheel="Item_RefineWheel"
+                                                    MouseEnter="ContentControl_MouseEnter"
+                                                    MouseLeave="ContentControl_MouseLeave">
+                                            <StackPanel Orientation="Vertical" Margin="8">
+                                                <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
+                                            </StackPanel>
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </TabItem>
                     <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}" >
                         <TabItem.Header>
                             <TextBlock Text="카드"/>
                         </TabItem.Header>
-                        <ItemsControl x:Name="CardSelector">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <UniformGrid Columns="6" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
+                        <StackPanel Orientation="Vertical">
+                            <ItemsControl x:Name="CardSelected">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="6" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
-                                        <StackPanel Orientation="Vertical" Margin="8">
-                                            <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
-                                        </StackPanel>
-                                    </ContentControl>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                                            <StackPanel Orientation="Vertical" Margin="8">
+                                                <Image Style="{Binding Source={StaticResource ItemImgBtn}}">
+                                                    <Image.Effect>
+                                                        <DropShadowEffect Direction="0" Color="OrangeRed" ShadowDepth="0" BlurRadius="20"/>
+                                                    </Image.Effect>
+                                                </Image>
+                                            </StackPanel>
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl x:Name="CardSelector">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="6" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
+                                                    MouseEnter="ContentControl_MouseEnter"
+                                                    MouseLeave="ContentControl_MouseLeave">
+                                            <StackPanel Orientation="Vertical" Margin="8">
+                                                <Image Style="{Binding Source={StaticResource ItemImgBtn}}"/>
+                                            </StackPanel>
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </TabItem>
                     <TabItem Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                         <TabItem.Header>
                             <TextBlock Text="인챈"/>
                         </TabItem.Header>
-                        <ItemsControl x:Name="EnchantSelector">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <UniformGrid Columns="5" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <ContentControl MouseDoubleClick="Enchant_MouseDoubleClick"
+                        <StackPanel Orientation="Vertical">
+                            <ItemsControl x:Name="EnchantSelected">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="6" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl MouseDoubleClick="Enchant_MouseDoubleClick"
+                                                    MouseEnter="Enchant_Option_MouseEnter"
+                                                    MouseLeave="ContentControl_MouseLeave">
+                                            <StackPanel Orientation="Vertical" Margin="8">
+                                                <TextBlock Height="20" TextAlignment="Center" VerticalAlignment="Stretch" FontWeight="bold"
+                                                           Width="60" Text="{Binding Path=Name}">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect Direction="0" Color="OrangeRed" ShadowDepth="0" BlurRadius="20"/>
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl x:Name="EnchantSelector">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="5" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ContentControl MouseDoubleClick="Enchant_MouseDoubleClick"
                                                     MouseWheel="Enchant_Option_MouseWheel"
                                                     MouseEnter="Enchant_Option_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
-                                        <StackPanel Orientation="Vertical" Margin="8" VerticalAlignment="Center">
-                                            <TextBlock Height="20" TextAlignment="Center" VerticalAlignment="Stretch" FontWeight="bold"
+                                            <StackPanel Orientation="Vertical" Margin="8" VerticalAlignment="Center">
+                                                <TextBlock Height="20" TextAlignment="Center" VerticalAlignment="Stretch" FontWeight="bold"
                                                            Width="60" Text="{Binding Path=Name}"/>
-                                        </StackPanel>
-                                    </ContentControl>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                                            </StackPanel>
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </TabItem>
                 </TabControl>
             </StackPanel>
