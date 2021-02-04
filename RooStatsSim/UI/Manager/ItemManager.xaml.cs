@@ -108,6 +108,13 @@ namespace RooStatsSim.UI.Manager
             for (int i = 0; i < 20; i++)
                 cmb_refine_num.Items.Add(i);
             cmb_refine_num.SelectedIndex = 0;
+
+            foreach (EQUIP_REFINE_TYPE_ENUM refine in Enum.GetValues(typeof(EQUIP_REFINE_TYPE_ENUM)))
+            {
+                string statusName = EnumBaseTable_Kor.EQUIP_REFINE_TYPE_ENUM_KOR[refine];
+                cmb_equip_refine_type.Items.Add(statusName);
+            }
+            cmb_equip_refine_type.SelectedIndex = (int)EQUIP_REFINE_TYPE_ENUM.PHYSICAL_WEAPON;
         }
         void SetComboBox()
         {
@@ -198,6 +205,7 @@ namespace RooStatsSim.UI.Manager
         void SetNowItemOption()
         {
             cmb_equip_type.SelectedIndex = (int)now_item.Equip_type;
+            cmb_equip_refine_type.SelectedIndex = (int)now_item.RefineType;
             cmb_Item_image.SelectedIndex = _image_list.IndexOf(now_item.ImageName);
             cmb_set_name_list.SelectedIndex = _set_option_list.IndexOf(now_item.SetName);
             list_Job_limit.ItemsSource = new Job_Limite_List(ref now_item._wear_job_limit);
@@ -232,6 +240,7 @@ namespace RooStatsSim.UI.Manager
             now_item.Weight = 0;
             now_item.Item_type = (ITEM_TYPE_ENUM)cmb_item_type.SelectedIndex;
             now_item.Equip_type = (EQUIP_TYPE_ENUM)cmb_equip_type.SelectedIndex;
+            now_item.RefineType = (EQUIP_REFINE_TYPE_ENUM)cmb_equip_refine_type.SelectedIndex;
             now_item.Wear_job_limit.Clear();
             now_item.Option_IF_TYPE.Clear();
             now_item.SetPosition.Clear();
@@ -280,6 +289,7 @@ namespace RooStatsSim.UI.Manager
 
             cmb_db_type.IsEnabled = false;
             cmb_equip_type.IsEnabled = false;
+            cmb_equip_refine_type.IsEnabled = false;
             list_Job_limit.IsEnabled = false;
             Item_EnchantSlot.IsEnabled = false;
             Item_Weight.IsEnabled = false;
@@ -294,6 +304,7 @@ namespace RooStatsSim.UI.Manager
             {
                 cmb_db_type.IsEnabled = true;
                 cmb_equip_type.IsEnabled = true;
+                cmb_equip_refine_type.IsEnabled = true;
                 list_Job_limit.IsEnabled = true;
                 Item_EnchantSlot.IsEnabled = true;
                 Item_Weight.IsEnabled = true;
@@ -413,6 +424,10 @@ namespace RooStatsSim.UI.Manager
                 now_item.NowRefineOption = now_item.Option_Refine[refine];
                 SetNowItemOption();
             }
+        }
+        private void cmb_equip_refine_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            now_item.RefineType = (EQUIP_REFINE_TYPE_ENUM)cmb_equip_refine_type.SelectedIndex;
         }
         #endregion
         #region normal option callback
