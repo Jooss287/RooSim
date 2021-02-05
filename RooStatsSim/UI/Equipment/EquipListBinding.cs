@@ -7,10 +7,8 @@ using RooStatsSim.User;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using RooStatsSim.DB.Enchant;
 
 namespace RooStatsSim.UI.Equipment
 {
@@ -37,9 +35,19 @@ namespace RooStatsSim.UI.Equipment
             }
             EquipTreeViewBinding EnchantTree = new EquipTreeViewBinding("인챈트");
             Add(EnchantTree);
-            foreach (int Enchant_id in equip_item.Enchant)
+            foreach (EQUIP.EquipItem.Enchant_param enchant_id in equip_item.Enchant)
             {
-                ItemDB Enchant = MainWindow._roo_db.Enchant_db[Enchant_id];
+                ItemDB Enchant = new ItemDB
+                {
+                    Name = Equip._enchant_db.Dic[enchant_id.Name].NAME_KOR + " " + Convert.ToString(enchant_id.Point)
+                };
+                if (Equip._enchant_db.Dic[enchant_id.Name].IsAdvanced)
+                {
+                    Enchant += Equip._enchant_db.Dic[enchant_id.Name].OPTION[enchant_id.Point];
+                }
+                else
+                    Enchant += (Equip._enchant_db.Dic[enchant_id.Name].OPTION[0] * enchant_id.Point);
+
                 EnchantTree.SubList.Add(new EquipTreeViewBinding(Enchant));
             }
         }
@@ -63,6 +71,19 @@ class ItemListFilter : ObservableCollection<EquipId>
                 Id = itemPair.Key,
                 Name = itemPair.Value.Name,
                 ImageRoot = itemPair.Value.ImageName
+            });
+        }
+    }
+    public ItemListFilter(ITEM_TYPE_ENUM itemtype, EQUIP_TYPE_ENUM equiptype)
+    {
+        if (itemtype != ITEM_TYPE_ENUM.ENCHANT)
+            return;
+        foreach (KeyValuePair<string, EnchantInfo> itemPair in Equip._enchant_db.Dic)
+        {
+            Add(new EquipId()
+            {
+                Name_Eng = itemPair.Value.NAME,
+                Name = itemPair.Value.NAME_KOR
             });
         }
     }

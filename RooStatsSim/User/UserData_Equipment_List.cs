@@ -20,13 +20,25 @@ namespace RooStatsSim.User
         [Serializable]
         public class EquipItem
         {
+            public class Enchant_param
+            {
+                public string Name { get; set; }
+                public int Point { get; set; }
+
+                public Enchant_param() { Name = ""; Point = 0; }
+                public Enchant_param(string name, int point)
+                {
+                    Name = name;
+                    Point = point;
+                }
+            }
             public EQUIP_TYPE_ENUM EquipType { get; set; }
             public int LastCardSetSlot { get; set; }
             public int LastEnchantSlot { get; set; }
 
             int _equip;
             List<int> _cards;
-            List<int> _enchant;
+            List<Enchant_param> _enchant;
 
             [JsonIgnore] public ItemDB EquipInfo { get; set; }
             //[JsonIgnore] Dictionary<ItemDB> CardInfo { get; set; }
@@ -52,11 +64,11 @@ namespace RooStatsSim.User
                 }
                 set { _cards = value; }
             }
-            public List<int> Enchant
+            public List<Enchant_param> Enchant
             {
                 get {
                     if (_enchant == null)
-                        _enchant = new List<int>();
+                        _enchant = new List<Enchant_param>();
                     return _enchant;
                 }
                 set { _enchant = value; }
@@ -76,6 +88,21 @@ namespace RooStatsSim.User
                     Card[LastCardSetSlot] = input_card;
                 }
             }
+            public void AddEnchant(string input_enchant, int point)
+            {
+                ItemDB item = MainWindow._roo_db.Equip_db[(int)EnumBaseTable_Kor.EQUIP_TYPE_TO_DB_ENUM[EquipType]][Equip];
+                if (item.EnchantSlot == 0)
+                    return;
+                if (Enchant.Count < item.EnchantSlot)
+                    Enchant.Add(new Enchant_param(input_enchant, point));
+                else
+                {
+                    if (LastEnchantSlot >= item.EnchantSlot-1)
+                        LastEnchantSlot = 0;
+                    Enchant[LastEnchantSlot++] = new Enchant_param(input_enchant, point);
+                }
+            }
+
             public ItemDB GetRefineOption()
             {
                 ItemDB db = null;
@@ -134,8 +161,16 @@ namespace RooStatsSim.User
                     continue;
                 foreach (int card_id in equipment.Value.Card)
                     option += MainWindow._roo_db.Card_db[card_id];
-                foreach (int enchant_id in equipment.Value.Enchant)
-                    option += MainWindow._roo_db.Card_db[enchant_id];
+                foreach (EquipItem.Enchant_param enchant_id in equipment.Value.Enchant)
+                {
+                    if (Equip._enchant_db.Dic[enchant_id.Name].IsAdvanced)
+                    {
+                        option += Equip._enchant_db.Dic[enchant_id.Name].OPTION[enchant_id.Point];
+                    }
+                    else
+                        option += (Equip._enchant_db.Dic[enchant_id.Name].OPTION[0] * enchant_id.Point);
+                }
+                    
                 option += equipment.Value.EquipInfo;
                 option += equipment.Value.GetRefineOption();
 

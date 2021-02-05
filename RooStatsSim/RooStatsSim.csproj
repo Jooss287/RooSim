@@ -121,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\Enchant\AdvancedEnchant.cs" />
+	<Compile Include="DB\Enchant\EnchantInfo.cs" />
+    <Compile Include="DB\Enchant\Enchant_DB.cs" />
+	<Compile Include="DB\Enchant\NormalEnchant.cs" />
     <Compile Include="DB\ConsumableItem\ConsumableBuff_DB.cs" />
     <Compile Include="DB\ConsumableItem\CookingConsumable.cs" />
     <Compile Include="DB\ConsumableItem\ConsumableBuffInfo.cs" />

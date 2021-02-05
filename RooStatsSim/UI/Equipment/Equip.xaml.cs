@@ -1,23 +1,14 @@
-﻿using RooStatsSim.DB.Table;
-using RooStatsSim.UI.Menu;
-using RooStatsSim.User;
-using System;
-using System.IO;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
+using RooStatsSim.DB.Table;
+using RooStatsSim.DB.Enchant;
+using RooStatsSim.User;
 using RooStatsSim.Extension;
 
 namespace RooStatsSim.UI.Equipment
@@ -27,6 +18,15 @@ namespace RooStatsSim.UI.Equipment
     /// </summary>
     public partial class Equip : UserControl
     {
+        enum EQUIP_UI_ENUM
+        {
+            EQUIP_IMAGE,
+            EQUIP_NAME,
+            CARD_ITEM_CTRL,
+            ENCHANT_ITEM_CTRL,
+        }
+        public static Enchant_DB _enchant_db = new Enchant_DB();
+
         UserData _user_data;
         ItemListFilter EquipItemList;
         ItemListFilter CardItemList;
@@ -66,51 +66,55 @@ namespace RooStatsSim.UI.Equipment
         void SetUserItemChanged(EquipId item, EQUIP_TYPE_ENUM equip_type, ITEM_TYPE_ENUM item_type = ITEM_TYPE_ENUM.EQUIPMENT)
         {
             if ( item_type == ITEM_TYPE_ENUM.EQUIPMENT)
-            { 
-                GetEquipTypeItem(equip_type).Header = string.Format("+{0} {1}", item.Refine, item.Name);
-                GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
+            {
+                StackPanel now_panel = GetEquipTypeItem(equip_type);
+
+                (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_IMAGE] as Image).Source = item.ImageFile;
+                (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_NAME] as TextBlock).Text = string.Format("+{0} {1}", item.Refine, item.Name);
+                //(now_panel.Children[(int)EQUIP_UI_ENUM.CARD_ITEM_CTRL] as ItemsControl).ItemsSource = 
+                //(now_panel.Children[(int)EQUIP_UI_ENUM.ENCHANT_ITEM_CTRL] as ItemsControl).ItemsSource = 
 
                 CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, equip_type);
                 CardSelector.ItemsSource = CardItemList;
-                //EnchantList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.ENCHANT, now_selected_equip_type);
-
+                EnchantList = new ItemListFilter(ITEM_TYPE_ENUM.ENCHANT, equip_type) ;
+                EnchantSelector.ItemsSource = EnchantList;
             }
             else if (( item_type == ITEM_TYPE_ENUM.CARD) || (item_type == ITEM_TYPE_ENUM.ENCHANT))
             {
-                GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
+                //GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
             }
 
             MainWindow._user_data_manager.CalcUserData();
         }
 
-        private TreeViewItem GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
+        private StackPanel GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
         {
             switch (equip_type)
             {
-                case EQUIP_TYPE_ENUM.HEAD_TOP:
-                    return head_top_tree;
-                case EQUIP_TYPE_ENUM.HEAD_MID:
-                    return head_mid_tree;
-                case EQUIP_TYPE_ENUM.HEAD_BOT:
-                    return head_bot_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_TOP:
+                //    return head_top_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_MID:
+                //    return head_mid_tree;
+                //case EQUIP_TYPE_ENUM.HEAD_BOT:
+                //    return head_bot_tree;
                 case EQUIP_TYPE_ENUM.WEAPON:
-                    return main_weapon_tree;
-                case EQUIP_TYPE_ENUM.SUB_WEAPON:
-                    return sub_weapon_tree;
-                case EQUIP_TYPE_ENUM.ARMOR:
-                    return armor_tree;
-                case EQUIP_TYPE_ENUM.CLOAK:
-                    return cloak_tree;
-                case EQUIP_TYPE_ENUM.SHOES:
-                    return shoes_tree;
-                case EQUIP_TYPE_ENUM.ACCESSORIES1:
-                    return acc1_tree;
-                case EQUIP_TYPE_ENUM.ACCESSORIES2:
-                    return acc2_tree;
-                case EQUIP_TYPE_ENUM.COSTUME:
-                    return costume_tree;
-                case EQUIP_TYPE_ENUM.BACK_DECORATION:
-                    return backdeco_tree;
+                    return main_weapon_panel;
+                //case EQUIP_TYPE_ENUM.SUB_WEAPON:
+                //    return sub_weapon_tree;
+                //case EQUIP_TYPE_ENUM.ARMOR:
+                //    return armor_tree;
+                //case EQUIP_TYPE_ENUM.CLOAK:
+                //    return cloak_tree;
+                //case EQUIP_TYPE_ENUM.SHOES:
+                //    return shoes_tree;
+                //case EQUIP_TYPE_ENUM.ACCESSORIES1:
+                //    return acc1_tree;
+                //case EQUIP_TYPE_ENUM.ACCESSORIES2:
+                //    return acc2_tree;
+                //case EQUIP_TYPE_ENUM.COSTUME:
+                //    return costume_tree;
+                //case EQUIP_TYPE_ENUM.BACK_DECORATION:
+                //    return backdeco_tree;
             }
             return null;
         }
@@ -118,9 +122,11 @@ namespace RooStatsSim.UI.Equipment
         #region Equipment window ui response
         void setItemTextBlock(EquipId item)
         {
-            TextBlock PopupText = new TextBlock();
-            PopupText.Text = "+" + Convert.ToString(item.Refine) + " " + item.Name;
-            PopupText.Background = Brushes.Silver;
+            TextBlock PopupText = new TextBlock
+            {
+                Text = "+" + Convert.ToString(item.Refine) + " " + item.Name,
+                Background = Brushes.Silver
+            };
             itemPopup.Child = PopupText;
         }
         private void SelectEquipment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -175,6 +181,52 @@ namespace RooStatsSim.UI.Equipment
             itemPopup.IsOpen = false;
         }
 
+        void SetEnchantTextBlock(EquipId item)
+        {
+            EnchantInfo enchant_info = Equip._enchant_db.Dic[item.Name_Eng];
+            string txt = "";
+            if (enchant_info.IsAdvanced)
+                txt = enchant_info.NAME_KOR + " " + Convert.ToString(item.Point);
+            else
+                txt = enchant_info.NAME_KOR + " " + Convert.ToString(item.Point);
+
+            TextBlock PopupText = new TextBlock
+            {
+                Text = txt,
+                Background = Brushes.Silver
+            };
+            itemPopup.Child = PopupText;
+        }
+
+        private void Enchant_Option_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            int changeValue = e.Delta > 0 ? 1 : -1;
+            if ((Keyboard.IsKeyDown(Key.LeftShift)) || (Keyboard.IsKeyDown(Key.RightShift)))
+                changeValue *= 10;
+            item.Point += changeValue;
+            SetEnchantTextBlock(item);
+        }
+
+        private void Enchant_Option_MouseEnter(object sender, MouseEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            SetEnchantTextBlock(item);
+            itemPopup.PlacementTarget = ((sender as ContentControl).Content as StackPanel).Children[0];
+            itemPopup.IsOpen = true;
+        }
+
+        private void Enchant_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            _user_data.Equip.Dic[now_selected_equip_type].AddEnchant(item.Name_Eng, item.Point);
+            SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.ENCHANT);
+        }
         #endregion
+
+
     }
 }
