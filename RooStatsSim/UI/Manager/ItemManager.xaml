@@ -82,6 +82,9 @@
                                 <ComboBox Name="cmb_set_name_list" Width="70" Margin="10,0,0,0"
                                           VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                           SelectionChanged="cmb_set_name_list_SelectionChanged"/>
+                                <ComboBox Name="cmb_equip_refine_type" SelectionChanged="cmb_equip_refine_type_SelectionChanged"
+                                          Width="130" Height="30" Margin="10,0,0,0"
+                                          VerticalAlignment="Bottom" HorizontalAlignment="Left" />
                                 <ComboBox Name="cmb_refine_num" Width="40" Margin="10,0,0,0"
                                           VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                           SelectionChanged="cmb_refine_num_SelectionChanged"/>

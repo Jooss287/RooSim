@@ -134,4 +134,12 @@ namespace RooStatsSim.DB.Table
         COSTUME,
         BACK_DECO,
     }
+    public enum EQUIP_REFINE_TYPE_ENUM
+    {
+        PHYSICAL_WEAPON,
+        MAGICAL_WEAPON,
+        ARMOR,
+        HEAD,
+        BACK_DECO
+    }
 }
