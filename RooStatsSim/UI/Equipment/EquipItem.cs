@@ -68,6 +68,7 @@ namespace RooStatsSim.UI.Equipment
             set { _image_name = value; OnPropertyChanged("ImageRoot"); GetImage(); }
         }
         public int Point { get; set; }
+        public string EnchantName { get; set; }
         public BitmapImage ImageFile
         {
             get { return _image; }

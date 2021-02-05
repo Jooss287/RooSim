@@ -104,3 +104,51 @@ class ItemListFilter : ObservableCollection<EquipId>
         return null;
     }
 }
+
+class UsedItemList : ObservableCollection<EquipId>
+{
+    public UsedItemList() { }
+    public UsedItemList(EQUIP.EquipItem user_item, ITEM_TYPE_ENUM itemtype, EQUIP_TYPE_ENUM equiptype)
+    {
+        switch(itemtype)
+        {
+            case ITEM_TYPE_ENUM.EQUIPMENT:
+                Add(new EquipId()
+                {
+                    Id = user_item.EquipInfo.Id,
+                    Name = user_item.EquipInfo.Name,
+                    Refine = user_item.Refine,
+                    ImageRoot = user_item.EquipInfo.ImageName,
+                });
+                break;
+            case ITEM_TYPE_ENUM.CARD:
+                foreach(int card_id in user_item.Card)
+                {
+                    ItemDB card = MainWindow._roo_db.Card_db[card_id];
+                    Add(new EquipId()
+                    {
+                        Id = card.Id,
+                        Name = card.Name,
+                        ImageRoot = card.ImageName,
+                    });
+                }
+                break;
+            case ITEM_TYPE_ENUM.ENCHANT:
+                foreach(EQUIP.EquipItem.Enchant_param enchant_id in user_item.Enchant)
+                {
+                    Add(new EquipId()
+                    {
+                        Name = Equip._enchant_db.Dic[enchant_id.Name].NAME_KOR,
+                        Name_Eng = enchant_id.Name,
+                        EnchantName = Equip._enchant_db.Dic[enchant_id.Name].NAME_KOR + " " + Convert.ToString(enchant_id.Point),
+                        Point = enchant_id.Point
+                    });
+                }
+                break;
+            case ITEM_TYPE_ENUM.GEAR:
+                break;
+            default:
+                break;
+        }
+    }
+}
