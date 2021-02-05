@@ -126,10 +126,7 @@ namespace RooStatsSim.Extension
             {
                 return false;
             }
-            if (typeToConvert.GetGenericTypeDefinition() == typeof(List<>))
-            {
-                return false;
-            }
+
             if (typeToConvert.GetGenericArguments()[0] == typeof(int))
                 return true;
             else
