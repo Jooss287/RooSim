@@ -29,8 +29,8 @@ namespace RooStatsSim.DB
             CardSlot = item_db.CardSlot;
             EnchantSlot = item_db.EnchantSlot;
             Weight = item_db.Weight;
+            RefineType = item_db.RefineType;
 
-            
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
             SetPosition = new List<EQUIP_TYPE_ENUM>(item_db.SetPosition);
 

@@ -111,6 +111,7 @@ namespace RooStatsSim.UI.Manager
             Weight = param.Weight;
             Item_type = param.Item_type;
             Equip_type = param.Equip_type;
+            RefineType = param.RefineType;
             SetPosition = param.SetPosition;
             Wear_job_limit = param.Wear_job_limit;
             Option = param.Option;

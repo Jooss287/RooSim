@@ -109,9 +109,9 @@ namespace RooStatsSim.UI.Manager
                 cmb_refine_num.Items.Add(i);
             cmb_refine_num.SelectedIndex = 0;
 
-            foreach (EQUIP_REFINE_TYPE_ENUM refine in Enum.GetValues(typeof(EQUIP_REFINE_TYPE_ENUM)))
+            foreach (EQUIP_REFINE_TYPE_ENUM refine_type in Enum.GetValues(typeof(EQUIP_REFINE_TYPE_ENUM)))
             {
-                string statusName = EnumBaseTable_Kor.EQUIP_REFINE_TYPE_ENUM_KOR[refine];
+                string statusName = EnumBaseTable_Kor.EQUIP_REFINE_TYPE_ENUM_KOR[refine_type];
                 cmb_equip_refine_type.Items.Add(statusName);
             }
             cmb_equip_refine_type.SelectedIndex = (int)EQUIP_REFINE_TYPE_ENUM.PHYSICAL_WEAPON;
