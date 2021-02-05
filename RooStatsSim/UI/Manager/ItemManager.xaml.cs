@@ -421,6 +421,8 @@ namespace RooStatsSim.UI.Manager
             if ((sender as ComboBox).SelectedItem != null)
             {
                 int refine = Convert.ToInt32((sender as ComboBox).SelectedItem.ToString());
+                if (!now_item.Option_Refine.ContainsKey(refine))
+                    now_item.Option_Refine.Add(refine, new Dictionary<ITEM_OPTION_TYPE, Dictionary<string, double>>());
                 now_item.NowRefineOption = now_item.Option_Refine[refine];
                 SetNowItemOption();
             }
