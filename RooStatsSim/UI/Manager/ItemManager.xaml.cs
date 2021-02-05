@@ -735,7 +735,7 @@ namespace RooStatsSim.UI.Manager
             string skill_name = null;
             skill_name = SwordmanSkill.SKILL_KOR.FirstOrDefault(x => x.Value == skill_name_kor).Key;
             if (skill_name != null) return skill_name;
-            skill_name = LoadKnightSkill.SKILL_KOR.FirstOrDefault(x => x.Value == skill_name_kor).Key;
+            skill_name = LordKnightSkill.SKILL_KOR.FirstOrDefault(x => x.Value == skill_name_kor).Key;
             if (skill_name != null) return skill_name;
 
             return null;

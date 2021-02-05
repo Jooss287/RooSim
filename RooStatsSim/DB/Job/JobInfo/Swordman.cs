@@ -10,7 +10,7 @@ namespace RooStatsSim.DB.Job.JobInfo
         SWORD_MASTERY,
         BASH,
         MAGNUM_BRAKE,
-        PROVOQUE,
+        PROVOKE,
         ENDURE,
     }
     public class SwordmanSkill
@@ -21,7 +21,7 @@ namespace RooStatsSim.DB.Job.JobInfo
             {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.SWORD_MASTERY), "검계열 수련" },
             {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.BASH), "배쉬" },
             {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.MAGNUM_BRAKE), "매그넘 브레이크" },
-            {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.PROVOQUE), "프로보크" },
+            {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.PROVOKE), "프로보크" },
             {Enum.GetName(typeof(SWORDMAN_SKILL),SWORDMAN_SKILL.ENDURE), "인듀어" },
         };
         public Dictionary<string, SkillInfo> Skill { get; set; }
@@ -63,8 +63,8 @@ namespace RooStatsSim.DB.Job.JobInfo
             }
                 
             //프로보크
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.PROVOQUE)].MAX_LV = 10;
-            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.PROVOQUE)].TYPE = SKILL_TYPE.DEBUFF;
+            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.PROVOKE)].MAX_LV = 10;
+            Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.PROVOKE)].TYPE = SKILL_TYPE.DEBUFF;
             //인듀어
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.ENDURE)].MAX_LV = 10;
             Skill[Enum.GetName(typeof(SWORDMAN_SKILL), SWORDMAN_SKILL.ENDURE)].TYPE = SKILL_TYPE.BUFF;

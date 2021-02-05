@@ -43,7 +43,7 @@ namespace RooStatsSim.DB.Table
         ALCHEMIST = 220,
         THIEF = 300,
         ASSASSIN = 310,
-        LOGUE = 320,
+        ROGUE = 320,
         ARCHER = 400,
         HUNTER = 410,
         BARD = 420,
@@ -52,18 +52,18 @@ namespace RooStatsSim.DB.Table
         WIZARD = 510,
         SAGE = 520,
         ACOLYTE = 600,
-        PRIST = 610,
+        PRIEST = 610,
         MONK = 620,
     }
     public enum STATUS_EFFECT_TYPE
     {
-        STERN,
+        STUN,
         FEAR,
         SILENCE,
         FROZEN,
         CURSE,
         PETRIFICATION,
-        DARK,
+        DARKNESS,
         POISON,
         SLEEP,
         BLEEDING
@@ -74,10 +74,10 @@ namespace RooStatsSim.DB.Table
         PLANT,
         INSECT,
         HUMAN,
-        SEAFOOD,
+        FISH,
         DEVIL,
         DRAGON,
-        NONE,
+        FORMLESS,
         ANGEL,
         UNDEAD
     }
@@ -97,8 +97,8 @@ namespace RooStatsSim.DB.Table
     {
         HAND,
         DAGGER,
-        SWARD,
-        TWOHAND_SWARD,
+        SWORD,
+        TWOHAND_SWORD,
         BLUNT,
         SPEAR,
         TWOHAND_SPEAR,

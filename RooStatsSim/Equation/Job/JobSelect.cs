@@ -22,7 +22,7 @@ namespace RooStatsSim.Equation.Job
                 new AssassinCross(),
                 new Sniper(),
                 new HighWizard(),
-                new HighPrist()
+                new HighPriest()
             };
 
         private JOB_SELECT_LIST SelectedJob { get; set; }

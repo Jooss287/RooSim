@@ -13,8 +13,8 @@ namespace RooStatsSim.DB.Table
         {
             {1.0, 1.0, 1.0},        //HAND
             {1.0, 0.75, 0.5 },      //DAGGER
-            {0.75, 1.0, 0.75 },     //SWARD
-            {0.75, 0.75, 1.0 },     //TWOHAND_SWARD
+            {0.75, 1.0, 0.75 },     //SWORD
+            {0.75, 0.75, 1.0 },     //TWOHAND_SWORD
             {0.75, 1.0, 1.0 },      //BLUNT
             {0.75, 0.75, 1.0 },     //SPEAR
             {0.75, 0.75, 1.0 },     //TOWHAD_SPEAR

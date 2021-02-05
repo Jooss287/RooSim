@@ -35,7 +35,7 @@
                     <RadioButton Content="하&#10;위" Grid.Column="5" Click="job_sel_Click" IsEnabled="False"
                                  IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=WIZARD}"/>
                     <RadioButton Content="하&#10;프" Grid.Column="6" Click="job_sel_Click" IsEnabled="False"
-                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=PRIST}"/>
+                                 IsChecked="{Binding Path=Job, Converter={StaticResource EnumToBooleanConverterKey}, ConverterParameter=PRIEST}"/>
                 </Grid>
             </GroupBox>
             <GroupBox Header="Save Point">
