@@ -63,19 +63,7 @@ namespace RooStatsSim.UI.Equipment
             string filename = "Resources/Job/" + job_name + ".png";
             Image_Char.Source = new BitmapImage(ResourceExtension.GetAssemblyUri(filename));
         }
-        void SetUserItemChanged(EquipId item, EQUIP_TYPE_ENUM equip_type, ITEM_TYPE_ENUM item_type = ITEM_TYPE_ENUM.EQUIPMENT)
-        {
-            if ( item_type == ITEM_TYPE_ENUM.EQUIPMENT)
-            {
-                StackPanel now_panel = GetEquipTypeItem(equip_type);
 
-                (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_IMAGE] as Image).Source = item.ImageFile;
-                (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_NAME] as TextBlock).Text = string.Format("+{0} {1}", item.Refine, item.Name);
-                //(now_panel.Children[(int)EQUIP_UI_ENUM.CARD_ITEM_CTRL] as ItemsControl).ItemsSource = 
-                //(now_panel.Children[(int)EQUIP_UI_ENUM.ENCHANT_ITEM_CTRL] as ItemsControl).ItemsSource = 
-            }
-        }
-        
         #region Equipment Window UI
         private void EquipmentPanel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -96,6 +84,7 @@ namespace RooStatsSim.UI.Equipment
             
             ItemSlectorTab.SelectedIndex = 0;
         }
+
         void SetUserItemChanged(EquipId item, EQUIP_TYPE_ENUM equip_type, ITEM_TYPE_ENUM item_type = ITEM_TYPE_ENUM.EQUIPMENT)
         {
             StackPanel now_panel = GetEquipTypeItem(equip_type);
@@ -107,8 +96,7 @@ namespace RooStatsSim.UI.Equipment
                 case ITEM_TYPE_ENUM.EQUIPMENT:
                     (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_IMAGE] as Image).Source = item.ImageFile;
                     (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_NAME] as TextBlock).Text = string.Format("+{0} {1}", item.Refine, item.Name);
-                //GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
-            }
+                    //GetEquipTypeItem(equip_type).ItemsSource = new EquipList(_user_data.Equip.Dic[equip_type]);
 
                     CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, equip_type);
                     CardSelector.ItemsSource = CardItemList;
