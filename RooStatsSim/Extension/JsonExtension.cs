@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Reflection;
+using RooStatsSim.DB;
 
 namespace RooStatsSim.Extension
 {
@@ -16,7 +17,9 @@ namespace RooStatsSim.Extension
                 return false;
             }
 
-            if (typeToConvert.GetGenericTypeDefinition() == typeof(List<>))
+            if (typeToConvert.GetGenericArguments()[0].IsEnum)
+                return false;
+            if ((typeToConvert.GetGenericTypeDefinition() == typeof(List<>)) && (typeToConvert.GetGenericArguments()[0] == typeof(ItemDB)))
             {
                 return true;
             }

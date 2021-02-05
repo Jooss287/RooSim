@@ -28,6 +28,9 @@ namespace RooStatsSim.DB
             Smelt = item_db.Smelt;
             CardSlot = item_db.CardSlot;
             EnchantSlot = item_db.EnchantSlot;
+            Weight = item_db.Weight;
+            RefineType = item_db.RefineType;
+
             Wear_job_limit = new List<JOB_SELECT_LIST>(item_db.Wear_job_limit);
             SetPosition = new List<EQUIP_TYPE_ENUM>(item_db.SetPosition);
 
@@ -71,6 +74,9 @@ namespace RooStatsSim.DB
         protected int _smelt;
         protected int _card_slot;
         protected int _enchant_slot;
+        protected int _weight;
+
+        protected EQUIP_REFINE_TYPE_ENUM _refine_type;
         protected ELEMENT_TYPE _attacker_element;
         protected ELEMENT_TYPE _defenser_element;
         public List<JOB_SELECT_LIST> _wear_job_limit = new List<JOB_SELECT_LIST>();
@@ -177,6 +183,16 @@ namespace RooStatsSim.DB
         {
             get { return _enchant_slot; }
             set { _enchant_slot = value; }
+        }
+        public int Weight
+        {
+            get { return _weight; }
+            set { _weight = value; }
+        }
+        public EQUIP_REFINE_TYPE_ENUM RefineType
+        {
+            get { return _refine_type; }
+            set { _refine_type = value; }
         }
         public ELEMENT_TYPE AttackerElement
         {
