@@ -13,7 +13,7 @@ namespace RooStatsSim.Equation.Job
     {
         public Dictionary<string, SkillInfo> Skill { get; set; }
         public SwordmanJobBonus JobBonus_1st = new SwordmanJobBonus();
-        public LoadKnightJobBonus JobBonus = new LoadKnightJobBonus();
+        public LordKnightJobBonus JobBonus = new LordKnightJobBonus();
 
         public LordKnight() : base(ATTACK_TYPE.MELEE_TYPE)
         {
