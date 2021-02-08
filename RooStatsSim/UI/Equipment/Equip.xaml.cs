@@ -49,14 +49,7 @@ namespace RooStatsSim.UI.Equipment
                 if (equipment.Value == null)
                     continue;
 
-                EquipId equip_id = new EquipId()
-                {
-                    Id = equipment.Value.EquipInfo.Id,
-                    Name = equipment.Value.EquipInfo.Name,
-                    Refine = equipment.Value.Refine,
-                    ImageRoot = equipment.Value.EquipInfo.ImageName
-                };
-                SetUserItemChanged(equip_id, equipment.Key);
+                SetUsedEquipBinding(equipment.Key);
             }
 
             string job_name = Enum.GetName(typeof(JOB_SELECT_LIST), ((int)((int)_user_data.Job / 100) * 100)).ToLower();
@@ -84,34 +77,18 @@ namespace RooStatsSim.UI.Equipment
             
             ItemSlectorTab.SelectedIndex = 0;
         }
-        void SetUserItemChanged(EquipId item, EQUIP_TYPE_ENUM equip_type, ITEM_TYPE_ENUM item_type = ITEM_TYPE_ENUM.EQUIPMENT)
+        void SetUsedEquipBinding(EQUIP_TYPE_ENUM equip_type)
         {
             StackPanel now_panel = GetEquipTypeItem(equip_type);
             if (now_panel == null)
                 return;
 
-            switch (item_type)
-            {
-                case ITEM_TYPE_ENUM.EQUIPMENT:
-                    (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_IMAGE] as Image).Source = item.ImageFile;
-                    (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_NAME] as TextBlock).Text = string.Format("+{0} {1}", item.Refine, item.Name);
+            EQUIP.EquipItem item = _user_data.Equip.Dic[equip_type];
+            (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_IMAGE] as Image).Source = item.GetImage();
+            (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_NAME] as TextBlock).Text = string.Format("+{0} {1}", item.Refine, item.EquipInfo.Name);
+            (now_panel.Children[(int)EQUIP_UI_ENUM.CARD_ITEM_CTRL] as ItemsControl).ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.CARD, equip_type);
+            (now_panel.Children[(int)EQUIP_UI_ENUM.ENCHANT_ITEM_CTRL] as ItemsControl).ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.ENCHANT, equip_type);
 
-                    CardItemList = new ItemListFilter(ref _user_data, ITEM_TYPE_ENUM.CARD, equip_type);
-                    CardSelector.ItemsSource = CardItemList;
-                    EnchantList = new ItemListFilter(ITEM_TYPE_ENUM.ENCHANT, equip_type);
-                    EnchantSelector.ItemsSource = EnchantList;
-                    break;
-                case ITEM_TYPE_ENUM.CARD:
-                    (now_panel.Children[(int)EQUIP_UI_ENUM.CARD_ITEM_CTRL] as ItemsControl).ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.CARD, equip_type);
-                    break;
-                case ITEM_TYPE_ENUM.ENCHANT:
-                    (now_panel.Children[(int)EQUIP_UI_ENUM.ENCHANT_ITEM_CTRL] as ItemsControl).ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.ENCHANT, equip_type);
-                    break;
-                case ITEM_TYPE_ENUM.GEAR:
-                    break;
-                default:
-                    break;
-            }
             MainWindow._user_data_manager.CalcUserData();
         }
         void SetUsedItem(EQUIP_TYPE_ENUM equip_type)
@@ -192,7 +169,7 @@ namespace RooStatsSim.UI.Equipment
             _user_data.Equip.Dic[now_selected_equip_type].Equip = item.Id;
             _user_data.Equip.Dic[now_selected_equip_type].Refine = item.Refine;
 
-            SetUserItemChanged(item, now_selected_equip_type);
+            SetUsedEquipBinding(now_selected_equip_type);
             ItemSlectorTab.SelectedIndex = 1;
         }
         private void Item_RefineWheel(object sender, MouseWheelEventArgs e)
@@ -208,7 +185,7 @@ namespace RooStatsSim.UI.Equipment
             EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
 
             _user_data.Equip.Dic[now_selected_equip_type].AddCard(item.Id);
-            SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.CARD);
+            SetUsedEquipBinding(now_selected_equip_type);
             SetUsedItem(now_selected_equip_type);
         }
         #endregion
@@ -220,8 +197,8 @@ namespace RooStatsSim.UI.Equipment
             if (item.Point == 0)
                 return;
 
-            _user_data.Equip.Dic[now_selected_equip_type].AddEnchant(item.Name_Eng, item.Point - 1);
-            SetUserItemChanged(item, now_selected_equip_type, ITEM_TYPE_ENUM.ENCHANT);
+            _user_data.Equip.Dic[now_selected_equip_type].AddEnchant(item.Name_Eng, item.Point);
+            SetUsedEquipBinding(now_selected_equip_type);
             SetUsedItem(now_selected_equip_type);
         }
         private void Enchant_Option_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -266,5 +243,31 @@ namespace RooStatsSim.UI.Equipment
 
         }
         #endregion
+
+        private void UnequipSelectedItem(object sender, MouseButtonEventArgs e)
+        {
+            if (!_user_data.Equip.Dic.ContainsKey(now_selected_equip_type))
+                return;
+
+            _user_data.Equip.Dic.Remove(now_selected_equip_type);
+            ItemSelected.ItemsSource = new UsedItemList();
+            CardSelected.ItemsSource = new UsedItemList();
+            EnchantSelected.ItemsSource = new UsedItemList();
+            SetUsedEquipBinding(now_selected_equip_type);
+            SetUsedItem(now_selected_equip_type);
+        }
+
+        private void UnequipSelectedCard(object sender, MouseButtonEventArgs e)
+        {
+            EquipId item = ((sender as ContentControl).Content as StackPanel).DataContext as EquipId;
+
+            if (!_user_data.Equip.Dic.ContainsKey(now_selected_equip_type))
+                return;
+
+            List<int> cardList = _user_data.Equip.Dic[now_selected_equip_type].Card;
+            cardList.Remove(item.Id);
+            SetUsedEquipBinding(now_selected_equip_type);
+            SetUsedItem(now_selected_equip_type);
+        }
     }
 }
