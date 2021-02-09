@@ -4,7 +4,7 @@ using System;
 
 namespace RooStatsSim.DB
 {
-    enum CALC_STANDARD
+    public enum CALC_STANDARD
     {
         NONE = 0,
         MIN_DAMAGE = -1,

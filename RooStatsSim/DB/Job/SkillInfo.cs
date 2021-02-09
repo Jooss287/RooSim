@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 
+using RooStatsSim.User;
+using RooStatsSim.DB;
+
 namespace RooStatsSim.DB.Job
 {
     public enum SKILL_TYPE
@@ -24,15 +27,20 @@ namespace RooStatsSim.DB.Job
                 return _option; }
             set { _option = value; }
         }
-        public SkillInfo(string name, string name_kor, int max_lv=0, SKILL_TYPE type=SKILL_TYPE.ACTIVE, bool has_dmg_equation = false)
+        public delegate int DamageEquationPointer(UserData _user_data, CALC_STANDARD calc_dmg);
+        public DamageEquationPointer CalcSkillDmg;
+        public SkillInfo(string name, string name_kor, int max_lv=0, SKILL_TYPE type=SKILL_TYPE.ACTIVE, bool has_dmg_equation = false, DamageEquationPointer dmg_pointer = null)
         {
             NAME = name;
             NAME_KOR = name_kor;
             MAX_LV = max_lv;
             TYPE = type;
             HAS_DMG_EQUATION = has_dmg_equation;
+            CalcSkillDmg = dmg_pointer;
         }
 
         List<ItemDB> _option;
+
+        
     }
 }
