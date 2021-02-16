@@ -4,15 +4,14 @@
 ![메인화면](https://github.com/Jooss287/RooSim/blob/master/Readme/mainWindow.jpg)
 
 ## 최신 버전 다운로드
-* v0.3-alpha - [Download](https://github.com/Jooss287/RooSim/releases/tag/v0.3-alpha)
-    * 위 링크에서 **RooSim.v0.3-alpha.zip** 을 다운받으시면 됩니다.
+* v0.4-alpha - [Download](https://github.com/Jooss287/RooSim/releases/tag/v0.4-alpha)
+    * 위 링크에서 **RooSim.v0.4-alpha.zip** 을 다운받으시면 됩니다.
 * 테스트 진행중입니다.
 
 ## 설치 방법
 
-윈도우:
 ```
-1. Release File 다운로드
+1. 최신 Release File 다운로드
 2. exe 파일 실행
 3. 사용 예제를 읽고 사용방법 습득
 4. 모든 기능들은 클릭, 더블클릭, 휠, Shift만을 이용합니다.
