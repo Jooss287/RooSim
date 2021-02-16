@@ -69,7 +69,7 @@ namespace RooStatsSim.UI.MonsterDamage
                     continue;
                 //if ( info.Detail.HAS_DMG_EQUATION )
                 SkillInfo skill = SkillWindow.SkillWindow._skill_db.Dic[info.Name];
-                normal_atk = Convert.ToString(calcATK_min*skill.DAMAGE[info.Level]) + " ~ " + Convert.ToString(calcATK_max * skill.DAMAGE[info.Level]);
+                normal_atk = Convert.ToString(calcATK_min*skill.DAMAGE[info.Level-1]) + " ~ " + Convert.ToString(calcATK_max * skill.DAMAGE[info.Level-1]);
                 _calc_user_dmamge_binding.AddDamageBinding(skill.NAME_KOR, normal_atk);
             }
             CalcUserDamage.ItemsSource = _calc_user_dmamge_binding;
