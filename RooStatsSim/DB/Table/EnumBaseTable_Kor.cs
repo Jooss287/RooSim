@@ -45,13 +45,13 @@ namespace RooStatsSim.DB.Table
         };
         public static Dictionary<STATUS_EFFECT_TYPE, string> STATUS_EFFECT_TYPE_KOR = new Dictionary<STATUS_EFFECT_TYPE, string>()
         {
-            {STATUS_EFFECT_TYPE.STERN, "스턴" },
+            {STATUS_EFFECT_TYPE.STUN, "스턴" },
             {STATUS_EFFECT_TYPE.FEAR, "공포" },
             {STATUS_EFFECT_TYPE.SILENCE, "침묵" },
             {STATUS_EFFECT_TYPE.FROZEN, "동빙" },
             {STATUS_EFFECT_TYPE.CURSE, "저주" },
             {STATUS_EFFECT_TYPE.PETRIFICATION, "석화" },
-            {STATUS_EFFECT_TYPE.DARK, "암흑" },
+            {STATUS_EFFECT_TYPE.DARKNESS, "암흑" },
             {STATUS_EFFECT_TYPE.POISON, "독" },
             {STATUS_EFFECT_TYPE.SLEEP, "수면" },
             {STATUS_EFFECT_TYPE.BLEEDING, "출혈" },
@@ -75,10 +75,10 @@ namespace RooStatsSim.DB.Table
             {TRIBE_TYPE.PLANT, "식물형" },
             {TRIBE_TYPE.INSECT, "곤충형" },
             {TRIBE_TYPE.HUMAN, "인간형" },
-            {TRIBE_TYPE.SEAFOOD, "어패형" },
+            {TRIBE_TYPE.FISH, "어패형" },
             {TRIBE_TYPE.DEVIL, "악마형" },
             {TRIBE_TYPE.DRAGON, "용족" },
-            {TRIBE_TYPE.NONE, "무형" },
+            {TRIBE_TYPE.FORMLESS, "무형" },
             {TRIBE_TYPE.ANGEL, "천사형" },
             {TRIBE_TYPE.UNDEAD, "불사형" },
         };
@@ -119,7 +119,7 @@ namespace RooStatsSim.DB.Table
             {JOB_SELECT_LIST.ALCHEMIST, "알케미스트" },
             {JOB_SELECT_LIST.THIEF, "도둑" },
             {JOB_SELECT_LIST.ASSASSIN, "어세신" },
-            {JOB_SELECT_LIST.LOGUE, "로그" },
+            {JOB_SELECT_LIST.ROGUE, "로그" },
             {JOB_SELECT_LIST.ARCHER, "궁수" },
             {JOB_SELECT_LIST.HUNTER, "헌터" },
             {JOB_SELECT_LIST.BARD, "바드" },
@@ -128,7 +128,7 @@ namespace RooStatsSim.DB.Table
             {JOB_SELECT_LIST.WIZARD, "위저드" },
             {JOB_SELECT_LIST.SAGE, "세이지" },
             {JOB_SELECT_LIST.ACOLYTE, "복사" },
-            {JOB_SELECT_LIST.PRIST, "프리스트" },
+            {JOB_SELECT_LIST.PRIEST, "프리스트" },
             {JOB_SELECT_LIST.MONK, "몽크" },
         };
         public static Dictionary<JOB_SELECT_LIST, string> JOB_SELECT_LIST_KOR_3WORD = new Dictionary<JOB_SELECT_LIST, string>()
@@ -142,7 +142,7 @@ namespace RooStatsSim.DB.Table
             {JOB_SELECT_LIST.ALCHEMIST, "알케" },
             {JOB_SELECT_LIST.THIEF, "도둑" },
             {JOB_SELECT_LIST.ASSASSIN, "어세신" },
-            {JOB_SELECT_LIST.LOGUE, "로그" },
+            {JOB_SELECT_LIST.ROGUE, "로그" },
             {JOB_SELECT_LIST.ARCHER, "궁수" },
             {JOB_SELECT_LIST.HUNTER, "헌터" },
             {JOB_SELECT_LIST.BARD, "바드" },
@@ -151,7 +151,7 @@ namespace RooStatsSim.DB.Table
             {JOB_SELECT_LIST.WIZARD, "위저드" },
             {JOB_SELECT_LIST.SAGE, "세이지" },
             {JOB_SELECT_LIST.ACOLYTE, "복사" },
-            {JOB_SELECT_LIST.PRIST, "프리" },
+            {JOB_SELECT_LIST.PRIEST, "프리" },
             {JOB_SELECT_LIST.MONK, "몽크" },
         };
         public static Dictionary<EQUIP_TYPE_ENUM, string> EQUIP_TYPE_ENUM_KOR = new Dictionary<EQUIP_TYPE_ENUM, string>()
@@ -173,8 +173,8 @@ namespace RooStatsSim.DB.Table
         {
             {WEAPON_TYPE_ENUM.HAND, "손" },
             {WEAPON_TYPE_ENUM.DAGGER, "단검" },
-            {WEAPON_TYPE_ENUM.SWARD, "한손검" },
-            {WEAPON_TYPE_ENUM.TWOHAND_SWARD, "양손검" },
+            {WEAPON_TYPE_ENUM.SWORD, "한손검" },
+            {WEAPON_TYPE_ENUM.TWOHAND_SWORD, "양손검" },
             {WEAPON_TYPE_ENUM.BLUNT, "둔기" },
             {WEAPON_TYPE_ENUM.SPEAR, "한손창" },
             {WEAPON_TYPE_ENUM.TWOHAND_SPEAR, "양손창" },
@@ -187,20 +187,20 @@ namespace RooStatsSim.DB.Table
         };
 
         public static Dictionary<EQUIP_TYPE_ENUM, EQUIP_DB_ENUM> EQUIP_TYPE_TO_DB_ENUM = new Dictionary<EQUIP_TYPE_ENUM, EQUIP_DB_ENUM>()
-    {
-        {EQUIP_TYPE_ENUM.HEAD_TOP, EQUIP_DB_ENUM.HEAD },
-        {EQUIP_TYPE_ENUM.HEAD_MID, EQUIP_DB_ENUM.HEAD },
-        {EQUIP_TYPE_ENUM.HEAD_BOT, EQUIP_DB_ENUM.HEAD },
-        {EQUIP_TYPE_ENUM.WEAPON, EQUIP_DB_ENUM.WEAPON },
-        {EQUIP_TYPE_ENUM.ARMOR, EQUIP_DB_ENUM.ARMOR },
-        {EQUIP_TYPE_ENUM.SUB_WEAPON, EQUIP_DB_ENUM.SUB_WEAPON},
-        {EQUIP_TYPE_ENUM.CLOAK, EQUIP_DB_ENUM.CLOAK },
-        {EQUIP_TYPE_ENUM.SHOES, EQUIP_DB_ENUM.SHOES },
-        {EQUIP_TYPE_ENUM.ACCESSORIES1, EQUIP_DB_ENUM.ACC},
-        {EQUIP_TYPE_ENUM.ACCESSORIES2, EQUIP_DB_ENUM.ACC },
-        {EQUIP_TYPE_ENUM.COSTUME, EQUIP_DB_ENUM.COSTUME },
-        {EQUIP_TYPE_ENUM.BACK_DECORATION, EQUIP_DB_ENUM.BACK_DECO},
-    };
+        {
+            {EQUIP_TYPE_ENUM.HEAD_TOP, EQUIP_DB_ENUM.HEAD },
+            {EQUIP_TYPE_ENUM.HEAD_MID, EQUIP_DB_ENUM.HEAD },
+            {EQUIP_TYPE_ENUM.HEAD_BOT, EQUIP_DB_ENUM.HEAD },
+            {EQUIP_TYPE_ENUM.WEAPON, EQUIP_DB_ENUM.WEAPON },
+            {EQUIP_TYPE_ENUM.ARMOR, EQUIP_DB_ENUM.ARMOR },
+            {EQUIP_TYPE_ENUM.SUB_WEAPON, EQUIP_DB_ENUM.SUB_WEAPON},
+            {EQUIP_TYPE_ENUM.CLOAK, EQUIP_DB_ENUM.CLOAK },
+            {EQUIP_TYPE_ENUM.SHOES, EQUIP_DB_ENUM.SHOES },
+            {EQUIP_TYPE_ENUM.ACCESSORIES1, EQUIP_DB_ENUM.ACC},
+            {EQUIP_TYPE_ENUM.ACCESSORIES2, EQUIP_DB_ENUM.ACC },
+            {EQUIP_TYPE_ENUM.COSTUME, EQUIP_DB_ENUM.COSTUME },
+            {EQUIP_TYPE_ENUM.BACK_DECORATION, EQUIP_DB_ENUM.BACK_DECO},
+        };
         public static Dictionary<EQUIP_DB_ENUM, string> EQUIP_DB_ENUM_KOR = new Dictionary<EQUIP_DB_ENUM, string>()
         {
             {EQUIP_DB_ENUM.HEAD, "머리"},
@@ -212,6 +212,14 @@ namespace RooStatsSim.DB.Table
             {EQUIP_DB_ENUM.ACC, "악세사리"},
             {EQUIP_DB_ENUM.COSTUME, "코스튬"},
             {EQUIP_DB_ENUM.BACK_DECO, "등장식"},
+        };
+        public static Dictionary<EQUIP_REFINE_TYPE_ENUM, string> EQUIP_REFINE_TYPE_ENUM_KOR = new Dictionary<EQUIP_REFINE_TYPE_ENUM, string>()
+        {
+            {EQUIP_REFINE_TYPE_ENUM.PHYSICAL_WEAPON, "물리무기"},
+            {EQUIP_REFINE_TYPE_ENUM.MAGICAL_WEAPON, "마법무기"},
+            {EQUIP_REFINE_TYPE_ENUM.ARMOR, "갑옷"},
+            {EQUIP_REFINE_TYPE_ENUM.HEAD, "머리"},
+            {EQUIP_REFINE_TYPE_ENUM.BACK_DECO, "등장식"},
         };
     }
 }

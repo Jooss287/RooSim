@@ -5,9 +5,9 @@ using RooStatsSim.User;
 
 namespace RooStatsSim.Equation.Job
 {
-    class HighPrist : Equations
+    class HighPriest : Equations
     {
-        public HighPrist() : base(ATTACK_TYPE.MELEE_TYPE)
+        public HighPriest() : base(ATTACK_TYPE.MELEE_TYPE)
         {
         }
         public void SetSkillInit()

@@ -92,26 +92,26 @@ namespace RooStatsSim.DB.Table
     }
     public enum SE_ATK_RATE_TYPE
     {
-        STERN_ATK_RATE,
+        STUN_ATK_RATE,
         FEAR_ATK_RATE,
         SILENCE_ATK_RATE,
         FROZEN_ATK_RATE,
         CURSE_ATK_RATE,
         PETRIFICATION_ATK_RATE,
-        DARK_ATK_RATE,
+        DARKNESS_ATK_RATE,
         POISON_ATK_RATE,
         SLEEP_ATK_RATE,
         BLEEDING_ATK_RATE,
     }
     public enum SE_REG_RATE_TYPE
     {
-        STERN_REG_RATE,
+        STUN_REG_RATE,
         FEAR_REG_RATE,
         SILENCE_REG_RATE,
         FROZEN_REG_RATE,
         CURSE_REG_RATE,
         PETRIFICATION_REG_RATE,
-        DARK_REG_RATE,
+        DARKNESS_REG_RATE,
         POISON_REG_RATE,
         SLEEP_REG_RATE,
         BLEEDING_REG_RATE,
@@ -122,10 +122,10 @@ namespace RooStatsSim.DB.Table
         PLANT_DMG,
         INSECT_DMG,
         HUMAN_DMG,
-        SEAFOOD_DMG,
+        FISH_DMG,
         DEVIL_DMG,
         DRAGON_DMG,
-        NONE_DMG,
+        FORMLESS_DMG,
         ANGEL_DMG,
         UNDEAD_DMG,
     }
@@ -135,10 +135,10 @@ namespace RooStatsSim.DB.Table
         PLANT_REG,
         INSECT_REG,
         HUMAN_REG,
-        SEAFOOD_REG,
+        FISH_REG,
         DEVIL_REG,
         DRAGON_REG,
-        NONE_REG,
+        FORMLESS_REG,
         ANGEL_REG,
         UNDEAD_REG,
     }

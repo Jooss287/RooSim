@@ -122,9 +122,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DB\Enchant\AdvancedEnchant.cs" />
-	<Compile Include="DB\Enchant\EnchantInfo.cs" />
+    <Compile Include="DB\Enchant\EnchantInfo.cs" />
     <Compile Include="DB\Enchant\Enchant_DB.cs" />
-	<Compile Include="DB\Enchant\NormalEnchant.cs" />
+    <Compile Include="DB\Enchant\NormalEnchant.cs" />
     <Compile Include="DB\ConsumableItem\ConsumableBuff_DB.cs" />
     <Compile Include="DB\ConsumableItem\CookingConsumable.cs" />
     <Compile Include="DB\ConsumableItem\ConsumableBuffInfo.cs" />
@@ -132,7 +132,7 @@
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\ItemDB.cs" />
     <Compile Include="DB\Job\SkillInfo.cs" />
-    <Compile Include="DB\Job\JobInfo\LoadKnight.cs" />
+    <Compile Include="DB\Job\JobInfo\LordKnight.cs" />
     <Compile Include="DB\Job\JobInfo\Swordman.cs" />
     <Compile Include="DB\Job\Skill_DB.cs" />
     <Compile Include="DB\Table\EnumBaseTable.cs" />
@@ -150,11 +150,11 @@
     <Compile Include="Equation\Defense.cs" />
     <Compile Include="Equation\GetValue.cs" />
     <Compile Include="Equation\Job\AssassinCross.cs" />
-    <Compile Include="Equation\Job\HighPrist.cs" />
+    <Compile Include="Equation\Job\HighPriest.cs" />
     <Compile Include="Equation\Job\HighWizard.cs" />
     <Compile Include="Equation\Job\JobSelect.cs" />
     <Compile Include="Equation\Job\Novice.cs" />
-    <Compile Include="Equation\Job\LoadKnight.cs" />
+    <Compile Include="Equation\Job\LordKnight.cs" />
     <Compile Include="Equation\Job\Sniper.cs" />
     <Compile Include="Equation\Job\WhiteSmith.cs" />
     <Compile Include="Equation\StatusATK.cs" />
@@ -401,7 +401,7 @@
     <Resource Include="Resources\Skills\HEAD_CRUSH.png" />
     <Resource Include="Resources\Skills\MAGNUM_BRAKE.png" />
     <Resource Include="Resources\Skills\PIERCE.png" />
-    <Resource Include="Resources\Skills\PROVOQUE.png" />
+    <Resource Include="Resources\Skills\PROVOKE.png" />
     <Resource Include="Resources\Skills\RYAN_RAPIDS.png" />
     <Resource Include="Resources\Skills\SOLID_BLOW.png" />
     <Resource Include="Resources\Skills\SPIRAL_PIERCE.png" />

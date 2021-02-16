@@ -88,7 +88,7 @@ namespace RooStatsSim.UI.Equipment
             (now_panel.Children[(int)EQUIP_UI_ENUM.EQUIP_NAME] as TextBlock).Text = string.Format("+{0} {1}", item.Refine, item.EquipInfo.Name);
             (now_panel.Children[(int)EQUIP_UI_ENUM.CARD_ITEM_CTRL] as ItemsControl).ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.CARD, equip_type);
             (now_panel.Children[(int)EQUIP_UI_ENUM.ENCHANT_ITEM_CTRL] as ItemsControl).ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.ENCHANT, equip_type);
-
+            
             MainWindow._user_data_manager.CalcUserData();
         }
         void SetUsedItem(EQUIP_TYPE_ENUM equip_type)
@@ -101,6 +101,7 @@ namespace RooStatsSim.UI.Equipment
             CardSelected.ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.CARD, equip_type);
             EnchantSelected.ItemsSource = new UsedItemList(_user_data.Equip.Dic[equip_type], ITEM_TYPE_ENUM.ENCHANT, equip_type);
         }
+
         private StackPanel GetEquipTypeItem(EQUIP_TYPE_ENUM equip_type)
         {
             switch (equip_type)

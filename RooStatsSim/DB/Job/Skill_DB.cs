@@ -9,13 +9,13 @@ namespace RooStatsSim.DB.Skill
     public class Skill_DB
     {
         public static SwordmanSkill _swordman_skill = new SwordmanSkill();
-        public static LoadKnightSkill _loadknight_skill = new LoadKnightSkill();
+        public static LordKnightSkill _lordknight_skill = new LordKnightSkill();
         public Dictionary<string, SkillInfo> Dic { get; set; }
 
         public Skill_DB()
         {
             Dic = new Dictionary<string, SkillInfo>();
-            MakeDB(_swordman_skill.Skill, _loadknight_skill.Skill);
+            MakeDB(_swordman_skill.Skill, _lordknight_skill.Skill);
         }
         
         void MakeDB(params Dictionary<string, SkillInfo>[] param)
@@ -57,7 +57,7 @@ namespace RooStatsSim.DB.Skill
             switch(job)
             {
                 case JOB_SELECT_LIST.KNIGHT:
-                    list.Add(_loadknight_skill.Skill);
+                    list.Add(_lordknight_skill.Skill);
                     break;
                 case JOB_SELECT_LIST.CRUSADER:
                     break;
@@ -67,7 +67,7 @@ namespace RooStatsSim.DB.Skill
                     break;
                 case JOB_SELECT_LIST.ASSASSIN:
                     break;
-                case JOB_SELECT_LIST.LOGUE:
+                case JOB_SELECT_LIST.ROGUE:
                     break;
                 case JOB_SELECT_LIST.HUNTER:
                     break;
@@ -79,7 +79,7 @@ namespace RooStatsSim.DB.Skill
                     break;
                 case JOB_SELECT_LIST.SAGE:
                     break;
-                case JOB_SELECT_LIST.PRIST:
+                case JOB_SELECT_LIST.PRIEST:
                     break;
                 case JOB_SELECT_LIST.MONK:
                     break;

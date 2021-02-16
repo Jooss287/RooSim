@@ -1,11 +1,12 @@
 # Roo(Ragnarok Origin) Simulator
 > 라그나로크 오리진 관련 시뮬레이터입니다. 이 프로그램을 이용하여 능력치와 아이템을 미리 세팅 해 보고 데미지를 계산 해 볼 수 있습니다.
 
-![]()
+![메인화면](https://github.com/Jooss287/RooSim/blob/master/Readme/mainWindow.jpg)
 
 ## 최신 버전 다운로드
-* ver.0.2 - [Download](https://github.com/Jooss287/RooSim/releases/tag/ver.0.2)
-    * 테스트 진행중입니다.
+* v0.3-alpha - [Download](https://github.com/Jooss287/RooSim/releases/tag/v0.3-alpha)
+    * 위 링크에서 **RooSim.v0.3-alpha.zip** 을 다운받으시면 됩니다.
+* 테스트 진행중입니다.
 
 ## 설치 방법
 

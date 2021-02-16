@@ -78,9 +78,9 @@ namespace RooStatsSim.DB.Enchant
                 Dic[Enum.GetName(typeof(ADVANCED_ENCHANT_ITEM), item)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(DTYPE), DTYPE.HEALING_RECERIVED)] = (i + 1);
                 //의지
                 item = ADVANCED_ENCHANT_ITEM.WILL;
-                Dic[Enum.GetName(typeof(ADVANCED_ENCHANT_ITEM), item)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(STATUS_EFFECT_TYPE), STATUS_EFFECT_TYPE.STERN)] = 2 * (i + 1);
+                Dic[Enum.GetName(typeof(ADVANCED_ENCHANT_ITEM), item)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(STATUS_EFFECT_TYPE), STATUS_EFFECT_TYPE.STUN)] = 2 * (i + 1);
                 Dic[Enum.GetName(typeof(ADVANCED_ENCHANT_ITEM), item)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(STATUS_EFFECT_TYPE), STATUS_EFFECT_TYPE.FROZEN)] = 2 * (i + 1);
-                Dic[Enum.GetName(typeof(ADVANCED_ENCHANT_ITEM), item)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(STATUS_EFFECT_TYPE), STATUS_EFFECT_TYPE.DARK)] = 2 * (i + 1);
+                Dic[Enum.GetName(typeof(ADVANCED_ENCHANT_ITEM), item)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(STATUS_EFFECT_TYPE), STATUS_EFFECT_TYPE.DARKNESS)] = 2 * (i + 1);
                 Dic[Enum.GetName(typeof(ADVANCED_ENCHANT_ITEM), item)].OPTION[0].Option_DTYPE[Enum.GetName(typeof(STATUS_EFFECT_TYPE), STATUS_EFFECT_TYPE.PETRIFICATION)] = 2 * (i + 1);
                 //샤이닝
                 item = ADVANCED_ENCHANT_ITEM.SHINING;

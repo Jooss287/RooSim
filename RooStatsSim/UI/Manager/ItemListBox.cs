@@ -76,6 +76,12 @@ namespace RooStatsSim.UI.Manager
             get { return _enchant_slot; }
             set { _enchant_slot = value; OnPropertyChanged("EnchantSlot"); }
         }
+        public new int Weight
+        {
+            get { return _weight; }
+            set { _weight = value; OnPropertyChanged("Weight"); }
+        }
+
         public int Count
         {
             get { return Option.Count + Option_IF_TYPE.Count + Option_Refine.Count; }
@@ -102,8 +108,10 @@ namespace RooStatsSim.UI.Manager
             LevelLimit = param.LevelLimit;
             CardSlot = param.CardSlot;
             EnchantSlot = param.EnchantSlot;
+            Weight = param.Weight;
             Item_type = param.Item_type;
             Equip_type = param.Equip_type;
+            RefineType = param.RefineType;
             SetPosition = param.SetPosition;
             Wear_job_limit = param.Wear_job_limit;
             Option = param.Option;
