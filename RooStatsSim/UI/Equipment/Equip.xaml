@@ -18,7 +18,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="head_top_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="머리상단" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -30,7 +30,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -50,7 +50,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="head_bot_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="머리하단" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -62,7 +62,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -82,7 +82,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="main_weapon_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="주무기" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -94,7 +94,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -114,7 +114,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="cloak_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="걸칠것" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -126,7 +126,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -146,7 +146,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="acc1_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="악세서리" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -158,7 +158,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -178,7 +178,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="costume_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="코스튬" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -190,7 +190,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -226,7 +226,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="head_mid_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="머리중단" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -238,7 +238,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -258,7 +258,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="armor_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="갑옷" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -270,7 +270,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -290,7 +290,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="sub_weapon_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="보조무기" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -302,7 +302,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -322,7 +322,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="shoes_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="신발" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -334,7 +334,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -354,7 +354,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="acc2_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="악세서리" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -366,7 +366,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -386,7 +386,7 @@
                             <StackPanel Orientation="Vertical" Background="GhostWhite" x:Name="back_deco_panel">
                                 <Image Style="{Binding Source={StaticResource ItemImage}}"/>
                                 <TextBlock Text="등장식" Margin="10,0,0,0"/>
-                                <ItemsControl Margin="40,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource CardPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Columns="3" />
@@ -398,7 +398,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <ItemsControl Margin="80,-40,0,0">
+                                <ItemsControl Style="{Binding Source={StaticResource EnchantPosItemCtrl}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <UniformGrid Rows="3" />
@@ -432,8 +432,7 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl MouseDoubleClick="SelectItem_MouseDoubleClick"
-                                                    MouseWheel="Item_RefineWheel"
+                                        <ContentControl MouseDoubleClick="UnequipSelectedItem"
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
                                             <StackPanel Orientation="Vertical" Margin="8">
@@ -481,7 +480,7 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ContentControl MouseDoubleClick="SelectCard_MouseDoubleClick"
+                                        <ContentControl MouseDoubleClick="UnequipSelectedCard"
                                                     MouseEnter="ContentControl_MouseEnter"
                                                     MouseLeave="ContentControl_MouseLeave">
                                             <StackPanel Orientation="Vertical" Margin="8">
@@ -533,7 +532,7 @@
                                                     MouseLeave="ContentControl_MouseLeave">
                                             <StackPanel Orientation="Vertical" Margin="8">
                                                 <TextBlock Height="20" TextAlignment="Center" VerticalAlignment="Stretch" FontWeight="bold"
-                                                           Width="60" Text="{Binding Path=Name}">
+                                                           Width="60" Text="{Binding Path=EnchantName}">
                                                     <TextBlock.Effect>
                                                         <DropShadowEffect Direction="0" Color="OrangeRed" ShadowDepth="0" BlurRadius="20"/>
                                                     </TextBlock.Effect>

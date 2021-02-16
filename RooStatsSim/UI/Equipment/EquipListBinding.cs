@@ -1,14 +1,15 @@
-﻿using RooStatsSim;
-using RooStatsSim.DB;
-using RooStatsSim.DB.Table;
-using RooStatsSim.UI.Equipment;
-using RooStatsSim.UI.Menu;
-using RooStatsSim.User;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
 
+using RooStatsSim;
+using RooStatsSim.DB;
+using RooStatsSim.DB.Table;
+using RooStatsSim.User;
 using RooStatsSim.DB.Enchant;
+using RooStatsSim.UI.Equipment;
+
 
 namespace RooStatsSim.UI.Equipment
 {

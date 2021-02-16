@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Text.Json.Serialization;
-using System.Windows.Media;
-using MaterialDesignThemes.Wpf;
+using System.Windows.Media.Imaging;
+
+using RooStatsSim.Extension;
 using RooStatsSim.DB;
 using RooStatsSim.DB.Table;
 using RooStatsSim.UI.Equipment;
@@ -101,6 +102,12 @@ namespace RooStatsSim.User
                         LastEnchantSlot = 0;
                     Enchant[LastEnchantSlot++] = new Enchant_param(input_enchant, point);
                 }
+            }
+
+            public BitmapImage GetImage()
+            {
+                var path = System.IO.Path.Combine(Environment.CurrentDirectory, "Img", EquipInfo.ImageName);
+                return new BitmapImage(ResourceExtension.GetUri(path));
             }
 
             public ItemDB GetRefineOption()
