@@ -121,13 +121,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\Abilitys\BasicAbility.cs" />
+    <Compile Include="DB\Abilitys\StatusPoint.cs" />
     <Compile Include="DB\ConsumableItem\ConsumableBuff_DB.cs" />
     <Compile Include="DB\ConsumableItem\CookingConsumable.cs" />
     <Compile Include="DB\ConsumableItem\ConsumableBuffInfo.cs" />
     <Compile Include="DB\ConsumableItem\PortionConsumable.cs" />
     <Compile Include="DB\DBlist.cs" />
     <Compile Include="DB\ItemDB.cs" />
-	<Compile Include="DB\Job\SkillInfo.cs" />
+    <Compile Include="DB\Job\SkillInfo.cs" />
     <Compile Include="DB\Job\JobInfo\LoadKnight.cs" />
     <Compile Include="DB\Job\JobInfo\Swordman.cs" />
     <Compile Include="DB\Job\Skill_DB.cs" />
