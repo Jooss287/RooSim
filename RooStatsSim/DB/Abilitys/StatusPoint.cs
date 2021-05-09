@@ -8,18 +8,22 @@ namespace RooStatsSim.DB.Abilitys
 {
     public class StatusPoint
     {
-        public int _point = 0;
-        
-        public int Point {
-            get {
-                return _point;
-            }
-            set
-            {
-                if (value < 0)
-                    return;
-                _point = value;
-            }
+        public int Str { get; set; }
+        public int Vit { get; set; }
+        public int Agi { get; set; }
+        public int Int { get; set; }
+        public int Dex { get; set; }
+        public int Luk { get; set; }
+
+        public static StatusPoint operator +(StatusPoint lhs, StatusPoint rhs)
+        {
+            lhs.Str += rhs.Str;
+            lhs.Vit += rhs.Vit;
+            lhs.Agi += rhs.Agi;
+            lhs.Int += rhs.Int;
+            lhs.Dex += rhs.Dex;
+            lhs.Luk += rhs.Luk;
+            return lhs;
         }
     }
 }
