@@ -76,5 +76,29 @@ namespace RooStatsSim.DB.DataType
         {
             get { return Enum.GetName(typeof(TribeKorList), _type); }
         }
+        public TribeList Type
+        {
+            get { return _type; }
+        }
+
+        public static bool operator ==(TribeType lhs, TribeType rhs)
+        {
+            return lhs.Type == rhs.Type;
+        }
+
+        public static bool operator !=(TribeType lhs, TribeType rhs)
+        {
+            return lhs.Type != rhs.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Type == ((TribeType)obj).Type;
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)Type;
+        }
     }
 }

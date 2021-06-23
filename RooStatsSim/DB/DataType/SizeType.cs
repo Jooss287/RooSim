@@ -64,5 +64,29 @@ namespace RooStatsSim.DB.DataType
         {
             get { return Enum.GetName(typeof(SizeKorList), _type); }
         }
+        public SizeList Type
+        {
+            get { return _type; }
+        }
+
+        public static bool operator ==(SizeType lhs, SizeType rhs)
+        {
+            return lhs.Type == rhs.Type;
+        }
+
+        public static bool operator !=(SizeType lhs, SizeType rhs)
+        {
+            return lhs.Type != rhs.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Type == ((SizeType)obj).Type;
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)Type;
+        }
     }
 }
