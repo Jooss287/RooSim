@@ -21,13 +21,18 @@ namespace RooStatsSim.DB.Abilitys
         public double CriticalDmg { get; set; }
         public double CriticalDmgDef { get; set; }
         public double PhysDmg { get; set; }
-        public double PhysDmgReg { get; set; }
-        public double MageDmg { get; set; }
-        public double MageDmgReg { get; set; }
-        public double DefIgnore { get; set; }
-        public double MDefIgnore { get; set; }
         public double PhysDmgMelee { get; set; }
         public double PhysDmgRange { get; set; }
+        public int PhysDmgAddition { get; set; }
+        public double PhysDmgReg { get; set; }
+        public double PhysDmgMeleeReg { get; set; }
+        public double PhysDmgRangeReg { get; set; }
+        public double MageDmg { get; set; }
+        public double MageDmgReg { get; set; }
+        public int MageDmgAddition { get; set; }
+        public double DefIgnore { get; set; }
+        public double MDefIgnore { get; set; }
+        public double CoolDownTime { get; set; }
         
 
         public static AdvancedAbility operator +(AdvancedAbility lhs, AdvancedAbility rhs)
@@ -48,10 +53,13 @@ namespace RooStatsSim.DB.Abilitys
             lhs.PhysDmgMelee += rhs.PhysDmgMelee;
             lhs.PhysDmgRange += rhs.PhysDmgRange;
             lhs.PhysDmgReg += rhs.PhysDmgReg;
+            lhs.PhysDmgMeleeReg += rhs.PhysDmgMeleeReg;
+            lhs.PhysDmgRangeReg += rhs.PhysDmgRangeReg;
             lhs.MageDmg += rhs.MageDmg;
             lhs.MageDmgReg += rhs.MageDmgReg;
             lhs.DefIgnore += rhs.DefIgnore;
             lhs.MDefIgnore += rhs.MDefIgnore;
+            lhs.CoolDownTime += rhs.CoolDownTime;
             return lhs;
         }
     }

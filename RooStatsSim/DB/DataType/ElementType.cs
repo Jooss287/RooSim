@@ -35,10 +35,9 @@ namespace RooStatsSim.DB.DataType
 
     public class ElementType
     {
-        private readonly ElementList _type;
         public ElementType(ElementList type)
         {
-            this._type = type;
+            Type = type;
         }
         public ElementType(string name)
         {
@@ -52,7 +51,7 @@ namespace RooStatsSim.DB.DataType
                 {
                     if (typeKor.Equals(name))
                     {
-                        _type = (ElementList)Enum.Parse(typeof(ElementKorList), name);
+                        Type = (ElementList)Enum.Parse(typeof(ElementKorList), name);
                         return;
                     }
                 }
@@ -63,25 +62,17 @@ namespace RooStatsSim.DB.DataType
                 {
                     if (typeEng.Equals(name))
                     {
-                        _type = (ElementList)Enum.Parse(typeof(ElementList), name);
+                        Type = (ElementList)Enum.Parse(typeof(ElementList), name);
                         return;
                     }
                 }
             }
         }
 
-        public string Name_en
-        {
-            get { return Enum.GetName(typeof(ElementList), _type); }
-        }
-        public string Name_ko
-        {
-            get { return Enum.GetName(typeof(ElementKorList), _type); }
-        }
-        public ElementList Type
-        {
-            get { return _type; }
-        }
+        public string Name_en => Enum.GetName(typeof(ElementList), Type);
+        public string Name_ko => Enum.GetName(typeof(ElementKorList), Type);
+        public ElementList Type { get; }
+        public int TypeNum => (int)Type;
 
         public static bool operator ==(ElementType lhs, ElementType rhs)
         {

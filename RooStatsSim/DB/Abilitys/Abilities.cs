@@ -13,5 +13,12 @@ namespace RooStatsSim.DB.Abilitys
         public SpecialAbility SpecialAbilities { get; set; }
         public StatusEffectAbility StatusEffectAbilities { get; set; }
 
+        public Abilities()
+        {
+            BasicAbilities = new BasicAbility();
+            AdvancedAbilities = new AdvancedAbility();
+            SpecialAbilities = new SpecialAbility();
+            StatusEffectAbilities = new StatusEffectAbility();
+        }
     }
 }

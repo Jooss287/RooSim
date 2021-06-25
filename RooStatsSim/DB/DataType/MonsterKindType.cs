@@ -21,10 +21,9 @@ namespace RooStatsSim.DB.DataType
 
     public class MonsterKindType
     {
-        private readonly MonsterKindList _type;
         public MonsterKindType(MonsterKindList type)
         {
-            this._type = type;
+            Type = type;
         }
         public MonsterKindType(string name)
         {
@@ -34,40 +33,32 @@ namespace RooStatsSim.DB.DataType
 
             if (value > 127)
             {   // 한글 Constructor
-                foreach (var typeKor in Enum.GetNames(typeof(MonsterKindKorList)))
+                foreach (string typeKor in Enum.GetNames(typeof(MonsterKindKorList)))
                 {
                     if (typeKor.Equals(name))
                     {
-                        _type = (MonsterKindList)Enum.Parse(typeof(MonsterKindKorList), name);
+                        Type = (MonsterKindList)Enum.Parse(typeof(MonsterKindKorList), name);
                         return;
                     }
                 }
             }
             else
             {   // 영어 Constructor
-                foreach (var typeEng in Enum.GetNames(typeof(MonsterKindList)))
+                foreach (string typeEng in Enum.GetNames(typeof(MonsterKindList)))
                 {
                     if (typeEng.Equals(name))
                     {
-                        _type = (MonsterKindList)Enum.Parse(typeof(MonsterKindList), name);
+                        Type = (MonsterKindList)Enum.Parse(typeof(MonsterKindList), name);
                         return;
                     }
                 }
             }
         }
 
-        public string Name_en
-        {
-            get { return Enum.GetName(typeof(MonsterKindList), _type); }
-        }
-        public string Name_ko
-        {
-            get { return Enum.GetName(typeof(MonsterKindKorList), _type); }
-        }
-        public MonsterKindList Type
-        {
-            get { return _type; }
-        }
+        public string Name_en => Enum.GetName(typeof(MonsterKindList), Type);
+        public string Name_ko => Enum.GetName(typeof(MonsterKindKorList), Type);
+        public MonsterKindList Type { get; }
+        public int TypeNum => (int)Type;
 
         public static bool operator ==(MonsterKindType lhs, MonsterKindType rhs)
         {

@@ -21,10 +21,9 @@ namespace RooStatsSim.DB.DataType
 
     public class SizeType
     {
-        private readonly SizeList _type;
         public SizeType(SizeList type)
         {
-            this._type = type;
+            Type = type;
         }
         public SizeType(string name)
         {
@@ -34,40 +33,32 @@ namespace RooStatsSim.DB.DataType
 
             if (value > 127)
             {   // 한글 Constructor
-                foreach (var typeKor in Enum.GetNames(typeof(SizeKorList)))
+                foreach (string typeKor in Enum.GetNames(typeof(SizeKorList)))
                 {
                     if (typeKor.Equals(name))
                     {
-                        _type = (SizeList)Enum.Parse(typeof(SizeKorList), name);
+                        Type = (SizeList)Enum.Parse(typeof(SizeKorList), name);
                         return;
                     }
                 }
             }
             else
             {   // 영어 Constructor
-                foreach (var typeEng in Enum.GetNames(typeof(SizeList)))
+                foreach (string typeEng in Enum.GetNames(typeof(SizeList)))
                 {
                     if (typeEng.Equals(name))
                     {
-                        _type = (SizeList)Enum.Parse(typeof(SizeList), name);
+                        Type = (SizeList)Enum.Parse(typeof(SizeList), name);
                         return;
                     }
                 }
             }
         }
 
-        public string Name_en
-        {
-            get { return Enum.GetName(typeof(SizeList), _type); }
-        }
-        public string Name_ko
-        {
-            get { return Enum.GetName(typeof(SizeKorList), _type); }
-        }
-        public SizeList Type
-        {
-            get { return _type; }
-        }
+        public string Name_en => Enum.GetName(typeof(SizeList), Type);
+        public string Name_ko => Enum.GetName(typeof(SizeKorList), Type);
+        public SizeList Type { get; }
+        public int TypeNum => (int)Type;
 
         public static bool operator ==(SizeType lhs, SizeType rhs)
         {

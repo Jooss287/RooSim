@@ -16,6 +16,7 @@ namespace RooStatsSim.DB.Abilitys
         public int Atk { get; set; }
         public int AtkStatus { get; set; }
         public int AtkRefine { get; set; }
+        public int AtkMastery { get; set; }
         public int Matk { get; set; }
         public int MatkStatus { get; set; }
         public int MatkRefine { get; set; }
@@ -30,6 +31,10 @@ namespace RooStatsSim.DB.Abilitys
         public int Hit { get; set; }
         public int Flee { get; set; }
 
+        public BasicAbility()
+        {
+            Status = new StatusPoint();
+        }
         public static BasicAbility operator +(BasicAbility lhs, BasicAbility rhs)
         {
             lhs.Status += rhs.Status;
@@ -38,6 +43,7 @@ namespace RooStatsSim.DB.Abilitys
             lhs.Atk += rhs.Atk;
             lhs.AtkStatus += rhs.AtkStatus;
             lhs.AtkRefine += rhs.AtkRefine;
+            lhs.AtkMastery += rhs.AtkMastery;
             lhs.Matk += rhs.Matk;
             lhs.MatkStatus += rhs.MatkStatus;
             lhs.MatkRefine += rhs.MatkRefine;

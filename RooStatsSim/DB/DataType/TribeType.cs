@@ -33,10 +33,9 @@ namespace RooStatsSim.DB.DataType
 
     public class TribeType
     {
-        private readonly TribeList _type;
         public TribeType(TribeList type)
         {
-            this._type = type;
+            Type = type;
         }
         public TribeType(string name)
         {
@@ -46,40 +45,32 @@ namespace RooStatsSim.DB.DataType
 
             if (value > 127)
             {   // 한글 Constructor
-                foreach (var typeKor in Enum.GetNames(typeof(TribeKorList)))
-                { 
+                foreach (string typeKor in Enum.GetNames(typeof(TribeKorList)))
+                {
                     if (typeKor.Equals(name))
                     {
-                        _type = (TribeList)Enum.Parse(typeof(TribeKorList), name);
+                        Type = (TribeList)Enum.Parse(typeof(TribeKorList), name);
                         return;
                     }
                 }
             }
             else
             {   // 영어 Constructor
-                foreach (var typeEng in Enum.GetNames(typeof(TribeList)))
-                { 
+                foreach (string typeEng in Enum.GetNames(typeof(TribeList)))
+                {
                     if (typeEng.Equals(name))
                     {
-                        _type = (TribeList)Enum.Parse(typeof(TribeList), name);
+                        Type = (TribeList)Enum.Parse(typeof(TribeList), name);
                         return;
                     }
                 }
             }
         }
 
-        public string Name_en
-        {
-            get { return Enum.GetName(typeof(TribeList), _type); }
-        }
-        public string Name_ko
-        {
-            get { return Enum.GetName(typeof(TribeKorList), _type); }
-        }
-        public TribeList Type
-        {
-            get { return _type; }
-        }
+        public string Name_en => Enum.GetName(typeof(TribeList), Type);
+        public string Name_ko => Enum.GetName(typeof(TribeKorList), Type);
+        public TribeList Type { get; }
+        public int TypeNum => (int)Type;
 
         public static bool operator ==(TribeType lhs, TribeType rhs)
         {

@@ -13,7 +13,7 @@ namespace RooStatsSim.DB
 
         public int Level
         {
-            get { return _level; }
+            get => _level;
             set
             {
                 if (value < 0)

@@ -14,7 +14,7 @@ namespace RooStatsSim.DB
 
         public int BaseLevel
         {
-            get { return _baseLevel; }
+            get => _baseLevel;
             set
             {
                 if (value < 1)
